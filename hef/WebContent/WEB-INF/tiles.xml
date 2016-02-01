@@ -1,0 +1,107 @@
+<?xml version="1.0"    encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="home_form" template="visor.jsp"></definition>
+<!-- 	<definition name="incidencias_form" template="/paginas/incidencias/incidenciasForm.jsp"></definition> -->
+	
+	<definition name="baseLayout" template="/layouts/baseLayout.jsp">
+		<put-attribute name="title" value=".::HEF::."/>
+		<put-attribute name="header" value="/layouts/baseHeader.jsp"/>
+		<put-attribute name="content" value=""/>
+		<put-list-attribute name="javscr">
+		</put-list-attribute>
+		<put-list-attribute name="styles">
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="configuracionLayout" template="/layouts/configuracionLayout.jsp">
+		<put-attribute name="title" value=".::HEF::."/>
+		<put-attribute name="header" value="/layouts/configuracionHeader.jsp"/>
+		<put-attribute name="menu" value="/layouts/configuracionMenu.jsp"/>
+		<put-attribute name="content" value=""/>
+		<put-list-attribute name="javscr">
+		</put-list-attribute>
+		<put-list-attribute name="styles">
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="combo_centrar_provincia_en_provincia" template="/paginas/visor/comboCentrarProvinciaEnProvinciaInicio.jsp"></definition>
+	<definition name="combo_centrar_distrito_en_distrito" template="/paginas/visor/comboCentrarDistritoEnDistritoInicio.jsp"></definition>
+	<definition name="combo_centrar_distrito_en_provincia" template="/paginas/visor/comboCentrarDistritoEnProvinciaInicio.jsp"></definition>
+	
+<!-- 	<definition name="home_form" template="visor.jsp"></definition> -->
+	<definition name="home_form" extends="baseLayout">
+		<put-attribute name="content" value="/paginas/visor/visorInicio.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/visor/visorInicio.js"/>
+			<add-attribute value="js/visor/visorCapasBaseInicio.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+	<!-- Cuenta de usuario -->
+	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/seguridad/cuentaUsuarioInicio.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/seguridad/cuentaUsuarioInicio.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="cuenta_usuario_form" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/seguridad/cuentaUsuarioForm.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/seguridad/cuentaUsuarioForm.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+
+	
+	<!-- Capas base -->
+	<definition name="capas_base_inicio" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/configuracion/capasBaseInicio.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/configuracion/capasBaseInicio.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="capas_base_form" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/configuracion/capasBaseForm.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/configuracion/capasBaseForm.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+
+	
+	<!-- Grupo de capas base -->
+	<definition name="grupo_capas_inicio" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/configuracion/grupoCapasInicio.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/configuracion/grupoCapasInicio.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="grupo_capas_form" extends="configuracionLayout">
+		<put-attribute name="content" value="/paginas/configuracion/grupoCapasForm.jsp"/>
+		<put-list-attribute name="javscr">
+			<add-attribute value="js/configuracion/grupoCapasForm.js"/>
+			<add-attribute value="js/comun.js"/>
+			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+	</definition>
+	
+</tiles-definitions>

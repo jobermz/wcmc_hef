@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    
+	<package name="visor" namespace="/" extends="principal,json-default,jasperreports-default">
+		
+		<action name="home" class="wcmc.hef.web.visor.action.VisorAction" method="inicio">
+			<result name="success" type="tiles">home_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="cargarCapasBaseJson" class="wcmc.hef.web.visor.action.VisorAction" method="cargarCapasBase">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarDepartamentoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDepartamento">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarDepartamentoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDepartamento">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarProvinciaEnDepartamentoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarProvinciaEnDepartamento">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarProvinciaEnProvinciaJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarProvinciaEnProvincia">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarDistritoEnDepartamentoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDistritoEnDepartamento">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarDistritoEnProvinciaJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDistritoEnProvincia">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="centrarDistritoEnDistritoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDistritoEnDistrito">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		
+		
+		<action name="comboCentrarProvinciaEnProvincia" class="wcmc.hef.web.visor.action.VisorAction" method="comboCentrarProvinciaEnProvincia">
+			<result name="success" type="tiles">combo_centrar_provincia_en_provincia</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="comboCentrarDistritoEnProvincia" class="wcmc.hef.web.visor.action.VisorAction" method="comboCentrarDistritoEnProvincia">
+			<result name="success" type="tiles">combo_centrar_distrito_en_provincia</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="comboCentrarDistritoEnDistrito" class="wcmc.hef.web.visor.action.VisorAction" method="comboCentrarDistritoEnDistrito">
+			<result name="success" type="tiles">combo_centrar_distrito_en_distrito</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+	</package>
+</struts>
+

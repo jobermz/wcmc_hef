@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="cuenta-usuario" namespace="/" extends="principal">
+		<action name="cuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="inicio">
+			<result name="success" type="tiles" >cuenta_usuario_inicio</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="buscarCuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="buscar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="nuevoCuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="nuevo">
+			<result name="success" type="tiles">cuenta_usuario_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="editarCuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="editar">
+			<result name="success" type="tiles">cuenta_usuario_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="guardarCuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="guardar">
+			<result name="error" type="json" />
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack" />
+		</action>
+		
+		<action name="eliminarCuentaUsuario" class="wcmc.hef.web.seguridad.action.CuentaUsuarioAction" method="eliminar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+
+
+		
+		
+	</package>
+	
+</struts>

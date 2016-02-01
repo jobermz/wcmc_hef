@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.visor.mapper.CapaDepartamentoMapper">
+	<resultMap id="CapaDepartamentoMap" type="wcmc.hef.dao.visor.domain.CapaDepartamento">
+		<result column="gid" property="intIdGid" jdbcType="INTEGER"/>
+		<result column="id_departamento" property="strIdDepartamento" jdbcType="VARCHAR"/>
+		<result column="nom_departamento" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="num_area" property="dblArea" jdbcType="DOUBLE"/>
+		<result column="fec_registro" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+		<result column="shp_geometria" property="strGeometria" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="CapaDepartamentoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t008capadepartamento as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="CapaDepartamentoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t008capadepartamento as tab
+		where 1 = 1
+		and gid = #{intIdGid,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamento">
+		insert into wcmc_hef.t008capadepartamento
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="intIdGid != null">
+				gid,
+			</if>
+			<if test="strIdDepartamento != null">
+				id_departamento,
+			</if>
+			<if test="strNombre != null">
+				nom_departamento,
+			</if>
+			<if test="dblArea != null">
+				num_area,
+			</if>
+			<if test="timFechaRegistro != null">
+				fec_registro,
+			</if>
+			<if test="strGeometria != null">
+				shp_geometria,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="intIdGid != null">
+				#{intIdGid, jdbcType=INTEGER},
+			</if>
+			<if test="strIdDepartamento != null">
+				#{strIdDepartamento, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+			<if test="dblArea != null">
+				#{dblArea, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+			<if test="strGeometria != null">
+				#{strGeometria, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamento">
+		update wcmc_hef.t008capadepartamento
+		<set>
+			<if test="intIdGid != null">
+				gid = #{intIdGid,jdbcType=INTEGER},
+			</if>
+			<if test="strIdDepartamento != null">
+				id_departamento = #{strIdDepartamento,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombre != null">
+				nom_departamento = #{strNombre,jdbcType=VARCHAR},
+			</if>
+			<if test="dblArea != null">
+				num_area = #{dblArea,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fec_registro = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+			<if test="strGeometria != null">
+				shp_geometria = #{strGeometria,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where 1 = 1
+		and gid = #{intIdGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoKey">
+		delete from wcmc_hef.t008capadepartamento
+		where 1 = 1
+		<if test="intIdGid != null">
+		and gid = #{intIdGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose>
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		gid, 
+		id_departamento, 
+		nom_departamento, 
+		num_area, 
+		fec_registro, 
+		ST_AsText(ST_Boundary(Box2D(shp_geometria))) as shp_geometria
+	</sql>
+</mapper>

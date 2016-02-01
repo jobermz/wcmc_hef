@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.ui.templateDir" value="template" />
+	<constant name="struts.multipart.maxSize" value="10000000000"/>
+	
+	<!-- Add packages here -->
+	
+	<include file="struts/struts-principal.xml"/>
+	<include file="struts/struts-home.xml"/>
+	
+	<include file="struts/visor/struts-visor.xml"/>
+	<include file="struts/seguridad/struts-cuenta-usuario.xml"/>
+	
+	<include file="struts/configuracion/struts-capas-base.xml"/>
+	<include file="struts/configuracion/struts-grupo-capas.xml"/>
+</struts>

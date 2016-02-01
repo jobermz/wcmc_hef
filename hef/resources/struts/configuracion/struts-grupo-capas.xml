@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="grupo-capas" namespace="/" extends="principal">
+		<action name="grupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="inicio">
+			<result name="success" type="tiles" >grupo_capas_inicio</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="buscarGrupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="buscar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="nuevoGrupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="nuevo">
+			<result name="success" type="tiles">grupo_capas_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="editarGrupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="editar">
+			<result name="success" type="tiles">grupo_capas_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="guardarGrupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="guardar">
+			<result name="error" type="json" />
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack" />
+		</action>
+		
+		<action name="eliminarGrupoCapas" class="wcmc.hef.web.configuracion.action.GrupoCapasAction" method="eliminar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+
+
+		
+		
+	</package>
+	
+</struts>

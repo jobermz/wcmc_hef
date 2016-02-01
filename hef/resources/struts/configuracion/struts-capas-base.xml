@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="capas-base" namespace="/" extends="principal">
+		<action name="capasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="inicio">
+			<result name="success" type="tiles" >capas_base_inicio</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="buscarCapasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="buscar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="nuevoCapasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="nuevo">
+			<result name="success" type="tiles">capas_base_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="editarCapasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="editar">
+			<result name="success" type="tiles">capas_base_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="guardarCapasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="guardar">
+			<result name="error" type="json" />
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack" />
+		</action>
+		
+		<action name="eliminarCapasBase" class="wcmc.hef.web.configuracion.action.CapasBaseAction" method="eliminar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+
+
+		
+		
+	</package>
+	
+</struts>
