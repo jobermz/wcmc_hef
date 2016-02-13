@@ -1,7 +1,6 @@
 package wcmc.hef.business.core.configuracion.service.impl;
 
 import java.util.List;
-import java.util.Date;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +19,39 @@ public class GrupoCapasServiceImpl implements GrupoCapasService {
 	private GrupoCapasMapper grupoCapasMapper;
 	public List<GrupoCapas> buscar(GrupoCapasDto grupoCapasDto) throws Exception {
 		GrupoCapasParamDef grupoCapasParamDef		= new GrupoCapasParamDef();
-		
+		Criteria criteria		= grupoCapasParamDef.createCriteria();
+		if(grupoCapasDto != null) {
+			if(CadenaUtil.getStrNull(grupoCapasDto.getStrNombre()) != null) {
+				criteria.andStrNombreLike(grupoCapasDto.getStrNombre());
+			}
+			if(CadenaUtil.getInteNull(grupoCapasDto.getIntIdGrupoCapasPadre()) != null) {
+				criteria.andIntIdGrupoCapasPadreEqualTo(grupoCapasDto.getIntIdGrupoCapasPadre());
+			} else {
+				criteria.andIntIdGrupoCapasPadreIsNull();
+			}
+		}
+		grupoCapasParamDef.setOrderByClause("cd_grcapad desc, nm_orden, de_nombre");
+		List<GrupoCapas>	 list	= grupoCapasMapper.selectByDefaultParameter(grupoCapasParamDef);
+		return list;
+	}
+	public List<GrupoCapas> buscarTodos(GrupoCapasDto grupoCapasDto) throws Exception {
+		GrupoCapasParamDef grupoCapasParamDef		= new GrupoCapasParamDef();
 		Criteria criteria		= grupoCapasParamDef.createCriteria();
 		if(grupoCapasDto != null) {
 			if(CadenaUtil.getStrNull(grupoCapasDto.getStrNombre()) != null) {
 				criteria.andStrNombreLike(grupoCapasDto.getStrNombre());
 			}
 		}
-		
-		grupoCapasParamDef.setOrderByClause("num_orden");
+		grupoCapasParamDef.setOrderByClause("cd_grcapad desc, nm_orden, de_nombre");
+		List<GrupoCapas>	 list	= grupoCapasMapper.selectByDefaultParameter(grupoCapasParamDef);
+		return list;
+	}
+	
+	public List<GrupoCapas> buscarGruposBase(GrupoCapasDto grupoCapasDto) throws Exception {
+		GrupoCapasParamDef grupoCapasParamDef		= new GrupoCapasParamDef();
+		Criteria criteria		= grupoCapasParamDef.createCriteria();
+		criteria.andIntIdGrupoCapasPadreIsNull();
+		grupoCapasParamDef.setOrderByClause("nm_orden");
 		List<GrupoCapas>	 list	= grupoCapasMapper.selectByDefaultParameter(grupoCapasParamDef);
 		return list;
 	}

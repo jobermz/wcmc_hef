@@ -1,19 +1,30 @@
 $(document).ready(function() {
-	iniciarEventosDialogEditar_capas_base();
+	iniciarEventosDialogEditar_capa(true);
 });
 
 	
 
 
 
-function iniciarEventosDialogEditar_capas_base(esEditar) {
+function iniciarEventosDialogEditar_capa(esEditar) {
+
+	$('.ui-dialog-content').each(function() {
+		if($(this).attr("id") == "idDivEditarCapaUmbral") {
+			$(this).dialog("destroy");
+		}
+	});
 
 
+	if(esEditar) {
+		$("#idBtnNuevoCapaUmbral").each(function() {
+			$(this).unbind("click");
+		});
+	}
 
-	$("#idBtnGuardarCapasBase").each(function() {
+	$("#idBtnGuardarCapa").each(function() {
 		$(this).unbind("click");
 	});
-	$("#idBtnVolverCapasBase").each(function() {
+	$("#idBtnVolverCapa").each(function() {
 		$(this).unbind("click");
 	});
 	$('.datepicker').each(function() {
@@ -21,9 +32,13 @@ function iniciarEventosDialogEditar_capas_base(esEditar) {
 	});
 	
 
+	if(esEditar) {
+		$('#idBtnNuevoCapaUmbral').click(nuevo_capa_umbral);
+		instanciardt_basico_capa_umbral(true);
+	}
 	
-	$('#idBtnGuardarCapasBase').click(guardar_capas_base);
-	$('#idBtnVolverCapasBase').click(volver_capas_base);
+	$('#idBtnGuardarCapa').click(guardar_capa);
+	$('#idBtnVolverCapa').click(volver_capa);
 	
 	$('.datepicker').each(function() {
 		$(this).datepicker({
@@ -43,33 +58,33 @@ function iniciarEventosDialogEditar_capas_base(esEditar) {
 	});
 
 }
-function volver_capas_base() {
-	deshabilitaBotones_capas_base(true);
-	var frm		= document.formEditarCapasBase;
-	frm.action	= "capasBase.action";
+function volver_capa() {
+	deshabilitaBotones_capa(true);
+	var frm		= document.formEditarCapa;
+	frm.action	= "capa.action";
 	frm.method	= "POST";
 	frm.submit();
 	
 	return false;
 }
 
-function guardar_capas_base() {
-	deshabilitaBotones_capas_base(true);
-	var frm		= $("#idFormEditarCapasBase");
-	$.post('guardarCapasBase.action', frm.serialize(), function(datos) {
+function guardar_capa() {
+	deshabilitaBotones_capa(true);
+	var frm		= $("#idFormEditarCapa");
+	$.post('guardarCapa.action', frm.serialize(), function(datos) {
 		sessionFinalizoJson(datos);
 		if(datos.actionErrors.length > 0) {
 			mostrarMensajesErrorStruts(datos.actionErrors);
-			deshabilitaBotones_capas_base(false);
+			deshabilitaBotones_capa(false);
 		} else {
 			mostrarMensajesStruts(datos.actionMessages);
-			volver_capas_base();
+			volver_capa();
 		}
 	},'json');
 	return false;
 }
 
-function deshabilitaBotones_capas_base(deshabilitarBoton) {
-	$('#idBtnGuardarCapasBase').prop('disabled', deshabilitarBoton);
-	$("#idBtnVolverCapasBase").prop('disabled', deshabilitarBoton);
+function deshabilitaBotones_capa(deshabilitarBoton) {
+	$('#idBtnGuardarCapa').prop('disabled', deshabilitarBoton);
+	$("#idBtnVolverCapa").prop('disabled', deshabilitarBoton);
 }

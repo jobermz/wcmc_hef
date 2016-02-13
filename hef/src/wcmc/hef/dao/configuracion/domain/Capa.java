@@ -4,19 +4,35 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class CapasBase extends CapasBaseKey {
+public class Capa extends CapaKey {
 	
+	private String intGrupoCapasDesc;
+	private Integer intGrupoCapas;
+	private String intTipoCapaDesc;
+	private Integer intTipoCapa;
 	private String strNombre;
 	private String strComentarios;
+	private String strAutor;
 	private String strUrl;
-	private String timFechaRegistroFecha;
-	private String timFechaRegistroHora;
 	private String strWmsUrl;
 	private String strWmsCapas;
 	private String strWfsUrl;
-	private String intGrupoCapasDesc;
-	private Integer intGrupoCapas;
-	
+	private String timFechaRegistroFecha;
+	private String timFechaRegistroHora;
+	private Integer intOrden;
+	private List<CapaUmbral> listCapaUmbral;
+	public String getIntGrupoCapasDesc() {
+		return intGrupoCapasDesc;
+	}
+	public void setIntGrupoCapasDesc(String intGrupoCapasDesc) {
+		this.intGrupoCapasDesc = intGrupoCapasDesc;
+	}
+	public String getIntTipoCapaDesc() {
+		return intTipoCapaDesc;
+	}
+	public void setIntTipoCapaDesc(String intTipoCapaDesc) {
+		this.intTipoCapaDesc = intTipoCapaDesc;
+	}
 	public String getTimFechaRegistroFecha() {
 		return timFechaRegistroFecha;
 	}
@@ -36,11 +52,17 @@ public class CapasBase extends CapasBaseKey {
 		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
 		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
 	}
-	public String getIntGrupoCapasDesc() {
-		return intGrupoCapasDesc;
+	public Integer getIntGrupoCapas() {
+		return intGrupoCapas;
 	}
-	public void setIntGrupoCapasDesc(String intGrupoCapasDesc) {
-		this.intGrupoCapasDesc = intGrupoCapasDesc;
+	public void setIntGrupoCapas(Integer intGrupoCapas) {
+		this.intGrupoCapas = intGrupoCapas;
+	}
+	public Integer getIntTipoCapa() {
+		return intTipoCapa;
+	}
+	public void setIntTipoCapa(Integer intTipoCapa) {
+		this.intTipoCapa = intTipoCapa;
 	}
 	public String getStrNombre() {
 		return strNombre;
@@ -60,13 +82,6 @@ public class CapasBase extends CapasBaseKey {
 	public void setStrUrl(String strUrl) {
 		this.strUrl = strUrl;
 	}
-	public Date getTimFechaRegistro() {
-		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
-	}
-	public void setTimFechaRegistro(Date timFechaRegistro) {
-		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
-		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
-	}
 	public String getStrWmsUrl() {
 		return strWmsUrl;
 	}
@@ -85,11 +100,30 @@ public class CapasBase extends CapasBaseKey {
 	public void setStrWfsUrl(String strWfsUrl) {
 		this.strWfsUrl = strWfsUrl;
 	}
-	public Integer getIntGrupoCapas() {
-		return intGrupoCapas;
+	public Date getTimFechaRegistro() {
+		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
 	}
-	public void setIntGrupoCapas(Integer intGrupoCapas) {
-		this.intGrupoCapas = intGrupoCapas;
+	public void setTimFechaRegistro(Date timFechaRegistro) {
+		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
+		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
+	}
+	public List<CapaUmbral> getListCapaUmbral() {
+		return listCapaUmbral;
+	}
+	public void setListCapaUmbral(List<CapaUmbral> listCapaUmbral) {
+		this.listCapaUmbral = listCapaUmbral;
+	}
+	public Integer getIntOrden() {
+		return intOrden;
+	}
+	public void setIntOrden(Integer intOrden) {
+		this.intOrden = intOrden;
+	}
+	public String getStrAutor() {
+		return strAutor;
+	}
+	public void setStrAutor(String strAutor) {
+		this.strAutor = strAutor;
 	}
 	
 }

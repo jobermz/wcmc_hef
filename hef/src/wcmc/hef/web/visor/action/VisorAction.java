@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import wcmc.hef.business.core.configuracion.dto.CapasBaseDto;
+import wcmc.hef.business.core.configuracion.dto.CapaDto;
+import wcmc.hef.business.core.configuracion.dto.CapaUmbralDto;
 import wcmc.hef.business.core.configuracion.dto.GrupoCapasDto;
-import wcmc.hef.business.core.configuracion.service.CapasBaseService;
+import wcmc.hef.business.core.configuracion.service.CapaService;
+import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
 import wcmc.hef.business.core.configuracion.service.GrupoCapasService;
 import wcmc.hef.business.core.visor.dto.CapaDepartamentoDto;
 import wcmc.hef.business.core.visor.dto.CapaDistritoDto;
@@ -18,12 +20,13 @@ import wcmc.hef.business.core.visor.dto.CapaProvinciaDto;
 import wcmc.hef.business.core.visor.service.CapaDepartamentoService;
 import wcmc.hef.business.core.visor.service.CapaDistritoService;
 import wcmc.hef.business.core.visor.service.CapaProvinciaService;
-import wcmc.hef.dao.configuracion.domain.CapasBase;
+import wcmc.hef.dao.configuracion.domain.Capa;
 import wcmc.hef.dao.configuracion.domain.GrupoCapas;
 import wcmc.hef.dao.visor.domain.CapaDepartamento;
 import wcmc.hef.dao.visor.domain.CapaDistrito;
 import wcmc.hef.dao.visor.domain.CapaProvincia;
 import wcmc.hef.general.util.CadenaUtil;
+import wcmc.hef.general.util.ConfiguracionProperties;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,7 +35,7 @@ public class VisorAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private CapasBaseService capasBaseService;
+	private CapaService capaService;
 	
 	@Autowired
 	private GrupoCapasService grupoCapasService;
@@ -42,11 +45,15 @@ public class VisorAction extends ActionSupport {
 	
 	@Autowired
 	private CapaProvinciaService capaProvinciaService;
-	
+
 	@Autowired
 	private CapaDistritoService capaDistritoService;
+
+	@Autowired
+	private CapaUmbralService capaUmbralService;
 	
-	private List<CapasBase> listCapasBase;
+	
+	private List<Capa> listCapasBase;
 	
 	public VisorAction() {
 	}
@@ -54,8 +61,8 @@ public class VisorAction extends ActionSupport {
 	public String cargarCapasBase() {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
-			CapasBaseDto capasBaseDto		= new CapasBaseDto();
-			listCapasBase	= capasBaseService.buscar(capasBaseDto);
+			CapaDto capaDto		= new CapaDto();
+			listCapasBase	= capaService.buscar(capaDto);
 			session.put("listCapasBase", listCapasBase);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,15 +71,28 @@ public class VisorAction extends ActionSupport {
 	}
 	
 	public String inicio() {
-		Map<String, Object> session				= ActionContext.getContext().getSession();
+		Map<String, Object> session			= ActionContext.getContext().getSession();
 		try {
-			CapasBaseDto capasBaseDto					= new CapasBaseDto();
-			listCapasBase								= capasBaseService.buscar(capasBaseDto);
+			CapaDto capaDto					= new CapaDto();
+			listCapasBase					= capaService.buscar(capaDto);
 			session.put("listCapasBase", listCapasBase);
-			
+			for(int i=0;i<listCapasBase.size();i++) {
+				if(listCapasBase.get(i).getIntTipoCapa().intValue() == ConfiguracionProperties.getConstanteInt(ConfiguracionProperties.TIPO_CAPA_UMBRAL)) {
+					CapaUmbralDto capaUmbralDto		= new CapaUmbralDto();
+					capaUmbralDto.setIntIdCapa(listCapasBase.get(i).getSrlIdCapa());
+					listCapasBase.get(i).setListCapaUmbral(capaUmbralService.buscar(capaUmbralDto));
+				}
+			}
 			GrupoCapasDto grupoCapasDto					= new GrupoCapasDto();
-			List<GrupoCapas> listGrupoCapas				= grupoCapasService.buscar(grupoCapasDto);
-			session.put("listGrupoCapas", listGrupoCapas);
+			List<GrupoCapas> listGrupoCapasBase			= grupoCapasService.buscar(grupoCapasDto);
+			List<GrupoCapas> listGrupoCapasSub			= null;
+			for(GrupoCapas grupoCapas:listGrupoCapasBase) {
+				grupoCapasDto					= new GrupoCapasDto();
+				grupoCapasDto.setIntIdGrupoCapasPadre(grupoCapas.getSrlIdGrupoCapas());
+				listGrupoCapasSub			= grupoCapasService.buscar(grupoCapasDto);
+				grupoCapas.setListGrupoCapas(listGrupoCapasSub);
+			}
+			session.put("listGrupoCapas", listGrupoCapasBase);
 
 			CapaDepartamentoDto capaDepartamentoDto		= new CapaDepartamentoDto();
 			List<CapaDepartamento> listCapaDepartamento	= capaDepartamentoService.buscar(capaDepartamentoDto);
@@ -245,11 +265,11 @@ public class VisorAction extends ActionSupport {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public List<CapasBase> getListCapasBase() {
+	public List<Capa> getListCapasBase() {
 		return listCapasBase;
 	}
 	
-	public void setListCapasBase(List<CapasBase> listCapasBase) {
+	public void setListCapasBase(List<Capa> listCapasBase) {
 		this.listCapasBase = listCapasBase;
 	}
 	

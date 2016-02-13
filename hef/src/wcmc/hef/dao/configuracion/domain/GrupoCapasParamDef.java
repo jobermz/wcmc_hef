@@ -110,197 +110,259 @@ public class GrupoCapasParamDef {
                 
         
         public Criteria andSrlIdGrupoCapasEqualTo(Integer value) {
-            addCriterion("id_grupocapas =", value, "id_grupocapas");
+            addCriterion("cd_grupcap =", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasNotEqualTo(Integer value) {
-            addCriterion("id_grupocapas <>", value, "id_grupocapas");
+            addCriterion("cd_grupcap <>", value, "cd_grupcap");
             return (Criteria) this;
         }
         
         
         public Criteria andSrlIdGrupoCapasIsNull() {
-            addCriterion("id_grupocapas is null");
+            addCriterion("cd_grupcap is null");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasIsNotNull() {
-            addCriterion("id_grupocapas is not null");
+            addCriterion("cd_grupcap is not null");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasGreaterThan(Integer value) {
-            addCriterion("id_grupocapas >", value, "id_grupocapas");
+            addCriterion("cd_grupcap >", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasGreaterThanOrEqualTo(Integer value) {
-            addCriterion("id_grupocapas >=", value, "id_grupocapas");
+            addCriterion("cd_grupcap >=", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasLessThan(Integer value) {
-            addCriterion("id_grupocapas <", value, "id_grupocapas");
+            addCriterion("cd_grupcap <", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasLessThanOrEqualTo(Integer value) {
-            addCriterion("id_grupocapas <=", value, "id_grupocapas");
+            addCriterion("cd_grupcap <=", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasIn(List<Integer> values) {
-            addCriterion("id_grupocapas in", values, "id_grupocapas");
+            addCriterion("cd_grupcap in", values, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasNotIn(List<Integer> values) {
-            addCriterion("id_grupocapas not in", values, "id_grupocapas");
+            addCriterion("cd_grupcap not in", values, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasBetween(Integer value1, Integer value2) {
-            addCriterion("id_grupocapas between", value1, value2, "id_grupocapas");
+            addCriterion("cd_grupcap between", value1, value2, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andSrlIdGrupoCapasNotBetween(Integer value1, Integer value2) {
-            addCriterion("id_grupocapas not between", value1, value2, "id_grupocapas");
+            addCriterion("cd_grupcap not between", value1, value2, "cd_grupcap");
             return (Criteria) this;
         }
         
         
         public Criteria andStrNombreLike(String value) {
-            addCriterion("upper(des_nombre) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_nombre");
+            addCriterion("upper(de_nombre) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreNotLike(String value) {
-            addCriterion("des_nombre not like", "%" + CadenaUtil.getStr(value) + "%", "des_nombre");
+            addCriterion("de_nombre not like", "%" + CadenaUtil.getStr(value) + "%", "de_nombre");
             return (Criteria) this;
         }
 			
         public Criteria andStrNombreEqualTo(String value) {
-            addCriterion("des_nombre =", CadenaUtil.getStr(value), "des_nombre");
+            addCriterion("de_nombre =", CadenaUtil.getStr(value), "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreNotEqualTo(String value) {
-            addCriterion("des_nombre <>", CadenaUtil.getStr(value), "des_nombre");
+            addCriterion("de_nombre <>", CadenaUtil.getStr(value), "de_nombre");
             return (Criteria) this;
         }
 
         
         public Criteria andStrNombreIsNull() {
-            addCriterion("des_nombre is null");
+            addCriterion("de_nombre is null");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreIsNotNull() {
-            addCriterion("des_nombre is not null");
+            addCriterion("de_nombre is not null");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreGreaterThan(String value) {
-            addCriterion("des_nombre >", value, "des_nombre");
+            addCriterion("de_nombre >", value, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreGreaterThanOrEqualTo(String value) {
-            addCriterion("des_nombre >=", value, "des_nombre");
+            addCriterion("de_nombre >=", value, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreLessThan(String value) {
-            addCriterion("des_nombre <", value, "des_nombre");
+            addCriterion("de_nombre <", value, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreLessThanOrEqualTo(String value) {
-            addCriterion("des_nombre <=", value, "des_nombre");
+            addCriterion("de_nombre <=", value, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreIn(List<String> values) {
-            addCriterion("des_nombre in", values, "des_nombre");
+            addCriterion("de_nombre in", values, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreNotIn(List<String> values) {
-            addCriterion("des_nombre not in", values, "des_nombre");
+            addCriterion("de_nombre not in", values, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreBetween(String value1, String value2) {
-            addCriterion("des_nombre between", value1, value2, "des_nombre");
+            addCriterion("de_nombre between", value1, value2, "de_nombre");
             return (Criteria) this;
         }
 
         public Criteria andStrNombreNotBetween(String value1, String value2) {
-            addCriterion("des_nombre not between", value1, value2, "des_nombre");
+            addCriterion("de_nombre not between", value1, value2, "de_nombre");
             return (Criteria) this;
         }
         
         
         public Criteria andIntOrdenEqualTo(Integer value) {
-            addCriterion("num_orden =", value, "num_orden");
+            addCriterion("nm_orden =", value, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenNotEqualTo(Integer value) {
-            addCriterion("num_orden <>", value, "num_orden");
+            addCriterion("nm_orden <>", value, "nm_orden");
             return (Criteria) this;
         }
         
         
         public Criteria andIntOrdenIsNull() {
-            addCriterion("num_orden is null");
+            addCriterion("nm_orden is null");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenIsNotNull() {
-            addCriterion("num_orden is not null");
+            addCriterion("nm_orden is not null");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenGreaterThan(Integer value) {
-            addCriterion("num_orden >", value, "num_orden");
+            addCriterion("nm_orden >", value, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenGreaterThanOrEqualTo(Integer value) {
-            addCriterion("num_orden >=", value, "num_orden");
+            addCriterion("nm_orden >=", value, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenLessThan(Integer value) {
-            addCriterion("num_orden <", value, "num_orden");
+            addCriterion("nm_orden <", value, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenLessThanOrEqualTo(Integer value) {
-            addCriterion("num_orden <=", value, "num_orden");
+            addCriterion("nm_orden <=", value, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenIn(List<Integer> values) {
-            addCriterion("num_orden in", values, "num_orden");
+            addCriterion("nm_orden in", values, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenNotIn(List<Integer> values) {
-            addCriterion("num_orden not in", values, "num_orden");
+            addCriterion("nm_orden not in", values, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenBetween(Integer value1, Integer value2) {
-            addCriterion("num_orden between", value1, value2, "num_orden");
+            addCriterion("nm_orden between", value1, value2, "nm_orden");
             return (Criteria) this;
         }
 
         public Criteria andIntOrdenNotBetween(Integer value1, Integer value2) {
-            addCriterion("num_orden not between", value1, value2, "num_orden");
+            addCriterion("nm_orden not between", value1, value2, "nm_orden");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andIntIdGrupoCapasPadreEqualTo(Integer value) {
+            addCriterion("cd_grcapad =", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreNotEqualTo(Integer value) {
+            addCriterion("cd_grcapad <>", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andIntIdGrupoCapasPadreIsNull() {
+            addCriterion("cd_grcapad is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreIsNotNull() {
+            addCriterion("cd_grcapad is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreGreaterThan(Integer value) {
+            addCriterion("cd_grcapad >", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cd_grcapad >=", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreLessThan(Integer value) {
+            addCriterion("cd_grcapad <", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreLessThanOrEqualTo(Integer value) {
+            addCriterion("cd_grcapad <=", value, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreIn(List<Integer> values) {
+            addCriterion("cd_grcapad in", values, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreNotIn(List<Integer> values) {
+            addCriterion("cd_grcapad not in", values, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreBetween(Integer value1, Integer value2) {
+            addCriterion("cd_grcapad between", value1, value2, "cd_grcapad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntIdGrupoCapasPadreNotBetween(Integer value1, Integer value2) {
+            addCriterion("cd_grcapad not between", value1, value2, "cd_grcapad");
             return (Criteria) this;
         }
         

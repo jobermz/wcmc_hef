@@ -14,96 +14,96 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 <s:set value="#request.CAPAS_BASE_PROVINCIA" var="CAPAS_BASE_PROVINCIA"></s:set>
 <s:set value="#request.CAPAS_BASE_DISTRITO" var="CAPAS_BASE_DISTRITO"></s:set>
 
-<!-- <div class="container"> -->
-<!-- 	<div class="row"> -->
-<!-- 		<div class="span12"> -->
-<!-- 			<div id="map" class="map" style=" position: absolute; top: 0; right: 0; bottom: 0; left: 0;"></div> -->
-			
-          <div id="map" class="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
-<!--           <div id="map" class="map"> -->
-            <div id="gmap" class="fill"></div>
-            <div id="olmap" class="fill" ></div>
-          </div>
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
+<div id="map" class="map" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
+	<div id="gmap" class="fill"></div>
+	<div id="olmap" class="fill" ></div>
+</div>
 
-<div class="modal fade seleccionar-capas-modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg">
+<div class="modal fade left seleccionar-capas-modal " tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-md pull-left">
 		<div class="modal-content" id="idDivSeleccionarCapas" >
-			
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Seleccionar capas a visualizar</h4>
 			</div>
-			
 			<div class="modal-body">
+				<div style="height: 250px;overflow-y: auto;"> 
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				<s:iterator value="#session.listGrupoCapas" var="grupoCapas">
+					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
 					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne${grupoCapas.srlIdGrupoCapas}">
+					    <div class="panel-heading" role="tab" id="headingOne${grupoCapasBase.srlIdGrupoCapas}">
 					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOne${grupoCapas.srlIdGrupoCapas}">
-					          ${grupoCapas.strNombre}
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${grupoCapasBase.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOne${grupoCapasBase.srlIdGrupoCapas}">
+					          ${grupoCapasBase.strNombre}
 					        </a>
 					      </h4>
 					    </div>
-					    <div id="collapseOne${grupoCapas.srlIdGrupoCapas}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne${grupoCapas.srlIdGrupoCapas}">
+					    <div id="collapseOne${grupoCapasBase.srlIdGrupoCapas}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne${grupoCapasBase.srlIdGrupoCapas}">
 					      <div class="panel-body">
 					      	<div class="row text-center" style="font-weight: bold;">
-						      	<div class="col-xs-6 text-left">
+						      	<div class="col-xs-5 text-left">
 						      		Nombre de capa
 						      	</div>
 						      	<div class="col-xs-2">
 						      		Transparencia
 						      	</div>
-						      	<div class="col-xs-1">
+						      	<div class="col-xs-2">
 						      		Umbral
 						      	</div>
 						      	<div class="col-xs-1">
-						      		Centrar
+						      		Cent.
 						      	</div>
 						      	<div class="col-xs-1">
-						      		Descargar
+						      		Dow.
 						      	</div>
 						      	<div class="col-xs-1">
 						      		Info
 						      	</div>
 					      	</div>
+					      	<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
+					      	<div class="row">
+						      	<div class="col-xs-12">
+									<h4>${grupoCapas.strNombre}</h4>
+						      	</div>
+						    </div>
 					      	<s:iterator value="#session.listCapasBase" var="capasBase">
 					      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 					      	<div class="row">
-						      	<div class="col-xs-6">
-						      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapasBase}" onclick="marcarCapas();" class="capasBase">
+						      	<div class="col-xs-5">
+						      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapa}" onclick="marcarCapas();" class="capasBase">
 									${capasBase.strNombre}
 						      	</div>
 						      	<div class="col-xs-2">
-						      		<div idcapa="${capasBase.srlIdCapasBase}" class="clsSlider"></div>
+						      		<div idcapa="${capasBase.srlIdCapa}" class="clsSlider"></div>
+						      	</div>
+						      	<div class="col-xs-2 text-center">
+						      		<s:if test="%{#capasBase.listCapaUmbral!=null}">
+						      		<s:select list="#capasBase.listCapaUmbral" name="filtrar_umbral" headerKey="" headerValue="-Sel.-" listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
+						      		</s:if>
 						      	</div>
 						      	<div class="col-xs-1 text-center">
-						      		
-						      	</div>
-						      	<div class="col-xs-1 text-center">
-						      		<s:if test="%{#capasBase.srlIdCapasBase.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapasBase.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapasBase.toString()==#CAPAS_BASE_DISTRITO}">
-						      			<i class="fa fa-lg fa-bullseye cursorPointer" onclick="centrarMapa(${capasBase.srlIdCapasBase});"></i>
+						      		<s:if test="%{#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DISTRITO}">
+						      			<i class="fa fa-lg fa-bullseye cursorPointer" onclick="centrarMapa(${capasBase.srlIdCapa});"></i>
 						      		</s:if>
 						      	</div>
 						      	<div class="col-xs-1 text-center">
 						      		<s:if test="%{#capasBase.strWfsUrl!=null&&#capasBase.strWfsUrl!=''}">
-						      			<i class="fa fa-lg fa-download cursorPointer" onclick="descargarMapa(${capasBase.srlIdCapasBase});"></i>
+						      			<i class="fa fa-lg fa-download cursorPointer" onclick="descargarMapa(${capasBase.srlIdCapa});"></i>
 						      		</s:if>
 						      	</div>
 						      	<div class="col-xs-1 text-center">
-						      		<i class="fa fa-lg fa-info-circle cursorPointer" onclick="mostrarInfo(${capasBase.srlIdCapasBase});"></i>
+						      		<i class="fa fa-lg fa-info-circle cursorPointer" onclick="mostrarInfo(${capasBase.srlIdCapa});"></i>
 						      	</div>
 					      	</div>
 					      	</s:if>
 					      	</s:iterator>
+					      	</s:iterator>
 					      </div>
 					    </div>
 					  </div>
-				</s:iterator>
+					</s:iterator>
 					</div>
+				</div>
 			</div>
 			
 			<div class="modal-footer">
@@ -134,6 +134,7 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 		</div>
 	</div>
 </div>
+
 <div class="modal fade upload-capas-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
@@ -171,31 +172,34 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 						Nombre
 					</div>
 					<div class="col-lg-8" id="idDivInfoNombre">
-						
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
-						Comentarios
+						Descripci&oacute;n
 					</div>
 					<div class="col-lg-8" id="idDivInfoComentario">
-						
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
-						Url
+						Fuentes/Autores
 					</div>
-					<div class="col-lg-8" id="idDivInfoUrl">
-						
+					<div class="col-lg-8" id="idDivInfoAutores">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
-						Fecha
+						Fecha de creaci&oacute;n
 					</div>
 					<div class="col-lg-8" id="idDivInfoFecha">
-						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						URL
+					</div>
+					<div class="col-lg-8" id="idDivInfoUrl">
 					</div>
 				</div>
 			</div>
@@ -254,4 +258,5 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 		</div>
 	</div>
 </div>
+
 <form id="form" name="form" action=""></form>

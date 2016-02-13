@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class CuentaUsuarioDto {
 	private Integer srlId;
+	private String intPerfilDesc;
 	private Integer intPerfil;
 	private String strNombres;
 	private String strApellidos;
@@ -13,13 +14,10 @@ public class CuentaUsuarioDto {
 	private String strClave;
 	private String strEsActivo;
 	public String getIntPerfilDesc() {
-		if((""+this.intPerfil).equals("1")) {
-			return "Administrador";
-		} else if((""+this.intPerfil).equals("1")) {
-			return "Técnico";
-		} else {
-			return "";
-		}
+		return intPerfilDesc;
+	}
+	public void setIntPerfilDesc(String intPerfilDesc) {
+		this.intPerfilDesc = intPerfilDesc;
 	}
 	public boolean getStrEsActivoBoolean() {
 		if(strEsActivo == null) {

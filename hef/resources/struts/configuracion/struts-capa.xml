@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="capa" namespace="/" extends="principal">
+		<action name="capa" class="wcmc.hef.web.configuracion.action.CapaAction" method="inicio">
+			<result name="success" type="tiles" >capa_inicio</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="buscarCapa" class="wcmc.hef.web.configuracion.action.CapaAction" method="buscar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="nuevoCapa" class="wcmc.hef.web.configuracion.action.CapaAction" method="nuevo">
+			<result name="success" type="tiles">capa_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="editarCapa" class="wcmc.hef.web.configuracion.action.CapaAction" method="editar">
+			<result name="success" type="tiles">capa_form</result>
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+		<action name="guardarCapa" class="wcmc.hef.web.configuracion.action.CapaAction" method="guardar">
+			<result name="error" type="json" />
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack" />
+		</action>
+		
+		<action name="eliminarCapa" class="wcmc.hef.web.configuracion.action.CapaAction" method="eliminar">
+			<result name="success" type="json" />
+			<interceptor-ref name="basicStack"/>
+		</action>
+		
+
+
+		
+		
+	</package>
+	
+</struts>

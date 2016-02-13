@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.configuracion.mapper.PerfilMapper">
+	<resultMap id="PerfilMap" type="wcmc.hef.dao.configuracion.domain.Perfil">
+		<result column="cd_perfil" property="srlIdPerfil" jdbcType="INTEGER"/>
+		<result column="nm_perfil" property="strNombre" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="PerfilMap" parameterType="wcmc.hef.dao.configuracion.domain.PerfilParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_perfil as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="PerfilMap" parameterType="wcmc.hef.dao.configuracion.domain.PerfilKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_perfil as tab
+		where 1 = 1
+		and cd_perfil = #{srlIdPerfil,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.t_perfil_cd_perfil_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.configuracion.domain.Perfil">
+		insert into wcmc_hef.t_perfil
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strNombre != null">
+				nm_perfil,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.configuracion.domain.Perfil">
+		update wcmc_hef.t_perfil
+		<set>
+			<if test="strNombre != null">
+				nm_perfil = #{strNombre,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_perfil = #{srlIdPerfil,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.configuracion.domain.PerfilKey">
+		delete from wcmc_hef.t_perfil
+		where 1 = 1
+		<if test="srlIdPerfil != null">
+		and cd_perfil = #{srlIdPerfil,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_perfil, 
+		nm_perfil
+	</sql>
+</mapper>

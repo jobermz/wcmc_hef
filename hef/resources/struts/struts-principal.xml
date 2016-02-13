@@ -12,7 +12,7 @@
 		</result-types>
 		
 		<interceptors>
-<!-- 			<interceptor name="seguridad" class="sernanp.biblioteca.web.seguridad.interceptor.SeguridadInterceptor"/> -->
+			<interceptor name="seguridad" class="wcmc.hef.web.seguridad.interceptor.SeguridadInterceptor"/>
 			<interceptor name="fileUpload" class="org.apache.struts2.interceptor.FileUploadInterceptor"/>
 			<interceptor-stack name="basicStack">
 				<interceptor-ref name="exception"/>
@@ -21,7 +21,7 @@
 				<interceptor-ref name="fileUpload"/>
 				<interceptor-ref name="params"/>
 				<interceptor-ref name="conversionError"/>
-<!-- 				<interceptor-ref name="seguridad"/> -->
+				<interceptor-ref name="seguridad"/>
 			</interceptor-stack>
 		</interceptors>
 

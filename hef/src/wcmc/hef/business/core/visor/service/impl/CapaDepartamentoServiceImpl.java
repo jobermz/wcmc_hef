@@ -31,7 +31,7 @@ public class CapaDepartamentoServiceImpl implements CapaDepartamentoService {
 			}
 		}
 		
-		capaDepartamentoParamDef.setOrderByClause("nom_departamento");
+		capaDepartamentoParamDef.setOrderByClause("nm_departa");
 		List<CapaDepartamento>	 list	= capaDepartamentoMapper.selectByDefaultParameter(capaDepartamentoParamDef);
 		return list;
 	}

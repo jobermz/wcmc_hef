@@ -27,6 +27,9 @@ function instanciardt_basico_cuenta_usuario(ejecutaBuscar) {
 	oTableDefaultCuentaUsuario = null;
 	oTableDefaultCuentaUsuario = $('#tableDefaultCuentaUsuario').dataTable({
 		autoWidth      : false,
+		"pagingType"   : "simple",
+		"searching"    : false,
+        "info"         : false,
 	    preDrawCallback: function () {
 	        if (!responsiveHelperCuentaUsuario) {
 	            responsiveHelperCuentaUsuario = new ResponsiveDatatablesHelper(oTableDefaultCuentaUsuario, breakpointDefinitionCuentaUsuario);
@@ -44,8 +47,8 @@ function instanciardt_basico_cuenta_usuario(ejecutaBuscar) {
 			"sUrl": "tools/bootstrap-datatables/lang/spanish.json"
 		},
 		"aLengthMenu": [
-		                [25, 50, 100, 200, -1],
-		                [25, 50, 100, 200, "Todos"]
+		                [5, 25, 100, 200, -1],
+		                [5, 25, 100, 200, "Todos"]
 		],
 		"sAjaxDataProp": "listCuentaUsuario",
 		"sAjaxSource": null,

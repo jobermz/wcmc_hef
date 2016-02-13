@@ -15,18 +15,14 @@
 		<div class="col-sm-12">
 			<ul class="list-group">
 			<!-- 	<li class="list-group-item active"><a href="#"> <i class="fa fa-bars"></i></a></li> -->
-				
 				<li class="list-group-item">
-					<a href="capasBase.action">Capas base</a>
+					<a href="capa.action"><i class="glyphicon glyphicon-list-alt"></i> Capas base</a>
 				</li>
 				<li class="list-group-item">
-					<a href="grupoCapas.action">Grupo de capas</a>
+					<a href="grupoCapas.action"><i class="glyphicon glyphicon-list-alt"></i> Grupo de capas</a>
 				</li>
 				<li class="list-group-item">
-					<a href="cuentaUsuario.action">Cuenta de usuario</a>
-				</li>
-				<li class="list-group-item">
-					<a href="idioma.action">Idioma</a>
+					<a href="cuentaUsuario.action"><i class="glyphicon glyphicon-list-alt"></i> Cuenta de usuario</a>
 				</li>
 			</ul>
 		</div>

@@ -10,9 +10,9 @@
 			</h3>
 		</div>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-male"></i> Hef</a></li>
-			<li><a href="home.action"><i class="fa fa-star"></i> Principal </a></li>
-			<li class="active"><i class="fa fa-edit"></i> Grupo de capas base</li>
+			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
+			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar grupo de capas base</li>
+			
 		</ol>
 	</div>
 	<div class="row">
@@ -21,9 +21,9 @@
 			<div class="grid-title">
 				<div class="row form-row">
 					<div class="col-sm-12">
-						<div class="botonera">
+						<div class="botonera pull-right" >
 							<button class="btn btn-primary" type="button" id="idBtnNuevoGrupoCapas" tabindex="10"><i class="fa fa-file-o"></i> Nuevo </button>
-							<button class="btn btn-primary" type="button" id="idBtnSalirGrupoCapas" tabindex="10"><i class="fa fa-power-off"></i> Salir </button>
+							<button class="btn btn-primary" type="button" id="idBtnSalirGrupoCapas" tabindex="10"><i class="fa fa-power-off"></i> Regresar al mapa </button>
 						</div>
 					</div>
 				</div>
@@ -34,28 +34,19 @@
 					
 					<div class="row ">
 						<div class="col-sm-12">
-							<h4 class="semi-bold"><span class="light">Listado de</span> <span class="semi-bold">Grupo de capas base</span><br>
+							<h4 class="semi-bold"><span class="light">Listado de Grupos de capas base</span><br>
 							</h4>
 							<div class="row form-row">
 								<div class="col-sm-6">
-		                			<label for="buscar_strNombre" class="form-label">Nombre</label>
-		                			<s:textfield name="buscar_strNombre" cssClass="form-control" tabindex="1" size="40" maxlength="null"/>
+		                			<label for="buscar_intIdGrupoCapasPadre" class="form-label">Grupo Padre</label>
+		                			<s:select name="buscar_intIdGrupoCapasPadre" cssClass="form-control " tabindex="1" 
+		                					list="#session.listGrupoCapasBase" listKey="srlIdGrupoCapas" listValue="strNombre" headerKey="" headerValue="-Solo grupos base-">
+		                				</s:select>
 								</div>
 							</div>
-
-
+							
 						</div>
 					</div>
-					
-					<div class="row form-row">
-						<div class="col-sm-12">
-							<div class="botonera">
-								<button class="btn btn-primary" type="button" id="idBtnConsultarGrupoCapas" tabindex="10"><i class="fa fa-filter"></i> Filtrar </button>
-								<button class="btn btn-primary" type="button" id="idBtnMostrarTodosGrupoCapas" tabindex="10"><i class="fa fa-file-o"></i> Mostrar todos </button>
-							</div>
-						</div>
-					</div>
-					
 				</form>
 			</div>
 			
@@ -65,6 +56,7 @@
 						<tr>
 							<th width="null">Nombre</th>
 							<th width="null">Orden</th>
+							<th width="null">Grupo Capas Padre</th>
 							<th style="width: 6%;">Detalle</th>
 						</tr>
 					</thead>

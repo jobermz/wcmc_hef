@@ -14,12 +14,15 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import wcmc.hef.general.util.CadenaUtil;
-import wcmc.hef.business.core.configuracion.dto.CapasBaseDto;
-import wcmc.hef.business.core.configuracion.service.CapasBaseService;
-import wcmc.hef.dao.configuracion.domain.CapasBase;
+import wcmc.hef.business.core.configuracion.dto.CapaDto;
+import wcmc.hef.business.core.configuracion.service.CapaService;
+import wcmc.hef.dao.configuracion.domain.Capa;
 import wcmc.hef.business.core.configuracion.dto.GrupoCapasDto;
 import wcmc.hef.business.core.configuracion.service.GrupoCapasService;
 import wcmc.hef.dao.configuracion.domain.GrupoCapas;
+import wcmc.hef.business.core.configuracion.dto.TipoCapaDto;
+import wcmc.hef.business.core.configuracion.service.TipoCapaService;
+import wcmc.hef.dao.configuracion.domain.TipoCapa;
 
 /**
  * Clase Action que se usa para el registro, edicion y consulta de Capas base
@@ -28,43 +31,48 @@ import wcmc.hef.dao.configuracion.domain.GrupoCapas;
  * 
  */
 
-public class CapasBaseAction extends ActionSupport {
+public class CapaAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Declaracion de clases servicio para el acceso a los datos
 	 */
 	@Autowired
-	private CapasBaseService capasBaseService;
+	private CapaService capaService;
 	
 	@Autowired
 	private GrupoCapasService grupoCapasService;
 	
-	private String buscar_srlIdCapasBase;
+	@Autowired
+	private TipoCapaService tipoCapaService;
+	
+	private String buscar_srlIdCapa;
+	private String buscar_intGrupoCapas;
+	private String buscar_intTipoCapa;
 	private String buscar_strNombre;
 	private String buscar_strComentarios;
 	private String buscar_strUrl;
-	private String buscar_timFechaRegistro;
 	private String buscar_strWmsUrl;
 	private String buscar_strWmsCapas;
 	private String buscar_strWfsUrl;
-	private String buscar_intGrupoCapas;
+	private String buscar_timFechaRegistro;
 	
 	private String[] buscar_seleccion_id;
 	
-	private CapasBaseDto edicion_capasBaseDto;
+	private CapaDto edicion_capaDto;
 	
-	private List<CapasBase> listCapasBase;
+	private List<Capa> listCapa;
 	
 
 	
 	
-	public CapasBaseAction() {
+	public CapaAction() {
 	}
 	
 	public String inicio() {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		grupoCapasCargar();
+		tipoCapaCargar();
 		return SUCCESS;
 	}
 	
@@ -72,15 +80,18 @@ public class CapasBaseAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
-			CapasBaseDto capasBaseDto		= new CapasBaseDto();
+			CapaDto capaDto		= new CapaDto();
 			if(buscar_strNombre != null && !buscar_strNombre.equals("")) {
-				capasBaseDto.setStrNombre(CadenaUtil.getStr(buscar_strNombre));
+				capaDto.setStrNombre(CadenaUtil.getStr(buscar_strNombre));
 			}
 			if(buscar_strComentarios != null && !buscar_strComentarios.equals("")) {
-				capasBaseDto.setStrComentarios(CadenaUtil.getStr(buscar_strComentarios));
+				capaDto.setStrComentarios(CadenaUtil.getStr(buscar_strComentarios));
+			}
+			if(buscar_intGrupoCapas != null && !buscar_intGrupoCapas.equals("")) {
+				capaDto.setIntGrupoCapas(CadenaUtil.getInte(buscar_intGrupoCapas));
 			}
 			
-			listCapasBase = capasBaseService.buscar(capasBaseDto);
+			listCapa = capaService.buscar(capaDto);
 		} catch(Exception ex) {
 			//ex.printStackTrace();
 			addActionError("Ocurrio un error:" + ex.getMessage());
@@ -89,12 +100,12 @@ public class CapasBaseAction extends ActionSupport {
 	}
 	
 	public String eliminar() {
-		CapasBaseDto capasBaseDto	= null;
+		CapaDto capaDto	= null;
 		try {
 			for(int i = 0;i < buscar_seleccion_id.length;i++) {
-				capasBaseDto	= new CapasBaseDto();
-				capasBaseDto.setSrlIdCapasBase(CadenaUtil.getInte(buscar_seleccion_id[i]));
-				capasBaseService.eliminar(capasBaseDto);
+				capaDto	= new CapaDto();
+				capaDto.setSrlIdCapa(CadenaUtil.getInte(buscar_seleccion_id[i]));
+				capaService.eliminar(capaDto);
 			}
 			addActionMessage("Se eliminó satisfactoriamente el registro");
 		} catch(Exception ex) {
@@ -108,12 +119,13 @@ public class CapasBaseAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
-			CapasBaseDto capasBaseDto		= new CapasBaseDto();
-			capasBaseDto.setSrlIdCapasBase(CadenaUtil.getInte(buscar_seleccion_id[0]));
-			CapasBase capasBase				= capasBaseService.buscarById(capasBaseDto);
-			if(capasBase != null) {
-				this.edicion_capasBaseDto		= new CapasBaseDto();
-				BeanUtils.copyProperties(capasBase, this.edicion_capasBaseDto);
+			CapaDto capaDto		= new CapaDto();
+			capaDto.setSrlIdCapa(CadenaUtil.getInte(buscar_seleccion_id[0]));
+			Capa capa				= capaService.buscarById(capaDto);
+			if(capa != null) {
+				this.edicion_capaDto		= new CapaDto();
+				BeanUtils.copyProperties(capa, this.edicion_capaDto);
+				session.put("CapaDto_SrlIdCapa", this.edicion_capaDto.getSrlIdCapa());
 			}
 		} catch(Exception ex) {
 			//ex.printStackTrace();
@@ -125,7 +137,7 @@ public class CapasBaseAction extends ActionSupport {
 	public String nuevo() {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
-		this.edicion_capasBaseDto		= new CapasBaseDto();
+		this.edicion_capaDto		= new CapaDto();
 		return SUCCESS;
 	}
 	
@@ -138,7 +150,7 @@ public class CapasBaseAction extends ActionSupport {
 				throw new Exception("");
 			}
 			
-			capasBaseService.guardar(this.edicion_capasBaseDto);
+			capaService.guardar(this.edicion_capaDto);
 			
 			addActionMessage("Se registro satisfactoriamente");
 		} catch(Exception ex) {
@@ -155,8 +167,40 @@ public class CapasBaseAction extends ActionSupport {
 		try {
 			Map<String, Object> session		= ActionContext.getContext().getSession();
 			HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-			List<GrupoCapas> list		= grupoCapasService.buscar(null);
-			session.put("listGrupoCapas", list);
+//			List<GrupoCapas> list		= grupoCapasService.buscar(null);
+//			session.put("listGrupoCapas", list);
+			
+			GrupoCapasDto grupoCapasDto					= new GrupoCapasDto();
+			List<GrupoCapas> listGrupoCapasBase			= grupoCapasService.buscar(grupoCapasDto);
+			List<GrupoCapas> listGrupoCapasSub			= null;
+			List<GrupoCapas> listGrupoCapasOut			= new ArrayList<GrupoCapas>();
+			for(GrupoCapas grupoCapas:listGrupoCapasBase) {
+				listGrupoCapasOut.add(grupoCapas);
+				grupoCapasDto				= new GrupoCapasDto();
+				grupoCapasDto.setIntIdGrupoCapasPadre(grupoCapas.getSrlIdGrupoCapas());
+				listGrupoCapasSub			= grupoCapasService.buscar(grupoCapasDto);
+				listGrupoCapasOut.addAll(listGrupoCapasSub);
+			}
+			session.put("listGrupoCapas", listGrupoCapasOut);
+			
+			session.put("listGrupoCapasBase", listGrupoCapasBase);
+			grupoCapasDto				= new GrupoCapasDto();
+			listGrupoCapasSub			= grupoCapasService.buscarTodos(grupoCapasDto);
+			session.put("listGrupoCapasTodos", listGrupoCapasSub);
+			
+		} catch(Exception ex) {
+			//ex.printStackTrace();
+			return "error";
+		}
+		return SUCCESS;
+	}
+	
+	public String tipoCapaCargar() {
+		try {
+			Map<String, Object> session		= ActionContext.getContext().getSession();
+			HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+			List<TipoCapa> list		= tipoCapaService.buscar(null);
+			session.put("listTipoCapa", list);
 		} catch(Exception ex) {
 			//ex.printStackTrace();
 			return "error";
@@ -167,12 +211,26 @@ public class CapasBaseAction extends ActionSupport {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	
-	public String getBuscar_srlIdCapasBase() {
-		return buscar_srlIdCapasBase;
+	public String getBuscar_srlIdCapa() {
+		return buscar_srlIdCapa;
 	}
 	
-	public void setBuscar_srlIdCapasBase(String buscar_srlIdCapasBase) {
-		this.buscar_srlIdCapasBase = buscar_srlIdCapasBase;
+	public void setBuscar_srlIdCapa(String buscar_srlIdCapa) {
+		this.buscar_srlIdCapa = buscar_srlIdCapa;
+	}
+	public String getBuscar_intGrupoCapas() {
+		return buscar_intGrupoCapas;
+	}
+	
+	public void setBuscar_intGrupoCapas(String buscar_intGrupoCapas) {
+		this.buscar_intGrupoCapas = buscar_intGrupoCapas;
+	}
+	public String getBuscar_intTipoCapa() {
+		return buscar_intTipoCapa;
+	}
+	
+	public void setBuscar_intTipoCapa(String buscar_intTipoCapa) {
+		this.buscar_intTipoCapa = buscar_intTipoCapa;
 	}
 	public String getBuscar_strNombre() {
 		return buscar_strNombre;
@@ -195,13 +253,6 @@ public class CapasBaseAction extends ActionSupport {
 	public void setBuscar_strUrl(String buscar_strUrl) {
 		this.buscar_strUrl = buscar_strUrl;
 	}
-	public String getBuscar_timFechaRegistro() {
-		return buscar_timFechaRegistro;
-	}
-	
-	public void setBuscar_timFechaRegistro(String buscar_timFechaRegistro) {
-		this.buscar_timFechaRegistro = buscar_timFechaRegistro;
-	}
 	public String getBuscar_strWmsUrl() {
 		return buscar_strWmsUrl;
 	}
@@ -223,21 +274,21 @@ public class CapasBaseAction extends ActionSupport {
 	public void setBuscar_strWfsUrl(String buscar_strWfsUrl) {
 		this.buscar_strWfsUrl = buscar_strWfsUrl;
 	}
-	public String getBuscar_intGrupoCapas() {
-		return buscar_intGrupoCapas;
+	public String getBuscar_timFechaRegistro() {
+		return buscar_timFechaRegistro;
 	}
 	
-	public void setBuscar_intGrupoCapas(String buscar_intGrupoCapas) {
-		this.buscar_intGrupoCapas = buscar_intGrupoCapas;
+	public void setBuscar_timFechaRegistro(String buscar_timFechaRegistro) {
+		this.buscar_timFechaRegistro = buscar_timFechaRegistro;
 	}
 	
-	public CapasBaseDto getEdicion_capasBaseDto() {
-		return edicion_capasBaseDto;
+	public CapaDto getEdicion_capaDto() {
+		return edicion_capaDto;
 	}
 	
-	public void setEdicion_capasBaseDto(
-			CapasBaseDto edicion_capasBaseDto) {
-		this.edicion_capasBaseDto = edicion_capasBaseDto;
+	public void setEdicion_capaDto(
+			CapaDto edicion_capaDto) {
+		this.edicion_capaDto = edicion_capaDto;
 	}
 	
 	public String[] getBuscar_seleccion_id() {
@@ -248,12 +299,12 @@ public class CapasBaseAction extends ActionSupport {
 		this.buscar_seleccion_id = buscar_seleccion_id;
 	}
 	
-	public List<CapasBase> getListCapasBase() {
-		return listCapasBase;
+	public List<Capa> getListCapa() {
+		return listCapa;
 	}
 	
-	public void setListCapasBase(List<CapasBase> listCapasBase) {
-		this.listCapasBase = listCapasBase;
+	public void setListCapa(List<Capa> listCapa) {
+		this.listCapa = listCapa;
 	}
 	
 	public Collection<String> getActionErrors() {

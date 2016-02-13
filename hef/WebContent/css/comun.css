@@ -15,3 +15,15 @@ body{
 	width: 100%;
 	height: 100%;
 }
+.clsLogin {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.clsLoginBlue {
+	color: #337ab7;
+	text-decoration:none;
+}
+a:hover, a:focus {
+	color: #337ab7;
+	text-decoration:none;
+}

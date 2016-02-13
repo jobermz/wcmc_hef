@@ -43,7 +43,7 @@ public class CapaDistritoServiceImpl implements CapaDistritoService {
 			}
 		}
 		
-		capaDistritoParamDef.setOrderByClause("nom_distrito, nom_provincia");
+		capaDistritoParamDef.setOrderByClause("nm_distrit, nm_provinc");
 		List<CapaDistrito>	 list	= capaDistritoMapper.selectByDefaultParameter(capaDistritoParamDef);
 		return list;
 	}

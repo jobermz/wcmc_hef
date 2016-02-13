@@ -6,11 +6,11 @@ var breakpointDefinitionGrupoCapas	= {
 };
 $(document).ready(function() {
 	$('#idBtnSalirGrupoCapas').click(salir_grupo_capas);
-	$('#idBtnConsultarGrupoCapas').click(buscar_basico_grupo_capas);
-	$('#idBtnMostrarTodosGrupoCapas').click(mostrarTodos_grupo_capas);
+//	$('#idBtnConsultarGrupoCapas').click(buscar_basico_grupo_capas);
+//	$('#idBtnMostrarTodosGrupoCapas').click(mostrarTodos_grupo_capas);
 	$('#idBtnNuevoGrupoCapas').click(nuevo_grupo_capas);
+	$('select[name=buscar_intIdGrupoCapasPadre]').change(buscar_basico_grupo_capas);
 	instanciardt_basico_grupo_capas();
-
 });
 
 
@@ -25,6 +25,9 @@ function instanciardt_basico_grupo_capas(ejecutaBuscar) {
 	oTableDefaultGrupoCapas = null;
 	oTableDefaultGrupoCapas = $('#tableDefaultGrupoCapas').dataTable({
 		autoWidth      : false,
+		"pagingType"   : "simple",
+		"searching"    : false,
+        "info"         : false,
 	    preDrawCallback: function () {
 	        if (!responsiveHelperGrupoCapas) {
 	            responsiveHelperGrupoCapas = new ResponsiveDatatablesHelper(oTableDefaultGrupoCapas, breakpointDefinitionGrupoCapas);
@@ -42,19 +45,20 @@ function instanciardt_basico_grupo_capas(ejecutaBuscar) {
 			"sUrl": "tools/bootstrap-datatables/lang/spanish.json"
 		},
 		"aLengthMenu": [
-		                [25, 50, 100, 200, -1],
-		                [25, 50, 100, 200, "Todos"]
+		                [5, 25, 100, 200, -1],
+		                [5, 25, 100, 200, "Todos"]
 		],
 		"sAjaxDataProp": "listGrupoCapas",
 		"sAjaxSource": null,
 		"aoColumns": [
 				{"mData" : "strNombre"},
 				{"mData" : "intOrden"},
+				{"mData" : "intIdGrupoCapasPadre"},
 				{"mData" : null}
 		],
 		"aoColumnDefs": [
 		                 {
-		                	 "aTargets": [2],
+		                	 "aTargets": [3],
 		                	 "mData": null,
 		                	 "mRender": function (data, type, row) {
 		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_grupo_capas" onclick="editar_grupo_capas(\'' + row.srlIdGrupoCapas + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;'
@@ -86,7 +90,7 @@ function buscar_basico_grupo_capas() {
 }
 function nuevo_grupo_capas() {
 	deshabilitaBotones_grupo_capas(true);
-	var frm		= document.form;
+	var frm		= document.formBuscarGrupoCapas;
 	frm.action	= "nuevoGrupoCapas.action";
 	frm.method	= "POST";
 	frm.target	= "_self";
@@ -142,8 +146,8 @@ function eliminar_grupo_capas(srlIdGrupoCapas) {
 
 function deshabilitaBotones_grupo_capas(deshabilitarBoton) {
 	$('#idBtnSalirGrupoCapas').prop('disabled', deshabilitarBoton);
-	$('#idBtnConsultarGrupoCapas').prop('disabled', deshabilitarBoton);
-	$('#idBtnMostrarTodosGrupoCapas').prop('disabled', deshabilitarBoton);
+//	$('#idBtnConsultarGrupoCapas').prop('disabled', deshabilitarBoton);
+//	$('#idBtnMostrarTodosGrupoCapas').prop('disabled', deshabilitarBoton);
 	$('#idBtnNuevoGrupoCapas').prop('disabled', deshabilitarBoton);
 	$(".btn_buscar_control_grupo_capas").each(function() {
 		$(this).prop('disabled', deshabilitarBoton);

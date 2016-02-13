@@ -26,15 +26,19 @@ public class CuentaUsuarioServiceImpl implements CuentaUsuarioService {
 			if(CadenaUtil.getStrNull(cuentaUsuarioDto.getStrNombres()) != null) {
 				criteria.andStrNombresLike(cuentaUsuarioDto.getStrNombres());
 			}
-			if(CadenaUtil.getStrNull(cuentaUsuarioDto.getStrUsuario()) != null) {
-				criteria.andStrUsuarioLike(cuentaUsuarioDto.getStrUsuario());
-			}
 			if(CadenaUtil.getStrNull(cuentaUsuarioDto.getStrEsActivo()) != null) {
 				criteria.andStrEsActivoLike(cuentaUsuarioDto.getStrEsActivo());
 			}
+			
+			if(CadenaUtil.getStrNull(cuentaUsuarioDto.getStrUsuario()) != null) {
+				criteria.andStrUsuarioEqualTo(cuentaUsuarioDto.getStrUsuario());
+			}
+			if(CadenaUtil.getStrNull(cuentaUsuarioDto.getStrClave()) != null) {
+				criteria.andStrClaveEqualTo(cuentaUsuarioDto.getStrClave());
+			}
 		}
 		
-		cuentaUsuarioParamDef.setOrderByClause("nom_usuario, ape_usuario");
+		cuentaUsuarioParamDef.setOrderByClause("nm_nombre, nm_apellid");
 		List<CuentaUsuario>	 list	= cuentaUsuarioMapper.selectByDefaultParameter(cuentaUsuarioParamDef);
 		return list;
 	}

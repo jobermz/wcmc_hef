@@ -17,8 +17,11 @@
 	<include file="struts/struts-home.xml"/>
 	
 	<include file="struts/visor/struts-visor.xml"/>
-	<include file="struts/seguridad/struts-cuenta-usuario.xml"/>
 	
-	<include file="struts/configuracion/struts-capas-base.xml"/>
+	<include file="struts/seguridad/struts-cuenta-usuario.xml"/>
+	<include file="struts/seguridad/struts-seguridad.xml"/>
+	<include file="struts/configuracion/struts-capa.xml"/>
 	<include file="struts/configuracion/struts-grupo-capas.xml"/>
+	<include file="struts/configuracion/struts-capa-umbral.xml"/>
+
 </struts>

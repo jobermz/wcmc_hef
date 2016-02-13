@@ -7,6 +7,10 @@ public class ConfiguracionProperties {
 	public static String CAPAS_BASE_DEPARTAMENTO	= "capas_base_departamento";
 	public static String CAPAS_BASE_PROVINCIA		= "capas_base_provincia";
 	public static String CAPAS_BASE_DISTRITO		= "capas_base_distrito";
+	
+	public static String TIPO_CAPA_UMBRAL			= "tipo_capa_umbral";
+	public static String TIPO_CAPA_SHAPEFILE		= "tipo_capa_shapefile";
+
 	public static List<String> getConstanteList(String strParam) {
 		List<String> list	= new ArrayList<String>();
 		int intIdContador	= 0;

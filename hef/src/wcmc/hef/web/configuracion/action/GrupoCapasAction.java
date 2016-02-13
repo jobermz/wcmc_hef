@@ -1,12 +1,8 @@
 package wcmc.hef.web.configuracion.action;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
@@ -37,6 +33,7 @@ public class GrupoCapasAction extends ActionSupport {
 	private String buscar_srlIdGrupoCapas;
 	private String buscar_strNombre;
 	private String buscar_intOrden;
+	private String buscar_intIdGrupoCapasPadre;
 	
 	private String[] buscar_seleccion_id;
 	
@@ -44,14 +41,22 @@ public class GrupoCapasAction extends ActionSupport {
 	
 	private List<GrupoCapas> listGrupoCapas;
 	
-
-	
-	
 	public GrupoCapasAction() {
 	}
 	
 	public String inicio() {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
+		try {
+			GrupoCapasDto grupoCapasDto		= new GrupoCapasDto();
+			List<GrupoCapas> listGrupoCapas = grupoCapasService.buscarGruposBase(grupoCapasDto);
+			session.put("listGrupoCapasBase", listGrupoCapas);
+			if(!CadenaUtil.getStr(this.edicion_grupoCapasDto.getIntIdGrupoCapasPadre()).equals("")) {
+				buscar_intIdGrupoCapasPadre	= ""+this.edicion_grupoCapasDto.getIntIdGrupoCapasPadre();
+			}
+		} catch(Exception ex) {
+			//ex.printStackTrace();
+			addActionError("Ocurrio un error:" + ex.getMessage());
+		}
 		return SUCCESS;
 	}
 	
@@ -63,7 +68,13 @@ public class GrupoCapasAction extends ActionSupport {
 			if(buscar_strNombre != null && !buscar_strNombre.equals("")) {
 				grupoCapasDto.setStrNombre(CadenaUtil.getStr(buscar_strNombre));
 			}
-			
+			if(buscar_intIdGrupoCapasPadre == null) {
+				buscar_intIdGrupoCapasPadre		= (String)session.get("buscar_intIdGrupoCapasPadre");
+			}
+			if(buscar_intIdGrupoCapasPadre != null) {
+				grupoCapasDto.setIntIdGrupoCapasPadre(CadenaUtil.getInte(buscar_intIdGrupoCapasPadre));
+				session.put("buscar_intIdGrupoCapasPadre", buscar_intIdGrupoCapasPadre);
+			}
 			listGrupoCapas = grupoCapasService.buscar(grupoCapasDto);
 		} catch(Exception ex) {
 			//ex.printStackTrace();
@@ -109,7 +120,17 @@ public class GrupoCapasAction extends ActionSupport {
 	public String nuevo() {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
-		this.edicion_grupoCapasDto		= new GrupoCapasDto();
+		try {
+			this.edicion_grupoCapasDto		= new GrupoCapasDto();
+			if(buscar_intIdGrupoCapasPadre != null && !buscar_intIdGrupoCapasPadre.equals("")) {
+				this.edicion_grupoCapasDto.setIntIdGrupoCapasPadre(CadenaUtil.getInte(buscar_intIdGrupoCapasPadre));
+			}
+			List<GrupoCapas> listGrupoCapas = grupoCapasService.buscar(this.edicion_grupoCapasDto);
+			this.edicion_grupoCapasDto.setIntOrden(listGrupoCapas.size() + 1);
+		} catch(Exception ex) {
+			//ex.printStackTrace();
+			addActionError("Ocurrio un error:" + ex.getMessage());
+		}
 		return SUCCESS;
 	}
 	
@@ -139,7 +160,6 @@ public class GrupoCapasAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	public String getBuscar_srlIdGrupoCapas() {
@@ -162,6 +182,13 @@ public class GrupoCapasAction extends ActionSupport {
 	
 	public void setBuscar_intOrden(String buscar_intOrden) {
 		this.buscar_intOrden = buscar_intOrden;
+	}
+	public String getBuscar_intIdGrupoCapasPadre() {
+		return buscar_intIdGrupoCapasPadre;
+	}
+	
+	public void setBuscar_intIdGrupoCapasPadre(String buscar_intIdGrupoCapasPadre) {
+		this.buscar_intIdGrupoCapasPadre = buscar_intIdGrupoCapasPadre;
 	}
 	
 	public GrupoCapasDto getEdicion_grupoCapasDto() {

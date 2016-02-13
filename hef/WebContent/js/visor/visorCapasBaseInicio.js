@@ -7,50 +7,61 @@ function iniciarCapasBase() {
 	$("select[name=centrar_prov_departamento]").change(centrar_prov_upd_dpto);
 	$("select[name=centrar_dist_departamento]").change(centrar_dist_upd_dpto);
 }
-function buscarCapasBaseById(srlIdCapasBase) {
+function buscarCapasBaseById(srlIdCapa) {
 	for(var i = 0;i < capasBaseArr.length;i++) {
-		if(capasBaseArr[i].srlIdCapasBase == srlIdCapasBase) {
+		if(capasBaseArr[i].srlIdCapa == srlIdCapa) {
 			return capasBaseArr[i];
 		}
 	}
 	return null;
 }
-function mostrarCapaById(srlIdCapasBase) {
-	var capaBase	= buscarCapasBaseById(srlIdCapasBase);
+function mostrarCapaById(srlIdCapa, min, max) {
+	var capaBase	= buscarCapasBaseById(srlIdCapa);
 	if(capaBase && !capaBase.currLayer) {
 		var url		= capaBase.strWmsUrl;
-		var layers	= "show: " + capaBase.strWmsCapas;
+		var layers	= "show:" + capaBase.strWmsCapas;
+		paramRaster = "";
+		if(min && max) {
+			paramRaster = "{"+
+		    "\"rasterFunction\" : \"Remap\","+
+		    "\"rasterFunctionArguments\" : {"+
+		    "\"InputRanges\" : ["+min+", "+max+"],"+
+		    "\"OutputValues\": ["+min+"],"+
+		    "\"AllowUnmatched\": \"false\""+
+		    "}}";
+		}
 		capaBase.currLayer	= new ol.layer.Tile({
 			source: new ol.source.TileArcGISRest({
 				url: url,
 				params: {
-					LAYERS: layers
+					LAYERS:layers,
+					renderingRule:paramRaster
 				}
 			})
 		});
 		map.addLayer(capaBase.currLayer);
 	}
 }
-function ocultarCapaById(srlIdCapasBase) {
-	var capaBase	= buscarCapasBaseById(srlIdCapasBase);
+function ocultarCapaById(srlIdCapa) {
+	var capaBase	= buscarCapasBaseById(srlIdCapa);
 	if(capaBase && capaBase.currLayer) {
 		map.removeLayer(capaBase.currLayer);
 		capaBase.currLayer	= null;
 	}
 }
-function centrarMapa(srlIdCapasBase) {
+function centrarMapa(srlIdCapa) {
 	$('.centrar-mapa-modal').off('shown.bs.modal');
 	$('.centrar-mapa-modal').off('hidden.bs.modal');
 	$('.centrar-mapa-modal').on('shown.bs.modal', function (e) {
-		if($("input[name=CAPAS_BASE_DEPARTAMENTO]").val() == srlIdCapasBase) {
+		if($("input[name=CAPAS_BASE_DEPARTAMENTO]").val() == srlIdCapa) {
 			$("#idDivCentrarDepartamento").css("display","");
 			$("#idDivCentrarProvincia").css("display","none");
 			$("#idDivCentrarDistrito").css("display","none");
-		} else if($("input[name=CAPAS_BASE_PROVINCIA]").val() == srlIdCapasBase) {
+		} else if($("input[name=CAPAS_BASE_PROVINCIA]").val() == srlIdCapa) {
 			$("#idDivCentrarDepartamento").css("display","none");
 			$("#idDivCentrarProvincia").css("display","");
 			$("#idDivCentrarDistrito").css("display","none");
-		} else if($("input[name=CAPAS_BASE_DISTRITO]").val() == srlIdCapasBase) {
+		} else if($("input[name=CAPAS_BASE_DISTRITO]").val() == srlIdCapa) {
 			$("#idDivCentrarDepartamento").css("display","none");
 			$("#idDivCentrarProvincia").css("display","none");
 			$("#idDivCentrarDistrito").css("display","");
@@ -61,8 +72,8 @@ function centrarMapa(srlIdCapasBase) {
 	});
 	$('.centrar-mapa-modal').modal('show');
 }
-function descargarMapa(srlIdCapasBase) {
-	var capaBase	= buscarCapasBaseById(srlIdCapasBase);
+function descargarMapa(srlIdCapa) {
+	var capaBase	= buscarCapasBaseById(srlIdCapa);
 	if(capaBase) {
 //		document.location.href=capaBase.strWfsUrl;
 		var frm	= document.form;
@@ -71,16 +82,17 @@ function descargarMapa(srlIdCapasBase) {
 		frm.submit();
 	}
 }
-function mostrarInfo(srlIdCapasBase) {
+function mostrarInfo(srlIdCapa) {
 	$('.info-capas-modal').off('shown.bs.modal');
 	$('.info-capas-modal').off('hidden.bs.modal');
 	$('.info-capas-modal').on('shown.bs.modal', function (e) {
-		var capaBase	= buscarCapasBaseById(srlIdCapasBase);
+		var capaBase	= buscarCapasBaseById(srlIdCapa);
 		if(capaBase) {
 			$("#idDivInfoNombre").html(capaBase.strNombre);
 			$("#idDivInfoComentario").html(capaBase.strComentarios);
 			$("#idDivInfoUrl").html(capaBase.strUrl);
 			$("#idDivInfoFecha").html(capaBase.timFechaRegistroFechaHora);
+			$("#idDivInfoAutores").html(capaBase.strAutor);
 		}
 	});
 	$('.info-capas-modal').on('hidden.bs.modal', function (e) {

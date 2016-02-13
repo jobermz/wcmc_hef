@@ -8,6 +8,7 @@ public class GrupoCapasDto {
 	private Integer srlIdGrupoCapas;
 	private String strNombre;
 	private Integer intOrden;
+	private Integer intIdGrupoCapasPadre;
 	public Integer getSrlIdGrupoCapas() {
 		return srlIdGrupoCapas;
 	}
@@ -25,6 +26,12 @@ public class GrupoCapasDto {
 	}
 	public void setIntOrden(Integer intOrden) {
 		this.intOrden = intOrden;
+	}
+	public Integer getIntIdGrupoCapasPadre() {
+		return intIdGrupoCapasPadre;
+	}
+	public void setIntIdGrupoCapasPadre(Integer intIdGrupoCapasPadre) {
+		this.intIdGrupoCapasPadre = intIdGrupoCapasPadre;
 	}
 	
 }

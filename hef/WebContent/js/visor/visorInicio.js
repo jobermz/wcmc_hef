@@ -4,6 +4,7 @@ $(document).ready(function() {
 	goog.require('ol.layer.Tile');
 	goog.require('ol.source.MapQuest');
 	goog.require('ol.source.TileArcGISRest');
+	goog.require('ol.proj');
 	
 	$('.seleccionar-capas').click(seleccionarCapas);
 	$('.consulta-analitica').click(consultaAnalitica);
@@ -33,6 +34,20 @@ function iniciarMapa() {
 		var view = new ol.View({
 		  // make sure the view doesn't go beyond the 22 zoom levels of Google Maps
 		  maxZoom: 21,
+		  minZoom: 5,
+		  extent: [-9199616.97582139,-2126814.61366579,-7603789.69645505,-767.505336264896]
+		  //extent: ol.proj.transform([-307327.143633909,7908231.77821119,1206672.85636609,9999231.77821119],'EPSG:32718', 'EPSG:3857')
+		/*
+minx=-9199616.97582139
+miny=-768.948333529314
+maxx=-7603789.69645505
+maxy=-2126814.61366579
+
+minx=-9199616.97582139
+miny=-2126814.61366579
+maxx=-7603789.69645505
+maxy=-767.505336264896
+		*/
 //		  center: [-8524257, -1311047],
 //	      zoom: 5
 //		  projection: 'EPSG:3857',
@@ -94,11 +109,10 @@ function iniciarComponentes() {
 	$(".clsSlider").each(function(index) {
 		var currSlider	= $(this);
 		$(this).slider({
-//			orientation: "vertical",
 			range: "min",
 			min: 0,
 			max: 100,
-			value: 50,
+			value: 100,
 			slide: function(event, ui) {
 				var currCapa = buscarCapasBaseById(currSlider.attr("idcapa"));
 				if(currCapa && currCapa.currLayer) {
@@ -122,7 +136,11 @@ function marcarCapas() {
 		}
 	});
 }
-
+function filtrar_umbral(currSelect) {
+	var rangoValores = eval(""+$(currSelect).val());
+	ocultarCapaById(rangoValores[0]);
+	mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
+}
 
 
 function seleccionarCapas() {

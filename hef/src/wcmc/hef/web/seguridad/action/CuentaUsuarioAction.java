@@ -1,12 +1,8 @@
 package wcmc.hef.web.seguridad.action;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
@@ -17,6 +13,8 @@ import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.business.core.seguridad.dto.CuentaUsuarioDto;
 import wcmc.hef.business.core.seguridad.service.CuentaUsuarioService;
 import wcmc.hef.dao.seguridad.domain.CuentaUsuario;
+import wcmc.hef.business.core.configuracion.service.PerfilService;
+import wcmc.hef.dao.configuracion.domain.Perfil;
 
 /**
  * Clase Action que se usa para el registro, edicion y consulta de Cuenta de usuario
@@ -34,6 +32,9 @@ public class CuentaUsuarioAction extends ActionSupport {
 	@Autowired
 	private CuentaUsuarioService cuentaUsuarioService;
 	
+	@Autowired
+	private PerfilService perfilService;
+	
 	private String buscar_srlId;
 	private String buscar_intPerfil;
 	private String buscar_strNombres;
@@ -47,9 +48,6 @@ public class CuentaUsuarioAction extends ActionSupport {
 	private CuentaUsuarioDto edicion_cuentaUsuarioDto;
 	
 	private List<CuentaUsuario> listCuentaUsuario;
-	
-
-	
 	
 	public CuentaUsuarioAction() {
 	}
@@ -163,16 +161,7 @@ public class CuentaUsuarioAction extends ActionSupport {
 		try {
 			Map<String, Object> session		= ActionContext.getContext().getSession();
 			HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-			List<Map<String, String>> list	= new ArrayList<Map<String, String>>();
-			Map<String, String> map			= null;
-			map			= new HashMap<String, String>();
-			map.put("id", "1");
-			map.put("desc", "Administrador");
-			list.add(map);
-			map			= new HashMap<String, String>();
-			map.put("id", "1");
-			map.put("desc", "Técnico");
-			list.add(map);
+			List<Perfil> list		= perfilService.buscar(null);
 			session.put("listPerfil", list);
 		} catch(Exception ex) {
 			//ex.printStackTrace();

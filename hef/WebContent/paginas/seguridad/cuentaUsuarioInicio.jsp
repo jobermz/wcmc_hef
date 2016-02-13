@@ -10,9 +10,8 @@
 			</h3>
 		</div>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-male"></i> Hef</a></li>
-			<li><a href="home.action"><i class="fa fa-star"></i> Principal </a></li>
-			<li class="active"><i class="fa fa-edit"></i> Cuenta de usuario</li>
+			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
+			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar cuenta de usuario </li>
 		</ol>
 	</div>
 	<div class="row">
@@ -21,9 +20,9 @@
 			<div class="grid-title">
 				<div class="row form-row">
 					<div class="col-sm-12">
-						<div class="botonera">
+						<div class="botonera pull-right">
 							<button class="btn btn-primary" type="button" id="idBtnNuevoCuentaUsuario" tabindex="10"><i class="fa fa-file-o"></i> Nuevo </button>
-							<button class="btn btn-primary" type="button" id="idBtnSalirCuentaUsuario" tabindex="10"><i class="fa fa-power-off"></i> Salir </button>
+							<button class="btn btn-primary" type="button" id="idBtnSalirCuentaUsuario" tabindex="10"><i class="fa fa-power-off"></i> Regresar al mapa </button>
 						</div>
 					</div>
 				</div>
@@ -48,16 +47,13 @@
 		                			<s:textfield name="buscar_strUsuario" cssClass="form-control" tabindex="2" size="40" maxlength="100"/>
 								</div>
 							</div>
-
-
 						</div>
 					</div>
 					
 					<div class="row form-row">
 						<div class="col-sm-12">
-							<div class="botonera">
-								<button class="btn btn-primary" type="button" id="idBtnConsultarCuentaUsuario" tabindex="10"><i class="fa fa-filter"></i> Filtrar </button>
-								<button class="btn btn-primary" type="button" id="idBtnMostrarTodosCuentaUsuario" tabindex="10"><i class="fa fa-file-o"></i> Mostrar todos </button>
+							<div class="botonera pull-right">
+								<button class="btn btn-primary" type="button" id="idBtnConsultarCuentaUsuario" tabindex="10"><i class="fa fa-filter"></i> Buscar </button>
 							</div>
 						</div>
 					</div>

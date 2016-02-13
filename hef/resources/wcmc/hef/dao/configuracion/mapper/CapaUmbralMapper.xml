@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.configuracion.mapper.CapaUmbralMapper">
+	<resultMap id="CapaUmbralMap" type="wcmc.hef.dao.configuracion.domain.CapaUmbral">
+		<result column="cd_capaumb" property="srlIdCapaUmbral" jdbcType="INTEGER"/>
+		<result column="cd_capa_string" property="intIdCapaDesc" jdbcType="VARCHAR"/>
+		<result column="cd_capa" property="intIdCapa" jdbcType="INTEGER"/>
+		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="ha_valmin" property="intValorMinimo" jdbcType="INTEGER"/>
+		<result column="ha_valmax" property="intValorMaximo" jdbcType="INTEGER"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="CapaUmbralMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbralParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_capaumbral as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="CapaUmbralMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbralKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_capaumbral as tab
+		where 1 = 1
+		and cd_capaumb = #{srlIdCapaUmbral,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.t_capaumbral_cd_capaumb_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbral">
+		insert into wcmc_hef.t_capaumbral
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="intIdCapa != null">
+				cd_capa,
+			</if>
+			<if test="strNombre != null">
+				de_nombre,
+			</if>
+			<if test="intValorMinimo != null">
+				ha_valmin,
+			</if>
+			<if test="intValorMaximo != null">
+				ha_valmax,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="intIdCapa != null">
+				#{intIdCapa, jdbcType=INTEGER},
+			</if>
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+			<if test="intValorMinimo != null">
+				#{intValorMinimo, jdbcType=INTEGER},
+			</if>
+			<if test="intValorMaximo != null">
+				#{intValorMaximo, jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbral">
+		update wcmc_hef.t_capaumbral
+		<set>
+			<if test="intIdCapa != null">
+				cd_capa = #{intIdCapa,jdbcType=INTEGER},
+			</if>
+			<if test="strNombre != null">
+				de_nombre = #{strNombre,jdbcType=VARCHAR},
+			</if>
+			<if test="intValorMinimo != null">
+				ha_valmin = #{intValorMinimo,jdbcType=INTEGER},
+			</if>
+			<if test="intValorMaximo != null">
+				ha_valmax = #{intValorMaximo,jdbcType=INTEGER},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_capaumb = #{srlIdCapaUmbral,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbralKey">
+		delete from wcmc_hef.t_capaumbral
+		where 1 = 1
+		<if test="srlIdCapaUmbral != null">
+		and cd_capaumb = #{srlIdCapaUmbral,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_capaumb, 
+		cd_capa, 
+		(SELECT ts.de_nombre FROM wcmc_hef.t_capa ts WHERE ts.cd_capa = tab.cd_capa) AS cd_capa_string, 
+		de_nombre, 
+		ha_valmin, 
+		ha_valmax
+	</sql>
+</mapper>

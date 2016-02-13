@@ -9,9 +9,9 @@
 			</h3>
 		</div>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-male"></i> Hef </a></li>
-			<li><a href="home.action"><i class="fa fa-star"></i> Principal </a></li>
-			<li class="active"><i class="fa fa-edit"></i> Cuenta de usuario</li>
+			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
+			<li><a href="cuentaUsuario.action"><i class="glyphicon glyphicon-th-list"></i> Listar cuenta de usuario </a></li>
+			<li class="active"><i class="glyphicon glyphicon-edit"></i> Edici&oacute;n de cuenta de usuario</li>
 		</ol>
 	</div>
 	
@@ -28,35 +28,40 @@
 							
 								<s:hidden name="edicion_cuentaUsuarioDto.srlId"></s:hidden>
 								<div class="row form-row">
-									<div class="col-sm-4 " id="idCampCuentaUsuario_Perfil">
+									<div class="col-sm-12 " id="idCampCuentaUsuario_Perfil">
 										<label for="edicion_cuentaUsuarioDto.intPerfil" class="form-label">Perfil:</label>
 										<div>
-											<s:select name="edicion_cuentaUsuarioDto.intPerfil" cssClass="form-control " tabindex="1" list="#session.listPerfil" headerKey="" headerValue="-Seleccionar-" listValue="desc" listKey="id"></s:select>
+											
+											<s:select name="edicion_cuentaUsuarioDto.intPerfil" cssClass="form-control " tabindex="1" list="#session.listPerfil" headerKey="" headerValue="-Seleccionar-" listValue="strNombre" listKey="srlIdPerfil"></s:select>
 										</div>
 									</div>
-									<div class="col-sm-4 " id="idCampCuentaUsuario_Nombres">
+								</div>
+								<div class="row form-row">
+									<div class="col-sm-6 " id="idCampCuentaUsuario_Nombres">
 			                			<label for="edicion_cuentaUsuarioDto.strNombres" class="form-label">Nombres</label>
 		                				<s:textfield name="edicion_cuentaUsuarioDto.strNombres" cssClass="form-control " tabindex="2" size="40" maxlength="200" />
 									</div>
-									<div class="col-sm-4 " id="idCampCuentaUsuario_Apellidos">
+									<div class="col-sm-6 " id="idCampCuentaUsuario_Apellidos">
 			                			<label for="edicion_cuentaUsuarioDto.strApellidos" class="form-label">Apellidos</label>
 		                				<s:textfield name="edicion_cuentaUsuarioDto.strApellidos" cssClass="form-control " tabindex="3" size="40" maxlength="300" />
 									</div>
 								</div>
 								<div class="row form-row">
-									<div class="col-sm-4 " id="idCampCuentaUsuario_Usuario">
+									<div class="col-sm-6 " id="idCampCuentaUsuario_Usuario">
 			                			<label for="edicion_cuentaUsuarioDto.strUsuario" class="form-label">Usuario</label>
 		                				<s:textfield name="edicion_cuentaUsuarioDto.strUsuario" cssClass="form-control " tabindex="4" size="40" maxlength="100" />
 									</div>
-									<div class="col-sm-4 " id="idCampCuentaUsuario_Clave">
+									<div class="col-sm-6 " id="idCampCuentaUsuario_Clave">
 			                			<label for="edicion_cuentaUsuarioDto.strClave" class="form-label">Clave</label>
 		                				<s:textfield name="edicion_cuentaUsuarioDto.strClave" cssClass="form-control " tabindex="5" size="40" maxlength="500" />
 									</div>
-									<div class="col-sm-4 " id="idCampCuentaUsuario_EsActivo">
+								</div>
+								<div class="row form-row">
+									<div class="col-sm-3 " id="idCampCuentaUsuario_EsActivo">
 										<label for="edicion_cuentaUsuarioDto.strEsActivo" class="form-label">Esta activo:</label>
 										<div><s:checkbox  name="edicion_cuentaUsuarioDto.strEsActivoBoolean" tabindex="6" theme="simple" /></div>
 									</div>
-								</div>
+									</div>
 							
 							</div>
 						</div>
@@ -64,7 +69,7 @@
 						<div class="form-actions">
 							<div class="row pull-right">
 								<button class="btn btn-primary" type="button" id="idBtnGuardarCuentaUsuario" tabindex="10"><i class="fa fa fa-save"></i> Guardar </button>
-								<button class="btn btn-primary" type="button" id="idBtnVolverCuentaUsuario" tabindex="10"><i class="fa fa fa-power-off"></i> Salir </button>
+								<button class="btn btn-primary" type="button" id="idBtnVolverCuentaUsuario" tabindex="10"><i class="fa fa fa-power-off"></i> Regresar </button>
 							</div>
 						</div>
 						<br><br>

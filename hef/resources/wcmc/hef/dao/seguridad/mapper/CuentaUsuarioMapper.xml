@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="wcmc.hef.dao.seguridad.mapper.CuentaUsuarioMapper">
 	<resultMap id="CuentaUsuarioMap" type="wcmc.hef.dao.seguridad.domain.CuentaUsuario">
-		<result column="id_usuario" property="srlId" jdbcType="INTEGER"/>
-		<result column="id_perfil" property="intPerfil" jdbcType="INTEGER"/>
-		<result column="nom_usuario" property="strNombres" jdbcType="VARCHAR"/>
-		<result column="ape_usuario" property="strApellidos" jdbcType="VARCHAR"/>
-		<result column="cod_usuario" property="strUsuario" jdbcType="VARCHAR"/>
-		<result column="clv_usuario" property="strClave" jdbcType="VARCHAR"/>
-		<result column="ind_estado" property="strEsActivo" jdbcType="VARCHAR"/>
+		<result column="cd_usuario" property="srlId" jdbcType="INTEGER"/>
+		<result column="cd_perfil_string" property="intPerfilDesc" jdbcType="VARCHAR"/>
+		<result column="cd_perfil" property="intPerfil" jdbcType="INTEGER"/>
+		<result column="nm_nombre" property="strNombres" jdbcType="VARCHAR"/>
+		<result column="nm_apellid" property="strApellidos" jdbcType="VARCHAR"/>
+		<result column="nm_logueo" property="strUsuario" jdbcType="VARCHAR"/>
+		<result column="nm_clave" property="strClave" jdbcType="VARCHAR"/>
+		<result column="nm_estado" property="strEsActivo" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CuentaUsuarioMap" parameterType="wcmc.hef.dao.seguridad.domain.CuentaUsuarioParamDef">
 		select
@@ -16,7 +17,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t001usuario as tab
+		from wcmc_hef.t_usuario as tab
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>
@@ -27,35 +28,35 @@
 	<select id="selectByPrimaryKey" resultMap="CuentaUsuarioMap" parameterType="wcmc.hef.dao.seguridad.domain.CuentaUsuarioKey" >
 		select 
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t001usuario as tab
+		from wcmc_hef.t_usuario as tab
 		where 1 = 1
-		and id_usuario = #{srlId,jdbcType=INTEGER}
+		and cd_usuario = #{srlId,jdbcType=INTEGER}
 	</select>
 
 	<select id="lastSequence" resultType="java.lang.Integer">
-		select currval('wcmc_hef.t001usuario_id_usuario_seq')
+		select currval('wcmc_hef.t_usuario_cd_usuario_seq')
 	</select>
 
 	<insert id="insertSelective" parameterType="wcmc.hef.dao.seguridad.domain.CuentaUsuario">
-		insert into wcmc_hef.t001usuario
+		insert into wcmc_hef.t_usuario
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="intPerfil != null">
-				id_perfil,
+				cd_perfil,
 			</if>
 			<if test="strNombres != null">
-				nom_usuario,
+				nm_nombre,
 			</if>
 			<if test="strApellidos != null">
-				ape_usuario,
+				nm_apellid,
 			</if>
 			<if test="strUsuario != null">
-				cod_usuario,
+				nm_logueo,
 			</if>
 			<if test="strClave != null">
-				clv_usuario,
+				nm_clave,
 			</if>
 			<if test="strEsActivo != null">
-				ind_estado,
+				nm_estado,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -80,35 +81,35 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.seguridad.domain.CuentaUsuario">
-		update wcmc_hef.t001usuario
+		update wcmc_hef.t_usuario
 		<set>
 			<if test="intPerfil != null">
-				id_perfil = #{intPerfil,jdbcType=INTEGER},
+				cd_perfil = #{intPerfil,jdbcType=INTEGER},
 			</if>
 			<if test="strNombres != null">
-				nom_usuario = #{strNombres,jdbcType=VARCHAR},
+				nm_nombre = #{strNombres,jdbcType=VARCHAR},
 			</if>
 			<if test="strApellidos != null">
-				ape_usuario = #{strApellidos,jdbcType=VARCHAR},
+				nm_apellid = #{strApellidos,jdbcType=VARCHAR},
 			</if>
 			<if test="strUsuario != null">
-				cod_usuario = #{strUsuario,jdbcType=VARCHAR},
+				nm_logueo = #{strUsuario,jdbcType=VARCHAR},
 			</if>
 			<if test="strClave != null">
-				clv_usuario = #{strClave,jdbcType=VARCHAR},
+				nm_clave = #{strClave,jdbcType=VARCHAR},
 			</if>
 			<if test="strEsActivo != null">
-				ind_estado = #{strEsActivo,jdbcType=VARCHAR},
+				nm_estado = #{strEsActivo,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
-		and id_usuario = #{srlId,jdbcType=INTEGER}
+		and cd_usuario = #{srlId,jdbcType=INTEGER}
 	</update>
 	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.seguridad.domain.CuentaUsuarioKey">
-		delete from wcmc_hef.t001usuario
+		delete from wcmc_hef.t_usuario
 		where 1 = 1
 		<if test="srlId != null">
-		and id_usuario = #{srlId,jdbcType=INTEGER}
+		and cd_usuario = #{srlId,jdbcType=INTEGER}
 		</if>
 	</delete>
 	<!-- Criterios de seleccion -->
@@ -142,12 +143,13 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id_usuario, 
-		id_perfil, 
-		nom_usuario, 
-		ape_usuario, 
-		cod_usuario, 
-		clv_usuario, 
-		ind_estado
+		cd_usuario, 
+		cd_perfil, 
+		(SELECT ts.nm_perfil FROM wcmc_hef.t_perfil ts WHERE ts.cd_perfil = tab.cd_perfil) AS cd_perfil_string, 
+		nm_nombre, 
+		nm_apellid, 
+		nm_logueo, 
+		nm_clave, 
+		nm_estado
 	</sql>
 </mapper>

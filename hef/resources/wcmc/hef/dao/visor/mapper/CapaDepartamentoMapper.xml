@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="wcmc.hef.dao.visor.mapper.CapaDepartamentoMapper">
 	<resultMap id="CapaDepartamentoMap" type="wcmc.hef.dao.visor.domain.CapaDepartamento">
-		<result column="gid" property="intIdGid" jdbcType="INTEGER"/>
-		<result column="id_departamento" property="strIdDepartamento" jdbcType="VARCHAR"/>
-		<result column="nom_departamento" property="strNombre" jdbcType="VARCHAR"/>
-		<result column="num_area" property="dblArea" jdbcType="DOUBLE"/>
-		<result column="fec_registro" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
-		<result column="shp_geometria" property="strGeometria" jdbcType="VARCHAR"/>
+		<result column="cd_gid" property="intIdGid" jdbcType="INTEGER"/>
+		<result column="cd_departa" property="strIdDepartamento" jdbcType="VARCHAR"/>
+		<result column="nm_departa" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="ha_area" property="dblArea" jdbcType="DOUBLE"/>
+		<result column="fc_registr" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+		<result column="si_geometr" property="strGeometria" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaDepartamentoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoParamDef">
 		select
@@ -15,7 +15,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t008capadepartamento as tab
+		from wcmc_hef.bas_limpol_departamento as tab
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>
@@ -26,31 +26,31 @@
 	<select id="selectByPrimaryKey" resultMap="CapaDepartamentoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoKey" >
 		select 
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t008capadepartamento as tab
+		from wcmc_hef.bas_limpol_departamento as tab
 		where 1 = 1
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 	</select>
 
 	<insert id="insertSelective" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamento">
-		insert into wcmc_hef.t008capadepartamento
+		insert into wcmc_hef.bas_limpol_departamento
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="intIdGid != null">
-				gid,
+				cd_gid,
 			</if>
 			<if test="strIdDepartamento != null">
-				id_departamento,
+				cd_departa,
 			</if>
 			<if test="strNombre != null">
-				nom_departamento,
+				nm_departa,
 			</if>
 			<if test="dblArea != null">
-				num_area,
+				ha_area,
 			</if>
 			<if test="timFechaRegistro != null">
-				fec_registro,
+				fc_registr,
 			</if>
 			<if test="strGeometria != null">
-				shp_geometria,
+				si_geometr,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -75,35 +75,35 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamento">
-		update wcmc_hef.t008capadepartamento
+		update wcmc_hef.bas_limpol_departamento
 		<set>
 			<if test="intIdGid != null">
-				gid = #{intIdGid,jdbcType=INTEGER},
+				cd_gid = #{intIdGid,jdbcType=INTEGER},
 			</if>
 			<if test="strIdDepartamento != null">
-				id_departamento = #{strIdDepartamento,jdbcType=VARCHAR},
+				cd_departa = #{strIdDepartamento,jdbcType=VARCHAR},
 			</if>
 			<if test="strNombre != null">
-				nom_departamento = #{strNombre,jdbcType=VARCHAR},
+				nm_departa = #{strNombre,jdbcType=VARCHAR},
 			</if>
 			<if test="dblArea != null">
-				num_area = #{dblArea,jdbcType=DOUBLE},
+				ha_area = #{dblArea,jdbcType=DOUBLE},
 			</if>
 			<if test="timFechaRegistro != null">
-				fec_registro = #{timFechaRegistro,jdbcType=TIMESTAMP},
+				fc_registr = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 			<if test="strGeometria != null">
-				shp_geometria = #{strGeometria,jdbcType=VARCHAR},
+				si_geometr = #{strGeometria,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 	</update>
 	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.visor.domain.CapaDepartamentoKey">
-		delete from wcmc_hef.t008capadepartamento
+		delete from wcmc_hef.bas_limpol_departamento
 		where 1 = 1
 		<if test="intIdGid != null">
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 		</if>
 	</delete>
 	<!-- Criterios de seleccion -->
@@ -113,7 +113,7 @@
 				<if test="criteria.valid" >
 					<trim prefix="(" suffix=")" prefixOverrides="and" >
 						<foreach collection="criteria.criteria" item="criterion" >
-							<choose>
+							<choose >
 								<when test="criterion.noValue" >
 									and ${criterion.condition}
 								</when>
@@ -137,11 +137,11 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		gid, 
-		id_departamento, 
-		nom_departamento, 
-		num_area, 
-		fec_registro, 
-		ST_AsText(ST_Boundary(Box2D(shp_geometria))) as shp_geometria
+		cd_gid, 
+		cd_departa, 
+		nm_departa, 
+		ha_area, 
+		fc_registr, 
+		ST_AsText(ST_Boundary(Box2D(si_geometr))) as si_geometr
 	</sql>
 </mapper>

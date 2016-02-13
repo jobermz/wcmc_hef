@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="wcmc.hef.dao.visor.mapper.CapaDistritoMapper">
 	<resultMap id="CapaDistritoMap" type="wcmc.hef.dao.visor.domain.CapaDistrito">
-		<result column="gid" property="intIdGid" jdbcType="INTEGER"/>
-		<result column="id_distrito" property="strIdDistrito" jdbcType="VARCHAR"/>
-		<result column="id_provincia" property="strIdProvincia" jdbcType="VARCHAR"/>
-		<result column="id_departamento" property="strIdDepartamento" jdbcType="VARCHAR"/>
-		<result column="nom_distrito" property="strNombreDistrito" jdbcType="VARCHAR"/>
-		<result column="nom_provincia" property="strNombreProvincia" jdbcType="VARCHAR"/>
-		<result column="nom_departamento" property="strNombreDepartamento" jdbcType="VARCHAR"/>
-		<result column="des_dcto" property="strDcto" jdbcType="VARCHAR"/>
-		<result column="des_ley" property="strLey" jdbcType="VARCHAR"/>
-		<result column="des_fecha" property="strFecha" jdbcType="VARCHAR"/>
-		<result column="nom_capa" property="strCapa" jdbcType="VARCHAR"/>
-		<result column="num_longitud" property="dblLongitud" jdbcType="DOUBLE"/>
-		<result column="num_area" property="dblArea" jdbcType="DOUBLE"/>
-		<result column="fec_registro" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
-		<result column="shp_geometria" property="strGeometria" jdbcType="VARCHAR"/>
+		<result column="cd_gid" property="intIdGid" jdbcType="INTEGER"/>
+		<result column="cd_distrit" property="strIdDistrito" jdbcType="VARCHAR"/>
+		<result column="cd_provinc" property="strIdProvincia" jdbcType="VARCHAR"/>
+		<result column="cd_departa" property="strIdDepartamento" jdbcType="VARCHAR"/>
+		<result column="nm_distrit" property="strNombreDistrito" jdbcType="VARCHAR"/>
+		<result column="nm_provinc" property="strNombreProvincia" jdbcType="VARCHAR"/>
+		<result column="nm_departa" property="strNombreDepartamento" jdbcType="VARCHAR"/>
+		<result column="de_dcto" property="strDcto" jdbcType="VARCHAR"/>
+		<result column="de_ley" property="strLey" jdbcType="VARCHAR"/>
+		<result column="de_fecha" property="strFecha" jdbcType="VARCHAR"/>
+		<result column="nm_capa" property="strCapa" jdbcType="VARCHAR"/>
+		<result column="ha_longtud" property="dblLongitud" jdbcType="DOUBLE"/>
+		<result column="ha_area" property="dblArea" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+		<result column="si_geometr" property="strGeometria" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaDistritoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDistritoParamDef">
 		select
@@ -24,7 +24,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t010capadistrito as tab
+		from wcmc_hef.bas_limpol_distrito as tab
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>
@@ -35,58 +35,58 @@
 	<select id="selectByPrimaryKey" resultMap="CapaDistritoMap" parameterType="wcmc.hef.dao.visor.domain.CapaDistritoKey" >
 		select 
 		<include refid="Base_Column_List" />
-		from wcmc_hef.t010capadistrito as tab
+		from wcmc_hef.bas_limpol_distrito as tab
 		where 1 = 1
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 	</select>
 
 	<insert id="insertSelective" parameterType="wcmc.hef.dao.visor.domain.CapaDistrito">
-		insert into wcmc_hef.t010capadistrito
+		insert into wcmc_hef.bas_limpol_distrito
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="intIdGid != null">
-				gid,
+				cd_gid,
 			</if>
 			<if test="strIdDistrito != null">
-				id_distrito,
+				cd_distrit,
 			</if>
 			<if test="strIdProvincia != null">
-				id_provincia,
+				cd_provinc,
 			</if>
 			<if test="strIdDepartamento != null">
-				id_departamento,
+				cd_departa,
 			</if>
 			<if test="strNombreDistrito != null">
-				nom_distrito,
+				nm_distrit,
 			</if>
 			<if test="strNombreProvincia != null">
-				nom_provincia,
+				nm_provinc,
 			</if>
 			<if test="strNombreDepartamento != null">
-				nom_departamento,
+				nm_departa,
 			</if>
 			<if test="strDcto != null">
-				des_dcto,
+				de_dcto,
 			</if>
 			<if test="strLey != null">
-				des_ley,
+				de_ley,
 			</if>
 			<if test="strFecha != null">
-				des_fecha,
+				de_fecha,
 			</if>
 			<if test="strCapa != null">
-				nom_capa,
+				nm_capa,
 			</if>
 			<if test="dblLongitud != null">
-				num_longitud,
+				ha_longtud,
 			</if>
 			<if test="dblArea != null">
-				num_area,
+				ha_area,
 			</if>
 			<if test="timFechaRegistro != null">
-				fec_registro,
+				fc_fecreg,
 			</if>
 			<if test="strGeometria != null">
-				shp_geometria,
+				si_geometr,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -138,62 +138,62 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.visor.domain.CapaDistrito">
-		update wcmc_hef.t010capadistrito
+		update wcmc_hef.bas_limpol_distrito
 		<set>
 			<if test="intIdGid != null">
-				gid = #{intIdGid,jdbcType=INTEGER},
+				cd_gid = #{intIdGid,jdbcType=INTEGER},
 			</if>
 			<if test="strIdDistrito != null">
-				id_distrito = #{strIdDistrito,jdbcType=VARCHAR},
+				cd_distrit = #{strIdDistrito,jdbcType=VARCHAR},
 			</if>
 			<if test="strIdProvincia != null">
-				id_provincia = #{strIdProvincia,jdbcType=VARCHAR},
+				cd_provinc = #{strIdProvincia,jdbcType=VARCHAR},
 			</if>
 			<if test="strIdDepartamento != null">
-				id_departamento = #{strIdDepartamento,jdbcType=VARCHAR},
+				cd_departa = #{strIdDepartamento,jdbcType=VARCHAR},
 			</if>
 			<if test="strNombreDistrito != null">
-				nom_distrito = #{strNombreDistrito,jdbcType=VARCHAR},
+				nm_distrit = #{strNombreDistrito,jdbcType=VARCHAR},
 			</if>
 			<if test="strNombreProvincia != null">
-				nom_provincia = #{strNombreProvincia,jdbcType=VARCHAR},
+				nm_provinc = #{strNombreProvincia,jdbcType=VARCHAR},
 			</if>
 			<if test="strNombreDepartamento != null">
-				nom_departamento = #{strNombreDepartamento,jdbcType=VARCHAR},
+				nm_departa = #{strNombreDepartamento,jdbcType=VARCHAR},
 			</if>
 			<if test="strDcto != null">
-				des_dcto = #{strDcto,jdbcType=VARCHAR},
+				de_dcto = #{strDcto,jdbcType=VARCHAR},
 			</if>
 			<if test="strLey != null">
-				des_ley = #{strLey,jdbcType=VARCHAR},
+				de_ley = #{strLey,jdbcType=VARCHAR},
 			</if>
 			<if test="strFecha != null">
-				des_fecha = #{strFecha,jdbcType=VARCHAR},
+				de_fecha = #{strFecha,jdbcType=VARCHAR},
 			</if>
 			<if test="strCapa != null">
-				nom_capa = #{strCapa,jdbcType=VARCHAR},
+				nm_capa = #{strCapa,jdbcType=VARCHAR},
 			</if>
 			<if test="dblLongitud != null">
-				num_longitud = #{dblLongitud,jdbcType=DOUBLE},
+				ha_longtud = #{dblLongitud,jdbcType=DOUBLE},
 			</if>
 			<if test="dblArea != null">
-				num_area = #{dblArea,jdbcType=DOUBLE},
+				ha_area = #{dblArea,jdbcType=DOUBLE},
 			</if>
 			<if test="timFechaRegistro != null">
-				fec_registro = #{timFechaRegistro,jdbcType=TIMESTAMP},
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 			<if test="strGeometria != null">
-				shp_geometria = #{strGeometria,jdbcType=VARCHAR},
+				si_geometr = #{strGeometria,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 	</update>
 	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.visor.domain.CapaDistritoKey">
-		delete from wcmc_hef.t010capadistrito
+		delete from wcmc_hef.bas_limpol_distrito
 		where 1 = 1
 		<if test="intIdGid != null">
-		and gid = #{intIdGid,jdbcType=INTEGER}
+		and cd_gid = #{intIdGid,jdbcType=INTEGER}
 		</if>
 	</delete>
 	<!-- Criterios de seleccion -->
@@ -227,20 +227,20 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		gid, 
-		id_distrito, 
-		id_provincia, 
-		id_departamento, 
-		nom_distrito, 
-		nom_provincia, 
-		nom_departamento, 
-		des_dcto, 
-		des_ley, 
-		des_fecha, 
-		nom_capa, 
-		num_longitud, 
-		num_area, 
-		fec_registro, 
-		ST_AsText(ST_Boundary(Box2D(shp_geometria))) as shp_geometria
+		cd_gid, 
+		cd_distrit, 
+		cd_provinc, 
+		cd_departa, 
+		nm_distrit, 
+		nm_provinc, 
+		nm_departa, 
+		de_dcto, 
+		de_ley, 
+		de_fecha, 
+		nm_capa, 
+		ha_longtud, 
+		ha_area, 
+		fc_fecreg, 
+		ST_AsText(ST_Boundary(Box2D(si_geometr))) as si_geometr
 	</sql>
 </mapper>

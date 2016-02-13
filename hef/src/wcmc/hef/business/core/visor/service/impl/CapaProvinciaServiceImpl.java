@@ -34,7 +34,7 @@ public class CapaProvinciaServiceImpl implements CapaProvinciaService {
 			}
 		}
 		
-		capaProvinciaParamDef.setOrderByClause("nom_provincia");
+		capaProvinciaParamDef.setOrderByClause("nm_provinc");
 		List<CapaProvincia>	 list	= capaProvinciaMapper.selectByDefaultParameter(capaProvinciaParamDef);
 		return list;
 	}

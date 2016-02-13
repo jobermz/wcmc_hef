@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Date;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class CapasBaseParamDef {
+public class CapaParamDef {
 	
     protected String orderByClause;
 
@@ -13,7 +13,7 @@ public class CapasBaseParamDef {
 
     protected List<Criteria> oredCriteria;
 
-    public CapasBaseParamDef() {
+    public CapaParamDef() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -109,620 +109,682 @@ public class CapasBaseParamDef {
         
                 
         
-        public Criteria andSrlIdCapasBaseEqualTo(Integer value) {
-            addCriterion("id_capasbase =", value, "id_capasbase");
+        public Criteria andSrlIdCapaEqualTo(Integer value) {
+            addCriterion("cd_capa =", value, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andSrlIdCapasBaseNotEqualTo(Integer value) {
-            addCriterion("id_capasbase <>", value, "id_capasbase");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andSrlIdCapasBaseIsNull() {
-            addCriterion("id_capasbase is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseIsNotNull() {
-            addCriterion("id_capasbase is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseGreaterThan(Integer value) {
-            addCriterion("id_capasbase >", value, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseGreaterThanOrEqualTo(Integer value) {
-            addCriterion("id_capasbase >=", value, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseLessThan(Integer value) {
-            addCriterion("id_capasbase <", value, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseLessThanOrEqualTo(Integer value) {
-            addCriterion("id_capasbase <=", value, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseIn(List<Integer> values) {
-            addCriterion("id_capasbase in", values, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseNotIn(List<Integer> values) {
-            addCriterion("id_capasbase not in", values, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseBetween(Integer value1, Integer value2) {
-            addCriterion("id_capasbase between", value1, value2, "id_capasbase");
-            return (Criteria) this;
-        }
-
-        public Criteria andSrlIdCapasBaseNotBetween(Integer value1, Integer value2) {
-            addCriterion("id_capasbase not between", value1, value2, "id_capasbase");
+        public Criteria andSrlIdCapaNotEqualTo(Integer value) {
+            addCriterion("cd_capa <>", value, "cd_capa");
             return (Criteria) this;
         }
         
         
-        public Criteria andStrNombreLike(String value) {
-            addCriterion("upper(des_nombre) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_nombre");
+        public Criteria andSrlIdCapaIsNull() {
+            addCriterion("cd_capa is null");
             return (Criteria) this;
         }
 
-        public Criteria andStrNombreNotLike(String value) {
-            addCriterion("des_nombre not like", "%" + CadenaUtil.getStr(value) + "%", "des_nombre");
+        public Criteria andSrlIdCapaIsNotNull() {
+            addCriterion("cd_capa is not null");
             return (Criteria) this;
         }
-			
-        public Criteria andStrNombreEqualTo(String value) {
-            addCriterion("des_nombre =", CadenaUtil.getStr(value), "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreNotEqualTo(String value) {
-            addCriterion("des_nombre <>", CadenaUtil.getStr(value), "des_nombre");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrNombreIsNull() {
-            addCriterion("des_nombre is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreIsNotNull() {
-            addCriterion("des_nombre is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreGreaterThan(String value) {
-            addCriterion("des_nombre >", value, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreGreaterThanOrEqualTo(String value) {
-            addCriterion("des_nombre >=", value, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreLessThan(String value) {
-            addCriterion("des_nombre <", value, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreLessThanOrEqualTo(String value) {
-            addCriterion("des_nombre <=", value, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreIn(List<String> values) {
-            addCriterion("des_nombre in", values, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreNotIn(List<String> values) {
-            addCriterion("des_nombre not in", values, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreBetween(String value1, String value2) {
-            addCriterion("des_nombre between", value1, value2, "des_nombre");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrNombreNotBetween(String value1, String value2) {
-            addCriterion("des_nombre not between", value1, value2, "des_nombre");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andStrComentariosLike(String value) {
-            addCriterion("upper(des_comentarios) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosNotLike(String value) {
-            addCriterion("des_comentarios not like", "%" + CadenaUtil.getStr(value) + "%", "des_comentarios");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrComentariosEqualTo(String value) {
-            addCriterion("des_comentarios =", CadenaUtil.getStr(value), "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosNotEqualTo(String value) {
-            addCriterion("des_comentarios <>", CadenaUtil.getStr(value), "des_comentarios");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrComentariosIsNull() {
-            addCriterion("des_comentarios is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosIsNotNull() {
-            addCriterion("des_comentarios is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosGreaterThan(String value) {
-            addCriterion("des_comentarios >", value, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosGreaterThanOrEqualTo(String value) {
-            addCriterion("des_comentarios >=", value, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosLessThan(String value) {
-            addCriterion("des_comentarios <", value, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosLessThanOrEqualTo(String value) {
-            addCriterion("des_comentarios <=", value, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosIn(List<String> values) {
-            addCriterion("des_comentarios in", values, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosNotIn(List<String> values) {
-            addCriterion("des_comentarios not in", values, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosBetween(String value1, String value2) {
-            addCriterion("des_comentarios between", value1, value2, "des_comentarios");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrComentariosNotBetween(String value1, String value2) {
-            addCriterion("des_comentarios not between", value1, value2, "des_comentarios");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andStrUrlLike(String value) {
-            addCriterion("upper(des_url) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlNotLike(String value) {
-            addCriterion("des_url not like", "%" + CadenaUtil.getStr(value) + "%", "des_url");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrUrlEqualTo(String value) {
-            addCriterion("des_url =", CadenaUtil.getStr(value), "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlNotEqualTo(String value) {
-            addCriterion("des_url <>", CadenaUtil.getStr(value), "des_url");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrUrlIsNull() {
-            addCriterion("des_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlIsNotNull() {
-            addCriterion("des_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlGreaterThan(String value) {
-            addCriterion("des_url >", value, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("des_url >=", value, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlLessThan(String value) {
-            addCriterion("des_url <", value, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlLessThanOrEqualTo(String value) {
-            addCriterion("des_url <=", value, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlIn(List<String> values) {
-            addCriterion("des_url in", values, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlNotIn(List<String> values) {
-            addCriterion("des_url not in", values, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlBetween(String value1, String value2) {
-            addCriterion("des_url between", value1, value2, "des_url");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrUrlNotBetween(String value1, String value2) {
-            addCriterion("des_url not between", value1, value2, "des_url");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andTimFechaRegistroEqualTo(Date value) {
-            addCriterion("fec_registro =", value, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroNotEqualTo(Date value) {
-            addCriterion("fec_registro <>", value, "fec_registro");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andTimFechaRegistroIsNull() {
-            addCriterion("fec_registro is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroIsNotNull() {
-            addCriterion("fec_registro is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroGreaterThan(Date value) {
-            addCriterion("fec_registro >", value, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroGreaterThanOrEqualTo(Date value) {
-            addCriterion("fec_registro >=", value, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroLessThan(Date value) {
-            addCriterion("fec_registro <", value, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroLessThanOrEqualTo(Date value) {
-            addCriterion("fec_registro <=", value, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroIn(List<Date> values) {
-            addCriterion("fec_registro in", values, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroNotIn(List<Date> values) {
-            addCriterion("fec_registro not in", values, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroBetween(Date value1, Date value2) {
-            addCriterion("fec_registro between", value1, value2, "fec_registro");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimFechaRegistroNotBetween(Date value1, Date value2) {
-            addCriterion("fec_registro not between", value1, value2, "fec_registro");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andStrWmsUrlLike(String value) {
-            addCriterion("upper(des_wmsurl) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlNotLike(String value) {
-            addCriterion("des_wmsurl not like", "%" + CadenaUtil.getStr(value) + "%", "des_wmsurl");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrWmsUrlEqualTo(String value) {
-            addCriterion("des_wmsurl =", CadenaUtil.getStr(value), "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlNotEqualTo(String value) {
-            addCriterion("des_wmsurl <>", CadenaUtil.getStr(value), "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrWmsUrlIsNull() {
-            addCriterion("des_wmsurl is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlIsNotNull() {
-            addCriterion("des_wmsurl is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlGreaterThan(String value) {
-            addCriterion("des_wmsurl >", value, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("des_wmsurl >=", value, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlLessThan(String value) {
-            addCriterion("des_wmsurl <", value, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlLessThanOrEqualTo(String value) {
-            addCriterion("des_wmsurl <=", value, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlIn(List<String> values) {
-            addCriterion("des_wmsurl in", values, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlNotIn(List<String> values) {
-            addCriterion("des_wmsurl not in", values, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlBetween(String value1, String value2) {
-            addCriterion("des_wmsurl between", value1, value2, "des_wmsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsUrlNotBetween(String value1, String value2) {
-            addCriterion("des_wmsurl not between", value1, value2, "des_wmsurl");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andStrWmsCapasLike(String value) {
-            addCriterion("upper(des_wmscapas) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasNotLike(String value) {
-            addCriterion("des_wmscapas not like", "%" + CadenaUtil.getStr(value) + "%", "des_wmscapas");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrWmsCapasEqualTo(String value) {
-            addCriterion("des_wmscapas =", CadenaUtil.getStr(value), "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasNotEqualTo(String value) {
-            addCriterion("des_wmscapas <>", CadenaUtil.getStr(value), "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrWmsCapasIsNull() {
-            addCriterion("des_wmscapas is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasIsNotNull() {
-            addCriterion("des_wmscapas is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasGreaterThan(String value) {
-            addCriterion("des_wmscapas >", value, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasGreaterThanOrEqualTo(String value) {
-            addCriterion("des_wmscapas >=", value, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasLessThan(String value) {
-            addCriterion("des_wmscapas <", value, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasLessThanOrEqualTo(String value) {
-            addCriterion("des_wmscapas <=", value, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasIn(List<String> values) {
-            addCriterion("des_wmscapas in", values, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasNotIn(List<String> values) {
-            addCriterion("des_wmscapas not in", values, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasBetween(String value1, String value2) {
-            addCriterion("des_wmscapas between", value1, value2, "des_wmscapas");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWmsCapasNotBetween(String value1, String value2) {
-            addCriterion("des_wmscapas not between", value1, value2, "des_wmscapas");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andStrWfsUrlLike(String value) {
-            addCriterion("upper(des_wfsurl) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "des_wfsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWfsUrlNotLike(String value) {
-            addCriterion("des_wfsurl not like", "%" + CadenaUtil.getStr(value) + "%", "des_wfsurl");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrWfsUrlEqualTo(String value) {
-            addCriterion("des_wfsurl =", CadenaUtil.getStr(value), "des_wfsurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWfsUrlNotEqualTo(String value) {
-            addCriterion("des_wfsurl <>", CadenaUtil.getStr(value), "des_wfsurl");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrWfsUrlIsNull() {
-            addCriterion("des_wfsurl is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrWfsUrlIsNotNull() {
-            addCriterion("des_wfsurl is not null");
-            return (Criteria) this;
-        }
 
-        public Criteria andStrWfsUrlGreaterThan(String value) {
-            addCriterion("des_wfsurl >", value, "des_wfsurl");
+        public Criteria andSrlIdCapaGreaterThan(Integer value) {
+            addCriterion("cd_capa >", value, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("des_wfsurl >=", value, "des_wfsurl");
+        public Criteria andSrlIdCapaGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cd_capa >=", value, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlLessThan(String value) {
-            addCriterion("des_wfsurl <", value, "des_wfsurl");
+        public Criteria andSrlIdCapaLessThan(Integer value) {
+            addCriterion("cd_capa <", value, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlLessThanOrEqualTo(String value) {
-            addCriterion("des_wfsurl <=", value, "des_wfsurl");
+        public Criteria andSrlIdCapaLessThanOrEqualTo(Integer value) {
+            addCriterion("cd_capa <=", value, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlIn(List<String> values) {
-            addCriterion("des_wfsurl in", values, "des_wfsurl");
+        public Criteria andSrlIdCapaIn(List<Integer> values) {
+            addCriterion("cd_capa in", values, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlNotIn(List<String> values) {
-            addCriterion("des_wfsurl not in", values, "des_wfsurl");
+        public Criteria andSrlIdCapaNotIn(List<Integer> values) {
+            addCriterion("cd_capa not in", values, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlBetween(String value1, String value2) {
-            addCriterion("des_wfsurl between", value1, value2, "des_wfsurl");
+        public Criteria andSrlIdCapaBetween(Integer value1, Integer value2) {
+            addCriterion("cd_capa between", value1, value2, "cd_capa");
             return (Criteria) this;
         }
 
-        public Criteria andStrWfsUrlNotBetween(String value1, String value2) {
-            addCriterion("des_wfsurl not between", value1, value2, "des_wfsurl");
+        public Criteria andSrlIdCapaNotBetween(Integer value1, Integer value2) {
+            addCriterion("cd_capa not between", value1, value2, "cd_capa");
             return (Criteria) this;
         }
         
         
         public Criteria andIntGrupoCapasEqualTo(Integer value) {
-            addCriterion("id_grupocapas =", value, "id_grupocapas");
+            addCriterion("cd_grupcap =", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasNotEqualTo(Integer value) {
-            addCriterion("id_grupocapas <>", value, "id_grupocapas");
+            addCriterion("cd_grupcap <>", value, "cd_grupcap");
             return (Criteria) this;
         }
         
         
         public Criteria andIntGrupoCapasIsNull() {
-            addCriterion("id_grupocapas is null");
+            addCriterion("cd_grupcap is null");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasIsNotNull() {
-            addCriterion("id_grupocapas is not null");
+            addCriterion("cd_grupcap is not null");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasGreaterThan(Integer value) {
-            addCriterion("id_grupocapas >", value, "id_grupocapas");
+            addCriterion("cd_grupcap >", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasGreaterThanOrEqualTo(Integer value) {
-            addCriterion("id_grupocapas >=", value, "id_grupocapas");
+            addCriterion("cd_grupcap >=", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasLessThan(Integer value) {
-            addCriterion("id_grupocapas <", value, "id_grupocapas");
+            addCriterion("cd_grupcap <", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasLessThanOrEqualTo(Integer value) {
-            addCriterion("id_grupocapas <=", value, "id_grupocapas");
+            addCriterion("cd_grupcap <=", value, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasIn(List<Integer> values) {
-            addCriterion("id_grupocapas in", values, "id_grupocapas");
+            addCriterion("cd_grupcap in", values, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasNotIn(List<Integer> values) {
-            addCriterion("id_grupocapas not in", values, "id_grupocapas");
+            addCriterion("cd_grupcap not in", values, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasBetween(Integer value1, Integer value2) {
-            addCriterion("id_grupocapas between", value1, value2, "id_grupocapas");
+            addCriterion("cd_grupcap between", value1, value2, "cd_grupcap");
             return (Criteria) this;
         }
 
         public Criteria andIntGrupoCapasNotBetween(Integer value1, Integer value2) {
-            addCriterion("id_grupocapas not between", value1, value2, "id_grupocapas");
+            addCriterion("cd_grupcap not between", value1, value2, "cd_grupcap");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andIntTipoCapaEqualTo(Integer value) {
+            addCriterion("cd_tipocapa =", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaNotEqualTo(Integer value) {
+            addCriterion("cd_tipocapa <>", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andIntTipoCapaIsNull() {
+            addCriterion("cd_tipocapa is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaIsNotNull() {
+            addCriterion("cd_tipocapa is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaGreaterThan(Integer value) {
+            addCriterion("cd_tipocapa >", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cd_tipocapa >=", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaLessThan(Integer value) {
+            addCriterion("cd_tipocapa <", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaLessThanOrEqualTo(Integer value) {
+            addCriterion("cd_tipocapa <=", value, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaIn(List<Integer> values) {
+            addCriterion("cd_tipocapa in", values, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaNotIn(List<Integer> values) {
+            addCriterion("cd_tipocapa not in", values, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaBetween(Integer value1, Integer value2) {
+            addCriterion("cd_tipocapa between", value1, value2, "cd_tipocapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntTipoCapaNotBetween(Integer value1, Integer value2) {
+            addCriterion("cd_tipocapa not between", value1, value2, "cd_tipocapa");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrNombreLike(String value) {
+            addCriterion("upper(de_nombre) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreNotLike(String value) {
+            addCriterion("de_nombre not like", "%" + CadenaUtil.getStr(value) + "%", "de_nombre");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrNombreEqualTo(String value) {
+            addCriterion("de_nombre =", CadenaUtil.getStr(value), "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreNotEqualTo(String value) {
+            addCriterion("de_nombre <>", CadenaUtil.getStr(value), "de_nombre");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrNombreIsNull() {
+            addCriterion("de_nombre is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreIsNotNull() {
+            addCriterion("de_nombre is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreGreaterThan(String value) {
+            addCriterion("de_nombre >", value, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreGreaterThanOrEqualTo(String value) {
+            addCriterion("de_nombre >=", value, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreLessThan(String value) {
+            addCriterion("de_nombre <", value, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreLessThanOrEqualTo(String value) {
+            addCriterion("de_nombre <=", value, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreIn(List<String> values) {
+            addCriterion("de_nombre in", values, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreNotIn(List<String> values) {
+            addCriterion("de_nombre not in", values, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreBetween(String value1, String value2) {
+            addCriterion("de_nombre between", value1, value2, "de_nombre");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrNombreNotBetween(String value1, String value2) {
+            addCriterion("de_nombre not between", value1, value2, "de_nombre");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrComentariosLike(String value) {
+            addCriterion("upper(de_coment) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosNotLike(String value) {
+            addCriterion("de_coment not like", "%" + CadenaUtil.getStr(value) + "%", "de_coment");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrComentariosEqualTo(String value) {
+            addCriterion("de_coment =", CadenaUtil.getStr(value), "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosNotEqualTo(String value) {
+            addCriterion("de_coment <>", CadenaUtil.getStr(value), "de_coment");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrComentariosIsNull() {
+            addCriterion("de_coment is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosIsNotNull() {
+            addCriterion("de_coment is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosGreaterThan(String value) {
+            addCriterion("de_coment >", value, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosGreaterThanOrEqualTo(String value) {
+            addCriterion("de_coment >=", value, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosLessThan(String value) {
+            addCriterion("de_coment <", value, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosLessThanOrEqualTo(String value) {
+            addCriterion("de_coment <=", value, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosIn(List<String> values) {
+            addCriterion("de_coment in", values, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosNotIn(List<String> values) {
+            addCriterion("de_coment not in", values, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosBetween(String value1, String value2) {
+            addCriterion("de_coment between", value1, value2, "de_coment");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrComentariosNotBetween(String value1, String value2) {
+            addCriterion("de_coment not between", value1, value2, "de_coment");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrUrlLike(String value) {
+            addCriterion("upper(de_url) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlNotLike(String value) {
+            addCriterion("de_url not like", "%" + CadenaUtil.getStr(value) + "%", "de_url");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrUrlEqualTo(String value) {
+            addCriterion("de_url =", CadenaUtil.getStr(value), "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlNotEqualTo(String value) {
+            addCriterion("de_url <>", CadenaUtil.getStr(value), "de_url");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrUrlIsNull() {
+            addCriterion("de_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlIsNotNull() {
+            addCriterion("de_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlGreaterThan(String value) {
+            addCriterion("de_url >", value, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("de_url >=", value, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlLessThan(String value) {
+            addCriterion("de_url <", value, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlLessThanOrEqualTo(String value) {
+            addCriterion("de_url <=", value, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlIn(List<String> values) {
+            addCriterion("de_url in", values, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlNotIn(List<String> values) {
+            addCriterion("de_url not in", values, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlBetween(String value1, String value2) {
+            addCriterion("de_url between", value1, value2, "de_url");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrUrlNotBetween(String value1, String value2) {
+            addCriterion("de_url not between", value1, value2, "de_url");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrWmsUrlLike(String value) {
+            addCriterion("upper(de_wmsurl) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlNotLike(String value) {
+            addCriterion("de_wmsurl not like", "%" + CadenaUtil.getStr(value) + "%", "de_wmsurl");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrWmsUrlEqualTo(String value) {
+            addCriterion("de_wmsurl =", CadenaUtil.getStr(value), "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlNotEqualTo(String value) {
+            addCriterion("de_wmsurl <>", CadenaUtil.getStr(value), "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrWmsUrlIsNull() {
+            addCriterion("de_wmsurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlIsNotNull() {
+            addCriterion("de_wmsurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlGreaterThan(String value) {
+            addCriterion("de_wmsurl >", value, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("de_wmsurl >=", value, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlLessThan(String value) {
+            addCriterion("de_wmsurl <", value, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlLessThanOrEqualTo(String value) {
+            addCriterion("de_wmsurl <=", value, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlIn(List<String> values) {
+            addCriterion("de_wmsurl in", values, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlNotIn(List<String> values) {
+            addCriterion("de_wmsurl not in", values, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlBetween(String value1, String value2) {
+            addCriterion("de_wmsurl between", value1, value2, "de_wmsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsUrlNotBetween(String value1, String value2) {
+            addCriterion("de_wmsurl not between", value1, value2, "de_wmsurl");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrWmsCapasLike(String value) {
+            addCriterion("upper(de_wmscapa) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasNotLike(String value) {
+            addCriterion("de_wmscapa not like", "%" + CadenaUtil.getStr(value) + "%", "de_wmscapa");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrWmsCapasEqualTo(String value) {
+            addCriterion("de_wmscapa =", CadenaUtil.getStr(value), "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasNotEqualTo(String value) {
+            addCriterion("de_wmscapa <>", CadenaUtil.getStr(value), "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrWmsCapasIsNull() {
+            addCriterion("de_wmscapa is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasIsNotNull() {
+            addCriterion("de_wmscapa is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasGreaterThan(String value) {
+            addCriterion("de_wmscapa >", value, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasGreaterThanOrEqualTo(String value) {
+            addCriterion("de_wmscapa >=", value, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasLessThan(String value) {
+            addCriterion("de_wmscapa <", value, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasLessThanOrEqualTo(String value) {
+            addCriterion("de_wmscapa <=", value, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasIn(List<String> values) {
+            addCriterion("de_wmscapa in", values, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasNotIn(List<String> values) {
+            addCriterion("de_wmscapa not in", values, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasBetween(String value1, String value2) {
+            addCriterion("de_wmscapa between", value1, value2, "de_wmscapa");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWmsCapasNotBetween(String value1, String value2) {
+            addCriterion("de_wmscapa not between", value1, value2, "de_wmscapa");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andStrWfsUrlLike(String value) {
+            addCriterion("upper(de_wfsurl) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlNotLike(String value) {
+            addCriterion("de_wfsurl not like", "%" + CadenaUtil.getStr(value) + "%", "de_wfsurl");
+            return (Criteria) this;
+        }
+			
+        public Criteria andStrWfsUrlEqualTo(String value) {
+            addCriterion("de_wfsurl =", CadenaUtil.getStr(value), "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlNotEqualTo(String value) {
+            addCriterion("de_wfsurl <>", CadenaUtil.getStr(value), "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        
+        public Criteria andStrWfsUrlIsNull() {
+            addCriterion("de_wfsurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlIsNotNull() {
+            addCriterion("de_wfsurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlGreaterThan(String value) {
+            addCriterion("de_wfsurl >", value, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("de_wfsurl >=", value, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlLessThan(String value) {
+            addCriterion("de_wfsurl <", value, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlLessThanOrEqualTo(String value) {
+            addCriterion("de_wfsurl <=", value, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlIn(List<String> values) {
+            addCriterion("de_wfsurl in", values, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlNotIn(List<String> values) {
+            addCriterion("de_wfsurl not in", values, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlBetween(String value1, String value2) {
+            addCriterion("de_wfsurl between", value1, value2, "de_wfsurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andStrWfsUrlNotBetween(String value1, String value2) {
+            addCriterion("de_wfsurl not between", value1, value2, "de_wfsurl");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andTimFechaRegistroEqualTo(Date value) {
+            addCriterion("fc_fecreg =", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroNotEqualTo(Date value) {
+            addCriterion("fc_fecreg <>", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+        
+        
+        public Criteria andTimFechaRegistroIsNull() {
+            addCriterion("fc_fecreg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroIsNotNull() {
+            addCriterion("fc_fecreg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroGreaterThan(Date value) {
+            addCriterion("fc_fecreg >", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroGreaterThanOrEqualTo(Date value) {
+            addCriterion("fc_fecreg >=", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroLessThan(Date value) {
+            addCriterion("fc_fecreg <", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroLessThanOrEqualTo(Date value) {
+            addCriterion("fc_fecreg <=", value, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroIn(List<Date> values) {
+            addCriterion("fc_fecreg in", values, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroNotIn(List<Date> values) {
+            addCriterion("fc_fecreg not in", values, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroBetween(Date value1, Date value2) {
+            addCriterion("fc_fecreg between", value1, value2, "fc_fecreg");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimFechaRegistroNotBetween(Date value1, Date value2) {
+            addCriterion("fc_fecreg not between", value1, value2, "fc_fecreg");
             return (Criteria) this;
         }
         
