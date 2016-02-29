@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.RedNacionalMapper">
+	<resultMap id="RedNacionalMap" type="wcmc.hef.dao.capa.domain.RedNacional">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="de_dpto" property="strDpto" jdbcType="VARCHAR"/>
+		<result column="de_ruta_d044" property="strRutaD044" jdbcType="VARCHAR"/>
+		<result column="de_red_044" property="strRed044" jdbcType="VARCHAR"/>
+		<result column="ha_longkm_d44" property="dblLongkmD44" jdbcType="DOUBLE"/>
+		<result column="de_super_rod" property="strSuperRod" jdbcType="VARCHAR"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="RedNacionalMap" parameterType="wcmc.hef.dao.capa.domain.RedNacionalParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.red_nacional as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="RedNacionalMap" parameterType="wcmc.hef.dao.capa.domain.RedNacionalKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.red_nacional as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.red_nacional_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.RedNacional">
+		insert into wcmc_hef.red_nacional
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="strDpto != null">
+				de_dpto,
+			</if>
+			<if test="strRutaD044 != null">
+				de_ruta_d044,
+			</if>
+			<if test="strRed044 != null">
+				de_red_044,
+			</if>
+			<if test="dblLongkmD44 != null">
+				ha_longkm_d44,
+			</if>
+			<if test="strSuperRod != null">
+				de_super_rod,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="strDpto != null">
+				#{strDpto, jdbcType=VARCHAR},
+			</if>
+			<if test="strRutaD044 != null">
+				#{strRutaD044, jdbcType=VARCHAR},
+			</if>
+			<if test="strRed044 != null">
+				#{strRed044, jdbcType=VARCHAR},
+			</if>
+			<if test="dblLongkmD44 != null">
+				#{dblLongkmD44, jdbcType=DOUBLE},
+			</if>
+			<if test="strSuperRod != null">
+				#{strSuperRod, jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.RedNacional">
+		update wcmc_hef.red_nacional
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="strDpto != null">
+				de_dpto = #{strDpto,jdbcType=VARCHAR},
+			</if>
+			<if test="strRutaD044 != null">
+				de_ruta_d044 = #{strRutaD044,jdbcType=VARCHAR},
+			</if>
+			<if test="strRed044 != null">
+				de_red_044 = #{strRed044,jdbcType=VARCHAR},
+			</if>
+			<if test="dblLongkmD44 != null">
+				ha_longkm_d44 = #{dblLongkmD44,jdbcType=DOUBLE},
+			</if>
+			<if test="strSuperRod != null">
+				de_super_rod = #{strSuperRod,jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.RedNacionalKey">
+		delete from wcmc_hef.red_nacional
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		de_dpto, 
+		de_ruta_d044, 
+		de_red_044, 
+		ha_longkm_d44, 
+		de_super_rod, 
+		fc_fecreg
+	</sql>
+</mapper>

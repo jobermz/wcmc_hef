@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.BasLimDistritosMapper">
+	<resultMap id="BasLimDistritosMap" type="wcmc.hef.dao.capa.domain.BasLimDistritos">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="de_iddpto" property="strIddpto" jdbcType="VARCHAR"/>
+		<result column="de_nombdep" property="strNombdep" jdbcType="VARCHAR"/>
+		<result column="de_idprov" property="strIdprov" jdbcType="VARCHAR"/>
+		<result column="de_nombprov" property="strNombprov" jdbcType="VARCHAR"/>
+		<result column="de_iddist" property="strIddist" jdbcType="VARCHAR"/>
+		<result column="de_nombdist" property="strNombdist" jdbcType="VARCHAR"/>
+		<result column="de_dcto" property="strDcto" jdbcType="VARCHAR"/>
+		<result column="de_ley" property="strLey" jdbcType="VARCHAR"/>
+		<result column="de_fecha" property="strFecha" jdbcType="VARCHAR"/>
+		<result column="de_nom_cap" property="strNomCap" jdbcType="VARCHAR"/>
+		<result column="ha_sup_contin" property="dblSupContin" jdbcType="DOUBLE"/>
+		<result column="ha_sup_insula" property="dblSupInsula" jdbcType="DOUBLE"/>
+		<result column="ha_sup_lacust" property="dblSupLacust" jdbcType="DOUBLE"/>
+		<result column="ha_sup_ins_d" property="dblSupInsD" jdbcType="DOUBLE"/>
+		<result column="de_ubigeo" property="strUbigeo" jdbcType="VARCHAR"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_distritos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_distritos as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.bas_lim_distritos_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritos">
+		insert into wcmc_hef.bas_lim_distritos
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="strIddpto != null">
+				de_iddpto,
+			</if>
+			<if test="strNombdep != null">
+				de_nombdep,
+			</if>
+			<if test="strIdprov != null">
+				de_idprov,
+			</if>
+			<if test="strNombprov != null">
+				de_nombprov,
+			</if>
+			<if test="strIddist != null">
+				de_iddist,
+			</if>
+			<if test="strNombdist != null">
+				de_nombdist,
+			</if>
+			<if test="strDcto != null">
+				de_dcto,
+			</if>
+			<if test="strLey != null">
+				de_ley,
+			</if>
+			<if test="strFecha != null">
+				de_fecha,
+			</if>
+			<if test="strNomCap != null">
+				de_nom_cap,
+			</if>
+			<if test="dblSupContin != null">
+				ha_sup_contin,
+			</if>
+			<if test="dblSupInsula != null">
+				ha_sup_insula,
+			</if>
+			<if test="dblSupLacust != null">
+				ha_sup_lacust,
+			</if>
+			<if test="dblSupInsD != null">
+				ha_sup_ins_d,
+			</if>
+			<if test="strUbigeo != null">
+				de_ubigeo,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="strIddpto != null">
+				#{strIddpto, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombdep != null">
+				#{strNombdep, jdbcType=VARCHAR},
+			</if>
+			<if test="strIdprov != null">
+				#{strIdprov, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombprov != null">
+				#{strNombprov, jdbcType=VARCHAR},
+			</if>
+			<if test="strIddist != null">
+				#{strIddist, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombdist != null">
+				#{strNombdist, jdbcType=VARCHAR},
+			</if>
+			<if test="strDcto != null">
+				#{strDcto, jdbcType=VARCHAR},
+			</if>
+			<if test="strLey != null">
+				#{strLey, jdbcType=VARCHAR},
+			</if>
+			<if test="strFecha != null">
+				#{strFecha, jdbcType=VARCHAR},
+			</if>
+			<if test="strNomCap != null">
+				#{strNomCap, jdbcType=VARCHAR},
+			</if>
+			<if test="dblSupContin != null">
+				#{dblSupContin, jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupInsula != null">
+				#{dblSupInsula, jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupLacust != null">
+				#{dblSupLacust, jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupInsD != null">
+				#{dblSupInsD, jdbcType=DOUBLE},
+			</if>
+			<if test="strUbigeo != null">
+				#{strUbigeo, jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritos">
+		update wcmc_hef.bas_lim_distritos
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="strIddpto != null">
+				de_iddpto = #{strIddpto,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombdep != null">
+				de_nombdep = #{strNombdep,jdbcType=VARCHAR},
+			</if>
+			<if test="strIdprov != null">
+				de_idprov = #{strIdprov,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombprov != null">
+				de_nombprov = #{strNombprov,jdbcType=VARCHAR},
+			</if>
+			<if test="strIddist != null">
+				de_iddist = #{strIddist,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombdist != null">
+				de_nombdist = #{strNombdist,jdbcType=VARCHAR},
+			</if>
+			<if test="strDcto != null">
+				de_dcto = #{strDcto,jdbcType=VARCHAR},
+			</if>
+			<if test="strLey != null">
+				de_ley = #{strLey,jdbcType=VARCHAR},
+			</if>
+			<if test="strFecha != null">
+				de_fecha = #{strFecha,jdbcType=VARCHAR},
+			</if>
+			<if test="strNomCap != null">
+				de_nom_cap = #{strNomCap,jdbcType=VARCHAR},
+			</if>
+			<if test="dblSupContin != null">
+				ha_sup_contin = #{dblSupContin,jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupInsula != null">
+				ha_sup_insula = #{dblSupInsula,jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupLacust != null">
+				ha_sup_lacust = #{dblSupLacust,jdbcType=DOUBLE},
+			</if>
+			<if test="dblSupInsD != null">
+				ha_sup_ins_d = #{dblSupInsD,jdbcType=DOUBLE},
+			</if>
+			<if test="strUbigeo != null">
+				de_ubigeo = #{strUbigeo,jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosKey">
+		delete from wcmc_hef.bas_lim_distritos
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		de_iddpto, 
+		de_nombdep, 
+		de_idprov, 
+		de_nombprov, 
+		de_iddist, 
+		de_nombdist, 
+		de_dcto, 
+		de_ley, 
+		de_fecha, 
+		de_nom_cap, 
+		ha_sup_contin, 
+		ha_sup_insula, 
+		ha_sup_lacust, 
+		ha_sup_ins_d, 
+		de_ubigeo, 
+		fc_fecreg
+	</sql>
+</mapper>

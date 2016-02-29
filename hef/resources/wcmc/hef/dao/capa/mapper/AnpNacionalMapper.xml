@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.AnpNacionalMapper">
+	<resultMap id="AnpNacionalMap" type="wcmc.hef.dao.capa.domain.AnpNacional">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="lngObjectid" jdbcType="INTEGER"/>
+		<result column="de_anp_cate" property="strAnpCate" jdbcType="VARCHAR"/>
+		<result column="de_anp_nomb" property="strAnpNomb" jdbcType="VARCHAR"/>
+		<result column="de_anp_codi" property="strAnpCodi" jdbcType="VARCHAR"/>
+		<result column="de_anp_ubpo" property="strAnpUbpo" jdbcType="VARCHAR"/>
+		<result column="ha_anp_arle" property="dblAnpArle" jdbcType="DOUBLE"/>
+		<result column="de_anp_balecr" property="strAnpBalecr" jdbcType="VARCHAR"/>
+		<result column="de_anp_fecrea" property="strAnpFecrea" jdbcType="VARCHAR"/>
+		<result column="de_anp_balemo" property="strAnpBalemo" jdbcType="VARCHAR"/>
+		<result column="de_anp_femodi" property="strAnpFemodi" jdbcType="VARCHAR"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="AnpNacionalMap" parameterType="wcmc.hef.dao.capa.domain.AnpNacionalParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.anp_nacional as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="AnpNacionalMap" parameterType="wcmc.hef.dao.capa.domain.AnpNacionalKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.anp_nacional as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.anp_nacional_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.AnpNacional">
+		insert into wcmc_hef.anp_nacional
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="lngObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strAnpCate != null">
+				de_anp_cate,
+			</if>
+			<if test="strAnpNomb != null">
+				de_anp_nomb,
+			</if>
+			<if test="strAnpCodi != null">
+				de_anp_codi,
+			</if>
+			<if test="strAnpUbpo != null">
+				de_anp_ubpo,
+			</if>
+			<if test="dblAnpArle != null">
+				ha_anp_arle,
+			</if>
+			<if test="strAnpBalecr != null">
+				de_anp_balecr,
+			</if>
+			<if test="strAnpFecrea != null">
+				de_anp_fecrea,
+			</if>
+			<if test="strAnpBalemo != null">
+				de_anp_balemo,
+			</if>
+			<if test="strAnpFemodi != null">
+				de_anp_femodi,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="lngObjectid != null">
+				#{lngObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strAnpCate != null">
+				#{strAnpCate, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpNomb != null">
+				#{strAnpNomb, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpCodi != null">
+				#{strAnpCodi, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpUbpo != null">
+				#{strAnpUbpo, jdbcType=VARCHAR},
+			</if>
+			<if test="dblAnpArle != null">
+				#{dblAnpArle, jdbcType=DOUBLE},
+			</if>
+			<if test="strAnpBalecr != null">
+				#{strAnpBalecr, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpFecrea != null">
+				#{strAnpFecrea, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpBalemo != null">
+				#{strAnpBalemo, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpFemodi != null">
+				#{strAnpFemodi, jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.AnpNacional">
+		update wcmc_hef.anp_nacional
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="lngObjectid != null">
+				cd_objectid = #{lngObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strAnpCate != null">
+				de_anp_cate = #{strAnpCate,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpNomb != null">
+				de_anp_nomb = #{strAnpNomb,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpCodi != null">
+				de_anp_codi = #{strAnpCodi,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpUbpo != null">
+				de_anp_ubpo = #{strAnpUbpo,jdbcType=VARCHAR},
+			</if>
+			<if test="dblAnpArle != null">
+				ha_anp_arle = #{dblAnpArle,jdbcType=DOUBLE},
+			</if>
+			<if test="strAnpBalecr != null">
+				de_anp_balecr = #{strAnpBalecr,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpFecrea != null">
+				de_anp_fecrea = #{strAnpFecrea,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpBalemo != null">
+				de_anp_balemo = #{strAnpBalemo,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnpFemodi != null">
+				de_anp_femodi = #{strAnpFemodi,jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.AnpNacionalKey">
+		delete from wcmc_hef.anp_nacional
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid, 
+		de_anp_cate, 
+		de_anp_nomb, 
+		de_anp_codi, 
+		de_anp_ubpo, 
+		ha_anp_arle, 
+		de_anp_balecr, 
+		de_anp_fecrea, 
+		de_anp_balemo, 
+		de_anp_femodi, 
+		fc_fecreg
+	</sql>
+</mapper>

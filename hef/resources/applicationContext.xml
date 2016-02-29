@@ -49,6 +49,7 @@ xsi:schemaLocation="
 	<mybatis:scan base-package="wcmc.hef.dao.configuracion.mapper" />
 	<mybatis:scan base-package="wcmc.hef.dao.visor.mapper" />
 	<mybatis:scan base-package="wcmc.hef.dao.seguridad.mapper" />
+	<mybatis:scan base-package="wcmc.hef.dao.capa.mapper" />
 	
 	<!-- JdbcTemplate -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

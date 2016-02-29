@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.ProyectosPoligonosMapper">
+	<resultMap id="ProyectosPoligonosMap" type="wcmc.hef.dao.capa.domain.ProyectosPoligonos">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="ha_sh_codigo" property="dblShCodigo" jdbcType="DOUBLE"/>
+		<result column="de_fc_comun" property="strFcComun" jdbcType="VARCHAR"/>
+		<result column="de_proyecto" property="strProyecto" jdbcType="VARCHAR"/>
+		<result column="de_inic_prog_" property="strInicProg" jdbcType="VARCHAR"/>
+		<result column="de_referencia" property="strReferencia" jdbcType="VARCHAR"/>
+		<result column="de_detalle_de" property="strDetalleDe" jdbcType="VARCHAR"/>
+		<result column="de_otros" property="strOtros" jdbcType="VARCHAR"/>
+		<result column="de_meta" property="strMeta" jdbcType="VARCHAR"/>
+		<result column="de_objetivos" property="strObjetivos" jdbcType="VARCHAR"/>
+		<result column="de_fecha_inic" property="strFechaInic" jdbcType="VARCHAR"/>
+		<result column="de_fecha_term" property="strFechaTerm" jdbcType="VARCHAR"/>
+		<result column="de_tipo_de_da" property="strTipoDeDa" jdbcType="VARCHAR"/>
+		<result column="de_cooperante" property="strCooperante" jdbcType="VARCHAR"/>
+		<result column="de_administra" property="strAdministra" jdbcType="VARCHAR"/>
+		<result column="ha_usd" property="dblUsd" jdbcType="DOUBLE"/>
+		<result column="de_institucio" property="strInstitucio" jdbcType="VARCHAR"/>
+		<result column="de_persona_co" property="strPersonaCo" jdbcType="VARCHAR"/>
+		<result column="de_cargo" property="strCargo" jdbcType="VARCHAR"/>
+		<result column="de_contacto" property="strContacto" jdbcType="VARCHAR"/>
+		<result column="de_direccion_" property="strDireccion" jdbcType="VARCHAR"/>
+		<result column="de_instituc_1" property="strInstituc1" jdbcType="VARCHAR"/>
+		<result column="de_obs" property="strObs" jdbcType="VARCHAR"/>
+		<result column="de_link" property="strLink" jdbcType="VARCHAR"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="ProyectosPoligonosMap" parameterType="wcmc.hef.dao.capa.domain.ProyectosPoligonosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.proyectos_poligonos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ProyectosPoligonosMap" parameterType="wcmc.hef.dao.capa.domain.ProyectosPoligonosKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.proyectos_poligonos as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.proyectos_poligonos_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.ProyectosPoligonos">
+		insert into wcmc_hef.proyectos_poligonos
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="dblShCodigo != null">
+				ha_sh_codigo,
+			</if>
+			<if test="strFcComun != null">
+				de_fc_comun,
+			</if>
+			<if test="strProyecto != null">
+				de_proyecto,
+			</if>
+			<if test="strInicProg != null">
+				de_inic_prog_,
+			</if>
+			<if test="strReferencia != null">
+				de_referencia,
+			</if>
+			<if test="strDetalleDe != null">
+				de_detalle_de,
+			</if>
+			<if test="strOtros != null">
+				de_otros,
+			</if>
+			<if test="strMeta != null">
+				de_meta,
+			</if>
+			<if test="strObjetivos != null">
+				de_objetivos,
+			</if>
+			<if test="strFechaInic != null">
+				de_fecha_inic,
+			</if>
+			<if test="strFechaTerm != null">
+				de_fecha_term,
+			</if>
+			<if test="strTipoDeDa != null">
+				de_tipo_de_da,
+			</if>
+			<if test="strCooperante != null">
+				de_cooperante,
+			</if>
+			<if test="strAdministra != null">
+				de_administra,
+			</if>
+			<if test="dblUsd != null">
+				ha_usd,
+			</if>
+			<if test="strInstitucio != null">
+				de_institucio,
+			</if>
+			<if test="strPersonaCo != null">
+				de_persona_co,
+			</if>
+			<if test="strCargo != null">
+				de_cargo,
+			</if>
+			<if test="strContacto != null">
+				de_contacto,
+			</if>
+			<if test="strDireccion != null">
+				de_direccion_,
+			</if>
+			<if test="strInstituc1 != null">
+				de_instituc_1,
+			</if>
+			<if test="strObs != null">
+				de_obs,
+			</if>
+			<if test="strLink != null">
+				de_link,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShCodigo != null">
+				#{dblShCodigo, jdbcType=DOUBLE},
+			</if>
+			<if test="strFcComun != null">
+				#{strFcComun, jdbcType=VARCHAR},
+			</if>
+			<if test="strProyecto != null">
+				#{strProyecto, jdbcType=VARCHAR},
+			</if>
+			<if test="strInicProg != null">
+				#{strInicProg, jdbcType=VARCHAR},
+			</if>
+			<if test="strReferencia != null">
+				#{strReferencia, jdbcType=VARCHAR},
+			</if>
+			<if test="strDetalleDe != null">
+				#{strDetalleDe, jdbcType=VARCHAR},
+			</if>
+			<if test="strOtros != null">
+				#{strOtros, jdbcType=VARCHAR},
+			</if>
+			<if test="strMeta != null">
+				#{strMeta, jdbcType=VARCHAR},
+			</if>
+			<if test="strObjetivos != null">
+				#{strObjetivos, jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaInic != null">
+				#{strFechaInic, jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaTerm != null">
+				#{strFechaTerm, jdbcType=VARCHAR},
+			</if>
+			<if test="strTipoDeDa != null">
+				#{strTipoDeDa, jdbcType=VARCHAR},
+			</if>
+			<if test="strCooperante != null">
+				#{strCooperante, jdbcType=VARCHAR},
+			</if>
+			<if test="strAdministra != null">
+				#{strAdministra, jdbcType=VARCHAR},
+			</if>
+			<if test="dblUsd != null">
+				#{dblUsd, jdbcType=DOUBLE},
+			</if>
+			<if test="strInstitucio != null">
+				#{strInstitucio, jdbcType=VARCHAR},
+			</if>
+			<if test="strPersonaCo != null">
+				#{strPersonaCo, jdbcType=VARCHAR},
+			</if>
+			<if test="strCargo != null">
+				#{strCargo, jdbcType=VARCHAR},
+			</if>
+			<if test="strContacto != null">
+				#{strContacto, jdbcType=VARCHAR},
+			</if>
+			<if test="strDireccion != null">
+				#{strDireccion, jdbcType=VARCHAR},
+			</if>
+			<if test="strInstituc1 != null">
+				#{strInstituc1, jdbcType=VARCHAR},
+			</if>
+			<if test="strObs != null">
+				#{strObs, jdbcType=VARCHAR},
+			</if>
+			<if test="strLink != null">
+				#{strLink, jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.ProyectosPoligonos">
+		update wcmc_hef.proyectos_poligonos
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShCodigo != null">
+				ha_sh_codigo = #{dblShCodigo,jdbcType=DOUBLE},
+			</if>
+			<if test="strFcComun != null">
+				de_fc_comun = #{strFcComun,jdbcType=VARCHAR},
+			</if>
+			<if test="strProyecto != null">
+				de_proyecto = #{strProyecto,jdbcType=VARCHAR},
+			</if>
+			<if test="strInicProg != null">
+				de_inic_prog_ = #{strInicProg,jdbcType=VARCHAR},
+			</if>
+			<if test="strReferencia != null">
+				de_referencia = #{strReferencia,jdbcType=VARCHAR},
+			</if>
+			<if test="strDetalleDe != null">
+				de_detalle_de = #{strDetalleDe,jdbcType=VARCHAR},
+			</if>
+			<if test="strOtros != null">
+				de_otros = #{strOtros,jdbcType=VARCHAR},
+			</if>
+			<if test="strMeta != null">
+				de_meta = #{strMeta,jdbcType=VARCHAR},
+			</if>
+			<if test="strObjetivos != null">
+				de_objetivos = #{strObjetivos,jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaInic != null">
+				de_fecha_inic = #{strFechaInic,jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaTerm != null">
+				de_fecha_term = #{strFechaTerm,jdbcType=VARCHAR},
+			</if>
+			<if test="strTipoDeDa != null">
+				de_tipo_de_da = #{strTipoDeDa,jdbcType=VARCHAR},
+			</if>
+			<if test="strCooperante != null">
+				de_cooperante = #{strCooperante,jdbcType=VARCHAR},
+			</if>
+			<if test="strAdministra != null">
+				de_administra = #{strAdministra,jdbcType=VARCHAR},
+			</if>
+			<if test="dblUsd != null">
+				ha_usd = #{dblUsd,jdbcType=DOUBLE},
+			</if>
+			<if test="strInstitucio != null">
+				de_institucio = #{strInstitucio,jdbcType=VARCHAR},
+			</if>
+			<if test="strPersonaCo != null">
+				de_persona_co = #{strPersonaCo,jdbcType=VARCHAR},
+			</if>
+			<if test="strCargo != null">
+				de_cargo = #{strCargo,jdbcType=VARCHAR},
+			</if>
+			<if test="strContacto != null">
+				de_contacto = #{strContacto,jdbcType=VARCHAR},
+			</if>
+			<if test="strDireccion != null">
+				de_direccion_ = #{strDireccion,jdbcType=VARCHAR},
+			</if>
+			<if test="strInstituc1 != null">
+				de_instituc_1 = #{strInstituc1,jdbcType=VARCHAR},
+			</if>
+			<if test="strObs != null">
+				de_obs = #{strObs,jdbcType=VARCHAR},
+			</if>
+			<if test="strLink != null">
+				de_link = #{strLink,jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.ProyectosPoligonosKey">
+		delete from wcmc_hef.proyectos_poligonos
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		ha_sh_codigo, 
+		de_fc_comun, 
+		de_proyecto, 
+		de_inic_prog_, 
+		de_referencia, 
+		de_detalle_de, 
+		de_otros, 
+		de_meta, 
+		de_objetivos, 
+		de_fecha_inic, 
+		de_fecha_term, 
+		de_tipo_de_da, 
+		de_cooperante, 
+		de_administra, 
+		ha_usd, 
+		de_institucio, 
+		de_persona_co, 
+		de_cargo, 
+		de_contacto, 
+		de_direccion_, 
+		de_instituc_1, 
+		de_obs, 
+		de_link, 
+		fc_fecreg
+	</sql>
+</mapper>

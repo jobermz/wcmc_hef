@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.ZonaAmortiguamientoEstablecidasMapper">
+	<resultMap id="ZonaAmortiguamientoEstablecidasMap" type="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidas">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="lngObjectid" jdbcType="INTEGER"/>
+		<result column="de_za_nomb" property="strZaNomb" jdbcType="VARCHAR"/>
+		<result column="de_za_bale" property="strZaBale" jdbcType="VARCHAR"/>
+		<result column="fc_za_fecr" property="dteZaFecr" jdbcType="DATE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="ZonaAmortiguamientoEstablecidasMap" parameterType="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.zona_amortiguamiento_establecidas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ZonaAmortiguamientoEstablecidasMap" parameterType="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidasKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.zona_amortiguamiento_establecidas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.zona_amortiguamiento_establecidas_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidas">
+		insert into wcmc_hef.zona_amortiguamiento_establecidas
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="lngObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strZaNomb != null">
+				de_za_nomb,
+			</if>
+			<if test="strZaBale != null">
+				de_za_bale,
+			</if>
+			<if test="dteZaFecr != null">
+				fc_za_fecr,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="lngObjectid != null">
+				#{lngObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strZaNomb != null">
+				#{strZaNomb, jdbcType=VARCHAR},
+			</if>
+			<if test="strZaBale != null">
+				#{strZaBale, jdbcType=VARCHAR},
+			</if>
+			<if test="dteZaFecr != null">
+				#{dteZaFecr, jdbcType=DATE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidas">
+		update wcmc_hef.zona_amortiguamiento_establecidas
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="lngObjectid != null">
+				cd_objectid = #{lngObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strZaNomb != null">
+				de_za_nomb = #{strZaNomb,jdbcType=VARCHAR},
+			</if>
+			<if test="strZaBale != null">
+				de_za_bale = #{strZaBale,jdbcType=VARCHAR},
+			</if>
+			<if test="dteZaFecr != null">
+				fc_za_fecr = #{dteZaFecr,jdbcType=DATE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.ZonaAmortiguamientoEstablecidasKey">
+		delete from wcmc_hef.zona_amortiguamiento_establecidas
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid, 
+		de_za_nomb, 
+		de_za_bale, 
+		fc_za_fecr, 
+		fc_fecreg
+	</sql>
+</mapper>

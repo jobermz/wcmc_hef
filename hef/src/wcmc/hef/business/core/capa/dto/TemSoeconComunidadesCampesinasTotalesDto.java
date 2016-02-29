@@ -1,0 +1,135 @@
+package wcmc.hef.business.core.capa.dto;
+
+import java.util.Date;
+import java.util.List;
+import wcmc.hef.general.util.CadenaUtil;
+
+public class TemSoeconComunidadesCampesinasTotalesDto {
+	private Integer srlGid;
+	private String strTheGeom;
+	private Integer intObjectid;
+	private String strNombre;
+	private String strEstado;
+	private String strResolucion;
+	private Double dblAreaHa;
+	private String strNomdpto;
+	private String strNomprov;
+	private String strDistrito;
+	private String strFechaReso;
+	private String strNTitulo;
+	private Double dblShapeLeng;
+	private Double dblShapeArea;
+	private String timFechaRegistroFecha;
+	private String timFechaRegistroHora;
+	public String getTimFechaRegistroFecha() {
+		return timFechaRegistroFecha;
+	}
+	public void setTimFechaRegistroFecha(String timFechaRegistroFecha) {
+		this.timFechaRegistroFecha = timFechaRegistroFecha;
+	}
+	public String getTimFechaRegistroHora() {
+		return timFechaRegistroHora;
+	}
+	public void setTimFechaRegistroHora(String timFechaRegistroHora) {
+		this.timFechaRegistroHora = timFechaRegistroHora;
+	}
+	public String getTimFechaRegistroFechaHora() {
+		return timFechaRegistroFecha + " " + timFechaRegistroHora;
+	}
+	public void setLngFechaRegistro(Long lngfechaRegistro) {
+		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
+		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
+	}
+	public Integer getSrlGid() {
+		return srlGid;
+	}
+	public void setSrlGid(Integer srlGid) {
+		this.srlGid = srlGid;
+	}
+	public String getStrTheGeom() {
+		return strTheGeom;
+	}
+	public void setStrTheGeom(String strTheGeom) {
+		this.strTheGeom = strTheGeom;
+	}
+	public Integer getIntObjectid() {
+		return intObjectid;
+	}
+	public void setIntObjectid(Integer intObjectid) {
+		this.intObjectid = intObjectid;
+	}
+	public String getStrNombre() {
+		return strNombre;
+	}
+	public void setStrNombre(String strNombre) {
+		this.strNombre = strNombre;
+	}
+	public String getStrEstado() {
+		return strEstado;
+	}
+	public void setStrEstado(String strEstado) {
+		this.strEstado = strEstado;
+	}
+	public String getStrResolucion() {
+		return strResolucion;
+	}
+	public void setStrResolucion(String strResolucion) {
+		this.strResolucion = strResolucion;
+	}
+	public Double getDblAreaHa() {
+		return dblAreaHa;
+	}
+	public void setDblAreaHa(Double dblAreaHa) {
+		this.dblAreaHa = dblAreaHa;
+	}
+	public String getStrNomdpto() {
+		return strNomdpto;
+	}
+	public void setStrNomdpto(String strNomdpto) {
+		this.strNomdpto = strNomdpto;
+	}
+	public String getStrNomprov() {
+		return strNomprov;
+	}
+	public void setStrNomprov(String strNomprov) {
+		this.strNomprov = strNomprov;
+	}
+	public String getStrDistrito() {
+		return strDistrito;
+	}
+	public void setStrDistrito(String strDistrito) {
+		this.strDistrito = strDistrito;
+	}
+	public String getStrFechaReso() {
+		return strFechaReso;
+	}
+	public void setStrFechaReso(String strFechaReso) {
+		this.strFechaReso = strFechaReso;
+	}
+	public String getStrNTitulo() {
+		return strNTitulo;
+	}
+	public void setStrNTitulo(String strNTitulo) {
+		this.strNTitulo = strNTitulo;
+	}
+	public Double getDblShapeLeng() {
+		return dblShapeLeng;
+	}
+	public void setDblShapeLeng(Double dblShapeLeng) {
+		this.dblShapeLeng = dblShapeLeng;
+	}
+	public Double getDblShapeArea() {
+		return dblShapeArea;
+	}
+	public void setDblShapeArea(Double dblShapeArea) {
+		this.dblShapeArea = dblShapeArea;
+	}
+	public Date getTimFechaRegistro() {
+		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
+	}
+	public void setTimFechaRegistro(Date timFechaRegistro) {
+		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
+		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
+	}
+	
+}

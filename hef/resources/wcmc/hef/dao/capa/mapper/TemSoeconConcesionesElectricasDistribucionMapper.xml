@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.TemSoeconConcesionesElectricasDistribucionMapper">
+	<resultMap id="TemSoeconConcesionesElectricasDistribucionMap" type="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucion">
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="TemSoeconConcesionesElectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_soecon_concesiones_electricas_distribucion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="TemSoeconConcesionesElectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucionKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_soecon_concesiones_electricas_distribucion as tab
+		where 1 = 1
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucion">
+		insert into wcmc_hef.tem_soecon_concesiones_electricas_distribucion
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucion">
+		update wcmc_hef.tem_soecon_concesiones_electricas_distribucion
+		<set>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.TemSoeconConcesionesElectricasDistribucionKey">
+		delete from wcmc_hef.tem_soecon_concesiones_electricas_distribucion
+		where 1 = 1
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fc_fecreg
+	</sql>
+</mapper>

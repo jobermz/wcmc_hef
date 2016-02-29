@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.KbaIbaPeruMapper">
+	<resultMap id="KbaIbaPeruMap" type="wcmc.hef.dao.capa.domain.KbaIbaPeru">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid_1" property="intObjectid1" jdbcType="INTEGER"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="cd_sitrecid" property="intSitrecid" jdbcType="INTEGER"/>
+		<result column="de_region" property="strRegion" jdbcType="VARCHAR"/>
+		<result column="de_country" property="strCountry" jdbcType="VARCHAR"/>
+		<result column="de_iso3" property="strIso3" jdbcType="VARCHAR"/>
+		<result column="de_natname" property="strNatname" jdbcType="VARCHAR"/>
+		<result column="de_intname" property="strIntname" jdbcType="VARCHAR"/>
+		<result column="de_fincode" property="strFincode" jdbcType="VARCHAR"/>
+		<result column="ha_sitlat" property="dblSitlat" jdbcType="DOUBLE"/>
+		<result column="ha_sitlong" property="dblSitlong" jdbcType="DOUBLE"/>
+		<result column="cd_sitarea" property="intSitarea" jdbcType="INTEGER"/>
+		<result column="de_protect" property="strProtect" jdbcType="VARCHAR"/>
+		<result column="cd_num_pas" property="intNumPas" jdbcType="INTEGER"/>
+		<result column="de_ibastatus" property="strIbastatus" jdbcType="VARCHAR"/>
+		<result column="de_kbastatus" property="strKbastatus" jdbcType="VARCHAR"/>
+		<result column="de_azestatus" property="strAzestatus" jdbcType="VARCHAR"/>
+		<result column="de_createdby" property="strCreatedby" jdbcType="VARCHAR"/>
+		<result column="de_addedby" property="strAddedby" jdbcType="VARCHAR"/>
+		<result column="fc_addeddate" property="dteAddeddate" jdbcType="DATE"/>
+		<result column="de_changeby" property="strChangeby" jdbcType="VARCHAR"/>
+		<result column="fc_changedate" property="dteChangedate" jdbcType="DATE"/>
+		<result column="de_source" property="strSource" jdbcType="VARCHAR"/>
+		<result column="de_deltxt" property="strDeltxt" jdbcType="VARCHAR"/>
+		<result column="de_delgeom" property="strDelgeom" jdbcType="VARCHAR"/>
+		<result column="de_marineiba" property="strMarineiba" jdbcType="VARCHAR"/>
+		<result column="ha_shape_leng" property="dblShapeLeng" jdbcType="DOUBLE"/>
+		<result column="ha_shape_le_1" property="dblShapeLe1" jdbcType="DOUBLE"/>
+		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="KbaIbaPeruMap" parameterType="wcmc.hef.dao.capa.domain.KbaIbaPeruParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.kba_iba_peru as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="KbaIbaPeruMap" parameterType="wcmc.hef.dao.capa.domain.KbaIbaPeruKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.kba_iba_peru as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.kba_iba_peru_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.KbaIbaPeru">
+		insert into wcmc_hef.kba_iba_peru
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="intSitrecid != null">
+				cd_sitrecid,
+			</if>
+			<if test="strRegion != null">
+				de_region,
+			</if>
+			<if test="strCountry != null">
+				de_country,
+			</if>
+			<if test="strIso3 != null">
+				de_iso3,
+			</if>
+			<if test="strNatname != null">
+				de_natname,
+			</if>
+			<if test="strIntname != null">
+				de_intname,
+			</if>
+			<if test="strFincode != null">
+				de_fincode,
+			</if>
+			<if test="dblSitlat != null">
+				ha_sitlat,
+			</if>
+			<if test="dblSitlong != null">
+				ha_sitlong,
+			</if>
+			<if test="intSitarea != null">
+				cd_sitarea,
+			</if>
+			<if test="strProtect != null">
+				de_protect,
+			</if>
+			<if test="intNumPas != null">
+				cd_num_pas,
+			</if>
+			<if test="strIbastatus != null">
+				de_ibastatus,
+			</if>
+			<if test="strKbastatus != null">
+				de_kbastatus,
+			</if>
+			<if test="strAzestatus != null">
+				de_azestatus,
+			</if>
+			<if test="strCreatedby != null">
+				de_createdby,
+			</if>
+			<if test="strAddedby != null">
+				de_addedby,
+			</if>
+			<if test="dteAddeddate != null">
+				fc_addeddate,
+			</if>
+			<if test="strChangeby != null">
+				de_changeby,
+			</if>
+			<if test="dteChangedate != null">
+				fc_changedate,
+			</if>
+			<if test="strSource != null">
+				de_source,
+			</if>
+			<if test="strDeltxt != null">
+				de_deltxt,
+			</if>
+			<if test="strDelgeom != null">
+				de_delgeom,
+			</if>
+			<if test="strMarineiba != null">
+				de_marineiba,
+			</if>
+			<if test="dblShapeLeng != null">
+				ha_shape_leng,
+			</if>
+			<if test="dblShapeLe1 != null">
+				ha_shape_le_1,
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				#{intObjectid1, jdbcType=INTEGER},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="intSitrecid != null">
+				#{intSitrecid, jdbcType=INTEGER},
+			</if>
+			<if test="strRegion != null">
+				#{strRegion, jdbcType=VARCHAR},
+			</if>
+			<if test="strCountry != null">
+				#{strCountry, jdbcType=VARCHAR},
+			</if>
+			<if test="strIso3 != null">
+				#{strIso3, jdbcType=VARCHAR},
+			</if>
+			<if test="strNatname != null">
+				#{strNatname, jdbcType=VARCHAR},
+			</if>
+			<if test="strIntname != null">
+				#{strIntname, jdbcType=VARCHAR},
+			</if>
+			<if test="strFincode != null">
+				#{strFincode, jdbcType=VARCHAR},
+			</if>
+			<if test="dblSitlat != null">
+				#{dblSitlat, jdbcType=DOUBLE},
+			</if>
+			<if test="dblSitlong != null">
+				#{dblSitlong, jdbcType=DOUBLE},
+			</if>
+			<if test="intSitarea != null">
+				#{intSitarea, jdbcType=INTEGER},
+			</if>
+			<if test="strProtect != null">
+				#{strProtect, jdbcType=VARCHAR},
+			</if>
+			<if test="intNumPas != null">
+				#{intNumPas, jdbcType=INTEGER},
+			</if>
+			<if test="strIbastatus != null">
+				#{strIbastatus, jdbcType=VARCHAR},
+			</if>
+			<if test="strKbastatus != null">
+				#{strKbastatus, jdbcType=VARCHAR},
+			</if>
+			<if test="strAzestatus != null">
+				#{strAzestatus, jdbcType=VARCHAR},
+			</if>
+			<if test="strCreatedby != null">
+				#{strCreatedby, jdbcType=VARCHAR},
+			</if>
+			<if test="strAddedby != null">
+				#{strAddedby, jdbcType=VARCHAR},
+			</if>
+			<if test="dteAddeddate != null">
+				#{dteAddeddate, jdbcType=DATE},
+			</if>
+			<if test="strChangeby != null">
+				#{strChangeby, jdbcType=VARCHAR},
+			</if>
+			<if test="dteChangedate != null">
+				#{dteChangedate, jdbcType=DATE},
+			</if>
+			<if test="strSource != null">
+				#{strSource, jdbcType=VARCHAR},
+			</if>
+			<if test="strDeltxt != null">
+				#{strDeltxt, jdbcType=VARCHAR},
+			</if>
+			<if test="strDelgeom != null">
+				#{strDelgeom, jdbcType=VARCHAR},
+			</if>
+			<if test="strMarineiba != null">
+				#{strMarineiba, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeLeng != null">
+				#{dblShapeLeng, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeLe1 != null">
+				#{dblShapeLe1, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeArea != null">
+				#{dblShapeArea, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.KbaIbaPeru">
+		update wcmc_hef.kba_iba_peru
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1 = #{intObjectid1,jdbcType=INTEGER},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="intSitrecid != null">
+				cd_sitrecid = #{intSitrecid,jdbcType=INTEGER},
+			</if>
+			<if test="strRegion != null">
+				de_region = #{strRegion,jdbcType=VARCHAR},
+			</if>
+			<if test="strCountry != null">
+				de_country = #{strCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="strIso3 != null">
+				de_iso3 = #{strIso3,jdbcType=VARCHAR},
+			</if>
+			<if test="strNatname != null">
+				de_natname = #{strNatname,jdbcType=VARCHAR},
+			</if>
+			<if test="strIntname != null">
+				de_intname = #{strIntname,jdbcType=VARCHAR},
+			</if>
+			<if test="strFincode != null">
+				de_fincode = #{strFincode,jdbcType=VARCHAR},
+			</if>
+			<if test="dblSitlat != null">
+				ha_sitlat = #{dblSitlat,jdbcType=DOUBLE},
+			</if>
+			<if test="dblSitlong != null">
+				ha_sitlong = #{dblSitlong,jdbcType=DOUBLE},
+			</if>
+			<if test="intSitarea != null">
+				cd_sitarea = #{intSitarea,jdbcType=INTEGER},
+			</if>
+			<if test="strProtect != null">
+				de_protect = #{strProtect,jdbcType=VARCHAR},
+			</if>
+			<if test="intNumPas != null">
+				cd_num_pas = #{intNumPas,jdbcType=INTEGER},
+			</if>
+			<if test="strIbastatus != null">
+				de_ibastatus = #{strIbastatus,jdbcType=VARCHAR},
+			</if>
+			<if test="strKbastatus != null">
+				de_kbastatus = #{strKbastatus,jdbcType=VARCHAR},
+			</if>
+			<if test="strAzestatus != null">
+				de_azestatus = #{strAzestatus,jdbcType=VARCHAR},
+			</if>
+			<if test="strCreatedby != null">
+				de_createdby = #{strCreatedby,jdbcType=VARCHAR},
+			</if>
+			<if test="strAddedby != null">
+				de_addedby = #{strAddedby,jdbcType=VARCHAR},
+			</if>
+			<if test="dteAddeddate != null">
+				fc_addeddate = #{dteAddeddate,jdbcType=DATE},
+			</if>
+			<if test="strChangeby != null">
+				de_changeby = #{strChangeby,jdbcType=VARCHAR},
+			</if>
+			<if test="dteChangedate != null">
+				fc_changedate = #{dteChangedate,jdbcType=DATE},
+			</if>
+			<if test="strSource != null">
+				de_source = #{strSource,jdbcType=VARCHAR},
+			</if>
+			<if test="strDeltxt != null">
+				de_deltxt = #{strDeltxt,jdbcType=VARCHAR},
+			</if>
+			<if test="strDelgeom != null">
+				de_delgeom = #{strDelgeom,jdbcType=VARCHAR},
+			</if>
+			<if test="strMarineiba != null">
+				de_marineiba = #{strMarineiba,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeLeng != null">
+				ha_shape_leng = #{dblShapeLeng,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeLe1 != null">
+				ha_shape_le_1 = #{dblShapeLe1,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area = #{dblShapeArea,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.KbaIbaPeruKey">
+		delete from wcmc_hef.kba_iba_peru
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid_1, 
+		cd_objectid, 
+		cd_sitrecid, 
+		de_region, 
+		de_country, 
+		de_iso3, 
+		de_natname, 
+		de_intname, 
+		de_fincode, 
+		ha_sitlat, 
+		ha_sitlong, 
+		cd_sitarea, 
+		de_protect, 
+		cd_num_pas, 
+		de_ibastatus, 
+		de_kbastatus, 
+		de_azestatus, 
+		de_createdby, 
+		de_addedby, 
+		fc_addeddate, 
+		de_changeby, 
+		fc_changedate, 
+		de_source, 
+		de_deltxt, 
+		de_delgeom, 
+		de_marineiba, 
+		ha_shape_leng, 
+		ha_shape_le_1, 
+		ha_shape_area, 
+		fc_fecreg
+	</sql>
+</mapper>

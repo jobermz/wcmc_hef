@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.ComunidadesNativasMapper">
+	<resultMap id="ComunidadesNativasMap" type="wcmc.hef.dao.capa.domain.ComunidadesNativas">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid_1" property="intObjectid1" jdbcType="INTEGER"/>
+		<result column="de_gml_id" property="strGmlId" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="de_codigo" property="strCodigo" jdbcType="VARCHAR"/>
+		<result column="de_cod_bib" property="strCodBib" jdbcType="VARCHAR"/>
+		<result column="de_georefer" property="strGeorefer" jdbcType="VARCHAR"/>
+		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
+		<result column="de_sector" property="strSector" jdbcType="VARCHAR"/>
+		<result column="de_zona" property="strZona" jdbcType="VARCHAR"/>
+		<result column="de_subzona" property="strSubzona" jdbcType="VARCHAR"/>
+		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="de_federacion" property="strFederacion" jdbcType="VARCHAR"/>
+		<result column="de_fam_lingui" property="strFamLingui" jdbcType="VARCHAR"/>
+		<result column="de_etnia1" property="strEtnia1" jdbcType="VARCHAR"/>
+		<result column="de_etnia2" property="strEtnia2" jdbcType="VARCHAR"/>
+		<result column="ha_poblacion" property="dblPoblacion" jdbcType="DOUBLE"/>
+		<result column="ha_familias" property="dblFamilias" jdbcType="DOUBLE"/>
+		<result column="ha_escolares" property="dblEscolares" jdbcType="DOUBLE"/>
+		<result column="de_rio" property="strRio" jdbcType="VARCHAR"/>
+		<result column="de_pueb_cerc" property="strPuebCerc" jdbcType="VARCHAR"/>
+		<result column="de_dpto" property="strDpto" jdbcType="VARCHAR"/>
+		<result column="de_provincia" property="strProvincia" jdbcType="VARCHAR"/>
+		<result column="de_distrito" property="strDistrito" jdbcType="VARCHAR"/>
+		<result column="de_longitud" property="strLongitud" jdbcType="VARCHAR"/>
+		<result column="de_latitud" property="strLatitud" jdbcType="VARCHAR"/>
+		<result column="de_resol_in" property="strResolIn" jdbcType="VARCHAR"/>
+		<result column="de_anoinscrip" property="strAnoinscrip" jdbcType="VARCHAR"/>
+		<result column="de_titulo" property="strTitulo" jdbcType="VARCHAR"/>
+		<result column="de_resol_tit" property="strResolTit" jdbcType="VARCHAR"/>
+		<result column="de_anotitulo" property="strAnotitulo" jdbcType="VARCHAR"/>
+		<result column="ha_area_total" property="dblAreaTotal" jdbcType="DOUBLE"/>
+		<result column="ha_area_titul" property="dblAreaTitul" jdbcType="DOUBLE"/>
+		<result column="ha_area_uso" property="dblAreaUso" jdbcType="DOUBLE"/>
+		<result column="ha_area_fisc" property="dblAreaFisc" jdbcType="DOUBLE"/>
+		<result column="ha_area_prote" property="dblAreaProte" jdbcType="DOUBLE"/>
+		<result column="ha_area_reser" property="dblAreaReser" jdbcType="DOUBLE"/>
+		<result column="ha_area_demar" property="dblAreaDemar" jdbcType="DOUBLE"/>
+		<result column="ha_area_sig" property="dblAreaSig" jdbcType="DOUBLE"/>
+		<result column="ha_perim_titu" property="dblPerimTitu" jdbcType="DOUBLE"/>
+		<result column="de_resol_am1" property="strResolAm1" jdbcType="VARCHAR"/>
+		<result column="de_titulo_am1" property="strTituloAm1" jdbcType="VARCHAR"/>
+		<result column="ha_ar_tot_am1" property="dblArTotAm1" jdbcType="DOUBLE"/>
+		<result column="ha_ar_sig_am1" property="dblArSigAm1" jdbcType="DOUBLE"/>
+		<result column="ha_perim_am1" property="dblPerimAm1" jdbcType="DOUBLE"/>
+		<result column="de_resol_am2" property="strResolAm2" jdbcType="VARCHAR"/>
+		<result column="de_titulo_am2" property="strTituloAm2" jdbcType="VARCHAR"/>
+		<result column="ha_ar_tot_am2" property="dblArTotAm2" jdbcType="DOUBLE"/>
+		<result column="ha_ar_sig_am2" property="dblArSigAm2" jdbcType="DOUBLE"/>
+		<result column="ha_perim_am2" property="dblPerimAm2" jdbcType="DOUBLE"/>
+		<result column="de_primaria" property="strPrimaria" jdbcType="VARCHAR"/>
+		<result column="de_bilingue" property="strBilingue" jdbcType="VARCHAR"/>
+		<result column="de_secundaria" property="strSecundaria" jdbcType="VARCHAR"/>
+		<result column="de_pues_salud" property="strPuesSalud" jdbcType="VARCHAR"/>
+		<result column="de_cent_salud" property="strCentSalud" jdbcType="VARCHAR"/>
+		<result column="de_prod_vent1" property="strProdVent1" jdbcType="VARCHAR"/>
+		<result column="de_prod_vent2" property="strProdVent2" jdbcType="VARCHAR"/>
+		<result column="de_prod_vent3" property="strProdVent3" jdbcType="VARCHAR"/>
+		<result column="de_fuente" property="strFuente" jdbcType="VARCHAR"/>
+		<result column="de_fecha" property="strFecha" jdbcType="VARCHAR"/>
+		<result column="de_notas" property="strNotas" jdbcType="VARCHAR"/>
+		<result column="ha_shape_star" property="dblShapeStar" jdbcType="DOUBLE"/>
+		<result column="ha_shape_stle" property="dblShapeStle" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="ComunidadesNativasMap" parameterType="wcmc.hef.dao.capa.domain.ComunidadesNativasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.comunidades_nativas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ComunidadesNativasMap" parameterType="wcmc.hef.dao.capa.domain.ComunidadesNativasKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.comunidades_nativas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.comunidades_nativas_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.ComunidadesNativas">
+		insert into wcmc_hef.comunidades_nativas
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1,
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strCodigo != null">
+				de_codigo,
+			</if>
+			<if test="strCodBib != null">
+				de_cod_bib,
+			</if>
+			<if test="strGeorefer != null">
+				de_georefer,
+			</if>
+			<if test="strSituacion != null">
+				de_situacion,
+			</if>
+			<if test="strSector != null">
+				de_sector,
+			</if>
+			<if test="strZona != null">
+				de_zona,
+			</if>
+			<if test="strSubzona != null">
+				de_subzona,
+			</if>
+			<if test="strNombre != null">
+				de_nombre,
+			</if>
+			<if test="strFederacion != null">
+				de_federacion,
+			</if>
+			<if test="strFamLingui != null">
+				de_fam_lingui,
+			</if>
+			<if test="strEtnia1 != null">
+				de_etnia1,
+			</if>
+			<if test="strEtnia2 != null">
+				de_etnia2,
+			</if>
+			<if test="dblPoblacion != null">
+				ha_poblacion,
+			</if>
+			<if test="dblFamilias != null">
+				ha_familias,
+			</if>
+			<if test="dblEscolares != null">
+				ha_escolares,
+			</if>
+			<if test="strRio != null">
+				de_rio,
+			</if>
+			<if test="strPuebCerc != null">
+				de_pueb_cerc,
+			</if>
+			<if test="strDpto != null">
+				de_dpto,
+			</if>
+			<if test="strProvincia != null">
+				de_provincia,
+			</if>
+			<if test="strDistrito != null">
+				de_distrito,
+			</if>
+			<if test="strLongitud != null">
+				de_longitud,
+			</if>
+			<if test="strLatitud != null">
+				de_latitud,
+			</if>
+			<if test="strResolIn != null">
+				de_resol_in,
+			</if>
+			<if test="strAnoinscrip != null">
+				de_anoinscrip,
+			</if>
+			<if test="strTitulo != null">
+				de_titulo,
+			</if>
+			<if test="strResolTit != null">
+				de_resol_tit,
+			</if>
+			<if test="strAnotitulo != null">
+				de_anotitulo,
+			</if>
+			<if test="dblAreaTotal != null">
+				ha_area_total,
+			</if>
+			<if test="dblAreaTitul != null">
+				ha_area_titul,
+			</if>
+			<if test="dblAreaUso != null">
+				ha_area_uso,
+			</if>
+			<if test="dblAreaFisc != null">
+				ha_area_fisc,
+			</if>
+			<if test="dblAreaProte != null">
+				ha_area_prote,
+			</if>
+			<if test="dblAreaReser != null">
+				ha_area_reser,
+			</if>
+			<if test="dblAreaDemar != null">
+				ha_area_demar,
+			</if>
+			<if test="dblAreaSig != null">
+				ha_area_sig,
+			</if>
+			<if test="dblPerimTitu != null">
+				ha_perim_titu,
+			</if>
+			<if test="strResolAm1 != null">
+				de_resol_am1,
+			</if>
+			<if test="strTituloAm1 != null">
+				de_titulo_am1,
+			</if>
+			<if test="dblArTotAm1 != null">
+				ha_ar_tot_am1,
+			</if>
+			<if test="dblArSigAm1 != null">
+				ha_ar_sig_am1,
+			</if>
+			<if test="dblPerimAm1 != null">
+				ha_perim_am1,
+			</if>
+			<if test="strResolAm2 != null">
+				de_resol_am2,
+			</if>
+			<if test="strTituloAm2 != null">
+				de_titulo_am2,
+			</if>
+			<if test="dblArTotAm2 != null">
+				ha_ar_tot_am2,
+			</if>
+			<if test="dblArSigAm2 != null">
+				ha_ar_sig_am2,
+			</if>
+			<if test="dblPerimAm2 != null">
+				ha_perim_am2,
+			</if>
+			<if test="strPrimaria != null">
+				de_primaria,
+			</if>
+			<if test="strBilingue != null">
+				de_bilingue,
+			</if>
+			<if test="strSecundaria != null">
+				de_secundaria,
+			</if>
+			<if test="strPuesSalud != null">
+				de_pues_salud,
+			</if>
+			<if test="strCentSalud != null">
+				de_cent_salud,
+			</if>
+			<if test="strProdVent1 != null">
+				de_prod_vent1,
+			</if>
+			<if test="strProdVent2 != null">
+				de_prod_vent2,
+			</if>
+			<if test="strProdVent3 != null">
+				de_prod_vent3,
+			</if>
+			<if test="strFuente != null">
+				de_fuente,
+			</if>
+			<if test="strFecha != null">
+				de_fecha,
+			</if>
+			<if test="strNotas != null">
+				de_notas,
+			</if>
+			<if test="dblShapeStar != null">
+				ha_shape_star,
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				#{intObjectid1, jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				#{strGmlId, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strCodigo != null">
+				#{strCodigo, jdbcType=VARCHAR},
+			</if>
+			<if test="strCodBib != null">
+				#{strCodBib, jdbcType=VARCHAR},
+			</if>
+			<if test="strGeorefer != null">
+				#{strGeorefer, jdbcType=VARCHAR},
+			</if>
+			<if test="strSituacion != null">
+				#{strSituacion, jdbcType=VARCHAR},
+			</if>
+			<if test="strSector != null">
+				#{strSector, jdbcType=VARCHAR},
+			</if>
+			<if test="strZona != null">
+				#{strZona, jdbcType=VARCHAR},
+			</if>
+			<if test="strSubzona != null">
+				#{strSubzona, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+			<if test="strFederacion != null">
+				#{strFederacion, jdbcType=VARCHAR},
+			</if>
+			<if test="strFamLingui != null">
+				#{strFamLingui, jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia1 != null">
+				#{strEtnia1, jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia2 != null">
+				#{strEtnia2, jdbcType=VARCHAR},
+			</if>
+			<if test="dblPoblacion != null">
+				#{dblPoblacion, jdbcType=DOUBLE},
+			</if>
+			<if test="dblFamilias != null">
+				#{dblFamilias, jdbcType=DOUBLE},
+			</if>
+			<if test="dblEscolares != null">
+				#{dblEscolares, jdbcType=DOUBLE},
+			</if>
+			<if test="strRio != null">
+				#{strRio, jdbcType=VARCHAR},
+			</if>
+			<if test="strPuebCerc != null">
+				#{strPuebCerc, jdbcType=VARCHAR},
+			</if>
+			<if test="strDpto != null">
+				#{strDpto, jdbcType=VARCHAR},
+			</if>
+			<if test="strProvincia != null">
+				#{strProvincia, jdbcType=VARCHAR},
+			</if>
+			<if test="strDistrito != null">
+				#{strDistrito, jdbcType=VARCHAR},
+			</if>
+			<if test="strLongitud != null">
+				#{strLongitud, jdbcType=VARCHAR},
+			</if>
+			<if test="strLatitud != null">
+				#{strLatitud, jdbcType=VARCHAR},
+			</if>
+			<if test="strResolIn != null">
+				#{strResolIn, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnoinscrip != null">
+				#{strAnoinscrip, jdbcType=VARCHAR},
+			</if>
+			<if test="strTitulo != null">
+				#{strTitulo, jdbcType=VARCHAR},
+			</if>
+			<if test="strResolTit != null">
+				#{strResolTit, jdbcType=VARCHAR},
+			</if>
+			<if test="strAnotitulo != null">
+				#{strAnotitulo, jdbcType=VARCHAR},
+			</if>
+			<if test="dblAreaTotal != null">
+				#{dblAreaTotal, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaTitul != null">
+				#{dblAreaTitul, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaUso != null">
+				#{dblAreaUso, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaFisc != null">
+				#{dblAreaFisc, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaProte != null">
+				#{dblAreaProte, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaReser != null">
+				#{dblAreaReser, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaDemar != null">
+				#{dblAreaDemar, jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaSig != null">
+				#{dblAreaSig, jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimTitu != null">
+				#{dblPerimTitu, jdbcType=DOUBLE},
+			</if>
+			<if test="strResolAm1 != null">
+				#{strResolAm1, jdbcType=VARCHAR},
+			</if>
+			<if test="strTituloAm1 != null">
+				#{strTituloAm1, jdbcType=VARCHAR},
+			</if>
+			<if test="dblArTotAm1 != null">
+				#{dblArTotAm1, jdbcType=DOUBLE},
+			</if>
+			<if test="dblArSigAm1 != null">
+				#{dblArSigAm1, jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimAm1 != null">
+				#{dblPerimAm1, jdbcType=DOUBLE},
+			</if>
+			<if test="strResolAm2 != null">
+				#{strResolAm2, jdbcType=VARCHAR},
+			</if>
+			<if test="strTituloAm2 != null">
+				#{strTituloAm2, jdbcType=VARCHAR},
+			</if>
+			<if test="dblArTotAm2 != null">
+				#{dblArTotAm2, jdbcType=DOUBLE},
+			</if>
+			<if test="dblArSigAm2 != null">
+				#{dblArSigAm2, jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimAm2 != null">
+				#{dblPerimAm2, jdbcType=DOUBLE},
+			</if>
+			<if test="strPrimaria != null">
+				#{strPrimaria, jdbcType=VARCHAR},
+			</if>
+			<if test="strBilingue != null">
+				#{strBilingue, jdbcType=VARCHAR},
+			</if>
+			<if test="strSecundaria != null">
+				#{strSecundaria, jdbcType=VARCHAR},
+			</if>
+			<if test="strPuesSalud != null">
+				#{strPuesSalud, jdbcType=VARCHAR},
+			</if>
+			<if test="strCentSalud != null">
+				#{strCentSalud, jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent1 != null">
+				#{strProdVent1, jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent2 != null">
+				#{strProdVent2, jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent3 != null">
+				#{strProdVent3, jdbcType=VARCHAR},
+			</if>
+			<if test="strFuente != null">
+				#{strFuente, jdbcType=VARCHAR},
+			</if>
+			<if test="strFecha != null">
+				#{strFecha, jdbcType=VARCHAR},
+			</if>
+			<if test="strNotas != null">
+				#{strNotas, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStar != null">
+				#{dblShapeStar, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeStle != null">
+				#{dblShapeStle, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.ComunidadesNativas">
+		update wcmc_hef.comunidades_nativas
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1 = #{intObjectid1,jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id = #{strGmlId,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strCodigo != null">
+				de_codigo = #{strCodigo,jdbcType=VARCHAR},
+			</if>
+			<if test="strCodBib != null">
+				de_cod_bib = #{strCodBib,jdbcType=VARCHAR},
+			</if>
+			<if test="strGeorefer != null">
+				de_georefer = #{strGeorefer,jdbcType=VARCHAR},
+			</if>
+			<if test="strSituacion != null">
+				de_situacion = #{strSituacion,jdbcType=VARCHAR},
+			</if>
+			<if test="strSector != null">
+				de_sector = #{strSector,jdbcType=VARCHAR},
+			</if>
+			<if test="strZona != null">
+				de_zona = #{strZona,jdbcType=VARCHAR},
+			</if>
+			<if test="strSubzona != null">
+				de_subzona = #{strSubzona,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombre != null">
+				de_nombre = #{strNombre,jdbcType=VARCHAR},
+			</if>
+			<if test="strFederacion != null">
+				de_federacion = #{strFederacion,jdbcType=VARCHAR},
+			</if>
+			<if test="strFamLingui != null">
+				de_fam_lingui = #{strFamLingui,jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia1 != null">
+				de_etnia1 = #{strEtnia1,jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia2 != null">
+				de_etnia2 = #{strEtnia2,jdbcType=VARCHAR},
+			</if>
+			<if test="dblPoblacion != null">
+				ha_poblacion = #{dblPoblacion,jdbcType=DOUBLE},
+			</if>
+			<if test="dblFamilias != null">
+				ha_familias = #{dblFamilias,jdbcType=DOUBLE},
+			</if>
+			<if test="dblEscolares != null">
+				ha_escolares = #{dblEscolares,jdbcType=DOUBLE},
+			</if>
+			<if test="strRio != null">
+				de_rio = #{strRio,jdbcType=VARCHAR},
+			</if>
+			<if test="strPuebCerc != null">
+				de_pueb_cerc = #{strPuebCerc,jdbcType=VARCHAR},
+			</if>
+			<if test="strDpto != null">
+				de_dpto = #{strDpto,jdbcType=VARCHAR},
+			</if>
+			<if test="strProvincia != null">
+				de_provincia = #{strProvincia,jdbcType=VARCHAR},
+			</if>
+			<if test="strDistrito != null">
+				de_distrito = #{strDistrito,jdbcType=VARCHAR},
+			</if>
+			<if test="strLongitud != null">
+				de_longitud = #{strLongitud,jdbcType=VARCHAR},
+			</if>
+			<if test="strLatitud != null">
+				de_latitud = #{strLatitud,jdbcType=VARCHAR},
+			</if>
+			<if test="strResolIn != null">
+				de_resol_in = #{strResolIn,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnoinscrip != null">
+				de_anoinscrip = #{strAnoinscrip,jdbcType=VARCHAR},
+			</if>
+			<if test="strTitulo != null">
+				de_titulo = #{strTitulo,jdbcType=VARCHAR},
+			</if>
+			<if test="strResolTit != null">
+				de_resol_tit = #{strResolTit,jdbcType=VARCHAR},
+			</if>
+			<if test="strAnotitulo != null">
+				de_anotitulo = #{strAnotitulo,jdbcType=VARCHAR},
+			</if>
+			<if test="dblAreaTotal != null">
+				ha_area_total = #{dblAreaTotal,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaTitul != null">
+				ha_area_titul = #{dblAreaTitul,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaUso != null">
+				ha_area_uso = #{dblAreaUso,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaFisc != null">
+				ha_area_fisc = #{dblAreaFisc,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaProte != null">
+				ha_area_prote = #{dblAreaProte,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaReser != null">
+				ha_area_reser = #{dblAreaReser,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaDemar != null">
+				ha_area_demar = #{dblAreaDemar,jdbcType=DOUBLE},
+			</if>
+			<if test="dblAreaSig != null">
+				ha_area_sig = #{dblAreaSig,jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimTitu != null">
+				ha_perim_titu = #{dblPerimTitu,jdbcType=DOUBLE},
+			</if>
+			<if test="strResolAm1 != null">
+				de_resol_am1 = #{strResolAm1,jdbcType=VARCHAR},
+			</if>
+			<if test="strTituloAm1 != null">
+				de_titulo_am1 = #{strTituloAm1,jdbcType=VARCHAR},
+			</if>
+			<if test="dblArTotAm1 != null">
+				ha_ar_tot_am1 = #{dblArTotAm1,jdbcType=DOUBLE},
+			</if>
+			<if test="dblArSigAm1 != null">
+				ha_ar_sig_am1 = #{dblArSigAm1,jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimAm1 != null">
+				ha_perim_am1 = #{dblPerimAm1,jdbcType=DOUBLE},
+			</if>
+			<if test="strResolAm2 != null">
+				de_resol_am2 = #{strResolAm2,jdbcType=VARCHAR},
+			</if>
+			<if test="strTituloAm2 != null">
+				de_titulo_am2 = #{strTituloAm2,jdbcType=VARCHAR},
+			</if>
+			<if test="dblArTotAm2 != null">
+				ha_ar_tot_am2 = #{dblArTotAm2,jdbcType=DOUBLE},
+			</if>
+			<if test="dblArSigAm2 != null">
+				ha_ar_sig_am2 = #{dblArSigAm2,jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimAm2 != null">
+				ha_perim_am2 = #{dblPerimAm2,jdbcType=DOUBLE},
+			</if>
+			<if test="strPrimaria != null">
+				de_primaria = #{strPrimaria,jdbcType=VARCHAR},
+			</if>
+			<if test="strBilingue != null">
+				de_bilingue = #{strBilingue,jdbcType=VARCHAR},
+			</if>
+			<if test="strSecundaria != null">
+				de_secundaria = #{strSecundaria,jdbcType=VARCHAR},
+			</if>
+			<if test="strPuesSalud != null">
+				de_pues_salud = #{strPuesSalud,jdbcType=VARCHAR},
+			</if>
+			<if test="strCentSalud != null">
+				de_cent_salud = #{strCentSalud,jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent1 != null">
+				de_prod_vent1 = #{strProdVent1,jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent2 != null">
+				de_prod_vent2 = #{strProdVent2,jdbcType=VARCHAR},
+			</if>
+			<if test="strProdVent3 != null">
+				de_prod_vent3 = #{strProdVent3,jdbcType=VARCHAR},
+			</if>
+			<if test="strFuente != null">
+				de_fuente = #{strFuente,jdbcType=VARCHAR},
+			</if>
+			<if test="strFecha != null">
+				de_fecha = #{strFecha,jdbcType=VARCHAR},
+			</if>
+			<if test="strNotas != null">
+				de_notas = #{strNotas,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStar != null">
+				ha_shape_star = #{dblShapeStar,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle = #{dblShapeStle,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.ComunidadesNativasKey">
+		delete from wcmc_hef.comunidades_nativas
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		de_codigo, 
+		de_cod_bib, 
+		de_georefer, 
+		de_situacion, 
+		de_sector, 
+		de_zona, 
+		de_subzona, 
+		de_nombre, 
+		de_federacion, 
+		de_fam_lingui, 
+		de_etnia1, 
+		de_etnia2, 
+		ha_poblacion, 
+		ha_familias, 
+		ha_escolares, 
+		de_rio, 
+		de_pueb_cerc, 
+		de_dpto, 
+		de_provincia, 
+		de_distrito, 
+		de_longitud, 
+		de_latitud, 
+		de_resol_in, 
+		de_anoinscrip, 
+		de_titulo, 
+		de_resol_tit, 
+		de_anotitulo, 
+		ha_area_total, 
+		ha_area_titul, 
+		ha_area_uso, 
+		ha_area_fisc, 
+		ha_area_prote, 
+		ha_area_reser, 
+		ha_area_demar, 
+		ha_area_sig, 
+		ha_perim_titu, 
+		de_resol_am1, 
+		de_titulo_am1, 
+		ha_ar_tot_am1, 
+		ha_ar_sig_am1, 
+		ha_perim_am1, 
+		de_resol_am2, 
+		de_titulo_am2, 
+		ha_ar_tot_am2, 
+		ha_ar_sig_am2, 
+		ha_perim_am2, 
+		de_primaria, 
+		de_bilingue, 
+		de_secundaria, 
+		de_pues_salud, 
+		de_cent_salud, 
+		de_prod_vent1, 
+		de_prod_vent2, 
+		de_prod_vent3, 
+		de_fuente, 
+		de_fecha, 
+		de_notas, 
+		ha_shape_star, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+</mapper>

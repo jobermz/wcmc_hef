@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.RiosSecundariosMapper">
+	<resultMap id="RiosSecundariosMap" type="wcmc.hef.dao.capa.domain.RiosSecundarios">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid_1" property="intObjectid1" jdbcType="INTEGER"/>
+		<result column="de_gml_id" property="strGmlId" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="de_jer_hidro" property="strJerHidro" jdbcType="VARCHAR"/>
+		<result column="de_dpd99" property="strDpd99" jdbcType="VARCHAR"/>
+		<result column="de_pp99" property="strPp99" jdbcType="VARCHAR"/>
+		<result column="de_dd" property="strDd" jdbcType="VARCHAR"/>
+		<result column="de_din99" property="strDin99" jdbcType="VARCHAR"/>
+		<result column="de_pn99" property="strPn99" jdbcType="VARCHAR"/>
+		<result column="de_dn99" property="strDn99" jdbcType="VARCHAR"/>
+		<result column="ha_shape_stle" property="dblShapeStle" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="RiosSecundariosMap" parameterType="wcmc.hef.dao.capa.domain.RiosSecundariosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.rios_secundarios as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="RiosSecundariosMap" parameterType="wcmc.hef.dao.capa.domain.RiosSecundariosKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.rios_secundarios as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.rios_secundarios_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.RiosSecundarios">
+		insert into wcmc_hef.rios_secundarios
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1,
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strJerHidro != null">
+				de_jer_hidro,
+			</if>
+			<if test="strDpd99 != null">
+				de_dpd99,
+			</if>
+			<if test="strPp99 != null">
+				de_pp99,
+			</if>
+			<if test="strDd != null">
+				de_dd,
+			</if>
+			<if test="strDin99 != null">
+				de_din99,
+			</if>
+			<if test="strPn99 != null">
+				de_pn99,
+			</if>
+			<if test="strDn99 != null">
+				de_dn99,
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				#{intObjectid1, jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				#{strGmlId, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strJerHidro != null">
+				#{strJerHidro, jdbcType=VARCHAR},
+			</if>
+			<if test="strDpd99 != null">
+				#{strDpd99, jdbcType=VARCHAR},
+			</if>
+			<if test="strPp99 != null">
+				#{strPp99, jdbcType=VARCHAR},
+			</if>
+			<if test="strDd != null">
+				#{strDd, jdbcType=VARCHAR},
+			</if>
+			<if test="strDin99 != null">
+				#{strDin99, jdbcType=VARCHAR},
+			</if>
+			<if test="strPn99 != null">
+				#{strPn99, jdbcType=VARCHAR},
+			</if>
+			<if test="strDn99 != null">
+				#{strDn99, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStle != null">
+				#{dblShapeStle, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.RiosSecundarios">
+		update wcmc_hef.rios_secundarios
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1 = #{intObjectid1,jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id = #{strGmlId,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strJerHidro != null">
+				de_jer_hidro = #{strJerHidro,jdbcType=VARCHAR},
+			</if>
+			<if test="strDpd99 != null">
+				de_dpd99 = #{strDpd99,jdbcType=VARCHAR},
+			</if>
+			<if test="strPp99 != null">
+				de_pp99 = #{strPp99,jdbcType=VARCHAR},
+			</if>
+			<if test="strDd != null">
+				de_dd = #{strDd,jdbcType=VARCHAR},
+			</if>
+			<if test="strDin99 != null">
+				de_din99 = #{strDin99,jdbcType=VARCHAR},
+			</if>
+			<if test="strPn99 != null">
+				de_pn99 = #{strPn99,jdbcType=VARCHAR},
+			</if>
+			<if test="strDn99 != null">
+				de_dn99 = #{strDn99,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle = #{dblShapeStle,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.RiosSecundariosKey">
+		delete from wcmc_hef.rios_secundarios
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		de_jer_hidro, 
+		de_dpd99, 
+		de_pp99, 
+		de_dd, 
+		de_din99, 
+		de_pn99, 
+		de_dn99, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+</mapper>

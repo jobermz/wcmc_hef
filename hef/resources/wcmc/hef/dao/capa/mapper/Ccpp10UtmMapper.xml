@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.Ccpp10UtmMapper">
+	<resultMap id="Ccpp10UtmMap" type="wcmc.hef.dao.capa.domain.Ccpp10Utm">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="de_idccpp10" property="strIdccpp10" jdbcType="VARCHAR"/>
+		<result column="de_area" property="strArea" jdbcType="VARCHAR"/>
+		<result column="de_codccpp" property="strCodccpp" jdbcType="VARCHAR"/>
+		<result column="de_nomccpp" property="strNomccpp" jdbcType="VARCHAR"/>
+		<result column="de_ubigeo" property="strUbigeo" jdbcType="VARCHAR"/>
+		<result column="de_ccdi" property="strCcdi" jdbcType="VARCHAR"/>
+		<result column="de_ccpp" property="strCcpp" jdbcType="VARCHAR"/>
+		<result column="de_ccdd" property="strCcdd" jdbcType="VARCHAR"/>
+		<result column="de_catccpp" property="strCatccpp" jdbcType="VARCHAR"/>
+		<result column="de_nomcat" property="strNomcat" jdbcType="VARCHAR"/>
+		<result column="cd_altitud" property="intAltitud" jdbcType="INTEGER"/>
+		<result column="de_longitudx" property="strLongitudx" jdbcType="VARCHAR"/>
+		<result column="de_latitudy" property="strLatitudy" jdbcType="VARCHAR"/>
+		<result column="cd_viv07" property="intViv07" jdbcType="INTEGER"/>
+		<result column="cd_pob07" property="intPob07" jdbcType="INTEGER"/>
+		<result column="cd_region" property="intRegion" jdbcType="INTEGER"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="Ccpp10UtmMap" parameterType="wcmc.hef.dao.capa.domain.Ccpp10UtmParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.ccpp10_utm as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="Ccpp10UtmMap" parameterType="wcmc.hef.dao.capa.domain.Ccpp10UtmKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.ccpp10_utm as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.ccpp10_utm_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.Ccpp10Utm">
+		insert into wcmc_hef.ccpp10_utm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strIdccpp10 != null">
+				de_idccpp10,
+			</if>
+			<if test="strArea != null">
+				de_area,
+			</if>
+			<if test="strCodccpp != null">
+				de_codccpp,
+			</if>
+			<if test="strNomccpp != null">
+				de_nomccpp,
+			</if>
+			<if test="strUbigeo != null">
+				de_ubigeo,
+			</if>
+			<if test="strCcdi != null">
+				de_ccdi,
+			</if>
+			<if test="strCcpp != null">
+				de_ccpp,
+			</if>
+			<if test="strCcdd != null">
+				de_ccdd,
+			</if>
+			<if test="strCatccpp != null">
+				de_catccpp,
+			</if>
+			<if test="strNomcat != null">
+				de_nomcat,
+			</if>
+			<if test="intAltitud != null">
+				cd_altitud,
+			</if>
+			<if test="strLongitudx != null">
+				de_longitudx,
+			</if>
+			<if test="strLatitudy != null">
+				de_latitudy,
+			</if>
+			<if test="intViv07 != null">
+				cd_viv07,
+			</if>
+			<if test="intPob07 != null">
+				cd_pob07,
+			</if>
+			<if test="intRegion != null">
+				cd_region,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strIdccpp10 != null">
+				#{strIdccpp10, jdbcType=VARCHAR},
+			</if>
+			<if test="strArea != null">
+				#{strArea, jdbcType=VARCHAR},
+			</if>
+			<if test="strCodccpp != null">
+				#{strCodccpp, jdbcType=VARCHAR},
+			</if>
+			<if test="strNomccpp != null">
+				#{strNomccpp, jdbcType=VARCHAR},
+			</if>
+			<if test="strUbigeo != null">
+				#{strUbigeo, jdbcType=VARCHAR},
+			</if>
+			<if test="strCcdi != null">
+				#{strCcdi, jdbcType=VARCHAR},
+			</if>
+			<if test="strCcpp != null">
+				#{strCcpp, jdbcType=VARCHAR},
+			</if>
+			<if test="strCcdd != null">
+				#{strCcdd, jdbcType=VARCHAR},
+			</if>
+			<if test="strCatccpp != null">
+				#{strCatccpp, jdbcType=VARCHAR},
+			</if>
+			<if test="strNomcat != null">
+				#{strNomcat, jdbcType=VARCHAR},
+			</if>
+			<if test="intAltitud != null">
+				#{intAltitud, jdbcType=INTEGER},
+			</if>
+			<if test="strLongitudx != null">
+				#{strLongitudx, jdbcType=VARCHAR},
+			</if>
+			<if test="strLatitudy != null">
+				#{strLatitudy, jdbcType=VARCHAR},
+			</if>
+			<if test="intViv07 != null">
+				#{intViv07, jdbcType=INTEGER},
+			</if>
+			<if test="intPob07 != null">
+				#{intPob07, jdbcType=INTEGER},
+			</if>
+			<if test="intRegion != null">
+				#{intRegion, jdbcType=INTEGER},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.Ccpp10Utm">
+		update wcmc_hef.ccpp10_utm
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strIdccpp10 != null">
+				de_idccpp10 = #{strIdccpp10,jdbcType=VARCHAR},
+			</if>
+			<if test="strArea != null">
+				de_area = #{strArea,jdbcType=VARCHAR},
+			</if>
+			<if test="strCodccpp != null">
+				de_codccpp = #{strCodccpp,jdbcType=VARCHAR},
+			</if>
+			<if test="strNomccpp != null">
+				de_nomccpp = #{strNomccpp,jdbcType=VARCHAR},
+			</if>
+			<if test="strUbigeo != null">
+				de_ubigeo = #{strUbigeo,jdbcType=VARCHAR},
+			</if>
+			<if test="strCcdi != null">
+				de_ccdi = #{strCcdi,jdbcType=VARCHAR},
+			</if>
+			<if test="strCcpp != null">
+				de_ccpp = #{strCcpp,jdbcType=VARCHAR},
+			</if>
+			<if test="strCcdd != null">
+				de_ccdd = #{strCcdd,jdbcType=VARCHAR},
+			</if>
+			<if test="strCatccpp != null">
+				de_catccpp = #{strCatccpp,jdbcType=VARCHAR},
+			</if>
+			<if test="strNomcat != null">
+				de_nomcat = #{strNomcat,jdbcType=VARCHAR},
+			</if>
+			<if test="intAltitud != null">
+				cd_altitud = #{intAltitud,jdbcType=INTEGER},
+			</if>
+			<if test="strLongitudx != null">
+				de_longitudx = #{strLongitudx,jdbcType=VARCHAR},
+			</if>
+			<if test="strLatitudy != null">
+				de_latitudy = #{strLatitudy,jdbcType=VARCHAR},
+			</if>
+			<if test="intViv07 != null">
+				cd_viv07 = #{intViv07,jdbcType=INTEGER},
+			</if>
+			<if test="intPob07 != null">
+				cd_pob07 = #{intPob07,jdbcType=INTEGER},
+			</if>
+			<if test="intRegion != null">
+				cd_region = #{intRegion,jdbcType=INTEGER},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.Ccpp10UtmKey">
+		delete from wcmc_hef.ccpp10_utm
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		si_the_geom, 
+		cd_objectid, 
+		de_idccpp10, 
+		de_area, 
+		de_codccpp, 
+		de_nomccpp, 
+		de_ubigeo, 
+		de_ccdi, 
+		de_ccpp, 
+		de_ccdd, 
+		de_catccpp, 
+		de_nomcat, 
+		cd_altitud, 
+		de_longitudx, 
+		de_latitudy, 
+		cd_viv07, 
+		cd_pob07, 
+		cd_region, 
+		fc_fecreg
+	</sql>
+</mapper>
