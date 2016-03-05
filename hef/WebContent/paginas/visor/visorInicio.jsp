@@ -22,115 +22,34 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 <div class="modal fade left seleccionar-capas-modal " tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-md pull-left">
 		<div class="modal-content" id="idDivSeleccionarCapas" >
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Seleccionar capas a visualizar</h4>
-			</div>
-			<div class="modal-body">
-				<div style="height: 250px;overflow-y: auto;"> 
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingOne${grupoCapasBase.srlIdGrupoCapas}">
-					      <h4 class="panel-title">
-					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${grupoCapasBase.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOne${grupoCapasBase.srlIdGrupoCapas}">
-					          ${grupoCapasBase.strNombre}
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="collapseOne${grupoCapasBase.srlIdGrupoCapas}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne${grupoCapasBase.srlIdGrupoCapas}">
-					      <div class="panel-body">
-					      	<div class="row text-center" style="font-weight: bold;">
-						      	<div class="col-xs-5 text-left">
-						      		Nombre de capa
-						      	</div>
-						      	<div class="col-xs-2">
-						      		Transparencia
-						      	</div>
-						      	<div class="col-xs-2">
-						      		Umbral
-						      	</div>
-						      	<div class="col-xs-1">
-						      		Cent.
-						      	</div>
-						      	<div class="col-xs-1">
-						      		Dow.
-						      	</div>
-						      	<div class="col-xs-1">
-						      		Info
-						      	</div>
-					      	</div>
-					      	<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-					      	<div class="row">
-						      	<div class="col-xs-12">
-									<h4>${grupoCapas.strNombre}</h4>
-						      	</div>
-						    </div>
-					      	<s:iterator value="#session.listCapasBase" var="capasBase">
-					      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
-					      	<div class="row">
-						      	<div class="col-xs-5">
-						      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapa}" onclick="marcarCapas();" class="capasBase">
-									${capasBase.strNombre}
-						      	</div>
-						      	<div class="col-xs-2">
-						      		<div idcapa="${capasBase.srlIdCapa}" class="clsSlider"></div>
-						      	</div>
-						      	<div class="col-xs-2 text-center">
-						      		<s:if test="%{#capasBase.listCapaUmbral!=null}">
-						      		<s:select list="#capasBase.listCapaUmbral" name="filtrar_umbral" headerKey="" headerValue="-Sel.-" listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
-						      		</s:if>
-						      	</div>
-						      	<div class="col-xs-1 text-center">
-						      		<s:if test="%{#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DISTRITO}">
-						      			<i class="fa fa-lg fa-bullseye cursorPointer" onclick="centrarMapa(${capasBase.srlIdCapa});"></i>
-						      		</s:if>
-						      	</div>
-						      	<div class="col-xs-1 text-center">
-						      		<s:if test="%{#capasBase.strWfsUrl!=null&&#capasBase.strWfsUrl!=''}">
-						      			<i class="fa fa-lg fa-download cursorPointer" onclick="descargarMapa(${capasBase.srlIdCapa});"></i>
-						      		</s:if>
-						      	</div>
-						      	<div class="col-xs-1 text-center">
-						      		<i class="fa fa-lg fa-info-circle cursorPointer" onclick="mostrarInfo(${capasBase.srlIdCapa});"></i>
-						      	</div>
-					      	</div>
-					      	</s:if>
-					      	</s:iterator>
-					      	</s:iterator>
-					      </div>
-					    </div>
-					  </div>
-					</s:iterator>
-					</div>
-				</div>
-			</div>
+		
+		<s:include value="visorInicioFormVisualizar.jsp"></s:include>
+		
+		</div>
+	</div>
+</div>
+<div class="modal fade left identificar-area-criterio-logico-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-md pull-left">
+		<div class="modal-content">
 			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default btnVideosInteractivos" data-dismiss="modal">Cerrar</button>
-			</div>
+		<s:include value="visorInicioFormIdentificarAreaCriterioLogicos.jsp"></s:include>
 			
 		</div>
 	</div>
 </div>
-<div class="modal fade consulta-analitica-modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-sm">
+<div class="modal fade left analizar-por-area-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-md pull-left">
 		<div class="modal-content">
-			
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Consulta analitica</h4>
-			</div>
-			
-<!-- 			<div class="modal-body"> -->
-<!-- 				<p>Are you sure about this ?</p> -->
-<!-- 			</div> -->
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default btnVideosInteractivos" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-danger btnVideosInteractivos" id="idBtnEliminar">Aceptar</button>
-			</div>
-			
+		
+		<s:include value="visorInicioFormAnalizarPorArea.jsp"></s:include>
+		
+		</div>
+	</div>
+</div>
+<div class="modal fade left reporte-capas-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg pull-left">
+		<div class="modal-content" id="idDivReporte">
+		
 		</div>
 	</div>
 </div>
@@ -211,7 +130,7 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 		</div>
 	</div>
 </div>
-
+<%--
 <div class="modal fade centrar-mapa-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content" id="idDivCentrarCapas">
@@ -258,5 +177,5 @@ request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstante
 		</div>
 	</div>
 </div>
-
+ --%>
 <form id="form" name="form" action=""></form>

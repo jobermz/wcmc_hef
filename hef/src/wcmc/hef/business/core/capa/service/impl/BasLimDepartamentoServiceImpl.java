@@ -24,7 +24,7 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 		Criteria criteria		= basLimDepartamentoParamDef.createCriteria();
 		if(basLimDepartamentoDto != null) {
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrTheGeom()) != null) {
-				criteria.andStrTheGeomLike(basLimDepartamentoDto.getStrTheGeom());
+				criteria.andStrTheGeomIntersectsTo(basLimDepartamentoDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrIddpto()) != null) {
 				criteria.andStrIddptoLike(basLimDepartamentoDto.getStrIddpto());

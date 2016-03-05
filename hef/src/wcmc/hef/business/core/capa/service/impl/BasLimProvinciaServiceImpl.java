@@ -24,7 +24,7 @@ public class BasLimProvinciaServiceImpl implements BasLimProvinciaService {
 		Criteria criteria		= basLimProvinciaParamDef.createCriteria();
 		if(basLimProvinciaDto != null) {
 			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrTheGeom()) != null) {
-				criteria.andStrTheGeomLike(basLimProvinciaDto.getStrTheGeom());
+				criteria.andStrTheGeomIntersectsTo(basLimProvinciaDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrIddpto()) != null) {
 				criteria.andStrIddptoLike(basLimProvinciaDto.getStrIddpto());

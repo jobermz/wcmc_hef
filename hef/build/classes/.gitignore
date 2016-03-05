@@ -2,6 +2,7 @@
 /configuracion.properties
 /log4j.properties
 /seguridad.properties
+/servicios.properties
 /struts
 /struts.xml
 /wcmc

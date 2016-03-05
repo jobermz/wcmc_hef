@@ -113,7 +113,7 @@ public class BasLimProvinciaParamDef {
             addCriterion("cd_gid =", value, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidNotEqualTo(Integer value) {
             addCriterion("cd_gid <>", value, "cd_gid");
             return (Criteria) this;
@@ -124,121 +124,55 @@ public class BasLimProvinciaParamDef {
             addCriterion("cd_gid is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidIsNotNull() {
             addCriterion("cd_gid is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidGreaterThan(Integer value) {
             addCriterion("cd_gid >", value, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidGreaterThanOrEqualTo(Integer value) {
             addCriterion("cd_gid >=", value, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidLessThan(Integer value) {
             addCriterion("cd_gid <", value, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidLessThanOrEqualTo(Integer value) {
             addCriterion("cd_gid <=", value, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidIn(List<Integer> values) {
             addCriterion("cd_gid in", values, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidNotIn(List<Integer> values) {
             addCriterion("cd_gid not in", values, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidBetween(Integer value1, Integer value2) {
             addCriterion("cd_gid between", value1, value2, "cd_gid");
             return (Criteria) this;
         }
-
+        
         public Criteria andSrlGidNotBetween(Integer value1, Integer value2) {
             addCriterion("cd_gid not between", value1, value2, "cd_gid");
             return (Criteria) this;
         }
         
         
-        public Criteria andStrTheGeomLike(String value) {
-            addCriterion("upper(si_the_geom) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomNotLike(String value) {
-            addCriterion("si_the_geom not like", "%" + CadenaUtil.getStr(value) + "%", "si_the_geom");
-            return (Criteria) this;
-        }
-			
-        public Criteria andStrTheGeomEqualTo(String value) {
-            addCriterion("si_the_geom =", CadenaUtil.getStr(value), "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomNotEqualTo(String value) {
-            addCriterion("si_the_geom <>", CadenaUtil.getStr(value), "si_the_geom");
-            return (Criteria) this;
-        }
-
-        
-        public Criteria andStrTheGeomIsNull() {
-            addCriterion("si_the_geom is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomIsNotNull() {
-            addCriterion("si_the_geom is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomGreaterThan(String value) {
-            addCriterion("si_the_geom >", value, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomGreaterThanOrEqualTo(String value) {
-            addCriterion("si_the_geom >=", value, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomLessThan(String value) {
-            addCriterion("si_the_geom <", value, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomLessThanOrEqualTo(String value) {
-            addCriterion("si_the_geom <=", value, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomIn(List<String> values) {
-            addCriterion("si_the_geom in", values, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomNotIn(List<String> values) {
-            addCriterion("si_the_geom not in", values, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomBetween(String value1, String value2) {
-            addCriterion("si_the_geom between", value1, value2, "si_the_geom");
-            return (Criteria) this;
-        }
-
-        public Criteria andStrTheGeomNotBetween(String value1, String value2) {
-            addCriterion("si_the_geom not between", value1, value2, "si_the_geom");
+        public Criteria andStrTheGeomIntersectsTo(String value) {
+        	addCriterion("ST_Intersects(si_the_geom, ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326)) ");
             return (Criteria) this;
         }
         
@@ -247,68 +181,68 @@ public class BasLimProvinciaParamDef {
             addCriterion("upper(de_iddpto) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoNotLike(String value) {
             addCriterion("de_iddpto not like", "%" + CadenaUtil.getStr(value) + "%", "de_iddpto");
             return (Criteria) this;
         }
-			
+        
         public Criteria andStrIddptoEqualTo(String value) {
             addCriterion("de_iddpto =", CadenaUtil.getStr(value), "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoNotEqualTo(String value) {
             addCriterion("de_iddpto <>", CadenaUtil.getStr(value), "de_iddpto");
             return (Criteria) this;
         }
-
+        
         
         public Criteria andStrIddptoIsNull() {
             addCriterion("de_iddpto is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoIsNotNull() {
             addCriterion("de_iddpto is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoGreaterThan(String value) {
             addCriterion("de_iddpto >", value, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoGreaterThanOrEqualTo(String value) {
             addCriterion("de_iddpto >=", value, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoLessThan(String value) {
             addCriterion("de_iddpto <", value, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoLessThanOrEqualTo(String value) {
             addCriterion("de_iddpto <=", value, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoIn(List<String> values) {
             addCriterion("de_iddpto in", values, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoNotIn(List<String> values) {
             addCriterion("de_iddpto not in", values, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoBetween(String value1, String value2) {
             addCriterion("de_iddpto between", value1, value2, "de_iddpto");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIddptoNotBetween(String value1, String value2) {
             addCriterion("de_iddpto not between", value1, value2, "de_iddpto");
             return (Criteria) this;
@@ -319,68 +253,68 @@ public class BasLimProvinciaParamDef {
             addCriterion("upper(de_nombdep) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepNotLike(String value) {
             addCriterion("de_nombdep not like", "%" + CadenaUtil.getStr(value) + "%", "de_nombdep");
             return (Criteria) this;
         }
-			
+        
         public Criteria andStrNombdepEqualTo(String value) {
             addCriterion("de_nombdep =", CadenaUtil.getStr(value), "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepNotEqualTo(String value) {
             addCriterion("de_nombdep <>", CadenaUtil.getStr(value), "de_nombdep");
             return (Criteria) this;
         }
-
+        
         
         public Criteria andStrNombdepIsNull() {
             addCriterion("de_nombdep is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepIsNotNull() {
             addCriterion("de_nombdep is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepGreaterThan(String value) {
             addCriterion("de_nombdep >", value, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepGreaterThanOrEqualTo(String value) {
             addCriterion("de_nombdep >=", value, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepLessThan(String value) {
             addCriterion("de_nombdep <", value, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepLessThanOrEqualTo(String value) {
             addCriterion("de_nombdep <=", value, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepIn(List<String> values) {
             addCriterion("de_nombdep in", values, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepNotIn(List<String> values) {
             addCriterion("de_nombdep not in", values, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepBetween(String value1, String value2) {
             addCriterion("de_nombdep between", value1, value2, "de_nombdep");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombdepNotBetween(String value1, String value2) {
             addCriterion("de_nombdep not between", value1, value2, "de_nombdep");
             return (Criteria) this;
@@ -391,68 +325,68 @@ public class BasLimProvinciaParamDef {
             addCriterion("upper(de_idprov) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovNotLike(String value) {
             addCriterion("de_idprov not like", "%" + CadenaUtil.getStr(value) + "%", "de_idprov");
             return (Criteria) this;
         }
-			
+        
         public Criteria andStrIdprovEqualTo(String value) {
             addCriterion("de_idprov =", CadenaUtil.getStr(value), "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovNotEqualTo(String value) {
             addCriterion("de_idprov <>", CadenaUtil.getStr(value), "de_idprov");
             return (Criteria) this;
         }
-
+        
         
         public Criteria andStrIdprovIsNull() {
             addCriterion("de_idprov is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovIsNotNull() {
             addCriterion("de_idprov is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovGreaterThan(String value) {
             addCriterion("de_idprov >", value, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovGreaterThanOrEqualTo(String value) {
             addCriterion("de_idprov >=", value, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovLessThan(String value) {
             addCriterion("de_idprov <", value, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovLessThanOrEqualTo(String value) {
             addCriterion("de_idprov <=", value, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovIn(List<String> values) {
             addCriterion("de_idprov in", values, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovNotIn(List<String> values) {
             addCriterion("de_idprov not in", values, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovBetween(String value1, String value2) {
             addCriterion("de_idprov between", value1, value2, "de_idprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrIdprovNotBetween(String value1, String value2) {
             addCriterion("de_idprov not between", value1, value2, "de_idprov");
             return (Criteria) this;
@@ -463,68 +397,68 @@ public class BasLimProvinciaParamDef {
             addCriterion("upper(de_nombprov) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovNotLike(String value) {
             addCriterion("de_nombprov not like", "%" + CadenaUtil.getStr(value) + "%", "de_nombprov");
             return (Criteria) this;
         }
-			
+        
         public Criteria andStrNombprovEqualTo(String value) {
             addCriterion("de_nombprov =", CadenaUtil.getStr(value), "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovNotEqualTo(String value) {
             addCriterion("de_nombprov <>", CadenaUtil.getStr(value), "de_nombprov");
             return (Criteria) this;
         }
-
+        
         
         public Criteria andStrNombprovIsNull() {
             addCriterion("de_nombprov is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovIsNotNull() {
             addCriterion("de_nombprov is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovGreaterThan(String value) {
             addCriterion("de_nombprov >", value, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovGreaterThanOrEqualTo(String value) {
             addCriterion("de_nombprov >=", value, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovLessThan(String value) {
             addCriterion("de_nombprov <", value, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovLessThanOrEqualTo(String value) {
             addCriterion("de_nombprov <=", value, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovIn(List<String> values) {
             addCriterion("de_nombprov in", values, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovNotIn(List<String> values) {
             addCriterion("de_nombprov not in", values, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovBetween(String value1, String value2) {
             addCriterion("de_nombprov between", value1, value2, "de_nombprov");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrNombprovNotBetween(String value1, String value2) {
             addCriterion("de_nombprov not between", value1, value2, "de_nombprov");
             return (Criteria) this;
@@ -535,68 +469,68 @@ public class BasLimProvinciaParamDef {
             addCriterion("upper(de_capital) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalNotLike(String value) {
             addCriterion("de_capital not like", "%" + CadenaUtil.getStr(value) + "%", "de_capital");
             return (Criteria) this;
         }
-			
+        
         public Criteria andStrCapitalEqualTo(String value) {
             addCriterion("de_capital =", CadenaUtil.getStr(value), "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalNotEqualTo(String value) {
             addCriterion("de_capital <>", CadenaUtil.getStr(value), "de_capital");
             return (Criteria) this;
         }
-
+        
         
         public Criteria andStrCapitalIsNull() {
             addCriterion("de_capital is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalIsNotNull() {
             addCriterion("de_capital is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalGreaterThan(String value) {
             addCriterion("de_capital >", value, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalGreaterThanOrEqualTo(String value) {
             addCriterion("de_capital >=", value, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalLessThan(String value) {
             addCriterion("de_capital <", value, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalLessThanOrEqualTo(String value) {
             addCriterion("de_capital <=", value, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalIn(List<String> values) {
             addCriterion("de_capital in", values, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalNotIn(List<String> values) {
             addCriterion("de_capital not in", values, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalBetween(String value1, String value2) {
             addCriterion("de_capital between", value1, value2, "de_capital");
             return (Criteria) this;
         }
-
+        
         public Criteria andStrCapitalNotBetween(String value1, String value2) {
             addCriterion("de_capital not between", value1, value2, "de_capital");
             return (Criteria) this;
@@ -607,7 +541,7 @@ public class BasLimProvinciaParamDef {
             addCriterion("fc_fecreg =", value, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroNotEqualTo(Date value) {
             addCriterion("fc_fecreg <>", value, "fc_fecreg");
             return (Criteria) this;
@@ -618,47 +552,47 @@ public class BasLimProvinciaParamDef {
             addCriterion("fc_fecreg is null");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroIsNotNull() {
             addCriterion("fc_fecreg is not null");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroGreaterThan(Date value) {
             addCriterion("fc_fecreg >", value, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroGreaterThanOrEqualTo(Date value) {
             addCriterion("fc_fecreg >=", value, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroLessThan(Date value) {
             addCriterion("fc_fecreg <", value, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroLessThanOrEqualTo(Date value) {
             addCriterion("fc_fecreg <=", value, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroIn(List<Date> values) {
             addCriterion("fc_fecreg in", values, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroNotIn(List<Date> values) {
             addCriterion("fc_fecreg not in", values, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroBetween(Date value1, Date value2) {
             addCriterion("fc_fecreg between", value1, value2, "fc_fecreg");
             return (Criteria) this;
         }
-
+        
         public Criteria andTimFechaRegistroNotBetween(Date value1, Date value2) {
             addCriterion("fc_fecreg not between", value1, value2, "fc_fecreg");
             return (Criteria) this;
@@ -666,9 +600,9 @@ public class BasLimProvinciaParamDef {
         
 		
     }
-
+    
     public static class Criteria extends GeneratedCriteria {
-
+        
         protected Criteria() {
             super();
         }

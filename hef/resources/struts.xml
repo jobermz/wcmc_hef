@@ -17,6 +17,7 @@
 	<include file="struts/struts-home.xml"/>
 	
 	<include file="struts/visor/struts-visor.xml"/>
+	<include file="struts/capa/struts-consulta.xml"/>
 	
 	<include file="struts/seguridad/struts-cuenta-usuario.xml"/>
 	<include file="struts/seguridad/struts-seguridad.xml"/>

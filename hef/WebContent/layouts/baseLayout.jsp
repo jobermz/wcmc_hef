@@ -35,6 +35,9 @@
 	<script	src="tools/bootstrap-datatables/js/datatables.bootstrap.js" type="text/javascript"></script>
 	<script src="tools/bootstrap-datatables/js/datatables-responsive.js" type="text/javascript"></script>
 	
+	<script src="js/visor/visorInicioAnalizarPorArea.js" type="text/javascript"></script>
+	<script src="js/visor/visorInicioIdentificarAreaCriterioLogico.js" type="text/javascript"></script>
+	
 	<tiles:useAttribute id="css" name="styles" classname="java.util.List" />
 	<c:forEach var="item" items="${css}">
 		<link rel="stylesheet" href="${item}" type="text/css" />

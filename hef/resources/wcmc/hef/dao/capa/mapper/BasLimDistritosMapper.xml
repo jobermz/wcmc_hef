@@ -253,7 +253,7 @@
 	</sql>
 	<sql id="Base_Column_List">
 		cd_gid, 
-		si_the_geom, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
 		de_iddpto, 
 		de_nombdep, 
 		de_idprov, 

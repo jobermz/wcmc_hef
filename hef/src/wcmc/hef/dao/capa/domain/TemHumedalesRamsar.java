@@ -1,0 +1,109 @@
+package wcmc.hef.dao.capa.domain;
+
+import java.util.Date;
+import java.util.List;
+import wcmc.hef.general.util.CadenaUtil;
+
+public class TemHumedalesRamsar extends TemHumedalesRamsarKey {
+	
+	private String strTheGeom;
+	private String strCategorías;
+	private String strNombre;
+	private String strBaseLegal;
+	private String strUbicaPoli;
+	private Double dblAreaLegal;
+	private Integer intId;
+	private String strObserva;
+	private Double dblShapeArea;
+	private Double dblShapeLen;
+	private String timFechaRegistroFecha;
+	private String timFechaRegistroHora;
+	
+	public String getTimFechaRegistroFecha() {
+		return timFechaRegistroFecha;
+	}
+	public void setTimFechaRegistroFecha(String timFechaRegistroFecha) {
+		this.timFechaRegistroFecha = timFechaRegistroFecha;
+	}
+	public String getTimFechaRegistroHora() {
+		return timFechaRegistroHora;
+	}
+	public void setTimFechaRegistroHora(String timFechaRegistroHora) {
+		this.timFechaRegistroHora = timFechaRegistroHora;
+	}
+	public String getTimFechaRegistroFechaHora() {
+		return timFechaRegistroFecha + " " + timFechaRegistroHora;
+	}
+	public void setLngFechaRegistro(Long lngfechaRegistro) {
+		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
+		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
+	}
+	public String getStrTheGeom() {
+		return strTheGeom;
+	}
+	public void setStrTheGeom(String strTheGeom) {
+		this.strTheGeom = strTheGeom;
+	}
+	public String getStrCategorías() {
+		return strCategorías;
+	}
+	public void setStrCategorías(String strCategorías) {
+		this.strCategorías = strCategorías;
+	}
+	public String getStrNombre() {
+		return strNombre;
+	}
+	public void setStrNombre(String strNombre) {
+		this.strNombre = strNombre;
+	}
+	public String getStrBaseLegal() {
+		return strBaseLegal;
+	}
+	public void setStrBaseLegal(String strBaseLegal) {
+		this.strBaseLegal = strBaseLegal;
+	}
+	public String getStrUbicaPoli() {
+		return strUbicaPoli;
+	}
+	public void setStrUbicaPoli(String strUbicaPoli) {
+		this.strUbicaPoli = strUbicaPoli;
+	}
+	public Double getDblAreaLegal() {
+		return dblAreaLegal;
+	}
+	public void setDblAreaLegal(Double dblAreaLegal) {
+		this.dblAreaLegal = dblAreaLegal;
+	}
+	public Integer getIntId() {
+		return intId;
+	}
+	public void setIntId(Integer intId) {
+		this.intId = intId;
+	}
+	public String getStrObserva() {
+		return strObserva;
+	}
+	public void setStrObserva(String strObserva) {
+		this.strObserva = strObserva;
+	}
+	public Double getDblShapeArea() {
+		return dblShapeArea;
+	}
+	public void setDblShapeArea(Double dblShapeArea) {
+		this.dblShapeArea = dblShapeArea;
+	}
+	public Double getDblShapeLen() {
+		return dblShapeLen;
+	}
+	public void setDblShapeLen(Double dblShapeLen) {
+		this.dblShapeLen = dblShapeLen;
+	}
+	public Date getTimFechaRegistro() {
+		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
+	}
+	public void setTimFechaRegistro(Date timFechaRegistro) {
+		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
+		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
+	}
+	
+}

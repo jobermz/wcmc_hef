@@ -24,7 +24,7 @@ public class BasLimDistritosServiceImpl implements BasLimDistritosService {
 		Criteria criteria		= basLimDistritosParamDef.createCriteria();
 		if(basLimDistritosDto != null) {
 			if(CadenaUtil.getStrNull(basLimDistritosDto.getStrTheGeom()) != null) {
-				criteria.andStrTheGeomLike(basLimDistritosDto.getStrTheGeom());
+				criteria.andStrTheGeomIntersectsTo(basLimDistritosDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basLimDistritosDto.getStrIddpto()) != null) {
 				criteria.andStrIddptoLike(basLimDistritosDto.getStrIddpto());

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.BasLimAmazoniaMapper">
+	<resultMap id="BasLimAmazoniaMap" type="wcmc.hef.dao.capa.domain.BasLimAmazonia">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid_1" property="intObjectid1" jdbcType="INTEGER"/>
+		<result column="de_simb_cobve" property="strSimbCobve" jdbcType="VARCHAR"/>
+		<result column="de_desc_cobve" property="strDescCobve" jdbcType="VARCHAR"/>
+		<result column="de_simb_defor" property="strSimbDefor" jdbcType="VARCHAR"/>
+		<result column="de_desc_defor" property="strDescDefor" jdbcType="VARCHAR"/>
+		<result column="ha_superf_m2" property="dblSuperfM2" jdbcType="DOUBLE"/>
+		<result column="ha_superf_ha" property="dblSuperfHa" jdbcType="DOUBLE"/>
+		<result column="de_sim_cv_def" property="strSimCvDef" jdbcType="VARCHAR"/>
+		<result column="ha_superf_km2" property="dblSuperfKm2" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_amazonia as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_amazonia as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.bas_lim_amazonia_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazonia">
+		insert into wcmc_hef.bas_lim_amazonia
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1,
+			</if>
+			<if test="strSimbCobve != null">
+				de_simb_cobve,
+			</if>
+			<if test="strDescCobve != null">
+				de_desc_cobve,
+			</if>
+			<if test="strSimbDefor != null">
+				de_simb_defor,
+			</if>
+			<if test="strDescDefor != null">
+				de_desc_defor,
+			</if>
+			<if test="dblSuperfM2 != null">
+				ha_superf_m2,
+			</if>
+			<if test="dblSuperfHa != null">
+				ha_superf_ha,
+			</if>
+			<if test="strSimCvDef != null">
+				de_sim_cv_def,
+			</if>
+			<if test="dblSuperfKm2 != null">
+				ha_superf_km2,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				#{intObjectid1, jdbcType=INTEGER},
+			</if>
+			<if test="strSimbCobve != null">
+				#{strSimbCobve, jdbcType=VARCHAR},
+			</if>
+			<if test="strDescCobve != null">
+				#{strDescCobve, jdbcType=VARCHAR},
+			</if>
+			<if test="strSimbDefor != null">
+				#{strSimbDefor, jdbcType=VARCHAR},
+			</if>
+			<if test="strDescDefor != null">
+				#{strDescDefor, jdbcType=VARCHAR},
+			</if>
+			<if test="dblSuperfM2 != null">
+				#{dblSuperfM2, jdbcType=DOUBLE},
+			</if>
+			<if test="dblSuperfHa != null">
+				#{dblSuperfHa, jdbcType=DOUBLE},
+			</if>
+			<if test="strSimCvDef != null">
+				#{strSimCvDef, jdbcType=VARCHAR},
+			</if>
+			<if test="dblSuperfKm2 != null">
+				#{dblSuperfKm2, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazonia">
+		update wcmc_hef.bas_lim_amazonia
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1 = #{intObjectid1,jdbcType=INTEGER},
+			</if>
+			<if test="strSimbCobve != null">
+				de_simb_cobve = #{strSimbCobve,jdbcType=VARCHAR},
+			</if>
+			<if test="strDescCobve != null">
+				de_desc_cobve = #{strDescCobve,jdbcType=VARCHAR},
+			</if>
+			<if test="strSimbDefor != null">
+				de_simb_defor = #{strSimbDefor,jdbcType=VARCHAR},
+			</if>
+			<if test="strDescDefor != null">
+				de_desc_defor = #{strDescDefor,jdbcType=VARCHAR},
+			</if>
+			<if test="dblSuperfM2 != null">
+				ha_superf_m2 = #{dblSuperfM2,jdbcType=DOUBLE},
+			</if>
+			<if test="dblSuperfHa != null">
+				ha_superf_ha = #{dblSuperfHa,jdbcType=DOUBLE},
+			</if>
+			<if test="strSimCvDef != null">
+				de_sim_cv_def = #{strSimCvDef,jdbcType=VARCHAR},
+			</if>
+			<if test="dblSuperfKm2 != null">
+				ha_superf_km2 = #{dblSuperfKm2,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaKey">
+		delete from wcmc_hef.bas_lim_amazonia
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
+		cd_objectid_1, 
+		de_simb_cobve, 
+		de_desc_cobve, 
+		de_simb_defor, 
+		de_desc_defor, 
+		ha_superf_m2, 
+		ha_superf_ha, 
+		de_sim_cv_def, 
+		ha_superf_km2, 
+		fc_fecreg
+	</sql>
+</mapper>

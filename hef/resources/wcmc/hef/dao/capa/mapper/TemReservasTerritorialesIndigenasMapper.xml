@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.TemReservasTerritorialesIndigenasMapper">
+	<resultMap id="TemReservasTerritorialesIndigenasMap" type="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid_1" property="intObjectid1" jdbcType="INTEGER"/>
+		<result column="de_gml_id" property="strGmlId" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="cd_id" property="intId" jdbcType="INTEGER"/>
+		<result column="ha_sde_dbo_te" property="dblSdeDboTe" jdbcType="DOUBLE"/>
+		<result column="ha_perimeter" property="dblPerimeter" jdbcType="DOUBLE"/>
+		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="de_base_legal" property="strBaseLegal" jdbcType="VARCHAR"/>
+		<result column="ha_n_ha_ibc" property="dblNHaIbc" jdbcType="DOUBLE"/>
+		<result column="de_n_ubic_anp" property="strNUbicAnp" jdbcType="VARCHAR"/>
+		<result column="de_n_map_a0" property="strNMapA0" jdbcType="VARCHAR"/>
+		<result column="de_categoria" property="strCategoria" jdbcType="VARCHAR"/>
+		<result column="de_etnia" property="strEtnia" jdbcType="VARCHAR"/>
+		<result column="de_ubica_poli" property="strUbicaPoli" jdbcType="VARCHAR"/>
+		<result column="de_area_legal" property="strAreaLegal" jdbcType="VARCHAR"/>
+		<result column="ha_shape_star" property="dblShapeStar" jdbcType="DOUBLE"/>
+		<result column="ha_shape_stle" property="dblShapeStle" jdbcType="DOUBLE"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.tem_reservas_territoriales_indigenas_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas">
+		insert into wcmc_hef.tem_reservas_territoriales_indigenas
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1,
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="intId != null">
+				cd_id,
+			</if>
+			<if test="dblSdeDboTe != null">
+				ha_sde_dbo_te,
+			</if>
+			<if test="dblPerimeter != null">
+				ha_perimeter,
+			</if>
+			<if test="strNombre != null">
+				de_nombre,
+			</if>
+			<if test="strBaseLegal != null">
+				de_base_legal,
+			</if>
+			<if test="dblNHaIbc != null">
+				ha_n_ha_ibc,
+			</if>
+			<if test="strNUbicAnp != null">
+				de_n_ubic_anp,
+			</if>
+			<if test="strNMapA0 != null">
+				de_n_map_a0,
+			</if>
+			<if test="strCategoria != null">
+				de_categoria,
+			</if>
+			<if test="strEtnia != null">
+				de_etnia,
+			</if>
+			<if test="strUbicaPoli != null">
+				de_ubica_poli,
+			</if>
+			<if test="strAreaLegal != null">
+				de_area_legal,
+			</if>
+			<if test="dblShapeStar != null">
+				ha_shape_star,
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				#{intObjectid1, jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				#{strGmlId, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="intId != null">
+				#{intId, jdbcType=INTEGER},
+			</if>
+			<if test="dblSdeDboTe != null">
+				#{dblSdeDboTe, jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimeter != null">
+				#{dblPerimeter, jdbcType=DOUBLE},
+			</if>
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+			<if test="strBaseLegal != null">
+				#{strBaseLegal, jdbcType=VARCHAR},
+			</if>
+			<if test="dblNHaIbc != null">
+				#{dblNHaIbc, jdbcType=DOUBLE},
+			</if>
+			<if test="strNUbicAnp != null">
+				#{strNUbicAnp, jdbcType=VARCHAR},
+			</if>
+			<if test="strNMapA0 != null">
+				#{strNMapA0, jdbcType=VARCHAR},
+			</if>
+			<if test="strCategoria != null">
+				#{strCategoria, jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia != null">
+				#{strEtnia, jdbcType=VARCHAR},
+			</if>
+			<if test="strUbicaPoli != null">
+				#{strUbicaPoli, jdbcType=VARCHAR},
+			</if>
+			<if test="strAreaLegal != null">
+				#{strAreaLegal, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStar != null">
+				#{dblShapeStar, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeStle != null">
+				#{dblShapeStle, jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas">
+		update wcmc_hef.tem_reservas_territoriales_indigenas
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid1 != null">
+				cd_objectid_1 = #{intObjectid1,jdbcType=INTEGER},
+			</if>
+			<if test="strGmlId != null">
+				de_gml_id = #{strGmlId,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="intId != null">
+				cd_id = #{intId,jdbcType=INTEGER},
+			</if>
+			<if test="dblSdeDboTe != null">
+				ha_sde_dbo_te = #{dblSdeDboTe,jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimeter != null">
+				ha_perimeter = #{dblPerimeter,jdbcType=DOUBLE},
+			</if>
+			<if test="strNombre != null">
+				de_nombre = #{strNombre,jdbcType=VARCHAR},
+			</if>
+			<if test="strBaseLegal != null">
+				de_base_legal = #{strBaseLegal,jdbcType=VARCHAR},
+			</if>
+			<if test="dblNHaIbc != null">
+				ha_n_ha_ibc = #{dblNHaIbc,jdbcType=DOUBLE},
+			</if>
+			<if test="strNUbicAnp != null">
+				de_n_ubic_anp = #{strNUbicAnp,jdbcType=VARCHAR},
+			</if>
+			<if test="strNMapA0 != null">
+				de_n_map_a0 = #{strNMapA0,jdbcType=VARCHAR},
+			</if>
+			<if test="strCategoria != null">
+				de_categoria = #{strCategoria,jdbcType=VARCHAR},
+			</if>
+			<if test="strEtnia != null">
+				de_etnia = #{strEtnia,jdbcType=VARCHAR},
+			</if>
+			<if test="strUbicaPoli != null">
+				de_ubica_poli = #{strUbicaPoli,jdbcType=VARCHAR},
+			</if>
+			<if test="strAreaLegal != null">
+				de_area_legal = #{strAreaLegal,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeStar != null">
+				ha_shape_star = #{dblShapeStar,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeStle != null">
+				ha_shape_stle = #{dblShapeStle,jdbcType=DOUBLE},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasKey">
+		delete from wcmc_hef.tem_reservas_territoriales_indigenas
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		cd_id, 
+		ha_sde_dbo_te, 
+		ha_perimeter, 
+		de_nombre, 
+		de_base_legal, 
+		ha_n_ha_ibc, 
+		de_n_ubic_anp, 
+		de_n_map_a0, 
+		de_categoria, 
+		de_etnia, 
+		de_ubica_poli, 
+		de_area_legal, 
+		ha_shape_star, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+</mapper>

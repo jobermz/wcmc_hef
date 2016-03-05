@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.BasHidroRiosLagunasMapper">
+	<resultMap id="BasHidroRiosLagunasMap" type="wcmc.hef.dao.capa.domain.BasHidroRiosLagunas">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_count" property="lngCount" jdbcType="INTEGER"/>
+		<result column="de_first_idpr" property="strFirstIdpr" jdbcType="VARCHAR"/>
+		<result column="de_nombprov" property="strNombprov" jdbcType="VARCHAR"/>
+		<result column="de_first_nomb" property="strFirstNomb" jdbcType="VARCHAR"/>
+		<result column="de_last_dcto" property="strLastDcto" jdbcType="VARCHAR"/>
+		<result column="de_last_ley" property="strLastLey" jdbcType="VARCHAR"/>
+		<result column="de_first_fech" property="strFirstFech" jdbcType="VARCHAR"/>
+		<result column="de_last_fecha" property="strLastFecha" jdbcType="VARCHAR"/>
+		<result column="ha_min_shape_" property="dblMinShape" jdbcType="DOUBLE"/>
+		<result column="ha_area" property="dblArea" jdbcType="DOUBLE"/>
+		<result column="ha_perimeter" property="dblPerimeter" jdbcType="DOUBLE"/>
+		<result column="cd_titicacg_" property="lngTiticacg" jdbcType="INTEGER"/>
+		<result column="cd_titicacg_i" property="lngTiticacgI" jdbcType="INTEGER"/>
+		<result column="de_dxf_layer" property="strDxfLayer" jdbcType="VARCHAR"/>
+		<result column="de_dxf_text" property="strDxfText" jdbcType="VARCHAR"/>
+		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_hidro_rios_lagunas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_hidro_rios_lagunas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.bas_hidro_rios_lagunas_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunas">
+		insert into wcmc_hef.bas_hidro_rios_lagunas
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="lngCount != null">
+				cd_count,
+			</if>
+			<if test="strFirstIdpr != null">
+				de_first_idpr,
+			</if>
+			<if test="strNombprov != null">
+				de_nombprov,
+			</if>
+			<if test="strFirstNomb != null">
+				de_first_nomb,
+			</if>
+			<if test="strLastDcto != null">
+				de_last_dcto,
+			</if>
+			<if test="strLastLey != null">
+				de_last_ley,
+			</if>
+			<if test="strFirstFech != null">
+				de_first_fech,
+			</if>
+			<if test="strLastFecha != null">
+				de_last_fecha,
+			</if>
+			<if test="dblMinShape != null">
+				ha_min_shape_,
+			</if>
+			<if test="dblArea != null">
+				ha_area,
+			</if>
+			<if test="dblPerimeter != null">
+				ha_perimeter,
+			</if>
+			<if test="lngTiticacg != null">
+				cd_titicacg_,
+			</if>
+			<if test="lngTiticacgI != null">
+				cd_titicacg_i,
+			</if>
+			<if test="strDxfLayer != null">
+				de_dxf_layer,
+			</if>
+			<if test="strDxfText != null">
+				de_dxf_text,
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="lngCount != null">
+				#{lngCount, jdbcType=INTEGER},
+			</if>
+			<if test="strFirstIdpr != null">
+				#{strFirstIdpr, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombprov != null">
+				#{strNombprov, jdbcType=VARCHAR},
+			</if>
+			<if test="strFirstNomb != null">
+				#{strFirstNomb, jdbcType=VARCHAR},
+			</if>
+			<if test="strLastDcto != null">
+				#{strLastDcto, jdbcType=VARCHAR},
+			</if>
+			<if test="strLastLey != null">
+				#{strLastLey, jdbcType=VARCHAR},
+			</if>
+			<if test="strFirstFech != null">
+				#{strFirstFech, jdbcType=VARCHAR},
+			</if>
+			<if test="strLastFecha != null">
+				#{strLastFecha, jdbcType=VARCHAR},
+			</if>
+			<if test="dblMinShape != null">
+				#{dblMinShape, jdbcType=DOUBLE},
+			</if>
+			<if test="dblArea != null">
+				#{dblArea, jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimeter != null">
+				#{dblPerimeter, jdbcType=DOUBLE},
+			</if>
+			<if test="lngTiticacg != null">
+				#{lngTiticacg, jdbcType=INTEGER},
+			</if>
+			<if test="lngTiticacgI != null">
+				#{lngTiticacgI, jdbcType=INTEGER},
+			</if>
+			<if test="strDxfLayer != null">
+				#{strDxfLayer, jdbcType=VARCHAR},
+			</if>
+			<if test="strDxfText != null">
+				#{strDxfText, jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunas">
+		update wcmc_hef.bas_hidro_rios_lagunas
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="lngCount != null">
+				cd_count = #{lngCount,jdbcType=INTEGER},
+			</if>
+			<if test="strFirstIdpr != null">
+				de_first_idpr = #{strFirstIdpr,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombprov != null">
+				de_nombprov = #{strNombprov,jdbcType=VARCHAR},
+			</if>
+			<if test="strFirstNomb != null">
+				de_first_nomb = #{strFirstNomb,jdbcType=VARCHAR},
+			</if>
+			<if test="strLastDcto != null">
+				de_last_dcto = #{strLastDcto,jdbcType=VARCHAR},
+			</if>
+			<if test="strLastLey != null">
+				de_last_ley = #{strLastLey,jdbcType=VARCHAR},
+			</if>
+			<if test="strFirstFech != null">
+				de_first_fech = #{strFirstFech,jdbcType=VARCHAR},
+			</if>
+			<if test="strLastFecha != null">
+				de_last_fecha = #{strLastFecha,jdbcType=VARCHAR},
+			</if>
+			<if test="dblMinShape != null">
+				ha_min_shape_ = #{dblMinShape,jdbcType=DOUBLE},
+			</if>
+			<if test="dblArea != null">
+				ha_area = #{dblArea,jdbcType=DOUBLE},
+			</if>
+			<if test="dblPerimeter != null">
+				ha_perimeter = #{dblPerimeter,jdbcType=DOUBLE},
+			</if>
+			<if test="lngTiticacg != null">
+				cd_titicacg_ = #{lngTiticacg,jdbcType=INTEGER},
+			</if>
+			<if test="lngTiticacgI != null">
+				cd_titicacg_i = #{lngTiticacgI,jdbcType=INTEGER},
+			</if>
+			<if test="strDxfLayer != null">
+				de_dxf_layer = #{strDxfLayer,jdbcType=VARCHAR},
+			</if>
+			<if test="strDxfText != null">
+				de_dxf_text = #{strDxfText,jdbcType=VARCHAR},
+			</if>
+			<if test="timFechaRegistro != null">
+				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasKey">
+		delete from wcmc_hef.bas_hidro_rios_lagunas
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
+		cd_count, 
+		de_first_idpr, 
+		de_nombprov, 
+		de_first_nomb, 
+		de_last_dcto, 
+		de_last_ley, 
+		de_first_fech, 
+		de_last_fecha, 
+		ha_min_shape_, 
+		ha_area, 
+		ha_perimeter, 
+		cd_titicacg_, 
+		cd_titicacg_i, 
+		de_dxf_layer, 
+		de_dxf_text, 
+		fc_fecreg
+	</sql>
+</mapper>

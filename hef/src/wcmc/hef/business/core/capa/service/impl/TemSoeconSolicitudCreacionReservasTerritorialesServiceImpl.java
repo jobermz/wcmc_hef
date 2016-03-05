@@ -24,7 +24,7 @@ public class TemSoeconSolicitudCreacionReservasTerritorialesServiceImpl implemen
 		Criteria criteria		= temSoeconSolicitudCreacionReservasTerritorialesParamDef.createCriteria();
 		if(temSoeconSolicitudCreacionReservasTerritorialesDto != null) {
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrTheGeom()) != null) {
-				criteria.andStrTheGeomLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrTheGeom());
+				criteria.andStrTheGeomIntersectsTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getInteNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1()) != null) {
 				criteria.andIntObjectid1EqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1());

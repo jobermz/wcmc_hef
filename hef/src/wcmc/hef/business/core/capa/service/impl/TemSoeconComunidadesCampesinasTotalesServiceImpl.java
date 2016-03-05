@@ -24,7 +24,7 @@ public class TemSoeconComunidadesCampesinasTotalesServiceImpl implements TemSoec
 		Criteria criteria		= temSoeconComunidadesCampesinasTotalesParamDef.createCriteria();
 		if(temSoeconComunidadesCampesinasTotalesDto != null) {
 			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrTheGeom()) != null) {
-				criteria.andStrTheGeomLike(temSoeconComunidadesCampesinasTotalesDto.getStrTheGeom());
+				criteria.andStrTheGeomIntersectsTo(temSoeconComunidadesCampesinasTotalesDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getInteNull(temSoeconComunidadesCampesinasTotalesDto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(temSoeconComunidadesCampesinasTotalesDto.getIntObjectid());

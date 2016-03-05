@@ -3,9 +3,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:50px;">
-	<div style="position: absolute;float: right;top: 150px;right:30px;z-index: 20;color:white;"><i class="fa fa-globe fa-2x cursorPointer seleccionar-capas"></i></div>
-	<div style="position: absolute;float: right;top: 185px;right:30px;z-index: 20;color:white;"><i class="fa fa-search fa-2x cursorPointer consulta-analitica"></i></div>
-	<div style="position: absolute;float: right;top: 220px;right:30px;z-index: 20;color:white;"><i class="fa fa-upload fa-2x cursorPointer upload-capas"></i></div>
+	<div style="position: absolute;float: right;top: 150px;right:30px;z-index: 20;color:white;"><i title="Visualziar capas" class="fa fa-globe fa-2x cursorPointer seleccionar-capas"></i></div>
+	<div style="position: absolute;float: right;top: 185px;right:30px;z-index: 20;color:white;"><i title="Identificar areas por criterios logicos" class="fa fa-search fa-2x cursorPointer identificar-area-criterio-logico"></i></div>
+	<div style="position: absolute;float: right;top: 220px;right:30px;z-index: 20;color:white;"><i title="Analizar por &aacute;rea" class="fa fa-bars fa-2x cursorPointer analizar-por-area"></i></div>
+	<div style="position: absolute;float: right;top: 255px;right:30px;z-index: 20;color:white;"><i title="Cargar capas" class="fa fa-upload fa-2x cursorPointer upload-capas"></i></div>
 </nav>
 <nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:50px;">
 	<div class="navbar-top">

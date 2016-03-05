@@ -61,6 +61,7 @@
 		</put-list-attribute>
 	</definition>
 	
+	<definition name="consulta_capas_reporte_form" template="/paginas/consulta/consultaCapasReporteForm.jsp"></definition>
 	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">
