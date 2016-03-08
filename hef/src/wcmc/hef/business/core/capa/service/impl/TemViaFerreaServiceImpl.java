@@ -47,6 +47,35 @@ public class TemViaFerreaServiceImpl implements TemViaFerreaService {
 		return list;
 	}
 	
+		public List<TemViaFerrea> buscarGeometry(TemViaFerreaDto temViaFerreaDto) throws Exception {
+		TemViaFerreaParamDef temViaFerreaParamDef		= new TemViaFerreaParamDef();
+		
+		Criteria criteria		= temViaFerreaParamDef.createCriteria();
+		if(temViaFerreaDto != null) {
+			if(CadenaUtil.getStrNull(temViaFerreaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temViaFerreaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temViaFerreaDto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(temViaFerreaDto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(temViaFerreaDto.getStrGmlId()) != null) {
+				criteria.andStrGmlIdLike(temViaFerreaDto.getStrGmlId());
+			}
+			if(CadenaUtil.getInteNull(temViaFerreaDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temViaFerreaDto.getIntObjectid());
+			}
+			if(CadenaUtil.getDoubNull(temViaFerreaDto.getDblViaferr()) != null) {
+				criteria.andDblViaferrEqualTo(temViaFerreaDto.getDblViaferr());
+			}
+			if(CadenaUtil.getDoubNull(temViaFerreaDto.getDblShapeStle()) != null) {
+				criteria.andDblShapeStleEqualTo(temViaFerreaDto.getDblShapeStle());
+			}
+		}
+		
+		List<TemViaFerrea>	 list	= temViaFerreaMapper.selectByDefaultParameterGeometry(temViaFerreaParamDef);
+		return list;
+	}
+	
 	public TemViaFerrea buscarById(TemViaFerreaDto temViaFerreaDto) throws Exception {
 		TemViaFerrea temViaFerrea		= new TemViaFerrea();
 		BeanUtils.copyProperties(temViaFerreaDto, temViaFerrea);

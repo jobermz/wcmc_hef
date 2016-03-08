@@ -10,8 +10,8 @@ public class CapaUmbral extends CapaUmbralKey {
 	private String intIdCapaDesc;
 	private Integer intIdCapa;
 	private String strNombre;
-	private Integer intValorMinimo;
-	private Integer intValorMaximo;
+	private Double dblValorMinimo;
+	private Double dblValorMaximo;
 	
 	public String getIntIdCapaDesc() {
 		return intIdCapaDesc;
@@ -31,19 +31,19 @@ public class CapaUmbral extends CapaUmbralKey {
 	public void setStrNombre(String strNombre) {
 		this.strNombre = strNombre;
 	}
-	public Integer getIntValorMinimo() {
-		return intValorMinimo;
+	public Double getDblValorMinimo() {
+		return dblValorMinimo;
 	}
-	public void setIntValorMinimo(Integer intValorMinimo) {
-		this.intValorMinimo = intValorMinimo;
+	public void setDblValorMinimo(Double dblValorMinimo) {
+		this.dblValorMinimo = dblValorMinimo;
 	}
-	public Integer getIntValorMaximo() {
-		return intValorMaximo;
+	public Double getDblValorMaximo() {
+		return dblValorMaximo;
 	}
-	public void setIntValorMaximo(Integer intValorMaximo) {
-		this.intValorMaximo = intValorMaximo;
+	public void setDblValorMaximo(Double dblValorMaximo) {
+		this.dblValorMaximo = dblValorMaximo;
 	}
 	public String getStrValoresMinimoMaximo() {
-		return "["+intIdCapa+","+intValorMinimo+","+intValorMaximo+"]";
+		return "["+intIdCapa+","+dblValorMinimo+","+dblValorMaximo+"]";
 	}
 }

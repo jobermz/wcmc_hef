@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemSinanpeAmortiguamientoDto {
+public class TemSinanpeAmortiguamientoDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
 	private Long lngObjectid;

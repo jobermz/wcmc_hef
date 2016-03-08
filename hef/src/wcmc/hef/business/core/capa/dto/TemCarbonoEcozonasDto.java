@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemCarbonoEcozonasDto {
+public class TemCarbonoEcozonasDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
 	private Integer intObjectid;

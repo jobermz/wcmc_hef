@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class BasViasRedVialVecinal extends BasViasRedVialVecinalKey {
+public class BasViasRedVialVecinal extends BasViasRedVialVecinalKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strProvinc;

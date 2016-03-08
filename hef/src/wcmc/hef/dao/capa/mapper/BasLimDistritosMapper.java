@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.BasLimDistritosParamDef;
 public interface BasLimDistritosMapper {
 	
 	public List<BasLimDistritos> selectByDefaultParameter(BasLimDistritosParamDef basLimDistritosParamDef);
+	public List<BasLimDistritos> selectByDefaultParameterGeometry(BasLimDistritosParamDef basLimDistritosParamDef);
 	public BasLimDistritos selectByPrimaryKey(BasLimDistritosKey basLimDistritosKey);
 	public int insertSelective(BasLimDistritos basLimDistritos);
 	public int updateByPrimaryKeySelective(BasLimDistritos basLimDistritos);

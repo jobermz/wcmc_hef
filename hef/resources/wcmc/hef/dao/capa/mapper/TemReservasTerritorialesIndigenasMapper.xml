@@ -37,6 +37,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -293,4 +308,27 @@
 		ha_shape_stle, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		cd_id, 
+		ha_sde_dbo_te, 
+		ha_perimeter, 
+		de_nombre, 
+		de_base_legal, 
+		ha_n_ha_ibc, 
+		de_n_ubic_anp, 
+		de_n_map_a0, 
+		de_categoria, 
+		de_etnia, 
+		de_ubica_poli, 
+		de_area_legal, 
+		ha_shape_star, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+
 </mapper>

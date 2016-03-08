@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionesForestalesConservacion extends TemConcesionesForestalesConservacionKey {
-		
+public class TemConcesionesForestalesConservacion extends TemConcesionesForestalesConservacionKey implements BaseBeanVectorial {
+	
 	private String strTheGeom;
 	private Double dblNum;
 	private Integer intId;
@@ -18,7 +18,7 @@ public class TemConcesionesForestalesConservacion extends TemConcesionesForestal
 	private String strSituacion;
 	private String timFechaRegistroFecha;
 	private String timFechaRegistroHora;
-		
+	
 	public String getTimFechaRegistroFecha() {
 		return timFechaRegistroFecha;
 	}
@@ -106,4 +106,4 @@ public class TemConcesionesForestalesConservacion extends TemConcesionesForestal
 		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
 	}
 	
-	}
+}

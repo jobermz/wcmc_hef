@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionesMineras extends TemConcesionesMinerasKey {
+public class TemConcesionesMineras extends TemConcesionesMinerasKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Integer intObjectid1;

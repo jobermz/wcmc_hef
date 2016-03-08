@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.BasViasRedVialNacional;
 public interface BasViasRedVialNacionalService {
 	
 	public List<BasViasRedVialNacional> buscar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
+	public List<BasViasRedVialNacional> buscarGeometry(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public BasViasRedVialNacional buscarById(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public Integer guardar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public Integer eliminar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;

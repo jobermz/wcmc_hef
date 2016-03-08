@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    
+	<package name="analizar-por-area" namespace="/" extends="principal,json-default,jasperreports-default">
+		
+		<action name="agregarShapeAPA" class="wcmc.hef.web.capa.action.AnalizarPorAreaAction" method="agregarShape">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+<!-- 		<action name="cargarCapasBaseJson" class="wcmc.hef.web.visor.action.VisorAction" method="cargarCapasBase"> -->
+<!-- 			<result name="success" type="json" /> -->
+<!-- 			<interceptor-ref name="basicStack"/> -->
+<!-- 		</action> -->
+		
+	</package>
+</struts>
+

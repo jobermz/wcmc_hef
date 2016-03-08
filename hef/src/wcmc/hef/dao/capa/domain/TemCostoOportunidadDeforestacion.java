@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemCostoOportunidadDeforestacion extends TemCostoOportunidadDeforestacionKey {
+public class TemCostoOportunidadDeforestacion extends TemCostoOportunidadDeforestacionKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strNombdist;

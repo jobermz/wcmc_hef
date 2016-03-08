@@ -56,7 +56,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
-								      		<input type="checkbox" id="idCapaSelCritLog" name="capasBase" value="${capasBase.srlIdCapa}"  class="capasBase">
+								      		<input type="checkbox" id="idCapaIdentACL${capasBase.srlIdCapa}" name="capaIdentACL" value="${capasBase.srlIdCapa}"  class="capasBase">
 											${capasBase.strNombre}
 								      	</div>
 								      	<div class="col-xs-2 text-center">
@@ -89,6 +89,7 @@
 			</div>
 			
 			<div class="modal-footer">
+				<button type="button" class="btn btn-default btnSeleccionarTodasCapasIAC">Seleccionar todas las capas</button>
 				<button type="button" class="btn btn-default btnProcesarIdentAreaCriteriosLogicos" >Procesar</button>
 			</div>
 			

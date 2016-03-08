@@ -47,6 +47,35 @@ public class BasViasRedVialDepartamentalServiceImpl implements BasViasRedVialDep
 		return list;
 	}
 	
+		public List<BasViasRedVialDepartamental> buscarGeometry(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
+		BasViasRedVialDepartamentalParamDef basViasRedVialDepartamentalParamDef		= new BasViasRedVialDepartamentalParamDef();
+		
+		Criteria criteria		= basViasRedVialDepartamentalParamDef.createCriteria();
+		if(basViasRedVialDepartamentalDto != null) {
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basViasRedVialDepartamentalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getDoubNull(basViasRedVialDepartamentalDto.getDblLongitud()) != null) {
+				criteria.andDblLongitudEqualTo(basViasRedVialDepartamentalDto.getDblLongitud());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrDpto()) != null) {
+				criteria.andStrDptoLike(basViasRedVialDepartamentalDto.getStrDpto());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRutaD044()) != null) {
+				criteria.andStrRutaD044Like(basViasRedVialDepartamentalDto.getStrRutaD044());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRed044()) != null) {
+				criteria.andStrRed044Like(basViasRedVialDepartamentalDto.getStrRed044());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrSupercicie()) != null) {
+				criteria.andStrSupercicieLike(basViasRedVialDepartamentalDto.getStrSupercicie());
+			}
+		}
+		
+		List<BasViasRedVialDepartamental>	 list	= basViasRedVialDepartamentalMapper.selectByDefaultParameterGeometry(basViasRedVialDepartamentalParamDef);
+		return list;
+	}
+	
 	public BasViasRedVialDepartamental buscarById(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
 		BasViasRedVialDepartamental basViasRedVialDepartamental		= new BasViasRedVialDepartamental();
 		BeanUtils.copyProperties(basViasRedVialDepartamentalDto, basViasRedVialDepartamental);

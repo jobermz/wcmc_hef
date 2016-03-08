@@ -55,6 +55,8 @@ public class SeguridadInterceptor implements Interceptor {
 			listActionException.add("comboCentrarDistritoEnProvincia");
 			listActionException.add("comboCentrarDistritoEnDistrito");
 			listActionException.add("consultaCapas");
+			listActionException.add("agregarShapeAPA");
+			listActionException.add("consultaCapasRightClick");
 			
 			if(listActionException.contains(actionName)) {
 				return arg0.invoke();

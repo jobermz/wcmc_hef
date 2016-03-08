@@ -25,6 +25,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="BasViasRedVialDepartamentalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialDepartamentalParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.bas_vias_red_vial_departamental as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasViasRedVialDepartamentalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialDepartamentalKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -161,4 +176,15 @@
 		de_supercicie, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		ha_longitud, 
+		de_dpto, 
+		de_ruta_d044, 
+		de_red_044, 
+		de_supercicie, 
+		fc_fecreg
+	</sql>
+
 </mapper>

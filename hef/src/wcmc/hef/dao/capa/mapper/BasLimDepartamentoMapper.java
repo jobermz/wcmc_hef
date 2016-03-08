@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.BasLimDepartamentoParamDef;
 public interface BasLimDepartamentoMapper {
 	
 	public List<BasLimDepartamento> selectByDefaultParameter(BasLimDepartamentoParamDef basLimDepartamentoParamDef);
+	public List<BasLimDepartamento> selectByDefaultParameterGeometry(BasLimDepartamentoParamDef basLimDepartamentoParamDef);
 	public BasLimDepartamento selectByPrimaryKey(BasLimDepartamentoKey basLimDepartamentoKey);
 	public int insertSelective(BasLimDepartamento basLimDepartamento);
 	public int updateByPrimaryKeySelective(BasLimDepartamento basLimDepartamento);

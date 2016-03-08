@@ -49,8 +49,8 @@ function instanciardt_basico_capa_umbral(ejecutaBuscar) {
 		"aoColumns": [
 //				{"mData" : "intIdCapa"},
 				{"mData" : "strNombre"},
-				{"mData" : "intValorMinimo"},
-				{"mData" : "intValorMaximo"},
+				{"mData" : "dblValorMinimo"},
+				{"mData" : "dblValorMaximo"},
 				{"mData" : null}
 		],
 		"aoColumnDefs": [

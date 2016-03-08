@@ -18,6 +18,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_concesion_hidroelectricas_distribucion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -84,4 +99,8 @@
 	<sql id="Base_Column_List">
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		fc_fecreg
+	</sql>
+
 </mapper>

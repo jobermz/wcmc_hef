@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.BasLimAmazoniaParamDef;
 public interface BasLimAmazoniaMapper {
 	
 	public List<BasLimAmazonia> selectByDefaultParameter(BasLimAmazoniaParamDef basLimAmazoniaParamDef);
+	public List<BasLimAmazonia> selectByDefaultParameterGeometry(BasLimAmazoniaParamDef basLimAmazoniaParamDef);
 	public BasLimAmazonia selectByPrimaryKey(BasLimAmazoniaKey basLimAmazoniaKey);
 	public int insertSelective(BasLimAmazonia basLimAmazonia);
 	public int updateByPrimaryKeySelective(BasLimAmazonia basLimAmazonia);

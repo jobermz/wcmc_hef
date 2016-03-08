@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemClaveBiodiversidad extends TemClaveBiodiversidadKey {
+public class TemClaveBiodiversidad extends TemClaveBiodiversidadKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Integer intObjectid1;

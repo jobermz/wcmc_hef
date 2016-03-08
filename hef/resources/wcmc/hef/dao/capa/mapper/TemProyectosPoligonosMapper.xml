@@ -43,6 +43,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemProyectosPoligonosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPoligonosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_proyectos_poligonos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemProyectosPoligonosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPoligonosKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -359,4 +374,33 @@
 		de_link, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		ha_sh_codigo, 
+		de_fc_comun, 
+		de_proyecto, 
+		de_inic_prog_, 
+		de_referencia, 
+		de_detalle_de, 
+		de_otros, 
+		de_meta, 
+		de_objetivos, 
+		de_fecha_inic, 
+		de_fecha_term, 
+		de_tipo_de_da, 
+		de_cooperante, 
+		de_administra, 
+		ha_usd, 
+		de_institucio, 
+		de_persona_co, 
+		de_cargo, 
+		de_contacto, 
+		de_direccion_, 
+		de_instituc_1, 
+		de_obs, 
+		de_link, 
+		fc_fecreg
+	</sql>
+
 </mapper>

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionHidroelectricasGeneracion extends TemConcesionHidroelectricasGeneracionKey {
+public class TemConcesionHidroelectricasGeneracion extends TemConcesionHidroelectricasGeneracionKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strIdGrafico;

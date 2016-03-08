@@ -29,6 +29,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.bas_lim_amazonia as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -205,4 +220,19 @@
 		ha_superf_km2, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		de_simb_cobve, 
+		de_desc_cobve, 
+		de_simb_defor, 
+		de_desc_defor, 
+		ha_superf_m2, 
+		ha_superf_ha, 
+		de_sim_cv_def, 
+		ha_superf_km2, 
+		fc_fecreg
+	</sql>
+
 </mapper>

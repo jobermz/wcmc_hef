@@ -6,10 +6,10 @@
 <struts>    
 	<package name="general" namespace="/" extends="principal,json-default,jasperreports-default">
 		
-		<action name="home" class="wcmc.hef.web.visor.action.VisorAction" method="inicio">
-			<result name="success" type="tiles">home_form</result>
-			<interceptor-ref name="basicStack" />  
-		</action>
+<!-- 		<action name="home" class="wcmc.hef.web.visor.action.VisorAction" method="inicio"> -->
+<!-- 			<result name="success" type="tiles">home_form</result> -->
+<!-- 			<interceptor-ref name="basicStack" />   -->
+<!-- 		</action> -->
 		
 <!-- 		<action name="nuevoIncidencias" class="wcmc.hef.general.action.BaseAction" method="nuevo"> -->
 <!-- 			<result name="success" type="tiles">incidencias_form</result> -->

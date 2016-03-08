@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemSoeconSolicitudCreacionReservasTerritoriales extends TemSoeconSolicitudCreacionReservasTerritorialesKey {
+public class TemSoeconSolicitudCreacionReservasTerritoriales extends TemSoeconSolicitudCreacionReservasTerritorialesKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Integer intObjectid1;

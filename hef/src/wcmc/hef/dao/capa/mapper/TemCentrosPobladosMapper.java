@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemCentrosPobladosParamDef;
 public interface TemCentrosPobladosMapper {
 	
 	public List<TemCentrosPoblados> selectByDefaultParameter(TemCentrosPobladosParamDef temCentrosPobladosParamDef);
+	public List<TemCentrosPoblados> selectByDefaultParameterGeometry(TemCentrosPobladosParamDef temCentrosPobladosParamDef);
 	public TemCentrosPoblados selectByPrimaryKey(TemCentrosPobladosKey temCentrosPobladosKey);
 	public int insertSelective(TemCentrosPoblados temCentrosPoblados);
 	public int updateByPrimaryKeySelective(TemCentrosPoblados temCentrosPoblados);

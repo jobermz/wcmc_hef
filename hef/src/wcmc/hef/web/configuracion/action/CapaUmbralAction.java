@@ -43,8 +43,8 @@ public class CapaUmbralAction extends ActionSupport {
 	private String buscar_srlIdCapaUmbral;
 	private String buscar_intIdCapa;
 	private String buscar_strNombre;
-	private String buscar_intValorMinimo;
-	private String buscar_intValorMaximo;
+	private String buscar_dblValorMinimo;
+	private String buscar_dblValorMaximo;
 	
 	private String[] buscar_seleccion_id;
 	
@@ -132,11 +132,11 @@ public class CapaUmbralAction extends ActionSupport {
 				error	= true;
 				addActionError("El valor del campo Nombre es obligatorio");
 			}
-			if(CadenaUtil.getStr(this.edicion_capaUmbralDto.getIntValorMinimo()).equals("")) {
+			if(CadenaUtil.getStr(this.edicion_capaUmbralDto.getDblValorMinimo()).equals("")) {
 				error	= true;
 				addActionError("El valor del campo Valor minimo es obligatorio");
 			}
-			if(CadenaUtil.getStr(this.edicion_capaUmbralDto.getIntValorMaximo()).equals("")) {
+			if(CadenaUtil.getStr(this.edicion_capaUmbralDto.getDblValorMaximo()).equals("")) {
 				error	= true;
 				addActionError("El valor del campo Valor maximo es obligatorio");
 			}
@@ -194,19 +194,19 @@ public class CapaUmbralAction extends ActionSupport {
 	public void setBuscar_strNombre(String buscar_strNombre) {
 		this.buscar_strNombre = buscar_strNombre;
 	}
-	public String getBuscar_intValorMinimo() {
-		return buscar_intValorMinimo;
+	public String getBuscar_dblValorMinimo() {
+		return buscar_dblValorMinimo;
 	}
 	
-	public void setBuscar_intValorMinimo(String buscar_intValorMinimo) {
-		this.buscar_intValorMinimo = buscar_intValorMinimo;
+	public void setBuscar_dblValorMinimo(String buscar_dblValorMinimo) {
+		this.buscar_dblValorMinimo = buscar_dblValorMinimo;
 	}
-	public String getBuscar_intValorMaximo() {
-		return buscar_intValorMaximo;
+	public String getBuscar_dblValorMaximo() {
+		return buscar_dblValorMaximo;
 	}
 	
-	public void setBuscar_intValorMaximo(String buscar_intValorMaximo) {
-		this.buscar_intValorMaximo = buscar_intValorMaximo;
+	public void setBuscar_dblValorMaximo(String buscar_dblValorMaximo) {
+		this.buscar_dblValorMaximo = buscar_dblValorMaximo;
 	}
 	
 	public CapaUmbralDto getEdicion_capaUmbralDto() {

@@ -68,6 +68,56 @@ public class TemSoeconComunidadesCampesinasTotalesServiceImpl implements TemSoec
 		return list;
 	}
 	
+		public List<TemSoeconComunidadesCampesinasTotales> buscarGeometry(TemSoeconComunidadesCampesinasTotalesDto temSoeconComunidadesCampesinasTotalesDto) throws Exception {
+		TemSoeconComunidadesCampesinasTotalesParamDef temSoeconComunidadesCampesinasTotalesParamDef		= new TemSoeconComunidadesCampesinasTotalesParamDef();
+		
+		Criteria criteria		= temSoeconComunidadesCampesinasTotalesParamDef.createCriteria();
+		if(temSoeconComunidadesCampesinasTotalesDto != null) {
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temSoeconComunidadesCampesinasTotalesDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temSoeconComunidadesCampesinasTotalesDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temSoeconComunidadesCampesinasTotalesDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrNombre()) != null) {
+				criteria.andStrNombreLike(temSoeconComunidadesCampesinasTotalesDto.getStrNombre());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrEstado()) != null) {
+				criteria.andStrEstadoLike(temSoeconComunidadesCampesinasTotalesDto.getStrEstado());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrResolucion()) != null) {
+				criteria.andStrResolucionLike(temSoeconComunidadesCampesinasTotalesDto.getStrResolucion());
+			}
+			if(CadenaUtil.getDoubNull(temSoeconComunidadesCampesinasTotalesDto.getDblAreaHa()) != null) {
+				criteria.andDblAreaHaEqualTo(temSoeconComunidadesCampesinasTotalesDto.getDblAreaHa());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrNomdpto()) != null) {
+				criteria.andStrNomdptoLike(temSoeconComunidadesCampesinasTotalesDto.getStrNomdpto());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrNomprov()) != null) {
+				criteria.andStrNomprovLike(temSoeconComunidadesCampesinasTotalesDto.getStrNomprov());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrDistrito()) != null) {
+				criteria.andStrDistritoLike(temSoeconComunidadesCampesinasTotalesDto.getStrDistrito());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrFechaReso()) != null) {
+				criteria.andStrFechaResoLike(temSoeconComunidadesCampesinasTotalesDto.getStrFechaReso());
+			}
+			if(CadenaUtil.getStrNull(temSoeconComunidadesCampesinasTotalesDto.getStrNTitulo()) != null) {
+				criteria.andStrNTituloLike(temSoeconComunidadesCampesinasTotalesDto.getStrNTitulo());
+			}
+			if(CadenaUtil.getDoubNull(temSoeconComunidadesCampesinasTotalesDto.getDblShapeLeng()) != null) {
+				criteria.andDblShapeLengEqualTo(temSoeconComunidadesCampesinasTotalesDto.getDblShapeLeng());
+			}
+			if(CadenaUtil.getDoubNull(temSoeconComunidadesCampesinasTotalesDto.getDblShapeArea()) != null) {
+				criteria.andDblShapeAreaEqualTo(temSoeconComunidadesCampesinasTotalesDto.getDblShapeArea());
+			}
+		}
+		
+		List<TemSoeconComunidadesCampesinasTotales>	 list	= temSoeconComunidadesCampesinasTotalesMapper.selectByDefaultParameterGeometry(temSoeconComunidadesCampesinasTotalesParamDef);
+		return list;
+	}
+	
 	public TemSoeconComunidadesCampesinasTotales buscarById(TemSoeconComunidadesCampesinasTotalesDto temSoeconComunidadesCampesinasTotalesDto) throws Exception {
 		TemSoeconComunidadesCampesinasTotales temSoeconComunidadesCampesinasTotales		= new TemSoeconComunidadesCampesinasTotales();
 		BeanUtils.copyProperties(temSoeconComunidadesCampesinasTotalesDto, temSoeconComunidadesCampesinasTotales);

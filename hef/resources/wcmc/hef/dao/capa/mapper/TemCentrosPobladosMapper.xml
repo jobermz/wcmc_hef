@@ -37,6 +37,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_centros_poblados as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -293,4 +308,27 @@
 		cd_region, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_idccpp10, 
+		de_area, 
+		de_codccpp, 
+		de_nomccpp, 
+		de_ubigeo, 
+		de_ccdi, 
+		de_ccpp, 
+		de_ccdd, 
+		de_catccpp, 
+		de_nomcat, 
+		cd_altitud, 
+		de_longitudx, 
+		de_latitudy, 
+		cd_viv07, 
+		cd_pob07, 
+		cd_region, 
+		fc_fecreg
+	</sql>
+
 </mapper>

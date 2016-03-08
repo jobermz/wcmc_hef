@@ -47,6 +47,35 @@ public class BasLimProvinciaServiceImpl implements BasLimProvinciaService {
 		return list;
 	}
 	
+		public List<BasLimProvincia> buscarGeometry(BasLimProvinciaDto basLimProvinciaDto) throws Exception {
+		BasLimProvinciaParamDef basLimProvinciaParamDef		= new BasLimProvinciaParamDef();
+		
+		Criteria criteria		= basLimProvinciaParamDef.createCriteria();
+		if(basLimProvinciaDto != null) {
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basLimProvinciaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrIddpto()) != null) {
+				criteria.andStrIddptoLike(basLimProvinciaDto.getStrIddpto());
+			}
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrNombdep()) != null) {
+				criteria.andStrNombdepLike(basLimProvinciaDto.getStrNombdep());
+			}
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrIdprov()) != null) {
+				criteria.andStrIdprovLike(basLimProvinciaDto.getStrIdprov());
+			}
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrNombprov()) != null) {
+				criteria.andStrNombprovLike(basLimProvinciaDto.getStrNombprov());
+			}
+			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrCapital()) != null) {
+				criteria.andStrCapitalLike(basLimProvinciaDto.getStrCapital());
+			}
+		}
+		
+		List<BasLimProvincia>	 list	= basLimProvinciaMapper.selectByDefaultParameterGeometry(basLimProvinciaParamDef);
+		return list;
+	}
+	
 	public BasLimProvincia buscarById(BasLimProvinciaDto basLimProvinciaDto) throws Exception {
 		BasLimProvincia basLimProvincia		= new BasLimProvincia();
 		BeanUtils.copyProperties(basLimProvinciaDto, basLimProvincia);

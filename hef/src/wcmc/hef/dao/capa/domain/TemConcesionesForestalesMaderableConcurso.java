@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionesForestalesMaderableConcurso extends TemConcesionesForestalesMaderableConcursoKey {
+public class TemConcesionesForestalesMaderableConcurso extends TemConcesionesForestalesMaderableConcursoKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strModalidad;

@@ -30,6 +30,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemAnpNacionalMap" parameterType="wcmc.hef.dao.capa.domain.TemAnpNacionalParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_anp_nacional as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemAnpNacionalMap" parameterType="wcmc.hef.dao.capa.domain.TemAnpNacionalKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -216,4 +231,20 @@
 		de_anp_femodi, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_anp_cate, 
+		de_anp_nomb, 
+		de_anp_codi, 
+		de_anp_ubpo, 
+		ha_anp_arle, 
+		de_anp_balecr, 
+		de_anp_fecrea, 
+		de_anp_balemo, 
+		de_anp_femodi, 
+		fc_fecreg
+	</sql>
+
 </mapper>

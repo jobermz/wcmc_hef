@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemPrediosRurales extends TemPrediosRuralesKey {
+public class TemPrediosRurales extends TemPrediosRuralesKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strDepartamen;

@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemHumedalesRamsarDto {
+public class TemHumedalesRamsarDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
-	private String strCategorías;
+	private String strCategorias;
 	private String strNombre;
 	private String strBaseLegal;
 	private String strUbicaPoli;
@@ -49,11 +49,11 @@ public class TemHumedalesRamsarDto {
 	public void setStrTheGeom(String strTheGeom) {
 		this.strTheGeom = strTheGeom;
 	}
-	public String getStrCategorías() {
-		return strCategorías;
+	public String getStrCategorias() {
+		return strCategorias;
 	}
-	public void setStrCategorías(String strCategorías) {
-		this.strCategorías = strCategorías;
+	public void setStrCategorias(String strCategorias) {
+		this.strCategorias = strCategorias;
 	}
 	public String getStrNombre() {
 		return strNombre;

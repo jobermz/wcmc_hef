@@ -40,6 +40,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemProyeccionDensidadPob2015Map" parameterType="wcmc.hef.dao.capa.domain.TemProyeccionDensidadPob2015ParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_proyeccion_densidad_pob_2015 as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemProyeccionDensidadPob2015Map" parameterType="wcmc.hef.dao.capa.domain.TemProyeccionDensidadPob2015Key" >
 		select 
 		<include refid="Base_Column_List" />
@@ -326,4 +341,30 @@
 		ha_pop_dens, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_iddpto, 
+		de_nombdep, 
+		de_idprov, 
+		de_nombprov, 
+		de_iddist, 
+		de_nombdist, 
+		de_dcto, 
+		de_ley, 
+		de_fecha, 
+		de_nom_cap, 
+		ha_sup_contin, 
+		ha_sup_insula, 
+		ha_sup_lacust, 
+		ha_sup_ins_d, 
+		de_ubigeo, 
+		de_ubigeo_1, 
+		de_distrito, 
+		de_total_2015, 
+		ha_area, 
+		ha_pop_dens, 
+		fc_fecreg
+	</sql>
+
 </mapper>

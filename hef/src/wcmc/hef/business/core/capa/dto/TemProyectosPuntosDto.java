@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemProyectosPuntosDto {
+public class TemProyectosPuntosDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
 	private String strNombre;

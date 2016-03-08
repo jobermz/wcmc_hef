@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoParamDef;
 public interface TemConcesionesEcoturismoMapper {
 	
 	public List<TemConcesionesEcoturismo> selectByDefaultParameter(TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef);
+	public List<TemConcesionesEcoturismo> selectByDefaultParameterGeometry(TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef);
 	public TemConcesionesEcoturismo selectByPrimaryKey(TemConcesionesEcoturismoKey temConcesionesEcoturismoKey);
 	public int insertSelective(TemConcesionesEcoturismo temConcesionesEcoturismo);
 	public int updateByPrimaryKeySelective(TemConcesionesEcoturismo temConcesionesEcoturismo);

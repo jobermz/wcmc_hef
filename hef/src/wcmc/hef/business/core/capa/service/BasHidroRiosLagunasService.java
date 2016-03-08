@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 public interface BasHidroRiosLagunasService {
 	
 	public List<BasHidroRiosLagunas> buscar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
+	public List<BasHidroRiosLagunas> buscarGeometry(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public BasHidroRiosLagunas buscarById(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public Integer guardar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public Integer eliminar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;

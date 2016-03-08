@@ -25,6 +25,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemViaFerreaMap" parameterType="wcmc.hef.dao.capa.domain.TemViaFerreaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_via_ferrea as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemViaFerreaMap" parameterType="wcmc.hef.dao.capa.domain.TemViaFerreaKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -161,4 +176,15 @@
 		ha_shape_stle, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		ha_viaferr_, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+
 </mapper>

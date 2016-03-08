@@ -50,6 +50,38 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 		return list;
 	}
 	
+		public List<TemCarbonoEcozonas> buscarGeometry(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
+		TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef		= new TemCarbonoEcozonasParamDef();
+		
+		Criteria criteria		= temCarbonoEcozonasParamDef.createCriteria();
+		if(temCarbonoEcozonasDto != null) {
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCarbonoEcozonasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temCarbonoEcozonasDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temCarbonoEcozonasDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrEcozona()) != null) {
+				criteria.andStrEcozonaLike(temCarbonoEcozonasDto.getStrEcozona());
+			}
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTcHa()) != null) {
+				criteria.andStrTcHaLike(temCarbonoEcozonasDto.getStrTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLinfTcHa()) != null) {
+				criteria.andDblLinfTcHaEqualTo(temCarbonoEcozonasDto.getDblLinfTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLsupTcHa()) != null) {
+				criteria.andDblLsupTcHaEqualTo(temCarbonoEcozonasDto.getDblLsupTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblPorcIncer()) != null) {
+				criteria.andDblPorcIncerEqualTo(temCarbonoEcozonasDto.getDblPorcIncer());
+			}
+		}
+		
+		List<TemCarbonoEcozonas>	 list	= temCarbonoEcozonasMapper.selectByDefaultParameterGeometry(temCarbonoEcozonasParamDef);
+		return list;
+	}
+	
 	public TemCarbonoEcozonas buscarById(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
 		TemCarbonoEcozonas temCarbonoEcozonas		= new TemCarbonoEcozonas();
 		BeanUtils.copyProperties(temCarbonoEcozonasDto, temCarbonoEcozonas);

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemProyectosPuntos extends TemProyectosPuntosKey {
+public class TemProyectosPuntos extends TemProyectosPuntosKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strNombre;

@@ -68,6 +68,56 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 		return list;
 	}
 	
+		public List<TemZonificPotencialBosqueProduccionPermanente> buscarGeometry(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
+		TemZonificPotencialBosqueProduccionPermanenteParamDef temZonificPotencialBosqueProduccionPermanenteParamDef		= new TemZonificPotencialBosqueProduccionPermanenteParamDef();
+		
+		Criteria criteria		= temZonificPotencialBosqueProduccionPermanenteParamDef.createCriteria();
+		if(temZonificPotencialBosqueProduccionPermanenteDto != null) {
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temZonificPotencialBosqueProduccionPermanenteDto.getLngId()) != null) {
+				criteria.andLngIdEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getLngId());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona()) != null) {
+				criteria.andStrZonaLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo()) != null) {
+				criteria.andStrTipoLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin()) != null) {
+				criteria.andStrDenominLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion()) != null) {
+				criteria.andStrRegionLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente()) != null) {
+				criteria.andStrFuenteLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal()) != null) {
+				criteria.andStrDocLegalLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
+			}
+			if(CadenaUtil.getInteNull(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid()) != null) {
+				criteria.andIntTheidEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblPerimeter()) != null) {
+				criteria.andDblPerimeterEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblPerimeter());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares()) != null) {
+				criteria.andDblHectaresEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares());
+			}
+		}
+		
+		List<TemZonificPotencialBosqueProduccionPermanente>	 list	= temZonificPotencialBosqueProduccionPermanenteMapper.selectByDefaultParameterGeometry(temZonificPotencialBosqueProduccionPermanenteParamDef);
+		return list;
+	}
+	
 	public TemZonificPotencialBosqueProduccionPermanente buscarById(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
 		TemZonificPotencialBosqueProduccionPermanente temZonificPotencialBosqueProduccionPermanente		= new TemZonificPotencialBosqueProduccionPermanente();
 		BeanUtils.copyProperties(temZonificPotencialBosqueProduccionPermanenteDto, temZonificPotencialBosqueProduccionPermanente);

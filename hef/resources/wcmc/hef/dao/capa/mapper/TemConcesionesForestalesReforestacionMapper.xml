@@ -4,7 +4,7 @@
 	<resultMap id="TemConcesionesForestalesReforestacionMap" type="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacion">
 		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
 		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
-		<result column="de_a¥o" property="strA¥o" jdbcType="VARCHAR"/>
+		<result column="de_anio" property="strAnio" jdbcType="VARCHAR"/>
 		<result column="de_modalidad" property="strModalidad" jdbcType="VARCHAR"/>
 		<result column="de_contrato" property="strContrato" jdbcType="VARCHAR"/>
 		<result column="de_region" property="strRegion" jdbcType="VARCHAR"/>
@@ -20,6 +20,21 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_concesiones_forestales_reforestacion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_concesiones_forestales_reforestacion as tab
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
@@ -46,8 +61,8 @@
 			<if test="strTheGeom != null">
 				si_the_geom,
 			</if>
-			<if test="strA¥o != null">
-				de_a¥o,
+			<if test="strAnio != null">
+				de_anio,
 			</if>
 			<if test="strModalidad != null">
 				de_modalidad,
@@ -78,8 +93,8 @@
 			<if test="strTheGeom != null">
 				#{strTheGeom, jdbcType=VARCHAR},
 			</if>
-			<if test="strA¥o != null">
-				#{strA¥o, jdbcType=VARCHAR},
+			<if test="strAnio != null">
+				#{strAnio, jdbcType=VARCHAR},
 			</if>
 			<if test="strModalidad != null">
 				#{strModalidad, jdbcType=VARCHAR},
@@ -113,8 +128,8 @@
 			<if test="strTheGeom != null">
 				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
 			</if>
-			<if test="strA¥o != null">
-				de_a¥o = #{strA¥o,jdbcType=VARCHAR},
+			<if test="strAnio != null">
+				de_anio = #{strAnio,jdbcType=VARCHAR},
 			</if>
 			<if test="strModalidad != null">
 				de_modalidad = #{strModalidad,jdbcType=VARCHAR},
@@ -184,7 +199,7 @@
 	<sql id="Base_Column_List">
 		cd_gid, 
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
-		de_a¥o, 
+		de_anio, 
 		de_modalidad, 
 		de_contrato, 
 		de_region, 
@@ -194,4 +209,18 @@
 		ha_area_sig, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_anio, 
+		de_modalidad, 
+		de_contrato, 
+		de_region, 
+		de_fuente, 
+		de_situacion, 
+		de_titular, 
+		ha_area_sig, 
+		fc_fecreg
+	</sql>
+
 </mapper>

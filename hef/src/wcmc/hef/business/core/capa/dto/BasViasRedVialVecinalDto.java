@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class BasViasRedVialVecinalDto {
+public class BasViasRedVialVecinalDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
 	private String strProvinc;

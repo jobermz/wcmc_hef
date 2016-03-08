@@ -41,6 +41,29 @@ public class BasViasRedVialVecinalServiceImpl implements BasViasRedVialVecinalSe
 		return list;
 	}
 	
+		public List<BasViasRedVialVecinal> buscarGeometry(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
+		BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef		= new BasViasRedVialVecinalParamDef();
+		
+		Criteria criteria		= basViasRedVialVecinalParamDef.createCriteria();
+		if(basViasRedVialVecinalDto != null) {
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basViasRedVialVecinalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrProvinc()) != null) {
+				criteria.andStrProvincLike(basViasRedVialVecinalDto.getStrProvinc());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrRuta()) != null) {
+				criteria.andStrRutaLike(basViasRedVialVecinalDto.getStrRuta());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrSuperficie()) != null) {
+				criteria.andStrSuperficieLike(basViasRedVialVecinalDto.getStrSuperficie());
+			}
+		}
+		
+		List<BasViasRedVialVecinal>	 list	= basViasRedVialVecinalMapper.selectByDefaultParameterGeometry(basViasRedVialVecinalParamDef);
+		return list;
+	}
+	
 	public BasViasRedVialVecinal buscarById(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
 		BasViasRedVialVecinal basViasRedVialVecinal		= new BasViasRedVialVecinal();
 		BeanUtils.copyProperties(basViasRedVialVecinalDto, basViasRedVialVecinal);

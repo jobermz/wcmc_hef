@@ -27,6 +27,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemCuencasHidrograficasMap" parameterType="wcmc.hef.dao.capa.domain.TemCuencasHidrograficasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_cuencas_hidrograficas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCuencasHidrograficasMap" parameterType="wcmc.hef.dao.capa.domain.TemCuencasHidrograficasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -183,4 +198,17 @@
 		cd_esri_oid, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_gml_id, 
+		de_id, 
+		de_codigo, 
+		de_nombre, 
+		de_geometria, 
+		cd_esri_oid, 
+		fc_fecreg
+	</sql>
+
 </mapper>

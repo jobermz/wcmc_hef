@@ -36,12 +36,12 @@
 								</div>
 								<div class="row form-row">
 									<div class="col-sm-6 " id="idCampCapaUmbral_ValorMinimo">
-			                			<label for="edicion_capaUmbralDto.intValorMinimo" class="form-label">Valor minimo</label>
-		                				<s:textfield name="edicion_capaUmbralDto.intValorMinimo" cssClass="form-control " tabindex="2" size="40" maxlength="100" />
+			                			<label for="edicion_capaUmbralDto.dblValorMinimo" class="form-label">Valor minimo</label>
+		                				<s:textfield name="edicion_capaUmbralDto.dblValorMinimo" cssClass="form-control " tabindex="2" size="40" maxlength="100" />
 									</div>
 									<div class="col-sm-6 " id="idCampCapaUmbral_ValorMaximo">
-			                			<label for="edicion_capaUmbralDto.intValorMaximo" class="form-label">Valor maximo</label>
-		                				<s:textfield name="edicion_capaUmbralDto.intValorMaximo" cssClass="form-control " tabindex="3" size="40" maxlength="100" />
+			                			<label for="edicion_capaUmbralDto.dblValorMaximo" class="form-label">Valor maximo</label>
+		                				<s:textfield name="edicion_capaUmbralDto.dblValorMaximo" cssClass="form-control " tabindex="3" size="40" maxlength="100" />
 									</div>
 								</div>
 							

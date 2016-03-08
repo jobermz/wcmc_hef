@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionesForestalesReforestacion extends TemConcesionesForestalesReforestacionKey {
+public class TemConcesionesForestalesReforestacion extends TemConcesionesForestalesReforestacionKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
-	private String strA¥o;
+	private String strAnio;
 	private String strModalidad;
 	private String strContrato;
 	private String strRegion;
@@ -43,11 +43,11 @@ public class TemConcesionesForestalesReforestacion extends TemConcesionesForesta
 	public void setStrTheGeom(String strTheGeom) {
 		this.strTheGeom = strTheGeom;
 	}
-	public String getStrA¥o() {
-		return strA¥o;
+	public String getStrAnio() {
+		return strAnio;
 	}
-	public void setStrA¥o(String strA¥o) {
-		this.strA¥o = strA¥o;
+	public void setStrAnio(String strAnio) {
+		this.strAnio = strAnio;
 	}
 	public String getStrModalidad() {
 		return strModalidad;

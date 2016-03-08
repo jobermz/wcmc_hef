@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class BasHidroRiosLagunas extends BasHidroRiosLagunasKey {
+public class BasHidroRiosLagunas extends BasHidroRiosLagunasKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Long lngCount;

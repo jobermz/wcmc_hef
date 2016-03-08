@@ -50,6 +50,38 @@ public class TemConcesionesForestalesCastaniaServiceImpl implements TemConcesion
 		return list;
 	}
 	
+		public List<TemConcesionesForestalesCastania> buscarGeometry(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
+		TemConcesionesForestalesCastaniaParamDef temConcesionesForestalesCastaniaParamDef		= new TemConcesionesForestalesCastaniaParamDef();
+		
+		Criteria criteria		= temConcesionesForestalesCastaniaParamDef.createCriteria();
+		if(temConcesionesForestalesCastaniaDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesCastaniaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadLike(temConcesionesForestalesCastaniaDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTitular()) != null) {
+				criteria.andStrTitularLike(temConcesionesForestalesCastaniaDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrContrato()) != null) {
+				criteria.andStrContratoLike(temConcesionesForestalesCastaniaDto.getStrContrato());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrRegion()) != null) {
+				criteria.andStrRegionLike(temConcesionesForestalesCastaniaDto.getStrRegion());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesCastaniaDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesForestalesCastaniaDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionLike(temConcesionesForestalesCastaniaDto.getStrSituacion());
+			}
+		}
+		
+		List<TemConcesionesForestalesCastania>	 list	= temConcesionesForestalesCastaniaMapper.selectByDefaultParameterGeometry(temConcesionesForestalesCastaniaParamDef);
+		return list;
+	}
+	
 	public TemConcesionesForestalesCastania buscarById(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
 		TemConcesionesForestalesCastania temConcesionesForestalesCastania		= new TemConcesionesForestalesCastania();
 		BeanUtils.copyProperties(temConcesionesForestalesCastaniaDto, temConcesionesForestalesCastania);

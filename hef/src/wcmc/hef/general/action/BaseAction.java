@@ -1,7 +1,9 @@
 package wcmc.hef.general.action;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -21,11 +23,6 @@ public class BaseAction extends ActionSupport {
 		session.remove("listIncidenciasFoto");
 		return SUCCESS;
 	}
-	public Map<String, Object> getEdicion_incidenciasVO() {
-		return edicion_incidenciasVO;
-	}
-	public void setEdicion_incidenciasVO(Map<String, Object> edicion_incidenciasVO) {
-		this.edicion_incidenciasVO = edicion_incidenciasVO;
-	}
+
 	
 }

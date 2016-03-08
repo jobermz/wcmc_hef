@@ -68,7 +68,7 @@
 				<a href="#" onclick="mostrarDetaRepo('temConcesionesEcoturismoReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem concesiones ecoturismo  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesEcoturismo.size()}" /></span></a>
 			</s:if>
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesCastania.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesCastaniaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem concesiones forestales castania  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesCastania.size()}" /></span></a>
+				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesCastaniaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem concesiones forestales castania/shiringa  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesCastania.size()}" /></span></a>
 			</s:if>
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesConservacion.size()>0}">
 				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesConservacionReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem concesiones forestales conservacion  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesConservacion.size()}" /></span></a>
@@ -128,7 +128,7 @@
 				<a href="#" onclick="mostrarDetaRepo('temSinanpeAmortiguamientoReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem sinanpe amortiguamiento  <span class="badge"><s:property value="%{#session.reporte.listTemSinanpeAmortiguamiento.size()}" /></span></a>
 			</s:if>
 			<s:if test="%{#session.reporte.listTemSoeconComunidadesCampesinasTotales.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temSoeconComunidadesCampesinasTotalesReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem soecon comunidades campesinas totales  <span class="badge"><s:property value="%{#session.reporte.listTemSoeconComunidadesCampesinasTotales.size()}" /></span></a>
+				<a href="#" onclick="mostrarDetaRepo('temSoeconComunidadesCampesinasReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem soecon comunidades campesinas totales  <span class="badge"><s:property value="%{#session.reporte.listTemSoeconComunidadesCampesinasTotales.size()}" /></span></a>
 			</s:if>
 			<s:if test="%{#session.reporte.listTemSoeconSolicitudCreacionReservasTerritoriales.size()>0}">
 				<a href="#" onclick="mostrarDetaRepo('temSoeconSolicitudCreacionReservasTerritorialesReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem soecon solicitud creacion reservas territoriales  <span class="badge"><s:property value="%{#session.reporte.listTemSoeconSolicitudCreacionReservasTerritoriales.size()}" /></span></a>
@@ -142,6 +142,22 @@
 			<s:if test="%{#session.reporte.listTemZonificPotencialBosqueProduccionPermanente.size()>0}">
 				<a href="#" onclick="mostrarDetaRepo('temZonificPotencialBosqueProduccionPermanenteReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem zonific potencial bosque produccion permanente  <span class="badge"><s:property value="%{#session.reporte.listTemZonificPotencialBosqueProduccionPermanente.size()}" /></span></a>
 			</s:if>
+			
+			<!-- Capas de tipo raster -->
+			
+			<s:if test="%{#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion.size()>0}">
+				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadEspeciesPeligroExtincionReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad especies peligro extincion  <span class="badge"><s:property value="%{#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion.size()}" /></span></a>
+			</s:if>
+			<s:if test="%{#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size()>0}">
+				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad riqueza potencial especies fauna endemica  <span class="badge"><s:property value="%{#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size()}" /></span></a>
+			</s:if>
+			<s:if test="%{#session.reporte.listTemDensidadCarbonoAerea.size()>0}">
+				<a href="#" onclick="mostrarDetaRepo('temDensidadCarbonoAereaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem densidad carbono aerea  <span class="badge"><s:property value="%{#session.reporte.listTemDensidadCarbonoAerea.size()}" /></span></a>
+			</s:if>
+			<s:if test="%{#session.reporte.listTemRiesgoErosionHidrica.size()>0}">
+				<a href="#" onclick="mostrarDetaRepo('temRiesgoErosionHidricaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem riesgo erosion hidrica  <span class="badge"><s:property value="%{#session.reporte.listTemRiesgoErosionHidrica.size()}" /></span></a>
+			</s:if>
+			
 			</div>
 		</div>
 		<div class="col-lg-8" id="idDivDetaRepo" style="overflow: auto;height: 450px;">

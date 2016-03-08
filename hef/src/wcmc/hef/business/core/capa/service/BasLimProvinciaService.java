@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.BasLimProvincia;
 public interface BasLimProvinciaService {
 	
 	public List<BasLimProvincia> buscar(BasLimProvinciaDto basLimProvinciaDto) throws Exception;
+	public List<BasLimProvincia> buscarGeometry(BasLimProvinciaDto basLimProvinciaDto) throws Exception;
 	public BasLimProvincia buscarById(BasLimProvinciaDto basLimProvinciaDto) throws Exception;
 	public Integer guardar(BasLimProvinciaDto basLimProvinciaDto) throws Exception;
 	public Integer eliminar(BasLimProvinciaDto basLimProvinciaDto) throws Exception;

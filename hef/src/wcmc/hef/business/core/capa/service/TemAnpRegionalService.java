@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemAnpRegional;
 public interface TemAnpRegionalService {
 	
 	public List<TemAnpRegional> buscar(TemAnpRegionalDto temAnpRegionalDto) throws Exception;
+	public List<TemAnpRegional> buscarGeometry(TemAnpRegionalDto temAnpRegionalDto) throws Exception;
 	public TemAnpRegional buscarById(TemAnpRegionalDto temAnpRegionalDto) throws Exception;
 	public Integer guardar(TemAnpRegionalDto temAnpRegionalDto) throws Exception;
 	public Integer eliminar(TemAnpRegionalDto temAnpRegionalDto) throws Exception;

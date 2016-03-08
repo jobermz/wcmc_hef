@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemCarbonoEcozonasParamDef;
 public interface TemCarbonoEcozonasMapper {
 	
 	public List<TemCarbonoEcozonas> selectByDefaultParameter(TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef);
+	public List<TemCarbonoEcozonas> selectByDefaultParameterGeometry(TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef);
 	public TemCarbonoEcozonas selectByPrimaryKey(TemCarbonoEcozonasKey temCarbonoEcozonasKey);
 	public int insertSelective(TemCarbonoEcozonas temCarbonoEcozonas);
 	public int updateByPrimaryKeySelective(TemCarbonoEcozonas temCarbonoEcozonas);

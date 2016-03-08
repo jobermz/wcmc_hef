@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-	<definition name="home_form" template="visor.jsp"></definition>
+<!-- 	<definition name="home_form" template="visor.jsp"></definition> -->
 	
 	<definition name="baseLayout" template="/layouts/baseLayout.jsp">
 		<put-attribute name="title" value=".::HEF::."/>
@@ -62,6 +62,7 @@
 	</definition>
 	
 	<definition name="consulta_capas_reporte_form" template="/paginas/consulta/consultaCapasReporteForm.jsp"></definition>
+	<definition name="consulta_capas_right_click_form" template="/paginas/consulta/consultaCapasRightClickForm.jsp"></definition>
 	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">

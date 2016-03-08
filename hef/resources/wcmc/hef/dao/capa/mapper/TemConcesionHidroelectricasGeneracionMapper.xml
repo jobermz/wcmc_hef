@@ -36,6 +36,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemConcesionHidroelectricasGeneracionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasGeneracionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_concesion_hidroelectricas_generacion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionHidroelectricasGeneracionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasGeneracionKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -282,4 +297,26 @@
 		ha_shape_len, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_id_grafico, 
+		de_expediente, 
+		cd_seccion, 
+		de_concesion, 
+		de_empresa, 
+		de_ruc, 
+		de_fuente, 
+		de_situacion_, 
+		de_tipo_conce, 
+		fc_fecha_pres, 
+		fc_fecha_reso, 
+		de_activo, 
+		ha_area_grafi, 
+		de_codigo_con, 
+		ha_shape_area, 
+		ha_shape_len, 
+		fc_fecreg
+	</sql>
+
 </mapper>

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemConcesionesForestalesMaderableAdecuadas extends TemConcesionesForestalesMaderableAdecuadasKey {
+public class TemConcesionesForestalesMaderableAdecuadas extends TemConcesionesForestalesMaderableAdecuadasKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strModalidad;

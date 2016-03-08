@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class BasHidroRios100000 extends BasHidroRios100000Key {
+public class BasHidroRios100000 extends BasHidroRios100000Key implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Integer intObjectid1;

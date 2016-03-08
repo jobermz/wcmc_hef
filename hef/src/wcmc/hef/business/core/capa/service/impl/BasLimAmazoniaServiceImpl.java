@@ -59,6 +59,47 @@ public class BasLimAmazoniaServiceImpl implements BasLimAmazoniaService {
 		return list;
 	}
 	
+		public List<BasLimAmazonia> buscarGeometry(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception {
+		BasLimAmazoniaParamDef basLimAmazoniaParamDef		= new BasLimAmazoniaParamDef();
+		
+		Criteria criteria		= basLimAmazoniaParamDef.createCriteria();
+		if(basLimAmazoniaDto != null) {
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basLimAmazoniaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(basLimAmazoniaDto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(basLimAmazoniaDto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrSimbCobve()) != null) {
+				criteria.andStrSimbCobveLike(basLimAmazoniaDto.getStrSimbCobve());
+			}
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrDescCobve()) != null) {
+				criteria.andStrDescCobveLike(basLimAmazoniaDto.getStrDescCobve());
+			}
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrSimbDefor()) != null) {
+				criteria.andStrSimbDeforLike(basLimAmazoniaDto.getStrSimbDefor());
+			}
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrDescDefor()) != null) {
+				criteria.andStrDescDeforLike(basLimAmazoniaDto.getStrDescDefor());
+			}
+			if(CadenaUtil.getDoubNull(basLimAmazoniaDto.getDblSuperfM2()) != null) {
+				criteria.andDblSuperfM2EqualTo(basLimAmazoniaDto.getDblSuperfM2());
+			}
+			if(CadenaUtil.getDoubNull(basLimAmazoniaDto.getDblSuperfHa()) != null) {
+				criteria.andDblSuperfHaEqualTo(basLimAmazoniaDto.getDblSuperfHa());
+			}
+			if(CadenaUtil.getStrNull(basLimAmazoniaDto.getStrSimCvDef()) != null) {
+				criteria.andStrSimCvDefLike(basLimAmazoniaDto.getStrSimCvDef());
+			}
+			if(CadenaUtil.getDoubNull(basLimAmazoniaDto.getDblSuperfKm2()) != null) {
+				criteria.andDblSuperfKm2EqualTo(basLimAmazoniaDto.getDblSuperfKm2());
+			}
+		}
+		
+		List<BasLimAmazonia>	 list	= basLimAmazoniaMapper.selectByDefaultParameterGeometry(basLimAmazoniaParamDef);
+		return list;
+	}
+	
 	public BasLimAmazonia buscarById(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception {
 		BasLimAmazonia basLimAmazonia		= new BasLimAmazonia();
 		BeanUtils.copyProperties(basLimAmazoniaDto, basLimAmazonia);

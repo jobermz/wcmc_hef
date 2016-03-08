@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemCoverturaVegetal2015 extends TemCoverturaVegetal2015Key {
+public class TemCoverturaVegetal2015 extends TemCoverturaVegetal2015Key implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strCobveg2013;

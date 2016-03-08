@@ -32,6 +32,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemSoeconComunidadesCampesinasTotalesMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasTotalesParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemSoeconComunidadesCampesinasTotalesMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasTotalesKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -238,4 +253,22 @@
 		ha_shape_area, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_nombre, 
+		de_estado, 
+		de_resolucion, 
+		ha_area_ha, 
+		de_nomdpto, 
+		de_nomprov, 
+		de_distrito, 
+		de_fecha_reso, 
+		de_n_titulo, 
+		ha_shape_leng, 
+		ha_shape_area, 
+		fc_fecreg
+	</sql>
+
 </mapper>

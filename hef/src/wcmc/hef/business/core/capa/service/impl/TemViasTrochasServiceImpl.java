@@ -47,6 +47,35 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 		return list;
 	}
 	
+		public List<TemViasTrochas> buscarGeometry(TemViasTrochasDto temViasTrochasDto) throws Exception {
+		TemViasTrochasParamDef temViasTrochasParamDef		= new TemViasTrochasParamDef();
+		
+		Criteria criteria		= temViasTrochasParamDef.createCriteria();
+		if(temViasTrochasDto != null) {
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temViasTrochasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temViasTrochasDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temViasTrochasDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrEstado()) != null) {
+				criteria.andStrEstadoLike(temViasTrochasDto.getStrEstado());
+			}
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrDescrip()) != null) {
+				criteria.andStrDescripLike(temViasTrochasDto.getStrDescrip());
+			}
+			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblShapeLeng()) != null) {
+				criteria.andDblShapeLengEqualTo(temViasTrochasDto.getDblShapeLeng());
+			}
+			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblStLength()) != null) {
+				criteria.andDblStLengthEqualTo(temViasTrochasDto.getDblStLength());
+			}
+		}
+		
+		List<TemViasTrochas>	 list	= temViasTrochasMapper.selectByDefaultParameterGeometry(temViasTrochasParamDef);
+		return list;
+	}
+	
 	public TemViasTrochas buscarById(TemViasTrochasDto temViasTrochasDto) throws Exception {
 		TemViasTrochas temViasTrochas		= new TemViasTrochas();
 		BeanUtils.copyProperties(temViasTrochasDto, temViasTrochas);

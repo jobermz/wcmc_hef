@@ -39,6 +39,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_proyectos_puntos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -315,4 +330,29 @@
 		de_link, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_nombre, 
+		de_iniciativa, 
+		de_referencia, 
+		de_region_geo, 
+		de_detalle_de, 
+		de_otros, 
+		de_fecha_inic, 
+		de_fecha_term, 
+		de_resultados, 
+		de_cooperante, 
+		de_administra, 
+		ha_usd, 
+		de_institucio, 
+		de_persona_co, 
+		de_cargo, 
+		de_contacto, 
+		de_direccion_, 
+		de_instituc_1, 
+		de_link, 
+		fc_fecreg
+	</sql>
+
 </mapper>

@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.BasHidroRios100000ParamDef;
 public interface BasHidroRios100000Mapper {
 	
 	public List<BasHidroRios100000> selectByDefaultParameter(BasHidroRios100000ParamDef basHidroRios100000ParamDef);
+	public List<BasHidroRios100000> selectByDefaultParameterGeometry(BasHidroRios100000ParamDef basHidroRios100000ParamDef);
 	public BasHidroRios100000 selectByPrimaryKey(BasHidroRios100000Key basHidroRios100000Key);
 	public int insertSelective(BasHidroRios100000 basHidroRios100000);
 	public int updateByPrimaryKeySelective(BasHidroRios100000 basHidroRios100000);

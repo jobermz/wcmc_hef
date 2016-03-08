@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPotencialBosqueProduccionPermanenteKey {
+public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPotencialBosqueProduccionPermanenteKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Long lngId;

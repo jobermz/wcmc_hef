@@ -11,10 +11,10 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
-<!-- 		<action name="cargarCapasBaseJson" class="wcmc.hef.web.visor.action.VisorAction" method="cargarCapasBase"> -->
-<!-- 			<result name="success" type="json" /> -->
-<!-- 			<interceptor-ref name="basicStack"/> -->
-<!-- 		</action> -->
+		<action name="consultaCapasRightClick" class="wcmc.hef.web.capa.action.ConsultaRightClickAction" method="consultar">
+			<result name="success" type="tiles">consulta_capas_right_click_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
 		
 	</package>
 </struts>

@@ -25,6 +25,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemPrediosRuralesMap" parameterType="wcmc.hef.dao.capa.domain.TemPrediosRuralesParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_predios_rurales as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemPrediosRuralesMap" parameterType="wcmc.hef.dao.capa.domain.TemPrediosRuralesKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -161,4 +176,15 @@
 		cd_orig_fid, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_departamen, 
+		de_datum, 
+		de_codproy, 
+		cd_cnt_codpro, 
+		cd_orig_fid, 
+		fc_fecreg
+	</sql>
+
 </mapper>

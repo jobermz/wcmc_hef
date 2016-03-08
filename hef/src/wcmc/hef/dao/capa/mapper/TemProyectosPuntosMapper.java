@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemProyectosPuntosParamDef;
 public interface TemProyectosPuntosMapper {
 	
 	public List<TemProyectosPuntos> selectByDefaultParameter(TemProyectosPuntosParamDef temProyectosPuntosParamDef);
+	public List<TemProyectosPuntos> selectByDefaultParameterGeometry(TemProyectosPuntosParamDef temProyectosPuntosParamDef);
 	public TemProyectosPuntos selectByPrimaryKey(TemProyectosPuntosKey temProyectosPuntosKey);
 	public int insertSelective(TemProyectosPuntos temProyectosPuntos);
 	public int updateByPrimaryKeySelective(TemProyectosPuntos temProyectosPuntos);

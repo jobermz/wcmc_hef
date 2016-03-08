@@ -35,6 +35,23 @@ public class TemIndiceImportanciaBiologicaServiceImpl implements TemIndiceImport
 		return list;
 	}
 	
+		public List<TemIndiceImportanciaBiologica> buscarGeometry(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
+		TemIndiceImportanciaBiologicaParamDef temIndiceImportanciaBiologicaParamDef		= new TemIndiceImportanciaBiologicaParamDef();
+		
+		Criteria criteria		= temIndiceImportanciaBiologicaParamDef.createCriteria();
+		if(temIndiceImportanciaBiologicaDto != null) {
+			if(CadenaUtil.getStrNull(temIndiceImportanciaBiologicaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temIndiceImportanciaBiologicaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getDoubNull(temIndiceImportanciaBiologicaDto.getDblImpGlob()) != null) {
+				criteria.andDblImpGlobEqualTo(temIndiceImportanciaBiologicaDto.getDblImpGlob());
+			}
+		}
+		
+		List<TemIndiceImportanciaBiologica>	 list	= temIndiceImportanciaBiologicaMapper.selectByDefaultParameterGeometry(temIndiceImportanciaBiologicaParamDef);
+		return list;
+	}
+	
 	public TemIndiceImportanciaBiologica buscarById(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
 		TemIndiceImportanciaBiologica temIndiceImportanciaBiologica		= new TemIndiceImportanciaBiologica();
 		BeanUtils.copyProperties(temIndiceImportanciaBiologicaDto, temIndiceImportanciaBiologica);

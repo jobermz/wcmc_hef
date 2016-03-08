@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class BasLimDistritos extends BasLimDistritosKey {
+public class BasLimDistritos extends BasLimDistritosKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strIddpto;

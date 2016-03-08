@@ -6,8 +6,8 @@
 		<result column="cd_capa_string" property="intIdCapaDesc" jdbcType="VARCHAR"/>
 		<result column="cd_capa" property="intIdCapa" jdbcType="INTEGER"/>
 		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
-		<result column="ha_valmin" property="intValorMinimo" jdbcType="INTEGER"/>
-		<result column="ha_valmax" property="intValorMaximo" jdbcType="INTEGER"/>
+		<result column="ha_valmin" property="dblValorMinimo" jdbcType="DOUBLE"/>
+		<result column="ha_valmax" property="dblValorMaximo" jdbcType="DOUBLE"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaUmbralMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbralParamDef">
 		select
@@ -44,10 +44,10 @@
 			<if test="strNombre != null">
 				de_nombre,
 			</if>
-			<if test="intValorMinimo != null">
+			<if test="dblValorMinimo != null">
 				ha_valmin,
 			</if>
-			<if test="intValorMaximo != null">
+			<if test="dblValorMaximo != null">
 				ha_valmax,
 			</if>
 		</trim>
@@ -58,11 +58,11 @@
 			<if test="strNombre != null">
 				#{strNombre, jdbcType=VARCHAR},
 			</if>
-			<if test="intValorMinimo != null">
-				#{intValorMinimo, jdbcType=INTEGER},
+			<if test="dblValorMinimo != null">
+				#{dblValorMinimo, jdbcType=DOUBLE},
 			</if>
-			<if test="intValorMaximo != null">
-				#{intValorMaximo, jdbcType=INTEGER},
+			<if test="dblValorMaximo != null">
+				#{dblValorMaximo, jdbcType=DOUBLE},
 			</if>
 		</trim>
 	</insert>
@@ -75,11 +75,11 @@
 			<if test="strNombre != null">
 				de_nombre = #{strNombre,jdbcType=VARCHAR},
 			</if>
-			<if test="intValorMinimo != null">
-				ha_valmin = #{intValorMinimo,jdbcType=INTEGER},
+			<if test="dblValorMinimo != null">
+				ha_valmin = #{dblValorMinimo,jdbcType=DOUBLE},
 			</if>
-			<if test="intValorMaximo != null">
-				ha_valmax = #{intValorMaximo,jdbcType=INTEGER},
+			<if test="dblValorMaximo != null">
+				ha_valmax = #{dblValorMaximo,jdbcType=DOUBLE},
 			</if>
 		</set>
 		where 1 = 1

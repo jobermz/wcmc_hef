@@ -177,74 +177,74 @@ public class TemConcesionesForestalesReforestacionParamDef {
         }
         
         
-        public Criteria andStrA¥oLike(String value) {
-            addCriterion("upper(de_a¥o) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_a¥o");
+        public Criteria andStrAnioLike(String value) {
+            addCriterion("upper(de_anio) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oNotLike(String value) {
-            addCriterion("de_a¥o not like", "%" + CadenaUtil.getStr(value) + "%", "de_a¥o");
+        public Criteria andStrAnioNotLike(String value) {
+            addCriterion("de_anio not like", "%" + CadenaUtil.getStr(value) + "%", "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oEqualTo(String value) {
-            addCriterion("de_a¥o =", CadenaUtil.getStr(value), "de_a¥o");
+        public Criteria andStrAnioEqualTo(String value) {
+            addCriterion("de_anio =", CadenaUtil.getStr(value), "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oNotEqualTo(String value) {
-            addCriterion("de_a¥o <>", CadenaUtil.getStr(value), "de_a¥o");
+        public Criteria andStrAnioNotEqualTo(String value) {
+            addCriterion("de_anio <>", CadenaUtil.getStr(value), "de_anio");
             return (Criteria) this;
         }
         
         
-        public Criteria andStrA¥oIsNull() {
-            addCriterion("de_a¥o is null");
+        public Criteria andStrAnioIsNull() {
+            addCriterion("de_anio is null");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oIsNotNull() {
-            addCriterion("de_a¥o is not null");
+        public Criteria andStrAnioIsNotNull() {
+            addCriterion("de_anio is not null");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oGreaterThan(String value) {
-            addCriterion("de_a¥o >", value, "de_a¥o");
+        public Criteria andStrAnioGreaterThan(String value) {
+            addCriterion("de_anio >", value, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oGreaterThanOrEqualTo(String value) {
-            addCriterion("de_a¥o >=", value, "de_a¥o");
+        public Criteria andStrAnioGreaterThanOrEqualTo(String value) {
+            addCriterion("de_anio >=", value, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oLessThan(String value) {
-            addCriterion("de_a¥o <", value, "de_a¥o");
+        public Criteria andStrAnioLessThan(String value) {
+            addCriterion("de_anio <", value, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oLessThanOrEqualTo(String value) {
-            addCriterion("de_a¥o <=", value, "de_a¥o");
+        public Criteria andStrAnioLessThanOrEqualTo(String value) {
+            addCriterion("de_anio <=", value, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oIn(List<String> values) {
-            addCriterion("de_a¥o in", values, "de_a¥o");
+        public Criteria andStrAnioIn(List<String> values) {
+            addCriterion("de_anio in", values, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oNotIn(List<String> values) {
-            addCriterion("de_a¥o not in", values, "de_a¥o");
+        public Criteria andStrAnioNotIn(List<String> values) {
+            addCriterion("de_anio not in", values, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oBetween(String value1, String value2) {
-            addCriterion("de_a¥o between", value1, value2, "de_a¥o");
+        public Criteria andStrAnioBetween(String value1, String value2) {
+            addCriterion("de_anio between", value1, value2, "de_anio");
             return (Criteria) this;
         }
         
-        public Criteria andStrA¥oNotBetween(String value1, String value2) {
-            addCriterion("de_a¥o not between", value1, value2, "de_a¥o");
+        public Criteria andStrAnioNotBetween(String value1, String value2) {
+            addCriterion("de_anio not between", value1, value2, "de_anio");
             return (Criteria) this;
         }
         

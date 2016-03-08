@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemAnpNacionalParamDef;
 public interface TemAnpNacionalMapper {
 	
 	public List<TemAnpNacional> selectByDefaultParameter(TemAnpNacionalParamDef temAnpNacionalParamDef);
+	public List<TemAnpNacional> selectByDefaultParameterGeometry(TemAnpNacionalParamDef temAnpNacionalParamDef);
 	public TemAnpNacional selectByPrimaryKey(TemAnpNacionalKey temAnpNacionalKey);
 	public int insertSelective(TemAnpNacional temAnpNacional);
 	public int updateByPrimaryKeySelective(TemAnpNacional temAnpNacional);

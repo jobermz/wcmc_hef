@@ -10,26 +10,45 @@ $(document).ready(function() {
 	$('.identificar-area-criterio-logico').click(identificarAreaCriterioLogico);
 	$('.analizar-por-area').click(analizarPorArea);
 	$('.upload-capas').click(uploadCapas);
+	
+	/*
+	$(document).bind('contextmenu', function(e) {
+		$('#idDivRightClick').css("display", "none");
+		return true;
+	});
+	*/
+	$(document).bind('click', function(e) {
+		$('#idDivRightClick').css("display", "none");
+		if(!activarSeleccionarAreaDesdeMapa) {
+			$(".clsTituloCapaActiva").css("display","none");
+		}
+		return true;
+	});
+	
 	iniciarMapa();
 	iniciarCapasBase();
 //	$('.collapse').collapse();
 	iniciarMarcarCapas();
 	marcarCapas();
 	iniciarIdentificarAreaPorCriteriosLogicos();
+	iniciarAnalizarPorArea();
 });
 var map			= null;
 var sourceDraw	= null;
 var draw		= null; // global so we can remove it later
 function iniciarMapa() {
-	var gmap = new google.maps.Map(document.getElementById('gmap'), {
-		disableDefaultUI: true,
-		keyboardShortcuts: false,
-		draggable: false,
-		disableDoubleClickZoom: true,
-		scrollwheel: false,
-		streetViewControl: false,
-		mapTypeId: google.maps.MapTypeId.SATELLITE
-	});
+	var gmap = null;
+	if(google) {
+		gmap	= new google.maps.Map(document.getElementById('gmap'), {
+			disableDefaultUI: true,
+			keyboardShortcuts: false,
+			draggable: false,
+			disableDoubleClickZoom: true,
+			scrollwheel: false,
+			streetViewControl: false,
+			mapTypeId: google.maps.MapTypeId.SATELLITE
+		});
+	}
 	var view = new ol.View({
 	  // make sure the view doesn't go beyond the 22 zoom levels of Google Maps
 	  maxZoom: 21,
@@ -38,10 +57,14 @@ function iniciarMapa() {
 	});
 	view.on('change:center', function() {
 		var center = ol.proj.transform(view.getCenter(), 'EPSG:3857', 'EPSG:4326');
-		gmap.setCenter(new google.maps.LatLng(center[1], center[0]));
+		if(gmap) {
+			gmap.setCenter(new google.maps.LatLng(center[1], center[0]));
+		}
 	});
 	view.on('change:resolution', function() {
-		gmap.setZoom(view.getZoom());
+		if(gmap) {
+			gmap.setZoom(view.getZoom());
+		}
 	});
 	
 	sourceDraw = new ol.source.Vector({wrapX: false});
@@ -80,8 +103,28 @@ function iniciarMapa() {
 	view.setZoom(5);
 	
 	olMapDiv.parentNode.removeChild(olMapDiv);
-	gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv);
+	if(gmap) {
+		gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv);
+	}
 	
+	map.getViewport().addEventListener('contextmenu', function (e) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
+		var pix		= map.getEventPixel(e);
+		eventoMenuContextualSeleccionarAreaDesdeMapa(pix, e);
+	    e.preventDefault();
+	    return false;
+		/*
+		var coord	= map.getCoordinateFromPixel(pix);
+		console.log("coord="+coord);
+		var point	= new ol.geom.Point(coord);
+		var feature = new ol.Feature({geometry: point});
+		var format	= new ol.format.WKT();
+	    var wkt		= format.writeFeature(feature, {
+	      dataProjection: 'EPSG:4326',
+	      featureProjection: 'EPSG:3857'
+	    });
+	    console.log("WKT="+wkt);
+	    */
+	});
 }
 function addInteraction(value) {
 	/* Polygon, Box*/
@@ -112,10 +155,10 @@ function addInteraction(value) {
 		map.addInteraction(draw);
 	}
 }
-function drawEnd(eve) {
+function drawEnd(event) {
     console.log("Fin del dibujo");
     var format = new ol.format.WKT();
-    var wkt = format.writeFeature(eve.feature, {
+    var wkt = format.writeFeature(event.feature, {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
     });
@@ -138,6 +181,7 @@ function terminarInteraction() {
 }
 
 var fn_iniciarComponentes	= null;
+var intIdCapaActiva			= null;
 function iniciarComponentes() {
 	$(".clsSlider").each(function(index) {
 		var currSlider	= $(this);
@@ -154,8 +198,29 @@ function iniciarComponentes() {
 			}
 		});
 	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		$(this).unbind("click");
+	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		$(this).click(function() {
+			intIdCapaActiva	= $(this).attr("id-capa");
+			$(".clsTituloCapaActiva").html("Capa activa: "+$(this).attr("nombre-capa"));
+			refrescarCapaActiva();
+		});
+	});
 }
-
+function refrescarCapaActiva() {
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		if($(this).hasClass("clsCapaActiva")) {
+			$(this).removeClass("clsCapaActiva");
+		}
+	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		if($(this).attr("id-capa") == intIdCapaActiva) {
+			$(this).addClass("clsCapaActiva");
+		}
+	});
+}
 function iniciarMarcarCapas() {
 	$(".capasBase").each(function(index) {
 		$(this).prop("checked", false);

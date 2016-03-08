@@ -56,7 +56,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
-								      		<input type="checkbox" id="idCapaAnalisPorArea" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBase">
+								      		<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBase">
 											${capasBase.strNombre}
 								      	</div>
 								      	<div class="col-xs-2 text-center">
@@ -89,7 +89,7 @@
 			
 			<div class="modal-footer">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="pull-left">
 							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -99,14 +99,15 @@
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
 									<li><a href="#" onclick="dibujarRectangulo()"><i class="fa fa-edit"></i> Dibujar un rectangulo</a></li>
 									<li><a href="#" onclick="dibujarPoligono()"><i class="fa fa-lastfm"></i> Dibujar un poligono</a></li>
-									<li><a href="#"><i class="fa fa-upload"></i> Cargar poligono Shp</a></li>
-									<li><a href="#"><i class="fa fa-bars"></i> Seleccionar en el mapa</a></li>
+									<li><a href="#" onclick="seleccionarAreaDesdeShapefile()"><i class="fa fa-upload"></i> Cargar poligono Shp</a></li>
+									<li><a href="#" onclick="seleccionarAreaDesdeMapa()"><i class="fa fa-bars"></i> Seleccionar en el mapa</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-8">
 						<div class="pull-right">
+							<button type="button" class="btn btn-default btnSeleccionarTodasCapasAPA">Seleccionar todas las capas</button>
 							<button type="button" class="btn btn-default btnProcesarAnalizarPorArea">Procesar</button>
 						</div>
 					</div>

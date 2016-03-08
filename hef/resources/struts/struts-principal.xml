@@ -5,6 +5,7 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd"
 	>
 <struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<package name="principal" namespace="/" extends="struts-default,json-default,jasperreports-default">
 		
 		<result-types>
@@ -27,7 +28,7 @@
 
 		
 		<global-results>
-			<result name="Login" type="redirect">../diana</result>
+			<result name="Login" type="redirect">../home</result>
 		</global-results>
 		
 	</package>

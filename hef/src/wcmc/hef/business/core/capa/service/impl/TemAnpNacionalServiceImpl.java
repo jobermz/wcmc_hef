@@ -62,6 +62,50 @@ public class TemAnpNacionalServiceImpl implements TemAnpNacionalService {
 		return list;
 	}
 	
+		public List<TemAnpNacional> buscarGeometry(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
+		TemAnpNacionalParamDef temAnpNacionalParamDef		= new TemAnpNacionalParamDef();
+		
+		Criteria criteria		= temAnpNacionalParamDef.createCriteria();
+		if(temAnpNacionalDto != null) {
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temAnpNacionalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temAnpNacionalDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temAnpNacionalDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCate()) != null) {
+				criteria.andStrAnpCateLike(temAnpNacionalDto.getStrAnpCate());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpNomb()) != null) {
+				criteria.andStrAnpNombLike(temAnpNacionalDto.getStrAnpNomb());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCodi()) != null) {
+				criteria.andStrAnpCodiLike(temAnpNacionalDto.getStrAnpCodi());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpUbpo()) != null) {
+				criteria.andStrAnpUbpoLike(temAnpNacionalDto.getStrAnpUbpo());
+			}
+			if(CadenaUtil.getDoubNull(temAnpNacionalDto.getDblAnpArle()) != null) {
+				criteria.andDblAnpArleEqualTo(temAnpNacionalDto.getDblAnpArle());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalecr()) != null) {
+				criteria.andStrAnpBalecrLike(temAnpNacionalDto.getStrAnpBalecr());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFecrea()) != null) {
+				criteria.andStrAnpFecreaLike(temAnpNacionalDto.getStrAnpFecrea());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalemo()) != null) {
+				criteria.andStrAnpBalemoLike(temAnpNacionalDto.getStrAnpBalemo());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFemodi()) != null) {
+				criteria.andStrAnpFemodiLike(temAnpNacionalDto.getStrAnpFemodi());
+			}
+		}
+		
+		List<TemAnpNacional>	 list	= temAnpNacionalMapper.selectByDefaultParameterGeometry(temAnpNacionalParamDef);
+		return list;
+	}
+	
 	public TemAnpNacional buscarById(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
 		TemAnpNacional temAnpNacional		= new TemAnpNacional();
 		BeanUtils.copyProperties(temAnpNacionalDto, temAnpNacional);

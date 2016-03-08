@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemCuencasHidrograficasParamDef;
 public interface TemCuencasHidrograficasMapper {
 	
 	public List<TemCuencasHidrograficas> selectByDefaultParameter(TemCuencasHidrograficasParamDef temCuencasHidrograficasParamDef);
+	public List<TemCuencasHidrograficas> selectByDefaultParameterGeometry(TemCuencasHidrograficasParamDef temCuencasHidrograficasParamDef);
 	public TemCuencasHidrograficas selectByPrimaryKey(TemCuencasHidrograficasKey temCuencasHidrograficasKey);
 	public int insertSelective(TemCuencasHidrograficas temCuencasHidrograficas);
 	public int updateByPrimaryKeySelective(TemCuencasHidrograficas temCuencasHidrograficas);

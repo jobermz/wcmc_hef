@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.BasViasRedVialNacionalParamDef;
 public interface BasViasRedVialNacionalMapper {
 	
 	public List<BasViasRedVialNacional> selectByDefaultParameter(BasViasRedVialNacionalParamDef basViasRedVialNacionalParamDef);
+	public List<BasViasRedVialNacional> selectByDefaultParameterGeometry(BasViasRedVialNacionalParamDef basViasRedVialNacionalParamDef);
 	public BasViasRedVialNacional selectByPrimaryKey(BasViasRedVialNacionalKey basViasRedVialNacionalKey);
 	public int insertSelective(BasViasRedVialNacional basViasRedVialNacional);
 	public int updateByPrimaryKeySelective(BasViasRedVialNacional basViasRedVialNacional);

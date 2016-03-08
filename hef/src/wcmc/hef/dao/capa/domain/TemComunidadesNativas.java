@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemComunidadesNativas extends TemComunidadesNativasKey {
+public class TemComunidadesNativas extends TemComunidadesNativasKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Integer intObjectid1;

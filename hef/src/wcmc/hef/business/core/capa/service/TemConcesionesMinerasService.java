@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemConcesionesMineras;
 public interface TemConcesionesMinerasService {
 	
 	public List<TemConcesionesMineras> buscar(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception;
+	public List<TemConcesionesMineras> buscarGeometry(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception;
 	public TemConcesionesMineras buscarById(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception;
 	public Integer guardar(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception;
 	public Integer eliminar(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception;

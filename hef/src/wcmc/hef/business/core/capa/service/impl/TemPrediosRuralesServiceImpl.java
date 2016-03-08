@@ -47,6 +47,35 @@ public class TemPrediosRuralesServiceImpl implements TemPrediosRuralesService {
 		return list;
 	}
 	
+		public List<TemPrediosRurales> buscarGeometry(TemPrediosRuralesDto temPrediosRuralesDto) throws Exception {
+		TemPrediosRuralesParamDef temPrediosRuralesParamDef		= new TemPrediosRuralesParamDef();
+		
+		Criteria criteria		= temPrediosRuralesParamDef.createCriteria();
+		if(temPrediosRuralesDto != null) {
+			if(CadenaUtil.getStrNull(temPrediosRuralesDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temPrediosRuralesDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temPrediosRuralesDto.getStrDepartamen()) != null) {
+				criteria.andStrDepartamenLike(temPrediosRuralesDto.getStrDepartamen());
+			}
+			if(CadenaUtil.getStrNull(temPrediosRuralesDto.getStrDatum()) != null) {
+				criteria.andStrDatumLike(temPrediosRuralesDto.getStrDatum());
+			}
+			if(CadenaUtil.getStrNull(temPrediosRuralesDto.getStrCodproy()) != null) {
+				criteria.andStrCodproyLike(temPrediosRuralesDto.getStrCodproy());
+			}
+			if(CadenaUtil.getInteNull(temPrediosRuralesDto.getIntCntCodpro()) != null) {
+				criteria.andIntCntCodproEqualTo(temPrediosRuralesDto.getIntCntCodpro());
+			}
+			if(CadenaUtil.getInteNull(temPrediosRuralesDto.getIntOrigFid()) != null) {
+				criteria.andIntOrigFidEqualTo(temPrediosRuralesDto.getIntOrigFid());
+			}
+		}
+		
+		List<TemPrediosRurales>	 list	= temPrediosRuralesMapper.selectByDefaultParameterGeometry(temPrediosRuralesParamDef);
+		return list;
+	}
+	
 	public TemPrediosRurales buscarById(TemPrediosRuralesDto temPrediosRuralesDto) throws Exception {
 		TemPrediosRurales temPrediosRurales		= new TemPrediosRurales();
 		BeanUtils.copyProperties(temPrediosRuralesDto, temPrediosRurales);

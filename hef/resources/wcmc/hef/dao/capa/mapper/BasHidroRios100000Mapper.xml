@@ -31,6 +31,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="BasHidroRios100000Map" parameterType="wcmc.hef.dao.capa.domain.BasHidroRios100000ParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.bas_hidro_rios_100000 as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasHidroRios100000Map" parameterType="wcmc.hef.dao.capa.domain.BasHidroRios100000Key" >
 		select 
 		<include refid="Base_Column_List" />
@@ -227,4 +242,21 @@
 		ha_shape_stle, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		de_jer_hidro, 
+		de_dpd99, 
+		de_pp99, 
+		de_dd, 
+		de_din99, 
+		de_pn99, 
+		de_dn99, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+
 </mapper>

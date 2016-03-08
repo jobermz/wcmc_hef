@@ -32,6 +32,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_concesiones_ecoturismo as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -238,4 +253,22 @@
 		ha_hectares, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_id, 
+		de_anio, 
+		de_modalidad, 
+		de_titular, 
+		de_contrato, 
+		ha_area_sig, 
+		ha_area_aprob, 
+		de_region, 
+		de_docum, 
+		de_situacion, 
+		ha_perimeter, 
+		ha_hectares, 
+		fc_fecreg
+	</sql>
+
 </mapper>

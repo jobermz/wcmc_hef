@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemCuencasHidrograficas;
 public interface TemCuencasHidrograficasService {
 	
 	public List<TemCuencasHidrograficas> buscar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
+	public List<TemCuencasHidrograficas> buscarGeometry(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public TemCuencasHidrograficas buscarById(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public Integer guardar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public Integer eliminar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;

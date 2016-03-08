@@ -2,7 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 		
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -61,9 +60,10 @@
 								      	</div>
 							      	</div>
 							      	<s:iterator value="#session.listCapasBase" var="capasBase">
-							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&#capasBase.strWmsUrl!=null}">
+<%-- 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&#capasBase.strWmsUrl!=null}"> --%>
+							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
-								      	<div class="col-xs-5">
+								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
 								      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapa}" onclick="marcarCapas();" class="capasBase">
 											${capasBase.strNombre}
 								      	</div>
@@ -107,12 +107,10 @@
 					</s:iterator>
 					</div>
 					
-					
 				</div>
 			</div>
 			
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default btnVideosInteractivos" data-dismiss="modal">Cerrar</button>
 			</div>
-			
 			

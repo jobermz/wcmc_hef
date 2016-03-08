@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemClaveBiodiversidad;
 public interface TemClaveBiodiversidadService {
 	
 	public List<TemClaveBiodiversidad> buscar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
+	public List<TemClaveBiodiversidad> buscarGeometry(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public TemClaveBiodiversidad buscarById(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public Integer guardar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public Integer eliminar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;

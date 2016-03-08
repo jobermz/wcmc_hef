@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemCentrosPoblados;
 public interface TemCentrosPobladosService {
 	
 	public List<TemCentrosPoblados> buscar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
+	public List<TemCentrosPoblados> buscarGeometry(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public TemCentrosPoblados buscarById(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public Integer guardar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public Integer eliminar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;

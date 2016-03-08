@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemHumedalesRamsar;
 public interface TemHumedalesRamsarService {
 	
 	public List<TemHumedalesRamsar> buscar(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception;
+	public List<TemHumedalesRamsar> buscarGeometry(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception;
 	public TemHumedalesRamsar buscarById(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception;
 	public Integer guardar(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception;
 	public Integer eliminar(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception;

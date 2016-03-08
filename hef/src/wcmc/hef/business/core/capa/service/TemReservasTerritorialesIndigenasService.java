@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas;
 public interface TemReservasTerritorialesIndigenasService {
 	
 	public List<TemReservasTerritorialesIndigenas> buscar(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception;
+	public List<TemReservasTerritorialesIndigenas> buscarGeometry(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception;
 	public TemReservasTerritorialesIndigenas buscarById(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception;
 	public Integer guardar(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception;
 	public Integer eliminar(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception;

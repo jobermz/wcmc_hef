@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemClaveBiodiversidadParamDef;
 public interface TemClaveBiodiversidadMapper {
 	
 	public List<TemClaveBiodiversidad> selectByDefaultParameter(TemClaveBiodiversidadParamDef temClaveBiodiversidadParamDef);
+	public List<TemClaveBiodiversidad> selectByDefaultParameterGeometry(TemClaveBiodiversidadParamDef temClaveBiodiversidadParamDef);
 	public TemClaveBiodiversidad selectByPrimaryKey(TemClaveBiodiversidadKey temClaveBiodiversidadKey);
 	public int insertSelective(TemClaveBiodiversidad temClaveBiodiversidad);
 	public int updateByPrimaryKeySelective(TemClaveBiodiversidad temClaveBiodiversidad);

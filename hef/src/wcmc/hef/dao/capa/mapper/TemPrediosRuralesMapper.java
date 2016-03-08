@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemPrediosRuralesParamDef;
 public interface TemPrediosRuralesMapper {
 	
 	public List<TemPrediosRurales> selectByDefaultParameter(TemPrediosRuralesParamDef temPrediosRuralesParamDef);
+	public List<TemPrediosRurales> selectByDefaultParameterGeometry(TemPrediosRuralesParamDef temPrediosRuralesParamDef);
 	public TemPrediosRurales selectByPrimaryKey(TemPrediosRuralesKey temPrediosRuralesKey);
 	public int insertSelective(TemPrediosRurales temPrediosRurales);
 	public int updateByPrimaryKeySelective(TemPrediosRurales temPrediosRurales);

@@ -177,74 +177,74 @@ public class TemHumedalesRamsarParamDef {
         }
         
         
-        public Criteria andStrCategoríasLike(String value) {
-            addCriterion("upper(de_categorías) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_categorías");
+        public Criteria andStrCategoriasLike(String value) {
+            addCriterion("upper(de_categorias) like", "%" + CadenaUtil.getStr(value).toUpperCase() + "%", "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasNotLike(String value) {
-            addCriterion("de_categorías not like", "%" + CadenaUtil.getStr(value) + "%", "de_categorías");
+        public Criteria andStrCategoriasNotLike(String value) {
+            addCriterion("de_categorias not like", "%" + CadenaUtil.getStr(value) + "%", "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasEqualTo(String value) {
-            addCriterion("de_categorías =", CadenaUtil.getStr(value), "de_categorías");
+        public Criteria andStrCategoriasEqualTo(String value) {
+            addCriterion("de_categorias =", CadenaUtil.getStr(value), "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasNotEqualTo(String value) {
-            addCriterion("de_categorías <>", CadenaUtil.getStr(value), "de_categorías");
+        public Criteria andStrCategoriasNotEqualTo(String value) {
+            addCriterion("de_categorias <>", CadenaUtil.getStr(value), "de_categorias");
             return (Criteria) this;
         }
         
         
-        public Criteria andStrCategoríasIsNull() {
-            addCriterion("de_categorías is null");
+        public Criteria andStrCategoriasIsNull() {
+            addCriterion("de_categorias is null");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasIsNotNull() {
-            addCriterion("de_categorías is not null");
+        public Criteria andStrCategoriasIsNotNull() {
+            addCriterion("de_categorias is not null");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasGreaterThan(String value) {
-            addCriterion("de_categorías >", value, "de_categorías");
+        public Criteria andStrCategoriasGreaterThan(String value) {
+            addCriterion("de_categorias >", value, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasGreaterThanOrEqualTo(String value) {
-            addCriterion("de_categorías >=", value, "de_categorías");
+        public Criteria andStrCategoriasGreaterThanOrEqualTo(String value) {
+            addCriterion("de_categorias >=", value, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasLessThan(String value) {
-            addCriterion("de_categorías <", value, "de_categorías");
+        public Criteria andStrCategoriasLessThan(String value) {
+            addCriterion("de_categorias <", value, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasLessThanOrEqualTo(String value) {
-            addCriterion("de_categorías <=", value, "de_categorías");
+        public Criteria andStrCategoriasLessThanOrEqualTo(String value) {
+            addCriterion("de_categorias <=", value, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasIn(List<String> values) {
-            addCriterion("de_categorías in", values, "de_categorías");
+        public Criteria andStrCategoriasIn(List<String> values) {
+            addCriterion("de_categorias in", values, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasNotIn(List<String> values) {
-            addCriterion("de_categorías not in", values, "de_categorías");
+        public Criteria andStrCategoriasNotIn(List<String> values) {
+            addCriterion("de_categorias not in", values, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasBetween(String value1, String value2) {
-            addCriterion("de_categorías between", value1, value2, "de_categorías");
+        public Criteria andStrCategoriasBetween(String value1, String value2) {
+            addCriterion("de_categorias between", value1, value2, "de_categorias");
             return (Criteria) this;
         }
         
-        public Criteria andStrCategoríasNotBetween(String value1, String value2) {
-            addCriterion("de_categorías not between", value1, value2, "de_categorías");
+        public Criteria andStrCategoriasNotBetween(String value1, String value2) {
+            addCriterion("de_categorias not between", value1, value2, "de_categorias");
             return (Criteria) this;
         }
         

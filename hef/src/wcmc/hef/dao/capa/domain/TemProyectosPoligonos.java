@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemProyectosPoligonos extends TemProyectosPoligonosKey {
+public class TemProyectosPoligonos extends TemProyectosPoligonosKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Double dblShCodigo;

@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaParamDef;
 public interface TemIndiceImportanciaBiologicaMapper {
 	
 	public List<TemIndiceImportanciaBiologica> selectByDefaultParameter(TemIndiceImportanciaBiologicaParamDef temIndiceImportanciaBiologicaParamDef);
+	public List<TemIndiceImportanciaBiologica> selectByDefaultParameterGeometry(TemIndiceImportanciaBiologicaParamDef temIndiceImportanciaBiologicaParamDef);
 	public TemIndiceImportanciaBiologica selectByPrimaryKey(TemIndiceImportanciaBiologicaKey temIndiceImportanciaBiologicaKey);
 	public int insertSelective(TemIndiceImportanciaBiologica temIndiceImportanciaBiologica);
 	public int updateByPrimaryKeySelective(TemIndiceImportanciaBiologica temIndiceImportanciaBiologica);

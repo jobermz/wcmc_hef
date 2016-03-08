@@ -26,6 +26,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemCarbonoEcozonasMap" parameterType="wcmc.hef.dao.capa.domain.TemCarbonoEcozonasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_carbono_ecozonas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCarbonoEcozonasMap" parameterType="wcmc.hef.dao.capa.domain.TemCarbonoEcozonasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -172,4 +187,16 @@
 		ha_porc_incer, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_ecozona, 
+		de_tc_ha, 
+		ha_linf_tc_ha, 
+		ha_lsup_tc_ha, 
+		ha_porc_incer, 
+		fc_fecreg
+	</sql>
+
 </mapper>

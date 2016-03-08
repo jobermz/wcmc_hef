@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemComunidadesNativasParamDef;
 public interface TemComunidadesNativasMapper {
 	
 	public List<TemComunidadesNativas> selectByDefaultParameter(TemComunidadesNativasParamDef temComunidadesNativasParamDef);
+	public List<TemComunidadesNativas> selectByDefaultParameterGeometry(TemComunidadesNativasParamDef temComunidadesNativasParamDef);
 	public TemComunidadesNativas selectByPrimaryKey(TemComunidadesNativasKey temComunidadesNativasKey);
 	public int insertSelective(TemComunidadesNativas temComunidadesNativas);
 	public int updateByPrimaryKeySelective(TemComunidadesNativas temComunidadesNativas);

@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.BasLimDepartamento;
 public interface BasLimDepartamentoService {
 	
 	public List<BasLimDepartamento> buscar(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception;
+	public List<BasLimDepartamento> buscarGeometry(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception;
 	public BasLimDepartamento buscarById(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception;
 	public Integer guardar(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception;
 	public Integer eliminar(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception;

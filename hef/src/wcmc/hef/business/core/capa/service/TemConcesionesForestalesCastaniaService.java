@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemConcesionesForestalesCastania;
 public interface TemConcesionesForestalesCastaniaService {
 	
 	public List<TemConcesionesForestalesCastania> buscar(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception;
+	public List<TemConcesionesForestalesCastania> buscarGeometry(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception;
 	public TemConcesionesForestalesCastania buscarById(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception;
 	public Integer guardar(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception;
 	public Integer eliminar(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception;

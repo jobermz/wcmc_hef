@@ -305,125 +305,125 @@ public class CapaUmbralParamDef {
         }
         
         
-        public Criteria andIntValorMinimoEqualTo(Integer value) {
+        public Criteria andDblValorMinimoEqualTo(Integer value) {
             addCriterion("ha_valmin =", value, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoNotEqualTo(Integer value) {
+        public Criteria andDblValorMinimoNotEqualTo(Integer value) {
             addCriterion("ha_valmin <>", value, "ha_valmin");
             return (Criteria) this;
         }
         
         
-        public Criteria andIntValorMinimoIsNull() {
+        public Criteria andDblValorMinimoIsNull() {
             addCriterion("ha_valmin is null");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoIsNotNull() {
+        public Criteria andDblValorMinimoIsNotNull() {
             addCriterion("ha_valmin is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoGreaterThan(Integer value) {
+        public Criteria andDblValorMinimoGreaterThan(Integer value) {
             addCriterion("ha_valmin >", value, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDblValorMinimoGreaterThanOrEqualTo(Integer value) {
             addCriterion("ha_valmin >=", value, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoLessThan(Integer value) {
+        public Criteria andDblValorMinimoLessThan(Integer value) {
             addCriterion("ha_valmin <", value, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoLessThanOrEqualTo(Integer value) {
+        public Criteria andDblValorMinimoLessThanOrEqualTo(Integer value) {
             addCriterion("ha_valmin <=", value, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoIn(List<Integer> values) {
+        public Criteria andDblValorMinimoIn(List<Integer> values) {
             addCriterion("ha_valmin in", values, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoNotIn(List<Integer> values) {
+        public Criteria andDblValorMinimoNotIn(List<Integer> values) {
             addCriterion("ha_valmin not in", values, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoBetween(Integer value1, Integer value2) {
+        public Criteria andDblValorMinimoBetween(Integer value1, Integer value2) {
             addCriterion("ha_valmin between", value1, value2, "ha_valmin");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMinimoNotBetween(Integer value1, Integer value2) {
+        public Criteria andDblValorMinimoNotBetween(Integer value1, Integer value2) {
             addCriterion("ha_valmin not between", value1, value2, "ha_valmin");
             return (Criteria) this;
         }
         
         
-        public Criteria andIntValorMaximoEqualTo(Integer value) {
+        public Criteria andDblValorMaximoEqualTo(Integer value) {
             addCriterion("ha_valmax =", value, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoNotEqualTo(Integer value) {
+        public Criteria andDblValorMaximoNotEqualTo(Integer value) {
             addCriterion("ha_valmax <>", value, "ha_valmax");
             return (Criteria) this;
         }
         
         
-        public Criteria andIntValorMaximoIsNull() {
+        public Criteria andDblValorMaximoIsNull() {
             addCriterion("ha_valmax is null");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoIsNotNull() {
+        public Criteria andDblValorMaximoIsNotNull() {
             addCriterion("ha_valmax is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoGreaterThan(Integer value) {
+        public Criteria andDblValorMaximoGreaterThan(Integer value) {
             addCriterion("ha_valmax >", value, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDblValorMaximoGreaterThanOrEqualTo(Integer value) {
             addCriterion("ha_valmax >=", value, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoLessThan(Integer value) {
+        public Criteria andDblValorMaximoLessThan(Integer value) {
             addCriterion("ha_valmax <", value, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoLessThanOrEqualTo(Integer value) {
+        public Criteria andDblValorMaximoLessThanOrEqualTo(Integer value) {
             addCriterion("ha_valmax <=", value, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoIn(List<Integer> values) {
+        public Criteria andDblValorMaximoIn(List<Integer> values) {
             addCriterion("ha_valmax in", values, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoNotIn(List<Integer> values) {
+        public Criteria andDblValorMaximoNotIn(List<Integer> values) {
             addCriterion("ha_valmax not in", values, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoBetween(Integer value1, Integer value2) {
+        public Criteria andDblValorMaximoBetween(Integer value1, Integer value2) {
             addCriterion("ha_valmax between", value1, value2, "ha_valmax");
             return (Criteria) this;
         }
 
-        public Criteria andIntValorMaximoNotBetween(Integer value1, Integer value2) {
+        public Criteria andDblValorMaximoNotBetween(Integer value1, Integer value2) {
             addCriterion("ha_valmax not between", value1, value2, "ha_valmax");
             return (Criteria) this;
         }

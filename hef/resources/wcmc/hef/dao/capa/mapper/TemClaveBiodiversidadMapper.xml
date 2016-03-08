@@ -49,6 +49,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemClaveBiodiversidadMap" parameterType="wcmc.hef.dao.capa.domain.TemClaveBiodiversidadParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_clave_biodiversidad as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemClaveBiodiversidadMap" parameterType="wcmc.hef.dao.capa.domain.TemClaveBiodiversidadKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -425,4 +440,39 @@
 		ha_shape_area, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		cd_objectid, 
+		cd_sitrecid, 
+		de_region, 
+		de_country, 
+		de_iso3, 
+		de_natname, 
+		de_intname, 
+		de_fincode, 
+		ha_sitlat, 
+		ha_sitlong, 
+		cd_sitarea, 
+		de_protect, 
+		cd_num_pas, 
+		de_ibastatus, 
+		de_kbastatus, 
+		de_azestatus, 
+		de_createdby, 
+		de_addedby, 
+		fc_addeddate, 
+		de_changeby, 
+		fc_changedate, 
+		de_source, 
+		de_deltxt, 
+		de_delgeom, 
+		de_marineiba, 
+		ha_shape_leng, 
+		ha_shape_le_1, 
+		ha_shape_area, 
+		fc_fecreg
+	</sql>
+
 </mapper>

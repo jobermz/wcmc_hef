@@ -68,6 +68,56 @@ public class TemAnpPrivadaServiceImpl implements TemAnpPrivadaService {
 		return list;
 	}
 	
+		public List<TemAnpPrivada> buscarGeometry(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception {
+		TemAnpPrivadaParamDef temAnpPrivadaParamDef		= new TemAnpPrivadaParamDef();
+		
+		Criteria criteria		= temAnpPrivadaParamDef.createCriteria();
+		if(temAnpPrivadaDto != null) {
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temAnpPrivadaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temAnpPrivadaDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temAnpPrivadaDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcCat()) != null) {
+				criteria.andStrAnpcCatLike(temAnpPrivadaDto.getStrAnpcCat());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcCodi()) != null) {
+				criteria.andStrAnpcCodiLike(temAnpPrivadaDto.getStrAnpcCodi());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcNomb()) != null) {
+				criteria.andStrAnpcNombLike(temAnpPrivadaDto.getStrAnpcNomb());
+			}
+			if(CadenaUtil.getDoubNull(temAnpPrivadaDto.getDblAnpcArea()) != null) {
+				criteria.andDblAnpcAreaEqualTo(temAnpPrivadaDto.getDblAnpcArea());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcBalec()) != null) {
+				criteria.andStrAnpcBalecLike(temAnpPrivadaDto.getStrAnpcBalec());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcFelec()) != null) {
+				criteria.andStrAnpcFelecLike(temAnpPrivadaDto.getStrAnpcFelec());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcBalem()) != null) {
+				criteria.andStrAnpcBalemLike(temAnpPrivadaDto.getStrAnpcBalem());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcFelem()) != null) {
+				criteria.andStrAnpcFelemLike(temAnpPrivadaDto.getStrAnpcFelem());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcDepa()) != null) {
+				criteria.andStrAnpcDepaLike(temAnpPrivadaDto.getStrAnpcDepa());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcTipop()) != null) {
+				criteria.andStrAnpcTipopLike(temAnpPrivadaDto.getStrAnpcTipop());
+			}
+			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcTitu()) != null) {
+				criteria.andStrAnpcTituLike(temAnpPrivadaDto.getStrAnpcTitu());
+			}
+		}
+		
+		List<TemAnpPrivada>	 list	= temAnpPrivadaMapper.selectByDefaultParameterGeometry(temAnpPrivadaParamDef);
+		return list;
+	}
+	
 	public TemAnpPrivada buscarById(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception {
 		TemAnpPrivada temAnpPrivada		= new TemAnpPrivada();
 		BeanUtils.copyProperties(temAnpPrivadaDto, temAnpPrivada);

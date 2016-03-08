@@ -82,6 +82,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemComunidadesNativasMap" parameterType="wcmc.hef.dao.capa.domain.TemComunidadesNativasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_comunidades_nativas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemComunidadesNativasMap" parameterType="wcmc.hef.dao.capa.domain.TemComunidadesNativasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -788,4 +803,72 @@
 		ha_shape_stle, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		de_codigo, 
+		de_cod_bib, 
+		de_georefer, 
+		de_situacion, 
+		de_sector, 
+		de_zona, 
+		de_subzona, 
+		de_nombre, 
+		de_federacion, 
+		de_fam_lingui, 
+		de_etnia1, 
+		de_etnia2, 
+		ha_poblacion, 
+		ha_familias, 
+		ha_escolares, 
+		de_rio, 
+		de_pueb_cerc, 
+		de_dpto, 
+		de_provincia, 
+		de_distrito, 
+		de_longitud, 
+		de_latitud, 
+		de_resol_in, 
+		de_anoinscrip, 
+		de_titulo, 
+		de_resol_tit, 
+		de_anotitulo, 
+		ha_area_total, 
+		ha_area_titul, 
+		ha_area_uso, 
+		ha_area_fisc, 
+		ha_area_prote, 
+		ha_area_reser, 
+		ha_area_demar, 
+		ha_area_sig, 
+		ha_perim_titu, 
+		de_resol_am1, 
+		de_titulo_am1, 
+		ha_ar_tot_am1, 
+		ha_ar_sig_am1, 
+		ha_perim_am1, 
+		de_resol_am2, 
+		de_titulo_am2, 
+		ha_ar_tot_am2, 
+		ha_ar_sig_am2, 
+		ha_perim_am2, 
+		de_primaria, 
+		de_bilingue, 
+		de_secundaria, 
+		de_pues_salud, 
+		de_cent_salud, 
+		de_prod_vent1, 
+		de_prod_vent2, 
+		de_prod_vent3, 
+		de_fuente, 
+		de_fecha, 
+		de_notas, 
+		ha_shape_star, 
+		ha_shape_stle, 
+		fc_fecreg
+	</sql>
+
 </mapper>

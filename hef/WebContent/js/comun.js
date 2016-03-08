@@ -1,19 +1,17 @@
 $(function() {
 
-	$("#divModalmsg").dialog({
-    	autoOpen: false,
-	    height: 'auto',
-	    width: 'auto',
-	    title: 'Mensaje: ',
-	    modal: true,
-	    buttons: {
-	      Aceptar: function() {
-	        $( this ).dialog( "close" );
-	      },
-	    }
-	  });
-
-	
+$("#divModalmsg").dialog({
+	autoOpen: false,
+    height: 'auto',
+    width: 'auto',
+    title: 'Mensaje: ',
+    modal: true,
+    buttons: {
+      Aceptar: function() {
+        $( this ).dialog( "close" );
+      },
+    }
+});
 
 });
 function mostrarMensajesErrorStruts(arrayMsgs, idObjMsg) {
@@ -348,3 +346,11 @@ function ajaxRequest(path,tipoPeticion,tipoDatoRetorno,parametros,tipoContenido)
 	
 	return request;
 }
+function blockui() {
+	$.blockUI({ message: '<h3><img src="image/busy.gif" /> Espere un momento...</h3>' });
+}
+
+function unblockui() {
+	$.unblockUI();
+}
+

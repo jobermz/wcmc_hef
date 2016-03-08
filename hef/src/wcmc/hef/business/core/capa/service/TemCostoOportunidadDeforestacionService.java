@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacion;
 public interface TemCostoOportunidadDeforestacionService {
 	
 	public List<TemCostoOportunidadDeforestacion> buscar(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception;
+	public List<TemCostoOportunidadDeforestacion> buscarGeometry(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception;
 	public TemCostoOportunidadDeforestacion buscarById(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception;
 	public Integer guardar(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception;
 	public Integer eliminar(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception;

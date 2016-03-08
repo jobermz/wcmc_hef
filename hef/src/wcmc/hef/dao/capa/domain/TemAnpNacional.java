@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemAnpNacional extends TemAnpNacionalKey {
+public class TemAnpNacional extends TemAnpNacionalKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Long lngObjectid;

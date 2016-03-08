@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemViasTrochasParamDef;
 public interface TemViasTrochasMapper {
 	
 	public List<TemViasTrochas> selectByDefaultParameter(TemViasTrochasParamDef temViasTrochasParamDef);
+	public List<TemViasTrochas> selectByDefaultParameterGeometry(TemViasTrochasParamDef temViasTrochasParamDef);
 	public TemViasTrochas selectByPrimaryKey(TemViasTrochasKey temViasTrochasKey);
 	public int insertSelective(TemViasTrochas temViasTrochas);
 	public int updateByPrimaryKeySelective(TemViasTrochas temViasTrochas);

@@ -35,6 +35,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.bas_hidro_rios_lagunas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -271,4 +286,25 @@
 		de_dxf_text, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_count, 
+		de_first_idpr, 
+		de_nombprov, 
+		de_first_nomb, 
+		de_last_dcto, 
+		de_last_ley, 
+		de_first_fech, 
+		de_last_fecha, 
+		ha_min_shape_, 
+		ha_area, 
+		ha_perimeter, 
+		cd_titicacg_, 
+		cd_titicacg_i, 
+		de_dxf_layer, 
+		de_dxf_text, 
+		fc_fecreg
+	</sql>
+
 </mapper>

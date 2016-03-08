@@ -47,6 +47,35 @@ public class BasViasRedVialNacionalServiceImpl implements BasViasRedVialNacional
 		return list;
 	}
 	
+		public List<BasViasRedVialNacional> buscarGeometry(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception {
+		BasViasRedVialNacionalParamDef basViasRedVialNacionalParamDef		= new BasViasRedVialNacionalParamDef();
+		
+		Criteria criteria		= basViasRedVialNacionalParamDef.createCriteria();
+		if(basViasRedVialNacionalDto != null) {
+			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basViasRedVialNacionalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrDpto()) != null) {
+				criteria.andStrDptoLike(basViasRedVialNacionalDto.getStrDpto());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrRutaD044()) != null) {
+				criteria.andStrRutaD044Like(basViasRedVialNacionalDto.getStrRutaD044());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrRed044()) != null) {
+				criteria.andStrRed044Like(basViasRedVialNacionalDto.getStrRed044());
+			}
+			if(CadenaUtil.getDoubNull(basViasRedVialNacionalDto.getDblLongkmD44()) != null) {
+				criteria.andDblLongkmD44EqualTo(basViasRedVialNacionalDto.getDblLongkmD44());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrSuperRod()) != null) {
+				criteria.andStrSuperRodLike(basViasRedVialNacionalDto.getStrSuperRod());
+			}
+		}
+		
+		List<BasViasRedVialNacional>	 list	= basViasRedVialNacionalMapper.selectByDefaultParameterGeometry(basViasRedVialNacionalParamDef);
+		return list;
+	}
+	
 	public BasViasRedVialNacional buscarById(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception {
 		BasViasRedVialNacional basViasRedVialNacional		= new BasViasRedVialNacional();
 		BeanUtils.copyProperties(basViasRedVialNacionalDto, basViasRedVialNacional);

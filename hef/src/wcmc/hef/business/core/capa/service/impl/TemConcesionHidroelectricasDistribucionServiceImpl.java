@@ -29,6 +29,17 @@ public class TemConcesionHidroelectricasDistribucionServiceImpl implements TemCo
 		return list;
 	}
 	
+		public List<TemConcesionHidroelectricasDistribucion> buscarGeometry(TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto) throws Exception {
+		TemConcesionHidroelectricasDistribucionParamDef temConcesionHidroelectricasDistribucionParamDef		= new TemConcesionHidroelectricasDistribucionParamDef();
+		
+		Criteria criteria		= temConcesionHidroelectricasDistribucionParamDef.createCriteria();
+		if(temConcesionHidroelectricasDistribucionDto != null) {
+		}
+		
+		List<TemConcesionHidroelectricasDistribucion>	 list	= temConcesionHidroelectricasDistribucionMapper.selectByDefaultParameterGeometry(temConcesionHidroelectricasDistribucionParamDef);
+		return list;
+	}
+	
 	public TemConcesionHidroelectricasDistribucion buscarById(TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto) throws Exception {
 		TemConcesionHidroelectricasDistribucion temConcesionHidroelectricasDistribucion		= new TemConcesionHidroelectricasDistribucion();
 		BeanUtils.copyProperties(temConcesionHidroelectricasDistribucionDto, temConcesionHidroelectricasDistribucion);

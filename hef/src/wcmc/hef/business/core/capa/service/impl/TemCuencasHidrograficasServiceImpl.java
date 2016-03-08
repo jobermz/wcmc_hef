@@ -53,6 +53,41 @@ public class TemCuencasHidrograficasServiceImpl implements TemCuencasHidrografic
 		return list;
 	}
 	
+		public List<TemCuencasHidrograficas> buscarGeometry(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception {
+		TemCuencasHidrograficasParamDef temCuencasHidrograficasParamDef		= new TemCuencasHidrograficasParamDef();
+		
+		Criteria criteria		= temCuencasHidrograficasParamDef.createCriteria();
+		if(temCuencasHidrograficasDto != null) {
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCuencasHidrograficasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temCuencasHidrograficasDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temCuencasHidrograficasDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrGmlId()) != null) {
+				criteria.andStrGmlIdLike(temCuencasHidrograficasDto.getStrGmlId());
+			}
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrId()) != null) {
+				criteria.andStrIdLike(temCuencasHidrograficasDto.getStrId());
+			}
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrCodigo()) != null) {
+				criteria.andStrCodigoLike(temCuencasHidrograficasDto.getStrCodigo());
+			}
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrNombre()) != null) {
+				criteria.andStrNombreLike(temCuencasHidrograficasDto.getStrNombre());
+			}
+			if(CadenaUtil.getStrNull(temCuencasHidrograficasDto.getStrGeometria()) != null) {
+				criteria.andStrGeometriaLike(temCuencasHidrograficasDto.getStrGeometria());
+			}
+			if(CadenaUtil.getInteNull(temCuencasHidrograficasDto.getIntEsriOid()) != null) {
+				criteria.andIntEsriOidEqualTo(temCuencasHidrograficasDto.getIntEsriOid());
+			}
+		}
+		
+		List<TemCuencasHidrograficas>	 list	= temCuencasHidrograficasMapper.selectByDefaultParameterGeometry(temCuencasHidrograficasParamDef);
+		return list;
+	}
+	
 	public TemCuencasHidrograficas buscarById(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception {
 		TemCuencasHidrograficas temCuencasHidrograficas		= new TemCuencasHidrograficas();
 		BeanUtils.copyProperties(temCuencasHidrograficasDto, temCuencasHidrograficas);

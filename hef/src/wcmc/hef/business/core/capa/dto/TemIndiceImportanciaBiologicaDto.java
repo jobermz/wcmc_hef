@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemIndiceImportanciaBiologicaDto {
+public class TemIndiceImportanciaBiologicaDto implements BaseBeanVectorialDto {
 	private Integer srlGid;
 	private String strTheGeom;
 	private Double dblImpGlob;

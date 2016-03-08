@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemProyectosPoligonosParamDef;
 public interface TemProyectosPoligonosMapper {
 	
 	public List<TemProyectosPoligonos> selectByDefaultParameter(TemProyectosPoligonosParamDef temProyectosPoligonosParamDef);
+	public List<TemProyectosPoligonos> selectByDefaultParameterGeometry(TemProyectosPoligonosParamDef temProyectosPoligonosParamDef);
 	public TemProyectosPoligonos selectByPrimaryKey(TemProyectosPoligonosKey temProyectosPoligonosKey);
 	public int insertSelective(TemProyectosPoligonos temProyectosPoligonos);
 	public int updateByPrimaryKeySelective(TemProyectosPoligonos temProyectosPoligonos);

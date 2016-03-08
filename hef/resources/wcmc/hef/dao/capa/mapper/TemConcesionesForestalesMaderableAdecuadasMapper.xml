@@ -27,6 +27,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemConcesionesForestalesMaderableAdecuadasMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesMaderableAdecuadasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_concesiones_forestales_maderable_adecuadas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionesForestalesMaderableAdecuadasMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesMaderableAdecuadasKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -183,4 +198,17 @@
 		de_situacion, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_modalidad, 
+		de_titular, 
+		de_contrato, 
+		ha_area_sig, 
+		ha_area_aprob, 
+		de_region, 
+		de_situacion, 
+		fc_fecreg
+	</sql>
+
 </mapper>

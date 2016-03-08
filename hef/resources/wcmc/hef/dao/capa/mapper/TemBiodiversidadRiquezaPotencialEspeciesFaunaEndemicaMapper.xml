@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaMapper">
+	<resultMap id="TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaMap" type="wcmc.hef.dao.capa.domain.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica">
+		<result column="cd_rast" property="strPoligonoConsulta" jdbcType="VARCHAR"/>
+		<result column="nm_archivo" property="strValuePromedio" jdbcType="VARCHAR"/>
+		<result column="nm_archivo" property="strValues" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="selectByGeometry" resultType="Double" parameterType="wcmc.hef.dao.capa.domain.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica" >
+		SELECT 
+		(foo.geomval).val
+		FROM (
+			SELECT ST_Intersection(ST_Clip(A.cd_rast, QRY.geom, true), QRY.geom) AS geomval
+			FROM wcmc_hef.tem_biodiversidad_riqueza_potencial_especies_fauna_endemica AS A,
+				(select geom from ST_Transform(ST_GeomFromText(#{strPoligonoConsulta,jdbcType=VARCHAR}, 4326),32718) as geom) as QRY
+			WHERE ST_Intersects(A.cd_rast, 1, QRY.geom)
+		) AS foo
+		WHERE (foo.geomval).val IS NOT NULL
+	</select>
+	
+</mapper>

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Key {
+public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Key implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private String strIddpto;

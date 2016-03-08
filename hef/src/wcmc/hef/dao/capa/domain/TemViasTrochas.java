@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
-public class TemViasTrochas extends TemViasTrochasKey {
+public class TemViasTrochas extends TemViasTrochasKey implements BaseBeanVectorial {
 	
 	private String strTheGeom;
 	private Long lngObjectid;

@@ -9,6 +9,7 @@ import wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologica;
 public interface TemIndiceImportanciaBiologicaService {
 	
 	public List<TemIndiceImportanciaBiologica> buscar(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception;
+	public List<TemIndiceImportanciaBiologica> buscarGeometry(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception;
 	public TemIndiceImportanciaBiologica buscarById(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception;
 	public Integer guardar(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception;
 	public Integer eliminar(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception;

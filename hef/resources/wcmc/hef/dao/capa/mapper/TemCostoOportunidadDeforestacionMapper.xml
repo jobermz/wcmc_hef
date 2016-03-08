@@ -22,6 +22,21 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_costo_oportunidad_deforestacion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionKey" >
 		select 
 		<include refid="Base_Column_List" />
@@ -128,4 +143,12 @@
 		ha_cop_tco2_h, 
 		fc_fecreg
 	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_nombdist, 
+		ha_cop_tco2_h, 
+		fc_fecreg
+	</sql>
+
 </mapper>

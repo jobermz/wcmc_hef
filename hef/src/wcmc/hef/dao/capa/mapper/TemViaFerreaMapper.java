@@ -10,6 +10,7 @@ import wcmc.hef.dao.capa.domain.TemViaFerreaParamDef;
 public interface TemViaFerreaMapper {
 	
 	public List<TemViaFerrea> selectByDefaultParameter(TemViaFerreaParamDef temViaFerreaParamDef);
+	public List<TemViaFerrea> selectByDefaultParameterGeometry(TemViaFerreaParamDef temViaFerreaParamDef);
 	public TemViaFerrea selectByPrimaryKey(TemViaFerreaKey temViaFerreaKey);
 	public int insertSelective(TemViaFerrea temViaFerrea);
 	public int updateByPrimaryKeySelective(TemViaFerrea temViaFerrea);

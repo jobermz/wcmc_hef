@@ -38,6 +38,26 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 		return list;
 	}
 	
+		public List<BasLimDepartamento> buscarGeometry(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
+		BasLimDepartamentoParamDef basLimDepartamentoParamDef		= new BasLimDepartamentoParamDef();
+		
+		Criteria criteria		= basLimDepartamentoParamDef.createCriteria();
+		if(basLimDepartamentoDto != null) {
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basLimDepartamentoDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrIddpto()) != null) {
+				criteria.andStrIddptoLike(basLimDepartamentoDto.getStrIddpto());
+			}
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrNombdep()) != null) {
+				criteria.andStrNombdepLike(basLimDepartamentoDto.getStrNombdep());
+			}
+		}
+		
+		List<BasLimDepartamento>	 list	= basLimDepartamentoMapper.selectByDefaultParameterGeometry(basLimDepartamentoParamDef);
+		return list;
+	}
+	
 	public BasLimDepartamento buscarById(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
 		BasLimDepartamento basLimDepartamento		= new BasLimDepartamento();
 		BeanUtils.copyProperties(basLimDepartamentoDto, basLimDepartamento);
