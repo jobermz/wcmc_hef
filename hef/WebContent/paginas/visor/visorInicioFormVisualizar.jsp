@@ -66,6 +66,9 @@
 								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
 								      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapa}" onclick="marcarCapas();" class="capasBase">
 											${capasBase.strNombre}
+											<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&(#capasBase.strWmsUrl==null||#capasBase.strWmsUrl=='')}">
+												<i class="fa fa-warning"  title="La visualizacion no se encuentra disponible por el momento"></i>
+											</s:if>
 								      	</div>
 								      	<div class="col-xs-2">
 								      		<div idcapa="${capasBase.srlIdCapa}" class="clsSlider"></div>

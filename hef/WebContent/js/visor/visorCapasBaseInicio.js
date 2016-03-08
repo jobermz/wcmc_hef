@@ -17,7 +17,7 @@ function buscarCapasBaseById(srlIdCapa) {
 }
 function mostrarCapaById(srlIdCapa, min, max) {
 	var capaBase	= buscarCapasBaseById(srlIdCapa);
-	if(capaBase && !capaBase.currLayer) {
+	if(capaBase && (capaBase.currLayer == undefined || capaBase.currLayer == null) && capaBase.strWmsCapas && capaBase.strWmsCapas != "") {
 		var url		= capaBase.strWmsUrl;
 		var layers	= "show:" + capaBase.strWmsCapas;
 		paramRaster = "";
