@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.ConsultaACLFuxionMapper">
+	
+	<select id="selectFuxion" resultType="String" parameterType="wcmc.hef.dao.capa.domain.ConsultaACLFuxion">
+		select ST_AsText(ST_Intersection(ST_GeomFromText(#{strGeom01,jdbcType=VARCHAR}), ST_GeomFromText(#{strGeom02,jdbcType=VARCHAR}))) 
+	</select>
+	
+</mapper>

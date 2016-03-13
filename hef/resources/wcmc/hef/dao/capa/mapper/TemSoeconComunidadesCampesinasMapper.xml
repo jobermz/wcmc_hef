@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.capa.mapper.TemSoeconComunidadesCampesinasMapper">
+	<resultMap id="TemSoeconComunidadesCampesinasMap" type="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinas">
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
+		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
+		<result column="de_estado" property="strEstado" jdbcType="VARCHAR"/>
+		<result column="de_resolucion" property="strResolucion" jdbcType="VARCHAR"/>
+		<result column="ha_area_ha" property="dblAreaHa" jdbcType="DOUBLE"/>
+		<result column="de_nomdpto" property="strNomdpto" jdbcType="VARCHAR"/>
+		<result column="de_nomprov" property="strNomprov" jdbcType="VARCHAR"/>
+		<result column="de_distrito" property="strDistrito" jdbcType="VARCHAR"/>
+		<result column="de_fecha_reso" property="strFechaReso" jdbcType="VARCHAR"/>
+		<result column="de_n_titulo" property="strNTitulo" jdbcType="VARCHAR"/>
+		<result column="ha_shape_leng" property="dblShapeLeng" jdbcType="DOUBLE"/>
+		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
+	</resultMap>
+	<select id="selectByDefaultParameter" resultMap="TemSoeconComunidadesCampesinasMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="selectByDefaultParameterGeometry" resultMap="TemSoeconComunidadesCampesinasMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemSoeconComunidadesCampesinasMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="TemSoeconComunidadesCampesinasMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemSoeconComunidadesCampesinasMap" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_soecon_comunidades_campesinas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.tem_soecon_comunidades_campesinas_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinas">
+		insert into wcmc_hef.tem_soecon_comunidades_campesinas
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid,
+			</if>
+			<if test="strNombre != null">
+				de_nombre,
+			</if>
+			<if test="strEstado != null">
+				de_estado,
+			</if>
+			<if test="strResolucion != null">
+				de_resolucion,
+			</if>
+			<if test="dblAreaHa != null">
+				ha_area_ha,
+			</if>
+			<if test="strNomdpto != null">
+				de_nomdpto,
+			</if>
+			<if test="strNomprov != null">
+				de_nomprov,
+			</if>
+			<if test="strDistrito != null">
+				de_distrito,
+			</if>
+			<if test="strFechaReso != null">
+				de_fecha_reso,
+			</if>
+			<if test="strNTitulo != null">
+				de_n_titulo,
+			</if>
+			<if test="dblShapeLeng != null">
+				ha_shape_leng,
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				#{intObjectid, jdbcType=INTEGER},
+			</if>
+			<if test="strNombre != null">
+				#{strNombre, jdbcType=VARCHAR},
+			</if>
+			<if test="strEstado != null">
+				#{strEstado, jdbcType=VARCHAR},
+			</if>
+			<if test="strResolucion != null">
+				#{strResolucion, jdbcType=VARCHAR},
+			</if>
+			<if test="dblAreaHa != null">
+				#{dblAreaHa, jdbcType=DOUBLE},
+			</if>
+			<if test="strNomdpto != null">
+				#{strNomdpto, jdbcType=VARCHAR},
+			</if>
+			<if test="strNomprov != null">
+				#{strNomprov, jdbcType=VARCHAR},
+			</if>
+			<if test="strDistrito != null">
+				#{strDistrito, jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaReso != null">
+				#{strFechaReso, jdbcType=VARCHAR},
+			</if>
+			<if test="strNTitulo != null">
+				#{strNTitulo, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeLeng != null">
+				#{dblShapeLeng, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeArea != null">
+				#{dblShapeArea, jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinas">
+		update wcmc_hef.tem_soecon_comunidades_campesinas
+		<set>
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="intObjectid != null">
+				cd_objectid = #{intObjectid,jdbcType=INTEGER},
+			</if>
+			<if test="strNombre != null">
+				de_nombre = #{strNombre,jdbcType=VARCHAR},
+			</if>
+			<if test="strEstado != null">
+				de_estado = #{strEstado,jdbcType=VARCHAR},
+			</if>
+			<if test="strResolucion != null">
+				de_resolucion = #{strResolucion,jdbcType=VARCHAR},
+			</if>
+			<if test="dblAreaHa != null">
+				ha_area_ha = #{dblAreaHa,jdbcType=DOUBLE},
+			</if>
+			<if test="strNomdpto != null">
+				de_nomdpto = #{strNomdpto,jdbcType=VARCHAR},
+			</if>
+			<if test="strNomprov != null">
+				de_nomprov = #{strNomprov,jdbcType=VARCHAR},
+			</if>
+			<if test="strDistrito != null">
+				de_distrito = #{strDistrito,jdbcType=VARCHAR},
+			</if>
+			<if test="strFechaReso != null">
+				de_fecha_reso = #{strFechaReso,jdbcType=VARCHAR},
+			</if>
+			<if test="strNTitulo != null">
+				de_n_titulo = #{strNTitulo,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeLeng != null">
+				ha_shape_leng = #{dblShapeLeng,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area = #{dblShapeArea,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasKey">
+		delete from wcmc_hef.tem_soecon_comunidades_campesinas
+		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_gid, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
+		cd_objectid, 
+		de_nombre, 
+		de_estado, 
+		de_resolucion, 
+		ha_area_ha, 
+		de_nomdpto, 
+		de_nomprov, 
+		de_distrito, 
+		de_fecha_reso, 
+		de_n_titulo, 
+		ha_shape_leng, 
+		ha_shape_area
+	</sql>
+	<sql id="Base_Column_List_Geometry">
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		cd_objectid, 
+		de_nombre, 
+		de_estado, 
+		de_resolucion, 
+		ha_area_ha, 
+		de_nomdpto, 
+		de_nomprov, 
+		de_distrito, 
+		de_fecha_reso, 
+		de_n_titulo, 
+		ha_shape_leng, 
+		ha_shape_area
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_objectid, 
+		de_nombre, 
+		de_estado, 
+		de_resolucion, 
+		ha_area_ha, 
+		de_nomdpto, 
+		de_nomprov, 
+		de_distrito, 
+		de_fecha_reso, 
+		de_n_titulo, 
+		ha_shape_leng, 
+		ha_shape_area
+	</sql>
+
+</mapper>
