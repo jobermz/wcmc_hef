@@ -11,7 +11,9 @@ public interface BasLimAmazoniaMapper {
 	
 	public List<BasLimAmazonia> selectByDefaultParameter(BasLimAmazoniaParamDef basLimAmazoniaParamDef);
 	public List<BasLimAmazonia> selectByDefaultParameterGeometry(BasLimAmazoniaParamDef basLimAmazoniaParamDef);
+	public List<BasLimAmazonia> selectByDefaultParameterCombo(BasLimAmazoniaParamDef basLimAmazoniaParamDef);
 	public BasLimAmazonia selectByPrimaryKey(BasLimAmazoniaKey basLimAmazoniaKey);
+	public BasLimAmazonia selectByPrimaryKeyGeometry(BasLimAmazoniaKey basLimAmazoniaKey);
 	public int insertSelective(BasLimAmazonia basLimAmazonia);
 	public int updateByPrimaryKeySelective(BasLimAmazonia basLimAmazonia);
 	public int deleteByPrimaryKey(BasLimAmazoniaKey basLimAmazoniaKey);

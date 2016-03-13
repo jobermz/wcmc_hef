@@ -27,18 +27,19 @@ public class TemCostoOportunidadDeforestacionServiceImpl implements TemCostoOpor
 				criteria.andStrTheGeomIntersectsTo(temCostoOportunidadDeforestacionDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temCostoOportunidadDeforestacionDto.getStrNombdist()) != null) {
-				criteria.andStrNombdistLike(temCostoOportunidadDeforestacionDto.getStrNombdist());
+				criteria.andStrNombdistEqualTo(temCostoOportunidadDeforestacionDto.getStrNombdist());
 			}
 			if(CadenaUtil.getDoubNull(temCostoOportunidadDeforestacionDto.getDblCopTco2H()) != null) {
 				criteria.andDblCopTco2HEqualTo(temCostoOportunidadDeforestacionDto.getDblCopTco2H());
 			}
 		}
 		
+		temCostoOportunidadDeforestacionParamDef.setOrderByClause("ha_cop_tco2_h");
 		List<TemCostoOportunidadDeforestacion>	 list	= temCostoOportunidadDeforestacionMapper.selectByDefaultParameter(temCostoOportunidadDeforestacionParamDef);
 		return list;
 	}
 	
-		public List<TemCostoOportunidadDeforestacion> buscarGeometry(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception {
+	public List<TemCostoOportunidadDeforestacion> buscarGeometry(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception {
 		TemCostoOportunidadDeforestacionParamDef temCostoOportunidadDeforestacionParamDef		= new TemCostoOportunidadDeforestacionParamDef();
 		
 		Criteria criteria		= temCostoOportunidadDeforestacionParamDef.createCriteria();
@@ -47,14 +48,36 @@ public class TemCostoOportunidadDeforestacionServiceImpl implements TemCostoOpor
 				criteria.andStrTheGeomIntersectsTo(temCostoOportunidadDeforestacionDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temCostoOportunidadDeforestacionDto.getStrNombdist()) != null) {
-				criteria.andStrNombdistLike(temCostoOportunidadDeforestacionDto.getStrNombdist());
+				criteria.andStrNombdistEqualTo(temCostoOportunidadDeforestacionDto.getStrNombdist());
 			}
 			if(CadenaUtil.getDoubNull(temCostoOportunidadDeforestacionDto.getDblCopTco2H()) != null) {
 				criteria.andDblCopTco2HEqualTo(temCostoOportunidadDeforestacionDto.getDblCopTco2H());
 			}
 		}
 		
+		temCostoOportunidadDeforestacionParamDef.setOrderByClause("ha_cop_tco2_h");
 		List<TemCostoOportunidadDeforestacion>	 list	= temCostoOportunidadDeforestacionMapper.selectByDefaultParameterGeometry(temCostoOportunidadDeforestacionParamDef);
+		return list;
+	}
+	
+	public List<TemCostoOportunidadDeforestacion> buscarCombo(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception {
+		TemCostoOportunidadDeforestacionParamDef temCostoOportunidadDeforestacionParamDef		= new TemCostoOportunidadDeforestacionParamDef();
+		
+		Criteria criteria		= temCostoOportunidadDeforestacionParamDef.createCriteria();
+		if(temCostoOportunidadDeforestacionDto != null) {
+			if(CadenaUtil.getStrNull(temCostoOportunidadDeforestacionDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCostoOportunidadDeforestacionDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temCostoOportunidadDeforestacionDto.getStrNombdist()) != null) {
+				criteria.andStrNombdistEqualTo(temCostoOportunidadDeforestacionDto.getStrNombdist());
+			}
+			if(CadenaUtil.getDoubNull(temCostoOportunidadDeforestacionDto.getDblCopTco2H()) != null) {
+				criteria.andDblCopTco2HEqualTo(temCostoOportunidadDeforestacionDto.getDblCopTco2H());
+			}
+		}
+		
+		temCostoOportunidadDeforestacionParamDef.setOrderByClause("ha_cop_tco2_h");
+		List<TemCostoOportunidadDeforestacion>	 list	= temCostoOportunidadDeforestacionMapper.selectByDefaultParameterCombo(temCostoOportunidadDeforestacionParamDef);
 		return list;
 	}
 	
@@ -62,6 +85,12 @@ public class TemCostoOportunidadDeforestacionServiceImpl implements TemCostoOpor
 		TemCostoOportunidadDeforestacion temCostoOportunidadDeforestacion		= new TemCostoOportunidadDeforestacion();
 		BeanUtils.copyProperties(temCostoOportunidadDeforestacionDto, temCostoOportunidadDeforestacion);
 		return temCostoOportunidadDeforestacionMapper.selectByPrimaryKey(temCostoOportunidadDeforestacion);
+	}
+	
+	public TemCostoOportunidadDeforestacion buscarGeometryById(TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto) throws Exception {
+		TemCostoOportunidadDeforestacion temCostoOportunidadDeforestacion		= new TemCostoOportunidadDeforestacion();
+		BeanUtils.copyProperties(temCostoOportunidadDeforestacionDto, temCostoOportunidadDeforestacion);
+		return temCostoOportunidadDeforestacionMapper.selectByPrimaryKeyGeometry(temCostoOportunidadDeforestacion);
 	}
 	
 	@Transactional

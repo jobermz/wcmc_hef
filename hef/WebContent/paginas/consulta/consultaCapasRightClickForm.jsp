@@ -278,8 +278,12 @@
 	<s:iterator value="#session.reporte.listTemConcesionHidroelectricasDistribucion" var="reporte" begin="0" end="0">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Nombre</strong></td>
-				<%--<td>${reporte.strNombdep}</td>--%>
+				<td><strong>Concesi&oacute;n</strong></td>
+				<td>${reporte.strConcesion}</td>
+			</tr>
+			<tr>
+				<td><strong>Sistema electr</strong></td>
+				<td>${reporte.strSistemaEl}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -345,7 +349,7 @@
 	<s:iterator value="#session.reporte.listTemPrediosRurales" var="reporte" begin="0" end="0">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Nombre</strong></td>
+				<td><strong>Predio rural</strong></td>
 				<%--<td>${reporte.strNombdep}</td>--%>
 			</tr>
 		</table>
@@ -451,59 +455,51 @@
 </s:if>
 
 <!-- Capas de tipo raster -->
-<s:if test="%{#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion.size()>0}">
-	<s:iterator value="#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion" var="reporte" begin="0" end="0">
+<s:if test="%{#session.reporte.beanTemBiodiversidadEspeciesPeligroExtincion!=null}">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Value</strong></td>
-				<td>${reporte.strValuePromedio}</td>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValuePromedio}</td>
 			</tr>
 			<tr>
 				<td><strong>Categor&iacute;a</strong></td>
-				<td>MEDIO</td>
+				<td>${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strCategoria}</td>
 			</tr>
 		</table>
-	</s:iterator>
 </s:if>
-<s:if test="%{#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size()>0}">
-	<s:iterator value="#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica" var="reporte" begin="0" end="0">
+<s:if test="%{#session.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica!=null}">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Value</strong></td>
-				<td>${reporte.strValuePromedio}</td>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValuePromedio}</td>
 			</tr>
 			<tr>
 				<td><strong>Categor&iacute;a</strong></td>
-				<td>MEDIO</td>
+				<td>${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strCategoria}</td>
 			</tr>
 		</table>
-	</s:iterator>
 </s:if>
-<s:if test="%{#session.reporte.listTemDensidadCarbonoAerea.size()>0}">
-	<s:iterator value="#session.reporte.listTemDensidadCarbonoAerea" var="reporte" begin="0" end="0">
+<s:if test="%{#session.reporte.beanTemDensidadCarbonoAerea!=null}">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Value</strong></td>
-				<td>${reporte.strValuePromedio}</td>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValuePromedio}</td>
 			</tr>
 			<tr>
 				<td><strong>Categor&iacute;a</strong></td>
-				<td>MEDIO</td>
+				<td>${sessionScope.reporte.beanTemDensidadCarbonoAerea.strCategoria}</td>
 			</tr>
 		</table>
-	</s:iterator>
 </s:if>
-<s:if test="%{#session.reporte.listTemRiesgoErosionHidrica.size()>0}">
-	<s:iterator value="#session.reporte.listTemRiesgoErosionHidrica" var="reporte" begin="0" end="0">
+<s:if test="%{#session.reporte.beanTemRiesgoErosionHidrica!=null}">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
-				<td><strong>Value</strong></td>
-				<td>${reporte.strValuePromedio}</td>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValuePromedio}</td>
 			</tr>
 			<tr>
 				<td><strong>Categor&iacute;a</strong></td>
-				<td>MEDIO</td>
+				<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strCategoria}</td>
 			</tr>
 		</table>
-	</s:iterator>
 </s:if>

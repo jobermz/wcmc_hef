@@ -30,16 +30,16 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 				criteria.andIntIdEqualTo(temConcesionesEcoturismoDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrAnio()) != null) {
-				criteria.andStrAnioLike(temConcesionesEcoturismoDto.getStrAnio());
+				criteria.andStrAnioEqualTo(temConcesionesEcoturismoDto.getStrAnio());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesEcoturismoDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesEcoturismoDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesEcoturismoDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesEcoturismoDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesEcoturismoDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesEcoturismoDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesEcoturismoDto.getDblAreaSig());
@@ -48,13 +48,13 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 				criteria.andDblAreaAprobEqualTo(temConcesionesEcoturismoDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesEcoturismoDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesEcoturismoDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrDocum()) != null) {
-				criteria.andStrDocumLike(temConcesionesEcoturismoDto.getStrDocum());
+				criteria.andStrDocumEqualTo(temConcesionesEcoturismoDto.getStrDocum());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesEcoturismoDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesEcoturismoDto.getStrSituacion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblPerimeter()) != null) {
 				criteria.andDblPerimeterEqualTo(temConcesionesEcoturismoDto.getDblPerimeter());
@@ -64,11 +64,12 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 			}
 		}
 		
+		temConcesionesEcoturismoParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesEcoturismo>	 list	= temConcesionesEcoturismoMapper.selectByDefaultParameter(temConcesionesEcoturismoParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesEcoturismo> buscarGeometry(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception {
+	public List<TemConcesionesEcoturismo> buscarGeometry(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception {
 		TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef		= new TemConcesionesEcoturismoParamDef();
 		
 		Criteria criteria		= temConcesionesEcoturismoParamDef.createCriteria();
@@ -80,16 +81,16 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 				criteria.andIntIdEqualTo(temConcesionesEcoturismoDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrAnio()) != null) {
-				criteria.andStrAnioLike(temConcesionesEcoturismoDto.getStrAnio());
+				criteria.andStrAnioEqualTo(temConcesionesEcoturismoDto.getStrAnio());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesEcoturismoDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesEcoturismoDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesEcoturismoDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesEcoturismoDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesEcoturismoDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesEcoturismoDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesEcoturismoDto.getDblAreaSig());
@@ -98,13 +99,13 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 				criteria.andDblAreaAprobEqualTo(temConcesionesEcoturismoDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesEcoturismoDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesEcoturismoDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrDocum()) != null) {
-				criteria.andStrDocumLike(temConcesionesEcoturismoDto.getStrDocum());
+				criteria.andStrDocumEqualTo(temConcesionesEcoturismoDto.getStrDocum());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesEcoturismoDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesEcoturismoDto.getStrSituacion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblPerimeter()) != null) {
 				criteria.andDblPerimeterEqualTo(temConcesionesEcoturismoDto.getDblPerimeter());
@@ -114,7 +115,59 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 			}
 		}
 		
+		temConcesionesEcoturismoParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesEcoturismo>	 list	= temConcesionesEcoturismoMapper.selectByDefaultParameterGeometry(temConcesionesEcoturismoParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesEcoturismo> buscarCombo(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception {
+		TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef		= new TemConcesionesEcoturismoParamDef();
+		
+		Criteria criteria		= temConcesionesEcoturismoParamDef.createCriteria();
+		if(temConcesionesEcoturismoDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesEcoturismoDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temConcesionesEcoturismoDto.getIntId()) != null) {
+				criteria.andIntIdEqualTo(temConcesionesEcoturismoDto.getIntId());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrAnio()) != null) {
+				criteria.andStrAnioEqualTo(temConcesionesEcoturismoDto.getStrAnio());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadEqualTo(temConcesionesEcoturismoDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrTitular()) != null) {
+				criteria.andStrTitularEqualTo(temConcesionesEcoturismoDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrContrato()) != null) {
+				criteria.andStrContratoEqualTo(temConcesionesEcoturismoDto.getStrContrato());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesEcoturismoDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temConcesionesEcoturismoDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temConcesionesEcoturismoDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrDocum()) != null) {
+				criteria.andStrDocumEqualTo(temConcesionesEcoturismoDto.getStrDocum());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesEcoturismoDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionEqualTo(temConcesionesEcoturismoDto.getStrSituacion());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblPerimeter()) != null) {
+				criteria.andDblPerimeterEqualTo(temConcesionesEcoturismoDto.getDblPerimeter());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblHectares()) != null) {
+				criteria.andDblHectaresEqualTo(temConcesionesEcoturismoDto.getDblHectares());
+			}
+		}
+		
+		temConcesionesEcoturismoParamDef.setOrderByClause("de_titular,de_contrato");
+		List<TemConcesionesEcoturismo>	 list	= temConcesionesEcoturismoMapper.selectByDefaultParameterCombo(temConcesionesEcoturismoParamDef);
 		return list;
 	}
 	
@@ -122,6 +175,12 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 		TemConcesionesEcoturismo temConcesionesEcoturismo		= new TemConcesionesEcoturismo();
 		BeanUtils.copyProperties(temConcesionesEcoturismoDto, temConcesionesEcoturismo);
 		return temConcesionesEcoturismoMapper.selectByPrimaryKey(temConcesionesEcoturismo);
+	}
+	
+	public TemConcesionesEcoturismo buscarGeometryById(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception {
+		TemConcesionesEcoturismo temConcesionesEcoturismo		= new TemConcesionesEcoturismo();
+		BeanUtils.copyProperties(temConcesionesEcoturismoDto, temConcesionesEcoturismo);
+		return temConcesionesEcoturismoMapper.selectByPrimaryKeyGeometry(temConcesionesEcoturismo);
 	}
 	
 	@Transactional

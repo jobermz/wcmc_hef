@@ -36,8 +36,6 @@ public class TemClaveBiodiversidad extends TemClaveBiodiversidadKey implements B
 	private Double dblShapeLeng;
 	private Double dblShapeLe1;
 	private Double dblShapeArea;
-	private String timFechaRegistroFecha;
-	private String timFechaRegistroHora;
 	
 	public String getDteAddeddateFecha() {
 		return CadenaUtil.getStrDate(dteAddeddate);
@@ -50,25 +48,6 @@ public class TemClaveBiodiversidad extends TemClaveBiodiversidadKey implements B
 	}
 	public void setDteChangedateFecha(String dteChangedate) {
 		this.dteChangedate = CadenaUtil.getDateFromStr(dteChangedate);
-	}
-	public String getTimFechaRegistroFecha() {
-		return timFechaRegistroFecha;
-	}
-	public void setTimFechaRegistroFecha(String timFechaRegistroFecha) {
-		this.timFechaRegistroFecha = timFechaRegistroFecha;
-	}
-	public String getTimFechaRegistroHora() {
-		return timFechaRegistroHora;
-	}
-	public void setTimFechaRegistroHora(String timFechaRegistroHora) {
-		this.timFechaRegistroHora = timFechaRegistroHora;
-	}
-	public String getTimFechaRegistroFechaHora() {
-		return timFechaRegistroFecha + " " + timFechaRegistroHora;
-	}
-	public void setLngFechaRegistro(Long lngfechaRegistro) {
-		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
-		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
 	}
 	public String getStrTheGeom() {
 		return strTheGeom;
@@ -249,13 +228,6 @@ public class TemClaveBiodiversidad extends TemClaveBiodiversidadKey implements B
 	}
 	public void setDblShapeArea(Double dblShapeArea) {
 		this.dblShapeArea = dblShapeArea;
-	}
-	public Date getTimFechaRegistro() {
-		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
-	}
-	public void setTimFechaRegistro(Date timFechaRegistro) {
-		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
-		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
 	}
 	
 }

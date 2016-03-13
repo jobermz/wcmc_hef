@@ -11,7 +11,9 @@ public interface TemHumedalesRamsarMapper {
 	
 	public List<TemHumedalesRamsar> selectByDefaultParameter(TemHumedalesRamsarParamDef temHumedalesRamsarParamDef);
 	public List<TemHumedalesRamsar> selectByDefaultParameterGeometry(TemHumedalesRamsarParamDef temHumedalesRamsarParamDef);
+	public List<TemHumedalesRamsar> selectByDefaultParameterCombo(TemHumedalesRamsarParamDef temHumedalesRamsarParamDef);
 	public TemHumedalesRamsar selectByPrimaryKey(TemHumedalesRamsarKey temHumedalesRamsarKey);
+	public TemHumedalesRamsar selectByPrimaryKeyGeometry(TemHumedalesRamsarKey temHumedalesRamsarKey);
 	public int insertSelective(TemHumedalesRamsar temHumedalesRamsar);
 	public int updateByPrimaryKeySelective(TemHumedalesRamsar temHumedalesRamsar);
 	public int deleteByPrimaryKey(TemHumedalesRamsarKey temHumedalesRamsarKey);

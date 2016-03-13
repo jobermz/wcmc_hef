@@ -30,39 +30,40 @@ public class TemConcesionesForestalesManejoFaunaSilvestreServiceImpl implements 
 				criteria.andIntObjectidEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar()) != null) {
-				criteria.andStrBeneficiarLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar());
+				criteria.andStrBeneficiarEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob()) != null) {
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum()) != null) {
-				criteria.andStrDocumLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum());
+				criteria.andStrDocumEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig());
 			}
 		}
 		
+		temConcesionesForestalesManejoFaunaSilvestreParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesManejoFaunaSilvestre>	 list	= temConcesionesForestalesManejoFaunaSilvestreMapper.selectByDefaultParameter(temConcesionesForestalesManejoFaunaSilvestreParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesForestalesManejoFaunaSilvestre> buscarGeometry(TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto) throws Exception {
+	public List<TemConcesionesForestalesManejoFaunaSilvestre> buscarGeometry(TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto) throws Exception {
 		TemConcesionesForestalesManejoFaunaSilvestreParamDef temConcesionesForestalesManejoFaunaSilvestreParamDef		= new TemConcesionesForestalesManejoFaunaSilvestreParamDef();
 		
 		Criteria criteria		= temConcesionesForestalesManejoFaunaSilvestreParamDef.createCriteria();
@@ -74,35 +75,81 @@ public class TemConcesionesForestalesManejoFaunaSilvestreServiceImpl implements 
 				criteria.andIntObjectidEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar()) != null) {
-				criteria.andStrBeneficiarLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar());
+				criteria.andStrBeneficiarEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob()) != null) {
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum()) != null) {
-				criteria.andStrDocumLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum());
+				criteria.andStrDocumEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig());
 			}
 		}
 		
+		temConcesionesForestalesManejoFaunaSilvestreParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesManejoFaunaSilvestre>	 list	= temConcesionesForestalesManejoFaunaSilvestreMapper.selectByDefaultParameterGeometry(temConcesionesForestalesManejoFaunaSilvestreParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesForestalesManejoFaunaSilvestre> buscarCombo(TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto) throws Exception {
+		TemConcesionesForestalesManejoFaunaSilvestreParamDef temConcesionesForestalesManejoFaunaSilvestreParamDef		= new TemConcesionesForestalesManejoFaunaSilvestreParamDef();
+		
+		Criteria criteria		= temConcesionesForestalesManejoFaunaSilvestreParamDef.createCriteria();
+		if(temConcesionesForestalesManejoFaunaSilvestreDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temConcesionesForestalesManejoFaunaSilvestreDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar()) != null) {
+				criteria.andStrBeneficiarEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrBeneficiar());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular()) != null) {
+				criteria.andStrTitularEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato()) != null) {
+				criteria.andStrContratoEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrContrato());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum()) != null) {
+				criteria.andStrDocumEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrDocum());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getStrSituacion());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig());
+			}
+		}
+		
+		temConcesionesForestalesManejoFaunaSilvestreParamDef.setOrderByClause("de_titular,de_contrato");
+		List<TemConcesionesForestalesManejoFaunaSilvestre>	 list	= temConcesionesForestalesManejoFaunaSilvestreMapper.selectByDefaultParameterCombo(temConcesionesForestalesManejoFaunaSilvestreParamDef);
 		return list;
 	}
 	
@@ -110,6 +157,12 @@ public class TemConcesionesForestalesManejoFaunaSilvestreServiceImpl implements 
 		TemConcesionesForestalesManejoFaunaSilvestre temConcesionesForestalesManejoFaunaSilvestre		= new TemConcesionesForestalesManejoFaunaSilvestre();
 		BeanUtils.copyProperties(temConcesionesForestalesManejoFaunaSilvestreDto, temConcesionesForestalesManejoFaunaSilvestre);
 		return temConcesionesForestalesManejoFaunaSilvestreMapper.selectByPrimaryKey(temConcesionesForestalesManejoFaunaSilvestre);
+	}
+	
+	public TemConcesionesForestalesManejoFaunaSilvestre buscarGeometryById(TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto) throws Exception {
+		TemConcesionesForestalesManejoFaunaSilvestre temConcesionesForestalesManejoFaunaSilvestre		= new TemConcesionesForestalesManejoFaunaSilvestre();
+		BeanUtils.copyProperties(temConcesionesForestalesManejoFaunaSilvestreDto, temConcesionesForestalesManejoFaunaSilvestre);
+		return temConcesionesForestalesManejoFaunaSilvestreMapper.selectByPrimaryKeyGeometry(temConcesionesForestalesManejoFaunaSilvestre);
 	}
 	
 	@Transactional

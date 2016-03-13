@@ -30,39 +30,40 @@ public class TemAnpNacionalServiceImpl implements TemAnpNacionalService {
 				criteria.andLngObjectidEqualTo(temAnpNacionalDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCate()) != null) {
-				criteria.andStrAnpCateLike(temAnpNacionalDto.getStrAnpCate());
+				criteria.andStrAnpCateEqualTo(temAnpNacionalDto.getStrAnpCate());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpNomb()) != null) {
-				criteria.andStrAnpNombLike(temAnpNacionalDto.getStrAnpNomb());
+				criteria.andStrAnpNombEqualTo(temAnpNacionalDto.getStrAnpNomb());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCodi()) != null) {
-				criteria.andStrAnpCodiLike(temAnpNacionalDto.getStrAnpCodi());
+				criteria.andStrAnpCodiEqualTo(temAnpNacionalDto.getStrAnpCodi());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpUbpo()) != null) {
-				criteria.andStrAnpUbpoLike(temAnpNacionalDto.getStrAnpUbpo());
+				criteria.andStrAnpUbpoEqualTo(temAnpNacionalDto.getStrAnpUbpo());
 			}
 			if(CadenaUtil.getDoubNull(temAnpNacionalDto.getDblAnpArle()) != null) {
 				criteria.andDblAnpArleEqualTo(temAnpNacionalDto.getDblAnpArle());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalecr()) != null) {
-				criteria.andStrAnpBalecrLike(temAnpNacionalDto.getStrAnpBalecr());
+				criteria.andStrAnpBalecrEqualTo(temAnpNacionalDto.getStrAnpBalecr());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFecrea()) != null) {
-				criteria.andStrAnpFecreaLike(temAnpNacionalDto.getStrAnpFecrea());
+				criteria.andStrAnpFecreaEqualTo(temAnpNacionalDto.getStrAnpFecrea());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalemo()) != null) {
-				criteria.andStrAnpBalemoLike(temAnpNacionalDto.getStrAnpBalemo());
+				criteria.andStrAnpBalemoEqualTo(temAnpNacionalDto.getStrAnpBalemo());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFemodi()) != null) {
-				criteria.andStrAnpFemodiLike(temAnpNacionalDto.getStrAnpFemodi());
+				criteria.andStrAnpFemodiEqualTo(temAnpNacionalDto.getStrAnpFemodi());
 			}
 		}
 		
+		temAnpNacionalParamDef.setOrderByClause("de_anp_cate,de_anp_nomb");
 		List<TemAnpNacional>	 list	= temAnpNacionalMapper.selectByDefaultParameter(temAnpNacionalParamDef);
 		return list;
 	}
 	
-		public List<TemAnpNacional> buscarGeometry(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
+	public List<TemAnpNacional> buscarGeometry(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
 		TemAnpNacionalParamDef temAnpNacionalParamDef		= new TemAnpNacionalParamDef();
 		
 		Criteria criteria		= temAnpNacionalParamDef.createCriteria();
@@ -74,35 +75,81 @@ public class TemAnpNacionalServiceImpl implements TemAnpNacionalService {
 				criteria.andLngObjectidEqualTo(temAnpNacionalDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCate()) != null) {
-				criteria.andStrAnpCateLike(temAnpNacionalDto.getStrAnpCate());
+				criteria.andStrAnpCateEqualTo(temAnpNacionalDto.getStrAnpCate());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpNomb()) != null) {
-				criteria.andStrAnpNombLike(temAnpNacionalDto.getStrAnpNomb());
+				criteria.andStrAnpNombEqualTo(temAnpNacionalDto.getStrAnpNomb());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCodi()) != null) {
-				criteria.andStrAnpCodiLike(temAnpNacionalDto.getStrAnpCodi());
+				criteria.andStrAnpCodiEqualTo(temAnpNacionalDto.getStrAnpCodi());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpUbpo()) != null) {
-				criteria.andStrAnpUbpoLike(temAnpNacionalDto.getStrAnpUbpo());
+				criteria.andStrAnpUbpoEqualTo(temAnpNacionalDto.getStrAnpUbpo());
 			}
 			if(CadenaUtil.getDoubNull(temAnpNacionalDto.getDblAnpArle()) != null) {
 				criteria.andDblAnpArleEqualTo(temAnpNacionalDto.getDblAnpArle());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalecr()) != null) {
-				criteria.andStrAnpBalecrLike(temAnpNacionalDto.getStrAnpBalecr());
+				criteria.andStrAnpBalecrEqualTo(temAnpNacionalDto.getStrAnpBalecr());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFecrea()) != null) {
-				criteria.andStrAnpFecreaLike(temAnpNacionalDto.getStrAnpFecrea());
+				criteria.andStrAnpFecreaEqualTo(temAnpNacionalDto.getStrAnpFecrea());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalemo()) != null) {
-				criteria.andStrAnpBalemoLike(temAnpNacionalDto.getStrAnpBalemo());
+				criteria.andStrAnpBalemoEqualTo(temAnpNacionalDto.getStrAnpBalemo());
 			}
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFemodi()) != null) {
-				criteria.andStrAnpFemodiLike(temAnpNacionalDto.getStrAnpFemodi());
+				criteria.andStrAnpFemodiEqualTo(temAnpNacionalDto.getStrAnpFemodi());
 			}
 		}
 		
+		temAnpNacionalParamDef.setOrderByClause("de_anp_cate,de_anp_nomb");
 		List<TemAnpNacional>	 list	= temAnpNacionalMapper.selectByDefaultParameterGeometry(temAnpNacionalParamDef);
+		return list;
+	}
+	
+	public List<TemAnpNacional> buscarCombo(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
+		TemAnpNacionalParamDef temAnpNacionalParamDef		= new TemAnpNacionalParamDef();
+		
+		Criteria criteria		= temAnpNacionalParamDef.createCriteria();
+		if(temAnpNacionalDto != null) {
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temAnpNacionalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temAnpNacionalDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temAnpNacionalDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCate()) != null) {
+				criteria.andStrAnpCateEqualTo(temAnpNacionalDto.getStrAnpCate());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpNomb()) != null) {
+				criteria.andStrAnpNombEqualTo(temAnpNacionalDto.getStrAnpNomb());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpCodi()) != null) {
+				criteria.andStrAnpCodiEqualTo(temAnpNacionalDto.getStrAnpCodi());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpUbpo()) != null) {
+				criteria.andStrAnpUbpoEqualTo(temAnpNacionalDto.getStrAnpUbpo());
+			}
+			if(CadenaUtil.getDoubNull(temAnpNacionalDto.getDblAnpArle()) != null) {
+				criteria.andDblAnpArleEqualTo(temAnpNacionalDto.getDblAnpArle());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalecr()) != null) {
+				criteria.andStrAnpBalecrEqualTo(temAnpNacionalDto.getStrAnpBalecr());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFecrea()) != null) {
+				criteria.andStrAnpFecreaEqualTo(temAnpNacionalDto.getStrAnpFecrea());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpBalemo()) != null) {
+				criteria.andStrAnpBalemoEqualTo(temAnpNacionalDto.getStrAnpBalemo());
+			}
+			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFemodi()) != null) {
+				criteria.andStrAnpFemodiEqualTo(temAnpNacionalDto.getStrAnpFemodi());
+			}
+		}
+		
+		temAnpNacionalParamDef.setOrderByClause("de_anp_cate,de_anp_nomb");
+		List<TemAnpNacional>	 list	= temAnpNacionalMapper.selectByDefaultParameterCombo(temAnpNacionalParamDef);
 		return list;
 	}
 	
@@ -110,6 +157,12 @@ public class TemAnpNacionalServiceImpl implements TemAnpNacionalService {
 		TemAnpNacional temAnpNacional		= new TemAnpNacional();
 		BeanUtils.copyProperties(temAnpNacionalDto, temAnpNacional);
 		return temAnpNacionalMapper.selectByPrimaryKey(temAnpNacional);
+	}
+	
+	public TemAnpNacional buscarGeometryById(TemAnpNacionalDto temAnpNacionalDto) throws Exception {
+		TemAnpNacional temAnpNacional		= new TemAnpNacional();
+		BeanUtils.copyProperties(temAnpNacionalDto, temAnpNacional);
+		return temAnpNacionalMapper.selectByPrimaryKeyGeometry(temAnpNacional);
 	}
 	
 	@Transactional

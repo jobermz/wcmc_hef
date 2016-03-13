@@ -2,16 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
-		
+			
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Identificar &aacute;rea por criterios logicos</h4>
 			</div>
 			<div class="modal-body">
 				<div style="height: 350px;overflow-y: auto;">
-				
-				
+					
 					<div class="panel-group" id="accordion_iac" role="tablist" aria-multiselectable="false">
 					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
 					  <div class="panel panel-default">
@@ -59,11 +57,20 @@
 								      		<input type="checkbox" id="idCapaIdentACL${capasBase.srlIdCapa}" name="capaIdentACL" value="${capasBase.srlIdCapa}"  class="capasBaseACL">
 											${capasBase.strNombre}
 								      	</div>
-								      	<div class="col-xs-2 text-center">
+								      	<div class="col-xs-2 text-center clsDivDetFiltroACL" id="idDivDetFiltroACL${capasBase.srlIdCapa}">
 								      		
 								      	</div>
 								      	<div class="col-xs-2 text-center">
-								      		<i class="fa fa-lg fa-filter cursorPointer" onclick="filtrar(${capasBase.srlIdCapa});"></i>
+											
+											<s:if test="%{#capasBase.strEsFiltroAclBoolean}">
+								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_VECTORIAL}">
+								      			<i class="fa fa-lg fa-filter cursorPointer" onclick="filtrarACL(${capasBase.srlIdCapa});"></i>
+								      		</s:if>
+								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_UMBRAL}">
+								      			<i class="fa fa-lg fa-filter cursorPointer" onclick="filtrarUmbralACL(${capasBase.srlIdCapa});"></i>
+								      		</s:if>
+								      		</s:if>
+								      		
 								      	</div>
 							      	</div>
 							      	</s:if>
@@ -84,13 +91,11 @@
 					</s:iterator>
 					</div>
 					
-					
 				</div>
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default btnSeleccionarTodasCapasIAC">Seleccionar todas las capas</button>
+				<button type="button" class="btn btn-default btnSeleccionarTodasCapasACL">Seleccionar todas las capas</button>
 				<button type="button" class="btn btn-default btnProcesarIdentAreaCriteriosLogicos" >Procesar</button>
 			</div>
-			
 			

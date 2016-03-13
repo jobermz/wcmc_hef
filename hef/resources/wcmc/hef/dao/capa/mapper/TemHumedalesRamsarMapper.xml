@@ -13,7 +13,6 @@
 		<result column="de_observa" property="strObserva" jdbcType="VARCHAR"/>
 		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
 		<result column="ha_shape_len" property="dblShapeLen" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemHumedalesRamsarMap" parameterType="wcmc.hef.dao.capa.domain.TemHumedalesRamsarParamDef">
 		select
@@ -44,9 +43,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemHumedalesRamsarMap" parameterType="wcmc.hef.dao.capa.domain.TemHumedalesRamsarParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_humedales_ramsar as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemHumedalesRamsarMap" parameterType="wcmc.hef.dao.capa.domain.TemHumedalesRamsarKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_humedales_ramsar as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemHumedalesRamsarMap" parameterType="wcmc.hef.dao.capa.domain.TemHumedalesRamsarKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_humedales_ramsar as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -89,9 +110,6 @@
 			<if test="dblShapeLen != null">
 				ha_shape_len,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -123,9 +141,6 @@
 			</if>
 			<if test="dblShapeLen != null">
 				#{dblShapeLen, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -161,9 +176,6 @@
 			</if>
 			<if test="dblShapeLen != null">
 				ha_shape_len = #{dblShapeLen,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -217,8 +229,7 @@
 		cd_id__, 
 		de_observa, 
 		ha_shape_area, 
-		ha_shape_len, 
-		fc_fecreg
+		ha_shape_len
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -231,8 +242,20 @@
 		cd_id__, 
 		de_observa, 
 		ha_shape_area, 
-		ha_shape_len, 
-		fc_fecreg
+		ha_shape_len
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_categorias, 
+		de_nombre, 
+		de_base_legal, 
+		de_ubica_poli, 
+		ha_area_legal, 
+		cd_id__, 
+		de_observa, 
+		ha_shape_area, 
+		ha_shape_len
 	</sql>
 
 </mapper>

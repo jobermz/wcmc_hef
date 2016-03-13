@@ -11,7 +11,9 @@ public interface BasViasRedVialVecinalMapper {
 	
 	public List<BasViasRedVialVecinal> selectByDefaultParameter(BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef);
 	public List<BasViasRedVialVecinal> selectByDefaultParameterGeometry(BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef);
+	public List<BasViasRedVialVecinal> selectByDefaultParameterCombo(BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef);
 	public BasViasRedVialVecinal selectByPrimaryKey(BasViasRedVialVecinalKey basViasRedVialVecinalKey);
+	public BasViasRedVialVecinal selectByPrimaryKeyGeometry(BasViasRedVialVecinalKey basViasRedVialVecinalKey);
 	public int insertSelective(BasViasRedVialVecinal basViasRedVialVecinal);
 	public int updateByPrimaryKeySelective(BasViasRedVialVecinal basViasRedVialVecinal);
 	public int deleteByPrimaryKey(BasViasRedVialVecinalKey basViasRedVialVecinalKey);

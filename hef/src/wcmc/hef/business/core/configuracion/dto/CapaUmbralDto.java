@@ -1,7 +1,9 @@
 package wcmc.hef.business.core.configuracion.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class CapaUmbralDto {
@@ -35,11 +37,25 @@ public class CapaUmbralDto {
 	public void setStrNombre(String strNombre) {
 		this.strNombre = strNombre;
 	}
+	public String getStrValorMinimo() {
+		if(dblValorMinimo != null) {
+			return new BigDecimal(dblValorMinimo.doubleValue()).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
+		} else {
+			return "0.0000";
+		}
+	}
 	public Double getDblValorMinimo() {
 		return dblValorMinimo;
 	}
 	public void setDblValorMinimo(Double dblValorMinimo) {
 		this.dblValorMinimo = dblValorMinimo;
+	}
+	public String getStrValorMaximo() {
+		if(dblValorMaximo != null) {
+			return new BigDecimal(dblValorMaximo.doubleValue()).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
+		} else {
+			return "0.0000";
+		}
 	}
 	public Double getDblValorMaximo() {
 		return dblValorMaximo;

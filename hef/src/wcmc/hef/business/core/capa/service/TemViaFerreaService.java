@@ -10,7 +10,9 @@ public interface TemViaFerreaService {
 	
 	public List<TemViaFerrea> buscar(TemViaFerreaDto temViaFerreaDto) throws Exception;
 	public List<TemViaFerrea> buscarGeometry(TemViaFerreaDto temViaFerreaDto) throws Exception;
+	public List<TemViaFerrea> buscarCombo(TemViaFerreaDto temViaFerreaDto) throws Exception;
 	public TemViaFerrea buscarById(TemViaFerreaDto temViaFerreaDto) throws Exception;
+	public TemViaFerrea buscarGeometryById(TemViaFerreaDto temViaFerreaDto) throws Exception;
 	public Integer guardar(TemViaFerreaDto temViaFerreaDto) throws Exception;
 	public Integer eliminar(TemViaFerreaDto temViaFerreaDto) throws Exception;
 	

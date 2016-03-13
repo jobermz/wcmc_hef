@@ -11,7 +11,9 @@ public interface BasLimDepartamentoMapper {
 	
 	public List<BasLimDepartamento> selectByDefaultParameter(BasLimDepartamentoParamDef basLimDepartamentoParamDef);
 	public List<BasLimDepartamento> selectByDefaultParameterGeometry(BasLimDepartamentoParamDef basLimDepartamentoParamDef);
+	public List<BasLimDepartamento> selectByDefaultParameterCombo(BasLimDepartamentoParamDef basLimDepartamentoParamDef);
 	public BasLimDepartamento selectByPrimaryKey(BasLimDepartamentoKey basLimDepartamentoKey);
+	public BasLimDepartamento selectByPrimaryKeyGeometry(BasLimDepartamentoKey basLimDepartamentoKey);
 	public int insertSelective(BasLimDepartamento basLimDepartamento);
 	public int updateByPrimaryKeySelective(BasLimDepartamento basLimDepartamento);
 	public int deleteByPrimaryKey(BasLimDepartamentoKey basLimDepartamentoKey);

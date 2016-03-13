@@ -11,7 +11,9 @@ public interface TemPrediosRuralesMapper {
 	
 	public List<TemPrediosRurales> selectByDefaultParameter(TemPrediosRuralesParamDef temPrediosRuralesParamDef);
 	public List<TemPrediosRurales> selectByDefaultParameterGeometry(TemPrediosRuralesParamDef temPrediosRuralesParamDef);
+	public List<TemPrediosRurales> selectByDefaultParameterCombo(TemPrediosRuralesParamDef temPrediosRuralesParamDef);
 	public TemPrediosRurales selectByPrimaryKey(TemPrediosRuralesKey temPrediosRuralesKey);
+	public TemPrediosRurales selectByPrimaryKeyGeometry(TemPrediosRuralesKey temPrediosRuralesKey);
 	public int insertSelective(TemPrediosRurales temPrediosRurales);
 	public int updateByPrimaryKeySelective(TemPrediosRurales temPrediosRurales);
 	public int deleteByPrimaryKey(TemPrediosRuralesKey temPrediosRuralesKey);

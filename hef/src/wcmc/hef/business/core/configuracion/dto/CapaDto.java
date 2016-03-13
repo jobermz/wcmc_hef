@@ -19,6 +19,10 @@ public class CapaDto {
 	private String timFechaRegistroFecha;
 	private String timFechaRegistroHora;
 	private Integer intOrden;
+	private String strEsSelecApa;
+	private String strEsFiltroAcl;
+	private String strEsCentrarMapa;
+	
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
 	}
@@ -122,6 +126,57 @@ public class CapaDto {
 	}
 	public void setStrAutor(String strAutor) {
 		this.strAutor = strAutor;
+	}
+	
+	public String getStrEsSelecApa() {
+		return strEsSelecApa;
+	}
+	public void setStrEsSelecApa(String strEsSelecApa) {
+		this.strEsSelecApa = strEsSelecApa;
+	}
+	public boolean getStrEsSelecApaBoolean() {
+		return CadenaUtil.getStr(strEsSelecApa).equalsIgnoreCase("S");
+	}
+	public void getStrEsSelecApaBoolean(boolean val) {
+		if(val) {
+			strEsSelecApa	= "S";
+		} else {
+			strEsSelecApa	= "N";
+		}
+	}
+	
+	public String getStrEsFiltroAcl() {
+		return strEsFiltroAcl;
+	}
+	public void setStrEsFiltroAcl(String strEsFiltroAcl) {
+		this.strEsFiltroAcl = strEsFiltroAcl;
+	}
+	public boolean getStrEsFiltroAclBoolean() {
+		return CadenaUtil.getStr(strEsFiltroAcl).equalsIgnoreCase("S");
+	}
+	public void setStrEsFiltroAclBoolean(boolean val) {
+		if(val) {
+			strEsFiltroAcl	= "S";
+		} else {
+			strEsFiltroAcl	= "N";
+		}
+	}
+	
+	public String getStrEsCentrarMapa() {
+		return strEsCentrarMapa;
+	}
+	public void setStrEsCentrarMapa(String strEsCentrarMapa) {
+		this.strEsCentrarMapa = strEsCentrarMapa;
+	}
+	public boolean getStrEsCentrarMapaBoolean() {
+		return CadenaUtil.getStr(strEsCentrarMapa).equalsIgnoreCase("S");
+	}
+	public void setStrEsCentrarMapaBoolean(boolean val) {
+		if(val) {
+			strEsCentrarMapa	= "S";
+		} else {
+			strEsCentrarMapa	= "N";
+		}
 	}
 	
 }

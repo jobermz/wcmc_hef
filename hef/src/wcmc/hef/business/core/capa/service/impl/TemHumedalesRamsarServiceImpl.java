@@ -27,16 +27,16 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 				criteria.andStrTheGeomIntersectsTo(temHumedalesRamsarDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrCategorias()) != null) {
-				criteria.andStrCategoriasLike(temHumedalesRamsarDto.getStrCategorias());
+				criteria.andStrCategoriasEqualTo(temHumedalesRamsarDto.getStrCategorias());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temHumedalesRamsarDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temHumedalesRamsarDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrBaseLegal()) != null) {
-				criteria.andStrBaseLegalLike(temHumedalesRamsarDto.getStrBaseLegal());
+				criteria.andStrBaseLegalEqualTo(temHumedalesRamsarDto.getStrBaseLegal());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrUbicaPoli()) != null) {
-				criteria.andStrUbicaPoliLike(temHumedalesRamsarDto.getStrUbicaPoli());
+				criteria.andStrUbicaPoliEqualTo(temHumedalesRamsarDto.getStrUbicaPoli());
 			}
 			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblAreaLegal()) != null) {
 				criteria.andDblAreaLegalEqualTo(temHumedalesRamsarDto.getDblAreaLegal());
@@ -45,7 +45,7 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 				criteria.andIntIdEqualTo(temHumedalesRamsarDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrObserva()) != null) {
-				criteria.andStrObservaLike(temHumedalesRamsarDto.getStrObserva());
+				criteria.andStrObservaEqualTo(temHumedalesRamsarDto.getStrObserva());
 			}
 			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblShapeArea()) != null) {
 				criteria.andDblShapeAreaEqualTo(temHumedalesRamsarDto.getDblShapeArea());
@@ -55,11 +55,12 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 			}
 		}
 		
+		temHumedalesRamsarParamDef.setOrderByClause("de_nombre");
 		List<TemHumedalesRamsar>	 list	= temHumedalesRamsarMapper.selectByDefaultParameter(temHumedalesRamsarParamDef);
 		return list;
 	}
 	
-		public List<TemHumedalesRamsar> buscarGeometry(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception {
+	public List<TemHumedalesRamsar> buscarGeometry(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception {
 		TemHumedalesRamsarParamDef temHumedalesRamsarParamDef		= new TemHumedalesRamsarParamDef();
 		
 		Criteria criteria		= temHumedalesRamsarParamDef.createCriteria();
@@ -68,16 +69,16 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 				criteria.andStrTheGeomIntersectsTo(temHumedalesRamsarDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrCategorias()) != null) {
-				criteria.andStrCategoriasLike(temHumedalesRamsarDto.getStrCategorias());
+				criteria.andStrCategoriasEqualTo(temHumedalesRamsarDto.getStrCategorias());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temHumedalesRamsarDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temHumedalesRamsarDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrBaseLegal()) != null) {
-				criteria.andStrBaseLegalLike(temHumedalesRamsarDto.getStrBaseLegal());
+				criteria.andStrBaseLegalEqualTo(temHumedalesRamsarDto.getStrBaseLegal());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrUbicaPoli()) != null) {
-				criteria.andStrUbicaPoliLike(temHumedalesRamsarDto.getStrUbicaPoli());
+				criteria.andStrUbicaPoliEqualTo(temHumedalesRamsarDto.getStrUbicaPoli());
 			}
 			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblAreaLegal()) != null) {
 				criteria.andDblAreaLegalEqualTo(temHumedalesRamsarDto.getDblAreaLegal());
@@ -86,7 +87,7 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 				criteria.andIntIdEqualTo(temHumedalesRamsarDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrObserva()) != null) {
-				criteria.andStrObservaLike(temHumedalesRamsarDto.getStrObserva());
+				criteria.andStrObservaEqualTo(temHumedalesRamsarDto.getStrObserva());
 			}
 			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblShapeArea()) != null) {
 				criteria.andDblShapeAreaEqualTo(temHumedalesRamsarDto.getDblShapeArea());
@@ -96,7 +97,50 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 			}
 		}
 		
+		temHumedalesRamsarParamDef.setOrderByClause("de_nombre");
 		List<TemHumedalesRamsar>	 list	= temHumedalesRamsarMapper.selectByDefaultParameterGeometry(temHumedalesRamsarParamDef);
+		return list;
+	}
+	
+	public List<TemHumedalesRamsar> buscarCombo(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception {
+		TemHumedalesRamsarParamDef temHumedalesRamsarParamDef		= new TemHumedalesRamsarParamDef();
+		
+		Criteria criteria		= temHumedalesRamsarParamDef.createCriteria();
+		if(temHumedalesRamsarDto != null) {
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temHumedalesRamsarDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrCategorias()) != null) {
+				criteria.andStrCategoriasEqualTo(temHumedalesRamsarDto.getStrCategorias());
+			}
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrNombre()) != null) {
+				criteria.andStrNombreEqualTo(temHumedalesRamsarDto.getStrNombre());
+			}
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrBaseLegal()) != null) {
+				criteria.andStrBaseLegalEqualTo(temHumedalesRamsarDto.getStrBaseLegal());
+			}
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrUbicaPoli()) != null) {
+				criteria.andStrUbicaPoliEqualTo(temHumedalesRamsarDto.getStrUbicaPoli());
+			}
+			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblAreaLegal()) != null) {
+				criteria.andDblAreaLegalEqualTo(temHumedalesRamsarDto.getDblAreaLegal());
+			}
+			if(CadenaUtil.getInteNull(temHumedalesRamsarDto.getIntId()) != null) {
+				criteria.andIntIdEqualTo(temHumedalesRamsarDto.getIntId());
+			}
+			if(CadenaUtil.getStrNull(temHumedalesRamsarDto.getStrObserva()) != null) {
+				criteria.andStrObservaEqualTo(temHumedalesRamsarDto.getStrObserva());
+			}
+			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblShapeArea()) != null) {
+				criteria.andDblShapeAreaEqualTo(temHumedalesRamsarDto.getDblShapeArea());
+			}
+			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblShapeLen()) != null) {
+				criteria.andDblShapeLenEqualTo(temHumedalesRamsarDto.getDblShapeLen());
+			}
+		}
+		
+		temHumedalesRamsarParamDef.setOrderByClause("de_nombre");
+		List<TemHumedalesRamsar>	 list	= temHumedalesRamsarMapper.selectByDefaultParameterCombo(temHumedalesRamsarParamDef);
 		return list;
 	}
 	
@@ -104,6 +148,12 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 		TemHumedalesRamsar temHumedalesRamsar		= new TemHumedalesRamsar();
 		BeanUtils.copyProperties(temHumedalesRamsarDto, temHumedalesRamsar);
 		return temHumedalesRamsarMapper.selectByPrimaryKey(temHumedalesRamsar);
+	}
+	
+	public TemHumedalesRamsar buscarGeometryById(TemHumedalesRamsarDto temHumedalesRamsarDto) throws Exception {
+		TemHumedalesRamsar temHumedalesRamsar		= new TemHumedalesRamsar();
+		BeanUtils.copyProperties(temHumedalesRamsarDto, temHumedalesRamsar);
+		return temHumedalesRamsarMapper.selectByPrimaryKeyGeometry(temHumedalesRamsar);
 	}
 	
 	@Transactional

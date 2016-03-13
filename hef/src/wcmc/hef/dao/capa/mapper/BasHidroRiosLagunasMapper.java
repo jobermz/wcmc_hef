@@ -11,7 +11,9 @@ public interface BasHidroRiosLagunasMapper {
 	
 	public List<BasHidroRiosLagunas> selectByDefaultParameter(BasHidroRiosLagunasParamDef basHidroRiosLagunasParamDef);
 	public List<BasHidroRiosLagunas> selectByDefaultParameterGeometry(BasHidroRiosLagunasParamDef basHidroRiosLagunasParamDef);
+	public List<BasHidroRiosLagunas> selectByDefaultParameterCombo(BasHidroRiosLagunasParamDef basHidroRiosLagunasParamDef);
 	public BasHidroRiosLagunas selectByPrimaryKey(BasHidroRiosLagunasKey basHidroRiosLagunasKey);
+	public BasHidroRiosLagunas selectByPrimaryKeyGeometry(BasHidroRiosLagunasKey basHidroRiosLagunasKey);
 	public int insertSelective(BasHidroRiosLagunas basHidroRiosLagunas);
 	public int updateByPrimaryKeySelective(BasHidroRiosLagunas basHidroRiosLagunas);
 	public int deleteByPrimaryKey(BasHidroRiosLagunasKey basHidroRiosLagunasKey);

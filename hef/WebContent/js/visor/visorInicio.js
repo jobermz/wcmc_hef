@@ -20,7 +20,7 @@ $(document).ready(function() {
 	$(document).bind('click', function(e) {
 		$('#idDivRightClick').css("display", "none");
 		if(!activarSeleccionarAreaDesdeMapa) {
-			$(".clsTituloCapaActiva").css("display","none");
+//			$(".clsTituloCapaActiva").css("display","none");
 		}
 		return true;
 	});

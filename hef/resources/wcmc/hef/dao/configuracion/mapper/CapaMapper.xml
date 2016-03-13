@@ -16,6 +16,9 @@
 		<result column="de_wmscapa" property="strWmsCapas" jdbcType="VARCHAR"/>
 		<result column="de_wfsurl" property="strWfsUrl" jdbcType="VARCHAR"/>
 		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+		<result column="de_es_selec_apa" property="strEsSelecApa" jdbcType="VARCHAR"/>
+		<result column="de_es_filtro_acl" property="strEsFiltroAcl" jdbcType="VARCHAR"/>
+		<result column="de_es_centrar_mapa" property="strEsCentrarMapa" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaParamDef">
 		select
@@ -79,6 +82,15 @@
 			<if test="strAutor != null">
 				de_autor,
 			</if>
+			<if test="strEsSelecApa != null">
+				de_es_selec_apa,
+			</if>
+			<if test="strEsFiltroAcl != null">
+				de_es_filtro_acl,
+			</if>
+			<if test="strEsCentrarMapa != null">
+				de_es_centrar_mapa,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="intGrupoCapas != null">
@@ -113,6 +125,15 @@
 			</if>
 			<if test="strAutor != null">
 				#{strAutor, jdbcType=INTEGER},
+			</if>
+			<if test="strEsSelecApa != null">
+				#{strEsSelecApa, jdbcType=VARCHAR},
+			</if>
+			<if test="strEsFiltroAcl != null">
+				#{strEsFiltroAcl, jdbcType=VARCHAR},
+			</if>
+			<if test="strEsCentrarMapa != null">
+				#{strEsCentrarMapa, jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -151,6 +172,15 @@
 			</if>
 			<if test="strAutor != null">
 				de_autor = #{strAutor,jdbcType=INTEGER},
+			</if>
+			<if test="strEsSelecApa != null">
+				de_es_selec_apa = #{strEsSelecApa,jdbcType=VARCHAR},
+			</if>
+			<if test="strEsFiltroAcl != null">
+				de_es_filtro_acl = #{strEsFiltroAcl,jdbcType=VARCHAR},
+			</if>
+			<if test="strEsCentrarMapa != null">
+				de_es_centrar_mapa = #{strEsCentrarMapa,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
@@ -207,6 +237,9 @@
 		de_wmscapa, 
 		de_wfsurl, 
 		fc_fecreg,
-		nm_orden
+		nm_orden,
+		de_es_selec_apa,
+		de_es_filtro_acl,
+		de_es_centrar_mapa
 	</sql>
 </mapper>

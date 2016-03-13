@@ -31,11 +31,12 @@ public class TemIndiceImportanciaBiologicaServiceImpl implements TemIndiceImport
 			}
 		}
 		
+		temIndiceImportanciaBiologicaParamDef.setOrderByClause("ha_imp_glob");
 		List<TemIndiceImportanciaBiologica>	 list	= temIndiceImportanciaBiologicaMapper.selectByDefaultParameter(temIndiceImportanciaBiologicaParamDef);
 		return list;
 	}
 	
-		public List<TemIndiceImportanciaBiologica> buscarGeometry(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
+	public List<TemIndiceImportanciaBiologica> buscarGeometry(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
 		TemIndiceImportanciaBiologicaParamDef temIndiceImportanciaBiologicaParamDef		= new TemIndiceImportanciaBiologicaParamDef();
 		
 		Criteria criteria		= temIndiceImportanciaBiologicaParamDef.createCriteria();
@@ -48,7 +49,26 @@ public class TemIndiceImportanciaBiologicaServiceImpl implements TemIndiceImport
 			}
 		}
 		
+		temIndiceImportanciaBiologicaParamDef.setOrderByClause("ha_imp_glob");
 		List<TemIndiceImportanciaBiologica>	 list	= temIndiceImportanciaBiologicaMapper.selectByDefaultParameterGeometry(temIndiceImportanciaBiologicaParamDef);
+		return list;
+	}
+	
+	public List<TemIndiceImportanciaBiologica> buscarCombo(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
+		TemIndiceImportanciaBiologicaParamDef temIndiceImportanciaBiologicaParamDef		= new TemIndiceImportanciaBiologicaParamDef();
+		
+		Criteria criteria		= temIndiceImportanciaBiologicaParamDef.createCriteria();
+		if(temIndiceImportanciaBiologicaDto != null) {
+			if(CadenaUtil.getStrNull(temIndiceImportanciaBiologicaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temIndiceImportanciaBiologicaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getDoubNull(temIndiceImportanciaBiologicaDto.getDblImpGlob()) != null) {
+				criteria.andDblImpGlobEqualTo(temIndiceImportanciaBiologicaDto.getDblImpGlob());
+			}
+		}
+		
+		temIndiceImportanciaBiologicaParamDef.setOrderByClause("ha_imp_glob");
+		List<TemIndiceImportanciaBiologica>	 list	= temIndiceImportanciaBiologicaMapper.selectByDefaultParameterCombo(temIndiceImportanciaBiologicaParamDef);
 		return list;
 	}
 	
@@ -56,6 +76,12 @@ public class TemIndiceImportanciaBiologicaServiceImpl implements TemIndiceImport
 		TemIndiceImportanciaBiologica temIndiceImportanciaBiologica		= new TemIndiceImportanciaBiologica();
 		BeanUtils.copyProperties(temIndiceImportanciaBiologicaDto, temIndiceImportanciaBiologica);
 		return temIndiceImportanciaBiologicaMapper.selectByPrimaryKey(temIndiceImportanciaBiologica);
+	}
+	
+	public TemIndiceImportanciaBiologica buscarGeometryById(TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto) throws Exception {
+		TemIndiceImportanciaBiologica temIndiceImportanciaBiologica		= new TemIndiceImportanciaBiologica();
+		BeanUtils.copyProperties(temIndiceImportanciaBiologicaDto, temIndiceImportanciaBiologica);
+		return temIndiceImportanciaBiologicaMapper.selectByPrimaryKeyGeometry(temIndiceImportanciaBiologica);
 	}
 	
 	@Transactional

@@ -26,6 +26,10 @@ public class CapaDepartamentoServiceImpl implements CapaDepartamentoService {
 			if(CadenaUtil.getStrNull(capaDepartamentoDto.getStrIdDepartamento()) != null) {
 				criteria.andStrIdDepartamentoLike(capaDepartamentoDto.getStrIdDepartamento());
 			}
+			if(CadenaUtil.getStrNull(capaDepartamentoDto.getStrIdDepartamento()) != null) {
+				criteria.andStrIdDepartamentoEqualTo(capaDepartamentoDto.getStrIdDepartamento());
+			}
+			
 			if(CadenaUtil.getStrNull(capaDepartamentoDto.getStrNombre()) != null) {
 				criteria.andStrNombreLike(capaDepartamentoDto.getStrNombre());
 			}

@@ -27,7 +27,7 @@ public class CapaDistritoServiceImpl implements CapaDistritoService {
 				criteria.andStrIdDistritoLike(capaDistritoDto.getStrIdDistrito());
 			}
 			if(CadenaUtil.getStrNull(capaDistritoDto.getStrIdProvincia()) != null) {
-				criteria.andStrIdProvinciaLike(capaDistritoDto.getStrIdProvincia());
+				criteria.andStrIdProvinciaEqualTo(capaDistritoDto.getStrIdProvincia());
 			}
 			if(CadenaUtil.getStrNull(capaDistritoDto.getStrIdDepartamento()) != null) {
 				criteria.andStrIdDepartamentoLike(capaDistritoDto.getStrIdDepartamento());

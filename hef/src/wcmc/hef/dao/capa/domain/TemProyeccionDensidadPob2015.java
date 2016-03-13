@@ -27,28 +27,7 @@ public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Ke
 	private String strTotal2015;
 	private Double dblArea;
 	private Double dblPopDens;
-	private String timFechaRegistroFecha;
-	private String timFechaRegistroHora;
 	
-	public String getTimFechaRegistroFecha() {
-		return timFechaRegistroFecha;
-	}
-	public void setTimFechaRegistroFecha(String timFechaRegistroFecha) {
-		this.timFechaRegistroFecha = timFechaRegistroFecha;
-	}
-	public String getTimFechaRegistroHora() {
-		return timFechaRegistroHora;
-	}
-	public void setTimFechaRegistroHora(String timFechaRegistroHora) {
-		this.timFechaRegistroHora = timFechaRegistroHora;
-	}
-	public String getTimFechaRegistroFechaHora() {
-		return timFechaRegistroFecha + " " + timFechaRegistroHora;
-	}
-	public void setLngFechaRegistro(Long lngfechaRegistro) {
-		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
-		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
-	}
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}
@@ -174,13 +153,6 @@ public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Ke
 	}
 	public void setDblPopDens(Double dblPopDens) {
 		this.dblPopDens = dblPopDens;
-	}
-	public Date getTimFechaRegistro() {
-		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
-	}
-	public void setTimFechaRegistro(Date timFechaRegistro) {
-		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
-		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
 	}
 	
 }

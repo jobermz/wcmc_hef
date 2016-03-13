@@ -16,7 +16,6 @@
 		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
 		<result column="ha_perimeter" property="dblPerimeter" jdbcType="DOUBLE"/>
 		<result column="ha_hectares" property="dblHectares" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoParamDef">
 		select
@@ -47,9 +46,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_concesiones_ecoturismo as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_concesiones_ecoturismo as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemConcesionesEcoturismoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesEcoturismoKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_concesiones_ecoturismo as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -101,9 +122,6 @@
 			<if test="dblHectares != null">
 				ha_hectares,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -144,9 +162,6 @@
 			</if>
 			<if test="dblHectares != null">
 				#{dblHectares, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -191,9 +206,6 @@
 			</if>
 			<if test="dblHectares != null">
 				ha_hectares = #{dblHectares,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -250,8 +262,7 @@
 		de_docum, 
 		de_situacion, 
 		ha_perimeter, 
-		ha_hectares, 
-		fc_fecreg
+		ha_hectares
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -267,8 +278,23 @@
 		de_docum, 
 		de_situacion, 
 		ha_perimeter, 
-		ha_hectares, 
-		fc_fecreg
+		ha_hectares
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_id, 
+		de_anio, 
+		de_modalidad, 
+		de_titular, 
+		de_contrato, 
+		ha_area_sig, 
+		ha_area_aprob, 
+		de_region, 
+		de_docum, 
+		de_situacion, 
+		ha_perimeter, 
+		ha_hectares
 	</sql>
 
 </mapper>

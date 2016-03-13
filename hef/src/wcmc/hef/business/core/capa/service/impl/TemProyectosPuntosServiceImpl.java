@@ -27,69 +27,70 @@ public class TemProyectosPuntosServiceImpl implements TemProyectosPuntosService 
 				criteria.andStrTheGeomIntersectsTo(temProyectosPuntosDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temProyectosPuntosDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temProyectosPuntosDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrIniciativa()) != null) {
-				criteria.andStrIniciativaLike(temProyectosPuntosDto.getStrIniciativa());
+				criteria.andStrIniciativaEqualTo(temProyectosPuntosDto.getStrIniciativa());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrReferencia()) != null) {
-				criteria.andStrReferenciaLike(temProyectosPuntosDto.getStrReferencia());
+				criteria.andStrReferenciaEqualTo(temProyectosPuntosDto.getStrReferencia());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrRegionGeo()) != null) {
-				criteria.andStrRegionGeoLike(temProyectosPuntosDto.getStrRegionGeo());
+				criteria.andStrRegionGeoEqualTo(temProyectosPuntosDto.getStrRegionGeo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDetalleDe()) != null) {
-				criteria.andStrDetalleDeLike(temProyectosPuntosDto.getStrDetalleDe());
+				criteria.andStrDetalleDeEqualTo(temProyectosPuntosDto.getStrDetalleDe());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrOtros()) != null) {
-				criteria.andStrOtrosLike(temProyectosPuntosDto.getStrOtros());
+				criteria.andStrOtrosEqualTo(temProyectosPuntosDto.getStrOtros());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaInic()) != null) {
-				criteria.andStrFechaInicLike(temProyectosPuntosDto.getStrFechaInic());
+				criteria.andStrFechaInicEqualTo(temProyectosPuntosDto.getStrFechaInic());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaTerm()) != null) {
-				criteria.andStrFechaTermLike(temProyectosPuntosDto.getStrFechaTerm());
+				criteria.andStrFechaTermEqualTo(temProyectosPuntosDto.getStrFechaTerm());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrResultados()) != null) {
-				criteria.andStrResultadosLike(temProyectosPuntosDto.getStrResultados());
+				criteria.andStrResultadosEqualTo(temProyectosPuntosDto.getStrResultados());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCooperante()) != null) {
-				criteria.andStrCooperanteLike(temProyectosPuntosDto.getStrCooperante());
+				criteria.andStrCooperanteEqualTo(temProyectosPuntosDto.getStrCooperante());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrAdministra()) != null) {
-				criteria.andStrAdministraLike(temProyectosPuntosDto.getStrAdministra());
+				criteria.andStrAdministraEqualTo(temProyectosPuntosDto.getStrAdministra());
 			}
 			if(CadenaUtil.getDoubNull(temProyectosPuntosDto.getDblUsd()) != null) {
 				criteria.andDblUsdEqualTo(temProyectosPuntosDto.getDblUsd());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstitucio()) != null) {
-				criteria.andStrInstitucioLike(temProyectosPuntosDto.getStrInstitucio());
+				criteria.andStrInstitucioEqualTo(temProyectosPuntosDto.getStrInstitucio());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrPersonaCo()) != null) {
-				criteria.andStrPersonaCoLike(temProyectosPuntosDto.getStrPersonaCo());
+				criteria.andStrPersonaCoEqualTo(temProyectosPuntosDto.getStrPersonaCo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCargo()) != null) {
-				criteria.andStrCargoLike(temProyectosPuntosDto.getStrCargo());
+				criteria.andStrCargoEqualTo(temProyectosPuntosDto.getStrCargo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrContacto()) != null) {
-				criteria.andStrContactoLike(temProyectosPuntosDto.getStrContacto());
+				criteria.andStrContactoEqualTo(temProyectosPuntosDto.getStrContacto());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDireccion()) != null) {
-				criteria.andStrDireccionLike(temProyectosPuntosDto.getStrDireccion());
+				criteria.andStrDireccionEqualTo(temProyectosPuntosDto.getStrDireccion());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstituc1()) != null) {
-				criteria.andStrInstituc1Like(temProyectosPuntosDto.getStrInstituc1());
+				criteria.andStrInstituc1EqualTo(temProyectosPuntosDto.getStrInstituc1());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrLink()) != null) {
-				criteria.andStrLinkLike(temProyectosPuntosDto.getStrLink());
+				criteria.andStrLinkEqualTo(temProyectosPuntosDto.getStrLink());
 			}
 		}
 		
+		temProyectosPuntosParamDef.setOrderByClause("de_iniciativa");
 		List<TemProyectosPuntos>	 list	= temProyectosPuntosMapper.selectByDefaultParameter(temProyectosPuntosParamDef);
 		return list;
 	}
 	
-		public List<TemProyectosPuntos> buscarGeometry(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception {
+	public List<TemProyectosPuntos> buscarGeometry(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception {
 		TemProyectosPuntosParamDef temProyectosPuntosParamDef		= new TemProyectosPuntosParamDef();
 		
 		Criteria criteria		= temProyectosPuntosParamDef.createCriteria();
@@ -98,65 +99,138 @@ public class TemProyectosPuntosServiceImpl implements TemProyectosPuntosService 
 				criteria.andStrTheGeomIntersectsTo(temProyectosPuntosDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temProyectosPuntosDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temProyectosPuntosDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrIniciativa()) != null) {
-				criteria.andStrIniciativaLike(temProyectosPuntosDto.getStrIniciativa());
+				criteria.andStrIniciativaEqualTo(temProyectosPuntosDto.getStrIniciativa());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrReferencia()) != null) {
-				criteria.andStrReferenciaLike(temProyectosPuntosDto.getStrReferencia());
+				criteria.andStrReferenciaEqualTo(temProyectosPuntosDto.getStrReferencia());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrRegionGeo()) != null) {
-				criteria.andStrRegionGeoLike(temProyectosPuntosDto.getStrRegionGeo());
+				criteria.andStrRegionGeoEqualTo(temProyectosPuntosDto.getStrRegionGeo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDetalleDe()) != null) {
-				criteria.andStrDetalleDeLike(temProyectosPuntosDto.getStrDetalleDe());
+				criteria.andStrDetalleDeEqualTo(temProyectosPuntosDto.getStrDetalleDe());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrOtros()) != null) {
-				criteria.andStrOtrosLike(temProyectosPuntosDto.getStrOtros());
+				criteria.andStrOtrosEqualTo(temProyectosPuntosDto.getStrOtros());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaInic()) != null) {
-				criteria.andStrFechaInicLike(temProyectosPuntosDto.getStrFechaInic());
+				criteria.andStrFechaInicEqualTo(temProyectosPuntosDto.getStrFechaInic());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaTerm()) != null) {
-				criteria.andStrFechaTermLike(temProyectosPuntosDto.getStrFechaTerm());
+				criteria.andStrFechaTermEqualTo(temProyectosPuntosDto.getStrFechaTerm());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrResultados()) != null) {
-				criteria.andStrResultadosLike(temProyectosPuntosDto.getStrResultados());
+				criteria.andStrResultadosEqualTo(temProyectosPuntosDto.getStrResultados());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCooperante()) != null) {
-				criteria.andStrCooperanteLike(temProyectosPuntosDto.getStrCooperante());
+				criteria.andStrCooperanteEqualTo(temProyectosPuntosDto.getStrCooperante());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrAdministra()) != null) {
-				criteria.andStrAdministraLike(temProyectosPuntosDto.getStrAdministra());
+				criteria.andStrAdministraEqualTo(temProyectosPuntosDto.getStrAdministra());
 			}
 			if(CadenaUtil.getDoubNull(temProyectosPuntosDto.getDblUsd()) != null) {
 				criteria.andDblUsdEqualTo(temProyectosPuntosDto.getDblUsd());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstitucio()) != null) {
-				criteria.andStrInstitucioLike(temProyectosPuntosDto.getStrInstitucio());
+				criteria.andStrInstitucioEqualTo(temProyectosPuntosDto.getStrInstitucio());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrPersonaCo()) != null) {
-				criteria.andStrPersonaCoLike(temProyectosPuntosDto.getStrPersonaCo());
+				criteria.andStrPersonaCoEqualTo(temProyectosPuntosDto.getStrPersonaCo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCargo()) != null) {
-				criteria.andStrCargoLike(temProyectosPuntosDto.getStrCargo());
+				criteria.andStrCargoEqualTo(temProyectosPuntosDto.getStrCargo());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrContacto()) != null) {
-				criteria.andStrContactoLike(temProyectosPuntosDto.getStrContacto());
+				criteria.andStrContactoEqualTo(temProyectosPuntosDto.getStrContacto());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDireccion()) != null) {
-				criteria.andStrDireccionLike(temProyectosPuntosDto.getStrDireccion());
+				criteria.andStrDireccionEqualTo(temProyectosPuntosDto.getStrDireccion());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstituc1()) != null) {
-				criteria.andStrInstituc1Like(temProyectosPuntosDto.getStrInstituc1());
+				criteria.andStrInstituc1EqualTo(temProyectosPuntosDto.getStrInstituc1());
 			}
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrLink()) != null) {
-				criteria.andStrLinkLike(temProyectosPuntosDto.getStrLink());
+				criteria.andStrLinkEqualTo(temProyectosPuntosDto.getStrLink());
 			}
 		}
 		
+		temProyectosPuntosParamDef.setOrderByClause("de_iniciativa");
 		List<TemProyectosPuntos>	 list	= temProyectosPuntosMapper.selectByDefaultParameterGeometry(temProyectosPuntosParamDef);
+		return list;
+	}
+	
+	public List<TemProyectosPuntos> buscarCombo(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception {
+		TemProyectosPuntosParamDef temProyectosPuntosParamDef		= new TemProyectosPuntosParamDef();
+		
+		Criteria criteria		= temProyectosPuntosParamDef.createCriteria();
+		if(temProyectosPuntosDto != null) {
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temProyectosPuntosDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrNombre()) != null) {
+				criteria.andStrNombreEqualTo(temProyectosPuntosDto.getStrNombre());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrIniciativa()) != null) {
+				criteria.andStrIniciativaEqualTo(temProyectosPuntosDto.getStrIniciativa());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrReferencia()) != null) {
+				criteria.andStrReferenciaEqualTo(temProyectosPuntosDto.getStrReferencia());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrRegionGeo()) != null) {
+				criteria.andStrRegionGeoEqualTo(temProyectosPuntosDto.getStrRegionGeo());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDetalleDe()) != null) {
+				criteria.andStrDetalleDeEqualTo(temProyectosPuntosDto.getStrDetalleDe());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrOtros()) != null) {
+				criteria.andStrOtrosEqualTo(temProyectosPuntosDto.getStrOtros());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaInic()) != null) {
+				criteria.andStrFechaInicEqualTo(temProyectosPuntosDto.getStrFechaInic());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrFechaTerm()) != null) {
+				criteria.andStrFechaTermEqualTo(temProyectosPuntosDto.getStrFechaTerm());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrResultados()) != null) {
+				criteria.andStrResultadosEqualTo(temProyectosPuntosDto.getStrResultados());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCooperante()) != null) {
+				criteria.andStrCooperanteEqualTo(temProyectosPuntosDto.getStrCooperante());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrAdministra()) != null) {
+				criteria.andStrAdministraEqualTo(temProyectosPuntosDto.getStrAdministra());
+			}
+			if(CadenaUtil.getDoubNull(temProyectosPuntosDto.getDblUsd()) != null) {
+				criteria.andDblUsdEqualTo(temProyectosPuntosDto.getDblUsd());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstitucio()) != null) {
+				criteria.andStrInstitucioEqualTo(temProyectosPuntosDto.getStrInstitucio());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrPersonaCo()) != null) {
+				criteria.andStrPersonaCoEqualTo(temProyectosPuntosDto.getStrPersonaCo());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrCargo()) != null) {
+				criteria.andStrCargoEqualTo(temProyectosPuntosDto.getStrCargo());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrContacto()) != null) {
+				criteria.andStrContactoEqualTo(temProyectosPuntosDto.getStrContacto());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrDireccion()) != null) {
+				criteria.andStrDireccionEqualTo(temProyectosPuntosDto.getStrDireccion());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrInstituc1()) != null) {
+				criteria.andStrInstituc1EqualTo(temProyectosPuntosDto.getStrInstituc1());
+			}
+			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrLink()) != null) {
+				criteria.andStrLinkEqualTo(temProyectosPuntosDto.getStrLink());
+			}
+		}
+		
+		temProyectosPuntosParamDef.setOrderByClause("de_iniciativa");
+		List<TemProyectosPuntos>	 list	= temProyectosPuntosMapper.selectByDefaultParameterCombo(temProyectosPuntosParamDef);
 		return list;
 	}
 	
@@ -164,6 +238,12 @@ public class TemProyectosPuntosServiceImpl implements TemProyectosPuntosService 
 		TemProyectosPuntos temProyectosPuntos		= new TemProyectosPuntos();
 		BeanUtils.copyProperties(temProyectosPuntosDto, temProyectosPuntos);
 		return temProyectosPuntosMapper.selectByPrimaryKey(temProyectosPuntos);
+	}
+	
+	public TemProyectosPuntos buscarGeometryById(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception {
+		TemProyectosPuntos temProyectosPuntos		= new TemProyectosPuntos();
+		BeanUtils.copyProperties(temProyectosPuntosDto, temProyectosPuntos);
+		return temProyectosPuntosMapper.selectByPrimaryKeyGeometry(temProyectosPuntos);
 	}
 	
 	@Transactional

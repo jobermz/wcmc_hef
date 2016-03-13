@@ -30,21 +30,22 @@ public class TemSinanpeAmortiguamientoServiceImpl implements TemSinanpeAmortigua
 				criteria.andLngObjectidEqualTo(temSinanpeAmortiguamientoDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaNomb()) != null) {
-				criteria.andStrZaNombLike(temSinanpeAmortiguamientoDto.getStrZaNomb());
+				criteria.andStrZaNombEqualTo(temSinanpeAmortiguamientoDto.getStrZaNomb());
 			}
 			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaBale()) != null) {
-				criteria.andStrZaBaleLike(temSinanpeAmortiguamientoDto.getStrZaBale());
+				criteria.andStrZaBaleEqualTo(temSinanpeAmortiguamientoDto.getStrZaBale());
 			}
 			if(temSinanpeAmortiguamientoDto.getDteZaFecr() != null) {
 				criteria.andDteZaFecrEqualTo(temSinanpeAmortiguamientoDto.getDteZaFecr());
 			}
 		}
 		
+		temSinanpeAmortiguamientoParamDef.setOrderByClause("de_za_nomb");
 		List<TemSinanpeAmortiguamiento>	 list	= temSinanpeAmortiguamientoMapper.selectByDefaultParameter(temSinanpeAmortiguamientoParamDef);
 		return list;
 	}
 	
-		public List<TemSinanpeAmortiguamiento> buscarGeometry(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception {
+	public List<TemSinanpeAmortiguamiento> buscarGeometry(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception {
 		TemSinanpeAmortiguamientoParamDef temSinanpeAmortiguamientoParamDef		= new TemSinanpeAmortiguamientoParamDef();
 		
 		Criteria criteria		= temSinanpeAmortiguamientoParamDef.createCriteria();
@@ -56,17 +57,45 @@ public class TemSinanpeAmortiguamientoServiceImpl implements TemSinanpeAmortigua
 				criteria.andLngObjectidEqualTo(temSinanpeAmortiguamientoDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaNomb()) != null) {
-				criteria.andStrZaNombLike(temSinanpeAmortiguamientoDto.getStrZaNomb());
+				criteria.andStrZaNombEqualTo(temSinanpeAmortiguamientoDto.getStrZaNomb());
 			}
 			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaBale()) != null) {
-				criteria.andStrZaBaleLike(temSinanpeAmortiguamientoDto.getStrZaBale());
+				criteria.andStrZaBaleEqualTo(temSinanpeAmortiguamientoDto.getStrZaBale());
 			}
 			if(temSinanpeAmortiguamientoDto.getDteZaFecr() != null) {
 				criteria.andDteZaFecrEqualTo(temSinanpeAmortiguamientoDto.getDteZaFecr());
 			}
 		}
 		
+		temSinanpeAmortiguamientoParamDef.setOrderByClause("de_za_nomb");
 		List<TemSinanpeAmortiguamiento>	 list	= temSinanpeAmortiguamientoMapper.selectByDefaultParameterGeometry(temSinanpeAmortiguamientoParamDef);
+		return list;
+	}
+	
+	public List<TemSinanpeAmortiguamiento> buscarCombo(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception {
+		TemSinanpeAmortiguamientoParamDef temSinanpeAmortiguamientoParamDef		= new TemSinanpeAmortiguamientoParamDef();
+		
+		Criteria criteria		= temSinanpeAmortiguamientoParamDef.createCriteria();
+		if(temSinanpeAmortiguamientoDto != null) {
+			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temSinanpeAmortiguamientoDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temSinanpeAmortiguamientoDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temSinanpeAmortiguamientoDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaNomb()) != null) {
+				criteria.andStrZaNombEqualTo(temSinanpeAmortiguamientoDto.getStrZaNomb());
+			}
+			if(CadenaUtil.getStrNull(temSinanpeAmortiguamientoDto.getStrZaBale()) != null) {
+				criteria.andStrZaBaleEqualTo(temSinanpeAmortiguamientoDto.getStrZaBale());
+			}
+			if(temSinanpeAmortiguamientoDto.getDteZaFecr() != null) {
+				criteria.andDteZaFecrEqualTo(temSinanpeAmortiguamientoDto.getDteZaFecr());
+			}
+		}
+		
+		temSinanpeAmortiguamientoParamDef.setOrderByClause("de_za_nomb");
+		List<TemSinanpeAmortiguamiento>	 list	= temSinanpeAmortiguamientoMapper.selectByDefaultParameterCombo(temSinanpeAmortiguamientoParamDef);
 		return list;
 	}
 	
@@ -74,6 +103,12 @@ public class TemSinanpeAmortiguamientoServiceImpl implements TemSinanpeAmortigua
 		TemSinanpeAmortiguamiento temSinanpeAmortiguamiento		= new TemSinanpeAmortiguamiento();
 		BeanUtils.copyProperties(temSinanpeAmortiguamientoDto, temSinanpeAmortiguamiento);
 		return temSinanpeAmortiguamientoMapper.selectByPrimaryKey(temSinanpeAmortiguamiento);
+	}
+	
+	public TemSinanpeAmortiguamiento buscarGeometryById(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception {
+		TemSinanpeAmortiguamiento temSinanpeAmortiguamiento		= new TemSinanpeAmortiguamiento();
+		BeanUtils.copyProperties(temSinanpeAmortiguamientoDto, temSinanpeAmortiguamiento);
+		return temSinanpeAmortiguamientoMapper.selectByPrimaryKeyGeometry(temSinanpeAmortiguamiento);
 	}
 	
 	@Transactional

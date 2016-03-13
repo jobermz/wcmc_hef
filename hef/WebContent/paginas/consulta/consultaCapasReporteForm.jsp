@@ -145,17 +145,17 @@
 			
 			<!-- Capas de tipo raster -->
 			
-			<s:if test="%{#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadEspeciesPeligroExtincionReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad especies peligro extincion  <span class="badge"><s:property value="%{#session.reporte.listTemBiodiversidadEspeciesPeligroExtincion.size()}" /></span></a>
+			<s:if test="%{#session.reporte.beanTemBiodiversidadEspeciesPeligroExtincion!=null}">
+				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadEspeciesPeligroExtincionReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad especies peligro extincion  <span class="badge">1</span></a>
 			</s:if>
-			<s:if test="%{#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad riqueza potencial especies fauna endemica  <span class="badge"><s:property value="%{#session.reporte.listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size()}" /></span></a>
+			<s:if test="%{#session.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica!=null}">
+				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem biodiversidad riqueza potencial especies fauna endemica  <span class="badge">1</span></a>
 			</s:if>
-			<s:if test="%{#session.reporte.listTemDensidadCarbonoAerea.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temDensidadCarbonoAereaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem densidad carbono aerea  <span class="badge"><s:property value="%{#session.reporte.listTemDensidadCarbonoAerea.size()}" /></span></a>
+			<s:if test="%{#session.reporte.beanTemDensidadCarbonoAerea!=null}">
+				<a href="#" onclick="mostrarDetaRepo('temDensidadCarbonoAereaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem densidad carbono aerea  <span class="badge">1</span></a>
 			</s:if>
-			<s:if test="%{#session.reporte.listTemRiesgoErosionHidrica.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('temRiesgoErosionHidricaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem riesgo erosion hidrica  <span class="badge"><s:property value="%{#session.reporte.listTemRiesgoErosionHidrica.size()}" /></span></a>
+			<s:if test="%{#session.reporte.beanTemRiesgoErosionHidrica!=null}">
+				<a href="#" onclick="mostrarDetaRepo('temRiesgoErosionHidricaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem riesgo erosion hidrica  <span class="badge">1</span></a>
 			</s:if>
 			
 			</div>

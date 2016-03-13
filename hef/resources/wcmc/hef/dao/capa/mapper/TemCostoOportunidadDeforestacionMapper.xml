@@ -6,7 +6,6 @@
 		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
 		<result column="de_nombdist" property="strNombdist" jdbcType="VARCHAR"/>
 		<result column="ha_cop_tco2_h" property="dblCopTco2H" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionParamDef">
 		select
@@ -37,9 +36,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_costo_oportunidad_deforestacion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_costo_oportunidad_deforestacion as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemCostoOportunidadDeforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacionKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_costo_oportunidad_deforestacion as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -61,9 +82,6 @@
 			<if test="dblCopTco2H != null">
 				ha_cop_tco2_h,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -74,9 +92,6 @@
 			</if>
 			<if test="dblCopTco2H != null">
 				#{dblCopTco2H, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -91,9 +106,6 @@
 			</if>
 			<if test="dblCopTco2H != null">
 				ha_cop_tco2_h = #{dblCopTco2H,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -140,15 +152,19 @@
 		cd_gid, 
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
 		de_nombdist, 
-		ha_cop_tco2_h, 
-		fc_fecreg
+		ha_cop_tco2_h
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
 		ST_AsText(si_the_geom) as si_the_geom, 
 		de_nombdist, 
-		ha_cop_tco2_h, 
-		fc_fecreg
+		ha_cop_tco2_h
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_nombdist, 
+		ha_cop_tco2_h
 	</sql>
 
 </mapper>

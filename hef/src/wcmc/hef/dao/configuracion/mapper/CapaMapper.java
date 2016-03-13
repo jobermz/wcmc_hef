@@ -16,6 +16,5 @@ public interface CapaMapper {
 	public int deleteByPrimaryKey(CapaKey capaKey);
 	
 	public int lastSequence();
-
 	
 }

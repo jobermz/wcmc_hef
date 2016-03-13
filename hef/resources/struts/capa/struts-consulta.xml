@@ -16,6 +16,17 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
+		<action name="consultaCombosACL" class="wcmc.hef.web.capa.action.ConsultaCombosACLAction" method="consultar">
+			<result name="success" type="tiles">consulta_combos_acl_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaCombosACLFuxion" class="wcmc.hef.web.capa.action.ConsultaCombosACLFuxionAction" method="consultar">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		
 	</package>
 </struts>
 

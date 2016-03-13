@@ -30,10 +30,10 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 				criteria.andLngObjectidEqualTo(temViasTrochasDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temViasTrochasDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temViasTrochasDto.getStrEstado());
 			}
 			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrDescrip()) != null) {
-				criteria.andStrDescripLike(temViasTrochasDto.getStrDescrip());
+				criteria.andStrDescripEqualTo(temViasTrochasDto.getStrDescrip());
 			}
 			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblShapeLeng()) != null) {
 				criteria.andDblShapeLengEqualTo(temViasTrochasDto.getDblShapeLeng());
@@ -47,7 +47,7 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 		return list;
 	}
 	
-		public List<TemViasTrochas> buscarGeometry(TemViasTrochasDto temViasTrochasDto) throws Exception {
+	public List<TemViasTrochas> buscarGeometry(TemViasTrochasDto temViasTrochasDto) throws Exception {
 		TemViasTrochasParamDef temViasTrochasParamDef		= new TemViasTrochasParamDef();
 		
 		Criteria criteria		= temViasTrochasParamDef.createCriteria();
@@ -59,10 +59,10 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 				criteria.andLngObjectidEqualTo(temViasTrochasDto.getLngObjectid());
 			}
 			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temViasTrochasDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temViasTrochasDto.getStrEstado());
 			}
 			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrDescrip()) != null) {
-				criteria.andStrDescripLike(temViasTrochasDto.getStrDescrip());
+				criteria.andStrDescripEqualTo(temViasTrochasDto.getStrDescrip());
 			}
 			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblShapeLeng()) != null) {
 				criteria.andDblShapeLengEqualTo(temViasTrochasDto.getDblShapeLeng());
@@ -76,10 +76,45 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 		return list;
 	}
 	
+	public List<TemViasTrochas> buscarCombo(TemViasTrochasDto temViasTrochasDto) throws Exception {
+		TemViasTrochasParamDef temViasTrochasParamDef		= new TemViasTrochasParamDef();
+		
+		Criteria criteria		= temViasTrochasParamDef.createCriteria();
+		if(temViasTrochasDto != null) {
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temViasTrochasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temViasTrochasDto.getLngObjectid()) != null) {
+				criteria.andLngObjectidEqualTo(temViasTrochasDto.getLngObjectid());
+			}
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrEstado()) != null) {
+				criteria.andStrEstadoEqualTo(temViasTrochasDto.getStrEstado());
+			}
+			if(CadenaUtil.getStrNull(temViasTrochasDto.getStrDescrip()) != null) {
+				criteria.andStrDescripEqualTo(temViasTrochasDto.getStrDescrip());
+			}
+			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblShapeLeng()) != null) {
+				criteria.andDblShapeLengEqualTo(temViasTrochasDto.getDblShapeLeng());
+			}
+			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblStLength()) != null) {
+				criteria.andDblStLengthEqualTo(temViasTrochasDto.getDblStLength());
+			}
+		}
+		
+		List<TemViasTrochas>	 list	= temViasTrochasMapper.selectByDefaultParameterCombo(temViasTrochasParamDef);
+		return list;
+	}
+	
 	public TemViasTrochas buscarById(TemViasTrochasDto temViasTrochasDto) throws Exception {
 		TemViasTrochas temViasTrochas		= new TemViasTrochas();
 		BeanUtils.copyProperties(temViasTrochasDto, temViasTrochas);
 		return temViasTrochasMapper.selectByPrimaryKey(temViasTrochas);
+	}
+	
+	public TemViasTrochas buscarGeometryById(TemViasTrochasDto temViasTrochasDto) throws Exception {
+		TemViasTrochas temViasTrochas		= new TemViasTrochas();
+		BeanUtils.copyProperties(temViasTrochasDto, temViasTrochas);
+		return temViasTrochasMapper.selectByPrimaryKeyGeometry(temViasTrochas);
 	}
 	
 	@Transactional

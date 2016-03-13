@@ -13,7 +13,7 @@
 		<div id="container">
 			<div class="row">
 				<div class="col-sm-6 col-xs-6 ">
-					<div class="text-center clsTituloCapaActiva" style="display: none;">&nbsp;</div>
+					<div class="text-center clsTituloCapaActiva" >&nbsp;</div>
 				</div>
 				<div class="col-sm-6 col-xs-6">
 				<s:if test="%{#session.USUARIO_ACTUAL != null}">

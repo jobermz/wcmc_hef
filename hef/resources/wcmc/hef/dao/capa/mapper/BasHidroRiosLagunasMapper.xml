@@ -19,7 +19,6 @@
 		<result column="cd_titicacg_i" property="lngTiticacgI" jdbcType="INTEGER"/>
 		<result column="de_dxf_layer" property="strDxfLayer" jdbcType="VARCHAR"/>
 		<result column="de_dxf_text" property="strDxfText" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasParamDef">
 		select
@@ -50,9 +49,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.bas_hidro_rios_lagunas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_hidro_rios_lagunas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="BasHidroRiosLagunasMap" parameterType="wcmc.hef.dao.capa.domain.BasHidroRiosLagunasKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.bas_hidro_rios_lagunas as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -113,9 +134,6 @@
 			<if test="strDxfText != null">
 				de_dxf_text,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -165,9 +183,6 @@
 			</if>
 			<if test="strDxfText != null">
 				#{strDxfText, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -221,9 +236,6 @@
 			</if>
 			<if test="strDxfText != null">
 				de_dxf_text = #{strDxfText,jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -283,8 +295,7 @@
 		cd_titicacg_, 
 		cd_titicacg_i, 
 		de_dxf_layer, 
-		de_dxf_text, 
-		fc_fecreg
+		de_dxf_text
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -303,8 +314,26 @@
 		cd_titicacg_, 
 		cd_titicacg_i, 
 		de_dxf_layer, 
-		de_dxf_text, 
-		fc_fecreg
+		de_dxf_text
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_count, 
+		de_first_idpr, 
+		de_nombprov, 
+		de_first_nomb, 
+		de_last_dcto, 
+		de_last_ley, 
+		de_first_fech, 
+		de_last_fecha, 
+		ha_min_shape_, 
+		ha_area, 
+		ha_perimeter, 
+		cd_titicacg_, 
+		cd_titicacg_i, 
+		de_dxf_layer, 
+		de_dxf_text
 	</sql>
 
 </mapper>

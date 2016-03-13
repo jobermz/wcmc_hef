@@ -27,18 +27,19 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 				criteria.andStrTheGeomIntersectsTo(basLimDepartamentoDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrIddpto()) != null) {
-				criteria.andStrIddptoLike(basLimDepartamentoDto.getStrIddpto());
+				criteria.andStrIddptoEqualTo(basLimDepartamentoDto.getStrIddpto());
 			}
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrNombdep()) != null) {
-				criteria.andStrNombdepLike(basLimDepartamentoDto.getStrNombdep());
+				criteria.andStrNombdepEqualTo(basLimDepartamentoDto.getStrNombdep());
 			}
 		}
 		
+		basLimDepartamentoParamDef.setOrderByClause("de_nombdep");
 		List<BasLimDepartamento>	 list	= basLimDepartamentoMapper.selectByDefaultParameter(basLimDepartamentoParamDef);
 		return list;
 	}
 	
-		public List<BasLimDepartamento> buscarGeometry(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
+	public List<BasLimDepartamento> buscarGeometry(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
 		BasLimDepartamentoParamDef basLimDepartamentoParamDef		= new BasLimDepartamentoParamDef();
 		
 		Criteria criteria		= basLimDepartamentoParamDef.createCriteria();
@@ -47,14 +48,36 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 				criteria.andStrTheGeomIntersectsTo(basLimDepartamentoDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrIddpto()) != null) {
-				criteria.andStrIddptoLike(basLimDepartamentoDto.getStrIddpto());
+				criteria.andStrIddptoEqualTo(basLimDepartamentoDto.getStrIddpto());
 			}
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrNombdep()) != null) {
-				criteria.andStrNombdepLike(basLimDepartamentoDto.getStrNombdep());
+				criteria.andStrNombdepEqualTo(basLimDepartamentoDto.getStrNombdep());
 			}
 		}
 		
+		basLimDepartamentoParamDef.setOrderByClause("de_nombdep");
 		List<BasLimDepartamento>	 list	= basLimDepartamentoMapper.selectByDefaultParameterGeometry(basLimDepartamentoParamDef);
+		return list;
+	}
+	
+	public List<BasLimDepartamento> buscarCombo(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
+		BasLimDepartamentoParamDef basLimDepartamentoParamDef		= new BasLimDepartamentoParamDef();
+		
+		Criteria criteria		= basLimDepartamentoParamDef.createCriteria();
+		if(basLimDepartamentoDto != null) {
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basLimDepartamentoDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrIddpto()) != null) {
+				criteria.andStrIddptoEqualTo(basLimDepartamentoDto.getStrIddpto());
+			}
+			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrNombdep()) != null) {
+				criteria.andStrNombdepEqualTo(basLimDepartamentoDto.getStrNombdep());
+			}
+		}
+		
+		basLimDepartamentoParamDef.setOrderByClause("de_nombdep");
+		List<BasLimDepartamento>	 list	= basLimDepartamentoMapper.selectByDefaultParameterCombo(basLimDepartamentoParamDef);
 		return list;
 	}
 	
@@ -62,6 +85,12 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 		BasLimDepartamento basLimDepartamento		= new BasLimDepartamento();
 		BeanUtils.copyProperties(basLimDepartamentoDto, basLimDepartamento);
 		return basLimDepartamentoMapper.selectByPrimaryKey(basLimDepartamento);
+	}
+	
+	public BasLimDepartamento buscarGeometryById(BasLimDepartamentoDto basLimDepartamentoDto) throws Exception {
+		BasLimDepartamento basLimDepartamento		= new BasLimDepartamento();
+		BeanUtils.copyProperties(basLimDepartamentoDto, basLimDepartamento);
+		return basLimDepartamentoMapper.selectByPrimaryKeyGeometry(basLimDepartamento);
 	}
 	
 	@Transactional

@@ -11,7 +11,9 @@ public interface TemConcesionesMinerasMapper {
 	
 	public List<TemConcesionesMineras> selectByDefaultParameter(TemConcesionesMinerasParamDef temConcesionesMinerasParamDef);
 	public List<TemConcesionesMineras> selectByDefaultParameterGeometry(TemConcesionesMinerasParamDef temConcesionesMinerasParamDef);
+	public List<TemConcesionesMineras> selectByDefaultParameterCombo(TemConcesionesMinerasParamDef temConcesionesMinerasParamDef);
 	public TemConcesionesMineras selectByPrimaryKey(TemConcesionesMinerasKey temConcesionesMinerasKey);
+	public TemConcesionesMineras selectByPrimaryKeyGeometry(TemConcesionesMinerasKey temConcesionesMinerasKey);
 	public int insertSelective(TemConcesionesMineras temConcesionesMineras);
 	public int updateByPrimaryKeySelective(TemConcesionesMineras temConcesionesMineras);
 	public int deleteByPrimaryKey(TemConcesionesMinerasKey temConcesionesMinerasKey);

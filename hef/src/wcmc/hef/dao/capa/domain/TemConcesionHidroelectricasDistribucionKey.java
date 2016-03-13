@@ -5,6 +5,13 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionHidroelectricasDistribucionKey {
+	private Integer srlGid;
 	
+	public Integer getSrlGid() {
+		return srlGid;
+	}
+	public void setSrlGid(Integer srlGid) {
+		this.srlGid = srlGid;
+	}
 	
 }

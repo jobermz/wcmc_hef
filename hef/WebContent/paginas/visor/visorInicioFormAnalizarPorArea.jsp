@@ -51,12 +51,11 @@
 								      		Umbral
 								      	</div>
 							      	</div>
-							      	
 							      	<s:iterator value="#session.listCapasBase" var="capasBase">
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
-								      		<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBaseAPA">
+								      		<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBaseAPA" es-selec-mapa-acl="${capasBase.strEsSelecApaBoolean}">
 											${capasBase.strNombre}
 								      	</div>
 								      	<div class="col-xs-2 text-center">

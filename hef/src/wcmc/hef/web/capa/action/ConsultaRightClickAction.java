@@ -61,23 +61,17 @@ import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.business.core.capa.service.TemReservasTerritorialesIndigenasService;
 import wcmc.hef.business.core.capa.service.TemRiesgoErosionHidricaService;
 import wcmc.hef.business.core.capa.service.TemSinanpeAmortiguamientoService;
-import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasTotalesService;
+import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasService;
 import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTerritorialesService;
 import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BaseBeanVectorialDto;
-import wcmc.hef.business.core.capa.dto.TemBiodiversidadEspeciesPeligroExtincionDto;
-import wcmc.hef.business.core.capa.dto.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto;
-import wcmc.hef.business.core.capa.dto.TemDensidadCarbonoAereaDto;
-import wcmc.hef.business.core.capa.dto.TemRiesgoErosionHidricaDto;
+import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadEspeciesPeligroExtincion;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica;
-import wcmc.hef.dao.capa.domain.TemDensidadCarbonoAerea;
-import wcmc.hef.dao.capa.domain.TemRiesgoErosionHidrica;
+import wcmc.hef.dao.capa.domain.BeanRaster;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -148,8 +142,8 @@ import wcmc.hef.business.core.capa.dto.TemReservasTerritorialesIndigenasDto;
 import wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas;
 import wcmc.hef.business.core.capa.dto.TemSinanpeAmortiguamientoDto;
 import wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamiento;
-import wcmc.hef.business.core.capa.dto.TemSoeconComunidadesCampesinasTotalesDto;
-import wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasTotales;
+import wcmc.hef.business.core.capa.dto.TemSoeconComunidadesCampesinasDto;
+import wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinas;
 import wcmc.hef.business.core.capa.dto.TemSoeconSolicitudCreacionReservasTerritorialesDto;
 import wcmc.hef.dao.capa.domain.TemSoeconSolicitudCreacionReservasTerritoriales;
 import wcmc.hef.business.core.capa.dto.TemViaFerreaDto;
@@ -278,7 +272,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 	private TemSinanpeAmortiguamientoService temSinanpeAmortiguamientoService;
 
 	@Autowired
-	private TemSoeconComunidadesCampesinasTotalesService temSoeconComunidadesCampesinasTotalesService;
+	private TemSoeconComunidadesCampesinasService temSoeconComunidadesCampesinasService;
 
 	@Autowired
 	private TemSoeconSolicitudCreacionReservasTerritorialesService temSoeconSolicitudCreacionReservasTerritorialesService;
@@ -325,7 +319,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
 			BaseBeanVectorial baseBeanVectorial	= null;
-			Map<String, List> mapReporte		= new HashMap<String, List>();
+			Map<String, Object> mapReporte		= new HashMap<String, Object>();
 			String[] arrCons	= listSrlIdCapaConsulta.split(",");
 			List<String> listConsulta	= Arrays.asList(arrCons);
 			Map<String, String> mapServ	= ServiciosProperties.getServiciosByIdList();
@@ -340,7 +334,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasHidroRios100000Dto basHidroRios100000Dto		= new BasHidroRios100000Dto();
 							basHidroRios100000Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasHidroRios100000> listBasHidroRios100000		= basHidroRios100000Service.buscar(basHidroRios100000Dto);
+							List<BasHidroRios100000> listBasHidroRios100000		= basHidroRios100000Service.buscarGeometry(basHidroRios100000Dto);
 							if(listBasHidroRios100000.size() > 0) {
 								baseBeanVectorial	= listBasHidroRios100000.get(0);
 								mapReporte.put("listBasHidroRios100000", listBasHidroRios100000);
@@ -357,7 +351,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasHidroRiosLagunasDto basHidroRiosLagunasDto		= new BasHidroRiosLagunasDto();
 							basHidroRiosLagunasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasHidroRiosLagunas> listBasHidroRiosLagunas		= basHidroRiosLagunasService.buscar(basHidroRiosLagunasDto);
+							List<BasHidroRiosLagunas> listBasHidroRiosLagunas		= basHidroRiosLagunasService.buscarGeometry(basHidroRiosLagunasDto);
 							if(listBasHidroRiosLagunas.size() > 0) {
 								baseBeanVectorial	= listBasHidroRiosLagunas.get(0);
 								mapReporte.put("listBasHidroRiosLagunas", listBasHidroRiosLagunas);
@@ -374,7 +368,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
 							basLimAmazoniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscar(basLimAmazoniaDto);
+							List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
 							if(listBasLimAmazonia.size() > 0) {
 								baseBeanVectorial	= listBasLimAmazonia.get(0);
 								mapReporte.put("listBasLimAmazonia", listBasLimAmazonia);
@@ -391,7 +385,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasLimDepartamentoDto basLimDepartamentoDto		= new BasLimDepartamentoDto();
 							basLimDepartamentoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
+							List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscarGeometry(basLimDepartamentoDto);
 							if(listBasLimDepartamento.size() > 0) {
 								baseBeanVectorial	= listBasLimDepartamento.get(0);
 								mapReporte.put("listBasLimDepartamento", listBasLimDepartamento);
@@ -408,7 +402,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasLimDistritosDto basLimDistritosDto		= new BasLimDistritosDto();
 							basLimDistritosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasLimDistritos> listBasLimDistritos		= basLimDistritosService.buscar(basLimDistritosDto);
+							List<BasLimDistritos> listBasLimDistritos		= basLimDistritosService.buscarGeometry(basLimDistritosDto);
 							if(listBasLimDistritos.size() > 0) {
 								baseBeanVectorial	= listBasLimDistritos.get(0);
 								mapReporte.put("listBasLimDistritos", listBasLimDistritos);
@@ -425,7 +419,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
 							basLimProvinciaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasLimProvincia> listBasLimProvincia		= basLimProvinciaService.buscar(basLimProvinciaDto);
+							List<BasLimProvincia> listBasLimProvincia		= basLimProvinciaService.buscarGeometry(basLimProvinciaDto);
 							if(listBasLimProvincia.size() > 0) {
 								baseBeanVectorial	= listBasLimProvincia.get(0);
 								mapReporte.put("listBasLimProvincia", listBasLimProvincia);
@@ -442,7 +436,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto		= new BasViasRedVialDepartamentalDto();
 							basViasRedVialDepartamentalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasViasRedVialDepartamental> listBasViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscar(basViasRedVialDepartamentalDto);
+							List<BasViasRedVialDepartamental> listBasViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscarGeometry(basViasRedVialDepartamentalDto);
 							if(listBasViasRedVialDepartamental.size() > 0) {
 								baseBeanVectorial	= listBasViasRedVialDepartamental.get(0);
 								mapReporte.put("listBasViasRedVialDepartamental", listBasViasRedVialDepartamental);
@@ -459,7 +453,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasViasRedVialNacionalDto basViasRedVialNacionalDto		= new BasViasRedVialNacionalDto();
 							basViasRedVialNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasViasRedVialNacional> listBasViasRedVialNacional		= basViasRedVialNacionalService.buscar(basViasRedVialNacionalDto);
+							List<BasViasRedVialNacional> listBasViasRedVialNacional		= basViasRedVialNacionalService.buscarGeometry(basViasRedVialNacionalDto);
 							if(listBasViasRedVialNacional.size() > 0) {
 								baseBeanVectorial	= listBasViasRedVialNacional.get(0);
 								mapReporte.put("listBasViasRedVialNacional", listBasViasRedVialNacional);
@@ -476,7 +470,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							BasViasRedVialVecinalDto basViasRedVialVecinalDto		= new BasViasRedVialVecinalDto();
 							basViasRedVialVecinalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<BasViasRedVialVecinal> listBasViasRedVialVecinal		= basViasRedVialVecinalService.buscar(basViasRedVialVecinalDto);
+							List<BasViasRedVialVecinal> listBasViasRedVialVecinal		= basViasRedVialVecinalService.buscarGeometry(basViasRedVialVecinalDto);
 							if(listBasViasRedVialVecinal.size() > 0) {
 								baseBeanVectorial	= listBasViasRedVialVecinal.get(0);
 								mapReporte.put("listBasViasRedVialVecinal", listBasViasRedVialVecinal);
@@ -493,7 +487,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemAnpNacionalDto temAnpNacionalDto		= new TemAnpNacionalDto();
 							temAnpNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemAnpNacional> listTemAnpNacional		= temAnpNacionalService.buscar(temAnpNacionalDto);
+							List<TemAnpNacional> listTemAnpNacional		= temAnpNacionalService.buscarGeometry(temAnpNacionalDto);
 							if(listTemAnpNacional.size() > 0) {
 								baseBeanVectorial	= listTemAnpNacional.get(0);
 								mapReporte.put("listTemAnpNacional", listTemAnpNacional);
@@ -510,7 +504,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemAnpPrivadaDto temAnpPrivadaDto		= new TemAnpPrivadaDto();
 							temAnpPrivadaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemAnpPrivada> listTemAnpPrivada		= temAnpPrivadaService.buscar(temAnpPrivadaDto);
+							List<TemAnpPrivada> listTemAnpPrivada		= temAnpPrivadaService.buscarGeometry(temAnpPrivadaDto);
 							if(listTemAnpPrivada.size() > 0) {
 								baseBeanVectorial	= listTemAnpPrivada.get(0);
 								mapReporte.put("listTemAnpPrivada", listTemAnpPrivada);
@@ -527,7 +521,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemAnpRegionalDto temAnpRegionalDto		= new TemAnpRegionalDto();
 							temAnpRegionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemAnpRegional> listTemAnpRegional		= temAnpRegionalService.buscar(temAnpRegionalDto);
+							List<TemAnpRegional> listTemAnpRegional		= temAnpRegionalService.buscarGeometry(temAnpRegionalDto);
 							if(listTemAnpRegional.size() > 0) {
 								baseBeanVectorial	= listTemAnpRegional.get(0);
 								mapReporte.put("listTemAnpRegional", listTemAnpRegional);
@@ -544,7 +538,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemCarbonoEcozonasDto temCarbonoEcozonasDto		= new TemCarbonoEcozonasDto();
 							temCarbonoEcozonasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCarbonoEcozonas> listTemCarbonoEcozonas		= temCarbonoEcozonasService.buscar(temCarbonoEcozonasDto);
+							List<TemCarbonoEcozonas> listTemCarbonoEcozonas		= temCarbonoEcozonasService.buscarGeometry(temCarbonoEcozonasDto);
 							if(listTemCarbonoEcozonas.size() > 0) {
 								baseBeanVectorial	= listTemCarbonoEcozonas.get(0);
 								mapReporte.put("listTemCarbonoEcozonas", listTemCarbonoEcozonas);
@@ -561,7 +555,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemCentrosPobladosDto temCentrosPobladosDto		= new TemCentrosPobladosDto();
 							temCentrosPobladosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCentrosPoblados> listTemCentrosPoblados		= temCentrosPobladosService.buscar(temCentrosPobladosDto);
+							List<TemCentrosPoblados> listTemCentrosPoblados		= temCentrosPobladosService.buscarGeometry(temCentrosPobladosDto);
 							if(listTemCentrosPoblados.size() > 0) {
 								baseBeanVectorial	= listTemCentrosPoblados.get(0);
 								mapReporte.put("listTemCentrosPoblados", listTemCentrosPoblados);
@@ -578,7 +572,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemClaveBiodiversidadDto temClaveBiodiversidadDto		= new TemClaveBiodiversidadDto();
 							temClaveBiodiversidadDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemClaveBiodiversidad> listTemClaveBiodiversidad		= temClaveBiodiversidadService.buscar(temClaveBiodiversidadDto);
+							List<TemClaveBiodiversidad> listTemClaveBiodiversidad		= temClaveBiodiversidadService.buscarGeometry(temClaveBiodiversidadDto);
 							if(listTemClaveBiodiversidad.size() > 0) {
 								baseBeanVectorial	= listTemClaveBiodiversidad.get(0);
 								mapReporte.put("listTemClaveBiodiversidad", listTemClaveBiodiversidad);
@@ -595,7 +589,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemComunidadesNativasDto temComunidadesNativasDto		= new TemComunidadesNativasDto();
 							temComunidadesNativasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemComunidadesNativas> listTemComunidadesNativas		= temComunidadesNativasService.buscar(temComunidadesNativasDto);
+							List<TemComunidadesNativas> listTemComunidadesNativas		= temComunidadesNativasService.buscarGeometry(temComunidadesNativasDto);
 							if(listTemComunidadesNativas.size() > 0) {
 								baseBeanVectorial	= listTemComunidadesNativas.get(0);
 								mapReporte.put("listTemComunidadesNativas", listTemComunidadesNativas);
@@ -612,7 +606,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesEcoturismoDto temConcesionesEcoturismoDto		= new TemConcesionesEcoturismoDto();
 							temConcesionesEcoturismoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesEcoturismo> listTemConcesionesEcoturismo		= temConcesionesEcoturismoService.buscar(temConcesionesEcoturismoDto);
+							List<TemConcesionesEcoturismo> listTemConcesionesEcoturismo		= temConcesionesEcoturismoService.buscarGeometry(temConcesionesEcoturismoDto);
 							if(listTemConcesionesEcoturismo.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesEcoturismo.get(0);
 								mapReporte.put("listTemConcesionesEcoturismo", listTemConcesionesEcoturismo);
@@ -629,7 +623,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto		= new TemConcesionesForestalesCastaniaDto();
 							temConcesionesForestalesCastaniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesCastania> listTemConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscar(temConcesionesForestalesCastaniaDto);
+							List<TemConcesionesForestalesCastania> listTemConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscarGeometry(temConcesionesForestalesCastaniaDto);
 							if(listTemConcesionesForestalesCastania.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesCastania.get(0);
 								mapReporte.put("listTemConcesionesForestalesCastania", listTemConcesionesForestalesCastania);
@@ -646,7 +640,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto		= new TemConcesionesForestalesConservacionDto();
 							temConcesionesForestalesConservacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesConservacion> listTemConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscar(temConcesionesForestalesConservacionDto);
+							List<TemConcesionesForestalesConservacion> listTemConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscarGeometry(temConcesionesForestalesConservacionDto);
 							if(listTemConcesionesForestalesConservacion.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesConservacion.get(0);
 								mapReporte.put("listTemConcesionesForestalesConservacion", listTemConcesionesForestalesConservacion);
@@ -663,7 +657,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto		= new TemConcesionesForestalesMaderableAdecuadasDto();
 							temConcesionesForestalesMaderableAdecuadasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesMaderableAdecuadas> listTemConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscar(temConcesionesForestalesMaderableAdecuadasDto);
+							List<TemConcesionesForestalesMaderableAdecuadas> listTemConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscarGeometry(temConcesionesForestalesMaderableAdecuadasDto);
 							if(listTemConcesionesForestalesMaderableAdecuadas.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesMaderableAdecuadas.get(0);
 								mapReporte.put("listTemConcesionesForestalesMaderableAdecuadas", listTemConcesionesForestalesMaderableAdecuadas);
@@ -680,7 +674,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesMaderableConcursoDto temConcesionesForestalesMaderableConcursoDto		= new TemConcesionesForestalesMaderableConcursoDto();
 							temConcesionesForestalesMaderableConcursoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesMaderableConcurso> listTemConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscar(temConcesionesForestalesMaderableConcursoDto);
+							List<TemConcesionesForestalesMaderableConcurso> listTemConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscarGeometry(temConcesionesForestalesMaderableConcursoDto);
 							if(listTemConcesionesForestalesMaderableConcurso.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesMaderableConcurso.get(0);
 								mapReporte.put("listTemConcesionesForestalesMaderableConcurso", listTemConcesionesForestalesMaderableConcurso);
@@ -697,7 +691,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto		= new TemConcesionesForestalesManejoFaunaSilvestreDto();
 							temConcesionesForestalesManejoFaunaSilvestreDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesManejoFaunaSilvestre> listTemConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscar(temConcesionesForestalesManejoFaunaSilvestreDto);
+							List<TemConcesionesForestalesManejoFaunaSilvestre> listTemConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscarGeometry(temConcesionesForestalesManejoFaunaSilvestreDto);
 							if(listTemConcesionesForestalesManejoFaunaSilvestre.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesManejoFaunaSilvestre.get(0);
 								mapReporte.put("listTemConcesionesForestalesManejoFaunaSilvestre", listTemConcesionesForestalesManejoFaunaSilvestre);
@@ -714,7 +708,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesForestalesReforestacionDto temConcesionesForestalesReforestacionDto		= new TemConcesionesForestalesReforestacionDto();
 							temConcesionesForestalesReforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesForestalesReforestacion> listTemConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscar(temConcesionesForestalesReforestacionDto);
+							List<TemConcesionesForestalesReforestacion> listTemConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscarGeometry(temConcesionesForestalesReforestacionDto);
 							if(listTemConcesionesForestalesReforestacion.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesForestalesReforestacion.get(0);
 								mapReporte.put("listTemConcesionesForestalesReforestacion", listTemConcesionesForestalesReforestacion);
@@ -731,7 +725,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionesMinerasDto temConcesionesMinerasDto		= new TemConcesionesMinerasDto();
 							temConcesionesMinerasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionesMineras> listTemConcesionesMineras		= temConcesionesMinerasService.buscar(temConcesionesMinerasDto);
+							List<TemConcesionesMineras> listTemConcesionesMineras		= temConcesionesMinerasService.buscarGeometry(temConcesionesMinerasDto);
 							if(listTemConcesionesMineras.size() > 0) {
 								baseBeanVectorial	= listTemConcesionesMineras.get(0);
 								mapReporte.put("listTemConcesionesMineras", listTemConcesionesMineras);
@@ -748,7 +742,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemConcesionHidroelectricasGeneracionDto temConcesionHidroelectricasGeneracionDto		= new TemConcesionHidroelectricasGeneracionDto();
 							temConcesionHidroelectricasGeneracionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemConcesionHidroelectricasGeneracion> listTemConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscar(temConcesionHidroelectricasGeneracionDto);
+							List<TemConcesionHidroelectricasGeneracion> listTemConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscarGeometry(temConcesionHidroelectricasGeneracionDto);
 							if(listTemConcesionHidroelectricasGeneracion.size() > 0) {
 								baseBeanVectorial	= listTemConcesionHidroelectricasGeneracion.get(0);
 								mapReporte.put("listTemConcesionHidroelectricasGeneracion", listTemConcesionHidroelectricasGeneracion);
@@ -765,7 +759,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto		= new TemCostoOportunidadDeforestacionDto();
 							temCostoOportunidadDeforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCostoOportunidadDeforestacion> listTemCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscar(temCostoOportunidadDeforestacionDto);
+							List<TemCostoOportunidadDeforestacion> listTemCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscarGeometry(temCostoOportunidadDeforestacionDto);
 							if(listTemCostoOportunidadDeforestacion.size() > 0) {
 								baseBeanVectorial	= listTemCostoOportunidadDeforestacion.get(0);
 								mapReporte.put("listTemCostoOportunidadDeforestacion", listTemCostoOportunidadDeforestacion);
@@ -782,7 +776,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto		= new TemCoverturaVegetal2015Dto();
 							temCoverturaVegetal2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCoverturaVegetal2015> listTemCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscar(temCoverturaVegetal2015Dto);
+							List<TemCoverturaVegetal2015> listTemCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscarGeometry(temCoverturaVegetal2015Dto);
 							if(listTemCoverturaVegetal2015.size() > 0) {
 								baseBeanVectorial	= listTemCoverturaVegetal2015.get(0);
 								mapReporte.put("listTemCoverturaVegetal2015", listTemCoverturaVegetal2015);
@@ -799,7 +793,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
 							temCuencasHidrograficasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscar(temCuencasHidrograficasDto);
+							List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscarGeometry(temCuencasHidrograficasDto);
 							if(listTemCuencasHidrograficas.size() > 0) {
 								baseBeanVectorial	= listTemCuencasHidrograficas.get(0);
 								mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
@@ -816,7 +810,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemHumedalesRamsarDto temHumedalesRamsarDto		= new TemHumedalesRamsarDto();
 							temHumedalesRamsarDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemHumedalesRamsar> listTemHumedalesRamsar		= temHumedalesRamsarService.buscar(temHumedalesRamsarDto);
+							List<TemHumedalesRamsar> listTemHumedalesRamsar		= temHumedalesRamsarService.buscarGeometry(temHumedalesRamsarDto);
 							if(listTemHumedalesRamsar.size() > 0) {
 								baseBeanVectorial	= listTemHumedalesRamsar.get(0);
 								mapReporte.put("listTemHumedalesRamsar", listTemHumedalesRamsar);
@@ -833,7 +827,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto		= new TemIndiceImportanciaBiologicaDto();
 							temIndiceImportanciaBiologicaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemIndiceImportanciaBiologica> listTemIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscar(temIndiceImportanciaBiologicaDto);
+							List<TemIndiceImportanciaBiologica> listTemIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscarGeometry(temIndiceImportanciaBiologicaDto);
 							if(listTemIndiceImportanciaBiologica.size() > 0) {
 								baseBeanVectorial	= listTemIndiceImportanciaBiologica.get(0);
 								mapReporte.put("listTemIndiceImportanciaBiologica", listTemIndiceImportanciaBiologica);
@@ -850,7 +844,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemPrediosRuralesDto temPrediosRuralesDto		= new TemPrediosRuralesDto();
 							temPrediosRuralesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemPrediosRurales> listTemPrediosRurales		= temPrediosRuralesService.buscar(temPrediosRuralesDto);
+							List<TemPrediosRurales> listTemPrediosRurales		= temPrediosRuralesService.buscarGeometry(temPrediosRuralesDto);
 							if(listTemPrediosRurales.size() > 0) {
 								baseBeanVectorial	= listTemPrediosRurales.get(0);
 								mapReporte.put("listTemPrediosRurales", listTemPrediosRurales);
@@ -867,7 +861,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto		= new TemProyeccionDensidadPob2015Dto();
 							temProyeccionDensidadPob2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemProyeccionDensidadPob2015> listTemProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscar(temProyeccionDensidadPob2015Dto);
+							List<TemProyeccionDensidadPob2015> listTemProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscarGeometry(temProyeccionDensidadPob2015Dto);
 							if(listTemProyeccionDensidadPob2015.size() > 0) {
 								baseBeanVectorial	= listTemProyeccionDensidadPob2015.get(0);
 								mapReporte.put("listTemProyeccionDensidadPob2015", listTemProyeccionDensidadPob2015);
@@ -884,7 +878,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemProyectosPoligonosDto temProyectosPoligonosDto		= new TemProyectosPoligonosDto();
 							temProyectosPoligonosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemProyectosPoligonos> listTemProyectosPoligonos		= temProyectosPoligonosService.buscar(temProyectosPoligonosDto);
+							List<TemProyectosPoligonos> listTemProyectosPoligonos		= temProyectosPoligonosService.buscarGeometry(temProyectosPoligonosDto);
 							if(listTemProyectosPoligonos.size() > 0) {
 								baseBeanVectorial	= listTemProyectosPoligonos.get(0);
 								mapReporte.put("listTemProyectosPoligonos", listTemProyectosPoligonos);
@@ -901,7 +895,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemProyectosPuntosDto temProyectosPuntosDto		= new TemProyectosPuntosDto();
 							temProyectosPuntosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemProyectosPuntos> listTemProyectosPuntos		= temProyectosPuntosService.buscar(temProyectosPuntosDto);
+							List<TemProyectosPuntos> listTemProyectosPuntos		= temProyectosPuntosService.buscarGeometry(temProyectosPuntosDto);
 							if(listTemProyectosPuntos.size() > 0) {
 								baseBeanVectorial	= listTemProyectosPuntos.get(0);
 								mapReporte.put("listTemProyectosPuntos", listTemProyectosPuntos);
@@ -918,7 +912,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto		= new TemReservasTerritorialesIndigenasDto();
 							temReservasTerritorialesIndigenasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemReservasTerritorialesIndigenas> listTemReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscar(temReservasTerritorialesIndigenasDto);
+							List<TemReservasTerritorialesIndigenas> listTemReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscarGeometry(temReservasTerritorialesIndigenasDto);
 							if(listTemReservasTerritorialesIndigenas.size() > 0) {
 								baseBeanVectorial	= listTemReservasTerritorialesIndigenas.get(0);
 								mapReporte.put("listTemReservasTerritorialesIndigenas", listTemReservasTerritorialesIndigenas);
@@ -935,7 +929,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto		= new TemSinanpeAmortiguamientoDto();
 							temSinanpeAmortiguamientoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemSinanpeAmortiguamiento> listTemSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscar(temSinanpeAmortiguamientoDto);
+							List<TemSinanpeAmortiguamiento> listTemSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscarGeometry(temSinanpeAmortiguamientoDto);
 							if(listTemSinanpeAmortiguamiento.size() > 0) {
 								baseBeanVectorial	= listTemSinanpeAmortiguamiento.get(0);
 								mapReporte.put("listTemSinanpeAmortiguamiento", listTemSinanpeAmortiguamiento);
@@ -947,20 +941,20 @@ public class ConsultaRightClickAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasTotalesService":
+					case "TemSoeconComunidadesCampesinasService":
 					{
 						try {
-							TemSoeconComunidadesCampesinasTotalesDto temSoeconComunidadesCampesinasTotalesDto		= new TemSoeconComunidadesCampesinasTotalesDto();
-							temSoeconComunidadesCampesinasTotalesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemSoeconComunidadesCampesinasTotales> listTemSoeconComunidadesCampesinasTotales		= temSoeconComunidadesCampesinasTotalesService.buscar(temSoeconComunidadesCampesinasTotalesDto);
-							if(listTemSoeconComunidadesCampesinasTotales.size() > 0) {
-								baseBeanVectorial	= listTemSoeconComunidadesCampesinasTotales.get(0);
-								mapReporte.put("listTemSoeconComunidadesCampesinasTotales", listTemSoeconComunidadesCampesinasTotales);
+							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
+							temSoeconComunidadesCampesinasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+							List<TemSoeconComunidadesCampesinas> listTemSoeconComunidadesCampesinas		= temSoeconComunidadesCampesinasService.buscarGeometry(temSoeconComunidadesCampesinasDto);
+							if(listTemSoeconComunidadesCampesinas.size() > 0) {
+								baseBeanVectorial	= listTemSoeconComunidadesCampesinas.get(0);
+								mapReporte.put("listTemSoeconComunidadesCampesinas", listTemSoeconComunidadesCampesinas);
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {
-							listReporteOk.add("TemSoeconComunidadesCampesinasTotalesService");
+							listReporteOk.add("TemSoeconComunidadesCampesinasService");
 						}
 						break;
 					}
@@ -969,7 +963,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto		= new TemSoeconSolicitudCreacionReservasTerritorialesDto();
 							temSoeconSolicitudCreacionReservasTerritorialesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemSoeconSolicitudCreacionReservasTerritoriales> listTemSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscar(temSoeconSolicitudCreacionReservasTerritorialesDto);
+							List<TemSoeconSolicitudCreacionReservasTerritoriales> listTemSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscarGeometry(temSoeconSolicitudCreacionReservasTerritorialesDto);
 							if(listTemSoeconSolicitudCreacionReservasTerritoriales.size() > 0) {
 								baseBeanVectorial	= listTemSoeconSolicitudCreacionReservasTerritoriales.get(0);
 								mapReporte.put("listTemSoeconSolicitudCreacionReservasTerritoriales", listTemSoeconSolicitudCreacionReservasTerritoriales);
@@ -986,7 +980,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemViaFerreaDto temViaFerreaDto		= new TemViaFerreaDto();
 							temViaFerreaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemViaFerrea> listTemViaFerrea		= temViaFerreaService.buscar(temViaFerreaDto);
+							List<TemViaFerrea> listTemViaFerrea		= temViaFerreaService.buscarGeometry(temViaFerreaDto);
 							if(listTemViaFerrea.size() > 0) {
 								baseBeanVectorial	= listTemViaFerrea.get(0);
 								mapReporte.put("listTemViaFerrea", listTemViaFerrea);
@@ -1003,7 +997,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemViasTrochasDto temViasTrochasDto		= new TemViasTrochasDto();
 							temViasTrochasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemViasTrochas> listTemViasTrochas		= temViasTrochasService.buscar(temViasTrochasDto);
+							List<TemViasTrochas> listTemViasTrochas		= temViasTrochasService.buscarGeometry(temViasTrochasDto);
 							if(listTemViasTrochas.size() > 0) {
 								baseBeanVectorial	= listTemViasTrochas.get(0);
 								mapReporte.put("listTemViasTrochas", listTemViasTrochas);
@@ -1020,7 +1014,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						try {
 							TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto		= new TemZonificPotencialBosqueProduccionPermanenteDto();
 							temZonificPotencialBosqueProduccionPermanenteDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemZonificPotencialBosqueProduccionPermanente> listTemZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscar(temZonificPotencialBosqueProduccionPermanenteDto);
+							List<TemZonificPotencialBosqueProduccionPermanente> listTemZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscarGeometry(temZonificPotencialBosqueProduccionPermanenteDto);
 							if(listTemZonificPotencialBosqueProduccionPermanente.size() > 0) {
 								baseBeanVectorial	= listTemZonificPotencialBosqueProduccionPermanente.get(0);
 								mapReporte.put("listTemZonificPotencialBosqueProduccionPermanente", listTemZonificPotencialBosqueProduccionPermanente);
@@ -1036,19 +1030,19 @@ public class ConsultaRightClickAction extends ActionSupport {
 					case "TemBiodiversidadEspeciesPeligroExtincionService":
 					{
 						try {
-							TemBiodiversidadEspeciesPeligroExtincionDto temBiodiversidadEspeciesPeligroExtincionDto		= new TemBiodiversidadEspeciesPeligroExtincionDto();
-							temBiodiversidadEspeciesPeligroExtincionDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemBiodiversidadEspeciesPeligroExtincion> listTemBiodiversidadEspeciesPeligroExtincion		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(temBiodiversidadEspeciesPeligroExtincionDto);
-							if(listTemBiodiversidadEspeciesPeligroExtincion.size() > 0) {
-								mapReporte.put("listTemBiodiversidadEspeciesPeligroExtincion", listTemBiodiversidadEspeciesPeligroExtincion);
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemBiodiversidadEspeciesPeligroExtincion", beanRaster);
 								
-								double dblValue		= CadenaUtil.getDoub(listTemBiodiversidadEspeciesPeligroExtincion.get(0).getStrValue());
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
 								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
 								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
 								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
 								for(CapaUmbral cu:listUmbrales) {
 									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										listTemBiodiversidadEspeciesPeligroExtincion.get(0).setStrCategoria(cu.getStrNombre());
+										beanRaster.setStrCategoria(cu.getStrNombre());
 										break;
 									}
 								}
@@ -1063,19 +1057,19 @@ public class ConsultaRightClickAction extends ActionSupport {
 					case "TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService":
 					{
 						try {
-							TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto		= new TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto();
-							temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica> listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto);
-							if(listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size() > 0) {
-								mapReporte.put("listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica);
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", beanRaster);
 								
-								double dblValue		= CadenaUtil.getDoub(listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.get(0).getStrValue());
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
 								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
 								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
 								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
 								for(CapaUmbral cu:listUmbrales) {
 									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.get(0).setStrCategoria(cu.getStrNombre());
+										beanRaster.setStrCategoria(cu.getStrNombre());
 										break;
 									}
 								}
@@ -1090,19 +1084,19 @@ public class ConsultaRightClickAction extends ActionSupport {
 					case "TemDensidadCarbonoAereaService":
 					{
 						try {
-							TemDensidadCarbonoAereaDto temDensidadCarbonoAereaDto		= new TemDensidadCarbonoAereaDto();
-							temDensidadCarbonoAereaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemDensidadCarbonoAerea> listTemDensidadCarbonoAerea		= temDensidadCarbonoAereaService.selectByGeometry(temDensidadCarbonoAereaDto);
-							if(listTemDensidadCarbonoAerea.size() > 0) {
-								mapReporte.put("listTemDensidadCarbonoAerea", listTemDensidadCarbonoAerea);
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temDensidadCarbonoAereaService.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemDensidadCarbonoAerea", beanRaster);
 								
-								double dblValue		= CadenaUtil.getDoub(listTemDensidadCarbonoAerea.get(0).getStrValue());
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
 								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
 								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
 								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
 								for(CapaUmbral cu:listUmbrales) {
 									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										listTemDensidadCarbonoAerea.get(0).setStrCategoria(cu.getStrNombre());
+										beanRaster.setStrCategoria(cu.getStrNombre());
 										break;
 									}
 								}
@@ -1117,19 +1111,19 @@ public class ConsultaRightClickAction extends ActionSupport {
 					case "TemRiesgoErosionHidricaService":
 					{
 						try {
-							TemRiesgoErosionHidricaDto temRiesgoErosionHidricaDto		= new TemRiesgoErosionHidricaDto();
-							temRiesgoErosionHidricaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemRiesgoErosionHidrica> listTemRiesgoErosionHidrica		= temRiesgoErosionHidricaService.selectByGeometry(temRiesgoErosionHidricaDto);
-							if(listTemRiesgoErosionHidrica.size() > 0) {
-								mapReporte.put("listTemRiesgoErosionHidrica", listTemRiesgoErosionHidrica);
-
-								double dblValue		= CadenaUtil.getDoub(listTemRiesgoErosionHidrica.get(0).getStrValue());
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temRiesgoErosionHidricaService.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemRiesgoErosionHidrica", beanRaster);
+								
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
 								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
 								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
 								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
 								for(CapaUmbral cu:listUmbrales) {
 									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										listTemRiesgoErosionHidrica.get(0).setStrCategoria(cu.getStrNombre());
+										beanRaster.setStrCategoria(cu.getStrNombre());
 										break;
 									}
 								}

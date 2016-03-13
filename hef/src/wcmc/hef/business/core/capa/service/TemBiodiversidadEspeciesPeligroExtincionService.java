@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import wcmc.hef.business.core.capa.dto.TemBiodiversidadEspeciesPeligroExtincionDto;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadEspeciesPeligroExtincion;
+import wcmc.hef.business.core.capa.dto.BeanRasterDto;
+import wcmc.hef.dao.capa.domain.BeanRaster;
 
 @Service
 public interface TemBiodiversidadEspeciesPeligroExtincionService {
-	
-	public List<TemBiodiversidadEspeciesPeligroExtincion> selectByGeometry(TemBiodiversidadEspeciesPeligroExtincionDto temBiodiversidadEspeciesPeligroExtincionDto) throws Exception;
+
+	public BeanRaster selectByGeometry(BeanRasterDto beanRasterDto) throws Exception;
+	public String selectGeometryByRangoAndGeometry(BeanRasterDto beanRasterDto) throws Exception;
 	
 }

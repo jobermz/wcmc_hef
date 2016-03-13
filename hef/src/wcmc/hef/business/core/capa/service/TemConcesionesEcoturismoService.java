@@ -10,7 +10,9 @@ public interface TemConcesionesEcoturismoService {
 	
 	public List<TemConcesionesEcoturismo> buscar(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
 	public List<TemConcesionesEcoturismo> buscarGeometry(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
+	public List<TemConcesionesEcoturismo> buscarCombo(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
 	public TemConcesionesEcoturismo buscarById(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
+	public TemConcesionesEcoturismo buscarGeometryById(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
 	public Integer guardar(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
 	public Integer eliminar(TemConcesionesEcoturismoDto temConcesionesEcoturismoDto) throws Exception;
 	

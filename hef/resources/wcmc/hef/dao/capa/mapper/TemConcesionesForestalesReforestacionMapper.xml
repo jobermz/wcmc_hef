@@ -12,7 +12,6 @@
 		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
 		<result column="de_titular" property="strTitular" jdbcType="VARCHAR"/>
 		<result column="ha_area_sig" property="dblAreaSig" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionParamDef">
 		select
@@ -43,9 +42,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_concesiones_forestales_reforestacion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_concesiones_forestales_reforestacion as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_concesiones_forestales_reforestacion as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -85,9 +106,6 @@
 			<if test="dblAreaSig != null">
 				ha_area_sig,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -116,9 +134,6 @@
 			</if>
 			<if test="dblAreaSig != null">
 				#{dblAreaSig, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -151,9 +166,6 @@
 			</if>
 			<if test="dblAreaSig != null">
 				ha_area_sig = #{dblAreaSig,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -206,8 +218,7 @@
 		de_fuente, 
 		de_situacion, 
 		de_titular, 
-		ha_area_sig, 
-		fc_fecreg
+		ha_area_sig
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -219,8 +230,19 @@
 		de_fuente, 
 		de_situacion, 
 		de_titular, 
-		ha_area_sig, 
-		fc_fecreg
+		ha_area_sig
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_anio, 
+		de_modalidad, 
+		de_contrato, 
+		de_region, 
+		de_fuente, 
+		de_situacion, 
+		de_titular, 
+		ha_area_sig
 	</sql>
 
 </mapper>

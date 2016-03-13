@@ -10,7 +10,9 @@ public interface BasViasRedVialNacionalService {
 	
 	public List<BasViasRedVialNacional> buscar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public List<BasViasRedVialNacional> buscarGeometry(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
+	public List<BasViasRedVialNacional> buscarCombo(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public BasViasRedVialNacional buscarById(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
+	public BasViasRedVialNacional buscarGeometryById(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public Integer guardar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	public Integer eliminar(BasViasRedVialNacionalDto basViasRedVialNacionalDto) throws Exception;
 	

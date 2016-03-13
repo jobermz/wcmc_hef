@@ -10,7 +10,9 @@ public interface TemCarbonoEcozonasService {
 	
 	public List<TemCarbonoEcozonas> buscar(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
 	public List<TemCarbonoEcozonas> buscarGeometry(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
+	public List<TemCarbonoEcozonas> buscarCombo(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
 	public TemCarbonoEcozonas buscarById(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
+	public TemCarbonoEcozonas buscarGeometryById(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
 	public Integer guardar(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
 	public Integer eliminar(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception;
 	

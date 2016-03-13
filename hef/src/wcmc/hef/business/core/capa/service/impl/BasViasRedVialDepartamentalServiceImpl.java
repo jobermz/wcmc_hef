@@ -30,24 +30,25 @@ public class BasViasRedVialDepartamentalServiceImpl implements BasViasRedVialDep
 				criteria.andDblLongitudEqualTo(basViasRedVialDepartamentalDto.getDblLongitud());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrDpto()) != null) {
-				criteria.andStrDptoLike(basViasRedVialDepartamentalDto.getStrDpto());
+				criteria.andStrDptoEqualTo(basViasRedVialDepartamentalDto.getStrDpto());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRutaD044()) != null) {
-				criteria.andStrRutaD044Like(basViasRedVialDepartamentalDto.getStrRutaD044());
+				criteria.andStrRutaD044EqualTo(basViasRedVialDepartamentalDto.getStrRutaD044());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRed044()) != null) {
-				criteria.andStrRed044Like(basViasRedVialDepartamentalDto.getStrRed044());
+				criteria.andStrRed044EqualTo(basViasRedVialDepartamentalDto.getStrRed044());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrSupercicie()) != null) {
-				criteria.andStrSupercicieLike(basViasRedVialDepartamentalDto.getStrSupercicie());
+				criteria.andStrSupercicieEqualTo(basViasRedVialDepartamentalDto.getStrSupercicie());
 			}
 		}
 		
+		basViasRedVialDepartamentalParamDef.setOrderByClause("de_ruta_d044");
 		List<BasViasRedVialDepartamental>	 list	= basViasRedVialDepartamentalMapper.selectByDefaultParameter(basViasRedVialDepartamentalParamDef);
 		return list;
 	}
 	
-		public List<BasViasRedVialDepartamental> buscarGeometry(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
+	public List<BasViasRedVialDepartamental> buscarGeometry(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
 		BasViasRedVialDepartamentalParamDef basViasRedVialDepartamentalParamDef		= new BasViasRedVialDepartamentalParamDef();
 		
 		Criteria criteria		= basViasRedVialDepartamentalParamDef.createCriteria();
@@ -59,20 +60,51 @@ public class BasViasRedVialDepartamentalServiceImpl implements BasViasRedVialDep
 				criteria.andDblLongitudEqualTo(basViasRedVialDepartamentalDto.getDblLongitud());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrDpto()) != null) {
-				criteria.andStrDptoLike(basViasRedVialDepartamentalDto.getStrDpto());
+				criteria.andStrDptoEqualTo(basViasRedVialDepartamentalDto.getStrDpto());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRutaD044()) != null) {
-				criteria.andStrRutaD044Like(basViasRedVialDepartamentalDto.getStrRutaD044());
+				criteria.andStrRutaD044EqualTo(basViasRedVialDepartamentalDto.getStrRutaD044());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRed044()) != null) {
-				criteria.andStrRed044Like(basViasRedVialDepartamentalDto.getStrRed044());
+				criteria.andStrRed044EqualTo(basViasRedVialDepartamentalDto.getStrRed044());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrSupercicie()) != null) {
-				criteria.andStrSupercicieLike(basViasRedVialDepartamentalDto.getStrSupercicie());
+				criteria.andStrSupercicieEqualTo(basViasRedVialDepartamentalDto.getStrSupercicie());
 			}
 		}
 		
+		basViasRedVialDepartamentalParamDef.setOrderByClause("de_ruta_d044");
 		List<BasViasRedVialDepartamental>	 list	= basViasRedVialDepartamentalMapper.selectByDefaultParameterGeometry(basViasRedVialDepartamentalParamDef);
+		return list;
+	}
+	
+	public List<BasViasRedVialDepartamental> buscarCombo(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
+		BasViasRedVialDepartamentalParamDef basViasRedVialDepartamentalParamDef		= new BasViasRedVialDepartamentalParamDef();
+		
+		Criteria criteria		= basViasRedVialDepartamentalParamDef.createCriteria();
+		if(basViasRedVialDepartamentalDto != null) {
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basViasRedVialDepartamentalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getDoubNull(basViasRedVialDepartamentalDto.getDblLongitud()) != null) {
+				criteria.andDblLongitudEqualTo(basViasRedVialDepartamentalDto.getDblLongitud());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrDpto()) != null) {
+				criteria.andStrDptoEqualTo(basViasRedVialDepartamentalDto.getStrDpto());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRutaD044()) != null) {
+				criteria.andStrRutaD044EqualTo(basViasRedVialDepartamentalDto.getStrRutaD044());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrRed044()) != null) {
+				criteria.andStrRed044EqualTo(basViasRedVialDepartamentalDto.getStrRed044());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrSupercicie()) != null) {
+				criteria.andStrSupercicieEqualTo(basViasRedVialDepartamentalDto.getStrSupercicie());
+			}
+		}
+		
+		basViasRedVialDepartamentalParamDef.setOrderByClause("de_ruta_d044");
+		List<BasViasRedVialDepartamental>	 list	= basViasRedVialDepartamentalMapper.selectByDefaultParameterCombo(basViasRedVialDepartamentalParamDef);
 		return list;
 	}
 	
@@ -80,6 +112,12 @@ public class BasViasRedVialDepartamentalServiceImpl implements BasViasRedVialDep
 		BasViasRedVialDepartamental basViasRedVialDepartamental		= new BasViasRedVialDepartamental();
 		BeanUtils.copyProperties(basViasRedVialDepartamentalDto, basViasRedVialDepartamental);
 		return basViasRedVialDepartamentalMapper.selectByPrimaryKey(basViasRedVialDepartamental);
+	}
+	
+	public BasViasRedVialDepartamental buscarGeometryById(BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto) throws Exception {
+		BasViasRedVialDepartamental basViasRedVialDepartamental		= new BasViasRedVialDepartamental();
+		BeanUtils.copyProperties(basViasRedVialDepartamentalDto, basViasRedVialDepartamental);
+		return basViasRedVialDepartamentalMapper.selectByPrimaryKeyGeometry(basViasRedVialDepartamental);
 	}
 	
 	@Transactional

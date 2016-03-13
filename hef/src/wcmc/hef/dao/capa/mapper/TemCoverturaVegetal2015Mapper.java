@@ -11,7 +11,9 @@ public interface TemCoverturaVegetal2015Mapper {
 	
 	public List<TemCoverturaVegetal2015> selectByDefaultParameter(TemCoverturaVegetal2015ParamDef temCoverturaVegetal2015ParamDef);
 	public List<TemCoverturaVegetal2015> selectByDefaultParameterGeometry(TemCoverturaVegetal2015ParamDef temCoverturaVegetal2015ParamDef);
+	public List<TemCoverturaVegetal2015> selectByDefaultParameterCombo(TemCoverturaVegetal2015ParamDef temCoverturaVegetal2015ParamDef);
 	public TemCoverturaVegetal2015 selectByPrimaryKey(TemCoverturaVegetal2015Key temCoverturaVegetal2015Key);
+	public TemCoverturaVegetal2015 selectByPrimaryKeyGeometry(TemCoverturaVegetal2015Key temCoverturaVegetal2015Key);
 	public int insertSelective(TemCoverturaVegetal2015 temCoverturaVegetal2015);
 	public int updateByPrimaryKeySelective(TemCoverturaVegetal2015 temCoverturaVegetal2015);
 	public int deleteByPrimaryKey(TemCoverturaVegetal2015Key temCoverturaVegetal2015Key);

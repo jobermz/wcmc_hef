@@ -1,5 +1,6 @@
 package wcmc.hef.web.visor.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,11 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import wcmc.hef.business.core.capa.dto.BasLimDepartamentoDto;
+import wcmc.hef.business.core.capa.dto.BasLimDistritosDto;
+import wcmc.hef.business.core.capa.dto.BasLimProvinciaDto;
 import wcmc.hef.business.core.capa.service.BasLimDepartamentoService;
+import wcmc.hef.business.core.capa.service.BasLimDistritosService;
+import wcmc.hef.business.core.capa.service.BasLimProvinciaService;
 import wcmc.hef.business.core.configuracion.dto.CapaDto;
 import wcmc.hef.business.core.configuracion.dto.CapaUmbralDto;
 import wcmc.hef.business.core.configuracion.dto.GrupoCapasDto;
@@ -23,6 +28,8 @@ import wcmc.hef.business.core.visor.service.CapaDepartamentoService;
 import wcmc.hef.business.core.visor.service.CapaDistritoService;
 import wcmc.hef.business.core.visor.service.CapaProvinciaService;
 import wcmc.hef.dao.capa.domain.BasLimDepartamento;
+import wcmc.hef.dao.capa.domain.BasLimDistritos;
+import wcmc.hef.dao.capa.domain.BasLimProvincia;
 import wcmc.hef.dao.configuracion.domain.Capa;
 import wcmc.hef.dao.configuracion.domain.GrupoCapas;
 import wcmc.hef.dao.visor.domain.CapaDepartamento;
@@ -44,21 +51,17 @@ public class VisorAction extends ActionSupport {
 	private GrupoCapasService grupoCapasService;
 	
 	@Autowired
-	private CapaDepartamentoService capaDepartamentoService;
+	private BasLimDepartamentoService basLimDepartamentoService;
 	
 	@Autowired
-	private CapaProvinciaService capaProvinciaService;
+	private BasLimProvinciaService basLimProvinciaService;
 
 	@Autowired
-	private CapaDistritoService capaDistritoService;
+	private BasLimDistritosService basLimDistritosService;
 
 	@Autowired
 	private CapaUmbralService capaUmbralService;
 
-	@Autowired
-	private BasLimDepartamentoService basLimDepartamentoService;
-	
-	
 	private List<Capa> listCapasBase;
 	
 	public VisorAction() {
@@ -79,7 +82,7 @@ public class VisorAction extends ActionSupport {
 	public String inicio() {
 		Map<String, Object> session			= ActionContext.getContext().getSession();
 		try {
-			
+			/*
 
 			BasLimDepartamentoDto basLimDepartamentoDto	= new BasLimDepartamentoDto();
 			StringBuffer sb=new StringBuffer();//Reserva nacional punta de atico
@@ -90,7 +93,7 @@ public class VisorAction extends ActionSupport {
 				System.out.println("nombreDpto:"+bean.getStrNombdep());
 			}
 			
-			
+			*/
 			
 			CapaDto capaDto					= new CapaDto();
 			listCapasBase					= capaService.buscar(capaDto);
@@ -113,19 +116,15 @@ public class VisorAction extends ActionSupport {
 			}
 			session.put("listGrupoCapas", listGrupoCapasBase);
 			
-			/*
-			CapaDepartamentoDto capaDepartamentoDto		= new CapaDepartamentoDto();
-			List<CapaDepartamento> listCapaDepartamento	= capaDepartamentoService.buscar(capaDepartamentoDto);
-			session.put("listCapaDepartamento", listCapaDepartamento);
+			
+			BasLimDepartamentoDto basLimDepartamentoDto		= new BasLimDepartamentoDto();
+			List<BasLimDepartamento> listBasLimDepartamento	= basLimDepartamentoService.buscar(basLimDepartamentoDto);
+			session.put("listBasLimDepartamento", listBasLimDepartamento);
 
-			CapaProvinciaDto capaProvinciaDto			= new CapaProvinciaDto();
-			List<CapaProvincia> listCapaProvincia		= capaProvinciaService.buscar(capaProvinciaDto);
-			session.put("listCapaProvincia", listCapaProvincia);
+			session.put("listBasLimProvincia", new ArrayList<BasLimProvincia>());
 
-			CapaDistritoDto capaDistritoDto				= new CapaDistritoDto();
-			List<CapaDistrito> listCapaDistrito			= capaDistritoService.buscar(capaDistritoDto);
-			session.put("listCapaDistrito", listCapaDistrito);
-			*/
+			session.put("listBasLimDistritos", new ArrayList<BasLimDistritos>());
+			
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -143,11 +142,11 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_departamento		= CadenaUtil.getStr(request.getParameter("centrar_departamento"));
-			CapaDepartamentoDto capaDepartamentoDto	= new CapaDepartamentoDto();
-			capaDepartamentoDto.setStrIdDepartamento(centrar_departamento);
-			List<CapaDepartamento> listCapaDepartamento		= capaDepartamentoService.buscar(capaDepartamentoDto);
-			if(listCapaDepartamento.size() > 0) {
-				strCentroDepartamento					= listCapaDepartamento.get(0).getStrGeometria();
+			BasLimDepartamentoDto basLimDepartamentoDto	= new BasLimDepartamentoDto();
+			basLimDepartamentoDto.setStrIddpto(centrar_departamento);
+			List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
+			if(listBasLimDepartamento.size() > 0) {
+				strCentroDepartamento					= listBasLimDepartamento.get(0).getStrTheGeom();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -159,14 +158,12 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_prov_departamento		= CadenaUtil.getStr(request.getParameter("centrar_prov_departamento"));
-			CapaDepartamentoDto capaDepartamentoDto	= new CapaDepartamentoDto();
-			capaDepartamentoDto.setStrIdDepartamento(centrar_prov_departamento);
-			List<CapaDepartamento> listCapaDepartamento		= capaDepartamentoService.buscar(capaDepartamentoDto);
-			if(listCapaDepartamento.size() > 0) {
-				strCentroDepartamento					= listCapaDepartamento.get(0).getStrGeometria();
+			BasLimDepartamentoDto basLimDepartamentoDto	= new BasLimDepartamentoDto();
+			basLimDepartamentoDto.setStrIddpto(centrar_prov_departamento);
+			List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
+			if(listBasLimDepartamento.size() > 0) {
+				strCentroDepartamento					= listBasLimDepartamento.get(0).getStrTheGeom();
 			}
-//			CapaDepartamento capaDepartamento		= capaDepartamentoService.buscarById(capaDepartamentoDto);
-//			strCentroDepartamento					= capaDepartamento.getStrGeometria();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -176,11 +173,11 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_prov_provincia		= CadenaUtil.getStr(request.getParameter("centrar_prov_provincia"));
-			CapaProvinciaDto capaProvinciaDto	= new CapaProvinciaDto();
-			capaProvinciaDto.setStrIdProvincia(centrar_prov_provincia);
-			List<CapaProvincia> listCapaProvincia	= capaProvinciaService.buscar(capaProvinciaDto);
-			if(listCapaProvincia.size() > 0) {
-				strCentroProvincia					= listCapaProvincia.get(0).getStrGeometria();
+			BasLimProvinciaDto basLimProvinciaDto	= new BasLimProvinciaDto();
+			basLimProvinciaDto.setStrIdprov(centrar_prov_provincia);
+			List<BasLimProvincia> listBasLimProvincia	= basLimProvinciaService.buscar(basLimProvinciaDto);
+			if(listBasLimProvincia.size() > 0) {
+				strCentroProvincia					= listBasLimProvincia.get(0).getStrTheGeom();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -192,13 +189,13 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_dist_departamento		= CadenaUtil.getStr(request.getParameter("centrar_dist_departamento"));
-			CapaDepartamentoDto capaDepartamentoDto	= new CapaDepartamentoDto();
-			capaDepartamentoDto.setStrIdDepartamento(centrar_dist_departamento);
-//			CapaDepartamento capaDepartamento		= capaDepartamentoService.buscarById(capaDepartamentoDto);
-//			strCentroDepartamento					= capaDepartamento.getStrGeometria();
-			List<CapaDepartamento> listCapaDepartamento		= capaDepartamentoService.buscar(capaDepartamentoDto);
-			if(listCapaDepartamento.size() > 0) {
-				strCentroDepartamento					= listCapaDepartamento.get(0).getStrGeometria();
+			BasLimDepartamentoDto basLimDepartamentoDto	= new BasLimDepartamentoDto();
+			basLimDepartamentoDto.setStrIddpto(centrar_dist_departamento);
+//			BasLimDepartamento basLimDepartamento		= basLimDepartamentoService.buscarById(basLimDepartamentoDto);
+//			strCentroDepartamento					= basLimDepartamento.getStrTheGeom();
+			List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
+			if(listBasLimDepartamento.size() > 0) {
+				strCentroDepartamento					= listBasLimDepartamento.get(0).getStrTheGeom();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -209,11 +206,11 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_dist_provincia		= CadenaUtil.getStr(request.getParameter("centrar_dist_provincia"));
-			CapaProvinciaDto capaProvinciaDto	= new CapaProvinciaDto();
-			capaProvinciaDto.setStrIdProvincia(centrar_dist_provincia);
-			List<CapaProvincia> listCapaProvincia	= capaProvinciaService.buscar(capaProvinciaDto);
-			if(listCapaProvincia.size() > 0) {
-				strCentroProvincia					= listCapaProvincia.get(0).getStrGeometria();
+			BasLimProvinciaDto basLimProvinciaDto	= new BasLimProvinciaDto();
+			basLimProvinciaDto.setStrIdprov(centrar_dist_provincia);
+			List<BasLimProvincia> listBasLimProvincia	= basLimProvinciaService.buscar(basLimProvinciaDto);
+			if(listBasLimProvincia.size() > 0) {
+				strCentroProvincia					= listBasLimProvincia.get(0).getStrTheGeom();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -224,11 +221,11 @@ public class VisorAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		try {
 			String centrar_dist_distrito		= CadenaUtil.getStr(request.getParameter("centrar_dist_distrito"));
-			CapaDistritoDto capaDistritoDto		= new CapaDistritoDto();
-			capaDistritoDto.setStrIdDistrito(centrar_dist_distrito);
-			List<CapaDistrito> listCapaDistrito	= capaDistritoService.buscar(capaDistritoDto);
-			if(listCapaDistrito.size() > 0) {
-				strCentroDistrito					= listCapaDistrito.get(0).getStrGeometria();
+			BasLimDistritosDto basLimDistritoDto		= new BasLimDistritosDto();
+			basLimDistritoDto.setStrIddist(centrar_dist_distrito);
+			List<BasLimDistritos> listBasLimDistritos	= basLimDistritosService.buscar(basLimDistritoDto);
+			if(listBasLimDistritos.size() > 0) {
+				strCentroDistrito					= listBasLimDistritos.get(0).getStrTheGeom();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -243,10 +240,10 @@ public class VisorAction extends ActionSupport {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
 			String centrar_prov_departamento		= CadenaUtil.getStr(request.getParameter("centrar_prov_departamento"));
-			CapaProvinciaDto capaProvinciaDto		= new CapaProvinciaDto();
-			capaProvinciaDto.setStrIdProvincia(centrar_prov_departamento+"%");
-			List<CapaProvincia> listCapaProvincia	= capaProvinciaService.buscar(capaProvinciaDto);
-			session.put("listCapaProvincia", listCapaProvincia);
+			BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
+			basLimProvinciaDto.setStrIdprov(centrar_prov_departamento+"%");
+			List<BasLimProvincia> listBasLimProvincia	= basLimProvinciaService.buscar(basLimProvinciaDto);
+			session.put("listBasLimProvincia", listBasLimProvincia);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -258,10 +255,10 @@ public class VisorAction extends ActionSupport {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
 			String centrar_dist_departamento		= CadenaUtil.getStr(request.getParameter("centrar_dist_departamento"));
-			CapaProvinciaDto capaProvinciaDto		= new CapaProvinciaDto();
-			capaProvinciaDto.setStrIdProvincia(centrar_dist_departamento);
-			List<CapaProvincia> listCapaProvincia	= capaProvinciaService.buscar(capaProvinciaDto);
-			session.put("listCapaProvincia", listCapaProvincia);
+			BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
+			basLimProvinciaDto.setStrIdprov(centrar_dist_departamento);
+			List<BasLimProvincia> listBasLimProvincia	= basLimProvinciaService.buscar(basLimProvinciaDto);
+			session.put("listBasLimProvincia", listBasLimProvincia);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -273,10 +270,10 @@ public class VisorAction extends ActionSupport {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
 			String centrar_dist_provincia			= CadenaUtil.getStr(request.getParameter("centrar_dist_provincia"));
-			CapaDistritoDto capaDistritoDto			= new CapaDistritoDto();
-			capaDistritoDto.setStrIdProvincia(centrar_dist_provincia);
-			List<CapaDistrito> listCapaDistrito		= capaDistritoService.buscar(capaDistritoDto);
-			session.put("listCapaDistrito", listCapaDistrito);
+			BasLimDistritosDto basLimDistritoDto			= new BasLimDistritosDto();
+			basLimDistritoDto.setStrIdprov(centrar_dist_provincia);
+			List<BasLimDistritos> listBasLimDistritos		= basLimDistritosService.buscar(basLimDistritoDto);
+			session.put("listBasLimDistritos", listBasLimDistritos);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

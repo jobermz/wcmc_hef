@@ -11,7 +11,9 @@ public interface TemAnpRegionalMapper {
 	
 	public List<TemAnpRegional> selectByDefaultParameter(TemAnpRegionalParamDef temAnpRegionalParamDef);
 	public List<TemAnpRegional> selectByDefaultParameterGeometry(TemAnpRegionalParamDef temAnpRegionalParamDef);
+	public List<TemAnpRegional> selectByDefaultParameterCombo(TemAnpRegionalParamDef temAnpRegionalParamDef);
 	public TemAnpRegional selectByPrimaryKey(TemAnpRegionalKey temAnpRegionalKey);
+	public TemAnpRegional selectByPrimaryKeyGeometry(TemAnpRegionalKey temAnpRegionalKey);
 	public int insertSelective(TemAnpRegional temAnpRegional);
 	public int updateByPrimaryKeySelective(TemAnpRegional temAnpRegional);
 	public int deleteByPrimaryKey(TemAnpRegionalKey temAnpRegionalKey);

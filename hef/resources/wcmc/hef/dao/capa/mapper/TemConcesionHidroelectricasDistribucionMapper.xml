@@ -2,7 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="wcmc.hef.dao.capa.mapper.TemConcesionHidroelectricasDistribucionMapper">
 	<resultMap id="TemConcesionHidroelectricasDistribucionMap" type="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion">
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
+		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
+		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
+		<result column="de_id_grafico" property="strIdGrafico" jdbcType="VARCHAR"/>
+		<result column="de_expediente" property="strExpediente" jdbcType="VARCHAR"/>
+		<result column="de_concesion" property="strConcesion" jdbcType="VARCHAR"/>
+		<result column="de_nombre_zon" property="strNombreZon" jdbcType="VARCHAR"/>
+		<result column="de_tipo_conce" property="strTipoConce" jdbcType="VARCHAR"/>
+		<result column="de_empresa" property="strEmpresa" jdbcType="VARCHAR"/>
+		<result column="de_sistema_el" property="strSistemaEl" jdbcType="VARCHAR"/>
+		<result column="cd_area_influ" property="lngAreaInflu" jdbcType="INTEGER"/>
+		<result column="ha_maxima_dem" property="dblMaximaDem" jdbcType="DOUBLE"/>
+		<result column="ha_horas_serv" property="dblHorasServ" jdbcType="DOUBLE"/>
+		<result column="cd_numero_usu" property="lngNumeroUsu" jdbcType="INTEGER"/>
+		<result column="fc_fecha_pres" property="dteFechaPres" jdbcType="DATE"/>
+		<result column="fc_fecha_reso" property="dteFechaReso" jdbcType="DATE"/>
+		<result column="de_activo" property="strActivo" jdbcType="VARCHAR"/>
+		<result column="de_codigo_con" property="strCodigoCon" jdbcType="VARCHAR"/>
+		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
+		<result column="ha_shape_len" property="dblShapeLen" jdbcType="DOUBLE"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionParamDef">
 		select
@@ -33,38 +51,222 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_concesion_hidroelectricas_distribucion as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionKey" >
 		select 
 		<include refid="Base_Column_List" />
 		from wcmc_hef.tem_concesion_hidroelectricas_distribucion as tab
 		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemConcesionHidroelectricasDistribucionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
+		from wcmc_hef.tem_concesion_hidroelectricas_distribucion as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.tem_concesion_hidroelectricas_distribucion_seq')
 	</select>
 
 	<insert id="insertSelective" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion">
 		insert into wcmc_hef.tem_concesion_hidroelectricas_distribucion
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
+			<if test="strTheGeom != null">
+				si_the_geom,
+			</if>
+			<if test="strIdGrafico != null">
+				de_id_grafico,
+			</if>
+			<if test="strExpediente != null">
+				de_expediente,
+			</if>
+			<if test="strConcesion != null">
+				de_concesion,
+			</if>
+			<if test="strNombreZon != null">
+				de_nombre_zon,
+			</if>
+			<if test="strTipoConce != null">
+				de_tipo_conce,
+			</if>
+			<if test="strEmpresa != null">
+				de_empresa,
+			</if>
+			<if test="strSistemaEl != null">
+				de_sistema_el,
+			</if>
+			<if test="lngAreaInflu != null">
+				cd_area_influ,
+			</if>
+			<if test="dblMaximaDem != null">
+				ha_maxima_dem,
+			</if>
+			<if test="dblHorasServ != null">
+				ha_horas_serv,
+			</if>
+			<if test="lngNumeroUsu != null">
+				cd_numero_usu,
+			</if>
+			<if test="dteFechaPres != null">
+				fc_fecha_pres,
+			</if>
+			<if test="dteFechaReso != null">
+				fc_fecha_reso,
+			</if>
+			<if test="strActivo != null">
+				de_activo,
+			</if>
+			<if test="strCodigoCon != null">
+				de_codigo_con,
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area,
+			</if>
+			<if test="dblShapeLen != null">
+				ha_shape_len,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
+			<if test="strTheGeom != null">
+				#{strTheGeom, jdbcType=VARCHAR},
+			</if>
+			<if test="strIdGrafico != null">
+				#{strIdGrafico, jdbcType=VARCHAR},
+			</if>
+			<if test="strExpediente != null">
+				#{strExpediente, jdbcType=VARCHAR},
+			</if>
+			<if test="strConcesion != null">
+				#{strConcesion, jdbcType=VARCHAR},
+			</if>
+			<if test="strNombreZon != null">
+				#{strNombreZon, jdbcType=VARCHAR},
+			</if>
+			<if test="strTipoConce != null">
+				#{strTipoConce, jdbcType=VARCHAR},
+			</if>
+			<if test="strEmpresa != null">
+				#{strEmpresa, jdbcType=VARCHAR},
+			</if>
+			<if test="strSistemaEl != null">
+				#{strSistemaEl, jdbcType=VARCHAR},
+			</if>
+			<if test="lngAreaInflu != null">
+				#{lngAreaInflu, jdbcType=INTEGER},
+			</if>
+			<if test="dblMaximaDem != null">
+				#{dblMaximaDem, jdbcType=DOUBLE},
+			</if>
+			<if test="dblHorasServ != null">
+				#{dblHorasServ, jdbcType=DOUBLE},
+			</if>
+			<if test="lngNumeroUsu != null">
+				#{lngNumeroUsu, jdbcType=INTEGER},
+			</if>
+			<if test="dteFechaPres != null">
+				#{dteFechaPres, jdbcType=DATE},
+			</if>
+			<if test="dteFechaReso != null">
+				#{dteFechaReso, jdbcType=DATE},
+			</if>
+			<if test="strActivo != null">
+				#{strActivo, jdbcType=VARCHAR},
+			</if>
+			<if test="strCodigoCon != null">
+				#{strCodigoCon, jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeArea != null">
+				#{dblShapeArea, jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeLen != null">
+				#{dblShapeLen, jdbcType=DOUBLE},
 			</if>
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion">
 		update wcmc_hef.tem_concesion_hidroelectricas_distribucion
 		<set>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
+			<if test="strTheGeom != null">
+				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
+			</if>
+			<if test="strIdGrafico != null">
+				de_id_grafico = #{strIdGrafico,jdbcType=VARCHAR},
+			</if>
+			<if test="strExpediente != null">
+				de_expediente = #{strExpediente,jdbcType=VARCHAR},
+			</if>
+			<if test="strConcesion != null">
+				de_concesion = #{strConcesion,jdbcType=VARCHAR},
+			</if>
+			<if test="strNombreZon != null">
+				de_nombre_zon = #{strNombreZon,jdbcType=VARCHAR},
+			</if>
+			<if test="strTipoConce != null">
+				de_tipo_conce = #{strTipoConce,jdbcType=VARCHAR},
+			</if>
+			<if test="strEmpresa != null">
+				de_empresa = #{strEmpresa,jdbcType=VARCHAR},
+			</if>
+			<if test="strSistemaEl != null">
+				de_sistema_el = #{strSistemaEl,jdbcType=VARCHAR},
+			</if>
+			<if test="lngAreaInflu != null">
+				cd_area_influ = #{lngAreaInflu,jdbcType=INTEGER},
+			</if>
+			<if test="dblMaximaDem != null">
+				ha_maxima_dem = #{dblMaximaDem,jdbcType=DOUBLE},
+			</if>
+			<if test="dblHorasServ != null">
+				ha_horas_serv = #{dblHorasServ,jdbcType=DOUBLE},
+			</if>
+			<if test="lngNumeroUsu != null">
+				cd_numero_usu = #{lngNumeroUsu,jdbcType=INTEGER},
+			</if>
+			<if test="dteFechaPres != null">
+				fc_fecha_pres = #{dteFechaPres,jdbcType=DATE},
+			</if>
+			<if test="dteFechaReso != null">
+				fc_fecha_reso = #{dteFechaReso,jdbcType=DATE},
+			</if>
+			<if test="strActivo != null">
+				de_activo = #{strActivo,jdbcType=VARCHAR},
+			</if>
+			<if test="strCodigoCon != null">
+				de_codigo_con = #{strCodigoCon,jdbcType=VARCHAR},
+			</if>
+			<if test="dblShapeArea != null">
+				ha_shape_area = #{dblShapeArea,jdbcType=DOUBLE},
+			</if>
+			<if test="dblShapeLen != null">
+				ha_shape_len = #{dblShapeLen,jdbcType=DOUBLE},
 			</if>
 		</set>
 		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
 	</update>
 	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucionKey">
 		delete from wcmc_hef.tem_concesion_hidroelectricas_distribucion
 		where 1 = 1
+		<if test="srlGid != null">
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+		</if>
 	</delete>
 	<!-- Criterios de seleccion -->
 	<sql id="Parameter_Default_Where_Clause">
@@ -97,10 +299,67 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		fc_fecreg
+		cd_gid, 
+		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
+		de_id_grafico, 
+		de_expediente, 
+		de_concesion, 
+		de_nombre_zon, 
+		de_tipo_conce, 
+		de_empresa, 
+		de_sistema_el, 
+		cd_area_influ, 
+		ha_maxima_dem, 
+		ha_horas_serv, 
+		cd_numero_usu, 
+		fc_fecha_pres, 
+		fc_fecha_reso, 
+		de_activo, 
+		de_codigo_con, 
+		ha_shape_area, 
+		ha_shape_len
 	</sql>
 	<sql id="Base_Column_List_Geometry">
-		fc_fecreg
+		cd_gid, 
+		ST_AsText(si_the_geom) as si_the_geom, 
+		de_id_grafico, 
+		de_expediente, 
+		de_concesion, 
+		de_nombre_zon, 
+		de_tipo_conce, 
+		de_empresa, 
+		de_sistema_el, 
+		cd_area_influ, 
+		ha_maxima_dem, 
+		ha_horas_serv, 
+		cd_numero_usu, 
+		fc_fecha_pres, 
+		fc_fecha_reso, 
+		de_activo, 
+		de_codigo_con, 
+		ha_shape_area, 
+		ha_shape_len
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_id_grafico, 
+		de_expediente, 
+		de_concesion, 
+		de_nombre_zon, 
+		de_tipo_conce, 
+		de_empresa, 
+		de_sistema_el, 
+		cd_area_influ, 
+		ha_maxima_dem, 
+		ha_horas_serv, 
+		cd_numero_usu, 
+		fc_fecha_pres, 
+		fc_fecha_reso, 
+		de_activo, 
+		de_codigo_con, 
+		ha_shape_area, 
+		ha_shape_len
 	</sql>
 
 </mapper>

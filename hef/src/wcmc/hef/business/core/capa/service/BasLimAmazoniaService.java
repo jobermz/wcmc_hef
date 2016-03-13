@@ -10,7 +10,9 @@ public interface BasLimAmazoniaService {
 	
 	public List<BasLimAmazonia> buscar(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
 	public List<BasLimAmazonia> buscarGeometry(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
+	public List<BasLimAmazonia> buscarCombo(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
 	public BasLimAmazonia buscarById(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
+	public BasLimAmazonia buscarGeometryById(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
 	public Integer guardar(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
 	public Integer eliminar(BasLimAmazoniaDto basLimAmazoniaDto) throws Exception;
 	

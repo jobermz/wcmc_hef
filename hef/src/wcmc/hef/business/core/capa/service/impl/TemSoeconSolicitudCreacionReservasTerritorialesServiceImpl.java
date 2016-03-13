@@ -30,27 +30,28 @@ public class TemSoeconSolicitudCreacionReservasTerritorialesServiceImpl implemen
 				criteria.andIntObjectid1EqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret()) != null) {
-				criteria.andStrNomretLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret());
+				criteria.andStrNomretEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego()) != null) {
-				criteria.andStrCategoLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego());
+				criteria.andStrCategoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol()) != null) {
-				criteria.andStrUbipolLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol());
+				criteria.andStrUbipolEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol());
 			}
 			if(CadenaUtil.getDoubNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg()) != null) {
 				criteria.andDblArelegEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
 			}
 		}
 		
+		temSoeconSolicitudCreacionReservasTerritorialesParamDef.setOrderByClause("de_nomret");
 		List<TemSoeconSolicitudCreacionReservasTerritoriales>	 list	= temSoeconSolicitudCreacionReservasTerritorialesMapper.selectByDefaultParameter(temSoeconSolicitudCreacionReservasTerritorialesParamDef);
 		return list;
 	}
 	
-		public List<TemSoeconSolicitudCreacionReservasTerritoriales> buscarGeometry(TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto) throws Exception {
+	public List<TemSoeconSolicitudCreacionReservasTerritoriales> buscarGeometry(TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto) throws Exception {
 		TemSoeconSolicitudCreacionReservasTerritorialesParamDef temSoeconSolicitudCreacionReservasTerritorialesParamDef		= new TemSoeconSolicitudCreacionReservasTerritorialesParamDef();
 		
 		Criteria criteria		= temSoeconSolicitudCreacionReservasTerritorialesParamDef.createCriteria();
@@ -62,23 +63,57 @@ public class TemSoeconSolicitudCreacionReservasTerritorialesServiceImpl implemen
 				criteria.andIntObjectid1EqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret()) != null) {
-				criteria.andStrNomretLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret());
+				criteria.andStrNomretEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego()) != null) {
-				criteria.andStrCategoLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego());
+				criteria.andStrCategoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol()) != null) {
-				criteria.andStrUbipolLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol());
+				criteria.andStrUbipolEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol());
 			}
 			if(CadenaUtil.getDoubNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg()) != null) {
 				criteria.andDblArelegEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg());
 			}
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
 			}
 		}
 		
+		temSoeconSolicitudCreacionReservasTerritorialesParamDef.setOrderByClause("de_nomret");
 		List<TemSoeconSolicitudCreacionReservasTerritoriales>	 list	= temSoeconSolicitudCreacionReservasTerritorialesMapper.selectByDefaultParameterGeometry(temSoeconSolicitudCreacionReservasTerritorialesParamDef);
+		return list;
+	}
+	
+	public List<TemSoeconSolicitudCreacionReservasTerritoriales> buscarCombo(TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto) throws Exception {
+		TemSoeconSolicitudCreacionReservasTerritorialesParamDef temSoeconSolicitudCreacionReservasTerritorialesParamDef		= new TemSoeconSolicitudCreacionReservasTerritorialesParamDef();
+		
+		Criteria criteria		= temSoeconSolicitudCreacionReservasTerritorialesParamDef.createCriteria();
+		if(temSoeconSolicitudCreacionReservasTerritorialesDto != null) {
+			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret()) != null) {
+				criteria.andStrNomretEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrNomret());
+			}
+			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego()) != null) {
+				criteria.andStrCategoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrCatego());
+			}
+			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol()) != null) {
+				criteria.andStrUbipolEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrUbipol());
+			}
+			if(CadenaUtil.getDoubNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg()) != null) {
+				criteria.andDblArelegEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getDblAreleg());
+			}
+			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado()) != null) {
+				criteria.andStrEstadoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
+			}
+		}
+		
+		temSoeconSolicitudCreacionReservasTerritorialesParamDef.setOrderByClause("de_nomret");
+		List<TemSoeconSolicitudCreacionReservasTerritoriales>	 list	= temSoeconSolicitudCreacionReservasTerritorialesMapper.selectByDefaultParameterCombo(temSoeconSolicitudCreacionReservasTerritorialesParamDef);
 		return list;
 	}
 	
@@ -86,6 +121,12 @@ public class TemSoeconSolicitudCreacionReservasTerritorialesServiceImpl implemen
 		TemSoeconSolicitudCreacionReservasTerritoriales temSoeconSolicitudCreacionReservasTerritoriales		= new TemSoeconSolicitudCreacionReservasTerritoriales();
 		BeanUtils.copyProperties(temSoeconSolicitudCreacionReservasTerritorialesDto, temSoeconSolicitudCreacionReservasTerritoriales);
 		return temSoeconSolicitudCreacionReservasTerritorialesMapper.selectByPrimaryKey(temSoeconSolicitudCreacionReservasTerritoriales);
+	}
+	
+	public TemSoeconSolicitudCreacionReservasTerritoriales buscarGeometryById(TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto) throws Exception {
+		TemSoeconSolicitudCreacionReservasTerritoriales temSoeconSolicitudCreacionReservasTerritoriales		= new TemSoeconSolicitudCreacionReservasTerritoriales();
+		BeanUtils.copyProperties(temSoeconSolicitudCreacionReservasTerritorialesDto, temSoeconSolicitudCreacionReservasTerritoriales);
+		return temSoeconSolicitudCreacionReservasTerritorialesMapper.selectByPrimaryKeyGeometry(temSoeconSolicitudCreacionReservasTerritoriales);
 	}
 	
 	@Transactional

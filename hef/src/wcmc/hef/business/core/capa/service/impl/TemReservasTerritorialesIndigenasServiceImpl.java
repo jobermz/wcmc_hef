@@ -30,7 +30,7 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 				criteria.andIntObjectid1EqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(temReservasTerritorialesIndigenasDto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(temReservasTerritorialesIndigenasDto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(temReservasTerritorialesIndigenasDto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid());
@@ -45,31 +45,31 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 				criteria.andDblPerimeterEqualTo(temReservasTerritorialesIndigenasDto.getDblPerimeter());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temReservasTerritorialesIndigenasDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temReservasTerritorialesIndigenasDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrBaseLegal()) != null) {
-				criteria.andStrBaseLegalLike(temReservasTerritorialesIndigenasDto.getStrBaseLegal());
+				criteria.andStrBaseLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrBaseLegal());
 			}
 			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblNHaIbc()) != null) {
 				criteria.andDblNHaIbcEqualTo(temReservasTerritorialesIndigenasDto.getDblNHaIbc());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNUbicAnp()) != null) {
-				criteria.andStrNUbicAnpLike(temReservasTerritorialesIndigenasDto.getStrNUbicAnp());
+				criteria.andStrNUbicAnpEqualTo(temReservasTerritorialesIndigenasDto.getStrNUbicAnp());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNMapA0()) != null) {
-				criteria.andStrNMapA0Like(temReservasTerritorialesIndigenasDto.getStrNMapA0());
+				criteria.andStrNMapA0EqualTo(temReservasTerritorialesIndigenasDto.getStrNMapA0());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrCategoria()) != null) {
-				criteria.andStrCategoriaLike(temReservasTerritorialesIndigenasDto.getStrCategoria());
+				criteria.andStrCategoriaEqualTo(temReservasTerritorialesIndigenasDto.getStrCategoria());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrEtnia()) != null) {
-				criteria.andStrEtniaLike(temReservasTerritorialesIndigenasDto.getStrEtnia());
+				criteria.andStrEtniaEqualTo(temReservasTerritorialesIndigenasDto.getStrEtnia());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrUbicaPoli()) != null) {
-				criteria.andStrUbicaPoliLike(temReservasTerritorialesIndigenasDto.getStrUbicaPoli());
+				criteria.andStrUbicaPoliEqualTo(temReservasTerritorialesIndigenasDto.getStrUbicaPoli());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrAreaLegal()) != null) {
-				criteria.andStrAreaLegalLike(temReservasTerritorialesIndigenasDto.getStrAreaLegal());
+				criteria.andStrAreaLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrAreaLegal());
 			}
 			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblShapeStar()) != null) {
 				criteria.andDblShapeStarEqualTo(temReservasTerritorialesIndigenasDto.getDblShapeStar());
@@ -79,11 +79,12 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 			}
 		}
 		
+		temReservasTerritorialesIndigenasParamDef.setOrderByClause("de_nombre,de_etnia");
 		List<TemReservasTerritorialesIndigenas>	 list	= temReservasTerritorialesIndigenasMapper.selectByDefaultParameter(temReservasTerritorialesIndigenasParamDef);
 		return list;
 	}
 	
-		public List<TemReservasTerritorialesIndigenas> buscarGeometry(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception {
+	public List<TemReservasTerritorialesIndigenas> buscarGeometry(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception {
 		TemReservasTerritorialesIndigenasParamDef temReservasTerritorialesIndigenasParamDef		= new TemReservasTerritorialesIndigenasParamDef();
 		
 		Criteria criteria		= temReservasTerritorialesIndigenasParamDef.createCriteria();
@@ -95,7 +96,7 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 				criteria.andIntObjectid1EqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(temReservasTerritorialesIndigenasDto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(temReservasTerritorialesIndigenasDto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(temReservasTerritorialesIndigenasDto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid());
@@ -110,31 +111,31 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 				criteria.andDblPerimeterEqualTo(temReservasTerritorialesIndigenasDto.getDblPerimeter());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNombre()) != null) {
-				criteria.andStrNombreLike(temReservasTerritorialesIndigenasDto.getStrNombre());
+				criteria.andStrNombreEqualTo(temReservasTerritorialesIndigenasDto.getStrNombre());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrBaseLegal()) != null) {
-				criteria.andStrBaseLegalLike(temReservasTerritorialesIndigenasDto.getStrBaseLegal());
+				criteria.andStrBaseLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrBaseLegal());
 			}
 			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblNHaIbc()) != null) {
 				criteria.andDblNHaIbcEqualTo(temReservasTerritorialesIndigenasDto.getDblNHaIbc());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNUbicAnp()) != null) {
-				criteria.andStrNUbicAnpLike(temReservasTerritorialesIndigenasDto.getStrNUbicAnp());
+				criteria.andStrNUbicAnpEqualTo(temReservasTerritorialesIndigenasDto.getStrNUbicAnp());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNMapA0()) != null) {
-				criteria.andStrNMapA0Like(temReservasTerritorialesIndigenasDto.getStrNMapA0());
+				criteria.andStrNMapA0EqualTo(temReservasTerritorialesIndigenasDto.getStrNMapA0());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrCategoria()) != null) {
-				criteria.andStrCategoriaLike(temReservasTerritorialesIndigenasDto.getStrCategoria());
+				criteria.andStrCategoriaEqualTo(temReservasTerritorialesIndigenasDto.getStrCategoria());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrEtnia()) != null) {
-				criteria.andStrEtniaLike(temReservasTerritorialesIndigenasDto.getStrEtnia());
+				criteria.andStrEtniaEqualTo(temReservasTerritorialesIndigenasDto.getStrEtnia());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrUbicaPoli()) != null) {
-				criteria.andStrUbicaPoliLike(temReservasTerritorialesIndigenasDto.getStrUbicaPoli());
+				criteria.andStrUbicaPoliEqualTo(temReservasTerritorialesIndigenasDto.getStrUbicaPoli());
 			}
 			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrAreaLegal()) != null) {
-				criteria.andStrAreaLegalLike(temReservasTerritorialesIndigenasDto.getStrAreaLegal());
+				criteria.andStrAreaLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrAreaLegal());
 			}
 			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblShapeStar()) != null) {
 				criteria.andDblShapeStarEqualTo(temReservasTerritorialesIndigenasDto.getDblShapeStar());
@@ -144,7 +145,74 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 			}
 		}
 		
+		temReservasTerritorialesIndigenasParamDef.setOrderByClause("de_nombre,de_etnia");
 		List<TemReservasTerritorialesIndigenas>	 list	= temReservasTerritorialesIndigenasMapper.selectByDefaultParameterGeometry(temReservasTerritorialesIndigenasParamDef);
+		return list;
+	}
+	
+	public List<TemReservasTerritorialesIndigenas> buscarCombo(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception {
+		TemReservasTerritorialesIndigenasParamDef temReservasTerritorialesIndigenasParamDef		= new TemReservasTerritorialesIndigenasParamDef();
+		
+		Criteria criteria		= temReservasTerritorialesIndigenasParamDef.createCriteria();
+		if(temReservasTerritorialesIndigenasDto != null) {
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temReservasTerritorialesIndigenasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temReservasTerritorialesIndigenasDto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrGmlId()) != null) {
+				criteria.andStrGmlIdEqualTo(temReservasTerritorialesIndigenasDto.getStrGmlId());
+			}
+			if(CadenaUtil.getInteNull(temReservasTerritorialesIndigenasDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temReservasTerritorialesIndigenasDto.getIntObjectid());
+			}
+			if(CadenaUtil.getInteNull(temReservasTerritorialesIndigenasDto.getIntId()) != null) {
+				criteria.andIntIdEqualTo(temReservasTerritorialesIndigenasDto.getIntId());
+			}
+			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblSdeDboTe()) != null) {
+				criteria.andDblSdeDboTeEqualTo(temReservasTerritorialesIndigenasDto.getDblSdeDboTe());
+			}
+			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblPerimeter()) != null) {
+				criteria.andDblPerimeterEqualTo(temReservasTerritorialesIndigenasDto.getDblPerimeter());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNombre()) != null) {
+				criteria.andStrNombreEqualTo(temReservasTerritorialesIndigenasDto.getStrNombre());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrBaseLegal()) != null) {
+				criteria.andStrBaseLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrBaseLegal());
+			}
+			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblNHaIbc()) != null) {
+				criteria.andDblNHaIbcEqualTo(temReservasTerritorialesIndigenasDto.getDblNHaIbc());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNUbicAnp()) != null) {
+				criteria.andStrNUbicAnpEqualTo(temReservasTerritorialesIndigenasDto.getStrNUbicAnp());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrNMapA0()) != null) {
+				criteria.andStrNMapA0EqualTo(temReservasTerritorialesIndigenasDto.getStrNMapA0());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrCategoria()) != null) {
+				criteria.andStrCategoriaEqualTo(temReservasTerritorialesIndigenasDto.getStrCategoria());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrEtnia()) != null) {
+				criteria.andStrEtniaEqualTo(temReservasTerritorialesIndigenasDto.getStrEtnia());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrUbicaPoli()) != null) {
+				criteria.andStrUbicaPoliEqualTo(temReservasTerritorialesIndigenasDto.getStrUbicaPoli());
+			}
+			if(CadenaUtil.getStrNull(temReservasTerritorialesIndigenasDto.getStrAreaLegal()) != null) {
+				criteria.andStrAreaLegalEqualTo(temReservasTerritorialesIndigenasDto.getStrAreaLegal());
+			}
+			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblShapeStar()) != null) {
+				criteria.andDblShapeStarEqualTo(temReservasTerritorialesIndigenasDto.getDblShapeStar());
+			}
+			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblShapeStle()) != null) {
+				criteria.andDblShapeStleEqualTo(temReservasTerritorialesIndigenasDto.getDblShapeStle());
+			}
+		}
+		
+		temReservasTerritorialesIndigenasParamDef.setOrderByClause("de_nombre,de_etnia");
+		List<TemReservasTerritorialesIndigenas>	 list	= temReservasTerritorialesIndigenasMapper.selectByDefaultParameterCombo(temReservasTerritorialesIndigenasParamDef);
 		return list;
 	}
 	
@@ -152,6 +220,12 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 		TemReservasTerritorialesIndigenas temReservasTerritorialesIndigenas		= new TemReservasTerritorialesIndigenas();
 		BeanUtils.copyProperties(temReservasTerritorialesIndigenasDto, temReservasTerritorialesIndigenas);
 		return temReservasTerritorialesIndigenasMapper.selectByPrimaryKey(temReservasTerritorialesIndigenas);
+	}
+	
+	public TemReservasTerritorialesIndigenas buscarGeometryById(TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto) throws Exception {
+		TemReservasTerritorialesIndigenas temReservasTerritorialesIndigenas		= new TemReservasTerritorialesIndigenas();
+		BeanUtils.copyProperties(temReservasTerritorialesIndigenasDto, temReservasTerritorialesIndigenas);
+		return temReservasTerritorialesIndigenasMapper.selectByPrimaryKeyGeometry(temReservasTerritorialesIndigenas);
 	}
 	
 	@Transactional

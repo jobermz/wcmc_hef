@@ -10,7 +10,9 @@ public interface TemViasTrochasService {
 	
 	public List<TemViasTrochas> buscar(TemViasTrochasDto temViasTrochasDto) throws Exception;
 	public List<TemViasTrochas> buscarGeometry(TemViasTrochasDto temViasTrochasDto) throws Exception;
+	public List<TemViasTrochas> buscarCombo(TemViasTrochasDto temViasTrochasDto) throws Exception;
 	public TemViasTrochas buscarById(TemViasTrochasDto temViasTrochasDto) throws Exception;
+	public TemViasTrochas buscarGeometryById(TemViasTrochasDto temViasTrochasDto) throws Exception;
 	public Integer guardar(TemViasTrochasDto temViasTrochasDto) throws Exception;
 	public Integer eliminar(TemViasTrochasDto temViasTrochasDto) throws Exception;
 	

@@ -10,7 +10,6 @@
 		<result column="ha_shape_leng" property="dblShapeLeng" jdbcType="DOUBLE"/>
 		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
 		<result column="de_cv_label" property="strCvLabel" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemCoverturaVegetal2015Map" parameterType="wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015ParamDef">
 		select
@@ -41,9 +40,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemCoverturaVegetal2015Map" parameterType="wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015ParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_covertura_vegetal_2015 as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCoverturaVegetal2015Map" parameterType="wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015Key" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_covertura_vegetal_2015 as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemCoverturaVegetal2015Map" parameterType="wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015Key" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_covertura_vegetal_2015 as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -77,9 +98,6 @@
 			<if test="strCvLabel != null">
 				de_cv_label,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -102,9 +120,6 @@
 			</if>
 			<if test="strCvLabel != null">
 				#{strCvLabel, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -131,9 +146,6 @@
 			</if>
 			<if test="strCvLabel != null">
 				de_cv_label = #{strCvLabel,jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -184,8 +196,7 @@
 		de_fisiogr, 
 		ha_shape_leng, 
 		ha_shape_area, 
-		de_cv_label, 
-		fc_fecreg
+		de_cv_label
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -195,8 +206,17 @@
 		de_fisiogr, 
 		ha_shape_leng, 
 		ha_shape_area, 
-		de_cv_label, 
-		fc_fecreg
+		de_cv_label
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_cobveg2013, 
+		de_simbolo, 
+		de_fisiogr, 
+		ha_shape_leng, 
+		ha_shape_area, 
+		de_cv_label
 	</sql>
 
 </mapper>

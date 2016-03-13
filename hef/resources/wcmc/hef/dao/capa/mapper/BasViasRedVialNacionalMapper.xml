@@ -9,7 +9,6 @@
 		<result column="de_red_044" property="strRed044" jdbcType="VARCHAR"/>
 		<result column="ha_longkm_d44" property="dblLongkmD44" jdbcType="DOUBLE"/>
 		<result column="de_super_rod" property="strSuperRod" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="BasViasRedVialNacionalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialNacionalParamDef">
 		select
@@ -40,9 +39,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="BasViasRedVialNacionalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialNacionalParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.bas_vias_red_vial_nacional as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasViasRedVialNacionalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialNacionalKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_vias_red_vial_nacional as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="BasViasRedVialNacionalMap" parameterType="wcmc.hef.dao.capa.domain.BasViasRedVialNacionalKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.bas_vias_red_vial_nacional as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -73,9 +94,6 @@
 			<if test="strSuperRod != null">
 				de_super_rod,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -95,9 +113,6 @@
 			</if>
 			<if test="strSuperRod != null">
 				#{strSuperRod, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -121,9 +136,6 @@
 			</if>
 			<if test="strSuperRod != null">
 				de_super_rod = #{strSuperRod,jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -173,8 +185,7 @@
 		de_ruta_d044, 
 		de_red_044, 
 		ha_longkm_d44, 
-		de_super_rod, 
-		fc_fecreg
+		de_super_rod
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -183,8 +194,16 @@
 		de_ruta_d044, 
 		de_red_044, 
 		ha_longkm_d44, 
-		de_super_rod, 
-		fc_fecreg
+		de_super_rod
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_dpto, 
+		de_ruta_d044, 
+		de_red_044, 
+		ha_longkm_d44, 
+		de_super_rod
 	</sql>
 
 </mapper>

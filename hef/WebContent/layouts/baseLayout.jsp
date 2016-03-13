@@ -20,13 +20,11 @@ request.setAttribute("CURR_DAY", strTimeDay);
 	<link rel="stylesheet" href="tools/bootstrap-3.3.2-dist/css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="tools/ol.v3.13/ol.css" type="text/css">
 	<link rel="stylesheet" href="tools/font-awesome-4.5.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/comun.css?day=${CURR_DAY}">
 	<link rel="stylesheet" href="tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/jquery-ui-1.10.4.custom.css">
 	
 	<link href="tools/bootstrap-datatables/css/datatables.bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="tools/bootstrap-datatables/css/datatables-responsive.css" rel="stylesheet" type="text/css">
-	
-	<link href="css/visor/visorInicio.css?day=${CURR_DAY}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="tools/bootstrap-select/css/bootstrap-select.css">
 	
 	<script src="tools/jquery-ui-1.10.4.custom_cupertino/js/jquery-1.10.2.js"></script>
 	<script src="tools/jquery-ui-1.10.4.custom_cupertino/js/jquery-ui-1.10.4.custom.js"></script>
@@ -42,7 +40,10 @@ request.setAttribute("CURR_DAY", strTimeDay);
 	<script	src="tools/bootstrap-datatables/js/jquery.datatables.1.10.0.js" type="text/javascript"></script>
 	<script	src="tools/bootstrap-datatables/js/datatables.bootstrap.js" type="text/javascript"></script>
 	<script src="tools/bootstrap-datatables/js/datatables-responsive.js" type="text/javascript"></script>
+	<script src="tools/bootstrap-select/js/bootstrap-select.js"></script>
 	
+	<link rel="stylesheet" href="css/comun.css?day=${CURR_DAY}">
+	<link href="css/visor/visorInicio.css?day=${CURR_DAY}" rel="stylesheet" type="text/css">
 	<script src="js/visor/visorInicioAnalizarPorArea.js?day=${CURR_DAY}" type="text/javascript"></script>
 	<script src="js/visor/visorInicioIdentificarAreaCriterioLogico.js?day=${CURR_DAY}" type="text/javascript"></script>
 	

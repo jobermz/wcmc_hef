@@ -53,6 +53,7 @@ function centrarMapa(srlIdCapa) {
 	$('.centrar-mapa-modal').off('shown.bs.modal');
 	$('.centrar-mapa-modal').off('hidden.bs.modal');
 	$('.centrar-mapa-modal').on('shown.bs.modal', function (e) {
+		$('.seleccionar-capas-modal').modal('hide');
 		if($("input[name=CAPAS_BASE_DEPARTAMENTO]").val() == srlIdCapa) {
 			$("#idDivCentrarDepartamento").css("display","");
 			$("#idDivCentrarProvincia").css("display","none");
@@ -86,6 +87,7 @@ function mostrarInfo(srlIdCapa) {
 	$('.info-capas-modal').off('shown.bs.modal');
 	$('.info-capas-modal').off('hidden.bs.modal');
 	$('.info-capas-modal').on('shown.bs.modal', function (e) {
+//		$('.seleccionar-capas-modal').modal('hide');
 		var capaBase	= buscarCapasBaseById(srlIdCapa);
 		if(capaBase) {
 			$("#idDivInfoNombre").html(capaBase.strNombre);

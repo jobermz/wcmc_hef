@@ -1,12 +1,12 @@
 package wcmc.hef.dao.capa.mapper;
 
-import java.util.List;
 import org.springframework.stereotype.Service;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica;
+import wcmc.hef.dao.capa.domain.BeanRaster;
 
 @Service
 public interface TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaMapper {
-	
-	public List<Double> selectByGeometry(TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica temBiodiversidadRiquezaPotencialEspeciesFaunaEndemica);
+
+	public BeanRaster selectByGeometry(BeanRaster beanRaster);
+	public String selectGeometryByRangoAndGeometry(BeanRaster BeanRaster);
 	
 }

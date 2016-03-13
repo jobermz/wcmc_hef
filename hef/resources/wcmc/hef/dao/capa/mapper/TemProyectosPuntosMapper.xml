@@ -23,7 +23,6 @@
 		<result column="de_direccion_" property="strDireccion" jdbcType="VARCHAR"/>
 		<result column="de_instituc_1" property="strInstituc1" jdbcType="VARCHAR"/>
 		<result column="de_link" property="strLink" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosParamDef">
 		select
@@ -54,9 +53,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_proyectos_puntos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_proyectos_puntos as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemProyectosPuntosMap" parameterType="wcmc.hef.dao.capa.domain.TemProyectosPuntosKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_proyectos_puntos as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -129,9 +150,6 @@
 			<if test="strLink != null">
 				de_link,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -193,9 +211,6 @@
 			</if>
 			<if test="strLink != null">
 				#{strLink, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -262,9 +277,6 @@
 			<if test="strLink != null">
 				de_link = #{strLink,jdbcType=VARCHAR},
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
-			</if>
 		</set>
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -327,8 +339,7 @@
 		de_contacto, 
 		de_direccion_, 
 		de_instituc_1, 
-		de_link, 
-		fc_fecreg
+		de_link
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -351,8 +362,30 @@
 		de_contacto, 
 		de_direccion_, 
 		de_instituc_1, 
-		de_link, 
-		fc_fecreg
+		de_link
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_nombre, 
+		de_iniciativa, 
+		de_referencia, 
+		de_region_geo, 
+		de_detalle_de, 
+		de_otros, 
+		de_fecha_inic, 
+		de_fecha_term, 
+		de_resultados, 
+		de_cooperante, 
+		de_administra, 
+		ha_usd, 
+		de_institucio, 
+		de_persona_co, 
+		de_cargo, 
+		de_contacto, 
+		de_direccion_, 
+		de_instituc_1, 
+		de_link
 	</sql>
 
 </mapper>

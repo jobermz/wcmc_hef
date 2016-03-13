@@ -11,7 +11,9 @@ public interface TemConcesionesEcoturismoMapper {
 	
 	public List<TemConcesionesEcoturismo> selectByDefaultParameter(TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef);
 	public List<TemConcesionesEcoturismo> selectByDefaultParameterGeometry(TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef);
+	public List<TemConcesionesEcoturismo> selectByDefaultParameterCombo(TemConcesionesEcoturismoParamDef temConcesionesEcoturismoParamDef);
 	public TemConcesionesEcoturismo selectByPrimaryKey(TemConcesionesEcoturismoKey temConcesionesEcoturismoKey);
+	public TemConcesionesEcoturismo selectByPrimaryKeyGeometry(TemConcesionesEcoturismoKey temConcesionesEcoturismoKey);
 	public int insertSelective(TemConcesionesEcoturismo temConcesionesEcoturismo);
 	public int updateByPrimaryKeySelective(TemConcesionesEcoturismo temConcesionesEcoturismo);
 	public int deleteByPrimaryKey(TemConcesionesEcoturismoKey temConcesionesEcoturismoKey);

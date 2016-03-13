@@ -59,22 +59,16 @@ import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.business.core.capa.service.TemReservasTerritorialesIndigenasService;
 import wcmc.hef.business.core.capa.service.TemRiesgoErosionHidricaService;
 import wcmc.hef.business.core.capa.service.TemSinanpeAmortiguamientoService;
-import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasTotalesService;
+import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasService;
 import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTerritorialesService;
 import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
-import wcmc.hef.business.core.capa.dto.TemBiodiversidadEspeciesPeligroExtincionDto;
-import wcmc.hef.business.core.capa.dto.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto;
-import wcmc.hef.business.core.capa.dto.TemDensidadCarbonoAereaDto;
-import wcmc.hef.business.core.capa.dto.TemRiesgoErosionHidricaDto;
+import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadEspeciesPeligroExtincion;
-import wcmc.hef.dao.capa.domain.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica;
-import wcmc.hef.dao.capa.domain.TemDensidadCarbonoAerea;
-import wcmc.hef.dao.capa.domain.TemRiesgoErosionHidrica;
+import wcmc.hef.dao.capa.domain.BeanRaster;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -145,8 +139,8 @@ import wcmc.hef.business.core.capa.dto.TemReservasTerritorialesIndigenasDto;
 import wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenas;
 import wcmc.hef.business.core.capa.dto.TemSinanpeAmortiguamientoDto;
 import wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamiento;
-import wcmc.hef.business.core.capa.dto.TemSoeconComunidadesCampesinasTotalesDto;
-import wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinasTotales;
+import wcmc.hef.business.core.capa.dto.TemSoeconComunidadesCampesinasDto;
+import wcmc.hef.dao.capa.domain.TemSoeconComunidadesCampesinas;
 import wcmc.hef.business.core.capa.dto.TemSoeconSolicitudCreacionReservasTerritorialesDto;
 import wcmc.hef.dao.capa.domain.TemSoeconSolicitudCreacionReservasTerritoriales;
 import wcmc.hef.business.core.capa.dto.TemViaFerreaDto;
@@ -273,7 +267,7 @@ public class ConsultaAction extends ActionSupport {
 	private TemSinanpeAmortiguamientoService temSinanpeAmortiguamientoService;
 
 	@Autowired
-	private TemSoeconComunidadesCampesinasTotalesService temSoeconComunidadesCampesinasTotalesService;
+	private TemSoeconComunidadesCampesinasService temSoeconComunidadesCampesinasService;
 
 	@Autowired
 	private TemSoeconSolicitudCreacionReservasTerritorialesService temSoeconSolicitudCreacionReservasTerritorialesService;
@@ -326,7 +320,7 @@ public class ConsultaAction extends ActionSupport {
 				}
 			}
 			
-			final Map<String, List> mapReporte		= new HashMap<String, List>();
+			final Map<String, Object> mapReporte		= new HashMap<String, Object>();
 			String[] arrCons	= listSrlIdCapaConsulta.split(",");
 			List<String> listConsulta	= Arrays.asList(arrCons);
 			Map<String, String> mapServ	= ServiciosProperties.getServiciosByIdList();
@@ -1117,9 +1111,9 @@ public class ConsultaAction extends ActionSupport {
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemSoeconComunidadesCampesinasTotalesDto temSoeconComunidadesCampesinasTotalesDto		= new TemSoeconComunidadesCampesinasTotalesDto();
-									temSoeconComunidadesCampesinasTotalesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemSoeconComunidadesCampesinasTotales> listTemSoeconComunidadesCampesinasTotales		= temSoeconComunidadesCampesinasTotalesService.buscar(temSoeconComunidadesCampesinasTotalesDto);
+									TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
+									temSoeconComunidadesCampesinasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									List<TemSoeconComunidadesCampesinas> listTemSoeconComunidadesCampesinasTotales		= temSoeconComunidadesCampesinasService.buscar(temSoeconComunidadesCampesinasDto);
 									if(listTemSoeconComunidadesCampesinasTotales.size() > 0) {
 										mapReporte.put("listTemSoeconComunidadesCampesinasTotales", listTemSoeconComunidadesCampesinasTotales);
 									}
@@ -1223,11 +1217,11 @@ public class ConsultaAction extends ActionSupport {
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemBiodiversidadEspeciesPeligroExtincionDto temBiodiversidadEspeciesPeligroExtincionDto		= new TemBiodiversidadEspeciesPeligroExtincionDto();
-									temBiodiversidadEspeciesPeligroExtincionDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemBiodiversidadEspeciesPeligroExtincion> listTemBiodiversidadEspeciesPeligroExtincion		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(temBiodiversidadEspeciesPeligroExtincionDto);
-									if(listTemBiodiversidadEspeciesPeligroExtincion.size() > 0) {
-										mapReporte.put("listTemBiodiversidadEspeciesPeligroExtincion", listTemBiodiversidadEspeciesPeligroExtincion);
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemBiodiversidadEspeciesPeligroExtincion", beanRaster);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1244,11 +1238,11 @@ public class ConsultaAction extends ActionSupport {
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto		= new TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto();
-									temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica> listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaDto);
-									if(listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.size() > 0) {
-										mapReporte.put("listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica);
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", beanRaster);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1265,11 +1259,11 @@ public class ConsultaAction extends ActionSupport {
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemDensidadCarbonoAereaDto temDensidadCarbonoAereaDto		= new TemDensidadCarbonoAereaDto();
-									temDensidadCarbonoAereaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemDensidadCarbonoAerea> listTemDensidadCarbonoAerea		= temDensidadCarbonoAereaService.selectByGeometry(temDensidadCarbonoAereaDto);
-									if(listTemDensidadCarbonoAerea.size() > 0) {
-										mapReporte.put("listTemDensidadCarbonoAerea", listTemDensidadCarbonoAerea);
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temDensidadCarbonoAereaService.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemDensidadCarbonoAerea", beanRaster);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1286,11 +1280,11 @@ public class ConsultaAction extends ActionSupport {
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemRiesgoErosionHidricaDto temRiesgoErosionHidricaDto		= new TemRiesgoErosionHidricaDto();
-									temRiesgoErosionHidricaDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemRiesgoErosionHidrica> listTemRiesgoErosionHidrica		= temRiesgoErosionHidricaService.selectByGeometry(temRiesgoErosionHidricaDto);
-									if(listTemRiesgoErosionHidrica.size() > 0) {
-										mapReporte.put("listTemRiesgoErosionHidrica", listTemRiesgoErosionHidrica);
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temRiesgoErosionHidricaService.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemRiesgoErosionHidrica", beanRaster);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();

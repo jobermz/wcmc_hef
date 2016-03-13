@@ -10,7 +10,9 @@ public interface TemSinanpeAmortiguamientoService {
 	
 	public List<TemSinanpeAmortiguamiento> buscar(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
 	public List<TemSinanpeAmortiguamiento> buscarGeometry(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
+	public List<TemSinanpeAmortiguamiento> buscarCombo(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
 	public TemSinanpeAmortiguamiento buscarById(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
+	public TemSinanpeAmortiguamiento buscarGeometryById(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
 	public Integer guardar(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
 	public Integer eliminar(TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto) throws Exception;
 	

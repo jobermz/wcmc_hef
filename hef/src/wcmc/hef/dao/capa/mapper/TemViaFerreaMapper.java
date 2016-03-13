@@ -11,7 +11,9 @@ public interface TemViaFerreaMapper {
 	
 	public List<TemViaFerrea> selectByDefaultParameter(TemViaFerreaParamDef temViaFerreaParamDef);
 	public List<TemViaFerrea> selectByDefaultParameterGeometry(TemViaFerreaParamDef temViaFerreaParamDef);
+	public List<TemViaFerrea> selectByDefaultParameterCombo(TemViaFerreaParamDef temViaFerreaParamDef);
 	public TemViaFerrea selectByPrimaryKey(TemViaFerreaKey temViaFerreaKey);
+	public TemViaFerrea selectByPrimaryKeyGeometry(TemViaFerreaKey temViaFerreaKey);
 	public int insertSelective(TemViaFerrea temViaFerrea);
 	public int updateByPrimaryKeySelective(TemViaFerrea temViaFerrea);
 	public int deleteByPrimaryKey(TemViaFerreaKey temViaFerreaKey);

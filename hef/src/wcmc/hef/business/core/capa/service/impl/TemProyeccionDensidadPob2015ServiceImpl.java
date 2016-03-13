@@ -27,34 +27,34 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 				criteria.andStrTheGeomIntersectsTo(temProyeccionDensidadPob2015Dto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddpto()) != null) {
-				criteria.andStrIddptoLike(temProyeccionDensidadPob2015Dto.getStrIddpto());
+				criteria.andStrIddptoEqualTo(temProyeccionDensidadPob2015Dto.getStrIddpto());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdep()) != null) {
-				criteria.andStrNombdepLike(temProyeccionDensidadPob2015Dto.getStrNombdep());
+				criteria.andStrNombdepEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdep());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIdprov()) != null) {
-				criteria.andStrIdprovLike(temProyeccionDensidadPob2015Dto.getStrIdprov());
+				criteria.andStrIdprovEqualTo(temProyeccionDensidadPob2015Dto.getStrIdprov());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombprov()) != null) {
-				criteria.andStrNombprovLike(temProyeccionDensidadPob2015Dto.getStrNombprov());
+				criteria.andStrNombprovEqualTo(temProyeccionDensidadPob2015Dto.getStrNombprov());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddist()) != null) {
-				criteria.andStrIddistLike(temProyeccionDensidadPob2015Dto.getStrIddist());
+				criteria.andStrIddistEqualTo(temProyeccionDensidadPob2015Dto.getStrIddist());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdist()) != null) {
-				criteria.andStrNombdistLike(temProyeccionDensidadPob2015Dto.getStrNombdist());
+				criteria.andStrNombdistEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdist());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDcto()) != null) {
-				criteria.andStrDctoLike(temProyeccionDensidadPob2015Dto.getStrDcto());
+				criteria.andStrDctoEqualTo(temProyeccionDensidadPob2015Dto.getStrDcto());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrLey()) != null) {
-				criteria.andStrLeyLike(temProyeccionDensidadPob2015Dto.getStrLey());
+				criteria.andStrLeyEqualTo(temProyeccionDensidadPob2015Dto.getStrLey());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrFecha()) != null) {
-				criteria.andStrFechaLike(temProyeccionDensidadPob2015Dto.getStrFecha());
+				criteria.andStrFechaEqualTo(temProyeccionDensidadPob2015Dto.getStrFecha());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNomCap()) != null) {
-				criteria.andStrNomCapLike(temProyeccionDensidadPob2015Dto.getStrNomCap());
+				criteria.andStrNomCapEqualTo(temProyeccionDensidadPob2015Dto.getStrNomCap());
 			}
 			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupContin()) != null) {
 				criteria.andDblSupContinEqualTo(temProyeccionDensidadPob2015Dto.getDblSupContin());
@@ -69,16 +69,16 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 				criteria.andDblSupInsDEqualTo(temProyeccionDensidadPob2015Dto.getDblSupInsD());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo()) != null) {
-				criteria.andStrUbigeoLike(temProyeccionDensidadPob2015Dto.getStrUbigeo());
+				criteria.andStrUbigeoEqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo1()) != null) {
-				criteria.andStrUbigeo1Like(temProyeccionDensidadPob2015Dto.getStrUbigeo1());
+				criteria.andStrUbigeo1EqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo1());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDistrito()) != null) {
-				criteria.andStrDistritoLike(temProyeccionDensidadPob2015Dto.getStrDistrito());
+				criteria.andStrDistritoEqualTo(temProyeccionDensidadPob2015Dto.getStrDistrito());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrTotal2015()) != null) {
-				criteria.andStrTotal2015Like(temProyeccionDensidadPob2015Dto.getStrTotal2015());
+				criteria.andStrTotal2015EqualTo(temProyeccionDensidadPob2015Dto.getStrTotal2015());
 			}
 			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblArea()) != null) {
 				criteria.andDblAreaEqualTo(temProyeccionDensidadPob2015Dto.getDblArea());
@@ -88,11 +88,12 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 			}
 		}
 		
+		temProyeccionDensidadPob2015ParamDef.setOrderByClause("ha_pop_dens");
 		List<TemProyeccionDensidadPob2015>	 list	= temProyeccionDensidadPob2015Mapper.selectByDefaultParameter(temProyeccionDensidadPob2015ParamDef);
 		return list;
 	}
 	
-		public List<TemProyeccionDensidadPob2015> buscarGeometry(TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto) throws Exception {
+	public List<TemProyeccionDensidadPob2015> buscarGeometry(TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto) throws Exception {
 		TemProyeccionDensidadPob2015ParamDef temProyeccionDensidadPob2015ParamDef		= new TemProyeccionDensidadPob2015ParamDef();
 		
 		Criteria criteria		= temProyeccionDensidadPob2015ParamDef.createCriteria();
@@ -101,34 +102,34 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 				criteria.andStrTheGeomIntersectsTo(temProyeccionDensidadPob2015Dto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddpto()) != null) {
-				criteria.andStrIddptoLike(temProyeccionDensidadPob2015Dto.getStrIddpto());
+				criteria.andStrIddptoEqualTo(temProyeccionDensidadPob2015Dto.getStrIddpto());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdep()) != null) {
-				criteria.andStrNombdepLike(temProyeccionDensidadPob2015Dto.getStrNombdep());
+				criteria.andStrNombdepEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdep());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIdprov()) != null) {
-				criteria.andStrIdprovLike(temProyeccionDensidadPob2015Dto.getStrIdprov());
+				criteria.andStrIdprovEqualTo(temProyeccionDensidadPob2015Dto.getStrIdprov());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombprov()) != null) {
-				criteria.andStrNombprovLike(temProyeccionDensidadPob2015Dto.getStrNombprov());
+				criteria.andStrNombprovEqualTo(temProyeccionDensidadPob2015Dto.getStrNombprov());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddist()) != null) {
-				criteria.andStrIddistLike(temProyeccionDensidadPob2015Dto.getStrIddist());
+				criteria.andStrIddistEqualTo(temProyeccionDensidadPob2015Dto.getStrIddist());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdist()) != null) {
-				criteria.andStrNombdistLike(temProyeccionDensidadPob2015Dto.getStrNombdist());
+				criteria.andStrNombdistEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdist());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDcto()) != null) {
-				criteria.andStrDctoLike(temProyeccionDensidadPob2015Dto.getStrDcto());
+				criteria.andStrDctoEqualTo(temProyeccionDensidadPob2015Dto.getStrDcto());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrLey()) != null) {
-				criteria.andStrLeyLike(temProyeccionDensidadPob2015Dto.getStrLey());
+				criteria.andStrLeyEqualTo(temProyeccionDensidadPob2015Dto.getStrLey());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrFecha()) != null) {
-				criteria.andStrFechaLike(temProyeccionDensidadPob2015Dto.getStrFecha());
+				criteria.andStrFechaEqualTo(temProyeccionDensidadPob2015Dto.getStrFecha());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNomCap()) != null) {
-				criteria.andStrNomCapLike(temProyeccionDensidadPob2015Dto.getStrNomCap());
+				criteria.andStrNomCapEqualTo(temProyeccionDensidadPob2015Dto.getStrNomCap());
 			}
 			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupContin()) != null) {
 				criteria.andDblSupContinEqualTo(temProyeccionDensidadPob2015Dto.getDblSupContin());
@@ -143,16 +144,16 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 				criteria.andDblSupInsDEqualTo(temProyeccionDensidadPob2015Dto.getDblSupInsD());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo()) != null) {
-				criteria.andStrUbigeoLike(temProyeccionDensidadPob2015Dto.getStrUbigeo());
+				criteria.andStrUbigeoEqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo1()) != null) {
-				criteria.andStrUbigeo1Like(temProyeccionDensidadPob2015Dto.getStrUbigeo1());
+				criteria.andStrUbigeo1EqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo1());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDistrito()) != null) {
-				criteria.andStrDistritoLike(temProyeccionDensidadPob2015Dto.getStrDistrito());
+				criteria.andStrDistritoEqualTo(temProyeccionDensidadPob2015Dto.getStrDistrito());
 			}
 			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrTotal2015()) != null) {
-				criteria.andStrTotal2015Like(temProyeccionDensidadPob2015Dto.getStrTotal2015());
+				criteria.andStrTotal2015EqualTo(temProyeccionDensidadPob2015Dto.getStrTotal2015());
 			}
 			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblArea()) != null) {
 				criteria.andDblAreaEqualTo(temProyeccionDensidadPob2015Dto.getDblArea());
@@ -162,7 +163,83 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 			}
 		}
 		
+		temProyeccionDensidadPob2015ParamDef.setOrderByClause("ha_pop_dens");
 		List<TemProyeccionDensidadPob2015>	 list	= temProyeccionDensidadPob2015Mapper.selectByDefaultParameterGeometry(temProyeccionDensidadPob2015ParamDef);
+		return list;
+	}
+	
+	public List<TemProyeccionDensidadPob2015> buscarCombo(TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto) throws Exception {
+		TemProyeccionDensidadPob2015ParamDef temProyeccionDensidadPob2015ParamDef		= new TemProyeccionDensidadPob2015ParamDef();
+		
+		Criteria criteria		= temProyeccionDensidadPob2015ParamDef.createCriteria();
+		if(temProyeccionDensidadPob2015Dto != null) {
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temProyeccionDensidadPob2015Dto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddpto()) != null) {
+				criteria.andStrIddptoEqualTo(temProyeccionDensidadPob2015Dto.getStrIddpto());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdep()) != null) {
+				criteria.andStrNombdepEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdep());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIdprov()) != null) {
+				criteria.andStrIdprovEqualTo(temProyeccionDensidadPob2015Dto.getStrIdprov());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombprov()) != null) {
+				criteria.andStrNombprovEqualTo(temProyeccionDensidadPob2015Dto.getStrNombprov());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrIddist()) != null) {
+				criteria.andStrIddistEqualTo(temProyeccionDensidadPob2015Dto.getStrIddist());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNombdist()) != null) {
+				criteria.andStrNombdistEqualTo(temProyeccionDensidadPob2015Dto.getStrNombdist());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDcto()) != null) {
+				criteria.andStrDctoEqualTo(temProyeccionDensidadPob2015Dto.getStrDcto());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrLey()) != null) {
+				criteria.andStrLeyEqualTo(temProyeccionDensidadPob2015Dto.getStrLey());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrFecha()) != null) {
+				criteria.andStrFechaEqualTo(temProyeccionDensidadPob2015Dto.getStrFecha());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrNomCap()) != null) {
+				criteria.andStrNomCapEqualTo(temProyeccionDensidadPob2015Dto.getStrNomCap());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupContin()) != null) {
+				criteria.andDblSupContinEqualTo(temProyeccionDensidadPob2015Dto.getDblSupContin());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupInsula()) != null) {
+				criteria.andDblSupInsulaEqualTo(temProyeccionDensidadPob2015Dto.getDblSupInsula());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupLacust()) != null) {
+				criteria.andDblSupLacustEqualTo(temProyeccionDensidadPob2015Dto.getDblSupLacust());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblSupInsD()) != null) {
+				criteria.andDblSupInsDEqualTo(temProyeccionDensidadPob2015Dto.getDblSupInsD());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo()) != null) {
+				criteria.andStrUbigeoEqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrUbigeo1()) != null) {
+				criteria.andStrUbigeo1EqualTo(temProyeccionDensidadPob2015Dto.getStrUbigeo1());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrDistrito()) != null) {
+				criteria.andStrDistritoEqualTo(temProyeccionDensidadPob2015Dto.getStrDistrito());
+			}
+			if(CadenaUtil.getStrNull(temProyeccionDensidadPob2015Dto.getStrTotal2015()) != null) {
+				criteria.andStrTotal2015EqualTo(temProyeccionDensidadPob2015Dto.getStrTotal2015());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblArea()) != null) {
+				criteria.andDblAreaEqualTo(temProyeccionDensidadPob2015Dto.getDblArea());
+			}
+			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblPopDens()) != null) {
+				criteria.andDblPopDensEqualTo(temProyeccionDensidadPob2015Dto.getDblPopDens());
+			}
+		}
+		
+		temProyeccionDensidadPob2015ParamDef.setOrderByClause("ha_pop_dens");
+		List<TemProyeccionDensidadPob2015>	 list	= temProyeccionDensidadPob2015Mapper.selectByDefaultParameterCombo(temProyeccionDensidadPob2015ParamDef);
 		return list;
 	}
 	
@@ -170,6 +247,12 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 		TemProyeccionDensidadPob2015 temProyeccionDensidadPob2015		= new TemProyeccionDensidadPob2015();
 		BeanUtils.copyProperties(temProyeccionDensidadPob2015Dto, temProyeccionDensidadPob2015);
 		return temProyeccionDensidadPob2015Mapper.selectByPrimaryKey(temProyeccionDensidadPob2015);
+	}
+	
+	public TemProyeccionDensidadPob2015 buscarGeometryById(TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto) throws Exception {
+		TemProyeccionDensidadPob2015 temProyeccionDensidadPob2015		= new TemProyeccionDensidadPob2015();
+		BeanUtils.copyProperties(temProyeccionDensidadPob2015Dto, temProyeccionDensidadPob2015);
+		return temProyeccionDensidadPob2015Mapper.selectByPrimaryKeyGeometry(temProyeccionDensidadPob2015);
 	}
 	
 	@Transactional

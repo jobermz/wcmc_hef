@@ -33,13 +33,13 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 				criteria.andIntIdEqualTo(temConcesionesForestalesConservacionDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesConservacionDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesConservacionDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesConservacionDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesConservacionDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesConservacionDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesConservacionDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesConservacionDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesConservacionDto.getDblAreaSig());
@@ -48,18 +48,19 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesConservacionDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesConservacionDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesConservacionDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesConservacionDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesConservacionDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesConservacionParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesConservacion>	 list	= temConcesionesForestalesConservacionMapper.selectByDefaultParameter(temConcesionesForestalesConservacionParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesForestalesConservacion> buscarGeometry(TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto) throws Exception {
+	public List<TemConcesionesForestalesConservacion> buscarGeometry(TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto) throws Exception {
 		TemConcesionesForestalesConservacionParamDef temConcesionesForestalesConservacionParamDef		= new TemConcesionesForestalesConservacionParamDef();
 		
 		Criteria criteria		= temConcesionesForestalesConservacionParamDef.createCriteria();
@@ -74,13 +75,13 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 				criteria.andIntIdEqualTo(temConcesionesForestalesConservacionDto.getIntId());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesConservacionDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesConservacionDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesConservacionDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesConservacionDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesConservacionDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesConservacionDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesConservacionDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesConservacionDto.getDblAreaSig());
@@ -89,14 +90,57 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesConservacionDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesConservacionDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesConservacionDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesConservacionDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesConservacionDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesConservacionParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesConservacion>	 list	= temConcesionesForestalesConservacionMapper.selectByDefaultParameterGeometry(temConcesionesForestalesConservacionParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesForestalesConservacion> buscarCombo(TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto) throws Exception {
+		TemConcesionesForestalesConservacionParamDef temConcesionesForestalesConservacionParamDef		= new TemConcesionesForestalesConservacionParamDef();
+		
+		Criteria criteria		= temConcesionesForestalesConservacionParamDef.createCriteria();
+		if(temConcesionesForestalesConservacionDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesConservacionDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesConservacionDto.getDblNum()) != null) {
+				criteria.andDblNumEqualTo(temConcesionesForestalesConservacionDto.getDblNum());
+			}
+			if(CadenaUtil.getInteNull(temConcesionesForestalesConservacionDto.getIntId()) != null) {
+				criteria.andIntIdEqualTo(temConcesionesForestalesConservacionDto.getIntId());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesConservacionDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrTitular()) != null) {
+				criteria.andStrTitularEqualTo(temConcesionesForestalesConservacionDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrContrato()) != null) {
+				criteria.andStrContratoEqualTo(temConcesionesForestalesConservacionDto.getStrContrato());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesConservacionDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesForestalesConservacionDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesConservacionDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesConservacionDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temConcesionesForestalesConservacionDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesConservacionDto.getStrSituacion());
+			}
+		}
+		
+		temConcesionesForestalesConservacionParamDef.setOrderByClause("de_titular,de_contrato");
+		List<TemConcesionesForestalesConservacion>	 list	= temConcesionesForestalesConservacionMapper.selectByDefaultParameterCombo(temConcesionesForestalesConservacionParamDef);
 		return list;
 	}
 	
@@ -104,6 +148,12 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 		TemConcesionesForestalesConservacion temConcesionesForestalesConservacion		= new TemConcesionesForestalesConservacion();
 		BeanUtils.copyProperties(temConcesionesForestalesConservacionDto, temConcesionesForestalesConservacion);
 		return temConcesionesForestalesConservacionMapper.selectByPrimaryKey(temConcesionesForestalesConservacion);
+	}
+	
+	public TemConcesionesForestalesConservacion buscarGeometryById(TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto) throws Exception {
+		TemConcesionesForestalesConservacion temConcesionesForestalesConservacion		= new TemConcesionesForestalesConservacion();
+		BeanUtils.copyProperties(temConcesionesForestalesConservacionDto, temConcesionesForestalesConservacion);
+		return temConcesionesForestalesConservacionMapper.selectByPrimaryKeyGeometry(temConcesionesForestalesConservacion);
 	}
 	
 	@Transactional

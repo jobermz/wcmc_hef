@@ -30,31 +30,31 @@ public class BasHidroRios100000ServiceImpl implements BasHidroRios100000Service 
 				criteria.andIntObjectid1EqualTo(basHidroRios100000Dto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(basHidroRios100000Dto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(basHidroRios100000Dto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(basHidroRios100000Dto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(basHidroRios100000Dto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrJerHidro()) != null) {
-				criteria.andStrJerHidroLike(basHidroRios100000Dto.getStrJerHidro());
+				criteria.andStrJerHidroEqualTo(basHidroRios100000Dto.getStrJerHidro());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDpd99()) != null) {
-				criteria.andStrDpd99Like(basHidroRios100000Dto.getStrDpd99());
+				criteria.andStrDpd99EqualTo(basHidroRios100000Dto.getStrDpd99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPp99()) != null) {
-				criteria.andStrPp99Like(basHidroRios100000Dto.getStrPp99());
+				criteria.andStrPp99EqualTo(basHidroRios100000Dto.getStrPp99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDd()) != null) {
-				criteria.andStrDdLike(basHidroRios100000Dto.getStrDd());
+				criteria.andStrDdEqualTo(basHidroRios100000Dto.getStrDd());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDin99()) != null) {
-				criteria.andStrDin99Like(basHidroRios100000Dto.getStrDin99());
+				criteria.andStrDin99EqualTo(basHidroRios100000Dto.getStrDin99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPn99()) != null) {
-				criteria.andStrPn99Like(basHidroRios100000Dto.getStrPn99());
+				criteria.andStrPn99EqualTo(basHidroRios100000Dto.getStrPn99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDn99()) != null) {
-				criteria.andStrDn99Like(basHidroRios100000Dto.getStrDn99());
+				criteria.andStrDn99EqualTo(basHidroRios100000Dto.getStrDn99());
 			}
 			if(CadenaUtil.getDoubNull(basHidroRios100000Dto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(basHidroRios100000Dto.getDblShapeStle());
@@ -65,7 +65,7 @@ public class BasHidroRios100000ServiceImpl implements BasHidroRios100000Service 
 		return list;
 	}
 	
-		public List<BasHidroRios100000> buscarGeometry(BasHidroRios100000Dto basHidroRios100000Dto) throws Exception {
+	public List<BasHidroRios100000> buscarGeometry(BasHidroRios100000Dto basHidroRios100000Dto) throws Exception {
 		BasHidroRios100000ParamDef basHidroRios100000ParamDef		= new BasHidroRios100000ParamDef();
 		
 		Criteria criteria		= basHidroRios100000ParamDef.createCriteria();
@@ -77,31 +77,31 @@ public class BasHidroRios100000ServiceImpl implements BasHidroRios100000Service 
 				criteria.andIntObjectid1EqualTo(basHidroRios100000Dto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(basHidroRios100000Dto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(basHidroRios100000Dto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(basHidroRios100000Dto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(basHidroRios100000Dto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrJerHidro()) != null) {
-				criteria.andStrJerHidroLike(basHidroRios100000Dto.getStrJerHidro());
+				criteria.andStrJerHidroEqualTo(basHidroRios100000Dto.getStrJerHidro());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDpd99()) != null) {
-				criteria.andStrDpd99Like(basHidroRios100000Dto.getStrDpd99());
+				criteria.andStrDpd99EqualTo(basHidroRios100000Dto.getStrDpd99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPp99()) != null) {
-				criteria.andStrPp99Like(basHidroRios100000Dto.getStrPp99());
+				criteria.andStrPp99EqualTo(basHidroRios100000Dto.getStrPp99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDd()) != null) {
-				criteria.andStrDdLike(basHidroRios100000Dto.getStrDd());
+				criteria.andStrDdEqualTo(basHidroRios100000Dto.getStrDd());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDin99()) != null) {
-				criteria.andStrDin99Like(basHidroRios100000Dto.getStrDin99());
+				criteria.andStrDin99EqualTo(basHidroRios100000Dto.getStrDin99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPn99()) != null) {
-				criteria.andStrPn99Like(basHidroRios100000Dto.getStrPn99());
+				criteria.andStrPn99EqualTo(basHidroRios100000Dto.getStrPn99());
 			}
 			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDn99()) != null) {
-				criteria.andStrDn99Like(basHidroRios100000Dto.getStrDn99());
+				criteria.andStrDn99EqualTo(basHidroRios100000Dto.getStrDn99());
 			}
 			if(CadenaUtil.getDoubNull(basHidroRios100000Dto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(basHidroRios100000Dto.getDblShapeStle());
@@ -112,10 +112,63 @@ public class BasHidroRios100000ServiceImpl implements BasHidroRios100000Service 
 		return list;
 	}
 	
+	public List<BasHidroRios100000> buscarCombo(BasHidroRios100000Dto basHidroRios100000Dto) throws Exception {
+		BasHidroRios100000ParamDef basHidroRios100000ParamDef		= new BasHidroRios100000ParamDef();
+		
+		Criteria criteria		= basHidroRios100000ParamDef.createCriteria();
+		if(basHidroRios100000Dto != null) {
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basHidroRios100000Dto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(basHidroRios100000Dto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(basHidroRios100000Dto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrGmlId()) != null) {
+				criteria.andStrGmlIdEqualTo(basHidroRios100000Dto.getStrGmlId());
+			}
+			if(CadenaUtil.getInteNull(basHidroRios100000Dto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(basHidroRios100000Dto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrJerHidro()) != null) {
+				criteria.andStrJerHidroEqualTo(basHidroRios100000Dto.getStrJerHidro());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDpd99()) != null) {
+				criteria.andStrDpd99EqualTo(basHidroRios100000Dto.getStrDpd99());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPp99()) != null) {
+				criteria.andStrPp99EqualTo(basHidroRios100000Dto.getStrPp99());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDd()) != null) {
+				criteria.andStrDdEqualTo(basHidroRios100000Dto.getStrDd());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDin99()) != null) {
+				criteria.andStrDin99EqualTo(basHidroRios100000Dto.getStrDin99());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrPn99()) != null) {
+				criteria.andStrPn99EqualTo(basHidroRios100000Dto.getStrPn99());
+			}
+			if(CadenaUtil.getStrNull(basHidroRios100000Dto.getStrDn99()) != null) {
+				criteria.andStrDn99EqualTo(basHidroRios100000Dto.getStrDn99());
+			}
+			if(CadenaUtil.getDoubNull(basHidroRios100000Dto.getDblShapeStle()) != null) {
+				criteria.andDblShapeStleEqualTo(basHidroRios100000Dto.getDblShapeStle());
+			}
+		}
+		
+		List<BasHidroRios100000>	 list	= basHidroRios100000Mapper.selectByDefaultParameterCombo(basHidroRios100000ParamDef);
+		return list;
+	}
+	
 	public BasHidroRios100000 buscarById(BasHidroRios100000Dto basHidroRios100000Dto) throws Exception {
 		BasHidroRios100000 basHidroRios100000		= new BasHidroRios100000();
 		BeanUtils.copyProperties(basHidroRios100000Dto, basHidroRios100000);
 		return basHidroRios100000Mapper.selectByPrimaryKey(basHidroRios100000);
+	}
+	
+	public BasHidroRios100000 buscarGeometryById(BasHidroRios100000Dto basHidroRios100000Dto) throws Exception {
+		BasHidroRios100000 basHidroRios100000		= new BasHidroRios100000();
+		BeanUtils.copyProperties(basHidroRios100000Dto, basHidroRios100000);
+		return basHidroRios100000Mapper.selectByPrimaryKeyGeometry(basHidroRios100000);
 	}
 	
 	@Transactional

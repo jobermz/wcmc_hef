@@ -21,7 +21,6 @@
 		<result column="cd_viv07" property="intViv07" jdbcType="INTEGER"/>
 		<result column="cd_pob07" property="intPob07" jdbcType="INTEGER"/>
 		<result column="cd_region" property="intRegion" jdbcType="INTEGER"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosParamDef">
 		select
@@ -52,9 +51,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_centros_poblados as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_centros_poblados as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemCentrosPobladosMap" parameterType="wcmc.hef.dao.capa.domain.TemCentrosPobladosKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_centros_poblados as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -121,9 +142,6 @@
 			<if test="intRegion != null">
 				cd_region,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -179,9 +197,6 @@
 			</if>
 			<if test="intRegion != null">
 				#{intRegion, jdbcType=INTEGER},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -241,9 +256,6 @@
 			</if>
 			<if test="intRegion != null">
 				cd_region = #{intRegion,jdbcType=INTEGER},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -305,8 +317,7 @@
 		de_latitudy, 
 		cd_viv07, 
 		cd_pob07, 
-		cd_region, 
-		fc_fecreg
+		cd_region
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -327,8 +338,28 @@
 		de_latitudy, 
 		cd_viv07, 
 		cd_pob07, 
-		cd_region, 
-		fc_fecreg
+		cd_region
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_objectid, 
+		de_idccpp10, 
+		de_area, 
+		de_codccpp, 
+		de_nomccpp, 
+		de_ubigeo, 
+		de_ccdi, 
+		de_ccpp, 
+		de_ccdd, 
+		de_catccpp, 
+		de_nomcat, 
+		cd_altitud, 
+		de_longitudx, 
+		de_latitudy, 
+		cd_viv07, 
+		cd_pob07, 
+		cd_region
 	</sql>
 
 </mapper>

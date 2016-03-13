@@ -19,7 +19,6 @@
 		<result column="ha_sup_lacust" property="dblSupLacust" jdbcType="DOUBLE"/>
 		<result column="ha_sup_ins_d" property="dblSupInsD" jdbcType="DOUBLE"/>
 		<result column="de_ubigeo" property="strUbigeo" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosParamDef">
 		select
@@ -50,9 +49,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.bas_lim_distritos as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_distritos as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="BasLimDistritosMap" parameterType="wcmc.hef.dao.capa.domain.BasLimDistritosKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.bas_lim_distritos as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -113,9 +134,6 @@
 			<if test="strUbigeo != null">
 				de_ubigeo,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -165,9 +183,6 @@
 			</if>
 			<if test="strUbigeo != null">
 				#{strUbigeo, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -221,9 +236,6 @@
 			</if>
 			<if test="strUbigeo != null">
 				de_ubigeo = #{strUbigeo,jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -283,8 +295,7 @@
 		ha_sup_insula, 
 		ha_sup_lacust, 
 		ha_sup_ins_d, 
-		de_ubigeo, 
-		fc_fecreg
+		de_ubigeo
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -303,8 +314,26 @@
 		ha_sup_insula, 
 		ha_sup_lacust, 
 		ha_sup_ins_d, 
-		de_ubigeo, 
-		fc_fecreg
+		de_ubigeo
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_iddpto, 
+		de_nombdep, 
+		de_idprov, 
+		de_nombprov, 
+		de_iddist, 
+		de_nombdist, 
+		de_dcto, 
+		de_ley, 
+		de_fecha, 
+		de_nom_cap, 
+		ha_sup_contin, 
+		ha_sup_insula, 
+		ha_sup_lacust, 
+		ha_sup_ins_d, 
+		de_ubigeo
 	</sql>
 
 </mapper>

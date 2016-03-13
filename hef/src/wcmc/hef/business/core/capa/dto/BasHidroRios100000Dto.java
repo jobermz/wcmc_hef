@@ -18,27 +18,6 @@ public class BasHidroRios100000Dto implements BaseBeanVectorialDto {
 	private String strPn99;
 	private String strDn99;
 	private Double dblShapeStle;
-	private String timFechaRegistroFecha;
-	private String timFechaRegistroHora;
-	public String getTimFechaRegistroFecha() {
-		return timFechaRegistroFecha;
-	}
-	public void setTimFechaRegistroFecha(String timFechaRegistroFecha) {
-		this.timFechaRegistroFecha = timFechaRegistroFecha;
-	}
-	public String getTimFechaRegistroHora() {
-		return timFechaRegistroHora;
-	}
-	public void setTimFechaRegistroHora(String timFechaRegistroHora) {
-		this.timFechaRegistroHora = timFechaRegistroHora;
-	}
-	public String getTimFechaRegistroFechaHora() {
-		return timFechaRegistroFecha + " " + timFechaRegistroHora;
-	}
-	public void setLngFechaRegistro(Long lngfechaRegistro) {
-		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));
-		timFechaRegistroHora	= CadenaUtil.getStrHoraMinutos(new Date(lngfechaRegistro));
-	}
 	public Integer getSrlGid() {
 		return srlGid;
 	}
@@ -116,13 +95,6 @@ public class BasHidroRios100000Dto implements BaseBeanVectorialDto {
 	}
 	public void setDblShapeStle(Double dblShapeStle) {
 		this.dblShapeStle = dblShapeStle;
-	}
-	public Date getTimFechaRegistro() {
-		return CadenaUtil.getDateHoraMinutosFromStr(this.timFechaRegistroFecha + " " + this.timFechaRegistroHora);
-	}
-	public void setTimFechaRegistro(Date timFechaRegistro) {
-		this.timFechaRegistroFecha = CadenaUtil.getStrDate(timFechaRegistro);
-		this.timFechaRegistroHora = CadenaUtil.getStrHoraMinutos(timFechaRegistro);
 	}
 	
 }

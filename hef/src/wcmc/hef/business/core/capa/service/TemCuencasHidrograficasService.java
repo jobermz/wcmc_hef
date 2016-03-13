@@ -10,7 +10,9 @@ public interface TemCuencasHidrograficasService {
 	
 	public List<TemCuencasHidrograficas> buscar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public List<TemCuencasHidrograficas> buscarGeometry(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
+	public List<TemCuencasHidrograficas> buscarCombo(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public TemCuencasHidrograficas buscarById(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
+	public TemCuencasHidrograficas buscarGeometryById(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public Integer guardar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	public Integer eliminar(TemCuencasHidrograficasDto temCuencasHidrograficasDto) throws Exception;
 	

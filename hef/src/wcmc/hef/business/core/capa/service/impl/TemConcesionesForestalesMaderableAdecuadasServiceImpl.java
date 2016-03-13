@@ -27,13 +27,13 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig());
@@ -42,18 +42,19 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesMaderableAdecuadasParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesMaderableAdecuadas>	 list	= temConcesionesForestalesMaderableAdecuadasMapper.selectByDefaultParameter(temConcesionesForestalesMaderableAdecuadasParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesForestalesMaderableAdecuadas> buscarGeometry(TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto) throws Exception {
+	public List<TemConcesionesForestalesMaderableAdecuadas> buscarGeometry(TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto) throws Exception {
 		TemConcesionesForestalesMaderableAdecuadasParamDef temConcesionesForestalesMaderableAdecuadasParamDef		= new TemConcesionesForestalesMaderableAdecuadasParamDef();
 		
 		Criteria criteria		= temConcesionesForestalesMaderableAdecuadasParamDef.createCriteria();
@@ -62,13 +63,13 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig());
@@ -77,14 +78,51 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesMaderableAdecuadasParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesMaderableAdecuadas>	 list	= temConcesionesForestalesMaderableAdecuadasMapper.selectByDefaultParameterGeometry(temConcesionesForestalesMaderableAdecuadasParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesForestalesMaderableAdecuadas> buscarCombo(TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto) throws Exception {
+		TemConcesionesForestalesMaderableAdecuadasParamDef temConcesionesForestalesMaderableAdecuadasParamDef		= new TemConcesionesForestalesMaderableAdecuadasParamDef();
+		
+		Criteria criteria		= temConcesionesForestalesMaderableAdecuadasParamDef.createCriteria();
+		if(temConcesionesForestalesMaderableAdecuadasDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular()) != null) {
+				criteria.andStrTitularEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato()) != null) {
+				criteria.andStrContratoEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrContrato());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
+			}
+		}
+		
+		temConcesionesForestalesMaderableAdecuadasParamDef.setOrderByClause("de_titular,de_contrato");
+		List<TemConcesionesForestalesMaderableAdecuadas>	 list	= temConcesionesForestalesMaderableAdecuadasMapper.selectByDefaultParameterCombo(temConcesionesForestalesMaderableAdecuadasParamDef);
 		return list;
 	}
 	
@@ -92,6 +130,12 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 		TemConcesionesForestalesMaderableAdecuadas temConcesionesForestalesMaderableAdecuadas		= new TemConcesionesForestalesMaderableAdecuadas();
 		BeanUtils.copyProperties(temConcesionesForestalesMaderableAdecuadasDto, temConcesionesForestalesMaderableAdecuadas);
 		return temConcesionesForestalesMaderableAdecuadasMapper.selectByPrimaryKey(temConcesionesForestalesMaderableAdecuadas);
+	}
+	
+	public TemConcesionesForestalesMaderableAdecuadas buscarGeometryById(TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto) throws Exception {
+		TemConcesionesForestalesMaderableAdecuadas temConcesionesForestalesMaderableAdecuadas		= new TemConcesionesForestalesMaderableAdecuadas();
+		BeanUtils.copyProperties(temConcesionesForestalesMaderableAdecuadasDto, temConcesionesForestalesMaderableAdecuadas);
+		return temConcesionesForestalesMaderableAdecuadasMapper.selectByPrimaryKeyGeometry(temConcesionesForestalesMaderableAdecuadas);
 	}
 	
 	@Transactional

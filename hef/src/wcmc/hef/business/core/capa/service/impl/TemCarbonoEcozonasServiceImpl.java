@@ -30,10 +30,10 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 				criteria.andIntObjectidEqualTo(temCarbonoEcozonasDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrEcozona()) != null) {
-				criteria.andStrEcozonaLike(temCarbonoEcozonasDto.getStrEcozona());
+				criteria.andStrEcozonaEqualTo(temCarbonoEcozonasDto.getStrEcozona());
 			}
 			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTcHa()) != null) {
-				criteria.andStrTcHaLike(temCarbonoEcozonasDto.getStrTcHa());
+				criteria.andStrTcHaEqualTo(temCarbonoEcozonasDto.getStrTcHa());
 			}
 			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLinfTcHa()) != null) {
 				criteria.andDblLinfTcHaEqualTo(temCarbonoEcozonasDto.getDblLinfTcHa());
@@ -46,11 +46,12 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 			}
 		}
 		
+		temCarbonoEcozonasParamDef.setOrderByClause("de_ecozona,de_tc_ha");
 		List<TemCarbonoEcozonas>	 list	= temCarbonoEcozonasMapper.selectByDefaultParameter(temCarbonoEcozonasParamDef);
 		return list;
 	}
 	
-		public List<TemCarbonoEcozonas> buscarGeometry(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
+	public List<TemCarbonoEcozonas> buscarGeometry(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
 		TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef		= new TemCarbonoEcozonasParamDef();
 		
 		Criteria criteria		= temCarbonoEcozonasParamDef.createCriteria();
@@ -62,10 +63,10 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 				criteria.andIntObjectidEqualTo(temCarbonoEcozonasDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrEcozona()) != null) {
-				criteria.andStrEcozonaLike(temCarbonoEcozonasDto.getStrEcozona());
+				criteria.andStrEcozonaEqualTo(temCarbonoEcozonasDto.getStrEcozona());
 			}
 			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTcHa()) != null) {
-				criteria.andStrTcHaLike(temCarbonoEcozonasDto.getStrTcHa());
+				criteria.andStrTcHaEqualTo(temCarbonoEcozonasDto.getStrTcHa());
 			}
 			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLinfTcHa()) != null) {
 				criteria.andDblLinfTcHaEqualTo(temCarbonoEcozonasDto.getDblLinfTcHa());
@@ -78,7 +79,41 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 			}
 		}
 		
+		temCarbonoEcozonasParamDef.setOrderByClause("de_ecozona,de_tc_ha");
 		List<TemCarbonoEcozonas>	 list	= temCarbonoEcozonasMapper.selectByDefaultParameterGeometry(temCarbonoEcozonasParamDef);
+		return list;
+	}
+	
+	public List<TemCarbonoEcozonas> buscarCombo(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
+		TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef		= new TemCarbonoEcozonasParamDef();
+		
+		Criteria criteria		= temCarbonoEcozonasParamDef.createCriteria();
+		if(temCarbonoEcozonasDto != null) {
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCarbonoEcozonasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temCarbonoEcozonasDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temCarbonoEcozonasDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrEcozona()) != null) {
+				criteria.andStrEcozonaEqualTo(temCarbonoEcozonasDto.getStrEcozona());
+			}
+			if(CadenaUtil.getStrNull(temCarbonoEcozonasDto.getStrTcHa()) != null) {
+				criteria.andStrTcHaEqualTo(temCarbonoEcozonasDto.getStrTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLinfTcHa()) != null) {
+				criteria.andDblLinfTcHaEqualTo(temCarbonoEcozonasDto.getDblLinfTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblLsupTcHa()) != null) {
+				criteria.andDblLsupTcHaEqualTo(temCarbonoEcozonasDto.getDblLsupTcHa());
+			}
+			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblPorcIncer()) != null) {
+				criteria.andDblPorcIncerEqualTo(temCarbonoEcozonasDto.getDblPorcIncer());
+			}
+		}
+		
+		temCarbonoEcozonasParamDef.setOrderByClause("de_ecozona,de_tc_ha");
+		List<TemCarbonoEcozonas>	 list	= temCarbonoEcozonasMapper.selectByDefaultParameterCombo(temCarbonoEcozonasParamDef);
 		return list;
 	}
 	
@@ -86,6 +121,12 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 		TemCarbonoEcozonas temCarbonoEcozonas		= new TemCarbonoEcozonas();
 		BeanUtils.copyProperties(temCarbonoEcozonasDto, temCarbonoEcozonas);
 		return temCarbonoEcozonasMapper.selectByPrimaryKey(temCarbonoEcozonas);
+	}
+	
+	public TemCarbonoEcozonas buscarGeometryById(TemCarbonoEcozonasDto temCarbonoEcozonasDto) throws Exception {
+		TemCarbonoEcozonas temCarbonoEcozonas		= new TemCarbonoEcozonas();
+		BeanUtils.copyProperties(temCarbonoEcozonasDto, temCarbonoEcozonas);
+		return temCarbonoEcozonasMapper.selectByPrimaryKeyGeometry(temCarbonoEcozonas);
 	}
 	
 	@Transactional

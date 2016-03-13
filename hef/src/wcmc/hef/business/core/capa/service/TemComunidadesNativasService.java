@@ -10,7 +10,9 @@ public interface TemComunidadesNativasService {
 	
 	public List<TemComunidadesNativas> buscar(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
 	public List<TemComunidadesNativas> buscarGeometry(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
+	public List<TemComunidadesNativas> buscarCombo(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
 	public TemComunidadesNativas buscarById(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
+	public TemComunidadesNativas buscarGeometryById(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
 	public Integer guardar(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
 	public Integer eliminar(TemComunidadesNativasDto temComunidadesNativasDto) throws Exception;
 	

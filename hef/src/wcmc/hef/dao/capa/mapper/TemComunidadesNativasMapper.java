@@ -11,7 +11,9 @@ public interface TemComunidadesNativasMapper {
 	
 	public List<TemComunidadesNativas> selectByDefaultParameter(TemComunidadesNativasParamDef temComunidadesNativasParamDef);
 	public List<TemComunidadesNativas> selectByDefaultParameterGeometry(TemComunidadesNativasParamDef temComunidadesNativasParamDef);
+	public List<TemComunidadesNativas> selectByDefaultParameterCombo(TemComunidadesNativasParamDef temComunidadesNativasParamDef);
 	public TemComunidadesNativas selectByPrimaryKey(TemComunidadesNativasKey temComunidadesNativasKey);
+	public TemComunidadesNativas selectByPrimaryKeyGeometry(TemComunidadesNativasKey temComunidadesNativasKey);
 	public int insertSelective(TemComunidadesNativas temComunidadesNativas);
 	public int updateByPrimaryKeySelective(TemComunidadesNativas temComunidadesNativas);
 	public int deleteByPrimaryKey(TemComunidadesNativasKey temComunidadesNativasKey);

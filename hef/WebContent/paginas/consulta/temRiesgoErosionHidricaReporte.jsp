@@ -2,21 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <table border="0" style="width: 100%;">
+	<s:if test="%{#session.reporte.beanTemRiesgoErosionHidrica!=null}">
 	<tr>
 		<td><strong>Valor promedio</strong></td>
-		<s:iterator value="#session.reporte.listTemRiesgoErosionHidrica" var="reporte" begin="0" end="0">
-		<td><strong>${reporte.strValuePromedio}</strong></td>
-		</s:iterator>
+		<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValuePromedio}</td>
 	</tr>
+	<tr>
+		<td><strong>Valor m&iacute;nimo</strong></td>
+		<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMin}</td>
+	</tr>
+	<tr>
+		<td><strong>Valor m&aacute;ximo</strong></td>
+		<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMax}</td>
+	</tr>
+	<tr>
+		<td><strong>Contador</strong></td>
+		<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueCount}</td>
+	</tr>
+	</s:if>
 </table>
 </br>
-<table border="0" style="width: 100%;">
-	<tr>
-		<td><strong>Value</strong></td>
-	</tr>
-	<s:iterator value="#session.reporte.listTemRiesgoErosionHidrica" var="reporte">
-	<tr>
-		<td>${reporte.strValue}</td>
-	</tr>
-	</s:iterator>
-</table>

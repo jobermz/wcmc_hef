@@ -13,7 +13,6 @@
 		<result column="ha_superf_ha" property="dblSuperfHa" jdbcType="DOUBLE"/>
 		<result column="de_sim_cv_def" property="strSimCvDef" jdbcType="VARCHAR"/>
 		<result column="ha_superf_km2" property="dblSuperfKm2" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaParamDef">
 		select
@@ -44,9 +43,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.bas_lim_amazonia as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.bas_lim_amazonia as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="BasLimAmazoniaMap" parameterType="wcmc.hef.dao.capa.domain.BasLimAmazoniaKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.bas_lim_amazonia as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -89,9 +110,6 @@
 			<if test="dblSuperfKm2 != null">
 				ha_superf_km2,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -123,9 +141,6 @@
 			</if>
 			<if test="dblSuperfKm2 != null">
 				#{dblSuperfKm2, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -161,9 +176,6 @@
 			</if>
 			<if test="dblSuperfKm2 != null">
 				ha_superf_km2 = #{dblSuperfKm2,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -217,8 +229,7 @@
 		ha_superf_m2, 
 		ha_superf_ha, 
 		de_sim_cv_def, 
-		ha_superf_km2, 
-		fc_fecreg
+		ha_superf_km2
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -231,8 +242,20 @@
 		ha_superf_m2, 
 		ha_superf_ha, 
 		de_sim_cv_def, 
-		ha_superf_km2, 
-		fc_fecreg
+		ha_superf_km2
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_objectid_1, 
+		de_simb_cobve, 
+		de_desc_cobve, 
+		de_simb_defor, 
+		de_desc_defor, 
+		ha_superf_m2, 
+		ha_superf_ha, 
+		de_sim_cv_def, 
+		ha_superf_km2
 	</sql>
 
 </mapper>

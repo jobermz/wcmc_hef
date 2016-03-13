@@ -102,6 +102,20 @@
 		                				<s:textfield name="edicion_capaDto.strWfsUrl" cssClass="form-control " tabindex="9" size="40" maxlength="500" />
 									</div>
 								</div>
+								<div class="row form-row">
+									<div class="col-sm-4 " id="idCampCapa_strEsSelecApaBoolean">
+			                			<label for="edicion_capaDto.strEsSelecApaBoolean" class="form-label">Seleccionar en Mapa?</label>
+		                				<s:checkbox name="edicion_capaDto.strEsSelecApaBoolean" cssClass="form-control " tabindex="10" />
+									</div>
+									<div class="col-sm-4 " id="idCampCapa_strEsFiltroAclBoolean">
+			                			<label for="edicion_capaDto.strEsFiltroAclBoolean" class="form-label">Filtrar desde combo en Ident. por Criterio?</label>
+		                				<s:checkbox name="edicion_capaDto.strEsFiltroAclBoolean" cssClass="form-control " tabindex="10" />
+									</div>
+									<div class="col-sm-4 " id="idCampCapa_strEsCentrarMapaBoolean">
+			                			<label for="edicion_capaDto.strEsCentrarMapaBoolean" class="form-label">Centrar desde combo en mapa?</label>
+		                				<s:checkbox name="edicion_capaDto.strEsCentrarMapaBoolean" cssClass="form-control " tabindex="10" />
+									</div>
+								</div>
 								<div class="row form-row"><div class="col-sm-12">&nbsp;</div></div>
 								<div class="row form-row">
 									<div class="col-sm-12 " id="idCampCapaUmbral_Umbrales">

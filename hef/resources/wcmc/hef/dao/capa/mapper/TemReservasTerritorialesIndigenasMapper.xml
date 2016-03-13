@@ -21,7 +21,6 @@
 		<result column="de_area_legal" property="strAreaLegal" jdbcType="VARCHAR"/>
 		<result column="ha_shape_star" property="dblShapeStar" jdbcType="DOUBLE"/>
 		<result column="ha_shape_stle" property="dblShapeStle" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasParamDef">
 		select
@@ -52,9 +51,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemReservasTerritorialesIndigenasMap" parameterType="wcmc.hef.dao.capa.domain.TemReservasTerritorialesIndigenasKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_reservas_territoriales_indigenas as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -121,9 +142,6 @@
 			<if test="dblShapeStle != null">
 				ha_shape_stle,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -179,9 +197,6 @@
 			</if>
 			<if test="dblShapeStle != null">
 				#{dblShapeStle, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -241,9 +256,6 @@
 			</if>
 			<if test="dblShapeStle != null">
 				ha_shape_stle = #{dblShapeStle,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -305,8 +317,7 @@
 		de_ubica_poli, 
 		de_area_legal, 
 		ha_shape_star, 
-		ha_shape_stle, 
-		fc_fecreg
+		ha_shape_stle
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -327,8 +338,28 @@
 		de_ubica_poli, 
 		de_area_legal, 
 		ha_shape_star, 
-		ha_shape_stle, 
-		fc_fecreg
+		ha_shape_stle
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_objectid_1, 
+		de_gml_id, 
+		cd_objectid, 
+		cd_id, 
+		ha_sde_dbo_te, 
+		ha_perimeter, 
+		de_nombre, 
+		de_base_legal, 
+		ha_n_ha_ibc, 
+		de_n_ubic_anp, 
+		de_n_map_a0, 
+		de_categoria, 
+		de_etnia, 
+		de_ubica_poli, 
+		de_area_legal, 
+		ha_shape_star, 
+		ha_shape_stle
 	</sql>
 
 </mapper>

@@ -10,7 +10,9 @@ public interface BasHidroRiosLagunasService {
 	
 	public List<BasHidroRiosLagunas> buscar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public List<BasHidroRiosLagunas> buscarGeometry(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
+	public List<BasHidroRiosLagunas> buscarCombo(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public BasHidroRiosLagunas buscarById(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
+	public BasHidroRiosLagunas buscarGeometryById(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public Integer guardar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	public Integer eliminar(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception;
 	

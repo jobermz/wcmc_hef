@@ -63,6 +63,7 @@
 	
 	<definition name="consulta_capas_reporte_form" template="/paginas/consulta/consultaCapasReporteForm.jsp"></definition>
 	<definition name="consulta_capas_right_click_form" template="/paginas/consulta/consultaCapasRightClickForm.jsp"></definition>
+	<definition name="consulta_combos_acl_form" template="/paginas/consulta/combosACL/consultaCombosACLForm.jsp"></definition>
 	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">

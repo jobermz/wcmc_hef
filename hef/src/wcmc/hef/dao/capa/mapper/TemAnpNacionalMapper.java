@@ -11,7 +11,9 @@ public interface TemAnpNacionalMapper {
 	
 	public List<TemAnpNacional> selectByDefaultParameter(TemAnpNacionalParamDef temAnpNacionalParamDef);
 	public List<TemAnpNacional> selectByDefaultParameterGeometry(TemAnpNacionalParamDef temAnpNacionalParamDef);
+	public List<TemAnpNacional> selectByDefaultParameterCombo(TemAnpNacionalParamDef temAnpNacionalParamDef);
 	public TemAnpNacional selectByPrimaryKey(TemAnpNacionalKey temAnpNacionalKey);
+	public TemAnpNacional selectByPrimaryKeyGeometry(TemAnpNacionalKey temAnpNacionalKey);
 	public int insertSelective(TemAnpNacional temAnpNacional);
 	public int updateByPrimaryKeySelective(TemAnpNacional temAnpNacional);
 	public int deleteByPrimaryKey(TemAnpNacionalKey temAnpNacionalKey);

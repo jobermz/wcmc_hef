@@ -11,7 +11,9 @@ public interface TemProyectosPoligonosMapper {
 	
 	public List<TemProyectosPoligonos> selectByDefaultParameter(TemProyectosPoligonosParamDef temProyectosPoligonosParamDef);
 	public List<TemProyectosPoligonos> selectByDefaultParameterGeometry(TemProyectosPoligonosParamDef temProyectosPoligonosParamDef);
+	public List<TemProyectosPoligonos> selectByDefaultParameterCombo(TemProyectosPoligonosParamDef temProyectosPoligonosParamDef);
 	public TemProyectosPoligonos selectByPrimaryKey(TemProyectosPoligonosKey temProyectosPoligonosKey);
+	public TemProyectosPoligonos selectByPrimaryKeyGeometry(TemProyectosPoligonosKey temProyectosPoligonosKey);
 	public int insertSelective(TemProyectosPoligonos temProyectosPoligonos);
 	public int updateByPrimaryKeySelective(TemProyectosPoligonos temProyectosPoligonos);
 	public int deleteByPrimaryKey(TemProyectosPoligonosKey temProyectosPoligonosKey);

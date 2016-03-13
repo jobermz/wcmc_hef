@@ -11,7 +11,9 @@ public interface TemCentrosPobladosMapper {
 	
 	public List<TemCentrosPoblados> selectByDefaultParameter(TemCentrosPobladosParamDef temCentrosPobladosParamDef);
 	public List<TemCentrosPoblados> selectByDefaultParameterGeometry(TemCentrosPobladosParamDef temCentrosPobladosParamDef);
+	public List<TemCentrosPoblados> selectByDefaultParameterCombo(TemCentrosPobladosParamDef temCentrosPobladosParamDef);
 	public TemCentrosPoblados selectByPrimaryKey(TemCentrosPobladosKey temCentrosPobladosKey);
+	public TemCentrosPoblados selectByPrimaryKeyGeometry(TemCentrosPobladosKey temCentrosPobladosKey);
 	public int insertSelective(TemCentrosPoblados temCentrosPoblados);
 	public int updateByPrimaryKeySelective(TemCentrosPoblados temCentrosPoblados);
 	public int deleteByPrimaryKey(TemCentrosPobladosKey temCentrosPobladosKey);

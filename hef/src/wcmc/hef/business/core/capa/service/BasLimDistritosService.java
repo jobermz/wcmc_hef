@@ -10,7 +10,9 @@ public interface BasLimDistritosService {
 	
 	public List<BasLimDistritos> buscar(BasLimDistritosDto basLimDistritosDto) throws Exception;
 	public List<BasLimDistritos> buscarGeometry(BasLimDistritosDto basLimDistritosDto) throws Exception;
+	public List<BasLimDistritos> buscarCombo(BasLimDistritosDto basLimDistritosDto) throws Exception;
 	public BasLimDistritos buscarById(BasLimDistritosDto basLimDistritosDto) throws Exception;
+	public BasLimDistritos buscarGeometryById(BasLimDistritosDto basLimDistritosDto) throws Exception;
 	public Integer guardar(BasLimDistritosDto basLimDistritosDto) throws Exception;
 	public Integer eliminar(BasLimDistritosDto basLimDistritosDto) throws Exception;
 	

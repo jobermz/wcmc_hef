@@ -10,7 +10,9 @@ public interface TemAnpPrivadaService {
 	
 	public List<TemAnpPrivada> buscar(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
 	public List<TemAnpPrivada> buscarGeometry(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
+	public List<TemAnpPrivada> buscarCombo(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
 	public TemAnpPrivada buscarById(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
+	public TemAnpPrivada buscarGeometryById(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
 	public Integer guardar(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
 	public Integer eliminar(TemAnpPrivadaDto temAnpPrivadaDto) throws Exception;
 	

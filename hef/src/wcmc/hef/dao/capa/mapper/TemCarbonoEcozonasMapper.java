@@ -11,7 +11,9 @@ public interface TemCarbonoEcozonasMapper {
 	
 	public List<TemCarbonoEcozonas> selectByDefaultParameter(TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef);
 	public List<TemCarbonoEcozonas> selectByDefaultParameterGeometry(TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef);
+	public List<TemCarbonoEcozonas> selectByDefaultParameterCombo(TemCarbonoEcozonasParamDef temCarbonoEcozonasParamDef);
 	public TemCarbonoEcozonas selectByPrimaryKey(TemCarbonoEcozonasKey temCarbonoEcozonasKey);
+	public TemCarbonoEcozonas selectByPrimaryKeyGeometry(TemCarbonoEcozonasKey temCarbonoEcozonasKey);
 	public int insertSelective(TemCarbonoEcozonas temCarbonoEcozonas);
 	public int updateByPrimaryKeySelective(TemCarbonoEcozonas temCarbonoEcozonas);
 	public int deleteByPrimaryKey(TemCarbonoEcozonasKey temCarbonoEcozonasKey);

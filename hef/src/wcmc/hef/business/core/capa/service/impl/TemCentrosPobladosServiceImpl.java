@@ -30,43 +30,43 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 				criteria.andIntObjectidEqualTo(temCentrosPobladosDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrIdccpp10()) != null) {
-				criteria.andStrIdccpp10Like(temCentrosPobladosDto.getStrIdccpp10());
+				criteria.andStrIdccpp10EqualTo(temCentrosPobladosDto.getStrIdccpp10());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrArea()) != null) {
-				criteria.andStrAreaLike(temCentrosPobladosDto.getStrArea());
+				criteria.andStrAreaEqualTo(temCentrosPobladosDto.getStrArea());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCodccpp()) != null) {
-				criteria.andStrCodccppLike(temCentrosPobladosDto.getStrCodccpp());
+				criteria.andStrCodccppEqualTo(temCentrosPobladosDto.getStrCodccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomccpp()) != null) {
-				criteria.andStrNomccppLike(temCentrosPobladosDto.getStrNomccpp());
+				criteria.andStrNomccppEqualTo(temCentrosPobladosDto.getStrNomccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrUbigeo()) != null) {
-				criteria.andStrUbigeoLike(temCentrosPobladosDto.getStrUbigeo());
+				criteria.andStrUbigeoEqualTo(temCentrosPobladosDto.getStrUbigeo());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdi()) != null) {
-				criteria.andStrCcdiLike(temCentrosPobladosDto.getStrCcdi());
+				criteria.andStrCcdiEqualTo(temCentrosPobladosDto.getStrCcdi());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcpp()) != null) {
-				criteria.andStrCcppLike(temCentrosPobladosDto.getStrCcpp());
+				criteria.andStrCcppEqualTo(temCentrosPobladosDto.getStrCcpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdd()) != null) {
-				criteria.andStrCcddLike(temCentrosPobladosDto.getStrCcdd());
+				criteria.andStrCcddEqualTo(temCentrosPobladosDto.getStrCcdd());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCatccpp()) != null) {
-				criteria.andStrCatccppLike(temCentrosPobladosDto.getStrCatccpp());
+				criteria.andStrCatccppEqualTo(temCentrosPobladosDto.getStrCatccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomcat()) != null) {
-				criteria.andStrNomcatLike(temCentrosPobladosDto.getStrNomcat());
+				criteria.andStrNomcatEqualTo(temCentrosPobladosDto.getStrNomcat());
 			}
 			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntAltitud()) != null) {
 				criteria.andIntAltitudEqualTo(temCentrosPobladosDto.getIntAltitud());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLongitudx()) != null) {
-				criteria.andStrLongitudxLike(temCentrosPobladosDto.getStrLongitudx());
+				criteria.andStrLongitudxEqualTo(temCentrosPobladosDto.getStrLongitudx());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLatitudy()) != null) {
-				criteria.andStrLatitudyLike(temCentrosPobladosDto.getStrLatitudy());
+				criteria.andStrLatitudyEqualTo(temCentrosPobladosDto.getStrLatitudy());
 			}
 			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntViv07()) != null) {
 				criteria.andIntViv07EqualTo(temCentrosPobladosDto.getIntViv07());
@@ -79,11 +79,12 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 			}
 		}
 		
+		temCentrosPobladosParamDef.setOrderByClause("de_nomccpp,de_nomcat,cd_pob07");
 		List<TemCentrosPoblados>	 list	= temCentrosPobladosMapper.selectByDefaultParameter(temCentrosPobladosParamDef);
 		return list;
 	}
 	
-		public List<TemCentrosPoblados> buscarGeometry(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception {
+	public List<TemCentrosPoblados> buscarGeometry(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception {
 		TemCentrosPobladosParamDef temCentrosPobladosParamDef		= new TemCentrosPobladosParamDef();
 		
 		Criteria criteria		= temCentrosPobladosParamDef.createCriteria();
@@ -95,43 +96,43 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 				criteria.andIntObjectidEqualTo(temCentrosPobladosDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrIdccpp10()) != null) {
-				criteria.andStrIdccpp10Like(temCentrosPobladosDto.getStrIdccpp10());
+				criteria.andStrIdccpp10EqualTo(temCentrosPobladosDto.getStrIdccpp10());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrArea()) != null) {
-				criteria.andStrAreaLike(temCentrosPobladosDto.getStrArea());
+				criteria.andStrAreaEqualTo(temCentrosPobladosDto.getStrArea());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCodccpp()) != null) {
-				criteria.andStrCodccppLike(temCentrosPobladosDto.getStrCodccpp());
+				criteria.andStrCodccppEqualTo(temCentrosPobladosDto.getStrCodccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomccpp()) != null) {
-				criteria.andStrNomccppLike(temCentrosPobladosDto.getStrNomccpp());
+				criteria.andStrNomccppEqualTo(temCentrosPobladosDto.getStrNomccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrUbigeo()) != null) {
-				criteria.andStrUbigeoLike(temCentrosPobladosDto.getStrUbigeo());
+				criteria.andStrUbigeoEqualTo(temCentrosPobladosDto.getStrUbigeo());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdi()) != null) {
-				criteria.andStrCcdiLike(temCentrosPobladosDto.getStrCcdi());
+				criteria.andStrCcdiEqualTo(temCentrosPobladosDto.getStrCcdi());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcpp()) != null) {
-				criteria.andStrCcppLike(temCentrosPobladosDto.getStrCcpp());
+				criteria.andStrCcppEqualTo(temCentrosPobladosDto.getStrCcpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdd()) != null) {
-				criteria.andStrCcddLike(temCentrosPobladosDto.getStrCcdd());
+				criteria.andStrCcddEqualTo(temCentrosPobladosDto.getStrCcdd());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCatccpp()) != null) {
-				criteria.andStrCatccppLike(temCentrosPobladosDto.getStrCatccpp());
+				criteria.andStrCatccppEqualTo(temCentrosPobladosDto.getStrCatccpp());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomcat()) != null) {
-				criteria.andStrNomcatLike(temCentrosPobladosDto.getStrNomcat());
+				criteria.andStrNomcatEqualTo(temCentrosPobladosDto.getStrNomcat());
 			}
 			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntAltitud()) != null) {
 				criteria.andIntAltitudEqualTo(temCentrosPobladosDto.getIntAltitud());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLongitudx()) != null) {
-				criteria.andStrLongitudxLike(temCentrosPobladosDto.getStrLongitudx());
+				criteria.andStrLongitudxEqualTo(temCentrosPobladosDto.getStrLongitudx());
 			}
 			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLatitudy()) != null) {
-				criteria.andStrLatitudyLike(temCentrosPobladosDto.getStrLatitudy());
+				criteria.andStrLatitudyEqualTo(temCentrosPobladosDto.getStrLatitudy());
 			}
 			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntViv07()) != null) {
 				criteria.andIntViv07EqualTo(temCentrosPobladosDto.getIntViv07());
@@ -144,7 +145,74 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 			}
 		}
 		
+		temCentrosPobladosParamDef.setOrderByClause("de_nomccpp,de_nomcat,cd_pob07");
 		List<TemCentrosPoblados>	 list	= temCentrosPobladosMapper.selectByDefaultParameterGeometry(temCentrosPobladosParamDef);
+		return list;
+	}
+	
+	public List<TemCentrosPoblados> buscarCombo(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception {
+		TemCentrosPobladosParamDef temCentrosPobladosParamDef		= new TemCentrosPobladosParamDef();
+		
+		Criteria criteria		= temCentrosPobladosParamDef.createCriteria();
+		if(temCentrosPobladosDto != null) {
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCentrosPobladosDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temCentrosPobladosDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrIdccpp10()) != null) {
+				criteria.andStrIdccpp10EqualTo(temCentrosPobladosDto.getStrIdccpp10());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrArea()) != null) {
+				criteria.andStrAreaEqualTo(temCentrosPobladosDto.getStrArea());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCodccpp()) != null) {
+				criteria.andStrCodccppEqualTo(temCentrosPobladosDto.getStrCodccpp());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomccpp()) != null) {
+				criteria.andStrNomccppEqualTo(temCentrosPobladosDto.getStrNomccpp());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrUbigeo()) != null) {
+				criteria.andStrUbigeoEqualTo(temCentrosPobladosDto.getStrUbigeo());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdi()) != null) {
+				criteria.andStrCcdiEqualTo(temCentrosPobladosDto.getStrCcdi());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcpp()) != null) {
+				criteria.andStrCcppEqualTo(temCentrosPobladosDto.getStrCcpp());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCcdd()) != null) {
+				criteria.andStrCcddEqualTo(temCentrosPobladosDto.getStrCcdd());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrCatccpp()) != null) {
+				criteria.andStrCatccppEqualTo(temCentrosPobladosDto.getStrCatccpp());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrNomcat()) != null) {
+				criteria.andStrNomcatEqualTo(temCentrosPobladosDto.getStrNomcat());
+			}
+			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntAltitud()) != null) {
+				criteria.andIntAltitudEqualTo(temCentrosPobladosDto.getIntAltitud());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLongitudx()) != null) {
+				criteria.andStrLongitudxEqualTo(temCentrosPobladosDto.getStrLongitudx());
+			}
+			if(CadenaUtil.getStrNull(temCentrosPobladosDto.getStrLatitudy()) != null) {
+				criteria.andStrLatitudyEqualTo(temCentrosPobladosDto.getStrLatitudy());
+			}
+			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntViv07()) != null) {
+				criteria.andIntViv07EqualTo(temCentrosPobladosDto.getIntViv07());
+			}
+			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntPob07()) != null) {
+				criteria.andIntPob07EqualTo(temCentrosPobladosDto.getIntPob07());
+			}
+			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntRegion()) != null) {
+				criteria.andIntRegionEqualTo(temCentrosPobladosDto.getIntRegion());
+			}
+		}
+		
+		temCentrosPobladosParamDef.setOrderByClause("de_nomccpp,de_nomcat,cd_pob07");
+		List<TemCentrosPoblados>	 list	= temCentrosPobladosMapper.selectByDefaultParameterCombo(temCentrosPobladosParamDef);
 		return list;
 	}
 	
@@ -152,6 +220,12 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 		TemCentrosPoblados temCentrosPoblados		= new TemCentrosPoblados();
 		BeanUtils.copyProperties(temCentrosPobladosDto, temCentrosPoblados);
 		return temCentrosPobladosMapper.selectByPrimaryKey(temCentrosPoblados);
+	}
+	
+	public TemCentrosPoblados buscarGeometryById(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception {
+		TemCentrosPoblados temCentrosPoblados		= new TemCentrosPoblados();
+		BeanUtils.copyProperties(temCentrosPobladosDto, temCentrosPoblados);
+		return temCentrosPobladosMapper.selectByPrimaryKeyGeometry(temCentrosPoblados);
 	}
 	
 	@Transactional

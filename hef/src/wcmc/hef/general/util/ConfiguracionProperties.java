@@ -9,7 +9,7 @@ public class ConfiguracionProperties {
 	public static String CAPAS_BASE_DISTRITO		= "capas_base_distrito";
 	
 	public static String TIPO_CAPA_UMBRAL			= "tipo_capa_umbral";
-	public static String TIPO_CAPA_SHAPEFILE		= "tipo_capa_shapefile";
+	public static String TIPO_CAPA_VECTORIAL		= "tipo_capa_vectorial";
 	
 	public static String REPOSITORIO_DOCS_TEMPORAL	= "repositorio_docs_temporal";
 	

@@ -11,7 +11,9 @@ public interface TemViasTrochasMapper {
 	
 	public List<TemViasTrochas> selectByDefaultParameter(TemViasTrochasParamDef temViasTrochasParamDef);
 	public List<TemViasTrochas> selectByDefaultParameterGeometry(TemViasTrochasParamDef temViasTrochasParamDef);
+	public List<TemViasTrochas> selectByDefaultParameterCombo(TemViasTrochasParamDef temViasTrochasParamDef);
 	public TemViasTrochas selectByPrimaryKey(TemViasTrochasKey temViasTrochasKey);
+	public TemViasTrochas selectByPrimaryKeyGeometry(TemViasTrochasKey temViasTrochasKey);
 	public int insertSelective(TemViasTrochas temViasTrochas);
 	public int updateByPrimaryKeySelective(TemViasTrochas temViasTrochas);
 	public int deleteByPrimaryKey(TemViasTrochasKey temViasTrochasKey);

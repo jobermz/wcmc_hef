@@ -10,7 +10,9 @@ public interface TemProyectosPuntosService {
 	
 	public List<TemProyectosPuntos> buscar(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
 	public List<TemProyectosPuntos> buscarGeometry(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
+	public List<TemProyectosPuntos> buscarCombo(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
 	public TemProyectosPuntos buscarById(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
+	public TemProyectosPuntos buscarGeometryById(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
 	public Integer guardar(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
 	public Integer eliminar(TemProyectosPuntosDto temProyectosPuntosDto) throws Exception;
 	

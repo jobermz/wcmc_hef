@@ -30,13 +30,13 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 				criteria.andLngIdEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getLngId());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona()) != null) {
-				criteria.andStrZonaLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
+				criteria.andStrZonaEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo()) != null) {
-				criteria.andStrTipoLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
+				criteria.andStrTipoEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin()) != null) {
-				criteria.andStrDenominLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
+				criteria.andStrDenominEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
 			}
 			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig());
@@ -45,13 +45,13 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 				criteria.andDblAreaAprobEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente()) != null) {
-				criteria.andStrFuenteLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
+				criteria.andStrFuenteEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal()) != null) {
-				criteria.andStrDocLegalLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
+				criteria.andStrDocLegalEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
 			}
 			if(CadenaUtil.getInteNull(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid()) != null) {
 				criteria.andIntTheidEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid());
@@ -64,11 +64,12 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 			}
 		}
 		
+		temZonificPotencialBosqueProduccionPermanenteParamDef.setOrderByClause("de_tipo,de_doc_legal");
 		List<TemZonificPotencialBosqueProduccionPermanente>	 list	= temZonificPotencialBosqueProduccionPermanenteMapper.selectByDefaultParameter(temZonificPotencialBosqueProduccionPermanenteParamDef);
 		return list;
 	}
 	
-		public List<TemZonificPotencialBosqueProduccionPermanente> buscarGeometry(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
+	public List<TemZonificPotencialBosqueProduccionPermanente> buscarGeometry(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
 		TemZonificPotencialBosqueProduccionPermanenteParamDef temZonificPotencialBosqueProduccionPermanenteParamDef		= new TemZonificPotencialBosqueProduccionPermanenteParamDef();
 		
 		Criteria criteria		= temZonificPotencialBosqueProduccionPermanenteParamDef.createCriteria();
@@ -80,13 +81,13 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 				criteria.andLngIdEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getLngId());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona()) != null) {
-				criteria.andStrZonaLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
+				criteria.andStrZonaEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo()) != null) {
-				criteria.andStrTipoLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
+				criteria.andStrTipoEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin()) != null) {
-				criteria.andStrDenominLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
+				criteria.andStrDenominEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
 			}
 			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig());
@@ -95,13 +96,13 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 				criteria.andDblAreaAprobEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente()) != null) {
-				criteria.andStrFuenteLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
+				criteria.andStrFuenteEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
 			}
 			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal()) != null) {
-				criteria.andStrDocLegalLike(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
+				criteria.andStrDocLegalEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
 			}
 			if(CadenaUtil.getInteNull(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid()) != null) {
 				criteria.andIntTheidEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid());
@@ -114,7 +115,59 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 			}
 		}
 		
+		temZonificPotencialBosqueProduccionPermanenteParamDef.setOrderByClause("de_tipo,de_doc_legal");
 		List<TemZonificPotencialBosqueProduccionPermanente>	 list	= temZonificPotencialBosqueProduccionPermanenteMapper.selectByDefaultParameterGeometry(temZonificPotencialBosqueProduccionPermanenteParamDef);
+		return list;
+	}
+	
+	public List<TemZonificPotencialBosqueProduccionPermanente> buscarCombo(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
+		TemZonificPotencialBosqueProduccionPermanenteParamDef temZonificPotencialBosqueProduccionPermanenteParamDef		= new TemZonificPotencialBosqueProduccionPermanenteParamDef();
+		
+		Criteria criteria		= temZonificPotencialBosqueProduccionPermanenteParamDef.createCriteria();
+		if(temZonificPotencialBosqueProduccionPermanenteDto != null) {
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(temZonificPotencialBosqueProduccionPermanenteDto.getLngId()) != null) {
+				criteria.andLngIdEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getLngId());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona()) != null) {
+				criteria.andStrZonaEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrZona());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo()) != null) {
+				criteria.andStrTipoEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrTipo());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin()) != null) {
+				criteria.andStrDenominEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDenomin());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob()) != null) {
+				criteria.andDblAreaAprobEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblAreaAprob());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrRegion());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente()) != null) {
+				criteria.andStrFuenteEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrFuente());
+			}
+			if(CadenaUtil.getStrNull(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal()) != null) {
+				criteria.andStrDocLegalEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getStrDocLegal());
+			}
+			if(CadenaUtil.getInteNull(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid()) != null) {
+				criteria.andIntTheidEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getIntTheid());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblPerimeter()) != null) {
+				criteria.andDblPerimeterEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblPerimeter());
+			}
+			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares()) != null) {
+				criteria.andDblHectaresEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares());
+			}
+		}
+		
+		temZonificPotencialBosqueProduccionPermanenteParamDef.setOrderByClause("de_tipo,de_doc_legal");
+		List<TemZonificPotencialBosqueProduccionPermanente>	 list	= temZonificPotencialBosqueProduccionPermanenteMapper.selectByDefaultParameterCombo(temZonificPotencialBosqueProduccionPermanenteParamDef);
 		return list;
 	}
 	
@@ -122,6 +175,12 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 		TemZonificPotencialBosqueProduccionPermanente temZonificPotencialBosqueProduccionPermanente		= new TemZonificPotencialBosqueProduccionPermanente();
 		BeanUtils.copyProperties(temZonificPotencialBosqueProduccionPermanenteDto, temZonificPotencialBosqueProduccionPermanente);
 		return temZonificPotencialBosqueProduccionPermanenteMapper.selectByPrimaryKey(temZonificPotencialBosqueProduccionPermanente);
+	}
+	
+	public TemZonificPotencialBosqueProduccionPermanente buscarGeometryById(TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto) throws Exception {
+		TemZonificPotencialBosqueProduccionPermanente temZonificPotencialBosqueProduccionPermanente		= new TemZonificPotencialBosqueProduccionPermanente();
+		BeanUtils.copyProperties(temZonificPotencialBosqueProduccionPermanenteDto, temZonificPotencialBosqueProduccionPermanente);
+		return temZonificPotencialBosqueProduccionPermanenteMapper.selectByPrimaryKeyGeometry(temZonificPotencialBosqueProduccionPermanente);
 	}
 	
 	@Transactional

@@ -30,46 +30,46 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 				criteria.andIntObjectid1EqualTo(temConcesionesMinerasDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(temConcesionesMinerasDto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(temConcesionesMinerasDto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(temConcesionesMinerasDto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(temConcesionesMinerasDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCodigou()) != null) {
-				criteria.andStrCodigouLike(temConcesionesMinerasDto.getStrCodigou());
+				criteria.andStrCodigouEqualTo(temConcesionesMinerasDto.getStrCodigou());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrZona()) != null) {
-				criteria.andStrZonaLike(temConcesionesMinerasDto.getStrZona());
+				criteria.andStrZonaEqualTo(temConcesionesMinerasDto.getStrZona());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrConcesion()) != null) {
-				criteria.andStrConcesionLike(temConcesionesMinerasDto.getStrConcesion());
+				criteria.andStrConcesionEqualTo(temConcesionesMinerasDto.getStrConcesion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temConcesionesMinerasDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temConcesionesMinerasDto.getStrEstado());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrTitConces()) != null) {
-				criteria.andStrTitConcesLike(temConcesionesMinerasDto.getStrTitConces());
+				criteria.andStrTitConcesEqualTo(temConcesionesMinerasDto.getStrTitConces());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNaturaleza()) != null) {
-				criteria.andStrNaturalezaLike(temConcesionesMinerasDto.getStrNaturaleza());
+				criteria.andStrNaturalezaEqualTo(temConcesionesMinerasDto.getStrNaturaleza());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrFecDenu()) != null) {
-				criteria.andStrFecDenuLike(temConcesionesMinerasDto.getStrFecDenu());
+				criteria.andStrFecDenuEqualTo(temConcesionesMinerasDto.getStrFecDenu());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblHectarea()) != null) {
 				criteria.andDblHectareaEqualTo(temConcesionesMinerasDto.getDblHectarea());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCarta()) != null) {
-				criteria.andStrCartaLike(temConcesionesMinerasDto.getStrCarta());
+				criteria.andStrCartaEqualTo(temConcesionesMinerasDto.getStrCarta());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDist()) != null) {
-				criteria.andStrNmDistLike(temConcesionesMinerasDto.getStrNmDist());
+				criteria.andStrNmDistEqualTo(temConcesionesMinerasDto.getStrNmDist());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmProv()) != null) {
-				criteria.andStrNmProvLike(temConcesionesMinerasDto.getStrNmProv());
+				criteria.andStrNmProvEqualTo(temConcesionesMinerasDto.getStrNmProv());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDepa()) != null) {
-				criteria.andStrNmDepaLike(temConcesionesMinerasDto.getStrNmDepa());
+				criteria.andStrNmDepaEqualTo(temConcesionesMinerasDto.getStrNmDepa());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblShapeStar()) != null) {
 				criteria.andDblShapeStarEqualTo(temConcesionesMinerasDto.getDblShapeStar());
@@ -79,11 +79,12 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 			}
 		}
 		
+		temConcesionesMinerasParamDef.setOrderByClause("de_tit_conces");
 		List<TemConcesionesMineras>	 list	= temConcesionesMinerasMapper.selectByDefaultParameter(temConcesionesMinerasParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesMineras> buscarGeometry(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception {
+	public List<TemConcesionesMineras> buscarGeometry(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception {
 		TemConcesionesMinerasParamDef temConcesionesMinerasParamDef		= new TemConcesionesMinerasParamDef();
 		
 		Criteria criteria		= temConcesionesMinerasParamDef.createCriteria();
@@ -95,46 +96,46 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 				criteria.andIntObjectid1EqualTo(temConcesionesMinerasDto.getIntObjectid1());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrGmlId()) != null) {
-				criteria.andStrGmlIdLike(temConcesionesMinerasDto.getStrGmlId());
+				criteria.andStrGmlIdEqualTo(temConcesionesMinerasDto.getStrGmlId());
 			}
 			if(CadenaUtil.getInteNull(temConcesionesMinerasDto.getIntObjectid()) != null) {
 				criteria.andIntObjectidEqualTo(temConcesionesMinerasDto.getIntObjectid());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCodigou()) != null) {
-				criteria.andStrCodigouLike(temConcesionesMinerasDto.getStrCodigou());
+				criteria.andStrCodigouEqualTo(temConcesionesMinerasDto.getStrCodigou());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrZona()) != null) {
-				criteria.andStrZonaLike(temConcesionesMinerasDto.getStrZona());
+				criteria.andStrZonaEqualTo(temConcesionesMinerasDto.getStrZona());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrConcesion()) != null) {
-				criteria.andStrConcesionLike(temConcesionesMinerasDto.getStrConcesion());
+				criteria.andStrConcesionEqualTo(temConcesionesMinerasDto.getStrConcesion());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrEstado()) != null) {
-				criteria.andStrEstadoLike(temConcesionesMinerasDto.getStrEstado());
+				criteria.andStrEstadoEqualTo(temConcesionesMinerasDto.getStrEstado());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrTitConces()) != null) {
-				criteria.andStrTitConcesLike(temConcesionesMinerasDto.getStrTitConces());
+				criteria.andStrTitConcesEqualTo(temConcesionesMinerasDto.getStrTitConces());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNaturaleza()) != null) {
-				criteria.andStrNaturalezaLike(temConcesionesMinerasDto.getStrNaturaleza());
+				criteria.andStrNaturalezaEqualTo(temConcesionesMinerasDto.getStrNaturaleza());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrFecDenu()) != null) {
-				criteria.andStrFecDenuLike(temConcesionesMinerasDto.getStrFecDenu());
+				criteria.andStrFecDenuEqualTo(temConcesionesMinerasDto.getStrFecDenu());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblHectarea()) != null) {
 				criteria.andDblHectareaEqualTo(temConcesionesMinerasDto.getDblHectarea());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCarta()) != null) {
-				criteria.andStrCartaLike(temConcesionesMinerasDto.getStrCarta());
+				criteria.andStrCartaEqualTo(temConcesionesMinerasDto.getStrCarta());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDist()) != null) {
-				criteria.andStrNmDistLike(temConcesionesMinerasDto.getStrNmDist());
+				criteria.andStrNmDistEqualTo(temConcesionesMinerasDto.getStrNmDist());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmProv()) != null) {
-				criteria.andStrNmProvLike(temConcesionesMinerasDto.getStrNmProv());
+				criteria.andStrNmProvEqualTo(temConcesionesMinerasDto.getStrNmProv());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDepa()) != null) {
-				criteria.andStrNmDepaLike(temConcesionesMinerasDto.getStrNmDepa());
+				criteria.andStrNmDepaEqualTo(temConcesionesMinerasDto.getStrNmDepa());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblShapeStar()) != null) {
 				criteria.andDblShapeStarEqualTo(temConcesionesMinerasDto.getDblShapeStar());
@@ -144,7 +145,74 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 			}
 		}
 		
+		temConcesionesMinerasParamDef.setOrderByClause("de_tit_conces");
 		List<TemConcesionesMineras>	 list	= temConcesionesMinerasMapper.selectByDefaultParameterGeometry(temConcesionesMinerasParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesMineras> buscarCombo(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception {
+		TemConcesionesMinerasParamDef temConcesionesMinerasParamDef		= new TemConcesionesMinerasParamDef();
+		
+		Criteria criteria		= temConcesionesMinerasParamDef.createCriteria();
+		if(temConcesionesMinerasDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesMinerasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getInteNull(temConcesionesMinerasDto.getIntObjectid1()) != null) {
+				criteria.andIntObjectid1EqualTo(temConcesionesMinerasDto.getIntObjectid1());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrGmlId()) != null) {
+				criteria.andStrGmlIdEqualTo(temConcesionesMinerasDto.getStrGmlId());
+			}
+			if(CadenaUtil.getInteNull(temConcesionesMinerasDto.getIntObjectid()) != null) {
+				criteria.andIntObjectidEqualTo(temConcesionesMinerasDto.getIntObjectid());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCodigou()) != null) {
+				criteria.andStrCodigouEqualTo(temConcesionesMinerasDto.getStrCodigou());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrZona()) != null) {
+				criteria.andStrZonaEqualTo(temConcesionesMinerasDto.getStrZona());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrConcesion()) != null) {
+				criteria.andStrConcesionEqualTo(temConcesionesMinerasDto.getStrConcesion());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrEstado()) != null) {
+				criteria.andStrEstadoEqualTo(temConcesionesMinerasDto.getStrEstado());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrTitConces()) != null) {
+				criteria.andStrTitConcesEqualTo(temConcesionesMinerasDto.getStrTitConces());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNaturaleza()) != null) {
+				criteria.andStrNaturalezaEqualTo(temConcesionesMinerasDto.getStrNaturaleza());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrFecDenu()) != null) {
+				criteria.andStrFecDenuEqualTo(temConcesionesMinerasDto.getStrFecDenu());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblHectarea()) != null) {
+				criteria.andDblHectareaEqualTo(temConcesionesMinerasDto.getDblHectarea());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrCarta()) != null) {
+				criteria.andStrCartaEqualTo(temConcesionesMinerasDto.getStrCarta());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDist()) != null) {
+				criteria.andStrNmDistEqualTo(temConcesionesMinerasDto.getStrNmDist());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmProv()) != null) {
+				criteria.andStrNmProvEqualTo(temConcesionesMinerasDto.getStrNmProv());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesMinerasDto.getStrNmDepa()) != null) {
+				criteria.andStrNmDepaEqualTo(temConcesionesMinerasDto.getStrNmDepa());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblShapeStar()) != null) {
+				criteria.andDblShapeStarEqualTo(temConcesionesMinerasDto.getDblShapeStar());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblShapeStle()) != null) {
+				criteria.andDblShapeStleEqualTo(temConcesionesMinerasDto.getDblShapeStle());
+			}
+		}
+		
+		temConcesionesMinerasParamDef.setOrderByClause("de_tit_conces");
+		List<TemConcesionesMineras>	 list	= temConcesionesMinerasMapper.selectByDefaultParameterCombo(temConcesionesMinerasParamDef);
 		return list;
 	}
 	
@@ -152,6 +220,12 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 		TemConcesionesMineras temConcesionesMineras		= new TemConcesionesMineras();
 		BeanUtils.copyProperties(temConcesionesMinerasDto, temConcesionesMineras);
 		return temConcesionesMinerasMapper.selectByPrimaryKey(temConcesionesMineras);
+	}
+	
+	public TemConcesionesMineras buscarGeometryById(TemConcesionesMinerasDto temConcesionesMinerasDto) throws Exception {
+		TemConcesionesMineras temConcesionesMineras		= new TemConcesionesMineras();
+		BeanUtils.copyProperties(temConcesionesMinerasDto, temConcesionesMineras);
+		return temConcesionesMinerasMapper.selectByPrimaryKeyGeometry(temConcesionesMineras);
 	}
 	
 	@Transactional

@@ -27,30 +27,31 @@ public class TemConcesionesForestalesCastaniaServiceImpl implements TemConcesion
 				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesCastaniaDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesCastaniaDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesCastaniaDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesCastaniaDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesCastaniaDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesCastaniaDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesCastaniaDto.getStrContrato());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesCastaniaDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesCastaniaDto.getStrRegion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesCastaniaDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesCastaniaDto.getDblAreaSig());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesCastaniaDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesCastaniaDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesCastaniaParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesCastania>	 list	= temConcesionesForestalesCastaniaMapper.selectByDefaultParameter(temConcesionesForestalesCastaniaParamDef);
 		return list;
 	}
 	
-		public List<TemConcesionesForestalesCastania> buscarGeometry(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
+	public List<TemConcesionesForestalesCastania> buscarGeometry(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
 		TemConcesionesForestalesCastaniaParamDef temConcesionesForestalesCastaniaParamDef		= new TemConcesionesForestalesCastaniaParamDef();
 		
 		Criteria criteria		= temConcesionesForestalesCastaniaParamDef.createCriteria();
@@ -59,26 +60,60 @@ public class TemConcesionesForestalesCastaniaServiceImpl implements TemConcesion
 				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesCastaniaDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrModalidad()) != null) {
-				criteria.andStrModalidadLike(temConcesionesForestalesCastaniaDto.getStrModalidad());
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesCastaniaDto.getStrModalidad());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTitular()) != null) {
-				criteria.andStrTitularLike(temConcesionesForestalesCastaniaDto.getStrTitular());
+				criteria.andStrTitularEqualTo(temConcesionesForestalesCastaniaDto.getStrTitular());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrContrato()) != null) {
-				criteria.andStrContratoLike(temConcesionesForestalesCastaniaDto.getStrContrato());
+				criteria.andStrContratoEqualTo(temConcesionesForestalesCastaniaDto.getStrContrato());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrRegion()) != null) {
-				criteria.andStrRegionLike(temConcesionesForestalesCastaniaDto.getStrRegion());
+				criteria.andStrRegionEqualTo(temConcesionesForestalesCastaniaDto.getStrRegion());
 			}
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesCastaniaDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesCastaniaDto.getDblAreaSig());
 			}
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrSituacion()) != null) {
-				criteria.andStrSituacionLike(temConcesionesForestalesCastaniaDto.getStrSituacion());
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesCastaniaDto.getStrSituacion());
 			}
 		}
 		
+		temConcesionesForestalesCastaniaParamDef.setOrderByClause("de_titular,de_contrato");
 		List<TemConcesionesForestalesCastania>	 list	= temConcesionesForestalesCastaniaMapper.selectByDefaultParameterGeometry(temConcesionesForestalesCastaniaParamDef);
+		return list;
+	}
+	
+	public List<TemConcesionesForestalesCastania> buscarCombo(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
+		TemConcesionesForestalesCastaniaParamDef temConcesionesForestalesCastaniaParamDef		= new TemConcesionesForestalesCastaniaParamDef();
+		
+		Criteria criteria		= temConcesionesForestalesCastaniaParamDef.createCriteria();
+		if(temConcesionesForestalesCastaniaDto != null) {
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temConcesionesForestalesCastaniaDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrModalidad()) != null) {
+				criteria.andStrModalidadEqualTo(temConcesionesForestalesCastaniaDto.getStrModalidad());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrTitular()) != null) {
+				criteria.andStrTitularEqualTo(temConcesionesForestalesCastaniaDto.getStrTitular());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrContrato()) != null) {
+				criteria.andStrContratoEqualTo(temConcesionesForestalesCastaniaDto.getStrContrato());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrRegion()) != null) {
+				criteria.andStrRegionEqualTo(temConcesionesForestalesCastaniaDto.getStrRegion());
+			}
+			if(CadenaUtil.getDoubNull(temConcesionesForestalesCastaniaDto.getDblAreaSig()) != null) {
+				criteria.andDblAreaSigEqualTo(temConcesionesForestalesCastaniaDto.getDblAreaSig());
+			}
+			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrSituacion()) != null) {
+				criteria.andStrSituacionEqualTo(temConcesionesForestalesCastaniaDto.getStrSituacion());
+			}
+		}
+		
+		temConcesionesForestalesCastaniaParamDef.setOrderByClause("de_titular,de_contrato");
+		List<TemConcesionesForestalesCastania>	 list	= temConcesionesForestalesCastaniaMapper.selectByDefaultParameterCombo(temConcesionesForestalesCastaniaParamDef);
 		return list;
 	}
 	
@@ -86,6 +121,12 @@ public class TemConcesionesForestalesCastaniaServiceImpl implements TemConcesion
 		TemConcesionesForestalesCastania temConcesionesForestalesCastania		= new TemConcesionesForestalesCastania();
 		BeanUtils.copyProperties(temConcesionesForestalesCastaniaDto, temConcesionesForestalesCastania);
 		return temConcesionesForestalesCastaniaMapper.selectByPrimaryKey(temConcesionesForestalesCastania);
+	}
+	
+	public TemConcesionesForestalesCastania buscarGeometryById(TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto) throws Exception {
+		TemConcesionesForestalesCastania temConcesionesForestalesCastania		= new TemConcesionesForestalesCastania();
+		BeanUtils.copyProperties(temConcesionesForestalesCastaniaDto, temConcesionesForestalesCastania);
+		return temConcesionesForestalesCastaniaMapper.selectByPrimaryKeyGeometry(temConcesionesForestalesCastania);
 	}
 	
 	@Transactional

@@ -8,7 +8,6 @@
 		<result column="de_za_nomb" property="strZaNomb" jdbcType="VARCHAR"/>
 		<result column="de_za_bale" property="strZaBale" jdbcType="VARCHAR"/>
 		<result column="fc_za_fecr" property="dteZaFecr" jdbcType="DATE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemSinanpeAmortiguamientoMap" parameterType="wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamientoParamDef">
 		select
@@ -39,9 +38,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemSinanpeAmortiguamientoMap" parameterType="wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamientoParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_sinanpe_amortiguamiento as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemSinanpeAmortiguamientoMap" parameterType="wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamientoKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_sinanpe_amortiguamiento as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemSinanpeAmortiguamientoMap" parameterType="wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamientoKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_sinanpe_amortiguamiento as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -69,9 +90,6 @@
 			<if test="dteZaFecr != null">
 				fc_za_fecr,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -88,9 +106,6 @@
 			</if>
 			<if test="dteZaFecr != null">
 				#{dteZaFecr, jdbcType=DATE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -111,9 +126,6 @@
 			</if>
 			<if test="dteZaFecr != null">
 				fc_za_fecr = #{dteZaFecr,jdbcType=DATE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -162,8 +174,7 @@
 		cd_objectid, 
 		de_za_nomb, 
 		de_za_bale, 
-		fc_za_fecr, 
-		fc_fecreg
+		fc_za_fecr
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -171,8 +182,15 @@
 		cd_objectid, 
 		de_za_nomb, 
 		de_za_bale, 
-		fc_za_fecr, 
-		fc_fecreg
+		fc_za_fecr
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		cd_objectid, 
+		de_za_nomb, 
+		de_za_bale, 
+		fc_za_fecr
 	</sql>
 
 </mapper>

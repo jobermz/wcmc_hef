@@ -5,7 +5,6 @@
 		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
 		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
 		<result column="ha_imp_glob" property="dblImpGlob" jdbcType="DOUBLE"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemIndiceImportanciaBiologicaMap" parameterType="wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaParamDef">
 		select
@@ -36,9 +35,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemIndiceImportanciaBiologicaMap" parameterType="wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_indice_importancia_biologica as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemIndiceImportanciaBiologicaMap" parameterType="wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_indice_importancia_biologica as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemIndiceImportanciaBiologicaMap" parameterType="wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_indice_importancia_biologica as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -57,9 +78,6 @@
 			<if test="dblImpGlob != null">
 				ha_imp_glob,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -67,9 +85,6 @@
 			</if>
 			<if test="dblImpGlob != null">
 				#{dblImpGlob, jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -81,9 +96,6 @@
 			</if>
 			<if test="dblImpGlob != null">
 				ha_imp_glob = #{dblImpGlob,jdbcType=DOUBLE},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -129,14 +141,17 @@
 	<sql id="Base_Column_List">
 		cd_gid, 
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
-		ha_imp_glob, 
-		fc_fecreg
+		ha_imp_glob
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
 		ST_AsText(si_the_geom) as si_the_geom, 
-		ha_imp_glob, 
-		fc_fecreg
+		ha_imp_glob
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		ha_imp_glob
 	</sql>
 
 </mapper>

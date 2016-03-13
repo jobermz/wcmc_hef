@@ -11,7 +11,9 @@ public interface TemAnpPrivadaMapper {
 	
 	public List<TemAnpPrivada> selectByDefaultParameter(TemAnpPrivadaParamDef temAnpPrivadaParamDef);
 	public List<TemAnpPrivada> selectByDefaultParameterGeometry(TemAnpPrivadaParamDef temAnpPrivadaParamDef);
+	public List<TemAnpPrivada> selectByDefaultParameterCombo(TemAnpPrivadaParamDef temAnpPrivadaParamDef);
 	public TemAnpPrivada selectByPrimaryKey(TemAnpPrivadaKey temAnpPrivadaKey);
+	public TemAnpPrivada selectByPrimaryKeyGeometry(TemAnpPrivadaKey temAnpPrivadaKey);
 	public int insertSelective(TemAnpPrivada temAnpPrivada);
 	public int updateByPrimaryKeySelective(TemAnpPrivada temAnpPrivada);
 	public int deleteByPrimaryKey(TemAnpPrivadaKey temAnpPrivadaKey);

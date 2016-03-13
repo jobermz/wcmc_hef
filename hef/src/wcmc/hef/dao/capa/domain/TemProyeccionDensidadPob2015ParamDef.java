@@ -1556,68 +1556,6 @@ public class TemProyeccionDensidadPob2015ParamDef {
             return (Criteria) this;
         }
         
-        
-        public Criteria andTimFechaRegistroEqualTo(Date value) {
-            addCriterion("fc_fecreg =", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroNotEqualTo(Date value) {
-            addCriterion("fc_fecreg <>", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        
-        public Criteria andTimFechaRegistroIsNull() {
-            addCriterion("fc_fecreg is null");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroIsNotNull() {
-            addCriterion("fc_fecreg is not null");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroGreaterThan(Date value) {
-            addCriterion("fc_fecreg >", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroGreaterThanOrEqualTo(Date value) {
-            addCriterion("fc_fecreg >=", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroLessThan(Date value) {
-            addCriterion("fc_fecreg <", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroLessThanOrEqualTo(Date value) {
-            addCriterion("fc_fecreg <=", value, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroIn(List<Date> values) {
-            addCriterion("fc_fecreg in", values, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroNotIn(List<Date> values) {
-            addCriterion("fc_fecreg not in", values, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroBetween(Date value1, Date value2) {
-            addCriterion("fc_fecreg between", value1, value2, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
-        public Criteria andTimFechaRegistroNotBetween(Date value1, Date value2) {
-            addCriterion("fc_fecreg not between", value1, value2, "fc_fecreg");
-            return (Criteria) this;
-        }
-        
 		
     }
     

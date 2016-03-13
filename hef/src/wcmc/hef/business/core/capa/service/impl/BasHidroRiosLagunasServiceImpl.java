@@ -30,25 +30,25 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 				criteria.andLngCountEqualTo(basHidroRiosLagunasDto.getLngCount());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstIdpr()) != null) {
-				criteria.andStrFirstIdprLike(basHidroRiosLagunasDto.getStrFirstIdpr());
+				criteria.andStrFirstIdprEqualTo(basHidroRiosLagunasDto.getStrFirstIdpr());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrNombprov()) != null) {
-				criteria.andStrNombprovLike(basHidroRiosLagunasDto.getStrNombprov());
+				criteria.andStrNombprovEqualTo(basHidroRiosLagunasDto.getStrNombprov());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstNomb()) != null) {
-				criteria.andStrFirstNombLike(basHidroRiosLagunasDto.getStrFirstNomb());
+				criteria.andStrFirstNombEqualTo(basHidroRiosLagunasDto.getStrFirstNomb());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastDcto()) != null) {
-				criteria.andStrLastDctoLike(basHidroRiosLagunasDto.getStrLastDcto());
+				criteria.andStrLastDctoEqualTo(basHidroRiosLagunasDto.getStrLastDcto());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastLey()) != null) {
-				criteria.andStrLastLeyLike(basHidroRiosLagunasDto.getStrLastLey());
+				criteria.andStrLastLeyEqualTo(basHidroRiosLagunasDto.getStrLastLey());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstFech()) != null) {
-				criteria.andStrFirstFechLike(basHidroRiosLagunasDto.getStrFirstFech());
+				criteria.andStrFirstFechEqualTo(basHidroRiosLagunasDto.getStrFirstFech());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastFecha()) != null) {
-				criteria.andStrLastFechaLike(basHidroRiosLagunasDto.getStrLastFecha());
+				criteria.andStrLastFechaEqualTo(basHidroRiosLagunasDto.getStrLastFecha());
 			}
 			if(CadenaUtil.getDoubNull(basHidroRiosLagunasDto.getDblMinShape()) != null) {
 				criteria.andDblMinShapeEqualTo(basHidroRiosLagunasDto.getDblMinShape());
@@ -66,10 +66,10 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 				criteria.andLngTiticacgIEqualTo(basHidroRiosLagunasDto.getLngTiticacgI());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfLayer()) != null) {
-				criteria.andStrDxfLayerLike(basHidroRiosLagunasDto.getStrDxfLayer());
+				criteria.andStrDxfLayerEqualTo(basHidroRiosLagunasDto.getStrDxfLayer());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfText()) != null) {
-				criteria.andStrDxfTextLike(basHidroRiosLagunasDto.getStrDxfText());
+				criteria.andStrDxfTextEqualTo(basHidroRiosLagunasDto.getStrDxfText());
 			}
 		}
 		
@@ -77,7 +77,7 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 		return list;
 	}
 	
-		public List<BasHidroRiosLagunas> buscarGeometry(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception {
+	public List<BasHidroRiosLagunas> buscarGeometry(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception {
 		BasHidroRiosLagunasParamDef basHidroRiosLagunasParamDef		= new BasHidroRiosLagunasParamDef();
 		
 		Criteria criteria		= basHidroRiosLagunasParamDef.createCriteria();
@@ -89,25 +89,25 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 				criteria.andLngCountEqualTo(basHidroRiosLagunasDto.getLngCount());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstIdpr()) != null) {
-				criteria.andStrFirstIdprLike(basHidroRiosLagunasDto.getStrFirstIdpr());
+				criteria.andStrFirstIdprEqualTo(basHidroRiosLagunasDto.getStrFirstIdpr());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrNombprov()) != null) {
-				criteria.andStrNombprovLike(basHidroRiosLagunasDto.getStrNombprov());
+				criteria.andStrNombprovEqualTo(basHidroRiosLagunasDto.getStrNombprov());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstNomb()) != null) {
-				criteria.andStrFirstNombLike(basHidroRiosLagunasDto.getStrFirstNomb());
+				criteria.andStrFirstNombEqualTo(basHidroRiosLagunasDto.getStrFirstNomb());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastDcto()) != null) {
-				criteria.andStrLastDctoLike(basHidroRiosLagunasDto.getStrLastDcto());
+				criteria.andStrLastDctoEqualTo(basHidroRiosLagunasDto.getStrLastDcto());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastLey()) != null) {
-				criteria.andStrLastLeyLike(basHidroRiosLagunasDto.getStrLastLey());
+				criteria.andStrLastLeyEqualTo(basHidroRiosLagunasDto.getStrLastLey());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstFech()) != null) {
-				criteria.andStrFirstFechLike(basHidroRiosLagunasDto.getStrFirstFech());
+				criteria.andStrFirstFechEqualTo(basHidroRiosLagunasDto.getStrFirstFech());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastFecha()) != null) {
-				criteria.andStrLastFechaLike(basHidroRiosLagunasDto.getStrLastFecha());
+				criteria.andStrLastFechaEqualTo(basHidroRiosLagunasDto.getStrLastFecha());
 			}
 			if(CadenaUtil.getDoubNull(basHidroRiosLagunasDto.getDblMinShape()) != null) {
 				criteria.andDblMinShapeEqualTo(basHidroRiosLagunasDto.getDblMinShape());
@@ -125,10 +125,10 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 				criteria.andLngTiticacgIEqualTo(basHidroRiosLagunasDto.getLngTiticacgI());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfLayer()) != null) {
-				criteria.andStrDxfLayerLike(basHidroRiosLagunasDto.getStrDxfLayer());
+				criteria.andStrDxfLayerEqualTo(basHidroRiosLagunasDto.getStrDxfLayer());
 			}
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfText()) != null) {
-				criteria.andStrDxfTextLike(basHidroRiosLagunasDto.getStrDxfText());
+				criteria.andStrDxfTextEqualTo(basHidroRiosLagunasDto.getStrDxfText());
 			}
 		}
 		
@@ -136,10 +136,75 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 		return list;
 	}
 	
+	public List<BasHidroRiosLagunas> buscarCombo(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception {
+		BasHidroRiosLagunasParamDef basHidroRiosLagunasParamDef		= new BasHidroRiosLagunasParamDef();
+		
+		Criteria criteria		= basHidroRiosLagunasParamDef.createCriteria();
+		if(basHidroRiosLagunasDto != null) {
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basHidroRiosLagunasDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getLongNull(basHidroRiosLagunasDto.getLngCount()) != null) {
+				criteria.andLngCountEqualTo(basHidroRiosLagunasDto.getLngCount());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstIdpr()) != null) {
+				criteria.andStrFirstIdprEqualTo(basHidroRiosLagunasDto.getStrFirstIdpr());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrNombprov()) != null) {
+				criteria.andStrNombprovEqualTo(basHidroRiosLagunasDto.getStrNombprov());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstNomb()) != null) {
+				criteria.andStrFirstNombEqualTo(basHidroRiosLagunasDto.getStrFirstNomb());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastDcto()) != null) {
+				criteria.andStrLastDctoEqualTo(basHidroRiosLagunasDto.getStrLastDcto());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastLey()) != null) {
+				criteria.andStrLastLeyEqualTo(basHidroRiosLagunasDto.getStrLastLey());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrFirstFech()) != null) {
+				criteria.andStrFirstFechEqualTo(basHidroRiosLagunasDto.getStrFirstFech());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrLastFecha()) != null) {
+				criteria.andStrLastFechaEqualTo(basHidroRiosLagunasDto.getStrLastFecha());
+			}
+			if(CadenaUtil.getDoubNull(basHidroRiosLagunasDto.getDblMinShape()) != null) {
+				criteria.andDblMinShapeEqualTo(basHidroRiosLagunasDto.getDblMinShape());
+			}
+			if(CadenaUtil.getDoubNull(basHidroRiosLagunasDto.getDblArea()) != null) {
+				criteria.andDblAreaEqualTo(basHidroRiosLagunasDto.getDblArea());
+			}
+			if(CadenaUtil.getDoubNull(basHidroRiosLagunasDto.getDblPerimeter()) != null) {
+				criteria.andDblPerimeterEqualTo(basHidroRiosLagunasDto.getDblPerimeter());
+			}
+			if(CadenaUtil.getLongNull(basHidroRiosLagunasDto.getLngTiticacg()) != null) {
+				criteria.andLngTiticacgEqualTo(basHidroRiosLagunasDto.getLngTiticacg());
+			}
+			if(CadenaUtil.getLongNull(basHidroRiosLagunasDto.getLngTiticacgI()) != null) {
+				criteria.andLngTiticacgIEqualTo(basHidroRiosLagunasDto.getLngTiticacgI());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfLayer()) != null) {
+				criteria.andStrDxfLayerEqualTo(basHidroRiosLagunasDto.getStrDxfLayer());
+			}
+			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfText()) != null) {
+				criteria.andStrDxfTextEqualTo(basHidroRiosLagunasDto.getStrDxfText());
+			}
+		}
+		
+		List<BasHidroRiosLagunas>	 list	= basHidroRiosLagunasMapper.selectByDefaultParameterCombo(basHidroRiosLagunasParamDef);
+		return list;
+	}
+	
 	public BasHidroRiosLagunas buscarById(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception {
 		BasHidroRiosLagunas basHidroRiosLagunas		= new BasHidroRiosLagunas();
 		BeanUtils.copyProperties(basHidroRiosLagunasDto, basHidroRiosLagunas);
 		return basHidroRiosLagunasMapper.selectByPrimaryKey(basHidroRiosLagunas);
+	}
+	
+	public BasHidroRiosLagunas buscarGeometryById(BasHidroRiosLagunasDto basHidroRiosLagunasDto) throws Exception {
+		BasHidroRiosLagunas basHidroRiosLagunas		= new BasHidroRiosLagunas();
+		BeanUtils.copyProperties(basHidroRiosLagunasDto, basHidroRiosLagunas);
+		return basHidroRiosLagunasMapper.selectByPrimaryKeyGeometry(basHidroRiosLagunas);
 	}
 	
 	@Transactional

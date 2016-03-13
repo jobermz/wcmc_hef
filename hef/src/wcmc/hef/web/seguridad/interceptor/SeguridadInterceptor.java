@@ -46,8 +46,8 @@ public class SeguridadInterceptor implements Interceptor {
 			
 			listActionException.add("cargarCapasBaseJson");
 			listActionException.add("centrarDepartamentoJson");
-			listActionException.add("centrarDepartamentoJson");
 			listActionException.add("centrarProvinciaEnDepartamentoJson");
+			listActionException.add("centrarProvinciaEnProvinciaJson");
 			listActionException.add("centrarDistritoEnDepartamentoJson");
 			listActionException.add("centrarDistritoEnProvinciaJson");
 			listActionException.add("centrarDistritoEnDistritoJson");
@@ -57,7 +57,8 @@ public class SeguridadInterceptor implements Interceptor {
 			listActionException.add("consultaCapas");
 			listActionException.add("agregarShapeAPA");
 			listActionException.add("consultaCapasRightClick");
-			
+			listActionException.add("consultaCombosACL");
+			listActionException.add("consultaCombosACLFuxion");
 			if(listActionException.contains(actionName)) {
 				return arg0.invoke();
 			} else {

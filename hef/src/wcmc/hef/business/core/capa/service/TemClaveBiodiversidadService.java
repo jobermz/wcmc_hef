@@ -10,7 +10,9 @@ public interface TemClaveBiodiversidadService {
 	
 	public List<TemClaveBiodiversidad> buscar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public List<TemClaveBiodiversidad> buscarGeometry(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
+	public List<TemClaveBiodiversidad> buscarCombo(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public TemClaveBiodiversidad buscarById(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
+	public TemClaveBiodiversidad buscarGeometryById(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public Integer guardar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	public Integer eliminar(TemClaveBiodiversidadDto temClaveBiodiversidadDto) throws Exception;
 	

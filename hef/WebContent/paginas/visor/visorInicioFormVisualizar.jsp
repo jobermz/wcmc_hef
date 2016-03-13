@@ -60,7 +60,6 @@
 								      	</div>
 							      	</div>
 							      	<s:iterator value="#session.listCapasBase" var="capasBase">
-<%-- 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&#capasBase.strWmsUrl!=null}"> --%>
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
@@ -75,7 +74,7 @@
 								      	</div>
 								      	<div class="col-xs-2 text-center">
 								      		<s:if test="%{#capasBase.listCapaUmbral!=null}">
-<%-- 								      		<s:select list="#capasBase.listCapaUmbral" name="filtrar_umbral" headerKey="" headerValue="-Sel.-" listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select> --%>
+								      		<s:select list="#capasBase.listCapaUmbral" name="filtrar_umbral" headerKey="" headerValue="-Sel.-" listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
 								      		</s:if>
 								      	</div>
 								      	<div class="col-xs-1 text-center">

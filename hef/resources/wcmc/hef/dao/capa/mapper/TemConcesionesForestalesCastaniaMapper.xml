@@ -10,7 +10,6 @@
 		<result column="de_region" property="strRegion" jdbcType="VARCHAR"/>
 		<result column="ha_area_sig" property="dblAreaSig" jdbcType="DOUBLE"/>
 		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
-		<result column="fc_fecreg" property="timFechaRegistro" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionesForestalesCastaniaMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesCastaniaParamDef">
 		select
@@ -41,9 +40,31 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<select id="selectByDefaultParameterCombo" resultMap="TemConcesionesForestalesCastaniaMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesCastaniaParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List_Combo" />
+		from wcmc_hef.tem_concesiones_forestales_castania as tab
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
 	<select id="selectByPrimaryKey" resultMap="TemConcesionesForestalesCastaniaMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesCastaniaKey" >
 		select 
 		<include refid="Base_Column_List" />
+		from wcmc_hef.tem_concesiones_forestales_castania as tab
+		where 1 = 1
+		and cd_gid = #{srlGid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKeyGeometry" resultMap="TemConcesionesForestalesCastaniaMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesCastaniaKey" >
+		select 
+		<include refid="Base_Column_List_Geometry" />
 		from wcmc_hef.tem_concesiones_forestales_castania as tab
 		where 1 = 1
 		and cd_gid = #{srlGid,jdbcType=INTEGER}
@@ -77,9 +98,6 @@
 			<if test="strSituacion != null">
 				de_situacion,
 			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="strTheGeom != null">
@@ -102,9 +120,6 @@
 			</if>
 			<if test="strSituacion != null">
 				#{strSituacion, jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				#{timFechaRegistro, jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -131,9 +146,6 @@
 			</if>
 			<if test="strSituacion != null">
 				de_situacion = #{strSituacion,jdbcType=VARCHAR},
-			</if>
-			<if test="timFechaRegistro != null">
-				fc_fecreg = #{timFechaRegistro,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where 1 = 1
@@ -184,8 +196,7 @@
 		de_contrato, 
 		de_region, 
 		ha_area_sig, 
-		de_situacion, 
-		fc_fecreg
+		de_situacion
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -195,8 +206,17 @@
 		de_contrato, 
 		de_region, 
 		ha_area_sig, 
-		de_situacion, 
-		fc_fecreg
+		de_situacion
+	</sql>
+	<sql id="Base_Column_List_Combo">
+		cd_gid, 
+		'' as si_the_geom, 
+		de_modalidad, 
+		de_titular, 
+		de_contrato, 
+		de_region, 
+		ha_area_sig, 
+		de_situacion
 	</sql>
 
 </mapper>

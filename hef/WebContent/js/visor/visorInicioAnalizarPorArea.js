@@ -152,7 +152,7 @@ function seleccionarAreaDesdeMapa() {
 	$('.analizar-por-area-modal').modal('hide');
 //	alert("Pendiente activar la vista grafica para seleccionar poligono");
 	activarSeleccionarAreaDesdeMapa	= true;
-	$(".clsTituloCapaActiva").css("display","");
+//	$(".clsTituloCapaActiva").css("display","");
 }
 var arrIntIdCapaSeleAreaDesdeMapa = ["9","1","3","2","12","18","19","20","21","22","23","47","41","40","39","38","37","34","35","36","24","25","26","27","28","29","30","31","33"];
 function contains(a, obj) {
@@ -164,18 +164,24 @@ function contains(a, obj) {
     return false;
 }
 function eventoMenuContextualSeleccionarAreaDesdeMapa(pixel, event) {
-	$('.analizar-por-area-modal').modal('hide');
+	//$('.analizar-por-area-modal').modal('hide');
 //	alert("Pendiente activar la vista grafica para seleccionar poligono");
-	if(activarSeleccionarAreaDesdeMapa) {
+	{
 		if(!intIdCapaActiva || intIdCapaActiva == "") {
 			mostrarMensajesErrorStruts(["Debe seleccionar por lo menos una capa como activa"]);
 			return;
 		}
-		
-		if(!contains(arrIntIdCapaSeleAreaDesdeMapa, intIdCapaActiva)) {
-			$(".clsGenerarReporteAnalitico").css("display", "none");
+		//<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBaseAPA" es-selec-mapa-acl="${capasBase.strEsSelecApaBoolean}
+		if(activarSeleccionarAreaDesdeMapa) {
+			var esSelecMapaAcl	= $("#idCapaAnalisPorArea"+intIdCapaActiva).attr("es-selec-mapa-acl");
+			//if(!contains(arrIntIdCapaSeleAreaDesdeMapa, intIdCapaActiva)) {
+			if(esSelecMapaAcl == "true") {
+				$(".clsGenerarReporteAnalitico").css("display", "");
+			} else {
+				$(".clsGenerarReporteAnalitico").css("display", "none");
+			}
 		} else {
-			$(".clsGenerarReporteAnalitico").css("display", "");
+			$(".clsGenerarReporteAnalitico").css("display", "none");
 		}
 		
 		var coord	= map.getCoordinateFromPixel(pixel);
@@ -205,5 +211,5 @@ function eventoMenuContextualSeleccionarAreaDesdeMapa(pixel, event) {
 function menucontextualProcesarReporteAnalitico() {
 	activarSeleccionarAreaDesdeMapa	= false;
 	procesarAnalizarPorArea(null, intIdCapaActiva);
-	$(".clsTituloCapaActiva").css("display","none");
+//	$(".clsTituloCapaActiva").css("display","none");
 }

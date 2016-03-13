@@ -11,7 +11,9 @@ public interface TemClaveBiodiversidadMapper {
 	
 	public List<TemClaveBiodiversidad> selectByDefaultParameter(TemClaveBiodiversidadParamDef temClaveBiodiversidadParamDef);
 	public List<TemClaveBiodiversidad> selectByDefaultParameterGeometry(TemClaveBiodiversidadParamDef temClaveBiodiversidadParamDef);
+	public List<TemClaveBiodiversidad> selectByDefaultParameterCombo(TemClaveBiodiversidadParamDef temClaveBiodiversidadParamDef);
 	public TemClaveBiodiversidad selectByPrimaryKey(TemClaveBiodiversidadKey temClaveBiodiversidadKey);
+	public TemClaveBiodiversidad selectByPrimaryKeyGeometry(TemClaveBiodiversidadKey temClaveBiodiversidadKey);
 	public int insertSelective(TemClaveBiodiversidad temClaveBiodiversidad);
 	public int updateByPrimaryKeySelective(TemClaveBiodiversidad temClaveBiodiversidad);
 	public int deleteByPrimaryKey(TemClaveBiodiversidadKey temClaveBiodiversidadKey);

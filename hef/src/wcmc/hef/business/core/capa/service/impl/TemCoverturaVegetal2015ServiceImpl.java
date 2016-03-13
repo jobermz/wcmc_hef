@@ -27,13 +27,13 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 				criteria.andStrTheGeomIntersectsTo(temCoverturaVegetal2015Dto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCobveg2013()) != null) {
-				criteria.andStrCobveg2013Like(temCoverturaVegetal2015Dto.getStrCobveg2013());
+				criteria.andStrCobveg2013EqualTo(temCoverturaVegetal2015Dto.getStrCobveg2013());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrSimbolo()) != null) {
-				criteria.andStrSimboloLike(temCoverturaVegetal2015Dto.getStrSimbolo());
+				criteria.andStrSimboloEqualTo(temCoverturaVegetal2015Dto.getStrSimbolo());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrFisiogr()) != null) {
-				criteria.andStrFisiogrLike(temCoverturaVegetal2015Dto.getStrFisiogr());
+				criteria.andStrFisiogrEqualTo(temCoverturaVegetal2015Dto.getStrFisiogr());
 			}
 			if(CadenaUtil.getDoubNull(temCoverturaVegetal2015Dto.getDblShapeLeng()) != null) {
 				criteria.andDblShapeLengEqualTo(temCoverturaVegetal2015Dto.getDblShapeLeng());
@@ -42,15 +42,16 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 				criteria.andDblShapeAreaEqualTo(temCoverturaVegetal2015Dto.getDblShapeArea());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCvLabel()) != null) {
-				criteria.andStrCvLabelLike(temCoverturaVegetal2015Dto.getStrCvLabel());
+				criteria.andStrCvLabelEqualTo(temCoverturaVegetal2015Dto.getStrCvLabel());
 			}
 		}
 		
+		temCoverturaVegetal2015ParamDef.setOrderByClause("de_cobveg2013");
 		List<TemCoverturaVegetal2015>	 list	= temCoverturaVegetal2015Mapper.selectByDefaultParameter(temCoverturaVegetal2015ParamDef);
 		return list;
 	}
 	
-		public List<TemCoverturaVegetal2015> buscarGeometry(TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto) throws Exception {
+	public List<TemCoverturaVegetal2015> buscarGeometry(TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto) throws Exception {
 		TemCoverturaVegetal2015ParamDef temCoverturaVegetal2015ParamDef		= new TemCoverturaVegetal2015ParamDef();
 		
 		Criteria criteria		= temCoverturaVegetal2015ParamDef.createCriteria();
@@ -59,13 +60,13 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 				criteria.andStrTheGeomIntersectsTo(temCoverturaVegetal2015Dto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCobveg2013()) != null) {
-				criteria.andStrCobveg2013Like(temCoverturaVegetal2015Dto.getStrCobveg2013());
+				criteria.andStrCobveg2013EqualTo(temCoverturaVegetal2015Dto.getStrCobveg2013());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrSimbolo()) != null) {
-				criteria.andStrSimboloLike(temCoverturaVegetal2015Dto.getStrSimbolo());
+				criteria.andStrSimboloEqualTo(temCoverturaVegetal2015Dto.getStrSimbolo());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrFisiogr()) != null) {
-				criteria.andStrFisiogrLike(temCoverturaVegetal2015Dto.getStrFisiogr());
+				criteria.andStrFisiogrEqualTo(temCoverturaVegetal2015Dto.getStrFisiogr());
 			}
 			if(CadenaUtil.getDoubNull(temCoverturaVegetal2015Dto.getDblShapeLeng()) != null) {
 				criteria.andDblShapeLengEqualTo(temCoverturaVegetal2015Dto.getDblShapeLeng());
@@ -74,11 +75,45 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 				criteria.andDblShapeAreaEqualTo(temCoverturaVegetal2015Dto.getDblShapeArea());
 			}
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCvLabel()) != null) {
-				criteria.andStrCvLabelLike(temCoverturaVegetal2015Dto.getStrCvLabel());
+				criteria.andStrCvLabelEqualTo(temCoverturaVegetal2015Dto.getStrCvLabel());
 			}
 		}
 		
+		temCoverturaVegetal2015ParamDef.setOrderByClause("de_cobveg2013");
 		List<TemCoverturaVegetal2015>	 list	= temCoverturaVegetal2015Mapper.selectByDefaultParameterGeometry(temCoverturaVegetal2015ParamDef);
+		return list;
+	}
+	
+	public List<TemCoverturaVegetal2015> buscarCombo(TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto) throws Exception {
+		TemCoverturaVegetal2015ParamDef temCoverturaVegetal2015ParamDef		= new TemCoverturaVegetal2015ParamDef();
+		
+		Criteria criteria		= temCoverturaVegetal2015ParamDef.createCriteria();
+		if(temCoverturaVegetal2015Dto != null) {
+			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(temCoverturaVegetal2015Dto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCobveg2013()) != null) {
+				criteria.andStrCobveg2013EqualTo(temCoverturaVegetal2015Dto.getStrCobveg2013());
+			}
+			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrSimbolo()) != null) {
+				criteria.andStrSimboloEqualTo(temCoverturaVegetal2015Dto.getStrSimbolo());
+			}
+			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrFisiogr()) != null) {
+				criteria.andStrFisiogrEqualTo(temCoverturaVegetal2015Dto.getStrFisiogr());
+			}
+			if(CadenaUtil.getDoubNull(temCoverturaVegetal2015Dto.getDblShapeLeng()) != null) {
+				criteria.andDblShapeLengEqualTo(temCoverturaVegetal2015Dto.getDblShapeLeng());
+			}
+			if(CadenaUtil.getDoubNull(temCoverturaVegetal2015Dto.getDblShapeArea()) != null) {
+				criteria.andDblShapeAreaEqualTo(temCoverturaVegetal2015Dto.getDblShapeArea());
+			}
+			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCvLabel()) != null) {
+				criteria.andStrCvLabelEqualTo(temCoverturaVegetal2015Dto.getStrCvLabel());
+			}
+		}
+		
+		temCoverturaVegetal2015ParamDef.setOrderByClause("de_cobveg2013");
+		List<TemCoverturaVegetal2015>	 list	= temCoverturaVegetal2015Mapper.selectByDefaultParameterCombo(temCoverturaVegetal2015ParamDef);
 		return list;
 	}
 	
@@ -86,6 +121,12 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 		TemCoverturaVegetal2015 temCoverturaVegetal2015		= new TemCoverturaVegetal2015();
 		BeanUtils.copyProperties(temCoverturaVegetal2015Dto, temCoverturaVegetal2015);
 		return temCoverturaVegetal2015Mapper.selectByPrimaryKey(temCoverturaVegetal2015);
+	}
+	
+	public TemCoverturaVegetal2015 buscarGeometryById(TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto) throws Exception {
+		TemCoverturaVegetal2015 temCoverturaVegetal2015		= new TemCoverturaVegetal2015();
+		BeanUtils.copyProperties(temCoverturaVegetal2015Dto, temCoverturaVegetal2015);
+		return temCoverturaVegetal2015Mapper.selectByPrimaryKeyGeometry(temCoverturaVegetal2015);
 	}
 	
 	@Transactional

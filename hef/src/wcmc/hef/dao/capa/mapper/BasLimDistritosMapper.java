@@ -11,7 +11,9 @@ public interface BasLimDistritosMapper {
 	
 	public List<BasLimDistritos> selectByDefaultParameter(BasLimDistritosParamDef basLimDistritosParamDef);
 	public List<BasLimDistritos> selectByDefaultParameterGeometry(BasLimDistritosParamDef basLimDistritosParamDef);
+	public List<BasLimDistritos> selectByDefaultParameterCombo(BasLimDistritosParamDef basLimDistritosParamDef);
 	public BasLimDistritos selectByPrimaryKey(BasLimDistritosKey basLimDistritosKey);
+	public BasLimDistritos selectByPrimaryKeyGeometry(BasLimDistritosKey basLimDistritosKey);
 	public int insertSelective(BasLimDistritos basLimDistritos);
 	public int updateByPrimaryKeySelective(BasLimDistritos basLimDistritos);
 	public int deleteByPrimaryKey(BasLimDistritosKey basLimDistritosKey);

@@ -27,21 +27,22 @@ public class BasViasRedVialVecinalServiceImpl implements BasViasRedVialVecinalSe
 				criteria.andStrTheGeomIntersectsTo(basViasRedVialVecinalDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrProvinc()) != null) {
-				criteria.andStrProvincLike(basViasRedVialVecinalDto.getStrProvinc());
+				criteria.andStrProvincEqualTo(basViasRedVialVecinalDto.getStrProvinc());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrRuta()) != null) {
-				criteria.andStrRutaLike(basViasRedVialVecinalDto.getStrRuta());
+				criteria.andStrRutaEqualTo(basViasRedVialVecinalDto.getStrRuta());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrSuperficie()) != null) {
-				criteria.andStrSuperficieLike(basViasRedVialVecinalDto.getStrSuperficie());
+				criteria.andStrSuperficieEqualTo(basViasRedVialVecinalDto.getStrSuperficie());
 			}
 		}
 		
+		basViasRedVialVecinalParamDef.setOrderByClause("de_ruta");
 		List<BasViasRedVialVecinal>	 list	= basViasRedVialVecinalMapper.selectByDefaultParameter(basViasRedVialVecinalParamDef);
 		return list;
 	}
 	
-		public List<BasViasRedVialVecinal> buscarGeometry(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
+	public List<BasViasRedVialVecinal> buscarGeometry(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
 		BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef		= new BasViasRedVialVecinalParamDef();
 		
 		Criteria criteria		= basViasRedVialVecinalParamDef.createCriteria();
@@ -50,17 +51,42 @@ public class BasViasRedVialVecinalServiceImpl implements BasViasRedVialVecinalSe
 				criteria.andStrTheGeomIntersectsTo(basViasRedVialVecinalDto.getStrTheGeom());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrProvinc()) != null) {
-				criteria.andStrProvincLike(basViasRedVialVecinalDto.getStrProvinc());
+				criteria.andStrProvincEqualTo(basViasRedVialVecinalDto.getStrProvinc());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrRuta()) != null) {
-				criteria.andStrRutaLike(basViasRedVialVecinalDto.getStrRuta());
+				criteria.andStrRutaEqualTo(basViasRedVialVecinalDto.getStrRuta());
 			}
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrSuperficie()) != null) {
-				criteria.andStrSuperficieLike(basViasRedVialVecinalDto.getStrSuperficie());
+				criteria.andStrSuperficieEqualTo(basViasRedVialVecinalDto.getStrSuperficie());
 			}
 		}
 		
+		basViasRedVialVecinalParamDef.setOrderByClause("de_ruta");
 		List<BasViasRedVialVecinal>	 list	= basViasRedVialVecinalMapper.selectByDefaultParameterGeometry(basViasRedVialVecinalParamDef);
+		return list;
+	}
+	
+	public List<BasViasRedVialVecinal> buscarCombo(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
+		BasViasRedVialVecinalParamDef basViasRedVialVecinalParamDef		= new BasViasRedVialVecinalParamDef();
+		
+		Criteria criteria		= basViasRedVialVecinalParamDef.createCriteria();
+		if(basViasRedVialVecinalDto != null) {
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrTheGeom()) != null) {
+				criteria.andStrTheGeomIntersectsTo(basViasRedVialVecinalDto.getStrTheGeom());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrProvinc()) != null) {
+				criteria.andStrProvincEqualTo(basViasRedVialVecinalDto.getStrProvinc());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrRuta()) != null) {
+				criteria.andStrRutaEqualTo(basViasRedVialVecinalDto.getStrRuta());
+			}
+			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrSuperficie()) != null) {
+				criteria.andStrSuperficieEqualTo(basViasRedVialVecinalDto.getStrSuperficie());
+			}
+		}
+		
+		basViasRedVialVecinalParamDef.setOrderByClause("de_ruta");
+		List<BasViasRedVialVecinal>	 list	= basViasRedVialVecinalMapper.selectByDefaultParameterCombo(basViasRedVialVecinalParamDef);
 		return list;
 	}
 	
@@ -68,6 +94,12 @@ public class BasViasRedVialVecinalServiceImpl implements BasViasRedVialVecinalSe
 		BasViasRedVialVecinal basViasRedVialVecinal		= new BasViasRedVialVecinal();
 		BeanUtils.copyProperties(basViasRedVialVecinalDto, basViasRedVialVecinal);
 		return basViasRedVialVecinalMapper.selectByPrimaryKey(basViasRedVialVecinal);
+	}
+	
+	public BasViasRedVialVecinal buscarGeometryById(BasViasRedVialVecinalDto basViasRedVialVecinalDto) throws Exception {
+		BasViasRedVialVecinal basViasRedVialVecinal		= new BasViasRedVialVecinal();
+		BeanUtils.copyProperties(basViasRedVialVecinalDto, basViasRedVialVecinal);
+		return basViasRedVialVecinalMapper.selectByPrimaryKeyGeometry(basViasRedVialVecinal);
 	}
 	
 	@Transactional

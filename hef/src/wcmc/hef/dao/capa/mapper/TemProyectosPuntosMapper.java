@@ -11,7 +11,9 @@ public interface TemProyectosPuntosMapper {
 	
 	public List<TemProyectosPuntos> selectByDefaultParameter(TemProyectosPuntosParamDef temProyectosPuntosParamDef);
 	public List<TemProyectosPuntos> selectByDefaultParameterGeometry(TemProyectosPuntosParamDef temProyectosPuntosParamDef);
+	public List<TemProyectosPuntos> selectByDefaultParameterCombo(TemProyectosPuntosParamDef temProyectosPuntosParamDef);
 	public TemProyectosPuntos selectByPrimaryKey(TemProyectosPuntosKey temProyectosPuntosKey);
+	public TemProyectosPuntos selectByPrimaryKeyGeometry(TemProyectosPuntosKey temProyectosPuntosKey);
 	public int insertSelective(TemProyectosPuntos temProyectosPuntos);
 	public int updateByPrimaryKeySelective(TemProyectosPuntos temProyectosPuntos);
 	public int deleteByPrimaryKey(TemProyectosPuntosKey temProyectosPuntosKey);

@@ -10,7 +10,9 @@ public interface TemCentrosPobladosService {
 	
 	public List<TemCentrosPoblados> buscar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public List<TemCentrosPoblados> buscarGeometry(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
+	public List<TemCentrosPoblados> buscarCombo(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public TemCentrosPoblados buscarById(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
+	public TemCentrosPoblados buscarGeometryById(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public Integer guardar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	public Integer eliminar(TemCentrosPobladosDto temCentrosPobladosDto) throws Exception;
 	
