@@ -12,11 +12,11 @@
 					
 					<div class="panel-group" id="accordion_iac" role="tablist" aria-multiselectable="false">
 					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
-					  <div class="panel panel-default">
+					  <div class="panel panel-default clsPanelGrupoCapasMainACL">
 					    <div class="panel-heading" role="tab" id="headingOneIAC${grupoCapasBase.srlIdGrupoCapas}">
 					      <h4 class="panel-title">
 					        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion_iac" href="#collapseOneIAC${grupoCapasBase.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneIAC${grupoCapasBase.srlIdGrupoCapas}">
-					          ${grupoCapasBase.strNombre}
+					          ${grupoCapasBase.strNombre} <span class="badge badgeCustomPanelGrupoCapaMainACL"></span>
 					        </a>
 					      </h4>
 					    </div>
@@ -27,11 +27,11 @@
 							<div class="panel-group" id="accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="true">
 							  
 							  <s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-							  <div class="panel panel-default">
+							  <div class="panel panel-default clsPanelGrupoCapasACL">
 							    <div class="panel-heading" role="tab" id="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}">
 							      <h4 class="panel-title">
 							        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" href="#collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}">
-							          ${grupoCapas.strNombre}
+							          ${grupoCapas.strNombre} <span class="badge badgeCustomPanelGrupoCapaACL"></span>
 							        </a>
 							      </h4>
 							    </div>
@@ -54,7 +54,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
-								      		<input type="checkbox" id="idCapaIdentACL${capasBase.srlIdCapa}" name="capaIdentACL" value="${capasBase.srlIdCapa}"  class="capasBaseACL">
+								      		<input type="checkbox" id="idCapaIdentACL${capasBase.srlIdCapa}" name="capaIdentACL" value="${capasBase.srlIdCapa}" class="capasBaseACL" id-capa="${capasBase.srlIdCapa}" onblur="guardarCapasSeleccionadasACL();" onclick="guardarCapasSeleccionadasACL();">
 											${capasBase.strNombre}
 								      	</div>
 								      	<div class="col-xs-2 text-center clsDivDetFiltroACL" id="idDivDetFiltroACL${capasBase.srlIdCapa}">

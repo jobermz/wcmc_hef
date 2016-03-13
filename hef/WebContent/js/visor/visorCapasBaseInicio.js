@@ -6,6 +6,13 @@ function iniciarCapasBase() {
 	$("select[name=centrar_departamento]").change(centrar_depa_upd_dpto);
 	$("select[name=centrar_prov_departamento]").change(centrar_prov_upd_dpto);
 	$("select[name=centrar_dist_departamento]").change(centrar_dist_upd_dpto);
+	
+	var idCapasDef	= $("input[name=CAPAS_VISUALIZACION_DEFAULT]").val();
+	var arrCapasDef	= idCapasDef.split(",");
+	for(var i = 0;i < arrCapasDef.length;i++) {
+		$("#idCapaBaseVisualizacion"+arrCapasDef[i]).prop("checked", true);
+	}
+	guardarCapasSeleccionadasCapasBase();
 }
 function buscarCapasBaseById(srlIdCapa) {
 	for(var i = 0;i < capasBaseArr.length;i++) {
@@ -182,3 +189,35 @@ function cargarCombo_dist_en_distrito() {
 }
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
+function guardarCapasSeleccionadasCapasBase() {
+	$(".clsPanelGrupoCapasCB").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBase").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaCB").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaCB").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaCB").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaCB").css("display", "none");
+		}
+	});
+	$(".clsPanelGrupoCapasMainCB").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBase").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaMainCB").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaMainCB").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaMainCB").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaMainCB").css("display", "none");
+		}
+	});
+}

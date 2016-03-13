@@ -1,10 +1,101 @@
 function iniciarAnalizarPorArea() {
+	$('.analizar-por-area').click(analizarPorArea);
+	
 	$('.btnProcesarAnalizarPorArea').click(procesarAnalizarPorArea);
 	$('.btnSeleccionarTodasCapasAPA').click(seleccionarTodosAPA);
 	$('.btnEnviarShapefile').click(cargarPoligonoDesdeShapefile);
 	$('.clsGenerarReporteAnalitico').click(menucontextualProcesarReporteAnalitico);
 	
+	$("#idMenuLimiparAPA").click(limpiarCapasSeleccionadasAPA);
+	
 }
+//////////////////////////////////////////////////////////////////
+
+function analizarPorArea() {
+	$('.analizar-por-area-modal').off('shown.bs.modal');
+	$('.analizar-por-area-modal').off('hidden.bs.modal');
+	$('.analizar-por-area-modal').on('shown.bs.modal', function (e) {
+		inicializarSeleccionadasActivasAPA();
+	});
+	$('.analizar-por-area-modal').on('hidden.bs.modal', function (e) {
+	});
+	$('.analizar-por-area-modal').modal('show');
+}
+function inicializarSeleccionadasActivasAPA() {
+	if(listado_idCapaIdentAPA!=null && listado_idCapaIdentAPA.length > 0) {
+		$(".capasBaseAPA").each(function(index) {
+			$(this).prop("checked", false);
+		});
+		for(var i = 0;i < listado_idCapaIdentAPA.length;i++) {
+			$("#idCapaAnalisPorArea"+listado_idCapaIdentAPA[i]).prop("checked", true);
+		}
+	} else if(listado_idCapaIdentACL!=null && listado_idCapaIdentACL.length > 0) {
+		$(".capasBaseAPA").each(function(index) {
+			$(this).prop("checked", false);
+		});
+		for(var i = 0;i < listado_idCapaIdentACL.length;i++) {
+			$("#idCapaAnalisPorArea"+listado_idCapaIdentACL[i]).prop("checked", true);
+		}
+	} else {
+		$(".capasBaseAPA").each(function(index) {
+			$(this).prop("checked", false);
+		});
+		$(".capasBase").each(function(index) {
+			if($(this).is(':checked')) {
+				var srlIdCapa	= $(this).attr("value");
+				$("#idCapaAnalisPorArea"+srlIdCapa).prop("checked", true);
+			}
+		});
+	}
+	guardarCapasSeleccionadasAPA();
+}
+var listado_idCapaIdentAPA		= null;
+function guardarCapasSeleccionadasAPA() {
+	listado_idCapaIdentAPA			= new Array();
+	$(".capasBaseAPA").each(function(index) {
+		if($(this).is(':checked')) {
+			var srlIdCapa		= $(this).attr("id-capa");
+			listado_idCapaIdentAPA[listado_idCapaIdentAPA.length]	= srlIdCapa;
+		}
+	});
+	$('.badgeCustomAPA').html(listado_idCapaIdentAPA.length);
+	$('.badgeCustomAPA').css("display","");
+	$(".clsPanelGrupoCapasAPA").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBaseAPA").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaAPA").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaAPA").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaAPA").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaAPA").css("display", "none");
+		}
+	});
+	$(".clsPanelGrupoCapasMainAPA").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBaseAPA").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaMainAPA").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaMainAPA").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaMainAPA").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaMainAPA").css("display", "none");
+		}
+	});
+}
+function limpiarCapasSeleccionadasAPA() {
+	listado_idCapaIdentAPA	= null;
+	$('.badgeCustomAPA').css("display","none");
+}
+//////////////////////////////////////////////////////////////////
 function seleccionarTodosAPA() {
 	var checkedTodos	= true;
 	$("input[name=capaAnalisPorArea]").each(function(index) {
@@ -13,6 +104,7 @@ function seleccionarTodosAPA() {
 	$("input[name=capaAnalisPorArea]").each(function(index) {
 		$(this).prop('checked', !checkedTodos);
 	});
+	guardarCapasSeleccionadasAPA();
 }
 function procesarAnalizarPorArea(wkt, idCapa) {
 	blockui();

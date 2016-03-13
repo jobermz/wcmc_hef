@@ -7,18 +7,27 @@ $(document).ready(function() {
 	goog.require('ol.proj');
 	
 	$('.seleccionar-capas').click(seleccionarCapas);
-	$('.identificar-area-criterio-logico').click(identificarAreaCriterioLogico);
-	$('.analizar-por-area').click(analizarPorArea);
+	
 	$('.upload-capas').click(uploadCapas);
 	
-	/*
-	$(document).bind('contextmenu', function(e) {
-		$('#idDivRightClick').css("display", "none");
-		return true;
+	$(".identificar-area-criterio-logico").bind('contextmenu', function(e) {
+		$('#idDivRightClickClean').css("display", "table-row");
+		$('#idDivRightClickClean').css("left", $("#idDivBotonFlotanteACL").css("left").pxToInt()+15);
+		$('#idDivRightClickClean').css("top", $("#idDivBotonFlotanteACL").css("top").pxToInt()+25);
+		return false;
 	});
-	*/
+	
+	$(".analizar-por-area").bind('contextmenu', function(e) {
+		$('#idDivRightClickAPAClean').css("display", "table-row");
+		$('#idDivRightClickAPAClean').css("left", $("#idDivBotonFlotanteACL").css("left").pxToInt()+15);
+		$('#idDivRightClickAPAClean').css("top", $("#idDivBotonFlotanteAPA").css("top").pxToInt()+25);
+		return false;
+	});
+	
 	$(document).bind('click', function(e) {
 		$('#idDivRightClick').css("display", "none");
+		$('#idDivRightClickClean').css("display", "none");
+		$('#idDivRightClickAPAClean').css("display","none");
 		if(!activarSeleccionarAreaDesdeMapa) {
 //			$(".clsTituloCapaActiva").css("display","none");
 		}
@@ -26,9 +35,9 @@ $(document).ready(function() {
 	});
 	
 	iniciarMapa();
-	iniciarCapasBase();
-//	$('.collapse').collapse();
 	iniciarMarcarCapas();
+	iniciarCapasBase();
+	
 	marcarCapas();
 	iniciarIdentificarAreaPorCriteriosLogicos();
 	iniciarAnalizarPorArea();
@@ -255,26 +264,6 @@ function seleccionarCapas() {
 	$('.seleccionar-capas-modal').on('hidden.bs.modal', function (e) {
 	});
 	$('.seleccionar-capas-modal').modal('show');
-}
-
-function identificarAreaCriterioLogico() {
-	$('.identificar-area-criterio-logico-modal').off('shown.bs.modal');
-	$('.identificar-area-criterio-logico-modal').off('hidden.bs.modal');
-	$('.identificar-area-criterio-logico-modal').on('shown.bs.modal', function (e) {
-	});
-	$('.identificar-area-criterio-logico-modal').on('hidden.bs.modal', function (e) {
-	});
-	$('.identificar-area-criterio-logico-modal').modal('show');
-}
-
-function analizarPorArea() {
-	$('.analizar-por-area-modal').off('shown.bs.modal');
-	$('.analizar-por-area-modal').off('hidden.bs.modal');
-	$('.analizar-por-area-modal').on('shown.bs.modal', function (e) {
-	});
-	$('.analizar-por-area-modal').on('hidden.bs.modal', function (e) {
-	});
-	$('.analizar-por-area-modal').modal('show');
 }
 
 function uploadCapas() {

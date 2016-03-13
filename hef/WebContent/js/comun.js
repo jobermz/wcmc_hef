@@ -1,17 +1,24 @@
-$(function() {
+String.prototype.pxToInt = function () {
+	varPx	= this;
+	if(varPx.indexOf("px") != -1) {
+		varPx	= varPx.substring(0, varPx.indexOf("px"));
+	}
+	return parseInt(varPx);
+};
 
-$("#divModalmsg").dialog({
-	autoOpen: false,
-    height: 'auto',
-    width: 'auto',
-    title: 'Mensaje: ',
-    modal: true,
-    buttons: {
-      Aceptar: function() {
-        $( this ).dialog( "close" );
-      },
-    }
-});
+$(function() {
+	$("#divModalmsg").dialog({
+		autoOpen: false,
+	    height: 'auto',
+	    width: 'auto',
+	    title: 'Mensaje: ',
+	    modal: true,
+	    buttons: {
+	      Aceptar: function() {
+	        $( this ).dialog( "close" );
+	      },
+	    }
+	});
 
 });
 function mostrarMensajesErrorStruts(arrayMsgs, idObjMsg) {

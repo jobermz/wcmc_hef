@@ -14,11 +14,11 @@
 				
 					<div class="panel-group" id="accordion_apa" role="tablist" aria-multiselectable="false">
 					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
-					  <div class="panel panel-default">
+					  <div class="panel panel-default clsPanelGrupoCapasMainAPA">
 					    <div class="panel-heading" role="tab" id="headingOneAPA${grupoCapasBase.srlIdGrupoCapas}">
 					      <h4 class="panel-title">
 					        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion_apa" href="#collapseOneAPA${grupoCapasBase.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneAPA${grupoCapasBase.srlIdGrupoCapas}">
-					          ${grupoCapasBase.strNombre}
+					          ${grupoCapasBase.strNombre} <span class="badge badgeCustomPanelGrupoCapaMainAPA"></span>
 					        </a>
 					      </h4>
 					    </div>
@@ -29,11 +29,11 @@
 							<div class="panel-group" id="accordionSubAPA${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="true">
 							  
 							  <s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-							  <div class="panel panel-default">
+							  <div class="panel panel-default clsPanelGrupoCapasAPA">
 							    <div class="panel-heading" role="tab" id="headingOneSubAPA${grupoCapas.srlIdGrupoCapas}">
 							      <h4 class="panel-title">
 							        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordionSubAPA${grupoCapasBase.srlIdGrupoCapas}" href="#collapseOneSubAPA${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneSubAPA${grupoCapas.srlIdGrupoCapas}">
-							          ${grupoCapas.strNombre}
+							          ${grupoCapas.strNombre} <span class="badge badgeCustomPanelGrupoCapaAPA"></span>
 							        </a>
 							      </h4>
 							    </div>
@@ -55,7 +55,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
-								      		<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBaseAPA" es-selec-mapa-acl="${capasBase.strEsSelecApaBoolean}">
+								      		<input type="checkbox" id="idCapaAnalisPorArea${capasBase.srlIdCapa}" name="capaAnalisPorArea" value="${capasBase.srlIdCapa}" class="capasBaseAPA" id-capa="${capasBase.srlIdCapa}" es-selec-mapa-acl="${capasBase.strEsSelecApaBoolean}" onblur="guardarCapasSeleccionadasAPA();" onclick="guardarCapasSeleccionadasAPA();">
 											${capasBase.strNombre}
 								      	</div>
 								      	<div class="col-xs-2 text-center">

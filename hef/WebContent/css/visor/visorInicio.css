@@ -111,3 +111,15 @@ h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.badge.badgeCustomAPA {
+	background-color: #F77;
+	left:10px;
+	top:-10px;
+	position:absolute;
+}
+.badge.badgeCustomACL {
+	background-color: #F77;
+	left:10px;
+	top:-10px;
+	position:absolute;
+}

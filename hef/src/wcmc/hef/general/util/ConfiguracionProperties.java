@@ -13,6 +13,8 @@ public class ConfiguracionProperties {
 	
 	public static String REPOSITORIO_DOCS_TEMPORAL	= "repositorio_docs_temporal";
 	
+	public static String CAPAS_VISUALIZACION_DEFAULT	= "capas_visualizacion_default";
+	
 	public static List<String> getConstanteList(String strParam) {
 		List<String> list	= new ArrayList<String>();
 		int intIdContador	= 0;

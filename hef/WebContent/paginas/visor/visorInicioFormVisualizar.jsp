@@ -13,11 +13,11 @@
 				
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
-					  <div class="panel panel-default">
+					  <div class="panel panel-default clsPanelGrupoCapasMainCB">
 					    <div class="panel-heading" role="tab" id="headingOne${grupoCapasBase.srlIdGrupoCapas}">
 					      <h4 class="panel-title">
 					        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${grupoCapasBase.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOne${grupoCapasBase.srlIdGrupoCapas}">
-					          ${grupoCapasBase.strNombre}
+					          ${grupoCapasBase.strNombre} <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 					        </a>
 					      </h4>
 					    </div>
@@ -28,11 +28,11 @@
 							<div class="panel-group" id="accordionSub${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="false">
 							  
 							  <s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-							  <div class="panel panel-default">
+							  <div class="panel panel-default clsPanelGrupoCapasCB">
 							    <div class="panel-heading" role="tab" id="headingOneSub${grupoCapas.srlIdGrupoCapas}">
 							      <h4 class="panel-title">
 							        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordionSub${grupoCapasBase.srlIdGrupoCapas}" href="#collapseOneSub${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneSub${grupoCapas.srlIdGrupoCapas}">
-							          ${grupoCapas.strNombre}
+							          ${grupoCapas.strNombre} <span class="badge badgeCustomPanelGrupoCapaCB"></span>
 							        </a>
 							      </h4>
 							    </div>
@@ -63,7 +63,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
-								      		<input type="checkbox" id="idCapaDpto" name="capasBase" value="${capasBase.srlIdCapa}" onclick="marcarCapas();" class="capasBase">
+								      		<input type="checkbox" id="idCapaBaseVisualizacion${capasBase.srlIdCapa}" name="capasBase" value="${capasBase.srlIdCapa}" id-capa="${capasBase.srlIdCapa}" class="capasBase" onblur="guardarCapasSeleccionadasCapasBase();" onclick="marcarCapas();guardarCapasSeleccionadasCapasBase();">
 											${capasBase.strNombre}
 											<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&(#capasBase.strWmsUrl==null||#capasBase.strWmsUrl=='')}">
 												<i class="fa fa-warning"  title="La visualizacion no se encuentra disponible por el momento"></i>

@@ -1,9 +1,94 @@
 function iniciarIdentificarAreaPorCriteriosLogicos() {
+	$('.identificar-area-criterio-logico').click(identificarAreaCriterioLogico);
+	
 	$('.btnProcesarIdentAreaCriteriosLogicos').click(procesarCriterioLogico);
 	$('.btnSeleccionarTodasCapasACL').click(seleccionarTodosACL);
 	$(".btnAplicarACLFiltrar").click(aplicarFiltroACL);
 	$("#idCriterioFiltroUmbral").change(actualizarFiltroUmbralACL);
 	$(".btnAplicarACLUmbral").click(aplicarFiltroUmbralACL);
+	
+	$("#idMenuLimiparACL").click(limpiarCapasSeleccionadasACL);
+	
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+function identificarAreaCriterioLogico() {
+	$('.identificar-area-criterio-logico-modal').off('shown.bs.modal');
+	$('.identificar-area-criterio-logico-modal').off('hidden.bs.modal');
+	$('.identificar-area-criterio-logico-modal').on('shown.bs.modal', function (e) {
+		inicializarSeleccionadasActivasACL();
+	});
+	$('.identificar-area-criterio-logico-modal').on('hidden.bs.modal', function (e) {
+	});
+	$('.identificar-area-criterio-logico-modal').modal('show');
+}
+function inicializarSeleccionadasActivasACL() {
+	if(listado_idCapaIdentACL!=null && listado_idCapaIdentACL.length > 0) {
+		$(".capasBaseACL").each(function(index) {
+			$(this).prop("checked", false);
+		});
+		for(var i = 0;i < listado_idCapaIdentACL.length;i++) {
+			$("#idCapaIdentACL"+listado_idCapaIdentACL[i]).prop("checked", true);
+		}
+	} else {
+		$(".capasBaseACL").each(function(index) {
+			$(this).prop("checked", false);
+		});
+		$(".capasBase").each(function(index) {
+			if($(this).is(':checked')) {
+				var srlIdCapa	= $(this).attr("value");
+				$("#idCapaIdentACL"+srlIdCapa).prop("checked", true);
+			}
+		});
+	}
+	guardarCapasSeleccionadasACL();
+}
+var listado_idCapaIdentACL		= null;
+function guardarCapasSeleccionadasACL() {
+	listado_idCapaIdentACL			= new Array();
+	$(".capasBaseACL").each(function(index) {
+		if($(this).is(':checked')) {
+			var srlIdCapa		= $(this).attr("id-capa");
+			listado_idCapaIdentACL[listado_idCapaIdentACL.length]	= srlIdCapa;
+		}
+	});
+	$('.badgeCustomACL').html(listado_idCapaIdentACL.length);
+	$('.badgeCustomACL').css("display","");
+	
+	$(".clsPanelGrupoCapasACL").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBaseACL").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaACL").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaACL").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaACL").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaACL").css("display", "none");
+		}
+	});
+	$(".clsPanelGrupoCapasMainACL").each(function(index) {
+		var contador	= 0;
+		$(this).find(".capasBaseACL").each(function(index) {
+			if($(this).is(':checked')) {
+				contador++;
+			}
+		});
+		if(contador > 0) {
+			$(this).find(".badgeCustomPanelGrupoCapaMainACL").html(contador);
+			$(this).find(".badgeCustomPanelGrupoCapaMainACL").css("display", "");
+		} else {
+			$(this).find(".badgeCustomPanelGrupoCapaMainACL").html("");
+			$(this).find(".badgeCustomPanelGrupoCapaMainACL").css("display", "none");
+		}
+	});
+
+}
+function limpiarCapasSeleccionadasACL() {
+	listado_idCapaIdentACL	= null;
+	$('.badgeCustomACL').css("display","none");
 }
 ///////////////////////////////////////////////////////////////////////////////////////// FILTRO SHP
 function filtrarACL(srlIdCapa) {
@@ -24,7 +109,6 @@ function filtrarACL(srlIdCapa) {
 			});
 			$(".clsDivACL").attr("srlIdCapa", srlIdCapa);
 		});
-		
 	});
 	$('.identificar-area-criterio-logico-filtrar-modal').on('hidden.bs.modal', function (e) {
 	});
@@ -123,6 +207,7 @@ function aplicarFiltroUmbralACL() {
 	$(".identificar-area-criterio-logico-modal").modal('show');
 }
 /////////////////////////////////////////////////////////////////////////////////////////
+
 function procesarCriterioLogico() {
 	var listSrlIdCapaCons			= "";
 	var listIdDataCapaCons			= "";
@@ -130,6 +215,7 @@ function procesarCriterioLogico() {
 	var listSrlIdCapaConsRASTER		= "";
 	var listIdDataCapaConsRASTER	= "";
 	var listIdDataCapaCriConsRASTER	= "";
+	guardarCapasSeleccionadasACL();
 	$(".clsDivDetFiltroACL").each(function(index) {
 		var valSelect		= $(this).attr("valSelect");
 		var valSelectDesde	= $(this).attr("valSelectDesde");
@@ -233,4 +319,5 @@ function seleccionarTodosACL() {
 	$("input[name=capaIdentACL]").each(function(index) {
 		$(this).prop('checked', !checkedTodos);
 	});
+	guardarCapasSeleccionadasACL();
 }

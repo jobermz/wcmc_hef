@@ -8,6 +8,8 @@
 
 <input type="hidden" name="TIPO_CAPA_VECTORIAL" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_VECTORIAL)%>"/>
 <input type="hidden" name="TIPO_CAPA_UMBRAL" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_UMBRAL)%>"/>
+
+<input type="hidden" name="CAPAS_VISUALIZACION_DEFAULT" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_VISUALIZACION_DEFAULT)%>"/>
 <%
 request.setAttribute("CAPAS_BASE_DEPARTAMENTO", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_DEPARTAMENTO));
 request.setAttribute("CAPAS_BASE_PROVINCIA", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_PROVINCIA));
@@ -131,6 +133,18 @@ request.setAttribute("TIPO_CAPA_UMBRAL", ConfiguracionProperties.getConstanteStr
 		<LI id="idMenuCabecera" class="clsMetadataMenuContextual"><table class="clsTableMetadataMenucontextual"><tr><td>Campo1</td><td>Valor1</td></tr><tr><td>Campo2</td><td>Valor2</td></tr></table></LI>
 		<LI id="idMenuCabecera" class="clsCabeceraMenuContextual">&nbsp;&nbsp;Acciones de la capa&nbsp;&nbsp;</LI>
 		<LI id="idMenuGenRepAnalitico" class="clsGenerarReporteAnalitico">&nbsp;<i class="fa fa-search"></i>&nbsp;Generar reporte analitico&nbsp;&nbsp;</LI>
+	</UL>
+</div>
+
+<div id="idDivRightClickClean" style="position:absolute;display:none;z-index:15000;">
+	<UL id="myMenuACL" class="contextMenu">
+		<LI id="idMenuLimiparACL" class="clsLimpiarACL">&nbsp;<i class="fa fa-trash"></i>&nbsp;Limpiar&nbsp;&nbsp;</LI>
+	</UL>
+</div>
+
+<div id="idDivRightClickAPAClean" style="position:absolute;display:none;z-index:15000;">
+	<UL id="myMenuACL" class="contextMenu">
+		<LI id="idMenuLimiparAPA" class="clsLimpiarAPA">&nbsp;<i class="fa fa-trash"></i>&nbsp;Limpiar&nbsp;&nbsp;</LI>
 	</UL>
 </div>
 
