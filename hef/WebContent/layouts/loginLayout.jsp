@@ -50,7 +50,7 @@ request.setAttribute("CURR_DAY", strTimeDay);
 
 	<title>.::Hef::.</title>
 </head>
-<body>
+<body >
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="content" />
 </body>

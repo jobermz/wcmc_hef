@@ -103,9 +103,10 @@
 	background-color: rgba(248,251,179,0.8);
 }
 .clsTituloCapaActiva {
-	font-size: 15pt;
+	font-size: 13pt;
 	vertical-align: middle;
-	color: white;
+	color: #EEE;
+	vertical-align: top;
 }
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
