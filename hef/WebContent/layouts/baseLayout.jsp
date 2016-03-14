@@ -46,6 +46,8 @@ request.setAttribute("CURR_DAY", strTimeDay);
 	<link href="css/visor/visorInicio.css?day=${CURR_DAY}" rel="stylesheet" type="text/css">
 	<script src="js/visor/visorInicioAnalizarPorArea.js?day=${CURR_DAY}" type="text/javascript"></script>
 	<script src="js/visor/visorInicioIdentificarAreaCriterioLogico.js?day=${CURR_DAY}" type="text/javascript"></script>
+	<script src="js/visor/visorCapasUploadInicio.js?day=${CURR_DAY}" type="text/javascript"></script>
+	
 	
 	<tiles:useAttribute id="css" name="styles" classname="java.util.List" />
 	<c:forEach var="item" items="${css}">

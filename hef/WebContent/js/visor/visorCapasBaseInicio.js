@@ -1,18 +1,84 @@
 var capasBaseArr	= new Array();
 function iniciarCapasBase() {
+	$('.seleccionar-capas').click(seleccionarCapas);
+	
 	$.post('cargarCapasBaseJson.action', null, function(datos) {
 		capasBaseArr	= datos.listCapasBase;
 	}, "json");
+	/*
 	$("select[name=centrar_departamento]").change(centrar_depa_upd_dpto);
 	$("select[name=centrar_prov_departamento]").change(centrar_prov_upd_dpto);
 	$("select[name=centrar_dist_departamento]").change(centrar_dist_upd_dpto);
+	*/
+	iniciarMarcarCapas();
 	
 	var idCapasDef	= $("input[name=CAPAS_VISUALIZACION_DEFAULT]").val();
 	var arrCapasDef	= idCapasDef.split(",");
 	for(var i = 0;i < arrCapasDef.length;i++) {
 		$("#idCapaBaseVisualizacion"+arrCapasDef[i]).prop("checked", true);
 	}
+	
+	marcarCapasVisualizacion();
+	
 	guardarCapasSeleccionadasCapasBase();
+}
+
+function iniciarMarcarCapas() {
+	$(".capasBase").each(function(index) {
+		$(this).prop("checked", false);
+	});
+}
+
+function seleccionarCapas() {
+	$('.seleccionar-capas-modal').off('shown.bs.modal');
+	$('.seleccionar-capas-modal').off('hidden.bs.modal');
+	$('.seleccionar-capas-modal').on('shown.bs.modal', function (e) {
+		iniciarComponentes();
+	});
+	$('.seleccionar-capas-modal').on('hidden.bs.modal', function (e) {
+	});
+	$('.seleccionar-capas-modal').modal('show');
+}
+
+function iniciarComponentes() {
+	$(".clsSlider").each(function(index) {
+		$(this).unbind("slider");
+		var currSlider	= $(this);
+		$(this).slider({
+			range: "min",
+			min: 0,
+			max: 100,
+			value: 100,
+			slide: function(event, ui) {
+				var currCapa = buscarCapasBaseById(currSlider.attr("idcapa"));
+				if(currCapa && currCapa.currLayer) {
+					currCapa.currLayer.setOpacity(ui.value/100);
+				}
+			}
+		});
+	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		$(this).unbind("click");
+	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		$(this).click(function() {
+			intIdCapaActiva	= $(this).attr("id-capa");
+			$(".clsTituloCapaActiva").html("Capa activa: "+$(this).attr("nombre-capa"));
+			refrescarCapaActiva();
+		});
+	});
+}
+function refrescarCapaActiva() {
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		if($(this).hasClass("clsCapaActiva")) {
+			$(this).removeClass("clsCapaActiva");
+		}
+	});
+	$(".seleccionarParaCapaActiva").each(function(index) {
+		if($(this).attr("id-capa") == intIdCapaActiva) {
+			$(this).addClass("clsCapaActiva");
+		}
+	});
 }
 function buscarCapasBaseById(srlIdCapa) {
 	for(var i = 0;i < capasBaseArr.length;i++) {
@@ -56,11 +122,12 @@ function ocultarCapaById(srlIdCapa) {
 		capaBase.currLayer	= null;
 	}
 }
+///////////////////////////////////////////////////////////////
 function centrarMapa(srlIdCapa) {
 	$('.centrar-mapa-modal').off('shown.bs.modal');
 	$('.centrar-mapa-modal').off('hidden.bs.modal');
 	$('.centrar-mapa-modal').on('shown.bs.modal', function (e) {
-		$('.seleccionar-capas-modal').modal('hide');
+		/*
 		if($("input[name=CAPAS_BASE_DEPARTAMENTO]").val() == srlIdCapa) {
 			$("#idDivCentrarDepartamento").css("display","");
 			$("#idDivCentrarProvincia").css("display","none");
@@ -74,11 +141,51 @@ function centrarMapa(srlIdCapa) {
 			$("#idDivCentrarProvincia").css("display","none");
 			$("#idDivCentrarDistrito").css("display","");
 		}
+		*/
+		$("#idDivCombosCentrar").html("");
+		$("#idDivCombosCentrar").attr("srlIdCapa", srlIdCapa);
+		
+		var param	= {
+				listSrlIdCapaConsulta:srlIdCapa
+		};
+		$.post("consultaCombosCentrar.action", param, function(datos) {
+			$("#idDivCombosCentrar").find("select[name=combo_centrar_visor]").each(function(index) {
+				$(this).unbind("selectpicker");
+			});
+			$("#idDivCombosCentrar").html(datos);
+			$("#idDivCombosCentrar").find("select[name=combo_centrar_visor]").selectpicker({
+				liveSearch: true,
+				maxOptions: 1
+			});
+			$("#idDivCombosCentrar").attr("srlIdCapa", srlIdCapa);
+
+			
+		});
 	});
 	$('.centrar-mapa-modal').on('hidden.bs.modal', function (e) {
 //		finalizarAllEventListenerIframe();
+		$('.seleccionar-capas-modal').modal('show');
 	});
+	$('.seleccionar-capas-modal').modal('hide');
 	$('.centrar-mapa-modal').modal('show');
+}
+function centrar_mapa_desde_combo(this_combo) {
+	var srlIdCapa		= $("#idDivCombosCentrar").attr("srlIdCapa");
+	var idValueSelect	= $(this_combo).val();
+	var param	= {
+			listSrlIdCapaConsulta:srlIdCapa,
+			listIdDataCapaConsulta:idValueSelect
+	};
+	$.post('consultaCombosCentrarMapa.action', param, function(datos) {
+		centrarZoomMapaFromBox(datos.strGeometriaRespuesta);
+	}, "json");
+}
+function centrarZoomMapaFromBox(txtBox) {
+	var formatWkt		= new ol.format.WKT();
+	var newVectorGeom	= formatWkt.readGeometry(txtBox);
+	var geomTransform	= newVectorGeom.transform('EPSG:4326', 'EPSG:3857');
+
+	map.getView().fit(geomTransform, map.getSize(),{});
 }
 function descargarMapa(srlIdCapa) {
 	var capaBase	= buscarCapasBaseById(srlIdCapa);
@@ -109,6 +216,7 @@ function mostrarInfo(srlIdCapa) {
 	});
 	$('.info-capas-modal').modal('show');
 }
+/*
 //////////////////////////////////////////////////////////////////
 function centrar_depa_upd_dpto() {
 	var centrar_departamento	= $("select[name=centrar_departamento]").val();
@@ -156,9 +264,9 @@ function centrar_dist_upd_dist() {
 		centrarZoomMapaFromBox(datos.strCentroDistrito);
 	}, "json");
 }
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 function centrarZoomMapaFromBox(txtBox) {
 	var formatWkt		= new ol.format.WKT();
 	var newVectorGeom	= formatWkt.readGeometry(txtBox);
@@ -168,6 +276,7 @@ function centrarZoomMapaFromBox(txtBox) {
 }
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
+
 function cargarCombo_prov_en_provincia() {
 	var centrar_prov_departamento	= $("select[name=centrar_prov_departamento]").val();
 	$.post('comboCentrarProvinciaEnProvincia.action', {"centrar_prov_departamento":centrar_prov_departamento}, function(datos) {
@@ -187,6 +296,7 @@ function cargarCombo_dist_en_distrito() {
 		$("#idDivComboDistritoEnDistrito").html(datos);
 	});
 }
+*/
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 function guardarCapasSeleccionadasCapasBase() {
@@ -220,4 +330,29 @@ function guardarCapasSeleccionadasCapasBase() {
 			$(this).find(".badgeCustomPanelGrupoCapaMainCB").css("display", "none");
 		}
 	});
+}
+function dibujarRectangulo() {
+	$('.analizar-por-area-modal').modal('hide');
+	addInteraction("Box");
+}
+function dibujarPoligono() {
+	$('.analizar-por-area-modal').modal('hide');
+	addInteraction("Polygon");
+}
+
+
+function marcarCapasVisualizacion() {
+	$(".capasBase").each(function(index) {
+		if($(this).prop("checked")) {
+			mostrarCapaById($(this).val());
+		} else {
+			ocultarCapaById($(this).val());
+		}
+	});
+}
+
+function filtrar_umbral(currSelect) {
+	var rangoValores = eval(""+$(currSelect).val());
+	ocultarCapaById(rangoValores[0]);
+	mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
 }

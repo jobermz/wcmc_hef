@@ -78,7 +78,8 @@
 								      		</s:if>
 								      	</div>
 								      	<div class="col-xs-1 text-center">
-								      		<s:if test="%{#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DISTRITO}">
+<%-- 								      		<s:if test="%{#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DISTRITO}"> --%>
+								      		<s:if test="%{#capasBase.strEsCentrarMapaBoolean}">
 								      			<i class="fa fa-lg fa-bullseye cursorPointer" onclick="centrarMapa(${capasBase.srlIdCapa});"></i>
 								      		</s:if>
 								      	</div>

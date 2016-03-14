@@ -8,7 +8,8 @@
 				<h4 class="modal-title">Centrar mapa</h4>
 			</div>
 			
-			<div class="modal-body">
+			<div class="modal-body" id="idDivCombosCentrar">
+				<!--
 				<div id="idDivCentrarDepartamento" style="display: none;">
 					<s:select list="#session.listBasLimDepartamento" name="centrar_departamento" headerKey="" headerValue="-Seleccionar-" listKey="strIddpto" listValue="strNombdep" onchange="centrar_depa_upd_dpto();"></s:select>
 				</div>
@@ -36,6 +37,7 @@
 						<div class="col-lg-7" id="idDivComboDistritoEnDistrito"><s:select list="{}" name="centrar_dist_distrito" listKey="strIddist" headerKey="" headerValue="-Seleccionar-" listValue="strNombdist" onchange="centrar_dist_upd_dist();"></s:select></div>
 					</div>
 				</div>
+				 -->
 			</div>
 			
 			<div class="modal-footer">

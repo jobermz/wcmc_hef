@@ -6,10 +6,6 @@ $(document).ready(function() {
 	goog.require('ol.source.TileArcGISRest');
 	goog.require('ol.proj');
 	
-	$('.seleccionar-capas').click(seleccionarCapas);
-	
-	$('.upload-capas').click(uploadCapas);
-	
 	$(".identificar-area-criterio-logico").bind('contextmenu', function(e) {
 		$('#idDivRightClickClean').css("display", "table-row");
 		$('#idDivRightClickClean').css("left", $("#idDivBotonFlotanteACL").css("left").pxToInt()+15);
@@ -29,18 +25,16 @@ $(document).ready(function() {
 		$('#idDivRightClickClean').css("display", "none");
 		$('#idDivRightClickAPAClean').css("display","none");
 		if(!activarSeleccionarAreaDesdeMapa) {
-//			$(".clsTituloCapaActiva").css("display","none");
 		}
 		return true;
 	});
 	
 	iniciarMapa();
-	iniciarMarcarCapas();
+		
 	iniciarCapasBase();
-	
-	marcarCapas();
 	iniciarIdentificarAreaPorCriteriosLogicos();
 	iniciarAnalizarPorArea();
+	iniciarCapasUpload();
 });
 var map			= null;
 var sourceDraw	= null;
@@ -175,103 +169,10 @@ function drawEnd(event) {
     terminarInteraction();
     procesarAnalizarPorArea(wkt);
 }
-function dibujarRectangulo() {
-	$('.analizar-por-area-modal').modal('hide');
-	addInteraction("Box");
-}
-function dibujarPoligono() {
-	$('.analizar-por-area-modal').modal('hide');
-	addInteraction("Polygon");
-}
+
 function terminarInteraction() {
 	if(map && draw) {
 		map.removeInteraction(draw);
 	}
 }
 
-var fn_iniciarComponentes	= null;
-var intIdCapaActiva			= null;
-function iniciarComponentes() {
-	$(".clsSlider").each(function(index) {
-		var currSlider	= $(this);
-		$(this).slider({
-			range: "min",
-			min: 0,
-			max: 100,
-			value: 100,
-			slide: function(event, ui) {
-				var currCapa = buscarCapasBaseById(currSlider.attr("idcapa"));
-				if(currCapa && currCapa.currLayer) {
-					currCapa.currLayer.setOpacity(ui.value/100);
-				}
-			}
-		});
-	});
-	$(".seleccionarParaCapaActiva").each(function(index) {
-		$(this).unbind("click");
-	});
-	$(".seleccionarParaCapaActiva").each(function(index) {
-		$(this).click(function() {
-			intIdCapaActiva	= $(this).attr("id-capa");
-			$(".clsTituloCapaActiva").html("Capa activa: "+$(this).attr("nombre-capa"));
-			refrescarCapaActiva();
-		});
-	});
-}
-function refrescarCapaActiva() {
-	$(".seleccionarParaCapaActiva").each(function(index) {
-		if($(this).hasClass("clsCapaActiva")) {
-			$(this).removeClass("clsCapaActiva");
-		}
-	});
-	$(".seleccionarParaCapaActiva").each(function(index) {
-		if($(this).attr("id-capa") == intIdCapaActiva) {
-			$(this).addClass("clsCapaActiva");
-		}
-	});
-}
-function iniciarMarcarCapas() {
-	$(".capasBase").each(function(index) {
-		$(this).prop("checked", false);
-	});
-}
-
-function marcarCapas() {
-	$(".capasBase").each(function(index) {
-		if($(this).prop("checked")) {
-			mostrarCapaById($(this).val());
-		} else {
-			ocultarCapaById($(this).val());
-		}
-	});
-}
-
-function filtrar_umbral(currSelect) {
-	var rangoValores = eval(""+$(currSelect).val());
-	ocultarCapaById(rangoValores[0]);
-	mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
-}
-
-function seleccionarCapas() {
-	$('.seleccionar-capas-modal').off('shown.bs.modal');
-	$('.seleccionar-capas-modal').off('hidden.bs.modal');
-	$('.seleccionar-capas-modal').on('shown.bs.modal', function (e) {
-		if(!fn_iniciarComponentes) {
-			iniciarComponentes();
-			fn_iniciarComponentes = iniciarComponentes;
-		}
-	});
-	$('.seleccionar-capas-modal').on('hidden.bs.modal', function (e) {
-	});
-	$('.seleccionar-capas-modal').modal('show');
-}
-
-function uploadCapas() {
-	$('.upload-capas-modal').off('shown.bs.modal');
-	$('.upload-capas-modal').off('hidden.bs.modal');
-	$('.upload-capas-modal').on('shown.bs.modal', function (e) {
-	});
-	$('.upload-capas-modal').on('hidden.bs.modal', function (e) {
-	});
-	$('.upload-capas-modal').modal('show');
-}
