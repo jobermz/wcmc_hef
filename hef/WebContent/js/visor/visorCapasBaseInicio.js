@@ -97,7 +97,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 			(capaBase.currLayer == undefined || capaBase.currLayer == null) && 
 			capaBase.strWmsUrl && 
 			capaBase.strWmsUrl != "") {
-		var url		= capaBase.strWmsUrl+"/export";
+		var url		= capaBase.strWmsUrl+"";
 		var layers	= "show:" + capaBase.strWmsCapas;
 		paramRaster = "";
 		
@@ -108,6 +108,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 			    "\"rasterFunctionArguments\" : {"+
 			    "\"InputRanges\" : ["+min+", "+max+"],"+
 			    "\"OutputValues\": ["+min+"],"+
+//			    "\"OutputValues\": ["+min+", "+max+"],"+
 			    "\"AllowUnmatched\": \"false\""+
 			    "}}";
 			}
@@ -124,6 +125,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 					    "\"rasterFunctionArguments\" : {"+
 					    "\"InputRanges\" : ["+rangoValores[1]+", "+rangoValores[2]+"],"+
 					    "\"OutputValues\": ["+rangoValores[1]+"],"+
+//					    "\"OutputValues\": ["+rangoValores[1]+", "+rangoValores[2]+"],"+
 					    "\"AllowUnmatched\": \"false\""+
 					    "}}";
 					}
@@ -137,6 +139,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 				url: url,
 				params: {
 					LAYERS:layers,
+//					FORMAT: "PNG24",
 					renderingRule:paramRaster
 				}
 			})
@@ -406,7 +409,7 @@ function dibujarPoligono() {
 
 function marcarCapasVisualizacion() {
 	$(".capasBase").each(function(index) {
-		if($(this).prop("checked")) {
+		if($(this).is(':checked')) {
 			mostrarCapaById($(this).val());
 		} else {
 			ocultarCapaById($(this).val());
@@ -416,8 +419,10 @@ function marcarCapasVisualizacion() {
 
 function filtrar_umbral(currSelect) {
 	var rangoValores = eval(""+$(currSelect).val());
-	ocultarCapaById(rangoValores[0]);
-	mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
+	if($("#idCapaBaseVisualizacion"+rangoValores[0]).is(':checked')) {
+		ocultarCapaById(rangoValores[0]);
+		mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
+	}
 }
 
 function eliminar_capa_usuario(srlIdCapa) {
