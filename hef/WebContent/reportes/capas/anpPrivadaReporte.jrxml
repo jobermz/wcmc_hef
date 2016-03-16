@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="lngObjectid" class="java.lang.String"/>
+	<field name="strAnpcCat" class="java.lang.String"/>
+	<field name="strAnpcCodi" class="java.lang.String"/>
+	<field name="strAnpcNomb" class="java.lang.String"/>
+	<field name="dblAnpcArea" class="java.lang.String"/>
+	<field name="strAnpcBalec" class="java.lang.String"/>
+	<field name="strAnpcFelec" class="java.lang.String"/>
+	<field name="strAnpcBalem" class="java.lang.String"/>
+	<field name="strAnpcFelem" class="java.lang.String"/>
+	<field name="strAnpcDepa" class="java.lang.String"/>
+	<field name="strAnpcTipop" class="java.lang.String"/>
+	<field name="strAnpcTitu" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" />
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Anp Privada]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objectid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Cat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Codi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Nomb]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Balec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Felec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Balem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Felem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Depa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Tipop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="726" y="0" width="66" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anpc Titu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngObjectid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcCat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcCodi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcNomb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblAnpcArea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcBalec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcFelec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="462" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcBalem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="528" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcFelem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="594" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcDepa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcTipop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="726" y="0" width="66" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strAnpcTitu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Anp Privada]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

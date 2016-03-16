@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="lngCount" class="java.lang.String"/>
+	<field name="strFirstIdpr" class="java.lang.String"/>
+	<field name="strNombprov" class="java.lang.String"/>
+	<field name="strFirstNomb" class="java.lang.String"/>
+	<field name="strLastDcto" class="java.lang.String"/>
+	<field name="strLastLey" class="java.lang.String"/>
+	<field name="strFirstFech" class="java.lang.String"/>
+	<field name="strLastFecha" class="java.lang.String"/>
+	<field name="dblMinShape" class="java.lang.String"/>
+	<field name="dblArea" class="java.lang.String"/>
+	<field name="dblPerimeter" class="java.lang.String"/>
+	<field name="lngTiticacg" class="java.lang.String"/>
+	<field name="lngTiticacgI" class="java.lang.String"/>
+	<field name="strDxfLayer" class="java.lang.String"/>
+	<field name="strDxfText" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" />
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Hidro Rios Lagunas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Count]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[First Idpr]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombprov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[First Nomb]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Dcto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Ley]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[First Fech]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Min Shape]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="477" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Perimeter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titicacg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="636" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titicacg I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="689" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dxf Layer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="742" y="0" width="53" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dxf Text]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strFirstIdpr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNombprov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strFirstNomb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strLastDcto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strLastLey}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strFirstFech}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strLastFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblMinShape}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="477" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblArea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblPerimeter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="583" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngTiticacg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="636" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngTiticacgI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="689" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDxfLayer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="742" y="0" width="53" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDxfText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hidro Rios Lagunas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

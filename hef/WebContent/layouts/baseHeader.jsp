@@ -1,12 +1,13 @@
 <%@page import="java.util.List"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
 <nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:50px;">
 	<div style="position: absolute;float: right;top: 150px;right:30px;z-index: 20;color:white;">
-		<i title="Visualziar capas" class="fa fa-globe fa-3x cursorPointer seleccionar-capas"></i>
+		<i title="Visualizar capas" class="fa fa-globe fa-3x cursorPointer seleccionar-capas"></i>
 	</div>
 	<div id="idDivBotonFlotanteACL" style="position: absolute;float: right;top: 200px;right:30px;z-index: 20;color:white;">
-		<i title="Identificar areas por criterios logicos" class="fa fa-map fa-3x cursorPointer identificar-area-criterio-logico">
+		<i title="Identificar areas por criterios l&oacute;gicos" class="fa fa-map fa-3x cursorPointer identificar-area-criterio-logico">
 			<span class="badge badgeCustomACL" style="display:none;"></span>
 		</i>
 	</div>
@@ -15,9 +16,13 @@
 			<span class="badge badgeCustomAPA" style="display:none;"></span>
 		</i>
 	</div>
+	<s:if test="%{#session.USUARIO_ACTUAL != null && #session.USUARIO_ACTUAL.intPerfil.toString()!='1'}">
+	
 	<div style="position: absolute;float: right;top: 300px;right:30px;z-index: 20;color:white;">
 		<i title="Cargar capas" class="fa fa-upload fa-3x cursorPointer upload-capas"></i>
 	</div>
+	<!---->
+	</s:if>
 </nav>
 
 <nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:50px;">
@@ -27,8 +32,8 @@
 				<div class="col-lg-3 ">
 					<center>
 <!-- 						<div style="height: 70px;min-width:50px;display: inline-block;">&nbsp;</div> -->
-						<img alt="" src="image/logos/minam_bosques.png" style="height: 70px;display: inline-table;margin-right: 5px;"/>
-						<img alt="" src="image/logos/red_mas.png" style="height: 70px;display: inline-table;margin-left: 5px;"/>
+<!-- 						<img alt="" src="image/logos/minam_bosques.png" style="height: 70px;display: inline-table;margin-right: 5px;"/> -->
+<!-- 						<img alt="" src="image/logos/red_mas.png" style="height: 70px;display: inline-table;margin-left: 5px;"/> -->
 					</center>
 				</div>
 				<div class="col-sm-6 ">
@@ -69,3 +74,36 @@
 		</div>
 	</div>
 </nav>
+
+<div class=" " style="position: absolute;float: right;top: 40px;left:50px;z-index: 20;color:#fff;">
+	<div class="pull-left ">
+		<img
+			src="image/Logo_MINAM.png"
+			class="logo" alt=""
+			data-src="image/Logo_MINAM.png"
+			data-src-retina="image/Logo_MINAM.png"
+			width="200" height="40">
+	</div>
+</div>
+
+<div class="" style="position: absolute;float: right;bottom:35px;left:50px;z-index: 20;color:#fff;">
+	<div class="pull-left ">
+		<img
+			src="image/Logo_programa_red.png"
+			class="logo" alt=""
+			data-src="image/Logo_programa_red.png"
+			data-src-retina="image/Logo_programa_red.png"
+			width="144" height="80">
+	</div>
+</div>
+
+<div class="" style="position: absolute;float: right;top: 40px;right:30px;z-index: 20;color:#fff;">
+	<div class="pull-left ">
+		<img
+			src="image/Logo_Programa_Bosques.png"
+			class="logo" alt=""
+			data-src="image/Logo_Programa_Bosques.png"
+			data-src-retina="image/Logo_Programa_Bosques.png"
+			width="110" height="75">
+	</div>
+</div>

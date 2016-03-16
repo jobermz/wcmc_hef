@@ -8,11 +8,21 @@
 				<h4 class="modal-title">Cargar archivos shape</h4>
 			</div>
 			
-<!-- 			<div class="modal-body"> -->
-<!-- 				<p>Are you sure about this ?</p> -->
-<!-- 			</div> -->
+			<div class="modal-body">
+				<s:form method="post" name="frmSelShapefileUsuario" id="idFrmSelShapefileUsuario" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-lg-2">Seleccionar archivo .shp:</div>
+						<div class="col-lg-8"><s:file name="shapefile" ></s:file></div>
+						<div class="col-lg-2">
+							<button type="button" class="btn btn-default btnEnviarShapefileUsuario">Enviar</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12" id="idDivSeleccionarShapeUsuarioHtml"></div>
+					</div>
+				</s:form>
+			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default btnVideosInteractivos" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-danger btnVideosInteractivos" id="idBtnEliminar">Aceptar</button>
+				<button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
 			</div>

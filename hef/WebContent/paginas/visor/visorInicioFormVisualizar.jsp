@@ -63,7 +63,7 @@
 							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
-								      		<input type="checkbox" id="idCapaBaseVisualizacion${capasBase.srlIdCapa}" name="capasBase" value="${capasBase.srlIdCapa}" id-capa="${capasBase.srlIdCapa}" class="capasBase" onblur="guardarCapasSeleccionadasCapasBase();" onclick="marcarCapas();guardarCapasSeleccionadasCapasBase();">
+								      		<input type="checkbox" id="idCapaBaseVisualizacion${capasBase.srlIdCapa}" name="capasBase" value="${capasBase.srlIdCapa}" id-capa="${capasBase.srlIdCapa}" class="capasBase" onblur="guardarCapasSeleccionadasCapasBase();" onclick="marcarCapasVisualizacion();guardarCapasSeleccionadasCapasBase();">
 											${capasBase.strNombre}
 											<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&(#capasBase.strWmsUrl==null||#capasBase.strWmsUrl=='')}">
 												<i class="fa fa-warning"  title="La visualizacion no se encuentra disponible por el momento"></i>
@@ -74,7 +74,7 @@
 								      	</div>
 								      	<div class="col-xs-2 text-center">
 								      		<s:if test="%{#capasBase.listCapaUmbral!=null}">
-								      		<s:select list="#capasBase.listCapaUmbral" name="filtrar_umbral" headerKey="" headerValue="-Sel.-" listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
+								      		<s:select list="#capasBase.listCapaUmbral" id-capa="${capasBase.srlIdCapa}" name="filtrar_umbral"  listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
 								      		</s:if>
 								      	</div>
 								      	<div class="col-xs-1 text-center">

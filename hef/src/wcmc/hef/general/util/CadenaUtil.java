@@ -454,6 +454,21 @@ public class CadenaUtil {
 		}
 		return strSalida.toString();
 	}
+
+	public static String convertirStrPrimeraMinuscula(String str) {
+		String strCaracter		= "";
+		StringBuffer strSalida	= new StringBuffer();
+		for(int i = 0;i < str.length();i++) {
+			strCaracter		= "" + str.charAt(i);
+			if(i == 0 && strCaracter.matches("[A-Z]")) {
+				strSalida.append("" + strCaracter.toLowerCase());
+			} else {
+				strSalida.append(strCaracter);
+			}
+		}
+		return strSalida.toString();
+	}
+	
 	public static String getStrDiaSem(int intDiaSemana) {
 		switch(intDiaSemana) {
 		case 1:
@@ -782,4 +797,12 @@ public class CadenaUtil {
 		return getStr(str).length() > leng ? str.substring(0, leng) : str;
 	}
 	
+	public static String generaColorAleatorio(int numBase) {
+		return "#"+(
+				Integer.toHexString((int)((Math.random()*(255d-numBase))+numBase))+""+
+				Integer.toHexString((int)((Math.random()*(255d-numBase))+numBase))+""+
+				Integer.toHexString((int)((Math.random()*(255d-numBase))+numBase))
+				).toUpperCase();
+	}
+
 }

@@ -286,6 +286,12 @@ function eventoMenuContextualSeleccionarAreaDesdeMapa(pixel, event) {
 		});
 		console.log("WKT="+wkt);
 		
+		var wkt2 = format.writeFeature(feature, {
+			dataProjection: 'EPSG:3857',
+			featureProjection: 'EPSG:3857'
+		});
+	    console.log("WKT2="+wkt2);
+
 		var param	= null;
 		param		= {
 				strPoligonoConsulta: wkt,

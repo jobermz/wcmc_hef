@@ -167,5 +167,9 @@
 </div>
 
 <div class="modal-footer">
+
+	<button type="button" class="btn btn-default " onclick="return reportePDF();">Reporte PDF</button>
+<!-- 	<button type="button" class="btn btn-default " onclick="return exportarPNG();">Exportar PNG</button> -->
 	<button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+<!-- 	<a id="export-png" class="btn" download="map.png"><i class="icon-download"></i> Export PNG</a> -->
 </div>

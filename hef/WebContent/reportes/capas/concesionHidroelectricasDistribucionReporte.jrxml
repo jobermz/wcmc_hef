@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="strIdGrafico" class="java.lang.String"/>
+	<field name="strExpediente" class="java.lang.String"/>
+	<field name="strConcesion" class="java.lang.String"/>
+	<field name="strNombreZon" class="java.lang.String"/>
+	<field name="strTipoConce" class="java.lang.String"/>
+	<field name="strEmpresa" class="java.lang.String"/>
+	<field name="strSistemaEl" class="java.lang.String"/>
+	<field name="lngAreaInflu" class="java.lang.String"/>
+	<field name="dblMaximaDem" class="java.lang.String"/>
+	<field name="dblHorasServ" class="java.lang.String"/>
+	<field name="lngNumeroUsu" class="java.lang.String"/>
+	<field name="dteFechaPres" class="java.lang.String"/>
+	<field name="dteFechaReso" class="java.lang.String"/>
+	<field name="strActivo" class="java.lang.String"/>
+	<field name="strCodigoCon" class="java.lang.String"/>
+	<field name="dblShapeArea" class="java.lang.String"/>
+	<field name="dblShapeLen" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" />
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Concesion Hidroelectricas Distribucion]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Grafico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expediente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concesion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Zon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Conce]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sistema El]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area Influ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maxima Dem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horas Serv]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero Usu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Pres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="564" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Reso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="611" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Activo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="658" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo Con]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="705" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shape Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="752" y="0" width="47" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shape Len]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strIdGrafico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strExpediente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strConcesion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNombreZon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strTipoConce}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strSistemaEl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngAreaInflu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblMaximaDem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblHorasServ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lngNumeroUsu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="517" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dteFechaPres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dteFechaReso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="611" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strActivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="658" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strCodigoCon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="705" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblShapeArea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="752" y="0" width="47" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblShapeLen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Concesion Hidroelectricas Distribucion]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

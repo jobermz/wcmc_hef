@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="intObjectid1" class="java.lang.String"/>
+	<field name="strSimbCobve" class="java.lang.String"/>
+	<field name="strDescCobve" class="java.lang.String"/>
+	<field name="strSimbDefor" class="java.lang.String"/>
+	<field name="strDescDefor" class="java.lang.String"/>
+	<field name="dblSuperfM2" class="java.lang.String"/>
+	<field name="dblSuperfHa" class="java.lang.String"/>
+	<field name="strSimCvDef" class="java.lang.String"/>
+	<field name="dblSuperfKm2" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" />
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Lim Amazonia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objectid 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Simb Cobve]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desc Cobve]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Simb Defor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desc Defor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Superf M2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="516" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Superf Ha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="602" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sim Cv Def]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="688" y="0" width="86" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Superf Km2]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{intObjectid1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strSimbCobve}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDescCobve}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strSimbDefor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDescDefor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSuperfM2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="516" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSuperfHa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="602" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strSimCvDef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="688" y="0" width="86" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSuperfKm2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lim Amazonia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

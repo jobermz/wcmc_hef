@@ -1,7 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+<%
+Integer idGrupoCapas	= (Integer)session.getAttribute("edicion_capaDto_intGrupoCapas");
+if(idGrupoCapas != null) {
+	request.setAttribute("edicion_capaDto_intGrupoCapas", idGrupoCapas);
+}
+%>
 <div class="page-content" id="idDivPrincipalCapa">
 	<div class="row">
 		<div class="page-title">
@@ -45,8 +50,15 @@
 											<optgroup label="${grupoCapaBase.strNombre}"></optgroup>
 											<s:iterator value="#session.listGrupoCapasTodos" var="grupoCapaBaseTodos">
 												<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}">
-													<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}">${grupoCapaBaseTodos.strNombre}</option>
+													<s:if test="%{#grupoCapaBaseTodos.srlIdGrupoCapas==#attr.edicion_capaDto_intGrupoCapas}">
+														<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}" selected="selected">${grupoCapaBaseTodos.strNombre}</option>
+													</s:if>
+													<s:else>
+														<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}">${grupoCapaBaseTodos.strNombre}</option>
+													</s:else>
 												</s:if>
+												
+												
 											</s:iterator>
 										</s:iterator>
 									</select>

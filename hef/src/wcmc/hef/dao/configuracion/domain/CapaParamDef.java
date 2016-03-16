@@ -788,7 +788,15 @@ public class CapaParamDef {
             return (Criteria) this;
         }
         
-		
+        public Criteria andIntIdUsuarioEqualTo(Integer value) {
+//            addCriterion("cd_usuario =", value, "cd_usuario");
+            addCriterion("(cd_usuario is null or cd_usuario = "+value+")");
+            return (Criteria) this;
+        }
+        public Criteria andIntIdUsuarioIsNull() {
+            addCriterion("cd_usuario is null");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a52acde-fbbb-4f82-b812-5a095c81144c">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="strValuePromedio" class="java.lang.String"/>
+	<field name="strValueMin" class="java.lang.String"/>
+	<field name="strValueMax" class="java.lang.String"/>
+	<field name="strStddev" class="java.lang.String"/>
+	<field name="strCategoria" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" uuid="be2922a5-8eff-4fe1-8946-c48f7a498d52"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Riqueza en especies de fauna endémica]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="5df04519-b62e-4655-bd96-fe3837b6a49f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="15" uuid="249e69b3-60e2-4159-8b89-4e9b32cf5151"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor mínimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="15" uuid="2e61af2e-7223-4e66-ac9b-d382c95d9d75"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor máximo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="15" uuid="d05b1602-7602-4a21-9737-2b620b5c01f4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desviación estandar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="15" uuid="8b94802c-75af-4c63-878f-421a3e08565d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="32" uuid="e1208984-a33d-490d-a86c-9dc3030580b9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strValuePromedio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="32" uuid="c559090c-769c-4910-b6d8-6c788f68b6a4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strValueMin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="32" uuid="6c31d3f4-a726-40a1-a202-b38e7d6c82ea"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strValueMax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="32" uuid="ab27f993-247c-4166-9b07-75c71003f1a8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strStddev}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="32" uuid="8abf5dd7-354b-4382-847f-6e086cc64943"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strCategoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15" uuid="eb6516f4-2fe6-4686-8161-3579dd2f3504"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15" uuid="532b7de0-bd2a-4e08-8257-5367c9409f66"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Riqueza en especies de fauna endémica]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15" uuid="874449a7-db73-4f9d-b7bf-9fcd0d19bef6"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15" uuid="3d6421f1-f1ba-4712-a897-7ae949811999"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15" uuid="5020485e-3a07-4ffa-b14c-642a574c9b0b"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15" uuid="50f022d9-1722-404f-8322-215f91076a5d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

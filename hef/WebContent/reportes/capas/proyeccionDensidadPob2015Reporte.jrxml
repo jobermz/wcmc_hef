@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parametros.strFecha" class="java.lang.String"/>
+	<parameter name="parametros.strHora" class="java.lang.String"/>
+	<field name="strIddpto" class="java.lang.String"/>
+	<field name="strNombdep" class="java.lang.String"/>
+	<field name="strIdprov" class="java.lang.String"/>
+	<field name="strNombprov" class="java.lang.String"/>
+	<field name="strIddist" class="java.lang.String"/>
+	<field name="strNombdist" class="java.lang.String"/>
+	<field name="strDcto" class="java.lang.String"/>
+	<field name="strLey" class="java.lang.String"/>
+	<field name="strFecha" class="java.lang.String"/>
+	<field name="strNomCap" class="java.lang.String"/>
+	<field name="dblSupContin" class="java.lang.String"/>
+	<field name="dblSupInsula" class="java.lang.String"/>
+	<field name="dblSupLacust" class="java.lang.String"/>
+	<field name="dblSupInsD" class="java.lang.String"/>
+	<field name="strUbigeo" class="java.lang.String"/>
+	<field name="strUbigeo1" class="java.lang.String"/>
+	<field name="strDistrito" class="java.lang.String"/>
+	<field name="strTotal2015" class="java.lang.String"/>
+	<field name="dblArea" class="java.lang.String"/>
+	<field name="dblPopDens" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" />
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Analítico - Proyeccion Densidad Pob 2015]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Iddpto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombdep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Idprov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombprov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Iddist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombdist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dcto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ley]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom Cap]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sup Contin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sup Insula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sup Lacust]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="507" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sup Ins D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="546" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubigeo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="585" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubigeo 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="624" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distrito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="663" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total 2015]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="741" y="0" width="39" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pop Dens]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strIddpto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="39" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNombdep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strIdprov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNombprov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strIddist}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNombdist}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDcto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strLey}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strNomCap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSupContin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSupInsula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSupLacust}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="507" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblSupInsD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="546" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strUbigeo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="585" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strUbigeo1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="624" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strDistrito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="663" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{strTotal2015}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblArea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="741" y="0" width="39" height="32"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dblPopDens}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="686" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="686" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Proyeccion Densidad Pob 2015]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="0" width="82" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="15" width="82" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="0" width="34" height="15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="15" width="34" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -6,12 +6,16 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.imageio.ImageIO;
+
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
 import org.geotools.data.collection.CollectionFeatureSource;
@@ -48,6 +52,7 @@ import org.opengis.filter.Filter;
 import org.opengis.filter.FilterFactory2;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
+
 import com.sun.mail.util.BASE64EncoderStream;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -391,6 +396,7 @@ public class Geotools {
 		ReferencedEnvelope mapBounds	= null;
 		try {
 			mapBounds						= mapContent.getMaxBounds();
+			System.out.println("Geotools.saveImage() mapBounds="+mapBounds);
 			double heightToWidth			= mapBounds.getSpan(1) / mapBounds.getSpan(0);
 			imageBounds						= new Rectangle(0, 0, imageWidth, (int) Math.round(imageWidth * heightToWidth));
 		} catch (Exception e) {
@@ -409,7 +415,13 @@ public class Geotools {
 //			File fileToSave					= new File(file);
 //			ImageIO.write(image, "jpeg", fileToSave);
 			ImageIO.write(image, "jpeg", byteOut);
-			
+			/*
+			String strFileTempName	= ""+new Date().getTime();
+			FileOutputStream fos	= new FileOutputStream("D:\\repositorios\\documentosHef\\image_demo_"+strFileTempName+".jpg");
+			fos.write(byteOut.toByteArray());
+			fos.flush();
+			fos.close();
+			*/
 			byte[] imgBytes		= BASE64EncoderStream.encode(byteOut.toByteArray());
 			
 //			System.out.println("Test2.saveImage() imagePNG64=data:image/jpeg;base64," + new String(imgBytes));
@@ -419,6 +431,73 @@ public class Geotools {
 			ImageIO.write(bufImg, "png", adjunto);
 			*/
 			return new String("data:image/jpeg;base64,"+new String(imgBytes));
+//			return "";
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				mapContent.dispose();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private String saveImageORIG(SimpleFeatureSource featureSource, final int imageWidth) throws Exception {
+		
+		MapContent mapContent			= new MapContent();
+		
+		mapContent.setTitle("StyleLab");
+		
+		Style style						= demoStyle(featureSource.getSchema().getTypeName());
+		
+		Layer layer						= new FeatureLayer(featureSource, style);
+		mapContent.addLayer(layer);
+		
+		GTRenderer renderer				= new StreamingRenderer();
+		renderer.setMapContent(mapContent);
+		
+		Rectangle imageBounds			= null;
+		ReferencedEnvelope mapBounds	= null;
+		try {
+			mapBounds						= mapContent.getMaxBounds();
+			System.out.println("Geotools.saveImage() mapBounds="+mapBounds);
+			double heightToWidth			= mapBounds.getSpan(1) / mapBounds.getSpan(0);
+			imageBounds						= new Rectangle(0, 0, imageWidth, (int) Math.round(imageWidth * heightToWidth));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+		BufferedImage image				= new BufferedImage(imageBounds.width, imageBounds.height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D gr					= image.createGraphics();
+		gr.setPaint(Color.WHITE);
+		gr.fill(imageBounds);
+		
+		try {
+			ByteArrayOutputStream byteOut	= new ByteArrayOutputStream();
+			
+			renderer.paint(gr, imageBounds, mapBounds);
+//			File fileToSave					= new File(file);
+//			ImageIO.write(image, "jpeg", fileToSave);
+			ImageIO.write(image, "jpeg", byteOut);
+			/*
+			String strFileTempName	= ""+new Date().getTime();
+			FileOutputStream fos	= new FileOutputStream("D:\\repositorios\\documentosHef\\image_demo_"+strFileTempName+".jpg");
+			fos.write(byteOut.toByteArray());
+			fos.flush();
+			fos.close();
+			*/
+			byte[] imgBytes		= BASE64EncoderStream.encode(byteOut.toByteArray());
+			
+//			System.out.println("Test2.saveImage() imagePNG64=data:image/jpeg;base64," + new String(imgBytes));
+			/*
+			byte[] imgBytes	= BASE64DecoderStream.decode(strFile.getBytes());//Java 1.7
+			BufferedImage bufImg	= ImageIO.read(new ByteArrayInputStream(imgBytes));  
+			ImageIO.write(bufImg, "png", adjunto);
+			*/
+			return new String("data:image/jpeg;base64,"+new String(imgBytes));
+//			return "";
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -435,7 +514,7 @@ public class Geotools {
 		StyleFactory sf = CommonFactoryFinder.getStyleFactory(GeoTools.getDefaultHints());
 		FilterFactory2 ff = CommonFactoryFinder.getFilterFactory2(GeoTools.getDefaultHints());
 		
-		Stroke stroke = sf.createStroke(ff.literal("#FF0000"), ff.literal(2));
+		Stroke stroke = sf.createStroke(ff.literal("#0B74C1"), ff.literal(2));
 		
 		LineSymbolizer lineSymbolizer = sf.createLineSymbolizer();
 		lineSymbolizer.setStroke(stroke);

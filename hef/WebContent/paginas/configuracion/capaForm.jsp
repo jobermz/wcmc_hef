@@ -1,6 +1,11 @@
+<%@page import="wcmc.hef.business.core.configuracion.dto.CapaDto"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+CapaDto	capa=(CapaDto)request.getAttribute("edicion_capaDto");
+session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
+%>
 <div class="page-content">
 	<div class="row">
 		<div class="page-title" id="idDivEditarTituloCapa">

@@ -61,12 +61,13 @@
 								      		
 								      	</div>
 								      	<div class="col-xs-2 text-center">
-											
 											<s:if test="%{#capasBase.strEsFiltroAclBoolean}">
-								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_VECTORIAL}">
+<%-- 								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_VECTORIAL}"> --%>
+								      		<s:if test="%{#capasBase.intTipoCapa==1}">
 								      			<i class="fa fa-lg fa-filter cursorPointer" onclick="filtrarACL(${capasBase.srlIdCapa});"></i>
 								      		</s:if>
-								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_UMBRAL}">
+<%-- 								      		<s:if test="%{#capasBase.intTipoCapa.toString()==#TIPO_CAPA_UMBRAL}"> --%>
+								      		<s:if test="%{#capasBase.intTipoCapa==2}">
 								      			<i class="fa fa-lg fa-filter cursorPointer" onclick="filtrarUmbralACL(${capasBase.srlIdCapa});"></i>
 								      		</s:if>
 								      		</s:if>

@@ -6,16 +6,29 @@ $(document).ready(function() {
 	goog.require('ol.source.TileArcGISRest');
 	goog.require('ol.proj');
 	
+	goog.require('ol.control');
+	goog.require('ol.layer.Vector');
+//	goog.require('ol.source.GeoJSON');
+	goog.require('ol.source.OSM');
+	
 	$(".identificar-area-criterio-logico").bind('contextmenu', function(e) {
+		$('#idDivRightClick').css("display", "none");
+		$('#idDivRightClickClean').css("display", "none");
+		$('#idDivRightClickAPAClean').css("display","none");
+		
 		$('#idDivRightClickClean').css("display", "table-row");
-		$('#idDivRightClickClean').css("left", $("#idDivBotonFlotanteACL").css("left").pxToInt()+15);
+		$('#idDivRightClickClean').css("right", $("#idDivBotonFlotanteACL").css("right").pxToInt()+15);
 		$('#idDivRightClickClean').css("top", $("#idDivBotonFlotanteACL").css("top").pxToInt()+25);
 		return false;
 	});
 	
 	$(".analizar-por-area").bind('contextmenu', function(e) {
+		$('#idDivRightClick').css("display", "none");
+		$('#idDivRightClickClean').css("display", "none");
+		$('#idDivRightClickAPAClean').css("display","none");
+		
 		$('#idDivRightClickAPAClean').css("display", "table-row");
-		$('#idDivRightClickAPAClean').css("left", $("#idDivBotonFlotanteACL").css("left").pxToInt()+15);
+		$('#idDivRightClickAPAClean').css("right", $("#idDivBotonFlotanteAPA").css("right").pxToInt()+15);
 		$('#idDivRightClickAPAClean').css("top", $("#idDivBotonFlotanteAPA").css("top").pxToInt()+25);
 		return false;
 	});
@@ -35,6 +48,7 @@ $(document).ready(function() {
 	iniciarIdentificarAreaPorCriteriosLogicos();
 	iniciarAnalizarPorArea();
 	iniciarCapasUpload();
+	
 });
 var map			= null;
 var sourceDraw	= null;
@@ -69,28 +83,9 @@ function iniciarMapa() {
 			gmap.setZoom(view.getZoom());
 		}
 	});
-	
-	sourceDraw = new ol.source.Vector({wrapX: false});
-	var vector = new ol.layer.Vector({
-		source: sourceDraw,
-		style: new ol.style.Style({
-			fill: new ol.style.Fill({
-				color: 'rgba(255, 255, 255, 0.2)'
-			}),
-			stroke: new ol.style.Stroke({
-				color: '#ffcc33',
-				width: 2
-			}),
-			image: new ol.style.Circle({
-				radius: 7,
-				fill: new ol.style.Fill({
-					color: '#ffcc33'
-				})
-			})
-		})
-	});
-	
-	var layers = [vector];
+
+//	var layers = [vector];
+	var layers = [];
 	var olMapDiv = document.getElementById('olmap');
 	map = new ol.Map({
 		layers: layers,
@@ -129,6 +124,7 @@ function iniciarMapa() {
 	    */
 	});
 }
+var vectorDraw = null;
 function addInteraction(value) {
 	/* Polygon, Box*/
 	if (map && value != '' && value !== 'None') {
@@ -148,6 +144,28 @@ function addInteraction(value) {
 				return geometry;
 			};
 		}
+		
+		sourceDraw = new ol.source.Vector({wrapX: false});
+		vectorDraw = new ol.layer.Vector({
+			source: sourceDraw,
+			style: new ol.style.Style({
+				fill: new ol.style.Fill({
+					color: 'rgba(255, 255, 255, 0.2)'
+				}),
+				stroke: new ol.style.Stroke({
+					color: '#ffcc33',
+					width: 2
+				}),
+				image: new ol.style.Circle({
+					radius: 7,
+					fill: new ol.style.Fill({
+						color: '#ffcc33'
+					})
+				})
+			})
+		});
+		map.addLayer(vectorDraw);
+
 		draw = new ol.interaction.Draw({
 			source: sourceDraw,
 			type: /** @type {ol.geom.GeometryType} */ (value),
@@ -172,7 +190,76 @@ function drawEnd(event) {
 
 function terminarInteraction() {
 	if(map && draw) {
+		
+//		sourceDraw.clear(true);
+//		var coll	= sourceDraw.getFeaturesCollection();
+//		var array	= coll.getArray();
+//		for(var i=0;i<array.length;i++) {
+//			sourceDraw.removeFeature(array[i]);
+//		}
+		if(vectorDraw) {
+			map.removeLayer(vectorDraw);
+			vectorDraw	= null;
+		}
 		map.removeInteraction(draw);
 	}
 }
 
+function reportePDF() {
+	var frm		= document.form;
+	frm.action	= "reporteCapas.action";
+	frm.target	= "_blank";
+	frm.submit();
+	return false;
+}
+function exportarPNG() {
+	/*
+	var exportPNGElement = document.getElementById('export-png');
+	map.once('postcompose', function(event) {
+		var canvas = event.context.canvas;
+		exportPNGElement.href = canvas.toDataURL('image/png');
+//		ventanaNuevaURL(canvas.toDataURL('image/png'));
+	});
+	map.renderSync();
+	*/
+	
+
+//	var exportPNGElement = $('#export-png');
+	//if ('download' in exportPNGElement) {
+//		exportPNGElement.click(function(e) {
+			map.once('postcompose', function(event) {
+				var canvas = event.context.canvas;
+				alert(canvas.toDataURL('image/png'));
+//				exportPNGElement.href = canvas.toDataURL('image/png');
+			});
+			map.renderSync();
+//		}, false);
+}
+function ventanaNuevaURL(url) {
+	var frm		= document.form;
+	frm.action	= url;
+	frm.target	= "_blank";
+	frm.submit();
+	return false;
+}
+
+//var exportPNGElement = document.getElementById('export-png');
+/*
+var exportPNGElement = $('#export-png');
+//if ('download' in exportPNGElement) {
+	exportPNGElement.click(function(e) {
+		map.once('postcompose', function(event) {
+			var canvas = event.context.canvas;
+			exportPNGElement.href = canvas.toDataURL('image/png');
+		});
+		map.renderSync();
+	}, false);
+	*/
+//} else {
+//	alert("Mensaje de error");
+//	var info = document.getElementById('no-download');
+	/**
+   * display error message
+   */
+//  info.style.display = '';
+//}

@@ -2,25 +2,28 @@ var capasBaseArr	= new Array();
 function iniciarCapasBase() {
 	$('.seleccionar-capas').click(seleccionarCapas);
 	
-	$.post('cargarCapasBaseJson.action', null, function(datos) {
-		capasBaseArr	= datos.listCapasBase;
-	}, "json");
-	/*
-	$("select[name=centrar_departamento]").change(centrar_depa_upd_dpto);
-	$("select[name=centrar_prov_departamento]").change(centrar_prov_upd_dpto);
-	$("select[name=centrar_dist_departamento]").change(centrar_dist_upd_dpto);
-	*/
 	iniciarMarcarCapas();
 	
-	var idCapasDef	= $("input[name=CAPAS_VISUALIZACION_DEFAULT]").val();
-	var arrCapasDef	= idCapasDef.split(",");
-	for(var i = 0;i < arrCapasDef.length;i++) {
-		$("#idCapaBaseVisualizacion"+arrCapasDef[i]).prop("checked", true);
-	}
+	$.post('cargarCapasBaseJson.action', null, function(datos) {
+		capasBaseArr	= datos.listCapasBase;
+		
+		var idCapasDef		= $("input[name=CAPAS_VISUALIZACION_DEFAULT]").val();
+		var arrCapasDef		= idCapasDef.split(",");
+		var ultCapaActiva	= "";
+		for(var i = 0;i < arrCapasDef.length;i++) {
+			$("#idCapaBaseVisualizacion"+arrCapasDef[i]).prop("checked", true);
+			ultCapaActiva	= arrCapasDef[i];
+		}
+		intIdCapaActiva	= ultCapaActiva;
+		var capaBase	= buscarCapasBaseById(intIdCapaActiva);
+		$(".clsTituloCapaActiva").html("Capa activa: "+capaBase.strNombre);
+		refrescarCapaActiva();
+		
+		marcarCapasVisualizacion();
+		
+		guardarCapasSeleccionadasCapasBase();
+	}, "json");
 	
-	marcarCapasVisualizacion();
-	
-	guardarCapasSeleccionadasCapasBase();
 }
 
 function iniciarMarcarCapas() {
@@ -90,19 +93,45 @@ function buscarCapasBaseById(srlIdCapa) {
 }
 function mostrarCapaById(srlIdCapa, min, max) {
 	var capaBase	= buscarCapasBaseById(srlIdCapa);
-	if(capaBase && (capaBase.currLayer == undefined || capaBase.currLayer == null) && capaBase.strWmsCapas && capaBase.strWmsCapas != "") {
-		var url		= capaBase.strWmsUrl;
+	if(capaBase && 
+			(capaBase.currLayer == undefined || capaBase.currLayer == null) && 
+			capaBase.strWmsUrl && 
+			capaBase.strWmsUrl != "") {
+		var url		= capaBase.strWmsUrl+"/export";
 		var layers	= "show:" + capaBase.strWmsCapas;
 		paramRaster = "";
+		
 		if(min && max) {
-			paramRaster = "{"+
-		    "\"rasterFunction\" : \"Remap\","+
-		    "\"rasterFunctionArguments\" : {"+
-		    "\"InputRanges\" : ["+min+", "+max+"],"+
-		    "\"OutputValues\": ["+min+"],"+
-		    "\"AllowUnmatched\": \"false\""+
-		    "}}";
+			if(min != -1 && max != -1) {
+				paramRaster = "{"+
+			    "\"rasterFunction\" : \"Remap\","+
+			    "\"rasterFunctionArguments\" : {"+
+			    "\"InputRanges\" : ["+min+", "+max+"],"+
+			    "\"OutputValues\": ["+min+"],"+
+			    "\"AllowUnmatched\": \"false\""+
+			    "}}";
+			}
+			console.log("paramRaster.A="+paramRaster);
+		} else {
+			$("select[name=filtrar_umbral]").each(function(index) {
+				if($(this).attr("id-capa")==srlIdCapa) {
+					var rangoValores = eval(""+$(this).val());
+					//ocultarCapaById(rangoValores[0]);
+					//mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
+					if(rangoValores[1] != -1 && rangoValores[2] != -1) {
+						paramRaster = "{"+
+					    "\"rasterFunction\" : \"Remap\","+
+					    "\"rasterFunctionArguments\" : {"+
+					    "\"InputRanges\" : ["+rangoValores[1]+", "+rangoValores[2]+"],"+
+					    "\"OutputValues\": ["+rangoValores[1]+"],"+
+					    "\"AllowUnmatched\": \"false\""+
+					    "}}";
+					}
+					console.log("paramRaster.B="+paramRaster);
+				}
+			});
 		}
+		console.log("paramRaster.TOTAL="+paramRaster);
 		capaBase.currLayer	= new ol.layer.Tile({
 			source: new ol.source.TileArcGISRest({
 				url: url,
@@ -113,8 +142,42 @@ function mostrarCapaById(srlIdCapa, min, max) {
 			})
 		});
 		map.addLayer(capaBase.currLayer);
+	} else 	if(capaBase && 
+			(capaBase.currLayer == undefined || capaBase.currLayer == null) && 
+			capaBase.strWmsCapas && 
+			capaBase.strWmsCapas != "") {
+		var arrExtNom		= capaBase.strWmsCapas.split("_");
+		capaBase.currLayer	= declararCapaUsuario(arrExtNom[0], capaBase.srlIdCapa);
+		map.addLayer(capaBase.currLayer);
 	}
 }
+
+function declararCapaUsuario(varExtent, strId) {
+//	var extent = [-81.14955661499994, -17.748342599999944, -68.71229543199993, -0.07651294299995648];
+	var extent = eval(""+varExtent);
+	//[minx, miny, maxx, maxy]
+	var projection = new ol.proj.Projection({
+		code: 'xkcd-image',
+		units: 'pixels',
+		extent: extent,
+		code: 'EPSG:4326'
+	});
+	var imageLayer	= new ol.layer.Image({
+		source: new ol.source.ImageStatic({
+			attributions: [
+				new ol.Attribution({
+					html: '&copy; User'
+			    })
+			],
+//			url: 'image/image_demo.jpg',
+			url: ('download.action?strId='+strId),
+			projection: projection,
+			imageExtent: extent
+		})
+	});
+	return imageLayer;
+}
+
 function ocultarCapaById(srlIdCapa) {
 	var capaBase	= buscarCapasBaseById(srlIdCapa);
 	if(capaBase && capaBase.currLayer) {

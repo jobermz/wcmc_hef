@@ -16,6 +16,7 @@
 			<interceptor-ref name="basicStack"/>
 		</action>
 		
+		<!--
 		<action name="centrarDepartamentoJson" class="wcmc.hef.web.visor.action.VisorAction" method="centrarDepartamento">
 			<result name="success" type="json" />
 			<interceptor-ref name="basicStack"/>
@@ -67,7 +68,7 @@
 			<result name="success" type="tiles">combo_centrar_distrito_en_distrito</result>
 			<interceptor-ref name="basicStack"/>
 		</action>
-		
+		-->
 	</package>
 </struts>
 

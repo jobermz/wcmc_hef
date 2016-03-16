@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>    
+	<package name="capa-usuario" namespace="/" extends="principal,json-default,jasperreports-default">
+		
+		<action name="agregarShapeUsuario" class="wcmc.hef.web.capa.action.CapaUsuarioAction" method="agregarShape">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="download" class="wcmc.hef.web.capa.action.DownloadAction">
+			<result name="success" type="stream">
+				<param name="inputName">archivo</param>
+				<param name="contentLength">${archivoTamanio}</param>
+				<param name="contentType">application/octet-stream</param>
+				<param name="contentDisposition">attachment;filename="${archivoNombre}"</param>
+				<param name="bufferSize">1048576</param><!-- Un Mega de buffer -->
+			</result> 
+			<interceptor-ref name="basicStack" />
+		</action>
+		
+	</package>
+</struts>
+

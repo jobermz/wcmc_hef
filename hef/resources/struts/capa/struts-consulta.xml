@@ -36,7 +36,24 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
-		
+		<action name="reporteCapas" class="wcmc.hef.web.capa.action.ReporteConsultaAction" method="reporteTodos">
+			<result name="success" type="jasper">
+				<param name="location">/reportes/reportAnalitico.jasper</param>
+				<param name="dataSource">listMapReporte</param>
+				<param name="format">PDF</param>
+				<param name="reportParameters">parametros</param>
+				<param name="documentName">reporteAnalitico</param>
+				<param name="REPORT_LOCALE">ES_PE</param>
+			</result>
+			<result name="successXLS" type="jasper">
+				<param name="location">/reportes/reportAnalitico.jasper</param>
+				<param name="dataSource">listMapReporte</param>
+				<param name="format">XLS</param>
+				<param name="reportParameters">parametros</param>
+				<param name="documentName">reporteAnalitico</param>
+				<param name="REPORT_LOCALE">ES_PE</param>
+			</result>
+		</action>
 		
 	</package>
 </struts>

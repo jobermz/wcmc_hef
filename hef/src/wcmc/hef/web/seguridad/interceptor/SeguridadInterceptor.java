@@ -61,6 +61,9 @@ public class SeguridadInterceptor implements Interceptor {
 			listActionException.add("consultaCombosACLFuxion");
 			listActionException.add("consultaCombosCentrar");
 			listActionException.add("consultaCombosCentrarMapa");
+			listActionException.add("reporteCapas");
+			listActionException.add("agregarShapeUsuario");
+			listActionException.add("download");
 			
 			if(listActionException.contains(actionName)) {
 				return arg0.invoke();

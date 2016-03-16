@@ -31,6 +31,11 @@ public class CapaServiceImpl implements CapaService {
 			if(CadenaUtil.getInteNull(capaDto.getIntGrupoCapas()) != null) {
 				criteria.andIntGrupoCapasEqualTo(capaDto.getIntGrupoCapas());
 			}
+			if(CadenaUtil.getInteNull(capaDto.getIntIdUsuario()) != null) {
+				criteria.andIntIdUsuarioEqualTo(capaDto.getIntIdUsuario());
+			} else {
+				criteria.andIntIdUsuarioIsNull();
+			}
 		}
 		
 		capaParamDef.setOrderByClause("nm_orden");

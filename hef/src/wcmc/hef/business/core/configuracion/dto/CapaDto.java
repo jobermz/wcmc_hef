@@ -22,7 +22,8 @@ public class CapaDto {
 	private String strEsSelecApa;
 	private String strEsFiltroAcl;
 	private String strEsCentrarMapa;
-	
+	private Integer intIdUsuario;
+
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
 	}
@@ -177,6 +178,12 @@ public class CapaDto {
 		} else {
 			strEsCentrarMapa	= "N";
 		}
+	}
+	public Integer getIntIdUsuario() {
+		return intIdUsuario;
+	}
+	public void setIntIdUsuario(Integer intIdUsuario) {
+		this.intIdUsuario = intIdUsuario;
 	}
 	
 }

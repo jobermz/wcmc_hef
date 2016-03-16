@@ -24,6 +24,7 @@ public class Capa extends CapaKey {
 	private String strEsSelecApa;
 	private String strEsFiltroAcl;
 	private String strEsCentrarMapa;
+	private Integer intIdUsuario;
 	
 	private List<CapaUmbral> listCapaUmbral;
 	public String getIntGrupoCapasDesc() {
@@ -180,6 +181,12 @@ public class Capa extends CapaKey {
 		} else {
 			strEsCentrarMapa	= "N";
 		}
+	}
+	public Integer getIntIdUsuario() {
+		return intIdUsuario;
+	}
+	public void setIntIdUsuario(Integer intIdUsuario) {
+		this.intIdUsuario = intIdUsuario;
 	}
 	
 }
