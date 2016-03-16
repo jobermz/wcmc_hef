@@ -59,7 +59,7 @@
 														<i class="fa fa-2x fa-user"></i>
 													</div>
 													<div class="col-xs-10">
-							                			<s:textfield name="autentica_strUsuario" cssClass="form-control" tabindex="1" maxlength="100" value="jobermz"/>
+							                			<s:textfield name="autentica_strUsuario" cssClass="form-control" tabindex="1" maxlength="100" value=""/>
 													</div>
 												</div>
 											</div>

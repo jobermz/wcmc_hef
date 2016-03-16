@@ -32,8 +32,13 @@ function cargarPoligonoDesdeShapefileUsuario() {
 					unblockui();
 				} else {
 					mostrarMensajesErrorStruts([]);
-					mostrarMensajesStruts(datos.actionMessages);
 					unblockui();
+					mostrarMensajesStruts(["Se registro satisfactoriamente la capa de usuario"]);
+					$("input[name=shapefile]").val("");
+					var frm		= document.form;
+					frm.action	= "/hef/home.action";
+//					frm.target	= "_blank";
+					frm.submit();
 				}
 				
 			}

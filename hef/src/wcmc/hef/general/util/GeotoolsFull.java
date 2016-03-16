@@ -72,8 +72,8 @@ public class GeotoolsFull {
 //			Integer.valueOf(num1_255, 16)
 //			String.
 			GeotoolsFull geo	= new GeotoolsFull();
-			String strShapeFileDemo	= "D:\\repositorios\\documentosHef\\1458103666251\\1458103666251.shp";
-			String strFileTempName	= "1458103666251";
+			String strShapeFileDemo	= "D:\\repositorios\\documentosHef\\1458110643597\\1458110643597.shp";
+			String strFileTempName	= "1458110643597";//D:\repositorios\documentosHef\1458110643597
 			geo.convertirShapeToImagen(strShapeFileDemo, strFileTempName);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -111,9 +111,29 @@ public class GeotoolsFull {
 				throw new Exception("No se encontro informaci�n de proyecciones validas (PRJ)");
 				//TODO No se encontro informaci�n sobre alguna proyeccion valida
 			}
+			//strCadenaExtent		= saveImage(featureSource, 4096, strFileTempName);//TODO
 			
-			strCadenaExtent		= saveImage(featureSource, 4096, strFileTempName);
+			FeatureCollection collection	= featureSource.getFeatures();
+			iterator						= collection.features();
 			
+			int countador	= 0;
+			SimpleFeatureSource featureSourceGeom		= null;
+			List<Geometry> listGeom	= new ArrayList<Geometry>();
+			Geometry geom		= null;
+			while (iterator.hasNext()) {
+				SimpleFeatureImpl featureImpl	= (SimpleFeatureImpl) iterator.next();
+				if(featureImpl.getDefaultGeometry() != null) {
+					geom		= (Geometry)featureImpl.getDefaultGeometry();
+					if(transform != null) {
+						geom		= JTS.transform(geom, transform);
+					}
+					listGeom.add(geom);
+				}
+			}
+			SimpleFeatureSource feSource	= createSimpleFeatureSource(listGeom);
+			
+			strCadenaExtent		= saveImage(feSource, 4096, strFileTempName);//TODO
+
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());
@@ -125,6 +145,24 @@ public class GeotoolsFull {
 			}
 		}
 		return strCadenaExtent;
+	}
+
+	private SimpleFeatureSource createSimpleFeatureSource(List<Geometry> listGeom) throws Exception {
+		ArrayList<SimpleFeature> list				= new ArrayList<SimpleFeature>();
+
+		SimpleFeatureType	sft_poli		= createFeatureType_Poligon();
+		SimpleFeatureBuilder sfb		= null;
+		for(Geometry geom:listGeom) {
+			sfb		= new SimpleFeatureBuilder(sft_poli);
+			sfb.add(geom);
+//			SimpleFeature feature = sfb.buildFeature( "fid" );
+//			list.add(feature);
+			list.add(sfb.buildFeature( "fid" ));
+		}
+		SimpleFeatureCollection simpFeatcollection	= new ListFeatureCollection(sft_poli, list);
+		
+		SimpleFeatureSource featureSourceGeom		= new CollectionFeatureSource(simpFeatcollection);
+		return featureSourceGeom;
 	}
 	
 	private String saveImage(SimpleFeatureSource featureSource, final int imageWidth, String strFileTempName) throws Exception {
@@ -290,24 +328,24 @@ public class GeotoolsFull {
 		return LOCATION;
 	}
 
-	private SimpleFeatureSource createSimpleFeatureSource(List<Geometry> listGeom) throws Exception {
-		
-		SimpleFeatureType	sft_poli		= createFeatureType_Poligon();
-		SimpleFeatureBuilder sfb		= new SimpleFeatureBuilder(sft_poli);
-//		for(Geometry geom:listGeom){
-//			sfb.add(geom);
-//		}
-		
-//		sfb.add("theName"+i);
-		
-		SimpleFeature feature = sfb.buildFeature( "fid" );
-		
-		ArrayList<SimpleFeature> list				= new ArrayList<SimpleFeature>();
-		list.add(feature);
-		SimpleFeatureCollection simpFeatcollection	= new ListFeatureCollection(sft_poli, list);
-		
-		SimpleFeatureSource featureSourceGeom		= new CollectionFeatureSource(simpFeatcollection);
-		return featureSourceGeom;
-	}
+//	private SimpleFeatureSource createSimpleFeatureSource(List<Geometry> listGeom) throws Exception {
+//		
+//		SimpleFeatureType	sft_poli		= createFeatureType_Poligon();
+//		SimpleFeatureBuilder sfb		= new SimpleFeatureBuilder(sft_poli);
+////		for(Geometry geom:listGeom){
+////			sfb.add(geom);
+////		}
+//		
+////		sfb.add("theName"+i);
+//		
+//		SimpleFeature feature = sfb.buildFeature( "fid" );
+//		
+//		ArrayList<SimpleFeature> list				= new ArrayList<SimpleFeature>();
+//		list.add(feature);
+//		SimpleFeatureCollection simpFeatcollection	= new ListFeatureCollection(sft_poli, list);
+//		
+//		SimpleFeatureSource featureSourceGeom		= new CollectionFeatureSource(simpFeatcollection);
+//		return featureSourceGeom;
+//	}
 	
 }

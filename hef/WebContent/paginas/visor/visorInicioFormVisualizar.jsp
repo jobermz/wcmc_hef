@@ -43,12 +43,22 @@
 								      	<div class="col-xs-5 text-left">
 								      		Nombre de capa
 								      	</div>
+								      	<s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()==#CAPA_GRUPO_USUARIO}">
+								      	<div class="col-xs-2">
+								      		Acci&oacute;n
+								      	</div>
+								      	<div class="col-xs-2">
+								      		Transparencia
+								      	</div>
+								      	</s:if>
+								      	<s:else>
 								      	<div class="col-xs-2">
 								      		Transparencia
 								      	</div>
 								      	<div class="col-xs-2">
 								      		Umbral
 								      	</div>
+								      	</s:else>
 								      	<div class="col-xs-1">
 								      		Cent.
 								      	</div>
@@ -65,10 +75,21 @@
 								      	<div class="col-xs-5 seleccionarParaCapaActiva" id-capa="${capasBase.srlIdCapa}" nombre-capa="${capasBase.strNombre}">
 								      		<input type="checkbox" id="idCapaBaseVisualizacion${capasBase.srlIdCapa}" name="capasBase" value="${capasBase.srlIdCapa}" id-capa="${capasBase.srlIdCapa}" class="capasBase" onblur="guardarCapasSeleccionadasCapasBase();" onclick="marcarCapasVisualizacion();guardarCapasSeleccionadasCapasBase();">
 											${capasBase.strNombre}
+											<s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}">
 											<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()&&(#capasBase.strWmsUrl==null||#capasBase.strWmsUrl=='')}">
 												<i class="fa fa-warning"  title="La visualizacion no se encuentra disponible por el momento"></i>
 											</s:if>
+											</s:if>
 								      	</div>
+								      	<s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()==#CAPA_GRUPO_USUARIO}">
+								      	<div class="col-xs-2 text-center">
+								      		<i class="fa fa-trash" onclick="eliminar_capa_usuario('${capasBase.srlIdCapa}');" style="color: red;cursor: pointer;"></i>
+								      	</div>
+								      	<div class="col-xs-2">
+								      		<div idcapa="${capasBase.srlIdCapa}" class="clsSlider"></div>
+								      	</div>
+								      	</s:if>
+								      	<s:else>
 								      	<div class="col-xs-2">
 								      		<div idcapa="${capasBase.srlIdCapa}" class="clsSlider"></div>
 								      	</div>
@@ -77,8 +98,8 @@
 								      		<s:select list="#capasBase.listCapaUmbral" id-capa="${capasBase.srlIdCapa}" name="filtrar_umbral"  listKey="strValoresMinimoMaximo" listValue="strNombre" onchange="filtrar_umbral(this);"></s:select>
 								      		</s:if>
 								      	</div>
+								      	</s:else>
 								      	<div class="col-xs-1 text-center">
-<%-- 								      		<s:if test="%{#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DEPARTAMENTO||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_PROVINCIA||#capasBase.srlIdCapa.toString()==#CAPAS_BASE_DISTRITO}"> --%>
 								      		<s:if test="%{#capasBase.strEsCentrarMapaBoolean}">
 								      			<i class="fa fa-lg fa-bullseye cursorPointer" onclick="centrarMapa(${capasBase.srlIdCapa});"></i>
 								      		</s:if>

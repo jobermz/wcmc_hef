@@ -12,6 +12,7 @@
 					
 					<div class="panel-group" id="accordion_iac" role="tablist" aria-multiselectable="false">
 					<s:iterator value="#session.listGrupoCapas" var="grupoCapasBase">
+					
 					  <div class="panel panel-default clsPanelGrupoCapasMainACL">
 					    <div class="panel-heading" role="tab" id="headingOneIAC${grupoCapasBase.srlIdGrupoCapas}">
 					      <h4 class="panel-title">
@@ -22,11 +23,11 @@
 					    </div>
 					    <div id="collapseOneIAC${grupoCapasBase.srlIdGrupoCapas}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;" role="tabpanel" aria-labelledby="headingOneIAC${grupoCapasBase.srlIdGrupoCapas}">
 					      <div class="panel-body">
-					      
 					      	
 							<div class="panel-group" id="accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="true">
 							  
-							  <s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
+							<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
+							  <s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}">
 							  <div class="panel panel-default clsPanelGrupoCapasACL">
 							    <div class="panel-heading" role="tab" id="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}">
 							      <h4 class="panel-title">
@@ -81,7 +82,8 @@
 							      </div>
 							    </div>
 							  </div>
-							  </s:iterator>
+							</s:if>
+							</s:iterator>
 							  
 							</div>
 					      	
@@ -89,6 +91,7 @@
 					      </div>
 					    </div>
 					  </div>
+					  
 					</s:iterator>
 					</div>
 					

@@ -419,3 +419,30 @@ function filtrar_umbral(currSelect) {
 	ocultarCapaById(rangoValores[0]);
 	mostrarCapaById(rangoValores[0], rangoValores[1], rangoValores[2]);//0 IdCapa  1 min  2 max
 }
+
+function eliminar_capa_usuario(srlIdCapa) {
+//	
+	$('.dialog-info-eliminar-modal').off('shown.bs.modal');
+	$('.dialog-info-eliminar-modal').off('hidden.bs.modal');
+	$('.dialog-info-eliminar-modal').on('shown.bs.modal', function (e) {
+		$(".btnConfirmEliminarSi").click(function() {
+			var frm		= $("#form");
+        	$('#buscar_seleccion_id').val(srlIdCapa);
+        	$.post('eliminarCapa.action', frm.serialize(), function(datos) {
+	    		if(datos.actionErrors.length > 0) {
+	    			mostrarMensajesErrorStruts(datos.actionErrors);
+	    		} else {
+	    			mostrarMensajesStruts(datos.actionMessages);
+	    		}
+        		$('#dialog-info-eliminar').dialog("close");
+        		var frm		= document.form;
+				frm.action	= "/hef/home.action";
+				frm.submit();
+        	}, "json");
+		});
+	});
+	$('.dialog-info-eliminar-modal').on('hidden.bs.modal', function (e) {
+	});
+	$('.dialog-info-eliminar-modal').modal('show');
+	
+}
