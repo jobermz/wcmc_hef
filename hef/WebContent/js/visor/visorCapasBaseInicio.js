@@ -21,6 +21,10 @@ function iniciarCapasBase() {
 		
 		marcarCapasVisualizacion();
 		
+		for(var i = 0;i < arrCapasDef.length;i++) {
+			setTransparenciaLayer(arrCapasDef[i], 40);
+		}
+		
 		guardarCapasSeleccionadasCapasBase();
 	}, "json");
 	
@@ -43,18 +47,36 @@ function seleccionarCapas() {
 	$('.seleccionar-capas-modal').modal('show');
 }
 
+function setTransparenciaLayer(srlIdCapa, transparencia) {
+	var currCapa = buscarCapasBaseById(srlIdCapa);
+	if(currCapa && currCapa.currLayer) {
+		currCapa.currLayer.setOpacity(transparencia/100);
+	}
+//	$(".clsSlider").each(function(index) {
+//		var currSlider	= $(this);
+//		if(currSlider.attr("idcapa")==srlIdCapa) {
+//			currSlider.slider("value", transparencia);
+//		}
+//	});
+}
 function iniciarComponentes() {
 	$(".clsSlider").each(function(index) {
 		$(this).unbind("slider");
 		var currSlider	= $(this);
+		var currCapa	= buscarCapasBaseById(currSlider.attr("idcapa"));
+		var currTransp	= 100;
+		if(currCapa && currCapa.currLayer && currCapa.currLayer.getOpacity()) {
+			currTransp	= currCapa.currLayer.getOpacity()*100;
+		}
 		$(this).slider({
 			range: "min",
 			min: 0,
 			max: 100,
-			value: 100,
+			value: currTransp,
 			slide: function(event, ui) {
-				var currCapa = buscarCapasBaseById(currSlider.attr("idcapa"));
 				if(currCapa && currCapa.currLayer) {
+//					currSlider.value(currCapa.getOpacity()*100);
+//					currCapa.getOpacity();
 					currCapa.currLayer.setOpacity(ui.value/100);
 				}
 			}

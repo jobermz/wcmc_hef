@@ -89,6 +89,14 @@ function guardarCapasSeleccionadasACL() {
 function limpiarCapasSeleccionadasACL() {
 	listado_idCapaIdentACL	= null;
 	$('.badgeCustomACL').css("display","none");
+	$(".identificar-area-criterio-logico-modal").find(".clsDivDetFiltroACL").each(function(index) {
+		$(this).html("");
+		$(this).attr("valSelect", "");
+		$(this).attr("valSelectDesde", "");
+		$(this).attr("valSelectHasta", "");
+		$(this).attr("valCriterio", "");
+		$(this).attr("srlIdCapa", "");
+	});
 }
 ///////////////////////////////////////////////////////////////////////////////////////// FILTRO SHP
 function filtrarACL(srlIdCapa) {
