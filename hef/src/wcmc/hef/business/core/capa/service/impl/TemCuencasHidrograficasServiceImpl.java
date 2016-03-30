@@ -47,6 +47,7 @@ public class TemCuencasHidrograficasServiceImpl implements TemCuencasHidrografic
 			if(CadenaUtil.getInteNull(temCuencasHidrograficasDto.getIntEsriOid()) != null) {
 				criteria.andIntEsriOidEqualTo(temCuencasHidrograficasDto.getIntEsriOid());
 			}
+			temCuencasHidrograficasParamDef.setStrHashConsulta(temCuencasHidrograficasDto.getStrHashConsulta());
 		}
 		
 		temCuencasHidrograficasParamDef.setOrderByClause("de_nombre");

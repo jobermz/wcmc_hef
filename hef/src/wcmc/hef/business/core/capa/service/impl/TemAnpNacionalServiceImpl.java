@@ -56,6 +56,7 @@ public class TemAnpNacionalServiceImpl implements TemAnpNacionalService {
 			if(CadenaUtil.getStrNull(temAnpNacionalDto.getStrAnpFemodi()) != null) {
 				criteria.andStrAnpFemodiEqualTo(temAnpNacionalDto.getStrAnpFemodi());
 			}
+			temAnpNacionalParamDef.setStrHashConsulta(temAnpNacionalDto.getStrHashConsulta());
 		}
 		
 		temAnpNacionalParamDef.setOrderByClause("de_anp_cate,de_anp_nomb");

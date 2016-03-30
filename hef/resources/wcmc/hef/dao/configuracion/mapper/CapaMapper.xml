@@ -20,6 +20,8 @@
 		<result column="de_es_filtro_acl" property="strEsFiltroAcl" jdbcType="VARCHAR"/>
 		<result column="de_es_centrar_mapa" property="strEsCentrarMapa" jdbcType="VARCHAR"/>
 		<result column="cd_usuario" property="intIdUsuario" jdbcType="INTEGER"/>
+		<result column="de_shp" property="strShp" jdbcType="VARCHAR"/>
+		<result column="de_shp_extent" property="strShpExtent" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaParamDef">
 		select
@@ -95,6 +97,12 @@
 			<if test="intIdUsuario != null">
 				cd_usuario,
 			</if>
+			<if test="strShp != null">
+				de_shp,
+			</if>
+			<if test="strShpExtent != null">
+				de_shp_extent,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="intGrupoCapas != null">
@@ -141,6 +149,12 @@
 			</if>
 			<if test="intIdUsuario != null">
 				#{intIdUsuario, jdbcType=INTEGER},
+			</if>
+			<if test="strShp != null">
+				#{strShp, jdbcType=VARCHAR},
+			</if>
+			<if test="strShpExtent != null">
+				#{strShpExtent, jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -191,6 +205,12 @@
 			</if>
 			<if test="intIdUsuario != null">
 				cd_usuario = #{intIdUsuario,jdbcType=INTEGER},
+			</if>
+			<if test="strShp != null">
+				de_shp = #{strShp,jdbcType=VARCHAR},
+			</if>
+			<if test="strShpExtent != null">
+				de_shp_extent = #{strShpExtent,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
@@ -251,6 +271,8 @@
 		de_es_selec_apa,
 		de_es_filtro_acl,
 		de_es_centrar_mapa,
-		cd_usuario
+		cd_usuario,
+		de_shp,
+		de_shp_extent
 	</sql>
 </mapper>

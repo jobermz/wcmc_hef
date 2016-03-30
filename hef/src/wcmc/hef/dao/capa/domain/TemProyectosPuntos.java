@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemProyectosPuntos extends TemProyectosPuntosKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strNombre;
 	private String strIniciativa;
@@ -26,7 +27,13 @@ public class TemProyectosPuntos extends TemProyectosPuntosKey implements BaseBea
 	private String strDireccion;
 	private String strInstituc1;
 	private String strLink;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

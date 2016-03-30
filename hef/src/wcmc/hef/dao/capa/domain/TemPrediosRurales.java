@@ -6,13 +6,20 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemPrediosRurales extends TemPrediosRuralesKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strDepartamen;
 	private String strDatum;
 	private String strCodproy;
 	private Integer intCntCodpro;
 	private Integer intOrigFid;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

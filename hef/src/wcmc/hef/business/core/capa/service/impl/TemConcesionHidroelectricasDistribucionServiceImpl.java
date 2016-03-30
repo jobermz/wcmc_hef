@@ -77,6 +77,7 @@ public class TemConcesionHidroelectricasDistribucionServiceImpl implements TemCo
 			if(CadenaUtil.getDoubNull(temConcesionHidroelectricasDistribucionDto.getDblShapeLen()) != null) {
 				criteria.andDblShapeLenEqualTo(temConcesionHidroelectricasDistribucionDto.getDblShapeLen());
 			}
+			temConcesionHidroelectricasDistribucionParamDef.setStrHashConsulta(temConcesionHidroelectricasDistribucionDto.getStrHashConsulta());
 		}
 		
 		temConcesionHidroelectricasDistribucionParamDef.setOrderByClause("de_concesion,de_sistema_el");

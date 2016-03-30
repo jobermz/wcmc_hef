@@ -50,6 +50,7 @@ public class TemConcesionesForestalesReforestacionServiceImpl implements TemConc
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesReforestacionDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesReforestacionDto.getDblAreaSig());
 			}
+			temConcesionesForestalesReforestacionParamDef.setStrHashConsulta(temConcesionesForestalesReforestacionDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesReforestacionParamDef.setOrderByClause("de_contrato,de_region");

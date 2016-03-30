@@ -58,14 +58,11 @@ public class DownloadAction extends ActionSupport {
 				CapaDto capaDto		= new CapaDto();
 				capaDto.setSrlIdCapa(CadenaUtil.getInte(strId));
 				Capa capa			= capaService.buscarById(capaDto);
-				String strExtNom	= "";
 				String strNombreFile	 = "";
-				if(capa != null && capa.getStrWmsCapas() != null) {
+				if(capa != null && capa.getStrShp() != null) {
 					//strCadenaExtent+","+strFileTempName+".png"
-					strExtNom			= capa.getStrWmsCapas();
 					strNombreFile		= capa.getStrNombre();
-					String[] arrExtNom	= strExtNom.split("_");
-					File fileTemporal	= new File(strRepositorioTemporal+File.separator+arrExtNom[1]+File.separator+arrExtNom[1]+".png");
+					File fileTemporal	= new File(strRepositorioTemporal+File.separator+capa.getStrShp()+File.separator+capa.getStrShp()+".png");
 					if(fileTemporal.exists()) {
 						archivoNombre					= strNombreFile;
 						archivoTamanio					= "" + fileTemporal.length();

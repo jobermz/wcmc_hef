@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class BasViasRedVialDepartamentalDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private Double dblLongitud;
@@ -12,6 +13,14 @@ public class BasViasRedVialDepartamentalDto implements BaseBeanVectorialDto {
 	private String strRutaD044;
 	private String strRed044;
 	private String strSupercicie;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public Integer getSrlGid() {
 		return srlGid;
 	}

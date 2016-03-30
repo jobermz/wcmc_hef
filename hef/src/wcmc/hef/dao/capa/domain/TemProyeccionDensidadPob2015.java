@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Key implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strIddpto;
 	private String strNombdep;
@@ -27,7 +28,13 @@ public class TemProyeccionDensidadPob2015 extends TemProyeccionDensidadPob2015Ke
 	private String strTotal2015;
 	private Double dblArea;
 	private Double dblPopDens;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

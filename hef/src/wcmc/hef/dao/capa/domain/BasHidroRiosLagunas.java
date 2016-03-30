@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasHidroRiosLagunas extends BasHidroRiosLagunasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Long lngCount;
 	private String strFirstIdpr;
@@ -22,7 +23,13 @@ public class BasHidroRiosLagunas extends BasHidroRiosLagunasKey implements BaseB
 	private Long lngTiticacgI;
 	private String strDxfLayer;
 	private String strDxfText;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

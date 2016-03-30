@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemHumedalesRamsarDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private String strCategorias;
@@ -16,6 +17,14 @@ public class TemHumedalesRamsarDto implements BaseBeanVectorialDto {
 	private String strObserva;
 	private Double dblShapeArea;
 	private Double dblShapeLen;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public Integer getSrlGid() {
 		return srlGid;
 	}

@@ -15,14 +15,31 @@
 		from (SELECT ST_Clip(A.cd_rast, QRY.geom, true) AS Clip
 			FROM wcmc_hef.tem_biodiversidad_riqueza_potencial_especies_fauna_endemica AS A,
 				(select geom from ST_Transform(ST_GeomFromText(#{strPoligonoConsulta,jdbcType=VARCHAR}, 4326),32718) as geom) as QRY
-			WHERE ST_Intersects(A.cd_rast, 1, QRY.geom)) as c) as e
+			WHERE ST_Intersects(A.cd_rast, QRY.geom)) as c) as e
 	</select>
 	
-	<select id="selectGeometryByRangoAndGeometry" resultType="String" parameterType="wcmc.hef.dao.capa.domain.BeanRaster" >
-		SELECT ST_AsText(ST_Polygon(ST_Reclass(t.Clip,1,'[${strRangoConsulta}]:[${strRangoConsulta}]'::text, '16BUI'::text,0))) 
-		FROM (SELECT ST_Clip(A.cd_rast, QRY.geom, true) AS Clip
-				FROM wcmc_hef.tem_biodiversidad_riqueza_potencial_especies_fauna_endemica AS A,
-					(select geom from ST_Transform(ST_GeomFromText(#{strPoligonoConsulta,jdbcType=VARCHAR}, 4326),32718) as geom) as QRY
-				WHERE ST_Intersects(A.cd_rast, 1, QRY.geom)) as t
+	<select id="selectRidAfectadosByGeometry" resultType="Integer" parameterType="wcmc.hef.dao.capa.domain.BeanRaster" >
+		select rid 
+		from (select rid, ST_Transform(ST_Envelope(cd_rast), 4326) as box from wcmc_hef.tem_biodiversidad_riqueza_potencial_especies_fauna_endemica) as ttt
+		where ST_Intersects(
+			ST_GeomFromText(#{strPoligonoConsulta,jdbcType=VARCHAR}, 4326),
+			box)
 	</select>
+	
+	<insert id="insertGeometryByRangoAndGeometry" parameterType="wcmc.hef.dao.capa.domain.BeanRaster" >
+		insert into wcmc_hef.tem_query_acl (de_hash_consulta, cd_rid, de_tabla, cd_rast, fc_fecreg) 
+		select ${strHashConsulta}, rid, 'tem_biodiversidad_riqueza_potencial_especies_fauna_endemica', raster, current_timestamp
+		from (
+			SELECT rid, ST_MapAlgebra(cd_rast, 1, '1BB', '(${strRangoConsulta})::int') as raster
+			FROM wcmc_hef.tem_biodiversidad_riqueza_potencial_especies_fauna_endemica where rid in (${strInRids})
+		) as ttt
+		where ST_Intersects(
+			ST_Transform(ST_GeomFromText(#{strPoligonoConsulta,jdbcType=VARCHAR}, 4326),32718),
+			raster)
+	</insert>
+	
+	<delete id="deleteQueryByUsuario" parameterType="wcmc.hef.dao.capa.domain.BeanRaster" >
+		delete from wcmc_hef.tem_query_acl where de_hash_consulta = #{strHashConsulta,jdbcType=VARCHAR}
+	</delete>
+	
 </mapper>

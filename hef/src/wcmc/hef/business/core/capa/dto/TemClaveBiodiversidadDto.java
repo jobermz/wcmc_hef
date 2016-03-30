@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemClaveBiodiversidadDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private Integer intObjectid1;
@@ -36,6 +37,14 @@ public class TemClaveBiodiversidadDto implements BaseBeanVectorialDto {
 	private Double dblShapeLeng;
 	private Double dblShapeLe1;
 	private Double dblShapeArea;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getDteAddeddateFecha() {
 		return CadenaUtil.getStrDate(dteAddeddate);
 	}

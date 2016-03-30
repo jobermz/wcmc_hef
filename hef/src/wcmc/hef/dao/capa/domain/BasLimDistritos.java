@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasLimDistritos extends BasLimDistritosKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strIddpto;
 	private String strNombdep;
@@ -22,7 +23,13 @@ public class BasLimDistritos extends BasLimDistritosKey implements BaseBeanVecto
 	private Double dblSupLacust;
 	private Double dblSupInsD;
 	private String strUbigeo;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

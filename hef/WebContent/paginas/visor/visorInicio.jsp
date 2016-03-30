@@ -72,6 +72,11 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 	</div>
 </div>
 
+
+
+
+
+
 <div class="modal fade left upload-capas-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-md pull-left">
 		<div class="modal-content">
@@ -112,6 +117,11 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 	</div>
 </div>
 
+
+
+
+
+
 <div class="modal fade left identificar-area-criterio-logico-filtrar-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-md pull-left">
 		<div class="modal-content" id="idDivIACFiltrar" style="background-color: white;">
@@ -123,7 +133,7 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 </div>
 
 <div class="modal fade left identificar-area-criterio-logico-umbral-modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-md pull-left">
+	<div class="modal-dialog modal-lg pull-left">
 		<div class="modal-content" id="idDivIACUmbral" style="background-color: white;">
 			
 			<s:include value="visorInicioFormIdentificarAreaCriterioLogicosUmbral.jsp"></s:include>
@@ -131,6 +141,11 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 		</div>
 	</div>
 </div>
+
+
+
+
+
 
 <div id="idDivRightClick" style="position:absolute;display:none;z-index:100;">
 	<UL id="myMenu" class="contextMenu">

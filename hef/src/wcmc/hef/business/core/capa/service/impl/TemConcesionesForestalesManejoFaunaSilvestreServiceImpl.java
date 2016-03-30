@@ -56,6 +56,7 @@ public class TemConcesionesForestalesManejoFaunaSilvestreServiceImpl implements 
 			if(CadenaUtil.getDoubNull(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig()) != null) {
 				criteria.andDblAreaSigEqualTo(temConcesionesForestalesManejoFaunaSilvestreDto.getDblAreaSig());
 			}
+			temConcesionesForestalesManejoFaunaSilvestreParamDef.setStrHashConsulta(temConcesionesForestalesManejoFaunaSilvestreDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesManejoFaunaSilvestreParamDef.setOrderByClause("de_titular,de_contrato");

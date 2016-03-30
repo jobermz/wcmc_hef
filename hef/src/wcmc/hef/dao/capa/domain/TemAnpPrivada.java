@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemAnpPrivada extends TemAnpPrivadaKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Long lngObjectid;
 	private String strAnpcCat;
@@ -19,7 +20,13 @@ public class TemAnpPrivada extends TemAnpPrivadaKey implements BaseBeanVectorial
 	private String strAnpcDepa;
 	private String strAnpcTipop;
 	private String strAnpcTitu;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

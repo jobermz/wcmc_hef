@@ -1,9 +1,9 @@
 package wcmc.hef.web.capa.action;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import wcmc.hef.business.core.configuracion.dto.CampoMetadataDto;
+import wcmc.hef.business.core.configuracion.dto.CapaDto;
+import wcmc.hef.business.core.configuracion.dto.GeometriaUsuarioDto;
+import wcmc.hef.business.core.configuracion.service.CampoMetadataService;
 import wcmc.hef.business.core.configuracion.service.CapaService;
+import wcmc.hef.business.core.configuracion.service.GeometriaUsuarioService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -66,9 +71,11 @@ import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BeanRasterDto;
+import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
 import wcmc.hef.dao.capa.domain.BeanRaster;
+import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -149,7 +156,12 @@ import wcmc.hef.business.core.capa.dto.TemViasTrochasDto;
 import wcmc.hef.dao.capa.domain.TemViasTrochas;
 import wcmc.hef.business.core.capa.dto.TemZonificPotencialBosqueProduccionPermanenteDto;
 import wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente;
+import wcmc.hef.dao.configuracion.domain.CampoMetadata;
+import wcmc.hef.dao.configuracion.domain.Capa;
+import wcmc.hef.dao.configuracion.domain.GeometriaUsuario;
 import wcmc.hef.general.util.CadenaUtil;
+import wcmc.hef.general.util.ConfiguracionProperties;
+import wcmc.hef.general.util.GeotoolsData;
 import wcmc.hef.general.util.ServiciosProperties;
 
 public class ConsultaAction extends ActionSupport {
@@ -297,6 +309,12 @@ public class ConsultaAction extends ActionSupport {
 	@Autowired
 	private CapaService capaService;
 	
+	@Autowired
+	private GeometriaUsuarioService geometriaUsuarioService;
+	
+	@Autowired
+	private CampoMetadataService campoMetadataService;
+	
 	private String strPoligonoConsulta;
 	private String strIdCapaConsulta;
 	private String listSrlIdCapaConsulta;
@@ -320,6 +338,17 @@ public class ConsultaAction extends ActionSupport {
 				}
 			}
 			
+			String strHashConsultaCurr	= "";
+			if(CadenaUtil.getStrNull(session.get("strHashConsultaACL")) != null) {
+				strHashConsultaCurr	= (String)session.get("strHashConsultaACL");
+			}
+			final String strHashConsulta	= strHashConsultaCurr;
+			
+			
+			if(CadenaUtil.getStrNull(strPoligonoConsulta) == null) {//TODO No compatible para la herencia de criterios hacia Analizar por area
+				strPoligonoConsulta		= (String)session.get("geometria_"+strHashConsulta);
+			}
+
 			final Map<String, Object> mapReporte		= new HashMap<String, Object>();
 			String[] arrCons	= listSrlIdCapaConsulta.split(",");
 			List<String> listConsulta	= Arrays.asList(arrCons);
@@ -327,65 +356,76 @@ public class ConsultaAction extends ActionSupport {
 			List<Thread> listThread	= new ArrayList<Thread>();
 			final List<String> listReporteOk	= new ArrayList<String>();
 			for(String strSrlIdCapa:listConsulta) {
-				if(mapServ.get(CadenaUtil.getStr(strSrlIdCapa)) != null) {
+				if(!mapServ.containsKey(CadenaUtil.getStr(strSrlIdCapa))) {
+					//TODO Consultar por capas de usuario
+					CapaDto capaDto		= new CapaDto();
+					capaDto.setSrlIdCapa(CadenaUtil.getInte(strSrlIdCapa));
+					final Capa capa		= capaService.buscarById(capaDto);
+					if(capa != null) {
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									GeometriaUsuarioDto geometriaUsuarioDto	= new GeometriaUsuarioDto();
+									geometriaUsuarioDto.setIntIdCapa(capa.getSrlIdCapa());
+									geometriaUsuarioDto.setStrGeometry(CadenaUtil.getStr(strPoligonoConsulta));
+									geometriaUsuarioDto.setStrHashConsulta(strHashConsulta);
+									List<GeometriaUsuario> listGeometriaUsu		= geometriaUsuarioService.buscar(geometriaUsuarioDto);
+//									List<Integer> listGid	= new ArrayList<Integer>();
+//									for(GeometriaUsuario geo:listGeometriaUsu) {
+//										listGid.add(geo.getIntGid());
+//									}
+//									String strRutaRepTemp	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.RUTA_BASE_CAPAS_USUARIO);
+//									String strRutaShp		= strRutaRepTemp+File.separator+capa.getStrShp()+File.separator+capa.getStrShp()+".shp";
+//									List<Map<String, Object>> list	= new GeotoolsData().filtrarOcurrenciasListGid(strRutaShp, listGid);
+									if(listGeometriaUsu.size() > 0) {
+										Map map = new HashMap<String, Object>();
+										map.put("list", listGeometriaUsu);
+										map.put("srlIdCapa", capa.getSrlIdCapa().toString());
+										map.put("strNombre", capa.getStrNombre());
+										
+										CampoMetadataDto campoMetadataDto	= new CampoMetadataDto();
+										campoMetadataDto.setIntIdCapa(capa.getSrlIdCapa());
+										List<CampoMetadata> listCampoMetadata	= campoMetadataService.buscar(campoMetadataDto);
+										map.put("listCampoMetadata", listCampoMetadata);
+										
+										List<Map> listGeometriaUsuario	= (List)mapReporte.get("listGeometriaUsuario");
+										if(listGeometriaUsuario == null) {
+											listGeometriaUsuario	= new ArrayList<Map>();
+											mapReporte.put("listGeometriaUsuario", listGeometriaUsuario);
+										}
+										listGeometriaUsuario.add(map);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("GeometriaUsuarioService_"+capa.getSrlIdCapa());
+								}
+							}
+						});
+						listThread.add(t);
+					}
+				} else {
 					switch(mapServ.get(CadenaUtil.getStr(strSrlIdCapa))) {
-					case "BasHidroRios100000Service":
+					case "BasLimNacionalService":
 					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									BasHidroRios100000Dto basHidroRios100000Dto		= new BasHidroRios100000Dto();
-									basHidroRios100000Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasHidroRios100000> listBasHidroRios100000		= basHidroRios100000Service.buscar(basHidroRios100000Dto);
-									if(listBasHidroRios100000.size() > 0) {
-										mapReporte.put("listBasHidroRios100000", listBasHidroRios100000);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("BasHidroRios100000Service");
-								}
-							}
-						});
-						listThread.add(t);
 						break;
 					}
-					case "BasHidroRiosLagunasService":
+					case "BasLimProvinciaService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									BasHidroRiosLagunasDto basHidroRiosLagunasDto		= new BasHidroRiosLagunasDto();
-									basHidroRiosLagunasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasHidroRiosLagunas> listBasHidroRiosLagunas		= basHidroRiosLagunasService.buscar(basHidroRiosLagunasDto);
-									if(listBasHidroRiosLagunas.size() > 0) {
-										mapReporte.put("listBasHidroRiosLagunas", listBasHidroRiosLagunas);
+									BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
+									basLimProvinciaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basLimProvinciaDto.setStrHashConsulta(strHashConsulta);
+									List<BasLimProvincia> listBasLimProvincia		= basLimProvinciaService.buscar(basLimProvinciaDto);
+									if(listBasLimProvincia.size() > 0) {
+										mapReporte.put("listBasLimProvincia", listBasLimProvincia);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("BasHidroRiosLagunasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "BasLimAmazoniaService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
-									basLimAmazoniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscar(basLimAmazoniaDto);
-									if(listBasLimAmazonia.size() > 0) {
-										mapReporte.put("listBasLimAmazonia", listBasLimAmazonia);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("BasLimAmazoniaService");
+									listReporteOk.add("BasLimProvinciaService");
 								}
 							}
 						});
@@ -399,6 +439,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									BasLimDepartamentoDto basLimDepartamentoDto		= new BasLimDepartamentoDto();
 									basLimDepartamentoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basLimDepartamentoDto.setStrHashConsulta(strHashConsulta);
 									List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
 									if(listBasLimDepartamento.size() > 0) {
 										mapReporte.put("listBasLimDepartamento", listBasLimDepartamento);
@@ -420,6 +461,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									BasLimDistritosDto basLimDistritosDto		= new BasLimDistritosDto();
 									basLimDistritosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basLimDistritosDto.setStrHashConsulta(strHashConsulta);
 									List<BasLimDistritos> listBasLimDistritos		= basLimDistritosService.buscar(basLimDistritosDto);
 									if(listBasLimDistritos.size() > 0) {
 										mapReporte.put("listBasLimDistritos", listBasLimDistritos);
@@ -434,483 +476,66 @@ public class ConsultaAction extends ActionSupport {
 						listThread.add(t);
 						break;
 					}
-					case "BasLimProvinciaService":
+					case "BasLimAmazoniaService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
-									basLimProvinciaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasLimProvincia> listBasLimProvincia		= basLimProvinciaService.buscar(basLimProvinciaDto);
-									if(listBasLimProvincia.size() > 0) {
-										mapReporte.put("listBasLimProvincia", listBasLimProvincia);
+									BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+									basLimAmazoniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basLimAmazoniaDto.setStrHashConsulta(strHashConsulta);
+									List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscar(basLimAmazoniaDto);
+									if(listBasLimAmazonia.size() > 0) {
+										mapReporte.put("listBasLimAmazonia", listBasLimAmazonia);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("BasLimProvinciaService");
+									listReporteOk.add("BasLimAmazoniaService");
 								}
 							}
 						});
 						listThread.add(t);
 						break;
 					}
-					case "BasViasRedVialDepartamentalService":
+					case "BasHidroRiosLagunasService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto		= new BasViasRedVialDepartamentalDto();
-									basViasRedVialDepartamentalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasViasRedVialDepartamental> listBasViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscar(basViasRedVialDepartamentalDto);
-									if(listBasViasRedVialDepartamental.size() > 0) {
-										mapReporte.put("listBasViasRedVialDepartamental", listBasViasRedVialDepartamental);
+									BasHidroRiosLagunasDto basHidroRiosLagunasDto		= new BasHidroRiosLagunasDto();
+									basHidroRiosLagunasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basHidroRiosLagunasDto.setStrHashConsulta(strHashConsulta);
+									List<BasHidroRiosLagunas> listBasHidroRiosLagunas		= basHidroRiosLagunasService.buscar(basHidroRiosLagunasDto);
+									if(listBasHidroRiosLagunas.size() > 0) {
+										mapReporte.put("listBasHidroRiosLagunas", listBasHidroRiosLagunas);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("BasViasRedVialDepartamentalService");
+									listReporteOk.add("BasHidroRiosLagunasService");
 								}
 							}
 						});
 						listThread.add(t);
 						break;
 					}
-					case "BasViasRedVialNacionalService":
+					case "BasHidroRios100000Service":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									BasViasRedVialNacionalDto basViasRedVialNacionalDto		= new BasViasRedVialNacionalDto();
-									basViasRedVialNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasViasRedVialNacional> listBasViasRedVialNacional		= basViasRedVialNacionalService.buscar(basViasRedVialNacionalDto);
-									if(listBasViasRedVialNacional.size() > 0) {
-										mapReporte.put("listBasViasRedVialNacional", listBasViasRedVialNacional);
+									BasHidroRios100000Dto basHidroRios100000Dto		= new BasHidroRios100000Dto();
+									basHidroRios100000Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basHidroRios100000Dto.setStrHashConsulta(strHashConsulta);
+									List<BasHidroRios100000> listBasHidroRios100000		= basHidroRios100000Service.buscar(basHidroRios100000Dto);
+									if(listBasHidroRios100000.size() > 0) {
+										mapReporte.put("listBasHidroRios100000", listBasHidroRios100000);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("BasViasRedVialNacionalService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "BasViasRedVialVecinalService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									BasViasRedVialVecinalDto basViasRedVialVecinalDto		= new BasViasRedVialVecinalDto();
-									basViasRedVialVecinalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<BasViasRedVialVecinal> listBasViasRedVialVecinal		= basViasRedVialVecinalService.buscar(basViasRedVialVecinalDto);
-									if(listBasViasRedVialVecinal.size() > 0) {
-										mapReporte.put("listBasViasRedVialVecinal", listBasViasRedVialVecinal);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("BasViasRedVialVecinalService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemAnpNacionalService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemAnpNacionalDto temAnpNacionalDto		= new TemAnpNacionalDto();
-									temAnpNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemAnpNacional> listTemAnpNacional		= temAnpNacionalService.buscar(temAnpNacionalDto);
-									if(listTemAnpNacional.size() > 0) {
-										mapReporte.put("listTemAnpNacional", listTemAnpNacional);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemAnpNacionalService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemAnpPrivadaService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemAnpPrivadaDto temAnpPrivadaDto		= new TemAnpPrivadaDto();
-									temAnpPrivadaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemAnpPrivada> listTemAnpPrivada		= temAnpPrivadaService.buscar(temAnpPrivadaDto);
-									if(listTemAnpPrivada.size() > 0) {
-										mapReporte.put("listTemAnpPrivada", listTemAnpPrivada);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemAnpPrivadaService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemAnpRegionalService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemAnpRegionalDto temAnpRegionalDto		= new TemAnpRegionalDto();
-									temAnpRegionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemAnpRegional> listTemAnpRegional		= temAnpRegionalService.buscar(temAnpRegionalDto);
-									if(listTemAnpRegional.size() > 0) {
-										mapReporte.put("listTemAnpRegional", listTemAnpRegional);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemAnpRegionalService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemCarbonoEcozonasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemCarbonoEcozonasDto temCarbonoEcozonasDto		= new TemCarbonoEcozonasDto();
-									temCarbonoEcozonasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemCarbonoEcozonas> listTemCarbonoEcozonas		= temCarbonoEcozonasService.buscar(temCarbonoEcozonasDto);
-									if(listTemCarbonoEcozonas.size() > 0) {
-										mapReporte.put("listTemCarbonoEcozonas", listTemCarbonoEcozonas);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemCarbonoEcozonasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemCentrosPobladosService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemCentrosPobladosDto temCentrosPobladosDto		= new TemCentrosPobladosDto();
-									temCentrosPobladosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemCentrosPoblados> listTemCentrosPoblados		= temCentrosPobladosService.buscar(temCentrosPobladosDto);
-									if(listTemCentrosPoblados.size() > 0) {
-										mapReporte.put("listTemCentrosPoblados", listTemCentrosPoblados);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemCentrosPobladosService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemClaveBiodiversidadService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemClaveBiodiversidadDto temClaveBiodiversidadDto		= new TemClaveBiodiversidadDto();
-									temClaveBiodiversidadDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemClaveBiodiversidad> listTemClaveBiodiversidad		= temClaveBiodiversidadService.buscar(temClaveBiodiversidadDto);
-									if(listTemClaveBiodiversidad.size() > 0) {
-										mapReporte.put("listTemClaveBiodiversidad", listTemClaveBiodiversidad);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemClaveBiodiversidadService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemComunidadesNativasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemComunidadesNativasDto temComunidadesNativasDto		= new TemComunidadesNativasDto();
-									temComunidadesNativasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemComunidadesNativas> listTemComunidadesNativas		= temComunidadesNativasService.buscar(temComunidadesNativasDto);
-									if(listTemComunidadesNativas.size() > 0) {
-										mapReporte.put("listTemComunidadesNativas", listTemComunidadesNativas);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemComunidadesNativasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesEcoturismoService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesEcoturismoDto temConcesionesEcoturismoDto		= new TemConcesionesEcoturismoDto();
-									temConcesionesEcoturismoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesEcoturismo> listTemConcesionesEcoturismo		= temConcesionesEcoturismoService.buscar(temConcesionesEcoturismoDto);
-									if(listTemConcesionesEcoturismo.size() > 0) {
-										mapReporte.put("listTemConcesionesEcoturismo", listTemConcesionesEcoturismo);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesEcoturismoService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesCastaniaService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto		= new TemConcesionesForestalesCastaniaDto();
-									temConcesionesForestalesCastaniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesCastania> listTemConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscar(temConcesionesForestalesCastaniaDto);
-									if(listTemConcesionesForestalesCastania.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesCastania", listTemConcesionesForestalesCastania);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesCastaniaService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesConservacionService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto		= new TemConcesionesForestalesConservacionDto();
-									temConcesionesForestalesConservacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesConservacion> listTemConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscar(temConcesionesForestalesConservacionDto);
-									if(listTemConcesionesForestalesConservacion.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesConservacion", listTemConcesionesForestalesConservacion);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesConservacionService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesMaderableAdecuadasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto		= new TemConcesionesForestalesMaderableAdecuadasDto();
-									temConcesionesForestalesMaderableAdecuadasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesMaderableAdecuadas> listTemConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscar(temConcesionesForestalesMaderableAdecuadasDto);
-									if(listTemConcesionesForestalesMaderableAdecuadas.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesMaderableAdecuadas", listTemConcesionesForestalesMaderableAdecuadas);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesMaderableAdecuadasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesMaderableConcursoService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesMaderableConcursoDto temConcesionesForestalesMaderableConcursoDto		= new TemConcesionesForestalesMaderableConcursoDto();
-									temConcesionesForestalesMaderableConcursoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesMaderableConcurso> listTemConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscar(temConcesionesForestalesMaderableConcursoDto);
-									if(listTemConcesionesForestalesMaderableConcurso.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesMaderableConcurso", listTemConcesionesForestalesMaderableConcurso);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesMaderableConcursoService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesManejoFaunaSilvestreService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto		= new TemConcesionesForestalesManejoFaunaSilvestreDto();
-									temConcesionesForestalesManejoFaunaSilvestreDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesManejoFaunaSilvestre> listTemConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscar(temConcesionesForestalesManejoFaunaSilvestreDto);
-									if(listTemConcesionesForestalesManejoFaunaSilvestre.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesManejoFaunaSilvestre", listTemConcesionesForestalesManejoFaunaSilvestre);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesManejoFaunaSilvestreService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesForestalesReforestacionService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesForestalesReforestacionDto temConcesionesForestalesReforestacionDto		= new TemConcesionesForestalesReforestacionDto();
-									temConcesionesForestalesReforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesForestalesReforestacion> listTemConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscar(temConcesionesForestalesReforestacionDto);
-									if(listTemConcesionesForestalesReforestacion.size() > 0) {
-										mapReporte.put("listTemConcesionesForestalesReforestacion", listTemConcesionesForestalesReforestacion);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesForestalesReforestacionService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemConcesionesMinerasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionesMinerasDto temConcesionesMinerasDto		= new TemConcesionesMinerasDto();
-									temConcesionesMinerasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionesMineras> listTemConcesionesMineras		= temConcesionesMinerasService.buscar(temConcesionesMinerasDto);
-									if(listTemConcesionesMineras.size() > 0) {
-										mapReporte.put("listTemConcesionesMineras", listTemConcesionesMineras);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionesMinerasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-	//				case "TemConcesionHidroelectricasDistribucionService":
-	//				{
-	//					Thread t= new Thread(new Runnable() {
-	//						public void run() {
-	//							try {
-	//								TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
-	//								temConcesionHidroelectricasDistribucionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-	//								List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscar(temConcesionHidroelectricasDistribucionDto);
-	//								if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
-	//									mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
-	//								}
-	//							} catch (Exception ex) {
-	//								ex.printStackTrace();
-	//							} finally {
-	//								listReporteOk.add("TemConcesionHidroelectricasDistribucionService");
-	//							}
-	//						}
-	//					});
-	//					listThread.add(t);
-	//					break;
-	//				}
-					case "TemConcesionHidroelectricasGeneracionService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemConcesionHidroelectricasGeneracionDto temConcesionHidroelectricasGeneracionDto		= new TemConcesionHidroelectricasGeneracionDto();
-									temConcesionHidroelectricasGeneracionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemConcesionHidroelectricasGeneracion> listTemConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscar(temConcesionHidroelectricasGeneracionDto);
-									if(listTemConcesionHidroelectricasGeneracion.size() > 0) {
-										mapReporte.put("listTemConcesionHidroelectricasGeneracion", listTemConcesionHidroelectricasGeneracion);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemConcesionHidroelectricasGeneracionService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemCostoOportunidadDeforestacionService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto		= new TemCostoOportunidadDeforestacionDto();
-									temCostoOportunidadDeforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemCostoOportunidadDeforestacion> listTemCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscar(temCostoOportunidadDeforestacionDto);
-									if(listTemCostoOportunidadDeforestacion.size() > 0) {
-										mapReporte.put("listTemCostoOportunidadDeforestacion", listTemCostoOportunidadDeforestacion);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemCostoOportunidadDeforestacionService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemCoverturaVegetal2015Service":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto		= new TemCoverturaVegetal2015Dto();
-									temCoverturaVegetal2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemCoverturaVegetal2015> listTemCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscar(temCoverturaVegetal2015Dto);
-									if(listTemCoverturaVegetal2015.size() > 0) {
-										mapReporte.put("listTemCoverturaVegetal2015", listTemCoverturaVegetal2015);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemCoverturaVegetal2015Service");
+									listReporteOk.add("BasHidroRios100000Service");
 								}
 							}
 						});
@@ -924,6 +549,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
 									temCuencasHidrograficasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temCuencasHidrograficasDto.setStrHashConsulta(strHashConsulta);
 									List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscar(temCuencasHidrograficasDto);
 									if(listTemCuencasHidrograficas.size() > 0) {
 										mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
@@ -938,210 +564,66 @@ public class ConsultaAction extends ActionSupport {
 						listThread.add(t);
 						break;
 					}
-					case "TemHumedalesRamsarService":
+					case "BasViasRedVialVecinalService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemHumedalesRamsarDto temHumedalesRamsarDto		= new TemHumedalesRamsarDto();
-									temHumedalesRamsarDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemHumedalesRamsar> listTemHumedalesRamsar		= temHumedalesRamsarService.buscar(temHumedalesRamsarDto);
-									if(listTemHumedalesRamsar.size() > 0) {
-										mapReporte.put("listTemHumedalesRamsar", listTemHumedalesRamsar);
+									BasViasRedVialVecinalDto basViasRedVialVecinalDto		= new BasViasRedVialVecinalDto();
+									basViasRedVialVecinalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basViasRedVialVecinalDto.setStrHashConsulta(strHashConsulta);
+									List<BasViasRedVialVecinal> listBasViasRedVialVecinal		= basViasRedVialVecinalService.buscar(basViasRedVialVecinalDto);
+									if(listBasViasRedVialVecinal.size() > 0) {
+										mapReporte.put("listBasViasRedVialVecinal", listBasViasRedVialVecinal);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("TemHumedalesRamsarService");
+									listReporteOk.add("BasViasRedVialVecinalService");
 								}
 							}
 						});
 						listThread.add(t);
 						break;
 					}
-					case "TemIndiceImportanciaBiologicaService":
+					case "BasViasRedVialNacionalService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto		= new TemIndiceImportanciaBiologicaDto();
-									temIndiceImportanciaBiologicaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemIndiceImportanciaBiologica> listTemIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscar(temIndiceImportanciaBiologicaDto);
-									if(listTemIndiceImportanciaBiologica.size() > 0) {
-										mapReporte.put("listTemIndiceImportanciaBiologica", listTemIndiceImportanciaBiologica);
+									BasViasRedVialNacionalDto basViasRedVialNacionalDto		= new BasViasRedVialNacionalDto();
+									basViasRedVialNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basViasRedVialNacionalDto.setStrHashConsulta(strHashConsulta);
+									List<BasViasRedVialNacional> listBasViasRedVialNacional		= basViasRedVialNacionalService.buscar(basViasRedVialNacionalDto);
+									if(listBasViasRedVialNacional.size() > 0) {
+										mapReporte.put("listBasViasRedVialNacional", listBasViasRedVialNacional);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("TemIndiceImportanciaBiologicaService");
+									listReporteOk.add("BasViasRedVialNacionalService");
 								}
 							}
 						});
 						listThread.add(t);
 						break;
 					}
-					case "TemPrediosRuralesService":
+					case "BasViasRedVialDepartamentalService":
 					{
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
-									TemPrediosRuralesDto temPrediosRuralesDto		= new TemPrediosRuralesDto();
-									temPrediosRuralesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemPrediosRurales> listTemPrediosRurales		= temPrediosRuralesService.buscar(temPrediosRuralesDto);
-									if(listTemPrediosRurales.size() > 0) {
-										mapReporte.put("listTemPrediosRurales", listTemPrediosRurales);
+									BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto		= new BasViasRedVialDepartamentalDto();
+									basViasRedVialDepartamentalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									basViasRedVialDepartamentalDto.setStrHashConsulta(strHashConsulta);
+									List<BasViasRedVialDepartamental> listBasViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscar(basViasRedVialDepartamentalDto);
+									if(listBasViasRedVialDepartamental.size() > 0) {
+										mapReporte.put("listBasViasRedVialDepartamental", listBasViasRedVialDepartamental);
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
-									listReporteOk.add("TemPrediosRuralesService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemProyeccionDensidadPob2015Service":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto		= new TemProyeccionDensidadPob2015Dto();
-									temProyeccionDensidadPob2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemProyeccionDensidadPob2015> listTemProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscar(temProyeccionDensidadPob2015Dto);
-									if(listTemProyeccionDensidadPob2015.size() > 0) {
-										mapReporte.put("listTemProyeccionDensidadPob2015", listTemProyeccionDensidadPob2015);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemProyeccionDensidadPob2015Service");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemProyectosPoligonosService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemProyectosPoligonosDto temProyectosPoligonosDto		= new TemProyectosPoligonosDto();
-									temProyectosPoligonosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemProyectosPoligonos> listTemProyectosPoligonos		= temProyectosPoligonosService.buscar(temProyectosPoligonosDto);
-									if(listTemProyectosPoligonos.size() > 0) {
-										mapReporte.put("listTemProyectosPoligonos", listTemProyectosPoligonos);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemProyectosPoligonosService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemProyectosPuntosService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemProyectosPuntosDto temProyectosPuntosDto		= new TemProyectosPuntosDto();
-									temProyectosPuntosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemProyectosPuntos> listTemProyectosPuntos		= temProyectosPuntosService.buscar(temProyectosPuntosDto);
-									if(listTemProyectosPuntos.size() > 0) {
-										mapReporte.put("listTemProyectosPuntos", listTemProyectosPuntos);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemProyectosPuntosService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemReservasTerritorialesIndigenasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto		= new TemReservasTerritorialesIndigenasDto();
-									temReservasTerritorialesIndigenasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemReservasTerritorialesIndigenas> listTemReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscar(temReservasTerritorialesIndigenasDto);
-									if(listTemReservasTerritorialesIndigenas.size() > 0) {
-										mapReporte.put("listTemReservasTerritorialesIndigenas", listTemReservasTerritorialesIndigenas);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemReservasTerritorialesIndigenasService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemSinanpeAmortiguamientoService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto		= new TemSinanpeAmortiguamientoDto();
-									temSinanpeAmortiguamientoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemSinanpeAmortiguamiento> listTemSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscar(temSinanpeAmortiguamientoDto);
-									if(listTemSinanpeAmortiguamiento.size() > 0) {
-										mapReporte.put("listTemSinanpeAmortiguamiento", listTemSinanpeAmortiguamiento);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemSinanpeAmortiguamientoService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemSoeconComunidadesCampesinasTotalesService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
-									temSoeconComunidadesCampesinasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemSoeconComunidadesCampesinas> listTemSoeconComunidadesCampesinasTotales		= temSoeconComunidadesCampesinasService.buscar(temSoeconComunidadesCampesinasDto);
-									if(listTemSoeconComunidadesCampesinasTotales.size() > 0) {
-										mapReporte.put("listTemSoeconComunidadesCampesinasTotales", listTemSoeconComunidadesCampesinasTotales);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemSoeconComunidadesCampesinasTotalesService");
-								}
-							}
-						});
-						listThread.add(t);
-						break;
-					}
-					case "TemSoeconSolicitudCreacionReservasTerritorialesService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto		= new TemSoeconSolicitudCreacionReservasTerritorialesDto();
-									temSoeconSolicitudCreacionReservasTerritorialesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									List<TemSoeconSolicitudCreacionReservasTerritoriales> listTemSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscar(temSoeconSolicitudCreacionReservasTerritorialesDto);
-									if(listTemSoeconSolicitudCreacionReservasTerritoriales.size() > 0) {
-										mapReporte.put("listTemSoeconSolicitudCreacionReservasTerritoriales", listTemSoeconSolicitudCreacionReservasTerritoriales);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemSoeconSolicitudCreacionReservasTerritorialesService");
+									listReporteOk.add("BasViasRedVialDepartamentalService");
 								}
 							}
 						});
@@ -1155,6 +637,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									TemViaFerreaDto temViaFerreaDto		= new TemViaFerreaDto();
 									temViaFerreaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temViaFerreaDto.setStrHashConsulta(strHashConsulta);
 									List<TemViaFerrea> listTemViaFerrea		= temViaFerreaService.buscar(temViaFerreaDto);
 									if(listTemViaFerrea.size() > 0) {
 										mapReporte.put("listTemViaFerrea", listTemViaFerrea);
@@ -1176,6 +659,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									TemViasTrochasDto temViasTrochasDto		= new TemViasTrochasDto();
 									temViasTrochasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temViasTrochasDto.setStrHashConsulta(strHashConsulta);
 									List<TemViasTrochas> listTemViasTrochas		= temViasTrochasService.buscar(temViasTrochasDto);
 									if(listTemViasTrochas.size() > 0) {
 										mapReporte.put("listTemViasTrochas", listTemViasTrochas);
@@ -1190,6 +674,270 @@ public class ConsultaAction extends ActionSupport {
 						listThread.add(t);
 						break;
 					}
+					case "TemSoeconComunidadesCampesinasTotalesService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
+									temSoeconComunidadesCampesinasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temSoeconComunidadesCampesinasDto.setStrHashConsulta(strHashConsulta);
+									List<TemSoeconComunidadesCampesinas> listTemSoeconComunidadesCampesinas		= temSoeconComunidadesCampesinasService.buscar(temSoeconComunidadesCampesinasDto);
+									if(listTemSoeconComunidadesCampesinas.size() > 0) {
+										mapReporte.put("listTemSoeconComunidadesCampesinas", listTemSoeconComunidadesCampesinas);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemSoeconComunidadesCampesinasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemComunidadesNativasService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemComunidadesNativasDto temComunidadesNativasDto		= new TemComunidadesNativasDto();
+									temComunidadesNativasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temComunidadesNativasDto.setStrHashConsulta(strHashConsulta);
+									List<TemComunidadesNativas> listTemComunidadesNativas		= temComunidadesNativasService.buscar(temComunidadesNativasDto);
+									if(listTemComunidadesNativas.size() > 0) {
+										mapReporte.put("listTemComunidadesNativas", listTemComunidadesNativas);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemComunidadesNativasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemReservasTerritorialesIndigenasService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto		= new TemReservasTerritorialesIndigenasDto();
+									temReservasTerritorialesIndigenasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temReservasTerritorialesIndigenasDto.setStrHashConsulta(strHashConsulta);
+									List<TemReservasTerritorialesIndigenas> listTemReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscar(temReservasTerritorialesIndigenasDto);
+									if(listTemReservasTerritorialesIndigenas.size() > 0) {
+										mapReporte.put("listTemReservasTerritorialesIndigenas", listTemReservasTerritorialesIndigenas);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemReservasTerritorialesIndigenasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemSoeconSolicitudCreacionReservasTerritorialesService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto		= new TemSoeconSolicitudCreacionReservasTerritorialesDto();
+									temSoeconSolicitudCreacionReservasTerritorialesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temSoeconSolicitudCreacionReservasTerritorialesDto.setStrHashConsulta(strHashConsulta);
+									List<TemSoeconSolicitudCreacionReservasTerritoriales> listTemSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscar(temSoeconSolicitudCreacionReservasTerritorialesDto);
+									if(listTemSoeconSolicitudCreacionReservasTerritoriales.size() > 0) {
+										mapReporte.put("listTemSoeconSolicitudCreacionReservasTerritoriales", listTemSoeconSolicitudCreacionReservasTerritoriales);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemSoeconSolicitudCreacionReservasTerritorialesService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesEcoturismoService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesEcoturismoDto temConcesionesEcoturismoDto		= new TemConcesionesEcoturismoDto();
+									temConcesionesEcoturismoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesEcoturismoDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesEcoturismo> listTemConcesionesEcoturismo		= temConcesionesEcoturismoService.buscar(temConcesionesEcoturismoDto);
+									if(listTemConcesionesEcoturismo.size() > 0) {
+										mapReporte.put("listTemConcesionesEcoturismo", listTemConcesionesEcoturismo);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesEcoturismoService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesCastaniaService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto		= new TemConcesionesForestalesCastaniaDto();
+									temConcesionesForestalesCastaniaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesCastaniaDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesCastania> listTemConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscar(temConcesionesForestalesCastaniaDto);
+									if(listTemConcesionesForestalesCastania.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesCastania", listTemConcesionesForestalesCastania);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesCastaniaService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesConservacionService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto		= new TemConcesionesForestalesConservacionDto();
+									temConcesionesForestalesConservacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesConservacionDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesConservacion> listTemConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscar(temConcesionesForestalesConservacionDto);
+									if(listTemConcesionesForestalesConservacion.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesConservacion", listTemConcesionesForestalesConservacion);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesConservacionService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesMaderableAdecuadasService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto		= new TemConcesionesForestalesMaderableAdecuadasDto();
+									temConcesionesForestalesMaderableAdecuadasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesMaderableAdecuadasDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesMaderableAdecuadas> listTemConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscar(temConcesionesForestalesMaderableAdecuadasDto);
+									if(listTemConcesionesForestalesMaderableAdecuadas.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesMaderableAdecuadas", listTemConcesionesForestalesMaderableAdecuadas);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesMaderableAdecuadasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesMaderableConcursoService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesMaderableConcursoDto temConcesionesForestalesMaderableConcursoDto		= new TemConcesionesForestalesMaderableConcursoDto();
+									temConcesionesForestalesMaderableConcursoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesMaderableConcursoDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesMaderableConcurso> listTemConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscar(temConcesionesForestalesMaderableConcursoDto);
+									if(listTemConcesionesForestalesMaderableConcurso.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesMaderableConcurso", listTemConcesionesForestalesMaderableConcurso);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesMaderableConcursoService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesManejoFaunaSilvestreService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto		= new TemConcesionesForestalesManejoFaunaSilvestreDto();
+									temConcesionesForestalesManejoFaunaSilvestreDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesManejoFaunaSilvestreDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesManejoFaunaSilvestre> listTemConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscar(temConcesionesForestalesManejoFaunaSilvestreDto);
+									if(listTemConcesionesForestalesManejoFaunaSilvestre.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesManejoFaunaSilvestre", listTemConcesionesForestalesManejoFaunaSilvestre);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesManejoFaunaSilvestreService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesForestalesReforestacionService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesForestalesReforestacionDto temConcesionesForestalesReforestacionDto		= new TemConcesionesForestalesReforestacionDto();
+									temConcesionesForestalesReforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesForestalesReforestacionDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesForestalesReforestacion> listTemConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscar(temConcesionesForestalesReforestacionDto);
+									if(listTemConcesionesForestalesReforestacion.size() > 0) {
+										mapReporte.put("listTemConcesionesForestalesReforestacion", listTemConcesionesForestalesReforestacion);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesForestalesReforestacionService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemPrediosRuralesService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemPrediosRuralesDto temPrediosRuralesDto		= new TemPrediosRuralesDto();
+									temPrediosRuralesDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temPrediosRuralesDto.setStrHashConsulta(strHashConsulta);
+									List<TemPrediosRurales> listTemPrediosRurales		= temPrediosRuralesService.buscar(temPrediosRuralesDto);
+									if(listTemPrediosRurales.size() > 0) {
+										mapReporte.put("listTemPrediosRurales", listTemPrediosRurales);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemPrediosRuralesService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
 					case "TemZonificPotencialBosqueProduccionPermanenteService":
 					{
 						Thread t= new Thread(new Runnable() {
@@ -1197,6 +945,7 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto		= new TemZonificPotencialBosqueProduccionPermanenteDto();
 									temZonificPotencialBosqueProduccionPermanenteDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temZonificPotencialBosqueProduccionPermanenteDto.setStrHashConsulta(strHashConsulta);
 									List<TemZonificPotencialBosqueProduccionPermanente> listTemZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscar(temZonificPotencialBosqueProduccionPermanenteDto);
 									if(listTemZonificPotencialBosqueProduccionPermanente.size() > 0) {
 										mapReporte.put("listTemZonificPotencialBosqueProduccionPermanente", listTemZonificPotencialBosqueProduccionPermanente);
@@ -1211,6 +960,381 @@ public class ConsultaAction extends ActionSupport {
 						listThread.add(t);
 						break;
 					}
+					case "TemConcesionHidroelectricasGeneracionService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionHidroelectricasGeneracionDto temConcesionHidroelectricasGeneracionDto		= new TemConcesionHidroelectricasGeneracionDto();
+									temConcesionHidroelectricasGeneracionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionHidroelectricasGeneracionDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionHidroelectricasGeneracion> listTemConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscar(temConcesionHidroelectricasGeneracionDto);
+									if(listTemConcesionHidroelectricasGeneracion.size() > 0) {
+										mapReporte.put("listTemConcesionHidroelectricasGeneracion", listTemConcesionHidroelectricasGeneracion);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionHidroelectricasGeneracionService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionHidroelectricasDistribucionService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
+									temConcesionHidroelectricasDistribucionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionHidroelectricasDistribucionDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscar(temConcesionHidroelectricasDistribucionDto);
+									if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
+										mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionHidroelectricasDistribucionService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemConcesionesMinerasService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemConcesionesMinerasDto temConcesionesMinerasDto		= new TemConcesionesMinerasDto();
+									temConcesionesMinerasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temConcesionesMinerasDto.setStrHashConsulta(strHashConsulta);
+									List<TemConcesionesMineras> listTemConcesionesMineras		= temConcesionesMinerasService.buscar(temConcesionesMinerasDto);
+									if(listTemConcesionesMineras.size() > 0) {
+										mapReporte.put("listTemConcesionesMineras", listTemConcesionesMineras);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemConcesionesMinerasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemAnpNacionalService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemAnpNacionalDto temAnpNacionalDto		= new TemAnpNacionalDto();
+									temAnpNacionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temAnpNacionalDto.setStrHashConsulta(strHashConsulta);
+									List<TemAnpNacional> listTemAnpNacional		= temAnpNacionalService.buscar(temAnpNacionalDto);
+									if(listTemAnpNacional.size() > 0) {
+										mapReporte.put("listTemAnpNacional", listTemAnpNacional);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemAnpNacionalService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemAnpRegionalService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemAnpRegionalDto temAnpRegionalDto		= new TemAnpRegionalDto();
+									temAnpRegionalDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temAnpRegionalDto.setStrHashConsulta(strHashConsulta);
+									List<TemAnpRegional> listTemAnpRegional		= temAnpRegionalService.buscar(temAnpRegionalDto);
+									if(listTemAnpRegional.size() > 0) {
+										mapReporte.put("listTemAnpRegional", listTemAnpRegional);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemAnpRegionalService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemAnpPrivadaService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemAnpPrivadaDto temAnpPrivadaDto		= new TemAnpPrivadaDto();
+									temAnpPrivadaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temAnpPrivadaDto.setStrHashConsulta(strHashConsulta);
+									List<TemAnpPrivada> listTemAnpPrivada		= temAnpPrivadaService.buscar(temAnpPrivadaDto);
+									if(listTemAnpPrivada.size() > 0) {
+										mapReporte.put("listTemAnpPrivada", listTemAnpPrivada);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemAnpPrivadaService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemSinanpeAmortiguamientoService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto		= new TemSinanpeAmortiguamientoDto();
+									temSinanpeAmortiguamientoDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temSinanpeAmortiguamientoDto.setStrHashConsulta(strHashConsulta);
+									List<TemSinanpeAmortiguamiento> listTemSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscar(temSinanpeAmortiguamientoDto);
+									if(listTemSinanpeAmortiguamiento.size() > 0) {
+										mapReporte.put("listTemSinanpeAmortiguamiento", listTemSinanpeAmortiguamiento);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemSinanpeAmortiguamientoService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemClaveBiodiversidadService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemClaveBiodiversidadDto temClaveBiodiversidadDto		= new TemClaveBiodiversidadDto();
+									temClaveBiodiversidadDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temClaveBiodiversidadDto.setStrHashConsulta(strHashConsulta);
+									List<TemClaveBiodiversidad> listTemClaveBiodiversidad		= temClaveBiodiversidadService.buscar(temClaveBiodiversidadDto);
+									if(listTemClaveBiodiversidad.size() > 0) {
+										mapReporte.put("listTemClaveBiodiversidad", listTemClaveBiodiversidad);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemClaveBiodiversidadService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemHumedalesRamsarService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemHumedalesRamsarDto temHumedalesRamsarDto		= new TemHumedalesRamsarDto();
+									temHumedalesRamsarDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temHumedalesRamsarDto.setStrHashConsulta(strHashConsulta);
+									List<TemHumedalesRamsar> listTemHumedalesRamsar		= temHumedalesRamsarService.buscar(temHumedalesRamsarDto);
+									if(listTemHumedalesRamsar.size() > 0) {
+										mapReporte.put("listTemHumedalesRamsar", listTemHumedalesRamsar);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemHumedalesRamsarService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemCoverturaVegetal2015Service":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto		= new TemCoverturaVegetal2015Dto();
+									temCoverturaVegetal2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temCoverturaVegetal2015Dto.setStrHashConsulta(strHashConsulta);
+									List<TemCoverturaVegetal2015> listTemCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscar(temCoverturaVegetal2015Dto);
+									if(listTemCoverturaVegetal2015.size() > 0) {
+										mapReporte.put("listTemCoverturaVegetal2015", listTemCoverturaVegetal2015);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemCoverturaVegetal2015Service");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemCarbonoEcozonasService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemCarbonoEcozonasDto temCarbonoEcozonasDto		= new TemCarbonoEcozonasDto();
+									temCarbonoEcozonasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temCarbonoEcozonasDto.setStrHashConsulta(strHashConsulta);
+									List<TemCarbonoEcozonas> listTemCarbonoEcozonas		= temCarbonoEcozonasService.buscar(temCarbonoEcozonasDto);
+									if(listTemCarbonoEcozonas.size() > 0) {
+										mapReporte.put("listTemCarbonoEcozonas", listTemCarbonoEcozonas);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemCarbonoEcozonasService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemIndiceImportanciaBiologicaService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto		= new TemIndiceImportanciaBiologicaDto();
+									temIndiceImportanciaBiologicaDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temIndiceImportanciaBiologicaDto.setStrHashConsulta(strHashConsulta);
+									List<TemIndiceImportanciaBiologica> listTemIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscar(temIndiceImportanciaBiologicaDto);
+									if(listTemIndiceImportanciaBiologica.size() > 0) {
+										mapReporte.put("listTemIndiceImportanciaBiologica", listTemIndiceImportanciaBiologica);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemIndiceImportanciaBiologicaService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemCentrosPobladosService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemCentrosPobladosDto temCentrosPobladosDto		= new TemCentrosPobladosDto();
+									temCentrosPobladosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temCentrosPobladosDto.setStrHashConsulta(strHashConsulta);
+									List<TemCentrosPoblados> listTemCentrosPoblados		= temCentrosPobladosService.buscar(temCentrosPobladosDto);
+									if(listTemCentrosPoblados.size() > 0) {
+										mapReporte.put("listTemCentrosPoblados", listTemCentrosPoblados);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemCentrosPobladosService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemProyeccionDensidadPob2015Service":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto		= new TemProyeccionDensidadPob2015Dto();
+									temProyeccionDensidadPob2015Dto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temProyeccionDensidadPob2015Dto.setStrHashConsulta(strHashConsulta);
+									List<TemProyeccionDensidadPob2015> listTemProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscar(temProyeccionDensidadPob2015Dto);
+									if(listTemProyeccionDensidadPob2015.size() > 0) {
+										mapReporte.put("listTemProyeccionDensidadPob2015", listTemProyeccionDensidadPob2015);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemProyeccionDensidadPob2015Service");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemCostoOportunidadDeforestacionService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto		= new TemCostoOportunidadDeforestacionDto();
+									temCostoOportunidadDeforestacionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temCostoOportunidadDeforestacionDto.setStrHashConsulta(strHashConsulta);
+									List<TemCostoOportunidadDeforestacion> listTemCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscar(temCostoOportunidadDeforestacionDto);
+									if(listTemCostoOportunidadDeforestacion.size() > 0) {
+										mapReporte.put("listTemCostoOportunidadDeforestacion", listTemCostoOportunidadDeforestacion);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemCostoOportunidadDeforestacionService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemProyectosPuntosService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemProyectosPuntosDto temProyectosPuntosDto		= new TemProyectosPuntosDto();
+									temProyectosPuntosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temProyectosPuntosDto.setStrHashConsulta(strHashConsulta);
+									List<TemProyectosPuntos> listTemProyectosPuntos		= temProyectosPuntosService.buscar(temProyectosPuntosDto);
+									if(listTemProyectosPuntos.size() > 0) {
+										mapReporte.put("listTemProyectosPuntos", listTemProyectosPuntos);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemProyectosPuntosService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemProyectosPoligonosService":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									TemProyectosPoligonosDto temProyectosPoligonosDto		= new TemProyectosPoligonosDto();
+									temProyectosPoligonosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+									temProyectosPoligonosDto.setStrHashConsulta(strHashConsulta);
+									List<TemProyectosPoligonos> listTemProyectosPoligonos		= temProyectosPoligonosService.buscar(temProyectosPoligonosDto);
+									if(listTemProyectosPoligonos.size() > 0) {
+										mapReporte.put("listTemProyectosPoligonos", listTemProyectosPoligonos);
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemProyectosPoligonosService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					
 					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					case "TemBiodiversidadEspeciesPeligroExtincionService":
 					{

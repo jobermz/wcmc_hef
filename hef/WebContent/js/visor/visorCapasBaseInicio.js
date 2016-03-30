@@ -169,10 +169,12 @@ function mostrarCapaById(srlIdCapa, min, max) {
 		map.addLayer(capaBase.currLayer);
 	} else 	if(capaBase && 
 			(capaBase.currLayer == undefined || capaBase.currLayer == null) && 
-			capaBase.strWmsCapas && 
-			capaBase.strWmsCapas != "") {
-		var arrExtNom		= capaBase.strWmsCapas.split("_");
-		capaBase.currLayer	= declararCapaUsuario(arrExtNom[0], capaBase.srlIdCapa);
+			capaBase.strShp && 
+			capaBase.strShp != "") {
+//		strShp;
+//		strShpExtent
+//		var arrExtNom		= capaBase.strWmsCapas.split("_");
+		capaBase.currLayer	= declararCapaUsuario(capaBase.strShpExtent, capaBase.srlIdCapa);
 		map.addLayer(capaBase.currLayer);
 	}
 }

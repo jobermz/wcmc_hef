@@ -44,6 +44,7 @@ public class TemConcesionesForestalesCastaniaServiceImpl implements TemConcesion
 			if(CadenaUtil.getStrNull(temConcesionesForestalesCastaniaDto.getStrSituacion()) != null) {
 				criteria.andStrSituacionEqualTo(temConcesionesForestalesCastaniaDto.getStrSituacion());
 			}
+			temConcesionesForestalesCastaniaParamDef.setStrHashConsulta(temConcesionesForestalesCastaniaDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesCastaniaParamDef.setOrderByClause("de_titular,de_contrato");

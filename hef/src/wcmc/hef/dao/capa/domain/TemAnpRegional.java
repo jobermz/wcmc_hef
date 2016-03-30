@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemAnpRegional extends TemAnpRegionalKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid;
 	private String strAnpcCat;
@@ -17,7 +18,13 @@ public class TemAnpRegional extends TemAnpRegionalKey implements BaseBeanVectori
 	private String strAnpcBalem;
 	private String strAnpcFelem;
 	private String strAnpcDepa;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

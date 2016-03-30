@@ -62,6 +62,7 @@ public class TemZonificPotencialBosqueProduccionPermanenteServiceImpl implements
 			if(CadenaUtil.getDoubNull(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares()) != null) {
 				criteria.andDblHectaresEqualTo(temZonificPotencialBosqueProduccionPermanenteDto.getDblHectares());
 			}
+			temZonificPotencialBosqueProduccionPermanenteParamDef.setStrHashConsulta(temZonificPotencialBosqueProduccionPermanenteDto.getStrHashConsulta());
 		}
 		
 		temZonificPotencialBosqueProduccionPermanenteParamDef.setOrderByClause("de_tipo,de_doc_legal");

@@ -41,6 +41,7 @@ public class BasViasRedVialNacionalServiceImpl implements BasViasRedVialNacional
 			if(CadenaUtil.getStrNull(basViasRedVialNacionalDto.getStrSuperRod()) != null) {
 				criteria.andStrSuperRodEqualTo(basViasRedVialNacionalDto.getStrSuperRod());
 			}
+			basViasRedVialNacionalParamDef.setStrHashConsulta(basViasRedVialNacionalDto.getStrHashConsulta());
 		}
 		
 		basViasRedVialNacionalParamDef.setOrderByClause("de_ruta_d044");

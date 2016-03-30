@@ -41,6 +41,7 @@ public class TemViaFerreaServiceImpl implements TemViaFerreaService {
 			if(CadenaUtil.getDoubNull(temViaFerreaDto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(temViaFerreaDto.getDblShapeStle());
 			}
+			temViaFerreaParamDef.setStrHashConsulta(temViaFerreaDto.getStrHashConsulta());
 		}
 		
 		List<TemViaFerrea>	 list	= temViaFerreaMapper.selectByDefaultParameter(temViaFerreaParamDef);

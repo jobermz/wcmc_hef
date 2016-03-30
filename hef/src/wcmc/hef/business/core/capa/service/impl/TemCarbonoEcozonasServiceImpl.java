@@ -44,6 +44,7 @@ public class TemCarbonoEcozonasServiceImpl implements TemCarbonoEcozonasService 
 			if(CadenaUtil.getDoubNull(temCarbonoEcozonasDto.getDblPorcIncer()) != null) {
 				criteria.andDblPorcIncerEqualTo(temCarbonoEcozonasDto.getDblPorcIncer());
 			}
+			temCarbonoEcozonasParamDef.setStrHashConsulta(temCarbonoEcozonasDto.getStrHashConsulta());
 		}
 		
 		temCarbonoEcozonasParamDef.setOrderByClause("de_ecozona,de_tc_ha");

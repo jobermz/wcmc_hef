@@ -86,6 +86,7 @@ public class TemProyeccionDensidadPob2015ServiceImpl implements TemProyeccionDen
 			if(CadenaUtil.getDoubNull(temProyeccionDensidadPob2015Dto.getDblPopDens()) != null) {
 				criteria.andDblPopDensEqualTo(temProyeccionDensidadPob2015Dto.getDblPopDens());
 			}
+			temProyeccionDensidadPob2015ParamDef.setStrHashConsulta(temProyeccionDensidadPob2015Dto.getStrHashConsulta());
 		}
 		
 		temProyeccionDensidadPob2015ParamDef.setOrderByClause("ha_pop_dens");

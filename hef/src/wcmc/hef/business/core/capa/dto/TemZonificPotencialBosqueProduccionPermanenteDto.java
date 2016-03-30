@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemZonificPotencialBosqueProduccionPermanenteDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private Long lngId;
@@ -19,6 +20,14 @@ public class TemZonificPotencialBosqueProduccionPermanenteDto implements BaseBea
 	private Integer intTheid;
 	private Double dblPerimeter;
 	private Double dblHectares;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public Integer getSrlGid() {
 		return srlGid;
 	}

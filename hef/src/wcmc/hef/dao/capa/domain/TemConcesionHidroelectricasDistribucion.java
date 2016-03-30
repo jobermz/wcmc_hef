@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionHidroelectricasDistribucion extends TemConcesionHidroelectricasDistribucionKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strIdGrafico;
 	private String strExpediente;
@@ -24,7 +25,13 @@ public class TemConcesionHidroelectricasDistribucion extends TemConcesionHidroel
 	private String strCodigoCon;
 	private Double dblShapeArea;
 	private Double dblShapeLen;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getDteFechaPresFecha() {
 		return CadenaUtil.getStrDate(dteFechaPres);
 	}

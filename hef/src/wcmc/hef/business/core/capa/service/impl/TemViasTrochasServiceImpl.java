@@ -41,6 +41,7 @@ public class TemViasTrochasServiceImpl implements TemViasTrochasService {
 			if(CadenaUtil.getDoubNull(temViasTrochasDto.getDblStLength()) != null) {
 				criteria.andDblStLengthEqualTo(temViasTrochasDto.getDblStLength());
 			}
+			temViasTrochasParamDef.setStrHashConsulta(temViasTrochasDto.getStrHashConsulta());
 		}
 		
 		List<TemViasTrochas>	 list	= temViasTrochasMapper.selectByDefaultParameter(temViasTrochasParamDef);

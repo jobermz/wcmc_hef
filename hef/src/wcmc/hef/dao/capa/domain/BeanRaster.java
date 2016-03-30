@@ -11,7 +11,9 @@ public class BeanRaster {
 	private Double dblStddev;
 	private Long lngValueCount;
 	private String strCategoria;
-
+	
+	private String strHashConsulta;
+	private String strInRids;
 	public BeanRaster() {
 	}
 	public BeanRaster(String strPoligonoConsulta) {
@@ -105,6 +107,18 @@ public class BeanRaster {
 	}
 	public void setDblStddev(Double dblStddev) {
 		this.dblStddev = dblStddev;
+	}
+	public String getStrInRids() {
+		return strInRids;
+	}
+	public void setStrInRids(String strInRids) {
+		this.strInRids = strInRids;
+	}
+	public String getStrHashConsulta() {
+		return strHashConsulta;
+	}
+	public void setStrHashConsulta(String strHashConsulta) {
+		this.strHashConsulta = strHashConsulta;
 	}
 	
 }

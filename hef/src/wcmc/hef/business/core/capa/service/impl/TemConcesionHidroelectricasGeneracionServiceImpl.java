@@ -74,6 +74,7 @@ public class TemConcesionHidroelectricasGeneracionServiceImpl implements TemConc
 			if(CadenaUtil.getDoubNull(temConcesionHidroelectricasGeneracionDto.getDblShapeLen()) != null) {
 				criteria.andDblShapeLenEqualTo(temConcesionHidroelectricasGeneracionDto.getDblShapeLen());
 			}
+			temConcesionHidroelectricasGeneracionParamDef.setStrHashConsulta(temConcesionHidroelectricasGeneracionDto.getStrHashConsulta());
 		}
 		
 		temConcesionHidroelectricasGeneracionParamDef.setOrderByClause("de_concesion,de_fuente");

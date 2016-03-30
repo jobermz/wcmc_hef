@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPotencialBosqueProduccionPermanenteKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Long lngId;
 	private String strZona;
@@ -19,7 +20,13 @@ public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPot
 	private Integer intTheid;
 	private Double dblPerimeter;
 	private Double dblHectares;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

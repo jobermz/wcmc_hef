@@ -53,6 +53,7 @@ public class BasLimAmazoniaServiceImpl implements BasLimAmazoniaService {
 			if(CadenaUtil.getDoubNull(basLimAmazoniaDto.getDblSuperfKm2()) != null) {
 				criteria.andDblSuperfKm2EqualTo(basLimAmazoniaDto.getDblSuperfKm2());
 			}
+			basLimAmazoniaParamDef.setStrHashConsulta(basLimAmazoniaDto.getStrHashConsulta());
 		}
 		
 		List<BasLimAmazonia>	 list	= basLimAmazoniaMapper.selectByDefaultParameter(basLimAmazoniaParamDef);

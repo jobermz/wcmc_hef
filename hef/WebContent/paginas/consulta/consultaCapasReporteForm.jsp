@@ -158,6 +158,14 @@
 				<a href="#" onclick="mostrarDetaRepo('temRiesgoErosionHidricaReporte.jsp','idDivDetaRepo', this);" class="list-group-item "> Tem riesgo erosion hidrica  <span class="badge">1</span></a>
 			</s:if>
 			
+			<!-- Capas de usuario -->
+			
+			<s:if test="%{#session.reporte.listGeometriaUsuario.size()>0}">
+				<s:iterator value="#session.reporte.listGeometriaUsuario" var="mapGeometriaUsuario">
+					<a href="#" onclick="mostrarDetaRepo('capaUsuarioReporte.jsp?srlIdCapa=${mapGeometriaUsuario.srlIdCapa}','idDivDetaRepo', this);" class="list-group-item "> ${mapGeometriaUsuario.strNombre} <span class="badge"><s:property value="%{#mapGeometriaUsuario.list.size()}" /></span></a>
+				</s:iterator>
+			</s:if>
+			
 			</div>
 		</div>
 		<div class="col-lg-8" id="idDivDetaRepo" style="overflow: auto;height: 450px;">

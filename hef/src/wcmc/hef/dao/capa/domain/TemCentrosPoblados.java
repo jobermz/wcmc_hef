@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCentrosPoblados extends TemCentrosPobladosKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid;
 	private String strIdccpp10;
@@ -24,7 +25,13 @@ public class TemCentrosPoblados extends TemCentrosPobladosKey implements BaseBea
 	private Integer intViv07;
 	private Integer intPob07;
 	private Integer intRegion;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

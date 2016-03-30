@@ -35,9 +35,13 @@ public class CadenaUtil {
 	public static String getStrNoTrim(String str) {
 		return str != null && !str.equals("") ? str : "";
 	}
-	
+
 	public static String getStrNull(String str) {
 		return str != null && !str.trim().equals("") ? str.trim() : null;
+	}
+
+	public static String getStrNull(Object str) {
+		return str != null && !str.toString().trim().equals("") ? str.toString().trim() : null;
 	}
 	
 	public static String getStr(Object obj) {

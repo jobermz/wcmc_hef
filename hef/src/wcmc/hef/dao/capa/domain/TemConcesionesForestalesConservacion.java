@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionesForestalesConservacion extends TemConcesionesForestalesConservacionKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Double dblNum;
 	private Integer intId;
@@ -16,7 +17,13 @@ public class TemConcesionesForestalesConservacion extends TemConcesionesForestal
 	private Double dblAreaAprob;
 	private String strRegion;
 	private String strSituacion;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

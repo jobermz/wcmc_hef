@@ -1,14 +1,11 @@
 package wcmc.hef.web.visor.action;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import wcmc.hef.business.core.capa.dto.BasLimDepartamentoDto;
 import wcmc.hef.business.core.capa.dto.BasLimDistritosDto;
 import wcmc.hef.business.core.capa.dto.BasLimProvinciaDto;
@@ -22,23 +19,14 @@ import wcmc.hef.business.core.configuracion.service.CapaService;
 import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
 import wcmc.hef.business.core.configuracion.service.GrupoCapasService;
 import wcmc.hef.business.core.seguridad.dto.CuentaUsuarioDto;
-import wcmc.hef.business.core.visor.dto.CapaDepartamentoDto;
-import wcmc.hef.business.core.visor.dto.CapaDistritoDto;
-import wcmc.hef.business.core.visor.dto.CapaProvinciaDto;
-import wcmc.hef.business.core.visor.service.CapaDepartamentoService;
-import wcmc.hef.business.core.visor.service.CapaDistritoService;
-import wcmc.hef.business.core.visor.service.CapaProvinciaService;
 import wcmc.hef.dao.capa.domain.BasLimDepartamento;
 import wcmc.hef.dao.capa.domain.BasLimDistritos;
 import wcmc.hef.dao.capa.domain.BasLimProvincia;
 import wcmc.hef.dao.configuracion.domain.Capa;
+import wcmc.hef.dao.configuracion.domain.CapaUmbral;
 import wcmc.hef.dao.configuracion.domain.GrupoCapas;
-import wcmc.hef.dao.visor.domain.CapaDepartamento;
-import wcmc.hef.dao.visor.domain.CapaDistrito;
-import wcmc.hef.dao.visor.domain.CapaProvincia;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -64,8 +52,48 @@ public class VisorAction extends ActionSupport {
 	private CapaUmbralService capaUmbralService;
 
 	private List<Capa> listCapasBase;
+	private List<CapaUmbral> listCapaUmbral;
+	
+	private String srlIdCapa;
+	
+	private String strCapaUmbralMin;
+	private String strCapaUmbralMax;
+	private String strCapaUmbralNombreCapa;
 	
 	public VisorAction() {
+	}
+	
+	public String obtenerCapaUmbral() {
+		Map<String, Object> session		= ActionContext.getContext().getSession();
+		try {
+			CapaUmbralDto capaUmbralDto	= new CapaUmbralDto();
+			capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(srlIdCapa));
+			listCapaUmbral	= capaUmbralService.buscar(capaUmbralDto);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	public String obtenerUmbralesMinMaxACL() {
+		Map<String, Object> session		= ActionContext.getContext().getSession();
+		try {
+			CapaDto capaDto		= new CapaDto();
+			capaDto.setSrlIdCapa(CadenaUtil.getInte(srlIdCapa));
+			Capa capa			= capaService.buscarById(capaDto);
+			if(capa != null) {
+				strCapaUmbralNombreCapa	= capa.getStrNombre();
+			}
+			
+			Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(srlIdCapa));
+			if(map.size() > 0) {
+				strCapaUmbralMin		= new BigDecimal((Double)map.get("min")).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
+				strCapaUmbralMax		= new BigDecimal((Double)map.get("max")).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return SUCCESS;
 	}
 	
 	public String cargarCapasBase() {
@@ -310,6 +338,46 @@ public class VisorAction extends ActionSupport {
 	
 	public void setStrCentroDistrito(String strCentroDistrito) {
 		this.strCentroDistrito = strCentroDistrito;
+	}
+
+	public String getSrlIdCapa() {
+		return srlIdCapa;
+	}
+
+	public void setSrlIdCapa(String srlIdCapa) {
+		this.srlIdCapa = srlIdCapa;
+	}
+
+	public List<CapaUmbral> getListCapaUmbral() {
+		return listCapaUmbral;
+	}
+
+	public void setListCapaUmbral(List<CapaUmbral> listCapaUmbral) {
+		this.listCapaUmbral = listCapaUmbral;
+	}
+
+	public String getStrCapaUmbralMin() {
+		return strCapaUmbralMin;
+	}
+
+	public void setStrCapaUmbralMin(String strCapaUmbralMin) {
+		this.strCapaUmbralMin = strCapaUmbralMin;
+	}
+
+	public String getStrCapaUmbralMax() {
+		return strCapaUmbralMax;
+	}
+
+	public void setStrCapaUmbralMax(String strCapaUmbralMax) {
+		this.strCapaUmbralMax = strCapaUmbralMax;
+	}
+
+	public String getStrCapaUmbralNombreCapa() {
+		return strCapaUmbralNombreCapa;
+	}
+
+	public void setStrCapaUmbralNombreCapa(String strCapaUmbralNombreCapa) {
+		this.strCapaUmbralNombreCapa = strCapaUmbralNombreCapa;
 	}
 	
 }

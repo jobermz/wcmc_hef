@@ -35,6 +35,7 @@ public class BasViasRedVialVecinalServiceImpl implements BasViasRedVialVecinalSe
 			if(CadenaUtil.getStrNull(basViasRedVialVecinalDto.getStrSuperficie()) != null) {
 				criteria.andStrSuperficieEqualTo(basViasRedVialVecinalDto.getStrSuperficie());
 			}
+			basViasRedVialVecinalParamDef.setStrHashConsulta(basViasRedVialVecinalDto.getStrHashConsulta());
 		}
 		
 		basViasRedVialVecinalParamDef.setOrderByClause("de_ruta");

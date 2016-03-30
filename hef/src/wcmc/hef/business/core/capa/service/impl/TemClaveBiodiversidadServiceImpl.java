@@ -113,6 +113,7 @@ public class TemClaveBiodiversidadServiceImpl implements TemClaveBiodiversidadSe
 			if(CadenaUtil.getDoubNull(temClaveBiodiversidadDto.getDblShapeArea()) != null) {
 				criteria.andDblShapeAreaEqualTo(temClaveBiodiversidadDto.getDblShapeArea());
 			}
+			temClaveBiodiversidadParamDef.setStrHashConsulta(temClaveBiodiversidadDto.getStrHashConsulta());
 		}
 		
 		temClaveBiodiversidadParamDef.setOrderByClause("de_natname");

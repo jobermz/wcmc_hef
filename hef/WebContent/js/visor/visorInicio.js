@@ -83,9 +83,10 @@ function iniciarMapa() {
 			gmap.setZoom(view.getZoom());
 		}
 	});
-
-//	var layers = [vector];
-	var layers = [];
+	
+	var vectorWkt	= drawWkt();
+	var layers = [vectorWkt];
+//	var layers = [];
 	var olMapDiv = document.getElementById('olmap');
 	map = new ol.Map({
 		layers: layers,
@@ -123,6 +124,34 @@ function iniciarMapa() {
 	    console.log("WKT="+wkt);
 	    */
 	});
+}
+function drawWkt() {
+	var currVector	= null;
+	$.ajax({
+		url: "wkt/test.wkt",
+		type: "GET",
+//		dataType:tipoDatoRetorno,
+//		data:parametros,
+		async:false,
+		success:function(datos) {
+			var wkt	= datos;
+//			var wkt = 'POLYGON((10.689 -25.092, 34.595 ' +
+//			'-20.170, 38.814 -35.639, 13.502 ' +
+//			'-39.155, 10.689 -25.092))';
+
+			var format = new ol.format.WKT();
+			var feature = format.readFeature(wkt, {
+				dataProjection: 'EPSG:4326',
+				featureProjection: 'EPSG:3857'
+			});
+			currVector = new ol.layer.Vector({
+				source: new ol.source.Vector({
+					features: [feature]
+				})
+			});
+		}
+	});
+	return currVector;
 }
 var vectorDraw = null;
 function addInteraction(value) {

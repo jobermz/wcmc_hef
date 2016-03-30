@@ -140,8 +140,22 @@ function filtrarUmbralACL(srlIdCapa) {
 	$('.identificar-area-criterio-logico-umbral-modal').off('hidden.bs.modal');
 	$('.identificar-area-criterio-logico-umbral-modal').on('shown.bs.modal', function (e) {
 		actualizarFiltroUmbralACL();
+		var srlIdCapa	= $('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa');
+		var param	= {
+				srlIdCapa: srlIdCapa
+		};
+		$.post("consultaCombosCapaUmbral.action", param, function(datos) {
+			$("#idDivComboUmbrales").html(datos);
+		});
+		$.post("consultaUmbralesMinMaxACL.action", param, function(datos) {
+			console.log("consultaUmbralesMinMaxACL: min=" + datos.strCapaUmbralMin + " max=" + datos.strCapaUmbralMax+" nombre="+datos.strCapaUmbralNombreCapa);
+			$("#idDivRangoUmbranlMinimo").html(datos.strCapaUmbralMin);
+			$("#idDivRangoUmbranlMaximo").html(datos.strCapaUmbralMax);
+			$("#idDivCapaUmbralNombreCapa").html(datos.strCapaUmbralNombreCapa);
+		}, "json");
 	});
 	$('.identificar-area-criterio-logico-umbral-modal').on('hidden.bs.modal', function (e) {
+		$(".identificar-area-criterio-logico-modal").modal('show');
 	});
 	$(".identificar-area-criterio-logico-modal").modal('hide');
 	$('.identificar-area-criterio-logico-umbral-modal').modal('show');
@@ -154,7 +168,6 @@ function actualizarFiltroUmbralACL() {
 	$("#idValorFiltroUmbral").val("");
 	$("#idValorFiltroUmbralDesde").val("");
 	$("#idValorFiltroUmbralHasta").val("");
-	$("#idDivComboUmbrales").html("");
 	
 	var filtroUmbral	= $("#idCriterioFiltroUmbral").val();
 	if(filtroUmbral == "preestablecido") {//Umbrales preestablecidos
@@ -168,19 +181,6 @@ function actualizarFiltroUmbralACL() {
 	} else if(filtroUmbral == "rango") {//Por rango
 		$("#idDivRango").css("display", "");
 	}
-	var srlIdCapa	= $('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa');
-	var param	= {
-			srlIdCapa: srlIdCapa
-	};
-	$.post("consultaUmbralesCombosACL.action", param, function(datos) {//TODO pendiente
-		console.log("consultaUmbralesCombosACL=" + datos);
-		$("#idDivComboUmbrales").html(datos);
-	});
-	$.post("consultaUmbralesMinMaxACL.action", param, function(datos) {//TODO pendiente
-		console.log("consultaUmbralesMinMaxACL: min=" + datos.minimo + " max=" + datos.maximo);
-		$("#idDivRangoUmbranlMinimo").html(datos.minimo);
-		$("#idDivRangoUmbranlMaximo").html(datos.maximo);
-	}, "json");
 }
 function aplicarFiltroUmbralACL() {
 //	var criterioFiltroUmbralTXT	= $("#idCriterioFiltroUmbral option:selected").text();
@@ -196,7 +196,8 @@ function aplicarFiltroUmbralACL() {
 	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
 	if(filtroUmbral == "preestablecido") {//Umbrales preestablecidos
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Umbral: "+valorFiltroUmbralPreTXT);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbralPre);
+		var arrUmbralPre	= eval(valorFiltroUmbralPre);
+		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",arrUmbralPre[1]+"-"+arrUmbralPre[2]);
 	} else if(filtroUmbral == "mayor") {//Mayor a
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valor > "+valorFiltroUmbral);
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbral);
@@ -207,7 +208,7 @@ function aplicarFiltroUmbralACL() {
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valor = "+valorFiltroUmbral);
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbral);
 	} else if(filtroUmbral == "rango") {//Por rango
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valores desde:"+valorFiltroUmbralDesde+" hasta:"+valorFiltroUmbralHasta);
+		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html(""+valorFiltroUmbralDesde+" < val < "+valorFiltroUmbralHasta);
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelectDesde",valorFiltroUmbralDesde);
 		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelectHasta",valorFiltroUmbralHasta);
 	}
@@ -217,6 +218,7 @@ function aplicarFiltroUmbralACL() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 function procesarCriterioLogico() {
+	blockui();
 	var listSrlIdCapaCons			= "";
 	var listIdDataCapaCons			= "";
 	var listIdDataCapaCriCons		= "";
@@ -225,13 +227,13 @@ function procesarCriterioLogico() {
 	var listIdDataCapaCriConsRASTER	= "";
 	guardarCapasSeleccionadasACL();
 	$(".clsDivDetFiltroACL").each(function(index) {
-		var valSelect		= $(this).attr("valSelect");
-		var valSelectDesde	= $(this).attr("valSelectDesde");
-		var valSelectHasta	= $(this).attr("valSelectHasta");
-		var valCriterio		= $(this).attr("valCriterio");
-		var srlIdCapa		= $(this).attr("srlIdCapa");
+		var valSelect		= $(this).attr("valSelect");//Ambos
+		var valSelectDesde	= $(this).attr("valSelectDesde");//Solo Umbrales
+		var valSelectHasta	= $(this).attr("valSelectHasta");//Solo Umbrales
+		var valCriterio		= $(this).attr("valCriterio");//Solo Umbrales siempre
+		var srlIdCapa		= $(this).attr("srlIdCapa");//Ambos
 		if(valCriterio && valCriterio != "") {
-			if(listSrlIdCapaCons.length > 0) {
+			if(listSrlIdCapaConsRASTER.length > 0) {
 				listSrlIdCapaConsRASTER			+= ",";
 				listIdDataCapaConsRASTER		+= ",";
 				listIdDataCapaCriConsRASTER		+= ",";
@@ -257,7 +259,7 @@ function procesarCriterioLogico() {
 			}
 			listSrlIdCapaCons		+= srlIdCapa;
 			listIdDataCapaCons		+= valSelect;
-			listIdDataCapaCriCons	+= valCriterio;
+			listIdDataCapaCriCons	+= "";
 		}
 	});
 	{
@@ -275,14 +277,15 @@ function procesarCriterioLogico() {
 			listIdDataCapaConsulta: listIdDataCapaCons,
 			listIdDataCapaCriConsulta: listIdDataCapaCriCons,
 	};
-	$.post("consultaCombosACLFuxion.action", param, function(datos) {
-		console.log(datos.strGeometriaRespuesta);
-		procesarReporteACL(datos.strGeometriaRespuesta);
+	$.post("consultaACLFuxion.action", param, function(datos) {
+		unblockui();
+		procesarReporteACL();
+//		procesarReporteACL(datos.strGeometriaRespuesta);
 		$(".identificar-area-criterio-logico-modal").modal('hide');
 	},"json");
 }
 
-function procesarReporteACL(wkt, idCapa) {
+function procesarReporteACL() {
 	blockui();
 	var srlIdCapas="";
 	$("input[name=capaIdentACL]").each(function(index) {
@@ -296,17 +299,10 @@ function procesarReporteACL(wkt, idCapa) {
 		}
 	});
 	var param	= null;
-	if(wkt) {
-		param	= {
-				listSrlIdCapaConsulta: srlIdCapas,
-				strPoligonoConsulta: wkt
-			};
-	} else if(idCapa) {
-		param	= {
-				listSrlIdCapaConsulta: srlIdCapas,
-				strIdCapaConsulta: idCapa
-			};
-	}
+	param	= {
+			listSrlIdCapaConsulta: srlIdCapas
+		};
+	
 	$.post('consultaCapas.action', param, function(datos) {
 		$('.reporte-capas-modal').off('shown.bs.modal');
 		$('.reporte-capas-modal').off('hidden.bs.modal');

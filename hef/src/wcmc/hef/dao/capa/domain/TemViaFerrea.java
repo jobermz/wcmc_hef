@@ -6,13 +6,20 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemViaFerrea extends TemViaFerreaKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid1;
 	private String strGmlId;
 	private Integer intObjectid;
 	private Double dblViaferr;
 	private Double dblShapeStle;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

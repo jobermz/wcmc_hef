@@ -83,6 +83,7 @@ public class TemProyectosPuntosServiceImpl implements TemProyectosPuntosService 
 			if(CadenaUtil.getStrNull(temProyectosPuntosDto.getStrLink()) != null) {
 				criteria.andStrLinkEqualTo(temProyectosPuntosDto.getStrLink());
 			}
+			temProyectosPuntosParamDef.setStrHashConsulta(temProyectosPuntosDto.getStrHashConsulta());
 		}
 		
 		temProyectosPuntosParamDef.setOrderByClause("de_iniciativa");

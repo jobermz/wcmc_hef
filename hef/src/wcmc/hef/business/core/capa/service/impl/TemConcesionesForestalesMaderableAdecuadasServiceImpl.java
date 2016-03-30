@@ -47,6 +47,7 @@ public class TemConcesionesForestalesMaderableAdecuadasServiceImpl implements Te
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion()) != null) {
 				criteria.andStrSituacionEqualTo(temConcesionesForestalesMaderableAdecuadasDto.getStrSituacion());
 			}
+			temConcesionesForestalesMaderableAdecuadasParamDef.setStrHashConsulta(temConcesionesForestalesMaderableAdecuadasDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesMaderableAdecuadasParamDef.setOrderByClause("de_titular,de_contrato");

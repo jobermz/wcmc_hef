@@ -13,6 +13,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.tem_indice_importancia_biologica as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

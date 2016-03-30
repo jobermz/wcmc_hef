@@ -53,6 +53,7 @@ public class TemHumedalesRamsarServiceImpl implements TemHumedalesRamsarService 
 			if(CadenaUtil.getDoubNull(temHumedalesRamsarDto.getDblShapeLen()) != null) {
 				criteria.andDblShapeLenEqualTo(temHumedalesRamsarDto.getDblShapeLen());
 			}
+			temHumedalesRamsarParamDef.setStrHashConsulta(temHumedalesRamsarDto.getStrHashConsulta());
 		}
 		
 		temHumedalesRamsarParamDef.setOrderByClause("de_nombre");

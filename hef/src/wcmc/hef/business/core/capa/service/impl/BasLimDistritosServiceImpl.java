@@ -71,6 +71,7 @@ public class BasLimDistritosServiceImpl implements BasLimDistritosService {
 			if(CadenaUtil.getStrNull(basLimDistritosDto.getStrUbigeo()) != null) {
 				criteria.andStrUbigeoEqualTo(basLimDistritosDto.getStrUbigeo());
 			}
+			basLimDistritosParamDef.setStrHashConsulta(basLimDistritosDto.getStrHashConsulta());
 		}
 		
 		basLimDistritosParamDef.setOrderByClause("de_nombdep,de_nombprov,de_nombdist");

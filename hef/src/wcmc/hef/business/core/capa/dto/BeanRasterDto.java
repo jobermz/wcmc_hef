@@ -2,6 +2,8 @@ package wcmc.hef.business.core.capa.dto;
 
 import java.math.BigDecimal;
 
+import wcmc.hef.general.util.CadenaUtil;
+
 public class BeanRasterDto {
 	private String strPoligonoConsulta;
 	private String strRangoConsulta;
@@ -11,6 +13,17 @@ public class BeanRasterDto {
 	private Long lngValueCount;
 	private String strCategoria;
 
+	private String strHashConsulta;
+	private String strInRids;
+	public BeanRasterDto clone() {
+		BeanRasterDto bean	= new BeanRasterDto(this.dblValuePromedio, this.dblValueMin, this.dblValueMax, this.lngValueCount);
+		bean.setStrPoligonoConsulta(this.strPoligonoConsulta);
+		bean.setStrRangoConsulta(this.strRangoConsulta);
+		bean.setStrCategoria(this.strCategoria);
+		bean.setStrHashConsulta(this.strHashConsulta);
+		bean.setStrInRids(this.strInRids);
+		return bean;
+	}
 	public BeanRasterDto() {
 	}
 	public BeanRasterDto(String strPoligonoConsulta) {
@@ -92,5 +105,23 @@ public class BeanRasterDto {
 	public void setLngValueCount(Long lngValueCount) {
 		this.lngValueCount = lngValueCount;
 	}
-	
+	public String getStrHashConsulta() {
+		return strHashConsulta;
+	}
+	public void setStrHashConsulta(String strHashConsulta) {
+		this.strHashConsulta = strHashConsulta;
+	}
+	public String getStrInRids() {
+		return strInRids;
+	}
+	public void setStrInRids(String strInRids) {
+		strInRids	= CadenaUtil.getStr(strInRids);
+		if(strInRids.indexOf("[") != -1) {
+			strInRids	= strInRids.substring(1);
+		}
+		if(strInRids.indexOf("]") != -1) {
+			strInRids	= strInRids.substring(0,strInRids.length()-1);
+		}
+		this.strInRids = strInRids;
+	}
 }

@@ -212,6 +212,7 @@ public class TemComunidadesNativasServiceImpl implements TemComunidadesNativasSe
 			if(CadenaUtil.getDoubNull(temComunidadesNativasDto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(temComunidadesNativasDto.getDblShapeStle());
 			}
+			temComunidadesNativasParamDef.setStrHashConsulta(temComunidadesNativasDto.getStrHashConsulta());
 		}
 		
 		temComunidadesNativasParamDef.setOrderByClause("de_nombre,de_etnia1");

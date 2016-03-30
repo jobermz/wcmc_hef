@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemReservasTerritorialesIndigenas extends TemReservasTerritorialesIndigenasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid1;
 	private String strGmlId;
@@ -24,7 +25,13 @@ public class TemReservasTerritorialesIndigenas extends TemReservasTerritorialesI
 	private String strAreaLegal;
 	private Double dblShapeStar;
 	private Double dblShapeStle;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

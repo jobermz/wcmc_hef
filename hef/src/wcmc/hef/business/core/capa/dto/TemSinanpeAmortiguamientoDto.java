@@ -5,12 +5,21 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemSinanpeAmortiguamientoDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private Long lngObjectid;
 	private String strZaNomb;
 	private String strZaBale;
 	private Date dteZaFecr;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getDteZaFecrFecha() {
 		return CadenaUtil.getStrDate(dteZaFecr);
 	}

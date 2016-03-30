@@ -16,6 +16,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.tem_sinanpe_amortiguamiento as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

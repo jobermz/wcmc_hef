@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemAnpNacional extends TemAnpNacionalKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Long lngObjectid;
 	private String strAnpCate;
@@ -17,7 +18,13 @@ public class TemAnpNacional extends TemAnpNacionalKey implements BaseBeanVectori
 	private String strAnpFecrea;
 	private String strAnpBalemo;
 	private String strAnpFemodi;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

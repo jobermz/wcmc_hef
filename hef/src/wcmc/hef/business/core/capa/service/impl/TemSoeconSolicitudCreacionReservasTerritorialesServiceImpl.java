@@ -44,6 +44,7 @@ public class TemSoeconSolicitudCreacionReservasTerritorialesServiceImpl implemen
 			if(CadenaUtil.getStrNull(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado()) != null) {
 				criteria.andStrEstadoEqualTo(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrEstado());
 			}
+			temSoeconSolicitudCreacionReservasTerritorialesParamDef.setStrHashConsulta(temSoeconSolicitudCreacionReservasTerritorialesDto.getStrHashConsulta());
 		}
 		
 		temSoeconSolicitudCreacionReservasTerritorialesParamDef.setOrderByClause("de_nomret");

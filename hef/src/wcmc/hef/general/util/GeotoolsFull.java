@@ -19,9 +19,12 @@ import javax.imageio.ImageIO;
 
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
+import org.geotools.data.FileDataStore;
+import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.collection.CollectionFeatureSource;
 import org.geotools.data.collection.ListFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureCollection;
+import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.factory.GeoTools;
@@ -83,14 +86,17 @@ public class GeotoolsFull {
 		List<Map<String, String>> listMapShape	= new ArrayList<Map<String, String>>();
 		Map<String, String> mapOutShape			= null;
 		File shapeFile			= new File(strShapeFileDemo);
+		shapeFile.setReadOnly();
 		String strCadenaExtent	= "";
-		Map map						= new HashMap();
-		map.put("url", shapeFile.toURL());
-		DataStore dataStore			= null;
-		FeatureIterator iterator	= null;
+//		Map map						= new HashMap();
+//		map.put("url", shapeFile.toURL());
+		FileDataStore dataStore		= null;
+		SimpleFeatureIterator iterator	= null;
+//		FeatureIterator iterator	= null;
 		MathTransform transform		= null;
 		try {
-			dataStore							= DataStoreFinder.getDataStore(map);
+//			dataStore							= DataStoreFinder.getDataStore(map);
+			dataStore							= FileDataStoreFinder.getDataStore(shapeFile);
 			String typeName						= dataStore.getTypeNames()[0];
 			SimpleFeatureSource featureSource	= dataStore.getFeatureSource(typeName);
 			
@@ -113,8 +119,8 @@ public class GeotoolsFull {
 			}
 			//strCadenaExtent		= saveImage(featureSource, 4096, strFileTempName);//TODO
 			
-			FeatureCollection collection	= featureSource.getFeatures();
-			iterator						= collection.features();
+			SimpleFeatureCollection collection	= featureSource.getFeatures();
+			iterator							= collection.features();
 			
 			int countador	= 0;
 			SimpleFeatureSource featureSourceGeom		= null;
@@ -138,11 +144,8 @@ public class GeotoolsFull {
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());
 		} finally {
-			try {
-				dataStore.dispose();
-			} catch(Exception ex) {
-				ex.printStackTrace();
-			}
+			try {iterator.close();} catch(Exception ex) {ex.printStackTrace();}
+			try {dataStore.dispose();} catch(Exception ex) {ex.printStackTrace();}
 		}
 		return strCadenaExtent;
 	}
@@ -155,8 +158,7 @@ public class GeotoolsFull {
 		for(Geometry geom:listGeom) {
 			sfb		= new SimpleFeatureBuilder(sft_poli);
 			sfb.add(geom);
-//			SimpleFeature feature = sfb.buildFeature( "fid" );
-//			list.add(feature);
+			
 			list.add(sfb.buildFeature( "fid" ));
 		}
 		SimpleFeatureCollection simpFeatcollection	= new ListFeatureCollection(sft_poli, list);

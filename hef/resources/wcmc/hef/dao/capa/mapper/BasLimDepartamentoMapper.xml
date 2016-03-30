@@ -14,6 +14,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.bas_lim_departamento as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

@@ -12,11 +12,23 @@ public class TemConcesionesForestalesCastaniaParamDef {
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
-
+    
+    protected String strHashConsulta;
+	
     public TemConcesionesForestalesCastaniaParamDef() {
         oredCriteria = new ArrayList<Criteria>();
     }
-
+	
+    public void setStrHashConsulta(String strHashConsulta) {
+    	if(CadenaUtil.getStrNull(strHashConsulta) != null) {
+        	this.strHashConsulta = " inner join wcmc_hef.tem_query_acl qry on de_hash_consulta = '"+CadenaUtil.getStr(strHashConsulta)+"' and ST_Intersects(ST_Transform(si_the_geom, 32718), cd_rast) ";
+    	}
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
+	
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }

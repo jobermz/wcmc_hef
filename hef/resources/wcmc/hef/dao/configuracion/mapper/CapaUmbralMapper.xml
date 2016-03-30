@@ -130,4 +130,10 @@
 		ha_valmin, 
 		ha_valmax
 	</sql>
+	
+	<select id="selectCapaUmbralMinMax" resultType="Map" parameterType="Integer">
+		select min(ha_valmin) as min, max(ha_valmax) as max from wcmc_hef.t_capaumbral where ha_valmin != -1 and cd_capa = #{value}
+	</select>
+	
+	
 </mapper>

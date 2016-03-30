@@ -15,18 +15,23 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
+import wcmc.hef.business.core.configuracion.dto.CampoMetadataDto;
 import wcmc.hef.business.core.configuracion.dto.CapaDto;
+import wcmc.hef.business.core.configuracion.dto.GeometriaUsuarioDto;
+import wcmc.hef.business.core.configuracion.service.CampoMetadataService;
 import wcmc.hef.business.core.configuracion.service.CapaService;
+import wcmc.hef.business.core.configuracion.service.GeometriaUsuarioService;
 import wcmc.hef.business.core.seguridad.dto.CuentaUsuarioDto;
+import wcmc.hef.dao.configuracion.domain.CampoMetadata;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
+import wcmc.hef.general.util.GeotoolsData;
 import wcmc.hef.general.util.GeotoolsFull;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CapaUsuarioAction extends ActionSupport {
@@ -35,9 +40,15 @@ public class CapaUsuarioAction extends ActionSupport {
 	private String shapefileFileName;
 	private String shapefileCaption;
 	private List<Map<String, String>> listAreaShapeSeleccionar;
-	
+
 	@Autowired
 	private CapaService capaService;
+
+	@Autowired
+	private GeometriaUsuarioService geometriaUsuarioService;
+	
+	@Autowired
+	private CampoMetadataService campoMetadataService;
 	
 	public String agregarShape() {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -50,18 +61,30 @@ public class CapaUsuarioAction extends ActionSupport {
 					String strFileTempName	= ""+new Date().getTime();
 					List<File> listFile		= abrirZip(shapefile, strFileTempName);
 					if(listFile.size() > 0) {
-						String strCadenaExtent		= new GeotoolsFull().convertirShapeToImagen(listFile.get(0).getPath(), strFileTempName);
-						CapaDto capaDto				= new CapaDto();
+						String strCadenaExtent						= new GeotoolsFull().convertirShapeToImagen(listFile.get(0).getPath(), strFileTempName);
+						CapaDto capaDto								= new CapaDto();
 						capaDto.setIntGrupoCapas(ConfiguracionProperties.getConstanteInt(ConfiguracionProperties.CAPA_GRUPO_USUARIO));//Ver properties
 						capaDto.setIntTipoCapa(ConfiguracionProperties.getConstanteInt(ConfiguracionProperties.TIPO_CAPA_VECTORIAL));
 						capaDto.setStrNombre(shapefileFileName);
-						capaDto.setStrWmsCapas(strCadenaExtent+"_"+strFileTempName);
+						capaDto.setStrShp(strFileTempName);
+						capaDto.setStrShpExtent(strCadenaExtent);
 						capaDto.setTimFechaRegistro(new Date());
 						capaDto.setStrEsCentrarMapa("N");
 						capaDto.setStrEsFiltroAcl("N");
 						capaDto.setStrEsSelecApa("N");
 						capaDto.setIntIdUsuario(cuentaUsuarioDto.getSrlId());
 						capaService.guardar(capaDto);
+						
+						new GeotoolsData().guardarGeometry(capaDto.getSrlIdCapa(), geometriaUsuarioService, listFile.get(0).getPath());
+						
+						CampoMetadataDto campoMetadataDto			= null;
+						List<String> listCampoMetadata				= new GeotoolsData().obtenerCampoMetadata(listFile.get(0).getPath());
+						for(String strCampoMetadata:listCampoMetadata) {
+							campoMetadataDto	= new CampoMetadataDto();
+							campoMetadataDto.setIntIdCapa(capaDto.getSrlIdCapa());
+							campoMetadataDto.setStrNombre(CadenaUtil.getStr(strCampoMetadata));
+							campoMetadataService.guardar(campoMetadataDto);
+						}
 					} else {
 						addActionError("No se han encontrado archivos en el documento Zip");
 					}

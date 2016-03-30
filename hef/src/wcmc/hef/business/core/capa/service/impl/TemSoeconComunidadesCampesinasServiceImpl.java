@@ -62,6 +62,7 @@ public class TemSoeconComunidadesCampesinasServiceImpl implements TemSoeconComun
 			if(CadenaUtil.getDoubNull(temSoeconComunidadesCampesinasDto.getDblShapeArea()) != null) {
 				criteria.andDblShapeAreaEqualTo(temSoeconComunidadesCampesinasDto.getDblShapeArea());
 			}
+			temSoeconComunidadesCampesinasParamDef.setStrHashConsulta(temSoeconComunidadesCampesinasDto.getStrHashConsulta());
 		}
 		
 		temSoeconComunidadesCampesinasParamDef.setOrderByClause("de_nombre");

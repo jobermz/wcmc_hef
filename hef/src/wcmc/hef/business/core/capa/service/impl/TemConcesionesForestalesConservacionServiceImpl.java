@@ -53,6 +53,7 @@ public class TemConcesionesForestalesConservacionServiceImpl implements TemConce
 			if(CadenaUtil.getStrNull(temConcesionesForestalesConservacionDto.getStrSituacion()) != null) {
 				criteria.andStrSituacionEqualTo(temConcesionesForestalesConservacionDto.getStrSituacion());
 			}
+			temConcesionesForestalesConservacionParamDef.setStrHashConsulta(temConcesionesForestalesConservacionDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesConservacionParamDef.setOrderByClause("de_titular,de_contrato");

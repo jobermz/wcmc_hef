@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCuencasHidrograficas extends TemCuencasHidrograficasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid;
 	private String strGmlId;
@@ -14,7 +15,13 @@ public class TemCuencasHidrograficas extends TemCuencasHidrograficasKey implemen
 	private String strNombre;
 	private String strGeometria;
 	private Integer intEsriOid;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

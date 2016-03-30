@@ -1,7 +1,10 @@
 package wcmc.hef.dao.configuracion.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
+
 import wcmc.hef.dao.configuracion.domain.CapaUmbral;
 import wcmc.hef.dao.configuracion.domain.CapaUmbralKey;
 import wcmc.hef.dao.configuracion.domain.CapaUmbralParamDef;
@@ -16,6 +19,7 @@ public interface CapaUmbralMapper {
 	public int deleteByPrimaryKey(CapaUmbralKey capaUmbralKey);
 	
 	public int lastSequence();
-
+	
+	public Map<String, Double> selectCapaUmbralMinMax(Integer value);
 	
 }

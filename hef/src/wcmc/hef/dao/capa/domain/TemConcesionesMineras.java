@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionesMineras extends TemConcesionesMinerasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid1;
 	private String strGmlId;
@@ -24,7 +25,13 @@ public class TemConcesionesMineras extends TemConcesionesMinerasKey implements B
 	private String strNmDepa;
 	private Double dblShapeStar;
 	private Double dblShapeStle;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

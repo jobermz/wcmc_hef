@@ -29,6 +29,7 @@ public class TemIndiceImportanciaBiologicaServiceImpl implements TemIndiceImport
 			if(CadenaUtil.getDoubNull(temIndiceImportanciaBiologicaDto.getDblImpGlob()) != null) {
 				criteria.andDblImpGlobEqualTo(temIndiceImportanciaBiologicaDto.getDblImpGlob());
 			}
+			temIndiceImportanciaBiologicaParamDef.setStrHashConsulta(temIndiceImportanciaBiologicaDto.getStrHashConsulta());
 		}
 		
 		temIndiceImportanciaBiologicaParamDef.setOrderByClause("ha_imp_glob");

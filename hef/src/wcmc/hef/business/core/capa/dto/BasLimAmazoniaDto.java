@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class BasLimAmazoniaDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private Integer intObjectid1;
@@ -16,6 +17,14 @@ public class BasLimAmazoniaDto implements BaseBeanVectorialDto {
 	private Double dblSuperfHa;
 	private String strSimCvDef;
 	private Double dblSuperfKm2;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public Integer getSrlGid() {
 		return srlGid;
 	}

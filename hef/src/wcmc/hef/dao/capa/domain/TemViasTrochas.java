@@ -6,13 +6,20 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemViasTrochas extends TemViasTrochasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Long lngObjectid;
 	private String strEstado;
 	private String strDescrip;
 	private Double dblShapeLeng;
 	private Double dblStLength;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

@@ -62,6 +62,7 @@ public class TemConcesionesEcoturismoServiceImpl implements TemConcesionesEcotur
 			if(CadenaUtil.getDoubNull(temConcesionesEcoturismoDto.getDblHectares()) != null) {
 				criteria.andDblHectaresEqualTo(temConcesionesEcoturismoDto.getDblHectares());
 			}
+			temConcesionesEcoturismoParamDef.setStrHashConsulta(temConcesionesEcoturismoDto.getStrHashConsulta());
 		}
 		
 		temConcesionesEcoturismoParamDef.setOrderByClause("de_titular,de_contrato");

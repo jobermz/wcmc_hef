@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemProyectosPoligonos extends TemProyectosPoligonosKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Double dblShCodigo;
 	private String strFcComun;
@@ -30,7 +31,13 @@ public class TemProyectosPoligonos extends TemProyectosPoligonosKey implements B
 	private String strInstituc1;
 	private String strObs;
 	private String strLink;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

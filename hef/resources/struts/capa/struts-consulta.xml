@@ -16,13 +16,13 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
-		<action name="consultaCombosACL" class="wcmc.hef.web.capa.action.ConsultaCombosACLAction" method="consultar">
-			<result name="success" type="tiles">consulta_combos_acl_form</result>
+		<action name="consultaACLFuxion" class="wcmc.hef.web.capa.action.ConsultaACLFuxionAction" method="consultar">
+			<result name="success" type="json"/>
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
-		<action name="consultaCombosACLFuxion" class="wcmc.hef.web.capa.action.ConsultaCombosACLFuxionAction" method="consultar">
-			<result name="success" type="json"/>
+		<action name="consultaCombosACL" class="wcmc.hef.web.capa.action.ConsultaCombosACLAction" method="consultar">
+			<result name="success" type="tiles">consulta_combos_acl_form</result>
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
@@ -54,6 +54,18 @@
 				<param name="REPORT_LOCALE">ES_PE</param>
 			</result>
 		</action>
+		
+		<action name="consultaCombosCapaUmbral" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
+			<result name="success" type="tiles">consulta_combos_capa_umbral_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaUmbralesMinMaxACL" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerUmbralesMinMaxACL">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		
 		
 	</package>
 </struts>

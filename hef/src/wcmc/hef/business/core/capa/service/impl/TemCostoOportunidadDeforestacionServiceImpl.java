@@ -32,6 +32,7 @@ public class TemCostoOportunidadDeforestacionServiceImpl implements TemCostoOpor
 			if(CadenaUtil.getDoubNull(temCostoOportunidadDeforestacionDto.getDblCopTco2H()) != null) {
 				criteria.andDblCopTco2HEqualTo(temCostoOportunidadDeforestacionDto.getDblCopTco2H());
 			}
+			temCostoOportunidadDeforestacionParamDef.setStrHashConsulta(temCostoOportunidadDeforestacionDto.getStrHashConsulta());
 		}
 		
 		temCostoOportunidadDeforestacionParamDef.setOrderByClause("ha_cop_tco2_h");

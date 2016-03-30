@@ -29,6 +29,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.tem_concesiones_mineras as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

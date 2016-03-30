@@ -24,6 +24,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.tem_zonific_potencial_bosque_produccion_permanente as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

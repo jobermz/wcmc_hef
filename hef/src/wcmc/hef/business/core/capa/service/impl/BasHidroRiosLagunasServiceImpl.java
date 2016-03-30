@@ -71,6 +71,7 @@ public class BasHidroRiosLagunasServiceImpl implements BasHidroRiosLagunasServic
 			if(CadenaUtil.getStrNull(basHidroRiosLagunasDto.getStrDxfText()) != null) {
 				criteria.andStrDxfTextEqualTo(basHidroRiosLagunasDto.getStrDxfText());
 			}
+			basHidroRiosLagunasParamDef.setStrHashConsulta(basHidroRiosLagunasDto.getStrHashConsulta());
 		}
 		
 		List<BasHidroRiosLagunas>	 list	= basHidroRiosLagunasMapper.selectByDefaultParameter(basHidroRiosLagunasParamDef);

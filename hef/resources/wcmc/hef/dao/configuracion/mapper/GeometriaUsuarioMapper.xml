@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wcmc.hef.dao.configuracion.mapper.GeometriaUsuarioMapper">
+	<resultMap id="GeometriaUsuarioMap" type="wcmc.hef.dao.configuracion.domain.GeometriaUsuario">
+		<result column="cd_geometria" property="srlIdGeometriaUsuario" jdbcType="INTEGER"/>
+		<result column="cd_capa" property="intIdCapa" jdbcType="INTEGER"/>
+		<result column="si_geometr" property="strGeometry" jdbcType="VARCHAR"/>
+		<result column="de_data" property="strData" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="selectByDefaultParameter" resultMap="GeometriaUsuarioMap" parameterType="wcmc.hef.dao.configuracion.domain.GeometriaUsuarioParamDef">
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_geometria as tab
+		${strHashConsulta}
+		<if test="_parameter != null" >
+			<include refid="Parameter_Default_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="selectByPrimaryKey" resultMap="GeometriaUsuarioMap" parameterType="wcmc.hef.dao.configuracion.domain.GeometriaUsuarioKey" >
+		select 
+		<include refid="Base_Column_List" />
+		from wcmc_hef.t_geometria as tab
+		where 1 = 1
+		and cd_geometria = #{srlIdGeometriaUsuario,jdbcType=INTEGER}
+	</select>
+
+	<select id="lastSequence" resultType="java.lang.Integer">
+		select currval('wcmc_hef.t_geometria_cd_geometria_seq')
+	</select>
+
+	<insert id="insertSelective" parameterType="wcmc.hef.dao.configuracion.domain.GeometriaUsuario">
+		insert into wcmc_hef.t_geometria
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="intIdCapa != null">
+				cd_capa,
+			</if>
+			<if test="strGeometry != null">
+				si_geometr,
+			</if>
+			<if test="strData != null">
+				de_data,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="intIdCapa != null">
+				#{intIdCapa, jdbcType=INTEGER},
+			</if>
+			<if test="strGeometry != null">
+				ST_GeomFromText(#{strGeometry, jdbcType=VARCHAR}, 4326),
+			</if>
+			<if test="strData != null">
+				#{strData, jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="wcmc.hef.dao.configuracion.domain.GeometriaUsuario">
+		update wcmc_hef.t_geometria
+		<set>
+			<if test="intIdCapa != null">
+				cd_capa = #{intIdCapa,jdbcType=INTEGER},
+			</if>
+			<if test="strGeometry != null">
+				si_geometr = ST_GeomFromText(#{strGeometry,jdbcType=VARCHAR}, 4326),
+			</if>
+			<if test="strData != null">
+				de_data = #{strData,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where 1 = 1
+		and cd_geometria = #{srlIdGeometriaUsuario,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="wcmc.hef.dao.configuracion.domain.GeometriaUsuarioKey">
+		delete from wcmc_hef.t_geometria
+		where 1 = 1
+		<if test="srlIdGeometriaUsuario != null">
+		and cd_geometria = #{srlIdGeometriaUsuario,jdbcType=INTEGER}
+		</if>
+	</delete>
+	<!-- Criterios de seleccion -->
+	<sql id="Parameter_Default_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		cd_geometria, 
+		cd_capa, 
+		ST_AsText(ST_Boundary(Box2D(si_geometr))) as si_geometr, 
+		de_data
+	</sql>
+</mapper>

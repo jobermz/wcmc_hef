@@ -77,6 +77,7 @@ public class TemCentrosPobladosServiceImpl implements TemCentrosPobladosService 
 			if(CadenaUtil.getInteNull(temCentrosPobladosDto.getIntRegion()) != null) {
 				criteria.andIntRegionEqualTo(temCentrosPobladosDto.getIntRegion());
 			}
+			temCentrosPobladosParamDef.setStrHashConsulta(temCentrosPobladosDto.getStrHashConsulta());
 		}
 		
 		temCentrosPobladosParamDef.setOrderByClause("de_nomccpp,de_nomcat,cd_pob07");

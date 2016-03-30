@@ -44,6 +44,7 @@ public class TemCoverturaVegetal2015ServiceImpl implements TemCoverturaVegetal20
 			if(CadenaUtil.getStrNull(temCoverturaVegetal2015Dto.getStrCvLabel()) != null) {
 				criteria.andStrCvLabelEqualTo(temCoverturaVegetal2015Dto.getStrCvLabel());
 			}
+			temCoverturaVegetal2015ParamDef.setStrHashConsulta(temCoverturaVegetal2015Dto.getStrHashConsulta());
 		}
 		
 		temCoverturaVegetal2015ParamDef.setOrderByClause("de_cobveg2013");

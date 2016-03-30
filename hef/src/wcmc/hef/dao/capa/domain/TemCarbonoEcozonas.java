@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCarbonoEcozonas extends TemCarbonoEcozonasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid;
 	private String strEcozona;
@@ -13,7 +14,13 @@ public class TemCarbonoEcozonas extends TemCarbonoEcozonasKey implements BaseBea
 	private Double dblLinfTcHa;
 	private Double dblLsupTcHa;
 	private Double dblPorcIncer;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

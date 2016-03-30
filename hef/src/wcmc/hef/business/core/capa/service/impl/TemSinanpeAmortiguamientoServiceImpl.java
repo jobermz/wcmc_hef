@@ -38,6 +38,7 @@ public class TemSinanpeAmortiguamientoServiceImpl implements TemSinanpeAmortigua
 			if(temSinanpeAmortiguamientoDto.getDteZaFecr() != null) {
 				criteria.andDteZaFecrEqualTo(temSinanpeAmortiguamientoDto.getDteZaFecr());
 			}
+			temSinanpeAmortiguamientoParamDef.setStrHashConsulta(temSinanpeAmortiguamientoDto.getStrHashConsulta());
 		}
 		
 		temSinanpeAmortiguamientoParamDef.setOrderByClause("de_za_nomb");

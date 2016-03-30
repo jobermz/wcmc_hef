@@ -77,6 +77,7 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 			if(CadenaUtil.getDoubNull(temConcesionesMinerasDto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(temConcesionesMinerasDto.getDblShapeStle());
 			}
+			temConcesionesMinerasParamDef.setStrHashConsulta(temConcesionesMinerasDto.getStrHashConsulta());
 		}
 		
 		temConcesionesMinerasParamDef.setOrderByClause("de_tit_conces");

@@ -11,6 +11,11 @@ import wcmc.hef.dao.capa.domain.BeanRaster;
 public interface TemBiodiversidadEspeciesPeligroExtincionService {
 
 	public BeanRaster selectByGeometry(BeanRasterDto beanRasterDto) throws Exception;
-	public String selectGeometryByRangoAndGeometry(BeanRasterDto beanRasterDto) throws Exception;
+
+	public List<Integer> selectRidAfectadosByGeometry(BeanRasterDto beanRasterDto) throws Exception;
 	
+	public void insertGeometryByRangoAndGeometry(BeanRasterDto beanRasterDto) throws Exception;
+	
+	public void deleteQueryByUsuario(BeanRasterDto beanRasterDto) throws Exception;
+		
 }

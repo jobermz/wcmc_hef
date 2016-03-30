@@ -1,7 +1,9 @@
 package wcmc.hef.web.capa.action;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -160,7 +162,7 @@ import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
 import wcmc.hef.general.util.ServiciosProperties;
 
-public class ConsultaCombosACLFuxionAction extends ActionSupport {
+public class ConsultaACLFuxionAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
@@ -316,7 +318,7 @@ public class ConsultaCombosACLFuxionAction extends ActionSupport {
 	private String listIdDataCapaConsulta;
 	private String listIdDataCapaCriConsulta;
 	
-	public ConsultaCombosACLFuxionAction() {
+	public ConsultaACLFuxionAction() {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,6 +328,17 @@ public class ConsultaCombosACLFuxionAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
+			
+			String strHashConsulta	= null;
+			if(CadenaUtil.getStrNull(session.get("strHashConsultaACL")) != null) {
+				strHashConsulta	= (String)session.get("strHashConsultaACL");
+				BeanRasterDto beanRasterDto		= new BeanRasterDto();
+				beanRasterDto.setStrHashConsulta(strHashConsulta);
+				temDensidadCarbonoAereaService.deleteQueryByUsuario(beanRasterDto);
+			}
+			
+			strHashConsulta			= CadenaUtil.getStr(new Date().getTime());
+			session.put("strHashConsultaACL", strHashConsulta);
 			List<BaseBeanVectorial> listReporte		= new ArrayList<BaseBeanVectorial>();
 			
 			String[] arrCons			= listSrlIdCapaConsulta.split(",");
@@ -341,10 +354,14 @@ public class ConsultaCombosACLFuxionAction extends ActionSupport {
 			String strIdData	= "";
 			String strIdDataCri	= "";
 			Map<String, String> mapServ	= ServiciosProperties.getServiciosByIdList();
-			final List<String> listReporteOk	= new ArrayList<String>();
-			String strLastServicioConsultado	= "";
-			strGeometriaRespuesta				= "";
+			final List<String> listReporteOk		= new ArrayList<String>();
+			String strLastServicioConsultado		= "";
+			strGeometriaRespuesta					= "";
+			List<Runnable> listThreadRids			= new ArrayList<Runnable>();
+			final List<String> listThreadRidsRS		= new ArrayList<String>();
+			boolean esRaster				= false;
 			for(int i = 0;i< listConsulta.size();i++) {
+				esRaster		= false;
 				strSrlIdCapa	= listConsulta.get(i);
 				strIdData		= listIdData.get(i);
 				strIdDataCri	= listIdDataCri.get(i);
@@ -1026,36 +1043,79 @@ public class ConsultaCombosACLFuxionAction extends ActionSupport {
 					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					case "TemBiodiversidadEspeciesPeligroExtincionService":
 					{
-						/*
+						esRaster	= true;
 						try {
-							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
 							strSrlIdCapa	= listConsulta.get(i);
 							strIdData		= listIdData.get(i);
 							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
 							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
-								//TODO Leer combos umbrales
-								beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr("10-100"));
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
 							} else if(strIdDataCri.equals("mayor")) {//Mayor a
-								beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr(strIdData+"-175"));
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
 							} else if(strIdDataCri.equals("menor")) {//Menor a
-								beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr("0-"+strIdData));
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
 							} else if(strIdDataCri.equals("igual")) {//Igual a
-								beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr(strIdData+"-"+strIdData));
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
 							} else if(strIdDataCri.equals("rango")) {//Por rango
-								beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr(strIdData));
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
 							}
-							if(strGeometriaRespuesta.equals("")) {
+							if(!strGeometriaRespuesta.equals("")) {
 								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
-								break;
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
 							}
-							final String strGeomResp				= temBiodiversidadEspeciesPeligroExtincionService.selectGeometryByRangoAndGeometry(beanRasterDto);
-							if(strGeomResp != null) {
-								listReporte.add(new BaseBeanVectorial(){
-									public Integer getSrlGid(){return null;}
-									public void setSrlGid(Integer srlGid){}
-									public String getStrTheGeom(){return strGeomResp;}
-									public void setStrTheGeom(String strTheGeom){}
-								});
+							List<Integer> listRids			= temBiodiversidadEspeciesPeligroExtincionService.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 30 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temBiodiversidadEspeciesPeligroExtincionService.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemBiodiversidadEspeciesPeligroExtincionService ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -1063,89 +1123,280 @@ public class ConsultaCombosACLFuxionAction extends ActionSupport {
 							System.out.println("ADD TemBiodiversidadEspeciesPeligroExtincionService");
 							listReporteOk.add("TemBiodiversidadEspeciesPeligroExtincionService");
 						}
-						*/
-						listReporteOk.add("TemBiodiversidadEspeciesPeligroExtincionService");
 						break;
 					}
 					case "TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService":
 					{
-						/*
+						esRaster	= true;
 						try {
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
+							strSrlIdCapa	= listConsulta.get(i);
+							strIdData		= listIdData.get(i);
+							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
 							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr("10-100"));
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr("Polygon"));
-							final String strGeomResp				= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectGeometryByRangoAndGeometry(beanRasterDto);
-							if(strGeomResp != null) {
-								listReporte.add(new BaseBeanVectorial(){
-									public Integer getSrlGid(){return null;}
-									public void setSrlGid(Integer srlGid){}
-									public String getStrTheGeom(){return strGeomResp;}
-									public void setStrTheGeom(String strTheGeom){}
-								});
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
+							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							} else if(strIdDataCri.equals("mayor")) {//Mayor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
+							} else if(strIdDataCri.equals("menor")) {//Menor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
+							} else if(strIdDataCri.equals("igual")) {//Igual a
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
+							} else if(strIdDataCri.equals("rango")) {//Por rango
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							}
+							if(!strGeometriaRespuesta.equals("")) {
+								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
+							}
+							List<Integer> listRids			= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 30 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {
+							System.out.println("ADD TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService");
 							listReporteOk.add("TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService");
 						}
-						*/
-						listReporteOk.add("TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService");
 						break;
 					}
 					case "TemDensidadCarbonoAereaService":
 					{
-						/*
+						esRaster	= true;
 						try {
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
+							strSrlIdCapa	= listConsulta.get(i);
+							strIdData		= listIdData.get(i);
+							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
 							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr("10-100"));
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr("Polygon"));
-							final String strGeomResp				= temDensidadCarbonoAereaService.selectGeometryByRangoAndGeometry(beanRasterDto);
-							if(strGeomResp != null) {
-								listReporte.add(new BaseBeanVectorial(){
-									public Integer getSrlGid(){return null;}
-									public void setSrlGid(Integer srlGid){}
-									public String getStrTheGeom(){return strGeomResp;}
-									public void setStrTheGeom(String strTheGeom){}
-								});
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
+							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							} else if(strIdDataCri.equals("mayor")) {//Mayor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
+							} else if(strIdDataCri.equals("menor")) {//Menor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
+							} else if(strIdDataCri.equals("igual")) {//Igual a
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
+							} else if(strIdDataCri.equals("rango")) {//Por rango
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							}
+							if(!strGeometriaRespuesta.equals("")) {
+								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
+							}
+							List<Integer> listRids			= temDensidadCarbonoAereaService.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 40 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temDensidadCarbonoAereaService.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemDensidadCarbonoAereaService ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {
+							System.out.println("ADD TemDensidadCarbonoAereaService");
 							listReporteOk.add("TemDensidadCarbonoAereaService");
 						}
-						*/
-						listReporteOk.add("TemDensidadCarbonoAereaService");
 						break;
 					}
 					case "TemRiesgoErosionHidricaService":
 					{
-						/*
+						esRaster	= true;
 						try {
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
+							strSrlIdCapa	= listConsulta.get(i);
+							strIdData		= listIdData.get(i);
+							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
 							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrRangoConsulta(CadenaUtil.getStr("10-100"));
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr("Polygon"));
-							final String strGeomResp				= temRiesgoErosionHidricaService.selectGeometryByRangoAndGeometry(beanRasterDto);
-							if(strGeomResp != null) {
-								listReporte.add(new BaseBeanVectorial(){
-									public Integer getSrlGid(){return null;}
-									public void setSrlGid(Integer srlGid){}
-									public String getStrTheGeom(){return strGeomResp;}
-									public void setStrTheGeom(String strTheGeom){}
-								});
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
+							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							} else if(strIdDataCri.equals("mayor")) {//Mayor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
+							} else if(strIdDataCri.equals("menor")) {//Menor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
+							} else if(strIdDataCri.equals("igual")) {//Igual a
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
+							} else if(strIdDataCri.equals("rango")) {//Por rango
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							}
+							if(!strGeometriaRespuesta.equals("")) {
+								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
+							}
+							List<Integer> listRids			= temRiesgoErosionHidricaService.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 30 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temRiesgoErosionHidricaService.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemRiesgoErosionHidricaService ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {
+							System.out.println("ADD TemRiesgoErosionHidricaService");
 							listReporteOk.add("TemRiesgoErosionHidricaService");
 						}
-						*/
-						listReporteOk.add("TemRiesgoErosionHidricaService");
 						break;
 					}
 					}
 				}
-				strGeometriaRespuesta	= evaluarGeometrias(listReporte);
+				if(!esRaster) {
+					strGeometriaRespuesta	= evaluarGeometrias(listReporte);
+					session.put("geometria_"+strHashConsulta, strGeometriaRespuesta);
+				}
 			}
+			for(int m = 0;m < listThreadRids.size();m++) {
+				new Thread(listThreadRids.get(m)).start();
+			}
+			while(true) {
+				synchronized(this) {
+					wait(500L);
+				}
+				System.out.println("ConsultaACLFuxionAction.consultar(RI:"+listThreadRidsRS.size() +" == TH:"+ listThreadRids.size()+")"); 
+				if(listThreadRidsRS.size() == listThreadRids.size()) {
+					break;
+				}
+			}
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -32,6 +32,7 @@ public class BasLimDepartamentoServiceImpl implements BasLimDepartamentoService 
 			if(CadenaUtil.getStrNull(basLimDepartamentoDto.getStrNombdep()) != null) {
 				criteria.andStrNombdepEqualTo(basLimDepartamentoDto.getStrNombdep());
 			}
+			basLimDepartamentoParamDef.setStrHashConsulta(basLimDepartamentoDto.getStrHashConsulta());
 		}
 		
 		basLimDepartamentoParamDef.setOrderByClause("de_nombdep");

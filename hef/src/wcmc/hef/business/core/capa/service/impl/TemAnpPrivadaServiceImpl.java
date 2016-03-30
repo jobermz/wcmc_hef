@@ -62,6 +62,7 @@ public class TemAnpPrivadaServiceImpl implements TemAnpPrivadaService {
 			if(CadenaUtil.getStrNull(temAnpPrivadaDto.getStrAnpcTitu()) != null) {
 				criteria.andStrAnpcTituEqualTo(temAnpPrivadaDto.getStrAnpcTitu());
 			}
+			temAnpPrivadaParamDef.setStrHashConsulta(temAnpPrivadaDto.getStrHashConsulta());
 		}
 		
 		temAnpPrivadaParamDef.setOrderByClause("de_anpc_nomb");

@@ -6,13 +6,20 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasLimProvincia extends BasLimProvinciaKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strIddpto;
 	private String strNombdep;
 	private String strIdprov;
 	private String strNombprov;
 	private String strCapital;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

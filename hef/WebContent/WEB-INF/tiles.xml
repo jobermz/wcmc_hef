@@ -66,6 +66,8 @@
 	<definition name="consulta_combos_acl_form" template="/paginas/consulta/combosACL/consultaCombosACLForm.jsp"></definition>
 	<definition name="consulta_combos_centrar_form" template="/paginas/consulta/combosCentrar/consultaCombosCentrarForm.jsp"></definition>
 	
+	<definition name="consulta_combos_capa_umbral_form" template="/paginas/visor/comboCapaUmbralInicio.jsp"></definition>
+	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">
 		<put-attribute name="content" value="/paginas/seguridad/cuentaUsuarioInicio.jsp"/>
@@ -132,6 +134,5 @@
 	
 	<!-- Umbral -->
 	<definition name="capa_umbral_form" template="/paginas/configuracion/capaUmbralForm.jsp"></definition>
-	
 	
 </tiles-definitions>

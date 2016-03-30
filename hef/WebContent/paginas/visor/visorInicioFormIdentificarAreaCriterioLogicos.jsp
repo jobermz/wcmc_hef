@@ -27,7 +27,7 @@
 							<div class="panel-group" id="accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="true">
 							  
 							<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-							  <s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}">
+<%-- 							  <s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}"> --%>
 							  <div class="panel panel-default clsPanelGrupoCapasACL">
 							    <div class="panel-heading" role="tab" id="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}">
 							      <h4 class="panel-title">
@@ -82,7 +82,7 @@
 							      </div>
 							    </div>
 							  </div>
-							</s:if>
+<%-- 							</s:if> --%>
 							</s:iterator>
 							  
 							</div>

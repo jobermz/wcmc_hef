@@ -53,6 +53,7 @@ public class TemConcesionesForestalesMaderableConcursoServiceImpl implements Tem
 			if(CadenaUtil.getStrNull(temConcesionesForestalesMaderableConcursoDto.getStrSituacion()) != null) {
 				criteria.andStrSituacionEqualTo(temConcesionesForestalesMaderableConcursoDto.getStrSituacion());
 			}
+			temConcesionesForestalesMaderableConcursoParamDef.setStrHashConsulta(temConcesionesForestalesMaderableConcursoDto.getStrHashConsulta());
 		}
 		
 		temConcesionesForestalesMaderableConcursoParamDef.setOrderByClause("de_titular,de_concurso");

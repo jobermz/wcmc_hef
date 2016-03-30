@@ -56,6 +56,7 @@ public class TemAnpRegionalServiceImpl implements TemAnpRegionalService {
 			if(CadenaUtil.getStrNull(temAnpRegionalDto.getStrAnpcDepa()) != null) {
 				criteria.andStrAnpcDepaEqualTo(temAnpRegionalDto.getStrAnpcDepa());
 			}
+			temAnpRegionalParamDef.setStrHashConsulta(temAnpRegionalDto.getStrHashConsulta());
 		}
 		
 		temAnpRegionalParamDef.setOrderByClause("de_anpc_nomb");

@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasHidroRios100000 extends BasHidroRios100000Key implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid1;
 	private String strGmlId;
@@ -18,7 +19,13 @@ public class BasHidroRios100000 extends BasHidroRios100000Key implements BaseBea
 	private String strPn99;
 	private String strDn99;
 	private Double dblShapeStle;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

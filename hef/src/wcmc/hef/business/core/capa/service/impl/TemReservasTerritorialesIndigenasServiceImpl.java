@@ -77,6 +77,7 @@ public class TemReservasTerritorialesIndigenasServiceImpl implements TemReservas
 			if(CadenaUtil.getDoubNull(temReservasTerritorialesIndigenasDto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(temReservasTerritorialesIndigenasDto.getDblShapeStle());
 			}
+			temReservasTerritorialesIndigenasParamDef.setStrHashConsulta(temReservasTerritorialesIndigenasDto.getStrHashConsulta());
 		}
 		
 		temReservasTerritorialesIndigenasParamDef.setOrderByClause("de_nombre,de_etnia");

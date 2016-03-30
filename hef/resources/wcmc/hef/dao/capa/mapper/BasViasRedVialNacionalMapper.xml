@@ -17,6 +17,7 @@
 		</if>
 		<include refid="Base_Column_List" />
 		from wcmc_hef.bas_vias_red_vial_nacional as tab
+		${strHashConsulta}
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>

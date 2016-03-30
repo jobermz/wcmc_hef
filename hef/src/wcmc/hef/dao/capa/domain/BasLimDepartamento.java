@@ -6,10 +6,17 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasLimDepartamento extends BasLimDepartamentoKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strIddpto;
 	private String strNombdep;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

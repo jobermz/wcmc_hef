@@ -41,6 +41,7 @@ public class BasLimProvinciaServiceImpl implements BasLimProvinciaService {
 			if(CadenaUtil.getStrNull(basLimProvinciaDto.getStrCapital()) != null) {
 				criteria.andStrCapitalEqualTo(basLimProvinciaDto.getStrCapital());
 			}
+			basLimProvinciaParamDef.setStrHashConsulta(basLimProvinciaDto.getStrHashConsulta());
 		}
 		
 		basLimProvinciaParamDef.setOrderByClause("de_nombdep,de_nombprov");

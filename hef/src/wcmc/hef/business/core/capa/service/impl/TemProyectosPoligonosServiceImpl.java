@@ -95,6 +95,7 @@ public class TemProyectosPoligonosServiceImpl implements TemProyectosPoligonosSe
 			if(CadenaUtil.getStrNull(temProyectosPoligonosDto.getStrLink()) != null) {
 				criteria.andStrLinkEqualTo(temProyectosPoligonosDto.getStrLink());
 			}
+			temProyectosPoligonosParamDef.setStrHashConsulta(temProyectosPoligonosDto.getStrHashConsulta());
 		}
 		
 		temProyectosPoligonosParamDef.setOrderByClause("de_inic_prog_");

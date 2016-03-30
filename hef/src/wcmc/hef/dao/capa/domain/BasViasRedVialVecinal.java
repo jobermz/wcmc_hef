@@ -6,11 +6,18 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class BasViasRedVialVecinal extends BasViasRedVialVecinalKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strProvinc;
 	private String strRuta;
 	private String strSuperficie;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

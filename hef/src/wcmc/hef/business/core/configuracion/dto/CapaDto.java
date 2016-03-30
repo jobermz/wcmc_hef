@@ -1,6 +1,7 @@
 package wcmc.hef.business.core.configuracion.dto;
 
 import java.util.Date;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class CapaDto {
@@ -23,6 +24,8 @@ public class CapaDto {
 	private String strEsFiltroAcl;
 	private String strEsCentrarMapa;
 	private Integer intIdUsuario;
+	private String strShp;
+	private String strShpExtent;
 
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
@@ -184,6 +187,18 @@ public class CapaDto {
 	}
 	public void setIntIdUsuario(Integer intIdUsuario) {
 		this.intIdUsuario = intIdUsuario;
+	}
+	public String getStrShp() {
+		return strShp;
+	}
+	public void setStrShp(String strShp) {
+		this.strShp = strShp;
+	}
+	public String getStrShpExtent() {
+		return strShpExtent;
+	}
+	public void setStrShpExtent(String strShpExtent) {
+		this.strShpExtent = strShpExtent;
 	}
 	
 }

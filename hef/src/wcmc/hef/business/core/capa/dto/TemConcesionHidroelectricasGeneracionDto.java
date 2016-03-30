@@ -5,6 +5,7 @@ import java.util.List;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionHidroelectricasGeneracionDto implements BaseBeanVectorialDto {
+    private String strHashConsulta;
 	private Integer srlGid;
 	private String strTheGeom;
 	private String strIdGrafico;
@@ -23,6 +24,14 @@ public class TemConcesionHidroelectricasGeneracionDto implements BaseBeanVectori
 	private String strCodigoCon;
 	private Double dblShapeArea;
 	private Double dblShapeLen;
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+	
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getDteFechaPresFecha() {
 		return CadenaUtil.getStrDate(dteFechaPres);
 	}

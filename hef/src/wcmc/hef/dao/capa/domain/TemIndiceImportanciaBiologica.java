@@ -6,9 +6,16 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemIndiceImportanciaBiologica extends TemIndiceImportanciaBiologicaKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Double dblImpGlob;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

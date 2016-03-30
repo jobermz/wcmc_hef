@@ -1,11 +1,13 @@
 package wcmc.hef.business.core.configuracion.service.impl;
 
 import java.util.List;
-import java.util.Date;
+import java.util.Map;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import wcmc.hef.business.core.configuracion.dto.CapaUmbralDto;
 import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
 import wcmc.hef.dao.configuracion.domain.CapaUmbral;
@@ -70,4 +72,7 @@ public class CapaUmbralServiceImpl implements CapaUmbralService {
 		return rs;
 	}
 	
+	public Map<String, Double> selectCapaUmbralMinMax(Integer value) throws Exception {
+		return capaUmbralMapper.selectCapaUmbralMinMax(value);
+	}
 }

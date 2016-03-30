@@ -59,6 +59,7 @@ public class BasHidroRios100000ServiceImpl implements BasHidroRios100000Service 
 			if(CadenaUtil.getDoubNull(basHidroRios100000Dto.getDblShapeStle()) != null) {
 				criteria.andDblShapeStleEqualTo(basHidroRios100000Dto.getDblShapeStle());
 			}
+			basHidroRios100000ParamDef.setStrHashConsulta(basHidroRios100000Dto.getStrHashConsulta());
 		}
 		
 		List<BasHidroRios100000>	 list	= basHidroRios100000Mapper.selectByDefaultParameter(basHidroRios100000ParamDef);

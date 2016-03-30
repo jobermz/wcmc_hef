@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemSoeconComunidadesCampesinas extends TemSoeconComunidadesCampesinasKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private Integer intObjectid;
 	private String strNombre;
@@ -19,7 +20,13 @@ public class TemSoeconComunidadesCampesinas extends TemSoeconComunidadesCampesin
 	private String strNTitulo;
 	private Double dblShapeLeng;
 	private Double dblShapeArea;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

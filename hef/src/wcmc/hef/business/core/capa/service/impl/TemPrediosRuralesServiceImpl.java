@@ -41,6 +41,7 @@ public class TemPrediosRuralesServiceImpl implements TemPrediosRuralesService {
 			if(CadenaUtil.getInteNull(temPrediosRuralesDto.getIntOrigFid()) != null) {
 				criteria.andIntOrigFidEqualTo(temPrediosRuralesDto.getIntOrigFid());
 			}
+			temPrediosRuralesParamDef.setStrHashConsulta(temPrediosRuralesDto.getStrHashConsulta());
 		}
 		
 		List<TemPrediosRurales>	 list	= temPrediosRuralesMapper.selectByDefaultParameter(temPrediosRuralesParamDef);

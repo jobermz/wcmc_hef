@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemHumedalesRamsar extends TemHumedalesRamsarKey implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strCategorias;
 	private String strNombre;
@@ -16,7 +17,13 @@ public class TemHumedalesRamsar extends TemHumedalesRamsarKey implements BaseBea
 	private String strObserva;
 	private Double dblShapeArea;
 	private Double dblShapeLen;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}

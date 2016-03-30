@@ -25,7 +25,9 @@ public class Capa extends CapaKey {
 	private String strEsFiltroAcl;
 	private String strEsCentrarMapa;
 	private Integer intIdUsuario;
-	
+	private String strShp;
+	private String strShpExtent;
+
 	private List<CapaUmbral> listCapaUmbral;
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
@@ -187,6 +189,18 @@ public class Capa extends CapaKey {
 	}
 	public void setIntIdUsuario(Integer intIdUsuario) {
 		this.intIdUsuario = intIdUsuario;
+	}
+	public String getStrShp() {
+		return strShp;
+	}
+	public void setStrShp(String strShp) {
+		this.strShp = strShp;
+	}
+	public String getStrShpExtent() {
+		return strShpExtent;
+	}
+	public void setStrShpExtent(String strShpExtent) {
+		this.strShpExtent = strShpExtent;
 	}
 	
 }

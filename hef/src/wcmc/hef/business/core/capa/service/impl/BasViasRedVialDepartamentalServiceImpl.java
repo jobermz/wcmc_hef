@@ -41,6 +41,7 @@ public class BasViasRedVialDepartamentalServiceImpl implements BasViasRedVialDep
 			if(CadenaUtil.getStrNull(basViasRedVialDepartamentalDto.getStrSupercicie()) != null) {
 				criteria.andStrSupercicieEqualTo(basViasRedVialDepartamentalDto.getStrSupercicie());
 			}
+			basViasRedVialDepartamentalParamDef.setStrHashConsulta(basViasRedVialDepartamentalDto.getStrHashConsulta());
 		}
 		
 		basViasRedVialDepartamentalParamDef.setOrderByClause("de_ruta_d044");

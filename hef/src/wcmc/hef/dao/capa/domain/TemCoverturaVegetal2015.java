@@ -6,6 +6,7 @@ import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCoverturaVegetal2015 extends TemCoverturaVegetal2015Key implements BaseBeanVectorial {
 	
+    private String strHashConsulta;
 	private String strTheGeom;
 	private String strCobveg2013;
 	private String strSimbolo;
@@ -13,7 +14,13 @@ public class TemCoverturaVegetal2015 extends TemCoverturaVegetal2015Key implemen
 	private Double dblShapeLeng;
 	private Double dblShapeArea;
 	private String strCvLabel;
-	
+
+    public void setStrHashConsulta(String strHashConsulta) {
+        this.strHashConsulta = strHashConsulta;
+    }
+    public String getStrHashConsulta() {
+        return CadenaUtil.getStr(strHashConsulta);
+    }
 	public String getStrTheGeom() {
 		return strTheGeom;
 	}
