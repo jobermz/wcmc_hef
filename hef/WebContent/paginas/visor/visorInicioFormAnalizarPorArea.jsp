@@ -109,7 +109,7 @@
 					<div class="col-lg-8">
 						<div class="pull-right">
 							<button type="button" class="btn btn-default btnSeleccionarTodasCapasAPA">Seleccionar todas las capas</button>
-							<button type="button" class="btn btn-default btnProcesarAnalizarPorArea">Procesar</button>
+							<!-- <button type="button" class="btn btn-default btnProcesarAnalizarPorArea">Procesar</button> -->
 						</div>
 					</div>
 				</div>

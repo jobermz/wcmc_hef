@@ -262,8 +262,12 @@ function procesarCriterioLogico() {
 			listIdDataCapaCriCons	+= "";
 		}
 	});
-	{
-		if(listSrlIdCapaCons.length > 0 && listSrlIdCapaConsRASTER.length > 0) {
+	if(listSrlIdCapaCons.length <= 0) {
+		alert("Debe incluir por lo menos una capa de tipo vectorial");
+		return;
+	}
+	if(listSrlIdCapaConsRASTER.length > 0) {
+		if(listSrlIdCapaCons.length > 0) {
 			listSrlIdCapaCons		+= ",";
 			listIdDataCapaCons		+= ",";
 			listIdDataCapaCriCons	+= ",";
