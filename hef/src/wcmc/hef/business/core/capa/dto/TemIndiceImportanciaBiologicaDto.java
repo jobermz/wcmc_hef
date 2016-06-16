@@ -1,7 +1,9 @@
 package wcmc.hef.business.core.capa.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemIndiceImportanciaBiologicaDto implements BaseBeanVectorialDto {
@@ -31,6 +33,12 @@ public class TemIndiceImportanciaBiologicaDto implements BaseBeanVectorialDto {
 	}
 	public Double getDblImpGlob() {
 		return dblImpGlob;
+	}
+	public String getDblImpGlob2Decimales() {
+		if(dblImpGlob != null)
+			return new BigDecimal(dblImpGlob).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
 	}
 	public void setDblImpGlob(Double dblImpGlob) {
 		this.dblImpGlob = dblImpGlob;

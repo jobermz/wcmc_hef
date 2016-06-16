@@ -8,10 +8,11 @@
 		<result column="max" property="dblValueMax" jdbcType="DOUBLE"/>
 		<result column="sum" property="lngValueCount" jdbcType="BIGINT"/>
 		<result column="stddev" property="dblStddev" jdbcType="DOUBLE"/>
+		<result column="total" property="dblValueSumaTotal" jdbcType="DOUBLE"/>
 	</resultMap>
 	
 	<select id="selectByGeometry" resultMap="TemBiodiversidadEspeciesPeligroExtincionMap" parameterType="wcmc.hef.dao.capa.domain.BeanRaster" >
-		select sum(e.count), avg(e.mean), min(e.min), max(e.max), stddev(e.stddev) from
+		select sum(e.count), avg(e.mean), min(e.min), max(e.max), stddev(e.stddev), sum(e.sum) as total from
 		(select (ST_SummaryStats(c.Clip, true)).*
 		from (SELECT ST_Clip(A.cd_rast, QRY.geom, true) AS Clip
 			FROM wcmc_hef.tem_biodiversidad_especies_peligro_extincion AS A,
@@ -31,7 +32,7 @@
 		insert into wcmc_hef.tem_query_acl (de_hash_consulta, cd_rid, de_tabla, cd_rast, fc_fecreg) 
 		select ${strHashConsulta}, rid, 'tem_biodiversidad_especies_peligro_extincion', raster, current_timestamp
 		from (
-			SELECT rid, ST_MapAlgebra(cd_rast, 1, '1BB', '(${strRangoConsulta})::int') as raster
+			SELECT rid, ST_MapAlgebra(cd_rast, 1, '32BF', '(${strRangoConsulta})::int') as raster
 			FROM wcmc_hef.tem_biodiversidad_especies_peligro_extincion where rid in (${strInRids})
 		) as ttt
 		where ST_Intersects(

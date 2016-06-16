@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class BeanRaster {
 	private String strPoligonoConsulta;
 	private String strRangoConsulta;
+	private Double dblValueSumaTotal;
 	private Double dblValuePromedio;
 	private Double dblValueMin;
 	private Double dblValueMax;
@@ -20,6 +21,13 @@ public class BeanRaster {
 		this.strPoligonoConsulta	= strPoligonoConsulta;
 	}
 	public BeanRaster(Double dblValuePromedio, Double dblValueMin, Double dblValueMax, Long lngValueCount) {
+		this.dblValuePromedio		= dblValuePromedio;
+		this.dblValueMin			= dblValueMin;
+		this.dblValueMax			= dblValueMax;
+		this.lngValueCount			= lngValueCount;
+	}
+	public BeanRaster(Double dblValueSumaTotal, Double dblValuePromedio, Double dblValueMin, Double dblValueMax, Long lngValueCount) {
+		this.dblValueSumaTotal		= dblValueSumaTotal;
 		this.dblValuePromedio		= dblValuePromedio;
 		this.dblValueMin			= dblValueMin;
 		this.dblValueMax			= dblValueMax;
@@ -50,6 +58,18 @@ public class BeanRaster {
 		else 
 			return "0.0000";
 	}
+	public String getStrValuePromedio2Decimales() {
+		if(dblValuePromedio != null)
+			return new BigDecimal(dblValuePromedio).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrValuePromedioSinDecimales() {
+		if(dblValuePromedio != null)
+			return new BigDecimal(dblValuePromedio).setScale(0, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0";
+	}
 	public Double getDblValuePromedio() {
 		return dblValuePromedio;
 	}
@@ -63,6 +83,18 @@ public class BeanRaster {
 		else 
 			return "0.0000";
 	}
+	public String getStrValueMin2Decimales() {
+		if(dblValueMin != null)
+			return new BigDecimal(dblValueMin).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrValueMinSinDecimales() {
+		if(dblValueMin != null)
+			return new BigDecimal(dblValueMin).setScale(0, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0";
+	}
 	public Double getDblValueMin() {
 		return dblValueMin;
 	}
@@ -75,6 +107,18 @@ public class BeanRaster {
 			return new BigDecimal(dblValueMax).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
 		else 
 			return "0.0000";
+	}
+	public String getStrValueMax2Decimales() {
+		if(dblValueMax != null)
+			return new BigDecimal(dblValueMax).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrValueMaxSinDecimales() {
+		if(dblValueMax != null)
+			return new BigDecimal(dblValueMax).setScale(0, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0";
 	}
 	public Double getDblValueMax() {
 		return dblValueMax;
@@ -102,6 +146,18 @@ public class BeanRaster {
 		else 
 			return "0.0000";
 	}
+	public String getStrStddev2Decimales() {
+		if(dblStddev != null)
+			return new BigDecimal(dblStddev).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrStddevSinDecimales() {
+		if(dblStddev != null)
+			return new BigDecimal(dblStddev).setScale(0, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0";
+	}
 	public Double getDblStddev() {
 		return dblStddev;
 	}
@@ -119,6 +175,36 @@ public class BeanRaster {
 	}
 	public void setStrHashConsulta(String strHashConsulta) {
 		this.strHashConsulta = strHashConsulta;
+	}
+	public Double getDblValueSumaTotal() {
+		return dblValueSumaTotal;
+	}
+	public void setDblValueSumaTotal(Double dblValueSumaTotal) {
+		this.dblValueSumaTotal = dblValueSumaTotal;
+	}
+	public String getStrValueSumaTotal() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(dblValueSumaTotal).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.0000";
+	}
+	public String getStrValueSumaTotal2Decimales() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(dblValueSumaTotal).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrValueSumaTotal2DecimalesCobBos() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(dblValueSumaTotal*0.09d).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+	public String getStrValueSumaTotalSinDecimales() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(dblValueSumaTotal).setScale(0, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0";
 	}
 	
 }

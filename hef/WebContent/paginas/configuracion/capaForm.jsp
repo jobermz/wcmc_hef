@@ -8,16 +8,16 @@ session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
 %>
 <div class="page-content">
 	<div class="row">
-		<div class="page-title" id="idDivEditarTituloCapa">
-			<h3>
-				Gestionar <span class="semi-bold">Capas base</span> 
-			</h3>
+		<div class="breadcrumb">
+			<h4>
+				Gestionar <span class="semi-bold">Capas</span> 
+			</h4>
 		</div>
-		<ol class="breadcrumb">
-			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
-			<li><a href="capa.action"><i class="glyphicon glyphicon-th-list"></i> Listar capas base </a></li>
-			<li class="active"><i class="glyphicon glyphicon-edit"></i> Edici&oacute;n de capas base</li>
-		</ol>
+<!-- 		<ol class="breadcrumb"> -->
+<!-- 			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li> -->
+<!-- 			<li><a href="capa.action"><i class="glyphicon glyphicon-th-list"></i> Listar capas base </a></li> -->
+<!-- 			<li class="active"><i class="glyphicon glyphicon-edit"></i> Edici&oacute;n de capas base</li> -->
+<!-- 		</ol> -->
 	</div>
 	
 		<div class="row">
@@ -36,19 +36,19 @@ session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
 											
 											<select name="edicion_capaDto.intGrupoCapas" tabindex="1" id="buscar_intGrupoCapas" class="form-control ">
 											    <option value="">-Seleccionar-</option>
-												<s:iterator value="#session.listGrupoCapasBase" var="grupoCapaBase">
-													<optgroup label="${grupoCapaBase.strNombre}"></optgroup>
+<%-- 												<s:iterator value="#session.listGrupoCapasBase" var="grupoCapaBase"> --%>
+<%-- 													<optgroup label="${grupoCapaBase.strNombre}"></optgroup> --%>
 													<s:iterator value="#session.listGrupoCapasTodos" var="grupoCapaBaseTodos">
-														<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}">
+<%-- 														<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}"> --%>
 															<s:if test="%{#grupoCapaBaseTodos.srlIdGrupoCapas==edicion_capaDto.intGrupoCapas}">
 																<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}" selected="selected">${grupoCapaBaseTodos.strNombre}</option>
 															</s:if>
 															<s:else>
 																<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}">${grupoCapaBaseTodos.strNombre}</option>
 															</s:else>
-														</s:if>
+<%-- 														</s:if> --%>
 													</s:iterator>
-												</s:iterator>
+<%-- 												</s:iterator> --%>
 											</select>
 											
 										</div>
@@ -108,20 +108,29 @@ session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
 									</div>
 								</div>
 								<div class="row form-row">
-									<div class="col-sm-4 " id="idCampCapa_strEsSelecApaBoolean">
-			                			<label for="edicion_capaDto.strEsSelecApaBoolean" class="form-label">Seleccionar en Mapa?</label>
-		                				<s:checkbox name="edicion_capaDto.strEsSelecApaBoolean" cssClass="form-control " tabindex="10" />
+									<div class="col-sm-6 " id="idCampCapa_strEsSelecApaBoolean">
+		                				<s:checkbox name="edicion_capaDto.strEsSelecApaBoolean"  tabindex="10" />
+			                			<label for="edicion_capaDto.strEsSelecApaBoolean" class="form-label">Seleccionar en el mapa?</label>
 									</div>
-									<div class="col-sm-4 " id="idCampCapa_strEsFiltroAclBoolean">
-			                			<label for="edicion_capaDto.strEsFiltroAclBoolean" class="form-label">Filtrar desde combo en Ident. por Criterio?</label>
-		                				<s:checkbox name="edicion_capaDto.strEsFiltroAclBoolean" cssClass="form-control " tabindex="10" />
+									<div class="col-sm-6 " id="idCampCapa_strEsFiltroAclBoolean">
+		                				<s:checkbox name="edicion_capaDto.strEsFiltroAclBoolean"  tabindex="10" />
+			                			<label for="edicion_capaDto.strEsFiltroAclBoolean" class="form-label">Opci&oacute;n de filtrar capa?</label>
 									</div>
-									<div class="col-sm-4 " id="idCampCapa_strEsCentrarMapaBoolean">
-			                			<label for="edicion_capaDto.strEsCentrarMapaBoolean" class="form-label">Centrar desde combo en mapa?</label>
-		                				<s:checkbox name="edicion_capaDto.strEsCentrarMapaBoolean" cssClass="form-control " tabindex="10" />
+								</div>
+								<div class="row form-row">
+									<div class="col-sm-6 " id="idCampCapa_strEsCentrarMapaBoolean">
+		                				<s:checkbox name="edicion_capaDto.strEsCentrarMapaBoolean"  tabindex="10" />
+			                			<label for="edicion_capaDto.strEsCentrarMapaBoolean" class="form-label">Opci&oacute;n de Centrar en el mapa?</label>
+									</div>
+									<div class="col-sm-6 " id="idCampCapa_strEsActivaBoolean">
+		                				<s:checkbox name="edicion_capaDto.strEsActivaBoolean"  tabindex="10" />
+			                			<label for="edicion_capaDto.strEsActivaBoolean" class="form-label">Mostrar en el visor?</label>
 									</div>
 								</div>
 								<div class="row form-row"><div class="col-sm-12">&nbsp;</div></div>
+<%-- 							<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}"> --%>
+								
+								<s:if test="%{edicion_capaDto.intTipoCapa==2}">								
 								<div class="row form-row">
 									<div class="col-sm-12 " id="idCampCapaUmbral_Umbrales">
 										<div class="row form-row">
@@ -138,6 +147,7 @@ session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
 															<th width="40%">Nombre</th>
 															<th width="20%">Valor minimo</th>
 															<th width="20%">Valor maximo</th>
+															<th width="10%">Nro Layer</th>
 															<th style="width: 6%;">Detalle</th>
 														</tr>
 													</thead>
@@ -146,6 +156,7 @@ session.setAttribute("edicion_capaDto_intGrupoCapas", capa.getIntGrupoCapas());
 										</div>
 									</div>
 								</div>
+								</s:if>
 							
 							</div>
 						</div>

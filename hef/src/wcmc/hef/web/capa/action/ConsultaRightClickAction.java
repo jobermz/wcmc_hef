@@ -50,16 +50,16 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
 import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
 import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.business.core.capa.service.TemReservasTerritorialesIndigenasService;
 import wcmc.hef.business.core.capa.service.TemRiesgoErosionHidricaService;
+import wcmc.hef.business.core.capa.service.TemCoberturaBoscosa2014Service;
+import wcmc.hef.business.core.capa.service.TemPerdidaBosque20012014Service;
 import wcmc.hef.business.core.capa.service.TemSinanpeAmortiguamientoService;
 import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasService;
 import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTerritorialesService;
@@ -69,9 +69,11 @@ import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPe
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BaseBeanVectorialDto;
 import wcmc.hef.business.core.capa.dto.BeanRasterDto;
+import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
 import wcmc.hef.dao.capa.domain.BeanRaster;
+import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -130,6 +132,7 @@ import wcmc.hef.business.core.capa.dto.TemHumedalesRamsarDto;
 import wcmc.hef.dao.capa.domain.TemHumedalesRamsar;
 import wcmc.hef.business.core.capa.dto.TemIndiceImportanciaBiologicaDto;
 import wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologica;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.dto.TemPrediosRuralesDto;
 import wcmc.hef.dao.capa.domain.TemPrediosRurales;
 import wcmc.hef.business.core.capa.dto.TemProyeccionDensidadPob2015Dto;
@@ -245,13 +248,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
-
-	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemPrediosRuralesService temPrediosRuralesService;
@@ -284,6 +281,9 @@ public class ConsultaRightClickAction extends ActionSupport {
 	private TemViasTrochasService temViasTrochasService;
 
 	@Autowired
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
+
+	@Autowired
 	private TemZonificPotencialBosqueProduccionPermanenteService temZonificPotencialBosqueProduccionPermanenteService;
 
 	
@@ -298,6 +298,12 @@ public class ConsultaRightClickAction extends ActionSupport {
 
 	@Autowired
 	private TemRiesgoErosionHidricaService temRiesgoErosionHidricaService;
+
+	@Autowired
+	private TemCoberturaBoscosa2014Service temCoberturaBoscosa2014Service;
+
+	@Autowired
+	private TemPerdidaBosque20012014Service temPerdidaBosque20012014Service;
 
 	@Autowired
 	private CapaService capaService;
@@ -754,6 +760,23 @@ public class ConsultaRightClickAction extends ActionSupport {
 						}
 						break;
 					}
+					case "TemConcesionHidroelectricasDistribucionService":
+					{
+						try {
+							TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
+							temConcesionHidroelectricasDistribucionDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
+							List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscarGeometry(temConcesionHidroelectricasDistribucionDto);
+							if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
+								baseBeanVectorial	= listTemConcesionHidroelectricasDistribucion.get(0);
+								mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							listReporteOk.add("TemConcesionHidroelectricasDistribucionService");
+						}
+						break;
+					}
 					case "TemCostoOportunidadDeforestacionService":
 					{
 						try {
@@ -785,23 +808,6 @@ public class ConsultaRightClickAction extends ActionSupport {
 							ex.printStackTrace();
 						} finally {
 							listReporteOk.add("TemCoverturaVegetal2015Service");
-						}
-						break;
-					}
-					case "TemCuencasHidrograficasService":
-					{
-						try {
-							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-							temCuencasHidrograficasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-							List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscarGeometry(temCuencasHidrograficasDto);
-							if(listTemCuencasHidrograficas.size() > 0) {
-								baseBeanVectorial	= listTemCuencasHidrograficas.get(0);
-								mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemCuencasHidrograficasService");
 						}
 						break;
 					}
@@ -941,7 +947,7 @@ public class ConsultaRightClickAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasService":
+					case "TemSoeconComunidadesCampesinasTotalesService":
 					{
 						try {
 							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
@@ -1135,7 +1141,60 @@ public class ConsultaRightClickAction extends ActionSupport {
 						}
 						break;
 					}
-
+					case "TemCoberturaBoscosa2014Service":
+					{
+						try {
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temCoberturaBoscosa2014Service.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemCoberturaBoscosa2014", beanRaster);
+								
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
+								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
+								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
+								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
+								for(CapaUmbral cu:listUmbrales) {
+									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
+										beanRaster.setStrCategoria(cu.getStrNombre());
+										break;
+									}
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							listReporteOk.add("TemCoberturaBoscosa2014Service");
+						}
+						break;
+					}
+					case "TemPerdidaBosque20012014Service":
+					{
+						try {
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+							BeanRaster beanRaster		= temPerdidaBosque20012014Service.selectByGeometry(beanRasterDto);
+							if(beanRaster != null) {
+								mapReporte.put("beanTemPerdidaBosque20012014", beanRaster);
+								
+								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
+								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
+								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
+								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
+								for(CapaUmbral cu:listUmbrales) {
+									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
+										beanRaster.setStrCategoria(cu.getStrNombre());
+										break;
+									}
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							listReporteOk.add("TemPerdidaBosque20012014Service");
+						}
+						break;
+					}
 					}
 				}
 			}

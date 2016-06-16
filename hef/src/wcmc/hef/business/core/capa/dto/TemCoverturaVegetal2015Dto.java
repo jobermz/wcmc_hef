@@ -2,6 +2,7 @@ package wcmc.hef.business.core.capa.dto;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCoverturaVegetal2015Dto implements BaseBeanVectorialDto {
@@ -14,7 +15,13 @@ public class TemCoverturaVegetal2015Dto implements BaseBeanVectorialDto {
 	private Double dblShapeLeng;
 	private Double dblShapeArea;
 	private String strCvLabel;
-
+	private Integer intGeodecid;
+	public Integer getIntGeodecid() {
+		return intGeodecid;
+	}
+	public void setIntGeodecid(Integer intGeodecid) {
+		this.intGeodecid = intGeodecid;
+	}
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
     }

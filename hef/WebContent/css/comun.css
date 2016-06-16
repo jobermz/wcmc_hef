@@ -3,7 +3,10 @@ body{
 	margin-left: 0px;
 	margin-right: 0px;
 	margin-top: 0px;
-	font-size: 11px;
+	font-size: 14px;
+/* 	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; */
+	font-family: 'Open Sans', sans-serif;
+	color: #666666;	
 /* 	line-height: 1.42857143; */
 }
 .cursorPointer {
@@ -26,4 +29,220 @@ body{
 a:hover, a:focus {
 	color: #337ab7;
 	text-decoration:none;
+}
+
+
+.ol-zoom {
+	bottom: 103px;
+	right: 8px;
+    top: auto;
+    left: auto;
+}
+.ol-control {
+    background-color: #fff;
+}
+.ol-control button {
+    color: #5F3815;
+    background-color: #fff;
+}
+
+.clsLogin {
+    color: #5F3815;
+    text-decoration: none;
+}
+
+a {
+    color: #8E663F;
+    text-decoration: none;
+    font-size: medium;
+}
+
+.footer {
+   position: relative;
+   
+  margin-top: -63px; /* ponga en negativo el alto de su pie de página para nuestro    ejemplo usamos 63, usted debe remplazarlo según su diseño   */
+  height: 63px;
+  clear:both;
+  width:100%;
+      bottom: 0;
+      z-index: -88; /* Lo muestra por encima de otros div */
+}
+
+.panel-default > .panel-heading {
+    color: #5F3815;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    font-weight: bold;
+}
+
+.panel-body {
+    padding: 0px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #FFF;
+    background: #E7DED7 url("../tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/images/ui-icons_5F3815_256x240.png") 50% 50% repeat-x;
+    font-weight: bold;
+    color: #5F3815;
+}
+    
+.ui-widget {
+    font-size: 0.7em;
+}
+
+.ui-slider .ui-slider-handle {
+    width: 0.7em;
+    height: 0.7em;
+}
+
+
+
+/* 	CAMBIOS EN jquery-ui-1.10.4.custom.css */
+.ui-widget-content {
+	border: 1px solid #FFF;
+/* 	background: #E7DED7 url("../tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/images/ui-bg_highlight-hard_100_5F3815_1x100.png") 50% top repeat-x; */
+	color: #5F3815;
+}
+
+.ui-widget-header {
+	border: 1px solid #FFF;
+	background: #5F3815 url("../tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/images/ui-bg_highlight-soft_100_5F3815_1x100.png") 50% 50% repeat-x;
+	color: #222222;
+	font-weight: bold;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.15em;
+    
+    margin-left: 0.0em;
+}
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	border: 1px solid #5F3815;
+	background: #5F3815 url("../tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/images/ui-icons_5F3815_256x240.png") 50% 50% repeat-x;
+	font-weight: bold;
+	color: #5F3815;
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+	border: 1px solid #5F3815;
+	background: #5F3815 url("../tools/jquery-ui-1.10.4.custom_cupertino/css/cupertino/images/ui-icons_5F3815_256x240.png") 50% 50% repeat-x;
+	font-weight: bold;
+	color: #5F3815;
+}
+
+body {
+/*     font-family: "Calibri Regular", Calibri; */
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fff;   
+}
+
+.panel-default > .panel-heading .badge {
+    background-color: #5F3815;
+    
+}
+
+.modal-backdrop.in {
+    opacity: 0.9;
+}
+
+.modal-backdrop {
+    background-color: #5f3815;
+}
+.info-capas-modal .modal-dialog {
+    width: 1000px;
+    margin: 30px auto;
+}
+.modal-dialog {
+    width: 440px;
+    margin: 30px auto;
+}
+.modal-body {
+    position: relative;
+    padding: 15px;
+    height: 280px;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    border-radius: 0;
+    border-color: #E7DED7;
+}
+
+.panel-group .panel + .panel {
+    margin-top: -1px;
+}
+
+.fa-user:before {
+    color: #714319;
+}
+
+.fa-lock:before {
+    color: #714319;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #5F3815;
+    border-color: #fff;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #666666;
+  border-color: #666666;
+  background-position: 0 -15px;
+}
+
+.btn-link {
+/*     font-weight: normal; */
+    color: #FFF;
+    border-radius: 0;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.btn-link:hover, .btn-link:focus {
+/*     color: #5F3815; */
+    text-decoration: none;
+}
+/**/
+.btn-linkpopover {
+    font-weight: normal;
+    border-radius: 0;
+    color: #5F3815;
+    background-color: #fff;
+    border-color: #fff;
+    text-align: left;
+/*     font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    padding: 6px 0px;
+}
+
+.popover {
+/*     font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+}    
+
+button.close {
+	color: #5F3815;
+}
+
+.close {
+    opacity: 1.2;
+}
+.clsNombreSistema {
+/* 	font-family: Open Sans; */
+	font-family: 'Open Sans', sans-serif;
+	font-style: italic;
+	font-size: 10pt;
+	color: #666666;
+	line-height: 1.1;
 }

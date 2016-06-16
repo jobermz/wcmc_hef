@@ -4,15 +4,16 @@
 
 <div class="page-content" id="idDivPrincipalCuentaUsuario">
 	<div class="row">
-		<div class="page-title">
-			<h3>
-				Gestionar <span class="semi-bold">Cuenta de usuario</span> 
-			</h3>
+		<div class="breadcrumb">
+			<h4>
+				<span class="semi-bold">Gestionar cuentas de usuario</span> 
+			</h4>
 		</div>
-		<ol class="breadcrumb">
-			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
-			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar cuenta de usuario </li>
-		</ol>
+		
+<!-- 		<ol class="breadcrumb"> -->
+<!-- 			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li> -->
+<!-- 		</ol> -->
+		
 	</div>
 	<div class="row">
 		<div class="grid simple">
@@ -22,7 +23,7 @@
 					<div class="col-sm-12">
 						<div class="botonera pull-right">
 							<button class="btn btn-primary" type="button" id="idBtnNuevoCuentaUsuario" tabindex="10"><i class="fa fa-file-o"></i> Nuevo </button>
-							<button class="btn btn-primary" type="button" id="idBtnSalirCuentaUsuario" tabindex="10"><i class="fa fa-power-off"></i> Regresar al mapa </button>
+							<button class="btn btn-primary" type="button" id="idBtnSalirCuentaUsuario" tabindex="10"><i class="fa fa-blobe"></i> Regresar al mapa </button>
 						</div>
 					</div>
 				</div>
@@ -33,8 +34,8 @@
 					
 					<div class="row ">
 						<div class="col-sm-12">
-							<h4 class="semi-bold"><span class="light">Listado de</span> <span class="semi-bold">Cuenta de usuario</span><br>
-							</h4>
+<%-- 							<h4 class="semi-bold"><span class="light">Listado de</span> <span class="semi-bold">Cuenta de usuario</span><br> --%>
+<!-- 							</h4> -->
 							<div class="row form-row">
 								<div class="col-sm-6">
 		                			<label for="buscar_strNombres" class="form-label">Nombres</label>

@@ -206,6 +206,14 @@ public class CadenaUtil {
 			return 0d;
 		}
 	}
+	public static Float getFloat(String str) {
+		try {
+			str		= getQuitarComa(str);
+			return str != null && !str.trim().equals("") ? new Float(str) : 0f;
+		} catch(Exception ex) {
+			return 0f;
+		}
+	}
 	public static Double getDoub(Double dbl) {
 		try {
 			return dbl != null && dbl instanceof Double && !dbl.equals(Double.NaN) ? dbl : 0d;
@@ -275,6 +283,16 @@ public class CadenaUtil {
 			return bd.doubleValue();
 		} else {
 			return 0d;
+		}
+	}
+	
+	public static String getDoubleFormato(Double dbl, int numDecimales) {
+		if(dbl != null) {
+			BigDecimal bd	= new BigDecimal(dbl);
+			bd				= bd.setScale(numDecimales, BigDecimal.ROUND_HALF_DOWN);
+			return bd.toString();
+		} else {
+			return llenarPorDerecha("0.", numDecimales, "0");
 		}
 	}
 	

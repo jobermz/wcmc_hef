@@ -9,15 +9,15 @@ if(idGrupoCapas != null) {
 %>
 <div class="page-content" id="idDivPrincipalCapa">
 	<div class="row">
-		<div class="page-title">
-			<h3>
-				Gestionar <span class="semi-bold">Capas base</span> 
-			</h3>
+		<div class="breadcrumb">
+			<h4>
+				<span class="semi-bold"> Gestionar Capas</span> 
+			</h4>
 		</div>
-		<ol class="breadcrumb">
-			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
-			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar capas base </li>
-		</ol>
+<!-- 		<ol class="breadcrumb"> -->
+<!-- 			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li> -->
+<!-- 			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar capas base </li> -->
+<!-- 		</ol> -->
 	</div>
 	<div class="row">
 		<div class="grid simple">
@@ -27,7 +27,7 @@ if(idGrupoCapas != null) {
 					<div class="col-sm-12">
 						<div class="botonera pull-right">
 							<button class="btn btn-primary" type="button" id="idBtnNuevoCapa" tabindex="10"><i class="fa fa-file-o"></i> Nuevo </button>
-							<button class="btn btn-primary" type="button" id="idBtnSalirCapa" tabindex="10"><i class="fa fa-power-off"></i> Regresar al mapa </button>
+							<button class="btn btn-primary" type="button" id="idBtnSalirCapa" tabindex="10"><i class="fa fa-globe"></i> Regresar al mapa </button>
 						</div>
 					</div>
 				</div>
@@ -38,35 +38,33 @@ if(idGrupoCapas != null) {
 					
 					<div class="row ">
 						<div class="col-sm-12">
-							<h4 class="semi-bold"><span class="light">Listado de Capas base</span><br>
-							</h4>
+<%-- 							<h4 class="semi-bold"><span class="light">Listado de Capas</span><br> --%>
+<!-- 							</h4> -->
 							<div class="row form-row">
 								<div class="col-sm-6">
 		                			<label for="buscar_strNombre" class="form-label">Grupo</label>
 <%-- 									<s:select name="buscar_intGrupoCapas" cssClass="form-control " tabindex="1" list="#session.listGrupoCapas" headerKey="" headerValue="-Todos-" listValue="strNombreNiveles" listKey="srlIdGrupoCapas"></s:select> --%>
 									<select name="buscar_intGrupoCapas" tabindex="1" id="buscar_intGrupoCapas" class="form-control ">
 									    <option value="">-Todos-</option>
-										<s:iterator value="#session.listGrupoCapasBase" var="grupoCapaBase">
-											<optgroup label="${grupoCapaBase.strNombre}"></optgroup>
+<%-- 										<s:iterator value="#session.listGrupoCapasBase" var="grupoCapaBase"> --%>
+<%-- 											<optgroup label="${grupoCapaBase.strNombre}"></optgroup> --%>
 											<s:iterator value="#session.listGrupoCapasTodos" var="grupoCapaBaseTodos">
-												<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}">
+<%-- 												<s:if test="%{#grupoCapaBase.srlIdGrupoCapas==#grupoCapaBaseTodos.intIdGrupoCapasPadre}"> --%>
 													<s:if test="%{#grupoCapaBaseTodos.srlIdGrupoCapas==#attr.edicion_capaDto_intGrupoCapas}">
 														<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}" selected="selected">${grupoCapaBaseTodos.strNombre}</option>
 													</s:if>
 													<s:else>
 														<option value="${grupoCapaBaseTodos.srlIdGrupoCapas}">${grupoCapaBaseTodos.strNombre}</option>
 													</s:else>
-												</s:if>
-												
-												
+<%-- 												</s:if> --%>
 											</s:iterator>
-										</s:iterator>
+<%-- 										</s:iterator> --%>
 									</select>
 								</div>
 							</div>
 							<div class="row form-row">
 								<div class="col-sm-6">
-		                			<label for="buscar_strNombre" class="form-label">Nombre</label>
+		                			<label for="buscar_strNombre" class="form-label">Nombre Capa</label>
 		                			<s:textfield name="buscar_strNombre" cssClass="form-control" tabindex="1" size="40" maxlength="null"/>
 								</div>
 							</div>
@@ -76,7 +74,7 @@ if(idGrupoCapas != null) {
 					<div class="row form-row">
 						<div class="col-sm-12">
 							<div class="botonera pull-right">
-								<button class="btn btn-primary" type="button" id="idBtnConsultarCapa" tabindex="10"><i class="fa fa-filter"></i> Buscar </button>
+								<button class="btn btn-primary" type="button" id="idBtnConsultarCapa" tabindex="10"><i class="fa fa-search"></i> Buscar </button>
 							</div>
 						</div>
 					</div>

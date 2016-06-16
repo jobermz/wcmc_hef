@@ -20,7 +20,13 @@ public class TemSoeconComunidadesCampesinas extends TemSoeconComunidadesCampesin
 	private String strNTitulo;
 	private Double dblShapeLeng;
 	private Double dblShapeArea;
-
+	private Integer intGeodecid;
+	public Integer getIntGeodecid() {
+		return intGeodecid;
+	}
+	public void setIntGeodecid(Integer intGeodecid) {
+		this.intGeodecid = intGeodecid;
+	}
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
     }

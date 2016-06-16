@@ -2,6 +2,7 @@ package wcmc.hef.dao.capa.domain;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPotencialBosqueProduccionPermanenteKey implements BaseBeanVectorial {
@@ -20,6 +21,13 @@ public class TemZonificPotencialBosqueProduccionPermanente extends TemZonificPot
 	private Integer intTheid;
 	private Double dblPerimeter;
 	private Double dblHectares;
+	private Integer intObjectid;
+	public Integer getIntObjectid() {
+		return intObjectid;
+	}
+	public void setIntObjectid(Integer intObjectid) {
+		this.intObjectid = intObjectid;
+	}
 
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;

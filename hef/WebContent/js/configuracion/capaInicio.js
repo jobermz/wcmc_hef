@@ -62,8 +62,8 @@ function instanciardt_basico_capa(ejecutaBuscar) {
 		                	 "aTargets": [3],
 		                	 "mData": null,
 		                	 "mRender": function (data, type, row) {
-		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_capa" onclick="editar_capa(\'' + row.srlIdCapa + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;'
-		                		 +'<button title="Eliminar" class="btn btn-danger btn_buscar_control_capa" onclick="eliminar_capa(\'' + row.srlIdCapa + '\');return false;"><i class="fa fa-trash-o"></i></button>'+'</div>';
+		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_capa" onclick="editar_capa(\'' + row.srlIdCapa + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;';
+//		                		 +'<button title="Eliminar" class="btn btn-danger btn_buscar_control_capa" onclick="eliminar_capa(\'' + row.srlIdCapa + '\');return false;"><i class="fa fa-trash-o"></i></button>'+'</div>';
 		                	 }
 		                 }
 		],
@@ -109,7 +109,6 @@ function editar_capa(srlIdCapa) {
 	frm.target	= "_self";
 	$('#buscar_seleccion_id').val(srlIdCapa);
 	frm.submit();
-	
 	return false;
 }
 

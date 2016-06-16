@@ -9,6 +9,7 @@
 	<definition name="baseLayout" template="/layouts/baseLayout.jsp">
 		<put-attribute name="title" value=".::HEF::."/>
 		<put-attribute name="header" value="/layouts/baseHeader.jsp"/>
+		<put-attribute name="footer" value="/layouts/baseFooter.jsp"/>
 		<put-attribute name="content" value=""/>
 		<put-list-attribute name="javscr">
 		</put-list-attribute>
@@ -56,8 +57,16 @@
 		<put-list-attribute name="javscr">
 			<add-attribute value="js/visor/visorInicio.js"/>
 			<add-attribute value="js/visor/visorCapasBaseInicio.js"/>
+			
+			<add-attribute value="js/visor/visorInicioAnalizarPorArea.js"/>
+			<add-attribute value="js/visor/visorInicioIdentificarAreaCriterioLogico.js"/>
+			<add-attribute value="js/visor/visorCapasUploadInicio.js"/>
+			
 			<add-attribute value="js/comun.js"/>
 			<add-attribute value="js/comunBuscar.js"/>
+		</put-list-attribute>
+		<put-list-attribute name="styles">
+			<add-attribute value="css/visor/visorInicio.css"/>
 		</put-list-attribute>
 	</definition>
 	
@@ -67,6 +76,11 @@
 	<definition name="consulta_combos_centrar_form" template="/paginas/consulta/combosCentrar/consultaCombosCentrarForm.jsp"></definition>
 	
 	<definition name="consulta_combos_capa_umbral_form" template="/paginas/visor/comboCapaUmbralInicio.jsp"></definition>
+	<definition name="consulta_combos_capa_umbral_sin_dec_form" template="/paginas/visor/comboCapaUmbralSinDecimalesInicio.jsp"></definition>
+	<definition name="consulta_combos_capa_umbral_2_dec_form" template="/paginas/visor/comboCapaUmbral2DecimalesInicio.jsp"></definition>
+	<definition name="consulta_combos_capa_filtraje_num_form" template="/paginas/visor/comboCapaFiltrajeNumInicio.jsp"></definition>
+	<definition name="consulta_combos_capa_filtraje_num_sin_dec_form" template="/paginas/visor/comboCapaFiltrajeNumSinDecimalesInicio.jsp"></definition>
+	
 	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">

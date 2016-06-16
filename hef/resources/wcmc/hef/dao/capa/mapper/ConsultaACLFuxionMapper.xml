@@ -3,7 +3,36 @@
 <mapper namespace="wcmc.hef.dao.capa.mapper.ConsultaACLFuxionMapper">
 	
 	<select id="selectFuxion" resultType="String" parameterType="wcmc.hef.dao.capa.domain.ConsultaACLFuxion">
-		select ST_AsText(ST_Intersection(ST_GeomFromText(#{strGeom01,jdbcType=VARCHAR}), ST_GeomFromText(#{strGeom02,jdbcType=VARCHAR}))) 
+		select ST_AsText(ST_Union(ST_GeomFromText(#{strGeom01,jdbcType=VARCHAR}), ST_GeomFromText(#{strGeom02,jdbcType=VARCHAR}))) 
 	</select>
 	
+	<select id="selectBoundary" resultType="String" parameterType="String">
+		select ST_AsText(ST_Boundary(Box2D(ST_GeomFromText(#{value,jdbcType=VARCHAR})))) 
+	</select>
+	
+	<select id="selectBBOX" resultType="String" parameterType="String">
+		select (ST_XMin(data.geom)||','||
+			ST_YMin(data.geom)||','||
+			ST_XMax(data.geom)||','||
+			ST_YMax(data.geom))
+		from (select ST_Transform(ST_GeomFromText(#{value,jdbcType=VARCHAR}, 4326), 3857) as geom) as data 
+	</select>
+	
+	<select id="selectBBOX4326" resultType="String" parameterType="String">
+		select (ST_XMin(data.geom)||','||
+			ST_YMin(data.geom)||','||
+			ST_XMax(data.geom)||','||
+			ST_YMax(data.geom))
+		from (select ST_GeomFromText(#{value,jdbcType=VARCHAR}) as geom) as data 
+	</select>
+	
+	<select id="selectCenter4326" resultType="String" parameterType="String">
+		select ST_AsText(ST_Centroid(Box2D(data.geom)))
+		from (select ST_GeomFromText(#{value,jdbcType=VARCHAR}) as geom) as data
+	</select>
+	
+	<select id="selectCenter_Y_X_4326" resultType="String" parameterType="String">
+		select ST_Y(ST_Centroid(Box2D(data.geom)))||','|| ST_X(ST_Centroid(Box2D(data.geom)))
+		from (select ST_GeomFromText(#{value,jdbcType=VARCHAR}) as geom) as data
+	</select>
 </mapper>

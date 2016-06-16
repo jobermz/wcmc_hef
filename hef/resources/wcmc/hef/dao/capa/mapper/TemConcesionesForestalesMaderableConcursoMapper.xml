@@ -13,6 +13,7 @@
 		<result column="de_concurso" property="strConcurso" jdbcType="VARCHAR"/>
 		<result column="de_num_conc" property="strNumConc" jdbcType="VARCHAR"/>
 		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionesForestalesMaderableConcursoMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesMaderableConcursoParamDef">
 		select
@@ -230,7 +231,8 @@
 		de_region, 
 		de_concurso, 
 		de_num_conc, 
-		de_situacion
+		de_situacion,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -243,7 +245,8 @@
 		de_region, 
 		de_concurso, 
 		de_num_conc, 
-		de_situacion
+		de_situacion,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Combo">
 		cd_gid, 
@@ -256,7 +259,8 @@
 		de_region, 
 		de_concurso, 
 		de_num_conc, 
-		de_situacion
+		de_situacion,
+		cd_objectid
 	</sql>
 
 </mapper>

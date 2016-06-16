@@ -1,3 +1,8 @@
+/*
+ * Mensaje informativo sobre la libreria de de validaciones generales
+ * nuevos cambios
+ * 
+*/
 function seleccionarTodos(frm) {
 	var seleccion	= frm.buscar_seleccion_id;
 	if(seleccion && seleccion.length) {

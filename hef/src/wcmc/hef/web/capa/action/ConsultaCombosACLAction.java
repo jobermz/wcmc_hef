@@ -50,10 +50,8 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
 import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
@@ -69,9 +67,11 @@ import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPe
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BaseBeanVectorialDto;
 import wcmc.hef.business.core.capa.dto.BeanRasterDto;
+import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
 import wcmc.hef.dao.capa.domain.BeanRaster;
+import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -156,6 +156,7 @@ import wcmc.hef.dao.configuracion.domain.CapaUmbral;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
 import wcmc.hef.general.util.ServiciosProperties;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 
 public class ConsultaCombosACLAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
@@ -245,13 +246,7 @@ public class ConsultaCombosACLAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
-
-	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemPrediosRuralesService temPrediosRuralesService;
@@ -282,6 +277,9 @@ public class ConsultaCombosACLAction extends ActionSupport {
 
 	@Autowired
 	private TemViasTrochasService temViasTrochasService;
+
+	@Autowired
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemZonificPotencialBosqueProduccionPermanenteService temZonificPotencialBosqueProduccionPermanenteService;
@@ -703,6 +701,21 @@ public class ConsultaCombosACLAction extends ActionSupport {
 						}
 						break;
 					}
+					case "TemConcesionHidroelectricasDistribucionService":
+					{
+						try {
+							TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
+							List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscarCombo(temConcesionHidroelectricasDistribucionDto);
+							if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
+								mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							listReporteOk.add("TemConcesionHidroelectricasDistribucionService");
+						}
+						break;
+					}
 					case "TemCostoOportunidadDeforestacionService":
 					{
 						try {
@@ -730,21 +743,6 @@ public class ConsultaCombosACLAction extends ActionSupport {
 							ex.printStackTrace();
 						} finally {
 							listReporteOk.add("TemCoverturaVegetal2015Service");
-						}
-						break;
-					}
-					case "TemCuencasHidrograficasService":
-					{
-						try {
-							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-							List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscarCombo(temCuencasHidrograficasDto);
-							if(listTemCuencasHidrograficas.size() > 0) {
-								mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemCuencasHidrograficasService");
 						}
 						break;
 					}
@@ -868,7 +866,7 @@ public class ConsultaCombosACLAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasService":
+					case "TemSoeconComunidadesCampesinasTotalesService":
 					{
 						try {
 							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();

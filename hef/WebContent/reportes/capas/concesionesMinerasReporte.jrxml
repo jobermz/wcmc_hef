@@ -1,35 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c35fcbda-65d9-4412-9250-3885cb39bbf3">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
-	<field name="intObjectid1" class="java.lang.String"/>
-	<field name="strGmlId" class="java.lang.String"/>
-	<field name="intObjectid" class="java.lang.String"/>
-	<field name="strCodigou" class="java.lang.String"/>
-	<field name="strZona" class="java.lang.String"/>
 	<field name="strConcesion" class="java.lang.String"/>
-	<field name="strEstado" class="java.lang.String"/>
-	<field name="strTitConces" class="java.lang.String"/>
-	<field name="strNaturaleza" class="java.lang.String"/>
-	<field name="strFecDenu" class="java.lang.String"/>
-	<field name="dblHectarea" class="java.lang.String"/>
-	<field name="strCarta" class="java.lang.String"/>
-	<field name="strNmDist" class="java.lang.String"/>
-	<field name="strNmProv" class="java.lang.String"/>
-	<field name="strNmDepa" class="java.lang.String"/>
-	<field name="dblShapeStar" class="java.lang.String"/>
-	<field name="dblShapeStle" class="java.lang.String"/>
-
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="20" />
+				<reportElement x="0" y="0" width="802" height="20" uuid="b046a37c-ca6c-41c7-912b-ad1f9bcb6c67"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -40,294 +23,23 @@
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="47" height="15"/>
+				<reportElement x="0" y="0" width="609" height="15" uuid="0f61eece-05bd-4205-a11e-cb4d41bb2bdf"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Objectid 1]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="47" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Gml Id]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="94" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Objectid]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="141" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Codigou]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="188" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Zona]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="235" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Concesion]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="282" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Estado]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="329" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tit Conces]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="376" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Naturaleza]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="423" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fec Denu]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="470" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hectarea]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="517" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Carta]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="564" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nm Dist]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="611" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nm Prov]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="658" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nm Depa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="705" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Shape Star]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="752" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Shape Stle]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="47" height="32"/>
+				<reportElement x="0" y="0" width="609" height="32" uuid="ece6d80c-7db8-4461-a437-44807b3abfb0"/>
 				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intObjectid1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="47" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strGmlId}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="94" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intObjectid}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="141" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCodigou}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="188" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strZona}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="235" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{strConcesion}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="282" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strEstado}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="329" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strTitConces}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="376" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNaturaleza}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="423" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strFecDenu}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="470" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dblHectarea}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="517" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCarta}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="564" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNmDist}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="611" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNmProv}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="658" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNmDepa}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="705" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dblShapeStar}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="752" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dblShapeStle}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="686" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="15" width="686" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Concesiones Mineras]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="720" y="0" width="82" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="720" y="15" width="82" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="686" y="0" width="34" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="686" y="15" width="34" height="15"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora:]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 </jasperReport>

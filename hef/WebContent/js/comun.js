@@ -6,6 +6,9 @@ String.prototype.pxToInt = function () {
 	return parseInt(varPx);
 };
 
+/*
+ * Mensaje informativo sobre la libreria de de validaciones generales
+*/
 $(function() {
 	$("#divModalmsg").dialog({
 		autoOpen: false,
@@ -354,10 +357,36 @@ function ajaxRequest(path,tipoPeticion,tipoDatoRetorno,parametros,tipoContenido)
 	return request;
 }
 function blockui() {
-	$.blockUI({ message: '<h3><img src="image/busy.gif" /> Espere un momento...</h3>' });
+	$.blockUI({
+		fadeIn : 0,
+        fadeOut : 0,
+        message : '<h3><img src="image/busy.gif" /> Espere un momento...</h3>'});
 }
 
 function unblockui() {
 	$.unblockUI();
 }
 
+
+function solonumeros(evt) {
+	var target	= null;
+	if(evt.target) {
+		target	= evt.target;
+	} else {
+		target	= evt.srcElement;
+	}
+	var key		= null;
+	if(evt) {
+		key		= (evt.which) ? evt.which : evt.keyCode;
+	} else {
+		key		= window.event.keyCode;
+	}
+	/*console.log("key="+key);
+	if (key == 46) {
+		return (target.value.length > 0 && target.value.indexOf(".") == -1);
+	}*/
+	return (key <= 12 || (key >= 48 && key <= 57) || key == 0 || validarEsControlCursor(key));
+}
+function validarEsControlCursor(charCode) {
+	return charCode == 8 || charCode == 9 || charCode == 35 || charCode == 36 || charCode == 37 || charCode == 39 || charCode == 46;
+}

@@ -197,7 +197,65 @@ public class Geotools {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**/
+	//INFO.GMAP:scale:32  LatLng:-78.64013671875,-0.6371938961998609  Zoom:5  World:(72.078125, 128.453125)  Pixel:(2306, 4110)  Tile:(9, 16)  TileRev:(0.078125, 0.453125)
+	public static void main(String[] arr) {
+		Geotools geo	= new Geotools();
+		try {
+//			System.out.println("Geotools.main()"+geo.convertir("POINT(-76.70654296875 -9.514079262770892)", CRS.decode("EPSG:4326"), CRS.decode("EPSG:3857")));
+//			System.out.println("Geotools.main()"+geo.convertir("POINT(-76.70654296875 -9.514079262770892)", CRS.decode("EPSG:4326"), CRS.decode("EPSG:3785")));
+//			System.out.println("Geotools.main()"+geo.convertir("POINT(-76.70654296875 -9.514079262770892)", CRS.decode("EPSG:4326"), CRS.decode("EPSG:900913")));
+//			double[] arrDbl	= geo.project(-78.64013671875,-0.6371938961998609);
+//			System.out.println("Geotools.main()"+arrDbl[0]+","+arrDbl[1]);//Geotools.main()72.078125, 128.453125
+			
+			double[] arrDbl	= geo.convertirTileCoordinate(-71.0101318359375,-12.772964393175698, 9);
+			System.out.println("Geotools.main()"+arrDbl[0]+","+arrDbl[1]);//Geotools.main()72.078125, 128.453125
+//			convertirTileCoordinate
+			
+//			int zoom		= 5;
+//			double scale	= 1 << zoom;
+//			System.out.println("Geotools.scale="+scale);//Geotools.main()72.078125, 128.453125
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
+	public static void convertirPunto(double lng, double lat, int zoom) {
+		double scale = 1 << zoom;
+
+		double[] arrWorldCoordinate = project(lng, lat);
+
+		double[] arrPixelCoordinate = new double[]{Math.floor(arrWorldCoordinate[0]/*x*/ * scale), Math.floor(arrWorldCoordinate[1]/*y*/ * scale)};
+		
+		double xTileCoord	= Math.floor(arrPixelCoordinate[0]/*x*/ * scale / TILE_SIZE);
+		double yTileCoord	= Math.floor(arrPixelCoordinate[1]/*y*/ * scale / TILE_SIZE);
+//		var tileCoordinate = new google.maps.Point((xTileCoord), (yTileCoord));
+
+		double xTileCoordDif	= (arrPixelCoordinate[0]/*x*/ * scale / TILE_SIZE) - xTileCoord;
+		double yTileCoordDif	= (arrPixelCoordinate[1]/*y*/ * scale / TILE_SIZE) - yTileCoord;
+//		var tileRevCoordinate = new google.maps.Point((xTileCoordDif/scale*TILE_SIZE), (yTileCoordDif/scale*TILE_SIZE));
+	}
+	public double[] convertirTileCoordinate(double lng, double lat, int zoom) {
+		double scale				= 1 << zoom;
+		double[] arrWorldCoordinate	= Geotools.project(lng, lat);
+		double[] arrPixelCoordinate = new double[]{Math.floor(arrWorldCoordinate[0]/*x*/ * scale), Math.floor(arrWorldCoordinate[1]/*y*/ * scale)};
+		double xTileCoord			= Math.floor(arrWorldCoordinate[0]/*x*/ * scale / Geotools.TILE_SIZE);
+		double yTileCoord			= Math.floor(arrWorldCoordinate[1]/*y*/ * scale / Geotools.TILE_SIZE);
+		return new double[]{xTileCoord, yTileCoord};
+	}
+	
+	public static double TILE_SIZE = 256d;
+	public static double[] project(double lng, double lat) {
+		double siny = Math.sin(lat * Math.PI / 180d);
+		
+		// Truncating to 0.9999 effectively limits latitude to 89.189. This is
+		// about a third of a tile past the edge of the world tile.
+		siny = Math.min(Math.max(siny, -0.999999d), 0.999999d);
+		
+		return new double[]{TILE_SIZE * (0.5d + lng / 360d) , TILE_SIZE * (0.5d - Math.log((1d + siny) / (1d - siny)) / (4d * Math.PI))};
+	}
+
 	public String convertir(String strWktPoint, CoordinateReferenceSystem sourceCRS, CoordinateReferenceSystem targetCRS) {
 		Geometry point	= null;
 		try {

@@ -2,6 +2,7 @@ package wcmc.hef.business.core.capa.dto;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionesEcoturismoDto implements BaseBeanVectorialDto {
@@ -20,7 +21,13 @@ public class TemConcesionesEcoturismoDto implements BaseBeanVectorialDto {
 	private String strSituacion;
 	private Double dblPerimeter;
 	private Double dblHectares;
-
+	private Integer intGeodecid;
+	public Integer getIntGeodecid() {
+		return intGeodecid;
+	}
+	public void setIntGeodecid(Integer intGeodecid) {
+		this.intGeodecid = intGeodecid;
+	}
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
     }

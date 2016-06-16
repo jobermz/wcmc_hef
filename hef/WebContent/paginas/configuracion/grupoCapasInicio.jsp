@@ -4,16 +4,15 @@
 
 <div class="page-content" id="idDivPrincipalGrupoCapas">
 	<div class="row">
-		<div class="page-title">
-			<h3>
-				Gestionar <span class="semi-bold">Grupo de capas base</span> 
-			</h3>
+		<div class="breadcrumb">
+			<h4>
+				<span class="semi-bold">Gestionar Agrupación de Capas</span> 
+			</h4>
 		</div>
-		<ol class="breadcrumb">
-			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
-			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar grupo de capas base</li>
-			
-		</ol>
+<!-- 		<ol class="breadcrumb"> -->
+<!-- 			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li> -->
+<!-- 			<li class="active"><i class="glyphicon glyphicon-th-list"></i> Listar grupo de capas base</li> -->
+<!-- 		</ol> -->
 	</div>
 	<div class="row">
 		<div class="grid simple">
@@ -23,32 +22,32 @@
 					<div class="col-sm-12">
 						<div class="botonera pull-right" >
 							<button class="btn btn-primary" type="button" id="idBtnNuevoGrupoCapas" tabindex="10"><i class="fa fa-file-o"></i> Nuevo </button>
-							<button class="btn btn-primary" type="button" id="idBtnSalirGrupoCapas" tabindex="10"><i class="fa fa-power-off"></i> Regresar al mapa </button>
+							<button class="btn btn-primary" type="button" id="idBtnSalirGrupoCapas" tabindex="10"><i class="fa fa-globe"></i> Regresar al mapa </button>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="grid-body no-border">
-				<form class="" method="POST" id="idFormBuscarGrupoCapas" name="formBuscarGrupoCapas" novalidate="novalidate">
+<!-- 			<div class="grid-body no-border"> -->
+<!-- 				<form class="" method="POST" id="idFormBuscarGrupoCapas" name="formBuscarGrupoCapas" novalidate="novalidate"> -->
 					
-					<div class="row ">
-						<div class="col-sm-12">
-							<h4 class="semi-bold"><span class="light">Listado de Grupos de capas base</span><br>
-							</h4>
-							<div class="row form-row">
-								<div class="col-sm-6">
-		                			<label for="buscar_intIdGrupoCapasPadre" class="form-label">Grupo Padre</label>
-		                			<s:select name="buscar_intIdGrupoCapasPadre" cssClass="form-control " tabindex="1" 
-		                					list="#session.listGrupoCapasBase" listKey="srlIdGrupoCapas" listValue="strNombre" headerKey="" headerValue="-Solo grupos base-">
-		                				</s:select>
-								</div>
-							</div>
+<!-- 					<div class="row "> -->
+<!-- 						<div class="col-sm-12"> -->
+<%-- 							<h4 class="semi-bold"><span class="light">Listado de agrupación de capas</span><br> --%>
+<!-- 							</h4> -->
+<!-- 							<div class="row form-row"> -->
+<!-- 								<div class="col-sm-6"> -->
+<!-- 		                			<label for="buscar_intIdGrupoCapasPadre" class="form-label">Grupo Padre</label> -->
+<%-- 		                			<s:select name="buscar_intIdGrupoCapasPadre" cssClass="form-control " tabindex="1"  --%>
+<%-- 		                					list="#session.listGrupoCapasBase" listKey="srlIdGrupoCapas" listValue="strNombre" headerKey="" headerValue="-Solo grupos base-"> --%>
+<%-- 		                				</s:select> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
-						</div>
-					</div>
-				</form>
-			</div>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
 			
 			<div class="grid-body no-border">      
 				<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover" id="tableDefaultGrupoCapas" >

@@ -16,13 +16,13 @@
 			<ul class="list-group">
 			<!-- 	<li class="list-group-item active"><a href="#"> <i class="fa fa-bars"></i></a></li> -->
 				<li class="list-group-item">
-					<a href="capa.action"><i class="glyphicon glyphicon-list-alt"></i> Capas base</a>
+					<a href="capa.action"><i class="glyphicon glyphicon glyphicon-th-list"></i> Capas</a>
 				</li>
 				<li class="list-group-item">
-					<a href="grupoCapas.action"><i class="glyphicon glyphicon-list-alt"></i> Grupo de capas</a>
+					<a href="grupoCapas.action"><i class="glyphicon glyphicon glyphicon-th"></i> Grupo de capas</a>
 				</li>
 				<li class="list-group-item">
-					<a href="cuentaUsuario.action"><i class="glyphicon glyphicon-list-alt"></i> Cuenta de usuario</a>
+					<a href="cuentaUsuario.action"><i class="glyphicon glyphicon glyphicon-user"></i> Cuentas de usuarios</a>
 				</li>
 			</ul>
 		</div>

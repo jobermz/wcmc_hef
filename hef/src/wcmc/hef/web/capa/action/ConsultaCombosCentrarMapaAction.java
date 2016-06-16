@@ -42,10 +42,8 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
 import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
@@ -146,6 +144,7 @@ import wcmc.hef.business.core.capa.dto.TemZonificPotencialBosqueProduccionPerman
 import wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ServiciosProperties;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 
 public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
@@ -235,13 +234,7 @@ public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
-
-	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemPrediosRuralesService temPrediosRuralesService;
@@ -272,6 +265,9 @@ public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 
 	@Autowired
 	private TemViasTrochasService temViasTrochasService;
+
+	@Autowired
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemZonificPotencialBosqueProduccionPermanenteService temZonificPotencialBosqueProduccionPermanenteService;
@@ -428,22 +424,6 @@ public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemCuencasHidrograficasService":
-					{
-						try {
-							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-							temCuencasHidrograficasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCuencasHidrograficas temCuencasHidrograficas		= temCuencasHidrograficasService.buscarById(temCuencasHidrograficasDto);
-							if(temCuencasHidrograficas != null) {
-								listReporte.add(temCuencasHidrograficas);
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemCuencasHidrograficasService");
-						}
-						break;
-					}
 					case "BasViasRedVialVecinalService":
 					{
 						try {
@@ -524,7 +504,7 @@ public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasService":
+					case "TemSoeconComunidadesCampesinasTotalesService":
 					{
 						try {
 							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
@@ -1005,26 +985,6 @@ public class ConsultaCombosCentrarMapaAction extends ActionSupport {
 						break;
 					}
 					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					case "TemBiodiversidadEspeciesPeligroExtincionService":
-					{
-						listReporteOk.add("TemBiodiversidadEspeciesPeligroExtincionService");
-						break;
-					}
-					case "TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService":
-					{
-						listReporteOk.add("TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService");
-						break;
-					}
-					case "TemDensidadCarbonoAereaService":
-					{
-						listReporteOk.add("TemDensidadCarbonoAereaService");
-						break;
-					}
-					case "TemRiesgoErosionHidricaService":
-					{
-						listReporteOk.add("TemRiesgoErosionHidricaService");
-						break;
-					}
 					}
 				}
 				strGeometriaRespuesta	= evaluarGeometrias(listReporte);

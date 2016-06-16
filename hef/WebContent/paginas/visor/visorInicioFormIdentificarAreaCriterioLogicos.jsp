@@ -26,18 +26,18 @@
 					      	
 							<div class="panel-group" id="accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" role="tablist" aria-multiselectable="true">
 							  
-							<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas">
-<%-- 							  <s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}"> --%>
-							  <div class="panel panel-default clsPanelGrupoCapasACL">
-							    <div class="panel-heading" role="tab" id="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}">
-							      <h4 class="panel-title">
-							        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" href="#collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}">
-							          ${grupoCapas.strNombre} <span class="badge badgeCustomPanelGrupoCapaACL"></span>
-							        </a>
-							      </h4>
-							    </div>
-							    <div id="collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;" role="tabpanel" aria-labelledby="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}">
-							      <div class="panel-body">
+<%-- 							<s:iterator value="#grupoCapasBase.listGrupoCapas" var="grupoCapas"> --%>
+<%--  							  <s:if test="%{#grupoCapas.srlIdGrupoCapas.toString()!=#CAPA_GRUPO_USUARIO}">  --%>
+<!-- 							  <div class="panel panel-default clsPanelGrupoCapasACL"> -->
+<%-- 							    <div class="panel-heading" role="tab" id="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}"> --%>
+<!-- 							      <h4 class="panel-title"> -->
+<%-- 							        <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordionSubIAC${grupoCapasBase.srlIdGrupoCapas}" href="#collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}" aria-expanded="false" aria-controls="collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}"> --%>
+<%-- 							          ${grupoCapas.strNombre} <span class="badge badgeCustomPanelGrupoCapaACL"></span> --%>
+<!-- 							        </a> -->
+<!-- 							      </h4> -->
+<!-- 							    </div> -->
+<%-- 							    <div id="collapseOneSubIAC${grupoCapas.srlIdGrupoCapas}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;" role="tabpanel" aria-labelledby="headingOneSubIAC${grupoCapas.srlIdGrupoCapas}"> --%>
+<!-- 							      <div class="panel-body"> -->
 							        
 							      	<div class="row text-center" style="font-weight: bold;">
 								      	<div class="col-xs-8 text-left">
@@ -52,7 +52,7 @@
 							      	</div>
 							      	
 							      	<s:iterator value="#session.listCapasBase" var="capasBase">
-							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapas.srlIdGrupoCapas.toString()}">
+							      	<s:if test="%{#capasBase.intGrupoCapas.toString()==#grupoCapasBase.srlIdGrupoCapas.toString()}">
 							      	<div class="row">
 								      	<div class="col-xs-8">
 								      		<input type="checkbox" id="idCapaIdentACL${capasBase.srlIdCapa}" name="capaIdentACL" value="${capasBase.srlIdCapa}" class="capasBaseACL" id-capa="${capasBase.srlIdCapa}" onblur="guardarCapasSeleccionadasACL();" onclick="guardarCapasSeleccionadasACL();">
@@ -79,11 +79,11 @@
 							      	</s:iterator>
 							        
 							        
-							      </div>
-							    </div>
-							  </div>
+<!-- 							      </div> -->
+<!-- 							    </div> -->
+<!-- 							  </div> -->
 <%-- 							</s:if> --%>
-							</s:iterator>
+<%-- 							</s:iterator> --%>
 							  
 							</div>
 					      	

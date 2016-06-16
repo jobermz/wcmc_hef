@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
-//ObtienePoperties.getParametro(file, paramName);
+
 public class ObtienePoperties {
 	public static String getParametro(String file, String paramName) {
 		try {

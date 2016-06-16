@@ -2,6 +2,7 @@ package wcmc.hef.business.core.capa.dto;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionesForestalesMaderableAdecuadasDto implements BaseBeanVectorialDto {
@@ -15,6 +16,13 @@ public class TemConcesionesForestalesMaderableAdecuadasDto implements BaseBeanVe
 	private Double dblAreaAprob;
 	private String strRegion;
 	private String strSituacion;
+	private Integer intObjectid;
+	public Integer getIntObjectid() {
+		return intObjectid;
+	}
+	public void setIntObjectid(Integer intObjectid) {
+		this.intObjectid = intObjectid;
+	}
 
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;

@@ -1,333 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7df539af-c7ca-4eaa-b653-90a73b600f0d">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
-	<field name="intObjectid" class="java.lang.String"/>
-	<field name="strIdccpp10" class="java.lang.String"/>
-	<field name="strArea" class="java.lang.String"/>
 	<field name="strCodccpp" class="java.lang.String"/>
 	<field name="strNomccpp" class="java.lang.String"/>
-	<field name="strUbigeo" class="java.lang.String"/>
-	<field name="strCcdi" class="java.lang.String"/>
-	<field name="strCcpp" class="java.lang.String"/>
-	<field name="strCcdd" class="java.lang.String"/>
-	<field name="strCatccpp" class="java.lang.String"/>
-	<field name="strNomcat" class="java.lang.String"/>
-	<field name="intAltitud" class="java.lang.String"/>
-	<field name="strLongitudx" class="java.lang.String"/>
-	<field name="strLatitudy" class="java.lang.String"/>
-	<field name="intViv07" class="java.lang.String"/>
 	<field name="intPob07" class="java.lang.String"/>
-	<field name="intRegion" class="java.lang.String"/>
-
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="20" />
+				<reportElement x="0" y="0" width="802" height="20" uuid="1fffd553-8c4c-44f2-bb8b-d897776f7b80"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Centros Poblados]]></text>
+				<text><![CDATA[Reporte Analítico - Centros poblados]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="47" height="15"/>
+				<reportElement x="0" y="0" width="200" height="15" uuid="192a61f2-110b-4fec-b8ae-0332a580e756"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Objectid]]></text>
+				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="0" width="47" height="15"/>
+				<reportElement x="200" y="0" width="200" height="15" uuid="4d9d3e86-aca8-4ad0-8eda-68d8aeb0dcb4"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Idccpp10]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="94" y="0" width="47" height="15"/>
+				<reportElement x="400" y="0" width="200" height="15" uuid="7e560061-43f1-48cf-bf4d-c84f765bcbca"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Area]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="141" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Codccpp]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="188" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nomccpp]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="235" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ubigeo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="282" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ccdi]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="329" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ccpp]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="376" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ccdd]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="423" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Catccpp]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="470" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nomcat]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="517" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Altitud]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="564" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Longitudx]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="611" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Latitudy]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="658" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Viv07]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="705" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Pob07]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="752" y="0" width="47" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Region]]></text>
+				<text><![CDATA[Población]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="47" height="32"/>
+				<reportElement x="0" y="0" width="200" height="32" uuid="fb7f62e7-3905-43d5-8162-b4f544a0348a"/>
 				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intObjectid}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="47" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strIdccpp10}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="94" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strArea}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="141" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{strCodccpp}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="188" y="0" width="47" height="32"/>
+				<reportElement x="200" y="0" width="200" height="32" uuid="ac38b04e-5c3f-4130-94d6-f0393b0aa4ed"/>
 				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{strNomccpp}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="235" y="0" width="47" height="32"/>
+				<reportElement x="400" y="0" width="200" height="32" uuid="a802f570-e81c-43e1-a951-a4ccfd21e096"/>
 				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strUbigeo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="282" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCcdi}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="329" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCcpp}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="376" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCcdd}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="423" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCatccpp}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="470" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNomcat}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="517" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intAltitud}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="564" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strLongitudx}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="611" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strLatitudy}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="658" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intViv07}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="705" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{intPob07}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="752" y="0" width="47" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intRegion}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="686" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="15" width="686" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Centros Poblados]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="720" y="0" width="82" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="720" y="15" width="82" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="686" y="0" width="34" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="686" y="15" width="34" height="15"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora:]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 </jasperReport>

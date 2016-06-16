@@ -27,8 +27,24 @@ public class Capa extends CapaKey {
 	private Integer intIdUsuario;
 	private String strShp;
 	private String strShpExtent;
-
 	private List<CapaUmbral> listCapaUmbral;
+	private String strEsActiva;
+	public String getStrEsActiva() {
+		return strEsActiva;
+	}
+	public void setStrEsActiva(String strEsActiva) {
+		this.strEsActiva = strEsActiva;
+	}
+	public boolean getStrEsActivaBoolean() {
+		return CadenaUtil.getStr(strEsActiva).equalsIgnoreCase("S");
+	}
+	public void setStrEsActivaBoolean(boolean val) {
+		if(val) {
+			strEsActiva	= "S";
+		} else {
+			strEsActiva	= "N";
+		}
+	}
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
 	}
@@ -55,6 +71,9 @@ public class Capa extends CapaKey {
 	}
 	public String getTimFechaRegistroFechaHora() {
 		return timFechaRegistroFecha + " " + timFechaRegistroHora;
+	}
+	public String getTimFechaRegistroFechaHoraSoloAnio() {
+		return CadenaUtil.getStrDateAnio(CadenaUtil.getDateFromStr(timFechaRegistroFecha));
 	}
 	public void setLngFechaRegistro(Long lngfechaRegistro) {
 		timFechaRegistroFecha = CadenaUtil.getStrDate(new Date(lngfechaRegistro));

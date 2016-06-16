@@ -5,11 +5,11 @@
 	<div class="row">
 		<div class="page-title" id="idDivEditarTituloGrupoCapas">
 			<h3>
-				Gestionar <span class="semi-bold">Grupo de capas base</span> 
+				<span class="semi-bold"> Gestionar grupo de capas base</span> 
 			</h3>
 		</div>
 		<ol class="breadcrumb">
-			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li>
+<!-- 			<li><a href="home.action"><i class="glyphicon glyphicon-globe"></i> Mapa </a></li> -->
 			<li><a href="grupoCapas.action"><i class="glyphicon glyphicon-th-list"></i> Listar grupo de capas base</a></li>
 			<li class="active"><i class="glyphicon glyphicon-edit"></i> Edici&oacute;n de Grupo de capas base</li>
 		</ol>
@@ -24,15 +24,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<s:hidden name="edicion_grupoCapasDto.srlIdGrupoCapas"></s:hidden>
-								
-								<div class="row form-row">
-									<div class="col-sm-12 " id="idCampGrupoCapas_intIdGrupoCapasPadre">
-			                			<label for="edicion_grupoCapasDto.intIdGrupoCapasPadre" class="form-label">Padre</label>
-		                				<s:select name="edicion_grupoCapasDto.intIdGrupoCapasPadre" cssClass="form-control " tabindex="1" 
-		                					list="#session.listGrupoCapasBase" listKey="srlIdGrupoCapas" listValue="strNombre" headerKey="" headerValue="-Seleccionar-">
-		                				</s:select>
-									</div>
-								</div>
+<!-- 								<div class="row form-row"> -->
+<!-- 									<div class="col-sm-12 " id="idCampGrupoCapas_intIdGrupoCapasPadre"> -->
+<!-- 			                			<label for="edicion_grupoCapasDto.intIdGrupoCapasPadre" class="form-label">Padre</label> -->
+<%-- 		                				<s:select name="edicion_grupoCapasDto.intIdGrupoCapasPadre" cssClass="form-control " tabindex="1"  --%>
+<%-- 		                					list="#session.listGrupoCapasBase" listKey="srlIdGrupoCapas" listValue="strNombre" headerKey="" headerValue="-Seleccionar-"> --%>
+<%-- 		                				</s:select> --%>
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<div class="row form-row">
 									<div class="col-sm-12 " id="idCampGrupoCapas_Nombre">
 			                			<label for="edicion_grupoCapasDto.strNombre" class="form-label">Nombre</label>
@@ -44,7 +43,7 @@
 			                			<label for="edicion_grupoCapasDto.intOrden" class="form-label">Orden</label>
 		                				<s:textfield name="edicion_grupoCapasDto.intOrden" cssClass="form-control " tabindex="2" size="40" maxlength="5" />
 									</div>
-									</div>
+								</div>
 							
 							</div>
 						</div>

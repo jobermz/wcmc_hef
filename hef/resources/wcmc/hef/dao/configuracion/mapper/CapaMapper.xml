@@ -22,6 +22,7 @@
 		<result column="cd_usuario" property="intIdUsuario" jdbcType="INTEGER"/>
 		<result column="de_shp" property="strShp" jdbcType="VARCHAR"/>
 		<result column="de_shp_extent" property="strShpExtent" jdbcType="VARCHAR"/>
+		<result column="de_es_activa" property="strEsActiva" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaParamDef">
 		select
@@ -103,6 +104,9 @@
 			<if test="strShpExtent != null">
 				de_shp_extent,
 			</if>
+			<if test="strEsActiva != null">
+				de_es_activa,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="intGrupoCapas != null">
@@ -155,6 +159,9 @@
 			</if>
 			<if test="strShpExtent != null">
 				#{strShpExtent, jdbcType=VARCHAR},
+			</if>
+			<if test="strEsActiva != null">
+				#{strEsActiva, jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -211,6 +218,9 @@
 			</if>
 			<if test="strShpExtent != null">
 				de_shp_extent = #{strShpExtent,jdbcType=VARCHAR},
+			</if>
+			<if test="strEsActiva != null">
+				de_es_activa = #{strEsActiva,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
@@ -273,6 +283,7 @@
 		de_es_centrar_mapa,
 		cd_usuario,
 		de_shp,
-		de_shp_extent
+		de_shp_extent,
+		de_es_activa
 	</sql>
 </mapper>

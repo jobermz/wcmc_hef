@@ -15,8 +15,8 @@
 		<result column="ha_maxima_dem" property="dblMaximaDem" jdbcType="DOUBLE"/>
 		<result column="ha_horas_serv" property="dblHorasServ" jdbcType="DOUBLE"/>
 		<result column="cd_numero_usu" property="lngNumeroUsu" jdbcType="INTEGER"/>
-		<result column="fc_fecha_pres" property="dteFechaPres" jdbcType="DATE"/>
-		<result column="fc_fecha_reso" property="dteFechaReso" jdbcType="DATE"/>
+<!-- 		<result column="fc_fecha_pres" property="dteFechaPres" jdbcType="DATE"/> -->
+<!-- 		<result column="fc_fecha_reso" property="dteFechaReso" jdbcType="DATE"/> -->
 		<result column="de_activo" property="strActivo" jdbcType="VARCHAR"/>
 		<result column="de_codigo_con" property="strCodigoCon" jdbcType="VARCHAR"/>
 		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
@@ -313,8 +313,6 @@
 		ha_maxima_dem, 
 		ha_horas_serv, 
 		cd_numero_usu, 
-		fc_fecha_pres, 
-		fc_fecha_reso, 
 		de_activo, 
 		de_codigo_con, 
 		ha_shape_area, 
@@ -334,8 +332,6 @@
 		ha_maxima_dem, 
 		ha_horas_serv, 
 		cd_numero_usu, 
-		fc_fecha_pres, 
-		fc_fecha_reso, 
 		de_activo, 
 		de_codigo_con, 
 		ha_shape_area, 
@@ -355,8 +351,6 @@
 		ha_maxima_dem, 
 		ha_horas_serv, 
 		cd_numero_usu, 
-		fc_fecha_pres, 
-		fc_fecha_reso, 
 		de_activo, 
 		de_codigo_con, 
 		ha_shape_area, 

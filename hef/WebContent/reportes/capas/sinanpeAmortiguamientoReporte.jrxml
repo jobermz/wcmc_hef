@@ -1,138 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ca8ce00-88b0-4ec6-a90e-4acfc085d821">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="164"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
-	<field name="lngObjectid" class="java.lang.String"/>
 	<field name="strZaNomb" class="java.lang.String"/>
-	<field name="strZaBale" class="java.lang.String"/>
-	<field name="dteZaFecr" class="java.lang.String"/>
-
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="20" />
+				<reportElement x="0" y="0" width="802" height="20" uuid="9ac41a18-167e-42de-8184-090eb6a8363a"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Sinanpe Amortiguamiento]]></text>
+				<text><![CDATA[Reporte Analítico - Zonas de amortiguamento de las áreas naturales protegidas]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="200" height="15"/>
+				<reportElement x="0" y="0" width="709" height="15" uuid="ddf86927-b7d4-43f9-a3f5-d07aa2c88cbc"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Objectid]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="200" y="0" width="200" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Za Nomb]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="200" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Za Bale]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="600" y="0" width="200" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Za Fecr]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="200" height="32"/>
+				<reportElement x="0" y="0" width="709" height="32" uuid="0f5d8787-5d4e-49f4-aed6-922d31372c4d"/>
 				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{lngObjectid}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="200" y="0" width="200" height="32"/>
-				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{strZaNomb}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="400" y="0" width="200" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strZaBale}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="600" y="0" width="200" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dteZaFecr}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="686" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="15" width="686" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Sinanpe Amortiguamiento]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="720" y="0" width="82" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="720" y="15" width="82" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="686" y="0" width="34" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="686" y="15" width="34" height="15"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora:]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 </jasperReport>

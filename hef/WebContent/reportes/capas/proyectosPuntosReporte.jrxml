@@ -1,363 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aff0e60a-5f6d-411e-a5e1-76132df4a577">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
-	<field name="strNombre" class="java.lang.String"/>
 	<field name="strIniciativa" class="java.lang.String"/>
-	<field name="strReferencia" class="java.lang.String"/>
-	<field name="strRegionGeo" class="java.lang.String"/>
-	<field name="strDetalleDe" class="java.lang.String"/>
-	<field name="strOtros" class="java.lang.String"/>
-	<field name="strFechaInic" class="java.lang.String"/>
-	<field name="strFechaTerm" class="java.lang.String"/>
-	<field name="strResultados" class="java.lang.String"/>
-	<field name="strCooperante" class="java.lang.String"/>
-	<field name="strAdministra" class="java.lang.String"/>
-	<field name="dblUsd" class="java.lang.String"/>
-	<field name="strInstitucio" class="java.lang.String"/>
-	<field name="strPersonaCo" class="java.lang.String"/>
-	<field name="strCargo" class="java.lang.String"/>
-	<field name="strContacto" class="java.lang.String"/>
-	<field name="strDireccion" class="java.lang.String"/>
-	<field name="strInstituc1" class="java.lang.String"/>
-	<field name="strLink" class="java.lang.String"/>
-
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="20" />
+				<reportElement x="0" y="0" width="802" height="20" uuid="c8486f80-b734-469f-9159-9d5f46375fe2"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Proyectos Puntos]]></text>
+				<text><![CDATA[Reporte Analítico - Proyectos de conservación (por puntos)]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="39" height="15"/>
+				<reportElement x="0" y="0" width="621" height="15" uuid="c38ff582-a5c5-4c0b-a833-53fca4766d7f"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="39" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Iniciativa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="78" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Referencia]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="117" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Region Geo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="156" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Detalle De]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="195" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Otros]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="234" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha Inic]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="273" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha Term]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="312" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Resultados]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="351" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cooperante]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="390" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Administra]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="429" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Usd]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="468" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Institucio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="507" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Persona Co]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="546" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cargo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="585" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Contacto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="624" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Direccion]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="663" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Instituc 1]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="702" y="0" width="39" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Link]]></text>
+				<text><![CDATA[Nombre iniciativa]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="39" height="32"/>
+				<reportElement x="0" y="0" width="621" height="32" uuid="489a3cc2-4e3f-4b66-ab21-e13f3030daa4"/>
 				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strNombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="39" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{strIniciativa}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="78" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strReferencia}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="117" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strRegionGeo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="156" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strDetalleDe}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="195" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strOtros}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="234" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strFechaInic}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="273" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strFechaTerm}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="312" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strResultados}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="351" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCooperante}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="390" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strAdministra}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="429" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dblUsd}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="468" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strInstitucio}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="507" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strPersonaCo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="546" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCargo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="585" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strContacto}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="624" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strDireccion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="663" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strInstituc1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="702" y="0" width="39" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strLink}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="686" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="15" width="686" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Proyectos Puntos]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="720" y="0" width="82" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="720" y="15" width="82" height="15"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="686" y="0" width="34" height="15"/>
-				<box>
-					<topPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="686" y="15" width="34" height="15"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora:]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 </jasperReport>

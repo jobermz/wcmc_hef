@@ -11,10 +11,17 @@
 			<div class="modal-body">
 				<s:form method="post" name="frmSelShapefileUsuario" id="idFrmSelShapefileUsuario" enctype="multipart/form-data">
 					<div class="row">
-						<div class="col-lg-2">Seleccionar archivo .shp:</div>
+						<div class="col-lg-8">Seleccionar archivo .shp:</div>
+						<br>
+					</div>
+					<div class="row">
 						<div class="col-lg-8"><s:file name="shapefile" ></s:file></div>
-						<div class="col-lg-2">
-							<button type="button" class="btn btn-default btnEnviarShapefileUsuario">Enviar</button>
+						<br>
+					</div>
+					<div class="row">
+						<div class="col-lg-8">
+							<button type="button" class="btn btn-primary btnEnviarShapefileUsuario">Cargar</button>
+							<br>
 						</div>
 					</div>
 					<div class="row">

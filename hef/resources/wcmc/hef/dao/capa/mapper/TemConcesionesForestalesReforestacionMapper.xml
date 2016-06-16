@@ -12,6 +12,7 @@
 		<result column="de_situacion" property="strSituacion" jdbcType="VARCHAR"/>
 		<result column="de_titular" property="strTitular" jdbcType="VARCHAR"/>
 		<result column="ha_area_sig" property="dblAreaSig" jdbcType="DOUBLE"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemConcesionesForestalesReforestacionMap" parameterType="wcmc.hef.dao.capa.domain.TemConcesionesForestalesReforestacionParamDef">
 		select
@@ -219,7 +220,8 @@
 		de_fuente, 
 		de_situacion, 
 		de_titular, 
-		ha_area_sig
+		ha_area_sig,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -231,7 +233,8 @@
 		de_fuente, 
 		de_situacion, 
 		de_titular, 
-		ha_area_sig
+		ha_area_sig,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Combo">
 		cd_gid, 
@@ -243,7 +246,8 @@
 		de_fuente, 
 		de_situacion, 
 		de_titular, 
-		ha_area_sig
+		ha_area_sig,
+		cd_objectid
 	</sql>
 
 </mapper>

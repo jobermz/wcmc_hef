@@ -13,6 +13,7 @@ public class CapaUmbralDto {
 	private String strNombre;
 	private Double dblValorMinimo;
 	private Double dblValorMaximo;
+	private String strNroLayer;
 	public String getIntIdCapaDesc() {
 		return intIdCapaDesc;
 	}
@@ -62,6 +63,12 @@ public class CapaUmbralDto {
 	}
 	public void setDblValorMaximo(Double dblValorMaximo) {
 		this.dblValorMaximo = dblValorMaximo;
+	}
+	public String getStrNroLayer() {
+		return strNroLayer;
+	}
+	public void setStrNroLayer(String strNroLayer) {
+		this.strNroLayer = strNroLayer;
 	}
 	
 }

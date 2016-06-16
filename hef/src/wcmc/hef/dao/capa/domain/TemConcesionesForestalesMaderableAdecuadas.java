@@ -2,6 +2,7 @@ package wcmc.hef.dao.capa.domain;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemConcesionesForestalesMaderableAdecuadas extends TemConcesionesForestalesMaderableAdecuadasKey implements BaseBeanVectorial {
@@ -15,6 +16,13 @@ public class TemConcesionesForestalesMaderableAdecuadas extends TemConcesionesFo
 	private Double dblAreaAprob;
 	private String strRegion;
 	private String strSituacion;
+	private Integer intObjectid;
+	public Integer getIntObjectid() {
+		return intObjectid;
+	}
+	public void setIntObjectid(Integer intObjectid) {
+		this.intObjectid = intObjectid;
+	}
 
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;

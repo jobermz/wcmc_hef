@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:50px;">
+<nav class="navbar navbar-fixed-top" role="navigation" style="margin-left:0px;">
 	<div style="position: absolute;float: right;top: 150px;right:30px;z-index: 20;color:white;">
 		<i title="Visualizar capas" class="fa fa-globe fa-3x cursorPointer seleccionar-capas"></i>
 	</div>

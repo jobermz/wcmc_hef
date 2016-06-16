@@ -61,8 +61,8 @@ function instanciardt_basico_grupo_capas(ejecutaBuscar) {
 		                	 "aTargets": [3],
 		                	 "mData": null,
 		                	 "mRender": function (data, type, row) {
-		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_grupo_capas" onclick="editar_grupo_capas(\'' + row.srlIdGrupoCapas + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;'
-		                		 +'<button title="Eliminar" class="btn btn-danger btn_buscar_control_grupo_capas" onclick="eliminar_grupo_capas(\'' + row.srlIdGrupoCapas + '\');return false;"><i class="fa fa-trash-o"></i></button>'+'</div>';
+		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_grupo_capas" onclick="editar_grupo_capas(\'' + row.srlIdGrupoCapas + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;';
+//		                		 +'<button title="Eliminar" class="btn btn-danger btn_buscar_control_grupo_capas" onclick="eliminar_grupo_capas(\'' + row.srlIdGrupoCapas + '\');return false;"><i class="fa fa-trash-o"></i></button>'+'</div>';
 		                	 }
 		                 }
 		],
@@ -90,7 +90,7 @@ function buscar_basico_grupo_capas() {
 }
 function nuevo_grupo_capas() {
 	deshabilitaBotones_grupo_capas(true);
-	var frm		= document.formBuscarGrupoCapas;
+	var frm		= document.form;
 	frm.action	= "nuevoGrupoCapas.action";
 	frm.method	= "POST";
 	frm.target	= "_self";

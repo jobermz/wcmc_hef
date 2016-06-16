@@ -195,8 +195,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -208,8 +208,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -221,8 +221,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -234,8 +234,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -247,8 +247,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -260,8 +260,8 @@
 				<td>${reporte.strTitular}</td>
 			</tr>
 			<tr>
-				<td><strong>strContrato</strong></td>
-				<td>${reporte.Contrato}</td>
+				<td><strong>Contrato</strong></td>
+				<td>${reporte.strContrato}</td>
 			</tr>
 		</table>
 	</s:iterator>
@@ -339,12 +339,14 @@
 </s:if><s:if test="%{#session.reporte.listTemIndiceImportanciaBiologica.size()>0}">
 	<s:iterator value="#session.reporte.listTemIndiceImportanciaBiologica" var="reporte" begin="0" end="0">
 		<table class="clsTableMetadataMenucontextual">
+		
 			<tr>
 				<td><strong>Nombre</strong></td>
-				<%--<td>${reporte.strNombdep}</td>--%>
+				<td>${reporte.dblImpGlob4Decimales}</td>
 			</tr>
 		</table>
 	</s:iterator>
+	
 </s:if><s:if test="%{#session.reporte.listTemPrediosRurales.size()>0}">
 	<s:iterator value="#session.reporte.listTemPrediosRurales" var="reporte" begin="0" end="0">
 		<table class="clsTableMetadataMenucontextual">
@@ -403,8 +405,8 @@
 			</tr>
 		</table>
 	</s:iterator>
-</s:if><s:if test="%{#session.reporte.listTemSoeconComunidadesCampesinasTotales.size()>0}">
-	<s:iterator value="#session.reporte.listTemSoeconComunidadesCampesinasTotales" var="reporte" begin="0" end="0">
+</s:if><s:if test="%{#session.reporte.listTemSoeconComunidadesCampesinas.size()>0}">
+	<s:iterator value="#session.reporte.listTemSoeconComunidadesCampesinas" var="reporte" begin="0" end="0">
 		<table class="clsTableMetadataMenucontextual">
 			<tr>
 				<td><strong>Nombre</strong></td>
@@ -500,6 +502,30 @@
 			<tr>
 				<td><strong>Categor&iacute;a</strong></td>
 				<td>${sessionScope.reporte.beanTemRiesgoErosionHidrica.strCategoria}</td>
+			</tr>
+		</table>
+</s:if>
+<s:if test="%{#session.reporte.beanTemCoberturaBoscosa2014!=null}">
+		<table class="clsTableMetadataMenucontextual">
+			<tr>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemCoberturaBoscosa2014.strValuePromedio}</td>
+			</tr>
+			<tr>
+				<td><strong>Categor&iacute;a</strong></td>
+				<td>${sessionScope.reporte.beanTemCoberturaBoscosa2014.strCategoria}</td>
+			</tr>
+		</table>
+</s:if>
+<s:if test="%{#session.reporte.beanTemPerdidaBosque20012014!=null}">
+		<table class="clsTableMetadataMenucontextual">
+			<tr>
+				<td><strong>Valor</strong></td>
+				<td>${sessionScope.reporte.beanTemPerdidaBosque20012014.strValuePromedio}</td>
+			</tr>
+			<tr>
+				<td><strong>Categor&iacute;a</strong></td>
+				<td>${sessionScope.reporte.beanTemPerdidaBosque20012014.strCategoria}</td>
 			</tr>
 		</table>
 </s:if>

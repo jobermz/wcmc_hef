@@ -5,11 +5,6 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
-	<field name="strDepartamen" class="java.lang.String"/>
-	<field name="strDatum" class="java.lang.String"/>
-	<field name="strCodproy" class="java.lang.String"/>
-	<field name="intCntCodpro" class="java.lang.String"/>
-	<field name="intOrigFid" class="java.lang.String"/>
 
 	<background>
 		<band splitType="Stretch"/>
@@ -21,88 +16,19 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Predios Rurales]]></text>
+				<text><![CDATA[Reporte Analítico - Predios rurales]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="160" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Departamen]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="160" y="0" width="160" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Datum]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="320" y="0" width="160" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Codproy]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="480" y="0" width="160" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cnt Codpro]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="640" y="0" width="160" height="15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Orig Fid]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="160" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strDepartamen}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="160" y="0" width="160" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strDatum}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="320" y="0" width="160" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strCodproy}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="480" y="0" width="160" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intCntCodpro}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="640" y="0" width="160" height="32"/>
-				<textElement>
-					<font size="5"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{intOrigFid}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
+	<!--
 	<pageFooter>
 		<band height="30" splitType="Stretch">
 			<staticText>
@@ -116,7 +42,7 @@
 			<staticText>
 				<reportElement x="0" y="15" width="686" height="15"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Predios Rurales]]></text>
+				<text><![CDATA[Predios rurales]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="720" y="0" width="82" height="15"/>
@@ -150,4 +76,5 @@
 			</staticText>
 		</band>
 	</pageFooter>
+	-->
 </jasperReport>

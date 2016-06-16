@@ -26,7 +26,23 @@ public class CapaDto {
 	private Integer intIdUsuario;
 	private String strShp;
 	private String strShpExtent;
-
+	private String strEsActiva;
+	public String getStrEsActiva() {
+		return strEsActiva;
+	}
+	public void setStrEsActiva(String strEsActiva) {
+		this.strEsActiva = strEsActiva;
+	}
+	public boolean getStrEsActivaBoolean() {
+		return CadenaUtil.getStr(strEsActiva).equalsIgnoreCase("S");
+	}
+	public void setStrEsActivaBoolean(boolean val) {
+		if(val) {
+			strEsActiva	= "S";
+		} else {
+			strEsActiva	= "N";
+		}
+	}
 	public String getIntGrupoCapasDesc() {
 		return intGrupoCapasDesc;
 	}

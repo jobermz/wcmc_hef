@@ -11,50 +11,106 @@ $(document).ready(function() {
 //	goog.require('ol.source.GeoJSON');
 	goog.require('ol.source.OSM');
 	
-	$(".identificar-area-criterio-logico").bind('contextmenu', function(e) {
-		$('#idDivRightClick').css("display", "none");
-		$('#idDivRightClickClean').css("display", "none");
-		$('#idDivRightClickAPAClean').css("display","none");
-		
-		$('#idDivRightClickClean').css("display", "table-row");
-		$('#idDivRightClickClean').css("right", $("#idDivBotonFlotanteACL").css("right").pxToInt()+15);
-		$('#idDivRightClickClean').css("top", $("#idDivBotonFlotanteACL").css("top").pxToInt()+25);
+	$(document).bind('contextmenu', function(e) {
 		return false;
 	});
-	
-	$(".analizar-por-area").bind('contextmenu', function(e) {
+	$(document).bind('click', function(event) {
 		$('#idDivRightClick').css("display", "none");
 		$('#idDivRightClickClean').css("display", "none");
 		$('#idDivRightClickAPAClean').css("display","none");
-		
-		$('#idDivRightClickAPAClean').css("display", "table-row");
-		$('#idDivRightClickAPAClean').css("right", $("#idDivBotonFlotanteAPA").css("right").pxToInt()+15);
-		$('#idDivRightClickAPAClean').css("top", $("#idDivBotonFlotanteAPA").css("top").pxToInt()+25);
-		return false;
-	});
-	
-	$(document).bind('click', function(e) {
-		$('#idDivRightClick').css("display", "none");
-		$('#idDivRightClickClean').css("display", "none");
-		$('#idDivRightClickAPAClean').css("display","none");
+		//cerrarTodosPopover();
 		if(!activarSeleccionarAreaDesdeMapa) {
+		}
+		//console.log("class="+$(event.target).attr("class"));
+		if(!($(event.target).hasClass("clsPopoverMenuOpcion") || 
+				$(event.target).hasClass("clsPopoverMenuAnalizarArea") || 
+				$(event.target).hasClass("clsPopoverMenuCapasBase"))) {
+			cerrarTodosPopover();
 		}
 		return true;
 	});
 	
 	iniciarMapa();
-		
-	iniciarCapasBase();
+	
+	iniciarCapasBase();//Ok
 	iniciarIdentificarAreaPorCriteriosLogicos();
 	iniciarAnalizarPorArea();
 	iniciarCapasUpload();
+	iniciarMenuLateral();
+	iniciarEfectosMouse();
 	
+	$(window).resize(function(_this, args) {
+		actualizarTamanioGrafica();
+	});
+	//actualizarTamanioGrafica();
 });
+var actualizarTamanioGraficaTimeout	= null;
+function actualizarTamanioGrafica() {
+	if(actualizarTamanioGraficaTimeout) {
+		clearTimeout(actualizarTamanioGraficaTimeout);
+	}
+	actualizarTamanioGraficaTimeout	= setTimeout(function(){
+		actualizarTamanioGraficaTimeout	= null;
+		actualizarTamanioGraficaExecute();
+	}, 100);
+}
+function actualizarTamanioGraficaExecute() {
+	if(view) {
+		var center = ol.proj.transform(view.getCenter(), 'EPSG:3857', 'EPSG:4326');
+		if(gmap) {
+			gmap.setCenter(new google.maps.LatLng(center[1], center[0]));
+		}
+	}
+	if(map) {
+		map.updateSize();
+	}	
+	var doc_height		= $(document).height();
+	//console.log("RESIZE...doc_height="+doc_height);
+	$(".clsDivPanelLateralIzq").each(function(index){
+		$(this).css("height", (doc_height-200)+"px");
+	});
+	$(".clsDivPanelLateralIzqRep").each(function(index){
+		$(this).css("height", (doc_height-200)+"px");
+	});
+	
+	//$("#idDivPanelLateralIzq").css("height", (doc_width-190)+"px");
+	//console.log("PANEL-LAT: "+(doc_width-190)+"px");
+}
 var map			= null;
 var sourceDraw	= null;
 var draw		= null; // global so we can remove it later
+function cambiarGoogle(_this, mapTypeId) {
+	/*
+	$(".clsGoogle").each(function(index) {
+		$(this).removeClass("fa-check");
+		$(this).addClass("fa-circle-o");
+	});
+	$(_this).find(".clsGoogle").removeClass("fa-circle-o");
+	$(_this).find(".clsGoogle").addClass("fa-check");
+	*/
+	if(mapTypeId == google.maps.MapTypeId.ROADMAP) {
+		$("#idPopoverMenuCapasBase").html("<span class=\"glyphicon glyphicon-globe\"></span> Cartogr&aacute;fica");
+		$("#idPopoverMenuCapasBase").attr("curr-vista", "ROADMAP");
+		cerrarPopoverCapasBase();
+	} else if(mapTypeId == google.maps.MapTypeId.SATELLITE) {
+		$("#idPopoverMenuCapasBase").html("<span class=\"glyphicon glyphicon-globe\"></span> Satelital");
+		$("#idPopoverMenuCapasBase").attr("curr-vista", "SATELLITE");
+		cerrarPopoverCapasBase();
+	} else if(mapTypeId == google.maps.MapTypeId.HYBRID) {
+		$("#idPopoverMenuCapasBase").html("<span class=\"glyphicon glyphicon-globe\"></span> Cartografica y Satelital");
+		$("#idPopoverMenuCapasBase").attr("curr-vista", "HYBRID");
+		cerrarPopoverCapasBase();
+	} else if(mapTypeId == google.maps.MapTypeId.TERRAIN) {
+		$("#idPopoverMenuCapasBase").html("<span class=\"glyphicon glyphicon-globe\"></span> Topografica");
+		$("#idPopoverMenuCapasBase").attr("curr-vista", "TERRAIN");
+		cerrarPopoverCapasBase();
+	}
+	gmap.setMapTypeId(mapTypeId);
+}
+var gmap = null;
+var view = null;
+var postrenderok = false;
 function iniciarMapa() {
-	var gmap = null;
 	if(google) {
 		gmap	= new google.maps.Map(document.getElementById('gmap'), {
 			disableDefaultUI: true,
@@ -63,10 +119,18 @@ function iniciarMapa() {
 			disableDoubleClickZoom: true,
 			scrollwheel: false,
 			streetViewControl: false,
-			mapTypeId: google.maps.MapTypeId.SATELLITE
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+			//mapTypeId: google.maps.MapTypeId.SATELLITE
+			//mapTypeId: google.maps.MapTypeId.HYBRID
+			//mapTypeId: google.maps.MapTypeId.TERRAIN
+		});
+		$("#idPopoverMenuCapasBase").attr("curr-vista", "ROADMAP");
+		gmap.addListener("idle", function() {
+			//console.log("google idle...OK");
+			setTimeout(function(){actualizarTamanioGrafica();}, 2000);
 		});
 	}
-	var view = new ol.View({
+	view = new ol.View({
 	  // make sure the view doesn't go beyond the 22 zoom levels of Google Maps
 	  maxZoom: 21,
 	  minZoom: 5,
@@ -84,9 +148,9 @@ function iniciarMapa() {
 		}
 	});
 	
-	var vectorWkt	= drawWkt();
-	var layers = [vectorWkt];
-//	var layers = [];
+//	var vectorWkt	= drawWkt();
+//	var layers = [vectorWkt];
+	var layers = [];
 	var olMapDiv = document.getElementById('olmap');
 	map = new ol.Map({
 		layers: layers,
@@ -105,26 +169,106 @@ function iniciarMapa() {
 	if(gmap) {
 		gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv);
 	}
+	/*
+	map.getViewport().addEventListener("click", function(e) {
+	    map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
+	        //do something
+	    }
+	};
+	*/
 	
+	map.once('postcompose', function(event) {
+		setTimeout(function(){actualizarTamanioGrafica();}, 2000);
+	});
+	/*
+	map.renderSync();
+	map.on("postrender", function() {
+		console.log("postrender...UHF");
+		if(!postrenderok) {
+			console.log("postrender...OK");
+			actualizarTamanioGrafica();
+			postrenderok = true;
+		} else {
+			console.log("postrender...UHF");
+			if(map) {
+				map.updateSize();
+			}
+		}
+		return true;
+	});
+	*/
 	map.getViewport().addEventListener('contextmenu', function (e) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
+//	map.getViewport().addEventListener('click', function (e) { // or $(map.getViewport()).on('contextmenu', function(e) with jQuery
 		var pix		= map.getEventPixel(e);
 		eventoMenuContextualSeleccionarAreaDesdeMapa(pix, e);
-	    e.preventDefault();
-	    return false;
-		/*
+		
+//		WKT=POINT(-74.454345703125 -6.659151487659315) visorInicioAnalizarPorArea.js:287:3
+//		WKT2=POINT(-8288219.851018231 -742967.9149319133)
 		var coord	= map.getCoordinateFromPixel(pix);
-		console.log("coord="+coord);
 		var point	= new ol.geom.Point(coord);
 		var feature = new ol.Feature({geometry: point});
 		var format	= new ol.format.WKT();
-	    var wkt		= format.writeFeature(feature, {
-	      dataProjection: 'EPSG:4326',
-	      featureProjection: 'EPSG:3857'
-	    });
-	    console.log("WKT="+wkt);
-	    */
+		var wkt		= format.writeFeature(feature, {
+			dataProjection: 'EPSG:4326',
+			featureProjection: 'EPSG:3857'
+		});
+		
+		var featureRS = format.readFeature(wkt, {
+			dataProjection: 'EPSG:4326'
+		});
+		var arrCoord	= featureRS.getGeometry().getCoordinates();
+		var chicago		= new google.maps.LatLng(arrCoord[1], arrCoord[0]);
+		//var chicago = new google.maps.LatLng(-9.253936156814447, -74.454345703125);
+		
+	    //e.preventDefault();
+	    return false;
 	});
+	
 }
+
+var TILE_SIZE = 256;
+
+function createInfoWindowContent(latLng, zoom) {
+	var scale = 1 << zoom;
+
+	var worldCoordinate = project(latLng);
+
+	var pixelCoordinate = new google.maps.Point(Math.floor(worldCoordinate.x * scale), Math.floor(worldCoordinate.y * scale));
+	
+	var xTileCoord	= Math.floor(worldCoordinate.x * scale / TILE_SIZE);
+	var yTileCoord	= Math.floor(worldCoordinate.y * scale / TILE_SIZE);
+	var tileCoordinate = new google.maps.Point((xTileCoord), (yTileCoord));
+
+	var xTileCoordDif	= (worldCoordinate.x * scale / TILE_SIZE) - xTileCoord;
+	var yTileCoordDif	= (worldCoordinate.y * scale / TILE_SIZE) - yTileCoord;
+	var tileRevCoordinate = new google.maps.Point((xTileCoordDif/scale*TILE_SIZE), (yTileCoordDif/scale*TILE_SIZE));
+
+	return [
+	        'zoom:'+zoom,
+	        'scale:'+scale,
+		    'LatLng:' + latLng.lng() + ',' + latLng.lat(),
+		    'Zoom:' + zoom,
+		    'World:' + worldCoordinate,
+		    'Pixel:' + pixelCoordinate,
+		    'Tile:' + tileCoordinate,
+		    'TileRev:' + tileRevCoordinate
+		  ].join('  ');
+}
+
+// The mapping between latitude, longitude and pixels is defined by the web
+// mercator projection.
+function project(latLng) {
+	var siny = Math.sin(latLng.lat() * Math.PI / 180);
+
+	// Truncating to 0.9999 effectively limits latitude to 89.189. This is
+	// about a third of a tile past the edge of the world tile.
+	siny = Math.min(Math.max(siny, -0.9999), 0.9999);
+
+	return new google.maps.Point(
+	      TILE_SIZE * (0.5 + latLng.lng() / 360),
+	      TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
+}
+
 function drawWkt() {
 	var currVector	= null;
 	$.ajax({
@@ -206,7 +350,6 @@ function addInteraction(value) {
 	}
 }
 function drawEnd(event) {
-    console.log("Fin del dibujo");
     var format = new ol.format.WKT();
     var wkt = format.writeFeature(event.feature, {
       dataProjection: 'EPSG:4326',
@@ -214,12 +357,11 @@ function drawEnd(event) {
     });
     console.log("WKT="+wkt);
     terminarInteraction();
-    procesarAnalizarPorArea(wkt);
+    procesarAnalizarPorArea(wkt);//Dibujar rectangulo y poligono en pantalla
 }
 
 function terminarInteraction() {
 	if(map && draw) {
-		
 //		sourceDraw.clear(true);
 //		var coll	= sourceDraw.getFeaturesCollection();
 //		var array	= coll.getArray();
@@ -235,35 +377,43 @@ function terminarInteraction() {
 }
 
 function reportePDF() {
-	var frm		= document.form;
-	frm.action	= "reporteCapas.action";
-	frm.target	= "_blank";
+	cerrarTodosPopover();
+	var frm				= document.form;
+	frm.action			= "reporteCapas.action";
+	frm.target			= "_blank";
 	frm.submit();
 	return false;
 }
+
+function reportePNG(keyImagen) {
+	cerrarTodosPopover();
+	var url	= "download.action?strImagenReporte="+keyImagen;
+	window.open(url);
+	return false;
+}
+
+function reporteCSV() {
+	cerrarTodosPopover();
+	if(ultimoReporteVisor) {
+		var frm				= document.form;
+		frm.action			= "paginas/consulta/rep-csv/" + ultimoReporteVisor + "CSV.jsp";
+		frm.target			= "_blank";
+		frm.submit();
+	} else {
+		alert("Debe seleccionar una capa de las encontradas en el reporte");
+	}
+	return false;
+}
+
+/*
 function exportarPNG() {
-	/*
-	var exportPNGElement = document.getElementById('export-png');
 	map.once('postcompose', function(event) {
 		var canvas = event.context.canvas;
-		exportPNGElement.href = canvas.toDataURL('image/png');
-//		ventanaNuevaURL(canvas.toDataURL('image/png'));
+		alert(canvas.toDataURL('image/png'));
 	});
 	map.renderSync();
-	*/
-	
-
-//	var exportPNGElement = $('#export-png');
-	//if ('download' in exportPNGElement) {
-//		exportPNGElement.click(function(e) {
-			map.once('postcompose', function(event) {
-				var canvas = event.context.canvas;
-				alert(canvas.toDataURL('image/png'));
-//				exportPNGElement.href = canvas.toDataURL('image/png');
-			});
-			map.renderSync();
-//		}, false);
 }
+*/
 function ventanaNuevaURL(url) {
 	var frm		= document.form;
 	frm.action	= url;
@@ -271,24 +421,27 @@ function ventanaNuevaURL(url) {
 	frm.submit();
 	return false;
 }
-
-//var exportPNGElement = document.getElementById('export-png');
-/*
-var exportPNGElement = $('#export-png');
-//if ('download' in exportPNGElement) {
-	exportPNGElement.click(function(e) {
-		map.once('postcompose', function(event) {
-			var canvas = event.context.canvas;
-			exportPNGElement.href = canvas.toDataURL('image/png');
-		});
-		map.renderSync();
-	}, false);
-	*/
-//} else {
-//	alert("Mensaje de error");
-//	var info = document.getElementById('no-download');
-	/**
-   * display error message
-   */
-//  info.style.display = '';
-//}
+function iniciarMenuLateral() {
+	var strHandles	= "e";
+	$("#idDivMenuLateral").resizable({
+		handles: strHandles, 
+		minWidth: 1,
+		start: function(event, ui) {
+			console.log("startResize()");
+		},
+		stop: function(event, ui) {
+			console.log("stopResize()");
+		}
+	});
+}
+function iniciarEfectosMouse() {
+//	$(".clsSliderColXs2").each(function() {
+//		$(this).find(".clsSlider").css("height", $(this).parent().css("height"));
+//		$(this).mouseover(function (event) {
+//			$(this).css("background-color","#F7F7F7");
+//		});
+//		$(this).mouseout(function (event) {
+//			$(this).css("background-color","#FFFFFF");
+//		});
+//	});
+}

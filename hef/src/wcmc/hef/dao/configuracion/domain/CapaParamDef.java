@@ -797,6 +797,11 @@ public class CapaParamDef {
             addCriterion("cd_usuario is null");
             return (Criteria) this;
         }
+        
+        public Criteria andStrEsActivaEqualTo(String value) {
+            addCriterion("de_es_activa =", CadenaUtil.getStr(value), "de_es_activa");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

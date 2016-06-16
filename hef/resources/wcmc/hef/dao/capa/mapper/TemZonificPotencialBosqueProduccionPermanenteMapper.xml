@@ -4,7 +4,6 @@
 	<resultMap id="TemZonificPotencialBosqueProduccionPermanenteMap" type="wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente">
 		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
 		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
-		<result column="cd_id" property="lngId" jdbcType="INTEGER"/>
 		<result column="de_zona" property="strZona" jdbcType="VARCHAR"/>
 		<result column="de_tipo" property="strTipo" jdbcType="VARCHAR"/>
 		<result column="de_denomin" property="strDenomin" jdbcType="VARCHAR"/>
@@ -16,6 +15,7 @@
 		<result column="cd_theid" property="intTheid" jdbcType="INTEGER"/>
 		<result column="ha_perimeter" property="dblPerimeter" jdbcType="DOUBLE"/>
 		<result column="ha_hectares" property="dblHectares" jdbcType="DOUBLE"/>
+		<result column="cd_objectid" property="intObjectid" jdbcType="INTEGER"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemZonificPotencialBosqueProduccionPermanenteMap" parameterType="wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanenteParamDef">
 		select
@@ -88,7 +88,7 @@
 				si_the_geom,
 			</if>
 			<if test="lngId != null">
-				cd_id,
+				ha_id,
 			</if>
 			<if test="strZona != null">
 				de_zona,
@@ -173,7 +173,7 @@
 				si_the_geom = #{strTheGeom,jdbcType=VARCHAR},
 			</if>
 			<if test="lngId != null">
-				cd_id = #{lngId,jdbcType=INTEGER},
+				ha_id = #{lngId,jdbcType=INTEGER},
 			</if>
 			<if test="strZona != null">
 				de_zona = #{strZona,jdbcType=VARCHAR},
@@ -252,7 +252,6 @@
 	<sql id="Base_Column_List">
 		cd_gid, 
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
-		cd_id, 
 		de_zona, 
 		de_tipo, 
 		de_denomin, 
@@ -263,12 +262,12 @@
 		de_doc_legal, 
 		cd_theid, 
 		ha_perimeter, 
-		ha_hectares
+		ha_hectares,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
 		ST_AsText(si_the_geom) as si_the_geom, 
-		cd_id, 
 		de_zona, 
 		de_tipo, 
 		de_denomin, 
@@ -279,12 +278,13 @@
 		de_doc_legal, 
 		cd_theid, 
 		ha_perimeter, 
-		ha_hectares
+		ha_hectares,
+		cd_objectid
 	</sql>
 	<sql id="Base_Column_List_Combo">
 		cd_gid, 
 		'' as si_the_geom, 
-		cd_id, 
+		ha_id, 
 		de_zona, 
 		de_tipo, 
 		de_denomin, 
@@ -295,7 +295,8 @@
 		de_doc_legal, 
 		cd_theid, 
 		ha_perimeter, 
-		ha_hectares
+		ha_hectares,
+		cd_objectid
 	</sql>
 
 </mapper>

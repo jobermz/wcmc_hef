@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="b3f7c163-dd13-4117-9a55-86bd1ffdefa7">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="386"/>
+	<property name="ireport.y" value="441"/>
 	<subDataset name="dataReporte" uuid="9e75ab2f-c84d-4991-bd62-0a98d7bf43d9">
 		<parameter name="parametros.strHora" class="java.lang.String"/>
 		<parameter name="parametros.strFecha" class="java.lang.String"/>
@@ -16,13 +16,14 @@
 	<parameter name="parametros.strRutaBase" class="java.lang.String"/>
 	<field name="strNombreReporte" class="java.lang.String"/>
 	<field name="dataReporte" class="java.lang.Object"/>
+	<field name="strNombreReporteComercial" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="595" splitType="Stretch">
+		<band height="524" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="842" height="595" uuid="b5330bb8-56a6-4b25-a20f-36ca3eede2db"/>
+				<reportElement x="0" y="0" width="842" height="524" uuid="b5330bb8-56a6-4b25-a20f-36ca3eede2db"/>
 				<subreportParameter name="parametros.strHora">
 					<subreportParameterExpression><![CDATA[$P{parametros.strHora}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -34,4 +35,51 @@
 			</subreport>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="686" height="15" uuid="6d451827-36a8-47ee-a1ef-0ab6590e3cb6"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Herramienta espacial flexible para la planificación de acciones REDD+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="15" width="686" height="15" uuid="4563d27e-9149-4e98-85da-8676e108ca5f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{strNombreReporteComercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="740" y="0" width="82" height="15" uuid="a28e2acd-5330-4501-96ca-181076c38fa7"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="740" y="15" width="82" height="15" uuid="c38dee4b-b107-4f16-911a-0b40f87c68a7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{parametros.strHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="706" y="0" width="34" height="15" uuid="ac955d77-9d1e-4e98-aba7-0b0b3873a817"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="706" y="15" width="34" height="15" uuid="07b0b605-8bb1-4b2c-915f-20a4e1759f37"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 </jasperReport>

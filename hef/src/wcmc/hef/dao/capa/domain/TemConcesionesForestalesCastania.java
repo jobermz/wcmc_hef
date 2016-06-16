@@ -14,7 +14,13 @@ public class TemConcesionesForestalesCastania extends TemConcesionesForestalesCa
 	private String strRegion;
 	private Double dblAreaSig;
 	private String strSituacion;
-
+	private Integer intObjectid;
+	public Integer getIntObjectid() {
+		return intObjectid;
+	}
+	public void setIntObjectid(Integer intObjectid) {
+		this.intObjectid = intObjectid;
+	}
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
     }
@@ -63,5 +69,4 @@ public class TemConcesionesForestalesCastania extends TemConcesionesForestalesCa
 	public void setStrSituacion(String strSituacion) {
 		this.strSituacion = strSituacion;
 	}
-	
 }

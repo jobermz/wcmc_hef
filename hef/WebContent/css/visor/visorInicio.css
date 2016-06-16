@@ -2,18 +2,25 @@
 	background-color: rgba(255,255,255,0.5);
 }
 .panel-default > .panel-heading {
-	background-color: rgba(245,245,245,0.3);
-	border-color: rgba(208,208,208,0.3);
-  	padding: 2px 10px;
+	background-color: #fff;
+  	padding: 6px 0px;
+  	border-color: #ccc
 }
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 0px;
+    border-right: 0px solid white !important;
+    border-left: 0px solid white !important;
+}
+
 
 .panel {
 	background-color: rgba(255,255,255,0.3);
 }
 .modal-backdrop.in {
-	opacity: .1;
+	opacity: 0.9;
 }
-
 
 .modal.fade:not(.in).left .modal-dialog {
 	-webkit-transform: translate3d(-25%, 0, 0);
@@ -99,14 +106,38 @@
 .seleccionarParaCapaActiva {
 	cursor: pointer;
 }
+.clsNombreGrupoCapa-Sel {
+	font-weight: bold;
+	font-size: 15px;
+	color: #714319;
+}
+.clsNombreGrupoCapa {
+	font-weight: bold;
+	font-size: 15px;
+	color: #5F3815;
+}
+.clsNombreGrupoCapaRep-Sel {
+	font-weight: bold;
+	font-size: 15px;
+	color: #714319;
+}
+.clsNombreGrupoCapaRep {
+	font-weight: bold;
+	font-size: 15px;
+	color: #5F3815;
+}
 .clsCapaActiva {
-	background-color: rgba(248,251,179,0.8);
+	background-color: #E7DED7;
 }
 .clsTituloCapaActiva {
 	font-size: 13pt;
 	vertical-align: middle;
-	color: #EEE;
+	color: #5F3815;
 	vertical-align: top;
+	font-weight: bold;
+	height: 43px;
+	width: 1000px;
+	overflow-x: hidden;
 }
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
@@ -127,3 +158,35 @@ h1, .h1, h2, .h2, h3, .h3 {
 .row .form-row {
 	min-height: 34px;
 }
+
+.ui-resizable-e {
+	position: absolute;
+	right: -11px;
+	width: 12px;
+	height: 23px;
+	top: 250px;
+	background-color:transparent;
+	background-image: url('../../image/control/arrow-24-16.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.dropdown-menu > li > a {
+    color: #5F3815;
+}
+
+.fa-lg {
+    color: #5F3815;
+}
+
+.clsSeleccionCapasEspaciales {
+	cursor: pointer;
+	line-height: 1.2;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+/*
+.clsSeleccionCapasEspaciales:hover {
+	background-color: #F7F7F7;
+}
+*/

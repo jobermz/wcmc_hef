@@ -10,6 +10,7 @@ public class ConfiguracionProperties {
 	
 	public static String TIPO_CAPA_UMBRAL				= "tipo_capa_umbral";
 	public static String TIPO_CAPA_VECTORIAL			= "tipo_capa_vectorial";
+	public static String TIPO_CAPA_VECTORIAL_NUMERICA	= "tipo_capa_vectorial_numerica";
 	
 	public static String REPOSITORIO_DOCS_TEMPORAL		= "repositorio_docs_temporal";
 	
@@ -19,6 +20,25 @@ public class ConfiguracionProperties {
 	public static String RUTA_BASE_CAPAS_USUARIO		= "ruta_base_capas_usuario";
 	
 	public static String CAPA_GRUPO_USUARIO				= "capa_grupo_usuario";
+	
+	public static String TEMPROYECCIONDENSIDADPOB2015_MIN		= "TemProyeccionDensidadPob2015_MIN";
+	public static String TEMPROYECCIONDENSIDADPOB2015_MAX		= "TemProyeccionDensidadPob2015_MAX";
+	
+	public static String TEMCOSTOOPORTUNIDADDEFORESTACION_MIN	= "TemCostoOportunidadDeforestacion_MIN";
+	public static String TEMCOSTOOPORTUNIDADDEFORESTACION_MAX	= "TemCostoOportunidadDeforestacion_MAX";
+	
+	public static String TEMINDICEIMPORTANCIABIOLOGICA_MIN		= "TemIndiceImportanciaBiologica_MIN";
+	public static String TEMINDICEIMPORTANCIABIOLOGICA_MAX		= "TemIndiceImportanciaBiologica_MAX";
+	
+	public static String TEMCENTROSPOBLADOS_MIN					= "TemCentrosPoblados_MIN";
+	public static String TEMCENTROSPOBLADOS_MAX					= "TemCentrosPoblados_MAX";
+	
+	public static String TEMCARBONOECOZONAS_01					= "TemCarbonoEcozonas_01";
+	public static String TEMCARBONOECOZONAS_02					= "TemCarbonoEcozonas_02";
+	public static String TEMCARBONOECOZONAS_03					= "TemCarbonoEcozonas_03";
+	public static String TEMCARBONOECOZONAS_04					= "TemCarbonoEcozonas_04";
+	public static String TEMCARBONOECOZONAS_05					= "TemCarbonoEcozonas_05";
+	public static String TEMCARBONOECOZONAS_06					= "TemCarbonoEcozonas_06";
 	
 	public static List<String> getConstanteList(String strParam) {
 		List<String> list	= new ArrayList<String>();

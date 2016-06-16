@@ -1,15 +1,20 @@
 package wcmc.hef.web.capa.action;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import wcmc.hef.business.core.configuracion.dto.CampoMetadataDto;
@@ -32,6 +37,7 @@ import wcmc.hef.business.core.capa.service.BasLimProvinciaService;
 import wcmc.hef.business.core.capa.service.BasViasRedVialDepartamentalService;
 import wcmc.hef.business.core.capa.service.BasViasRedVialNacionalService;
 import wcmc.hef.business.core.capa.service.BasViasRedVialVecinalService;
+import wcmc.hef.business.core.capa.service.ConsultaACLFuxionService;
 import wcmc.hef.business.core.capa.service.TemAnpNacionalService;
 import wcmc.hef.business.core.capa.service.TemAnpPrivadaService;
 import wcmc.hef.business.core.capa.service.TemAnpRegionalService;
@@ -53,16 +59,16 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
 import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
 import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.business.core.capa.service.TemReservasTerritorialesIndigenasService;
 import wcmc.hef.business.core.capa.service.TemRiesgoErosionHidricaService;
+import wcmc.hef.business.core.capa.service.TemPerdidaBosque20012014Service;
+import wcmc.hef.business.core.capa.service.TemCoberturaBoscosa2014Service;
 import wcmc.hef.business.core.capa.service.TemSinanpeAmortiguamientoService;
 import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasService;
 import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTerritorialesService;
@@ -74,7 +80,9 @@ import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
+import wcmc.hef.dao.capa.domain.BaseBeanVectorialImpl;
 import wcmc.hef.dao.capa.domain.BeanRaster;
+import wcmc.hef.dao.capa.domain.ConsultaACLFuxion;
 import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
@@ -161,8 +169,13 @@ import wcmc.hef.dao.configuracion.domain.Capa;
 import wcmc.hef.dao.configuracion.domain.GeometriaUsuario;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
-import wcmc.hef.general.util.GeotoolsData;
+import wcmc.hef.general.util.Geotools;
+import wcmc.hef.general.util.GeotoolsFullImagen;
+import wcmc.hef.general.util.GeotoolsImagen;
+import wcmc.hef.general.util.ImagenUtil;
+import wcmc.hef.general.util.RedUtil;
 import wcmc.hef.general.util.ServiciosProperties;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 
 public class ConsultaAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
@@ -252,13 +265,7 @@ public class ConsultaAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
-
-	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemPrediosRuralesService temPrediosRuralesService;
@@ -304,7 +311,16 @@ public class ConsultaAction extends ActionSupport {
 	private TemDensidadCarbonoAereaService temDensidadCarbonoAereaService;
 
 	@Autowired
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
+
+	@Autowired
 	private TemRiesgoErosionHidricaService temRiesgoErosionHidricaService;
+
+	@Autowired
+	private TemCoberturaBoscosa2014Service temCoberturaBoscosa2014Service;
+
+	@Autowired
+	private TemPerdidaBosque20012014Service temPerdidaBosque20012014Service;
 
 	@Autowired
 	private CapaService capaService;
@@ -314,17 +330,18 @@ public class ConsultaAction extends ActionSupport {
 	
 	@Autowired
 	private CampoMetadataService campoMetadataService;
+
+	@Autowired
+	private ConsultaACLFuxionService consultaACLFuxionService;
 	
 	private String strPoligonoConsulta;
+	private String strPoligonoConsultaBoundary;
 	private String strIdCapaConsulta;
 	private String listSrlIdCapaConsulta;
+	private String zoomLevel;
 	public ConsultaAction() {
 	}
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	public String consultar() {
+	public String consultarBoundary() {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
@@ -334,7 +351,7 @@ public class ConsultaAction extends ActionSupport {
 			if(!CadenaUtil.getStr(strIdCapaConsulta).equals("")) {
 				BaseBeanVectorial baseBeanVectorial		= (BaseBeanVectorial)session.get("beanConsultaCapasRightClick");
 				if(baseBeanVectorial != null) {
-					strPoligonoConsulta	= baseBeanVectorial.getStrTheGeom();
+					strPoligonoConsulta	= baseBeanVectorial.getStrTheGeom();//Proviene de APA
 				}
 			}
 			
@@ -342,22 +359,85 @@ public class ConsultaAction extends ActionSupport {
 			if(CadenaUtil.getStrNull(session.get("strHashConsultaACL")) != null) {
 				strHashConsultaCurr	= (String)session.get("strHashConsultaACL");
 			}
-			final String strHashConsulta	= strHashConsultaCurr;
-			
+			String strHashConsultaCurrTemp		= strHashConsultaCurr;
 			
 			if(CadenaUtil.getStrNull(strPoligonoConsulta) == null) {//TODO No compatible para la herencia de criterios hacia Analizar por area
-				strPoligonoConsulta		= (String)session.get("geometria_"+strHashConsulta);
+				strPoligonoConsulta		= CadenaUtil.getStr(session.get("geometria_"+strHashConsultaCurrTemp));//Proviene de fuxion ACL
+			} else if(session.get("geometria_"+strHashConsultaCurrTemp) != null) {
+				List<BaseBeanVectorial> listReporte	= new ArrayList<BaseBeanVectorial>();
+				listReporte.add(new BaseBeanVectorialImpl(CadenaUtil.getStr(session.get("geometria_"+strHashConsultaCurrTemp))));
+				listReporte.add(new BaseBeanVectorialImpl(strPoligonoConsulta));
+				strPoligonoConsulta	 = evaluarGeometrias(listReporte);
 			}
-
-			final Map<String, Object> mapReporte		= new HashMap<String, Object>();
+			if(!CadenaUtil.getStr(strPoligonoConsulta).equals("")) {
+				strPoligonoConsultaBoundary	= consultaACLFuxionService.selectBoundary(strPoligonoConsulta);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	public String consultar() {
+		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		Map<String, Object> session		= ActionContext.getContext().getSession();
+		try {
+			if(CadenaUtil.getStr(request.getParameter("esRaster")).equals("false")) {
+				session.remove("usar_consulta_acl");
+			}
+			ActionContext ctx					= ActionContext.getContext();
+			ActionInvocation actionInvocation	= ctx.getActionInvocation();
+			String actionName					= CadenaUtil.getStr(actionInvocation.getProxy().getActionName());
+			if(!CadenaUtil.getStr(strIdCapaConsulta).equals("")) {
+				BaseBeanVectorial baseBeanVectorial		= (BaseBeanVectorial)session.get("beanConsultaCapasRightClick");
+				if(baseBeanVectorial != null) {
+					strPoligonoConsulta	= baseBeanVectorial.getStrTheGeom();//Proviene de APA
+				}
+			}
+			
+			String strHashConsultaCurr	= "";
+			if(CadenaUtil.getStrNull(session.get("strHashConsultaACL")) != null) {
+				strHashConsultaCurr	= (String)session.get("strHashConsultaACL");
+				session.remove("strHashConsultaACL");
+			}
+			String strHashConsultaCurrTemp		= strHashConsultaCurr;
+			if(!CadenaUtil.getStr(session.get("usar_consulta_acl")).equals("true")) {
+				strHashConsultaCurr			= "";
+			}
+			final String strHashConsulta	= strHashConsultaCurr;
+			
+			if(CadenaUtil.getStrNull(strPoligonoConsulta) == null) {//TODO No compatible para la herencia de criterios hacia Analizar por area
+				strPoligonoConsulta		= CadenaUtil.getStr(session.get("geometria_"+strHashConsultaCurrTemp));//Proviene de fuxion ACL
+				session.remove("geometria_"+strHashConsultaCurrTemp);
+			} else if(session.get("geometria_"+strHashConsultaCurrTemp) != null) {
+				List<BaseBeanVectorial> listReporte	= new ArrayList<BaseBeanVectorial>();
+				listReporte.add(new BaseBeanVectorialImpl(CadenaUtil.getStr(session.get("geometria_"+strHashConsultaCurrTemp))));
+				listReporte.add(new BaseBeanVectorialImpl(strPoligonoConsulta));
+				strPoligonoConsulta	 = evaluarGeometrias(listReporte);
+				session.remove("geometria_"+strHashConsultaCurrTemp);
+			}
+			if(!CadenaUtil.getStr(strPoligonoConsulta).equals("")) {
+				strPoligonoConsultaBoundary	= consultaACLFuxionService.selectBoundary(strPoligonoConsulta);
+			}
+			final Map<String, Object> mapReporte			= new HashMap<String, Object>();
+			final Map<String, String> mapReporteNombres		= new HashMap<String, String>();
+			
 			String[] arrCons	= listSrlIdCapaConsulta.split(",");
 			List<String> listConsulta	= Arrays.asList(arrCons);
 			Map<String, String> mapServ	= ServiciosProperties.getServiciosByIdList();
 			List<Thread> listThread	= new ArrayList<Thread>();
-			final List<String> listReporteOk	= new ArrayList<String>();
+			final List<String> listReporteOk	= new Vector<String>();
+			CapaDto capaDto		= null;
 			for(String strSrlIdCapa:listConsulta) {
+				capaDto		= new CapaDto();
+				capaDto.setSrlIdCapa(CadenaUtil.getInte(strSrlIdCapa));
+				final Capa capa		= capaService.buscarById(capaDto);
 				if(!mapServ.containsKey(CadenaUtil.getStr(strSrlIdCapa))) {
 					//TODO Consultar por capas de usuario
+					/*
 					CapaDto capaDto		= new CapaDto();
 					capaDto.setSrlIdCapa(CadenaUtil.getInte(strSrlIdCapa));
 					final Capa capa		= capaService.buscarById(capaDto);
@@ -404,6 +484,7 @@ public class ConsultaAction extends ActionSupport {
 						});
 						listThread.add(t);
 					}
+					*/
 				} else {
 					switch(mapServ.get(CadenaUtil.getStr(strSrlIdCapa))) {
 					case "BasLimNacionalService":
@@ -421,6 +502,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasLimProvincia> listBasLimProvincia		= basLimProvinciaService.buscar(basLimProvinciaDto);
 									if(listBasLimProvincia.size() > 0) {
 										mapReporte.put("listBasLimProvincia", listBasLimProvincia);
+										mapReporteNombres.put("listBasLimProvincia", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -443,6 +525,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasLimDepartamento> listBasLimDepartamento		= basLimDepartamentoService.buscar(basLimDepartamentoDto);
 									if(listBasLimDepartamento.size() > 0) {
 										mapReporte.put("listBasLimDepartamento", listBasLimDepartamento);
+										mapReporteNombres.put("listBasLimDepartamento", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -461,10 +544,11 @@ public class ConsultaAction extends ActionSupport {
 								try {
 									BasLimDistritosDto basLimDistritosDto		= new BasLimDistritosDto();
 									basLimDistritosDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									basLimDistritosDto.setStrHashConsulta(strHashConsulta);
+									basLimDistritosDto.setStrHashConsulta(strHashConsulta);;
 									List<BasLimDistritos> listBasLimDistritos		= basLimDistritosService.buscar(basLimDistritosDto);
 									if(listBasLimDistritos.size() > 0) {
 										mapReporte.put("listBasLimDistritos", listBasLimDistritos);
+										mapReporteNombres.put("listBasLimDistritos", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -487,6 +571,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscar(basLimAmazoniaDto);
 									if(listBasLimAmazonia.size() > 0) {
 										mapReporte.put("listBasLimAmazonia", listBasLimAmazonia);
+										mapReporteNombres.put("listBasLimAmazonia", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -500,6 +585,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "BasHidroRiosLagunasService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -509,6 +595,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasHidroRiosLagunas> listBasHidroRiosLagunas		= basHidroRiosLagunasService.buscar(basHidroRiosLagunasDto);
 									if(listBasHidroRiosLagunas.size() > 0) {
 										mapReporte.put("listBasHidroRiosLagunas", listBasHidroRiosLagunas);
+										mapReporteNombres.put("listBasHidroRiosLagunas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -518,10 +605,12 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "BasHidroRios100000Service":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -531,6 +620,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasHidroRios100000> listBasHidroRios100000		= basHidroRios100000Service.buscar(basHidroRios100000Dto);
 									if(listBasHidroRios100000.size() > 0) {
 										mapReporte.put("listBasHidroRios100000", listBasHidroRios100000);
+										mapReporteNombres.put("listBasHidroRios100000", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -540,28 +630,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
-						break;
-					}
-					case "TemCuencasHidrograficasService":
-					{
-						Thread t= new Thread(new Runnable() {
-							public void run() {
-								try {
-									TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-									temCuencasHidrograficasDto.setStrTheGeom(CadenaUtil.getStr(strPoligonoConsulta));
-									temCuencasHidrograficasDto.setStrHashConsulta(strHashConsulta);
-									List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscar(temCuencasHidrograficasDto);
-									if(listTemCuencasHidrograficas.size() > 0) {
-										mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
-									}
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								} finally {
-									listReporteOk.add("TemCuencasHidrograficasService");
-								}
-							}
-						});
-						listThread.add(t);
+						*/
 						break;
 					}
 					case "BasViasRedVialVecinalService":
@@ -575,6 +644,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasViasRedVialVecinal> listBasViasRedVialVecinal		= basViasRedVialVecinalService.buscar(basViasRedVialVecinalDto);
 									if(listBasViasRedVialVecinal.size() > 0) {
 										mapReporte.put("listBasViasRedVialVecinal", listBasViasRedVialVecinal);
+										mapReporteNombres.put("listBasViasRedVialVecinal", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -597,6 +667,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasViasRedVialNacional> listBasViasRedVialNacional		= basViasRedVialNacionalService.buscar(basViasRedVialNacionalDto);
 									if(listBasViasRedVialNacional.size() > 0) {
 										mapReporte.put("listBasViasRedVialNacional", listBasViasRedVialNacional);
+										mapReporteNombres.put("listBasViasRedVialNacional", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -619,6 +690,7 @@ public class ConsultaAction extends ActionSupport {
 									List<BasViasRedVialDepartamental> listBasViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscar(basViasRedVialDepartamentalDto);
 									if(listBasViasRedVialDepartamental.size() > 0) {
 										mapReporte.put("listBasViasRedVialDepartamental", listBasViasRedVialDepartamental);
+										mapReporteNombres.put("listBasViasRedVialDepartamental", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -641,6 +713,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemViaFerrea> listTemViaFerrea		= temViaFerreaService.buscar(temViaFerreaDto);
 									if(listTemViaFerrea.size() > 0) {
 										mapReporte.put("listTemViaFerrea", listTemViaFerrea);
+										mapReporteNombres.put("listTemViaFerrea", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -663,6 +736,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemViasTrochas> listTemViasTrochas		= temViasTrochasService.buscar(temViasTrochasDto);
 									if(listTemViasTrochas.size() > 0) {
 										mapReporte.put("listTemViasTrochas", listTemViasTrochas);
+										mapReporteNombres.put("listTemViasTrochas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -685,6 +759,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemSoeconComunidadesCampesinas> listTemSoeconComunidadesCampesinas		= temSoeconComunidadesCampesinasService.buscar(temSoeconComunidadesCampesinasDto);
 									if(listTemSoeconComunidadesCampesinas.size() > 0) {
 										mapReporte.put("listTemSoeconComunidadesCampesinas", listTemSoeconComunidadesCampesinas);
+										mapReporteNombres.put("listTemSoeconComunidadesCampesinas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -707,6 +782,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemComunidadesNativas> listTemComunidadesNativas		= temComunidadesNativasService.buscar(temComunidadesNativasDto);
 									if(listTemComunidadesNativas.size() > 0) {
 										mapReporte.put("listTemComunidadesNativas", listTemComunidadesNativas);
+										mapReporteNombres.put("listTemComunidadesNativas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -729,6 +805,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemReservasTerritorialesIndigenas> listTemReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscar(temReservasTerritorialesIndigenasDto);
 									if(listTemReservasTerritorialesIndigenas.size() > 0) {
 										mapReporte.put("listTemReservasTerritorialesIndigenas", listTemReservasTerritorialesIndigenas);
+										mapReporteNombres.put("listTemReservasTerritorialesIndigenas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -751,6 +828,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemSoeconSolicitudCreacionReservasTerritoriales> listTemSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscar(temSoeconSolicitudCreacionReservasTerritorialesDto);
 									if(listTemSoeconSolicitudCreacionReservasTerritoriales.size() > 0) {
 										mapReporte.put("listTemSoeconSolicitudCreacionReservasTerritoriales", listTemSoeconSolicitudCreacionReservasTerritoriales);
+										mapReporteNombres.put("listTemSoeconSolicitudCreacionReservasTerritoriales", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -773,6 +851,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesEcoturismo> listTemConcesionesEcoturismo		= temConcesionesEcoturismoService.buscar(temConcesionesEcoturismoDto);
 									if(listTemConcesionesEcoturismo.size() > 0) {
 										mapReporte.put("listTemConcesionesEcoturismo", listTemConcesionesEcoturismo);
+										mapReporteNombres.put("listTemConcesionesEcoturismo", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -795,6 +874,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesCastania> listTemConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscar(temConcesionesForestalesCastaniaDto);
 									if(listTemConcesionesForestalesCastania.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesCastania", listTemConcesionesForestalesCastania);
+										mapReporteNombres.put("listTemConcesionesForestalesCastania", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -817,6 +897,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesConservacion> listTemConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscar(temConcesionesForestalesConservacionDto);
 									if(listTemConcesionesForestalesConservacion.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesConservacion", listTemConcesionesForestalesConservacion);
+										mapReporteNombres.put("listTemConcesionesForestalesConservacion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -839,6 +920,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesMaderableAdecuadas> listTemConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscar(temConcesionesForestalesMaderableAdecuadasDto);
 									if(listTemConcesionesForestalesMaderableAdecuadas.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesMaderableAdecuadas", listTemConcesionesForestalesMaderableAdecuadas);
+										mapReporteNombres.put("listTemConcesionesForestalesMaderableAdecuadas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -861,6 +943,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesMaderableConcurso> listTemConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscar(temConcesionesForestalesMaderableConcursoDto);
 									if(listTemConcesionesForestalesMaderableConcurso.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesMaderableConcurso", listTemConcesionesForestalesMaderableConcurso);
+										mapReporteNombres.put("listTemConcesionesForestalesMaderableConcurso", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -883,6 +966,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesManejoFaunaSilvestre> listTemConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscar(temConcesionesForestalesManejoFaunaSilvestreDto);
 									if(listTemConcesionesForestalesManejoFaunaSilvestre.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesManejoFaunaSilvestre", listTemConcesionesForestalesManejoFaunaSilvestre);
+										mapReporteNombres.put("listTemConcesionesForestalesManejoFaunaSilvestre", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -905,6 +989,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesForestalesReforestacion> listTemConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscar(temConcesionesForestalesReforestacionDto);
 									if(listTemConcesionesForestalesReforestacion.size() > 0) {
 										mapReporte.put("listTemConcesionesForestalesReforestacion", listTemConcesionesForestalesReforestacion);
+										mapReporteNombres.put("listTemConcesionesForestalesReforestacion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -927,6 +1012,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemPrediosRurales> listTemPrediosRurales		= temPrediosRuralesService.buscar(temPrediosRuralesDto);
 									if(listTemPrediosRurales.size() > 0) {
 										mapReporte.put("listTemPrediosRurales", listTemPrediosRurales);
+										mapReporteNombres.put("listTemPrediosRurales", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -949,6 +1035,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemZonificPotencialBosqueProduccionPermanente> listTemZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscar(temZonificPotencialBosqueProduccionPermanenteDto);
 									if(listTemZonificPotencialBosqueProduccionPermanente.size() > 0) {
 										mapReporte.put("listTemZonificPotencialBosqueProduccionPermanente", listTemZonificPotencialBosqueProduccionPermanente);
+										mapReporteNombres.put("listTemZonificPotencialBosqueProduccionPermanente", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -971,6 +1058,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionHidroelectricasGeneracion> listTemConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscar(temConcesionHidroelectricasGeneracionDto);
 									if(listTemConcesionHidroelectricasGeneracion.size() > 0) {
 										mapReporte.put("listTemConcesionHidroelectricasGeneracion", listTemConcesionHidroelectricasGeneracion);
+										mapReporteNombres.put("listTemConcesionHidroelectricasGeneracion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -993,6 +1081,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscar(temConcesionHidroelectricasDistribucionDto);
 									if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
 										mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
+										mapReporteNombres.put("listTemConcesionHidroelectricasDistribucion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1015,6 +1104,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemConcesionesMineras> listTemConcesionesMineras		= temConcesionesMinerasService.buscar(temConcesionesMinerasDto);
 									if(listTemConcesionesMineras.size() > 0) {
 										mapReporte.put("listTemConcesionesMineras", listTemConcesionesMineras);
+										mapReporteNombres.put("listTemConcesionesMineras", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1037,6 +1127,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemAnpNacional> listTemAnpNacional		= temAnpNacionalService.buscar(temAnpNacionalDto);
 									if(listTemAnpNacional.size() > 0) {
 										mapReporte.put("listTemAnpNacional", listTemAnpNacional);
+										mapReporteNombres.put("listTemAnpNacional", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1059,6 +1150,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemAnpRegional> listTemAnpRegional		= temAnpRegionalService.buscar(temAnpRegionalDto);
 									if(listTemAnpRegional.size() > 0) {
 										mapReporte.put("listTemAnpRegional", listTemAnpRegional);
+										mapReporteNombres.put("listTemAnpRegional", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1081,6 +1173,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemAnpPrivada> listTemAnpPrivada		= temAnpPrivadaService.buscar(temAnpPrivadaDto);
 									if(listTemAnpPrivada.size() > 0) {
 										mapReporte.put("listTemAnpPrivada", listTemAnpPrivada);
+										mapReporteNombres.put("listTemAnpPrivada", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1103,6 +1196,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemSinanpeAmortiguamiento> listTemSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscar(temSinanpeAmortiguamientoDto);
 									if(listTemSinanpeAmortiguamiento.size() > 0) {
 										mapReporte.put("listTemSinanpeAmortiguamiento", listTemSinanpeAmortiguamiento);
+										mapReporteNombres.put("listTemSinanpeAmortiguamiento", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1125,6 +1219,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemClaveBiodiversidad> listTemClaveBiodiversidad		= temClaveBiodiversidadService.buscar(temClaveBiodiversidadDto);
 									if(listTemClaveBiodiversidad.size() > 0) {
 										mapReporte.put("listTemClaveBiodiversidad", listTemClaveBiodiversidad);
+										mapReporteNombres.put("listTemClaveBiodiversidad", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1147,6 +1242,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemHumedalesRamsar> listTemHumedalesRamsar		= temHumedalesRamsarService.buscar(temHumedalesRamsarDto);
 									if(listTemHumedalesRamsar.size() > 0) {
 										mapReporte.put("listTemHumedalesRamsar", listTemHumedalesRamsar);
+										mapReporteNombres.put("listTemHumedalesRamsar", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1169,6 +1265,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemCoverturaVegetal2015> listTemCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscar(temCoverturaVegetal2015Dto);
 									if(listTemCoverturaVegetal2015.size() > 0) {
 										mapReporte.put("listTemCoverturaVegetal2015", listTemCoverturaVegetal2015);
+										mapReporteNombres.put("listTemCoverturaVegetal2015", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1191,6 +1288,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemCarbonoEcozonas> listTemCarbonoEcozonas		= temCarbonoEcozonasService.buscar(temCarbonoEcozonasDto);
 									if(listTemCarbonoEcozonas.size() > 0) {
 										mapReporte.put("listTemCarbonoEcozonas", listTemCarbonoEcozonas);
+										mapReporteNombres.put("listTemCarbonoEcozonas", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1213,6 +1311,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemIndiceImportanciaBiologica> listTemIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscar(temIndiceImportanciaBiologicaDto);
 									if(listTemIndiceImportanciaBiologica.size() > 0) {
 										mapReporte.put("listTemIndiceImportanciaBiologica", listTemIndiceImportanciaBiologica);
+										mapReporteNombres.put("listTemIndiceImportanciaBiologica", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1235,6 +1334,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemCentrosPoblados> listTemCentrosPoblados		= temCentrosPobladosService.buscar(temCentrosPobladosDto);
 									if(listTemCentrosPoblados.size() > 0) {
 										mapReporte.put("listTemCentrosPoblados", listTemCentrosPoblados);
+										mapReporteNombres.put("listTemCentrosPoblados", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1257,6 +1357,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemProyeccionDensidadPob2015> listTemProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscar(temProyeccionDensidadPob2015Dto);
 									if(listTemProyeccionDensidadPob2015.size() > 0) {
 										mapReporte.put("listTemProyeccionDensidadPob2015", listTemProyeccionDensidadPob2015);
+										mapReporteNombres.put("listTemProyeccionDensidadPob2015", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1279,6 +1380,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemCostoOportunidadDeforestacion> listTemCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscar(temCostoOportunidadDeforestacionDto);
 									if(listTemCostoOportunidadDeforestacion.size() > 0) {
 										mapReporte.put("listTemCostoOportunidadDeforestacion", listTemCostoOportunidadDeforestacion);
+										mapReporteNombres.put("listTemCostoOportunidadDeforestacion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1301,6 +1403,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemProyectosPuntos> listTemProyectosPuntos		= temProyectosPuntosService.buscar(temProyectosPuntosDto);
 									if(listTemProyectosPuntos.size() > 0) {
 										mapReporte.put("listTemProyectosPuntos", listTemProyectosPuntos);
+										mapReporteNombres.put("listTemProyectosPuntos", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1323,6 +1426,7 @@ public class ConsultaAction extends ActionSupport {
 									List<TemProyectosPoligonos> listTemProyectosPoligonos		= temProyectosPoligonosService.buscar(temProyectosPoligonosDto);
 									if(listTemProyectosPoligonos.size() > 0) {
 										mapReporte.put("listTemProyectosPoligonos", listTemProyectosPoligonos);
+										mapReporteNombres.put("listTemProyectosPoligonos", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1346,6 +1450,7 @@ public class ConsultaAction extends ActionSupport {
 									BeanRaster beanRaster		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(beanRasterDto);
 									if(beanRaster != null) {
 										mapReporte.put("beanTemBiodiversidadEspeciesPeligroExtincion", beanRaster);
+										mapReporteNombres.put("beanTemBiodiversidadEspeciesPeligroExtincion", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1367,6 +1472,7 @@ public class ConsultaAction extends ActionSupport {
 									BeanRaster beanRaster		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(beanRasterDto);
 									if(beanRaster != null) {
 										mapReporte.put("beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", beanRaster);
+										mapReporteNombres.put("beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1388,6 +1494,7 @@ public class ConsultaAction extends ActionSupport {
 									BeanRaster beanRaster		= temDensidadCarbonoAereaService.selectByGeometry(beanRasterDto);
 									if(beanRaster != null) {
 										mapReporte.put("beanTemDensidadCarbonoAerea", beanRaster);
+										mapReporteNombres.put("beanTemDensidadCarbonoAerea", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
@@ -1409,11 +1516,56 @@ public class ConsultaAction extends ActionSupport {
 									BeanRaster beanRaster		= temRiesgoErosionHidricaService.selectByGeometry(beanRasterDto);
 									if(beanRaster != null) {
 										mapReporte.put("beanTemRiesgoErosionHidrica", beanRaster);
+										mapReporteNombres.put("beanTemRiesgoErosionHidrica", capa.getStrNombre());
 									}
 								} catch (Exception ex) {
 									ex.printStackTrace();
 								} finally {
 									listReporteOk.add("TemRiesgoErosionHidricaService");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemCoberturaBoscosa2014Service":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temCoberturaBoscosa2014Service.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemCoberturaBoscosa2014", beanRaster);
+										mapReporteNombres.put("beanTemCoberturaBoscosa2014", capa.getStrNombre());
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemCoberturaBoscosa2014Service");
+								}
+							}
+						});
+						listThread.add(t);
+						break;
+					}
+					case "TemPerdidaBosque20012014Service":
+					{
+						Thread t= new Thread(new Runnable() {
+							public void run() {
+								try {
+									BeanRasterDto beanRasterDto		= new BeanRasterDto();
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
+									BeanRaster beanRaster		= temPerdidaBosque20012014Service.selectByGeometry(beanRasterDto);
+									if(beanRaster != null) {
+										mapReporte.put("beanTemPerdidaBosque20012014", beanRaster);
+										mapReporteNombres.put("beanTemPerdidaBosque20012014", capa.getStrNombre());
+									}
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								} finally {
+									listReporteOk.add("TemPerdidaBosque20012014Service");
 								}
 							}
 						});
@@ -1428,6 +1580,8 @@ public class ConsultaAction extends ActionSupport {
 				t.start();
 			}
 			
+			prepararCapasReporte(listConsulta, mapServ);
+			
 			while(true) {
 				synchronized(this) {
 					wait(500L);
@@ -1438,17 +1592,297 @@ public class ConsultaAction extends ActionSupport {
 			}
 			
 			session.put("reporte", mapReporte);
+			session.put("mapReporteNombres", mapReporteNombres);
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
 		return SUCCESS;
 	}
+	
+
+	public String evaluarGeometrias(List<BaseBeanVectorial> listReporte) {
+		ConsultaACLFuxion consultaACLFuxion		= new ConsultaACLFuxion();
+		String strGeomRS	= "";
+		String strGeom01	= "";
+		BaseBeanVectorial baseBeanVectorial		= null;
+		if(listReporte.size() > 1) {
+			strGeom01	= listReporte.get(0).getStrTheGeom();
+			for(int i = 1;i < listReporte.size();i++) {
+				baseBeanVectorial	= listReporte.get(i);
+				consultaACLFuxion.setStrGeom01(strGeom01);
+				consultaACLFuxion.setStrGeom02(baseBeanVectorial.getStrTheGeom());
+				strGeomRS	= consultaACLFuxionService.selectFuxion(consultaACLFuxion);
+				strGeom01	= strGeomRS;
+			}
+		} else if(listReporte.size() == 1) {
+			strGeomRS	= listReporte.get(0).getStrTheGeom();
+		}
+		return strGeomRS;
+	}
+	
+	public void prepararCapasReporte(List<String> listConsulta, Map<String, String> mapServ) throws Exception {
+		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		String strBbox					= consultaACLFuxionService.selectBBOX(strPoligonoConsulta);
+		final String strBbox4326		= consultaACLFuxionService.selectBBOX4326(strPoligonoConsulta);
+		zoomLevel			= ""+(CadenaUtil.getInte(zoomLevel)+1);
+		int zoom			= CadenaUtil.getInte(zoomLevel);
+		CapaDto capaDto		= new CapaDto();
+		Capa capa			= null;
+		String[] arrBbox	= strBbox4326.split(",");//<xmin>, <ymin>, <xmax>, <ymax>
+		double xmin		= CadenaUtil.getDoub(arrBbox[0]);
+		double ymin		= CadenaUtil.getDoub(arrBbox[1]);
+		double xmax		= CadenaUtil.getDoub(arrBbox[2]);
+		double ymax		= CadenaUtil.getDoub(arrBbox[3]);
+		
+		double[] arrPixMin	= convertirWorlCoordinateEnPixeles(xmin, ymin, zoom);
+		double[] arrPixMax	= convertirWorlCoordinateEnPixeles(xmax, ymax, zoom);
+		
+		double ylong	= arrPixMax[1] - arrPixMin[1];
+		double xlong	= arrPixMax[0] - arrPixMin[0];
+		
+		int altoOri		= (int)Math.abs(ylong);
+		int anchoOri	= (int)Math.abs(xlong);
+		int alto		= altoOri;
+		int ancho		= anchoOri;
+		final int[] newDim	= new int[] {-1,-1};
+		List<byte[]> listArrByteImage					= null;
+		List<byte[]> listArrByteImageGmap				= new ArrayList<byte[]>();
+		List<byte[]> listArrByteImageLayer				= new ArrayList<byte[]>();
+		List<Float> listArrTransImageLayer				= new ArrayList<Float>();
+		
+		List<Thread> listThreadLayer					= new ArrayList<Thread>();
+		final Map<Integer, byte[]> mapArrByteImageLayer	= new HashMap<Integer, byte[]>();
+		final List<String> listThreadRSLayer			= new Vector<String>();
+
+		String gmaps	= request.getParameter("gmaps");
+		listArrByteImageGmap.add(cargarGoogleMaps(strBbox4326, gmaps, anchoOri, altoOri, anchoOri, altoOri));
+		
+		listArrByteImage					= new ArrayList<byte[]>();
+		listArrByteImage.addAll(listArrByteImageGmap);
+		listArrByteImage.addAll(listArrByteImageLayer);
+		
+		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strPoligonoConsulta, ancho, alto);
+		listArrByteImage.add(bytImageSeleccion);
+
+		byte[] bytImageTemp				= ImagenUtil.fuxionarImagenPNG(listArrByteImage, ancho, alto);
+
+		byte[] bytImage				= ImagenUtil.comprimirImagenJPG(bytImageTemp, ancho, alto);
+		FileOutputStream fos	= null;
+		try {
+			String strFileTempName	= ""+new Date().getTime();
+			String strRutaRepTemp	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.REPOSITORIO_DOCS_TEMPORAL);
+			File file	= new File(strRutaRepTemp+File.separator+strFileTempName+".jpg");
+			if(ActionContext.getContext() != null) {
+				Map<String, Object> session		= ActionContext.getContext().getSession();
+				session.put("NombreImagenReporteTemp", strFileTempName);
+			}
+			fos	= new FileOutputStream(file);
+			fos.write(bytImage);
+			fos.flush();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {fos.close();}catch (Exception ex){}
+		}
+	}
+	
+	public byte[] cargarGoogleApis(int anchoLoad, int altoLoad) throws Exception {
+		final String str_Y_X_4326		= consultaACLFuxionService.selectCenter_Y_X_4326(strPoligonoConsulta);
+		
+		StringBuffer sbUrl			= new StringBuffer();
+		double dblAnchoDef			= (double)anchoLoad;
+		double dblAltoDef			= (double)altoLoad;
+		double dblAnchoLoad			= (double)anchoLoad/1d;
+		double dblAltoLoad			= (double)altoLoad/1d;
+		double dblFactorReductor	= 1d;
+		double dblFactorAumenta		= 1d;
+		double maxDim	= Math.max(dblAnchoLoad, dblAltoLoad);
+		if(maxDim > 640) {
+			dblFactorReductor	= 640d / maxDim;
+			dblFactorAumenta	= maxDim / 640d;
+		}
+		
+		sbUrl.append("https://maps.googleapis.com/maps/api/staticmap?");
+		sbUrl.append("center="+str_Y_X_4326+"&");
+		sbUrl.append("zoom="+(CadenaUtil.getInte(zoomLevel)-1)+"&");
+		sbUrl.append("size="+((int)(dblAnchoLoad*dblFactorReductor))+"x"+((int)(dblAltoLoad*dblFactorReductor))+"&");
+		sbUrl.append("scale=1&");
+		sbUrl.append("maptype=roadmap");
+		System.out.println("sbUrl=("+sbUrl+")");
+		
+		byte[] arrData	= RedUtil.consultarInternet(sbUrl.toString());
+		
+		byte[] bytImageLastRS	= null;
+		bytImageLastRS	= ImagenUtil.tamanioImagenPNG(arrData, ((int)(dblAnchoDef)), ((int)(dblAltoDef)));
+		return bytImageLastRS;
+	}
+	
+	public byte[] cargarGoogleMaps(String strBbox, String gmaps, int anchoOri, int altoOri, int anchoLoad, int altoLoad) throws Exception {
+		
+		String[] arrBbox	= strBbox.split(",");//<xmin>, <ymin>, <xmax>, <ymax>
+		double xmin			= CadenaUtil.getDoub(arrBbox[0]);
+		double ymin			= CadenaUtil.getDoub(arrBbox[1]);
+		double xmax			= CadenaUtil.getDoub(arrBbox[2]);
+		double ymax			= CadenaUtil.getDoub(arrBbox[3]);
+		
+		double ylong	= ymax - ymin;
+		double xlong	= xmax - xmin;
+		double factor	= xlong / ylong;
+		
+		int alto		= altoOri;
+		int ancho		= anchoOri;
+
+		final int zoom			= CadenaUtil.getInte(zoomLevel);
+		System.out.println("zoom="+zoomLevel);
+
+		final StringBuffer sbUrl	= new StringBuffer();
+		
+		if(CadenaUtil.getStr(gmaps).equals("ROADMAP")) {
+			sbUrl.append("http://mts1.google.com/vt/");//CARTOGRAFICA
+		} else if(CadenaUtil.getStr(gmaps).equals("SATELLITE")) {
+			sbUrl.append("http://mt1.google.com/vt/lyrs=s&");//satellite 
+		} else if(CadenaUtil.getStr(gmaps).equals("HYBRID")) {
+			sbUrl.append("http://mt1.google.com/vt/lyrs=y&");//HYBRID
+		} else if(CadenaUtil.getStr(gmaps).equals("TERRAIN")) {
+			sbUrl.append("http://mt1.google.com/vt/lyrs=p&");//TERRAIN
+		} else {
+			sbUrl.append("http://mts1.google.com/vt/");//CARTOGRAFICA default
+		}
+		
+		double lng			= 0;
+		double lat			= 0;
+		double[] tileCoordDifPixMin;
+		double[] tileCoordDifPixMax;
+		double[] tileCoordDifPixDif;
+		
+		lng					= xmin;
+		lat					= ymax;
+		tileCoordDifPixMin	=  convertirTileCoordinate(lng, lat, zoom);
+
+		lng					= xmax;
+		lat					= ymin;
+		tileCoordDifPixMax	=  convertirTileCoordinate(lng, lat, zoom);
+
+		lng					= xmin;
+		lat					= ymax;
+		tileCoordDifPixDif	=  convertirWorlCoordinate(lng, lat, zoom);
+		
+		byte[] bytImage		= null;
+		byte[] bytImageLast	= null;
+		int intXLast		= 0;
+		int intYLast		= 0;
+		int intXPrev		= 0;
+		int intYPrev		= 0;
+		boolean primeraImagen	= true;
+		
+		List<Thread> listThread						= new ArrayList<Thread>();
+		final Map<String, byte[]> mapArrByteImage	= new HashMap<String, byte[]>();
+		final List<String> listThreadRS				= new Vector<String>();
+		
+		for(int x = (int)tileCoordDifPixMin[0];x <= tileCoordDifPixMax[0];x++) {
+			for(int y = (int)tileCoordDifPixMin[1];y <= tileCoordDifPixMax[1];y++) {
+				final int xPos	= x;
+				final int yPos	= y;
+				listThread.add(new Thread() {
+					public void run() {
+						try {
+							mapArrByteImage.put(xPos+","+yPos, RedUtil.consultarInternet(sbUrl.toString()+"x="+xPos+"&y="+yPos+"&z="+zoom));
+						} catch(Throwable ex) {
+							ex.printStackTrace();
+						} finally {
+							listThreadRS.add("Return_"+xPos+","+yPos);
+						}
+					}
+				});
+			}
+		}
+		for(Thread t:listThread) {
+			t.start();
+		}
+		while(true) {
+			synchronized(this) {
+				wait(500L);
+			}
+			if(listThreadRS.size() == listThread.size()) {
+				break;
+			}
+		}
+		
+		for(int x = (int)tileCoordDifPixMin[0];x <= tileCoordDifPixMax[0];x++) {
+			intYLast	= -(int)tileCoordDifPixDif[1];
+			intYPrev	= (int)tileCoordDifPixMin[1];
+			for(int y = (int)tileCoordDifPixMin[1];y <= tileCoordDifPixMax[1];y++) {
+				bytImage	= (byte[])mapArrByteImage.get(x+","+y);
+				if(primeraImagen) {
+					intXLast	= -(int)tileCoordDifPixDif[0];
+					intYLast	= -(int)tileCoordDifPixDif[1];
+					bytImageLast	= ImagenUtil.fuxionarImagenPNG(bytImage, intXLast, intYLast, null, 0, 0, ancho, alto);
+				} else {
+					if(intXPrev != x) {
+						intXLast	+= 256;
+					}
+					if(intYPrev != y) {
+						intYLast	+= 256;
+					}
+					bytImageLast	= ImagenUtil.fuxionarImagenPNG(bytImageLast, 0, 0, bytImage, intXLast, intYLast, ancho, alto);
+				}
+				primeraImagen	= false;
+				intXPrev	= x;
+				intYPrev	= y;
+			}
+		}
+		byte[] bytImageLastRS	= null;
+		bytImageLastRS	= ImagenUtil.tamanioImagenPNG(bytImageLast, anchoLoad, altoLoad);
+		return bytImageLastRS;
+	}
+	
+	public void saveFilePng(byte[] bytImageLast) throws Exception {
+		FileOutputStream fos	= null;
+		String strFileTempName	= ""+new Date().getTime();
+		String strRutaRepTemp	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.REPOSITORIO_DOCS_TEMPORAL);
+		File file	= new File(strRutaRepTemp+File.separator+"newImagen_"+strFileTempName+".png");
+		fos	= new FileOutputStream(file);
+		fos.write(bytImageLast);
+		fos.flush();
+		fos.close();
+	}
+	public double[] convertirTileCoordinate(double lng, double lat, int zoom) {
+		double scale				= 1 << zoom;
+		double[] arrWorldCoordinate	= Geotools.project(lng, lat);
+		double[] arrPixelCoordinate = new double[]{Math.floor(arrWorldCoordinate[0]/*x*/ * scale), Math.floor(arrWorldCoordinate[1]/*y*/ * scale)};
+		double xTileCoord			= Math.floor(arrWorldCoordinate[0]/*x*/ * scale / Geotools.TILE_SIZE);
+		double yTileCoord			= Math.floor(arrWorldCoordinate[1]/*y*/ * scale / Geotools.TILE_SIZE);
+		return new double[]{xTileCoord, yTileCoord};
+	}
+	
+	public double[] convertirWorlCoordinate(double lng, double lat, int zoom) {
+		double scale				= 1 << zoom;
+		double[] arrWorldCoordinate	= Geotools.project(lng, lat);
+		double[] arrPixelCoordinate = new double[]{Math.floor(arrWorldCoordinate[0]/*x*/ * scale), Math.floor(arrWorldCoordinate[1]/*y*/ * scale)};
+		double xTileCoord			= Math.floor(arrWorldCoordinate[0]/*x*/ * scale / Geotools.TILE_SIZE);
+		double yTileCoord			= Math.floor(arrWorldCoordinate[1]/*y*/ * scale / Geotools.TILE_SIZE);
+		double xTileCoordDif		= (arrWorldCoordinate[0]/*x*/ * scale / Geotools.TILE_SIZE) - xTileCoord;
+		double yTileCoordDif		= (arrWorldCoordinate[1]/*y*/ * scale / Geotools.TILE_SIZE) - yTileCoord;
+
+		double xTileCoordDifPix		= xTileCoordDif * Geotools.TILE_SIZE;
+		double yTileCoordDifPix		= yTileCoordDif * Geotools.TILE_SIZE;
+		return new double[]{xTileCoordDifPix, yTileCoordDifPix};
+	}
+	
+	public static double[] convertirWorlCoordinateEnPixeles(double lng, double lat, int zoom) {
+		double scale				= 1 << zoom;
+		double[] arrWorldCoordinate	= Geotools.project(lng, lat);
+		double[] arrPixelCoordinate = new double[]{Math.floor(arrWorldCoordinate[0]/*x*/ * scale), Math.floor(arrWorldCoordinate[1]/*y*/ * scale)};
+		return new double[]{arrPixelCoordinate[0], arrPixelCoordinate[1]};
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public String getStrPoligonoConsulta() {
+ 	public String getStrPoligonoConsulta() {
 		return strPoligonoConsulta;
 	}
 
@@ -1470,6 +1904,22 @@ public class ConsultaAction extends ActionSupport {
 
 	public void setStrIdCapaConsulta(String strIdCapaConsulta) {
 		this.strIdCapaConsulta = strIdCapaConsulta;
+	}
+
+	public String getZoomLevel() {
+		return zoomLevel;
+	}
+
+	public void setZoomLevel(String zoomLevel) {
+		this.zoomLevel = zoomLevel;
+	}
+
+	public String getStrPoligonoConsultaBoundary() {
+		return strPoligonoConsultaBoundary;
+	}
+
+	public void setStrPoligonoConsultaBoundary(String strPoligonoConsultaBoundary) {
+		this.strPoligonoConsultaBoundary = strPoligonoConsultaBoundary;
 	}
 	
 }

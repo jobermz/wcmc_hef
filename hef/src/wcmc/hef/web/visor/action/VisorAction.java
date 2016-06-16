@@ -86,7 +86,7 @@ public class VisorAction extends ActionSupport {
 			}
 			
 			Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(srlIdCapa));
-			if(map.size() > 0) {
+			if(map != null && map.size() > 0) {
 				strCapaUmbralMin		= new BigDecimal((Double)map.get("min")).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
 				strCapaUmbralMax		= new BigDecimal((Double)map.get("max")).setScale(4, BigDecimal.ROUND_HALF_EVEN).toString();
 			}

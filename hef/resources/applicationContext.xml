@@ -21,7 +21,7 @@ xsi:schemaLocation="
 		<property name="driverClassName" value="org.postgresql.Driver"/>
 		<property name="url" value="jdbc:postgresql://localhost:5432/bdwcmchef"/>
 		<property name="username" value="postgres"/>
-		<property name="password" value="postgres"/>
+		<property name="password" value="jefferson2016"/>
 	</bean>
 	
 	<!-- transaction manager, use JtaTransactionManager for global tx -->

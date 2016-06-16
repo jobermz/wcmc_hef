@@ -1,5 +1,7 @@
 package wcmc.hef.web.capa.action;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +13,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import wcmc.hef.business.core.configuracion.dto.CapaDto;
 import wcmc.hef.business.core.configuracion.dto.CapaUmbralDto;
 import wcmc.hef.business.core.configuracion.service.CapaService;
 import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
@@ -53,11 +57,10 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
 import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
 import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
@@ -69,6 +72,8 @@ import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTer
 import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
+import wcmc.hef.business.core.capa.service.TemCoberturaBoscosa2014Service;
+import wcmc.hef.business.core.capa.service.TemPerdidaBosque20012014Service;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
@@ -157,9 +162,12 @@ import wcmc.hef.business.core.capa.dto.TemViasTrochasDto;
 import wcmc.hef.dao.capa.domain.TemViasTrochas;
 import wcmc.hef.business.core.capa.dto.TemZonificPotencialBosqueProduccionPermanenteDto;
 import wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente;
+import wcmc.hef.dao.configuracion.domain.Capa;
 import wcmc.hef.dao.configuracion.domain.CapaUmbral;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
+import wcmc.hef.general.util.ImagenUtil;
+import wcmc.hef.general.util.RedUtil;
 import wcmc.hef.general.util.ServiciosProperties;
 
 public class ConsultaACLFuxionAction extends ActionSupport {
@@ -250,16 +258,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
 
 	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
+	private TemPrediosRuralesService temPrediosRuralesService;
 
 	@Autowired
-	private TemPrediosRuralesService temPrediosRuralesService;
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemProyeccionDensidadPob2015Service temProyeccionDensidadPob2015Service;
@@ -291,7 +296,12 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 	@Autowired
 	private TemZonificPotencialBosqueProduccionPermanenteService temZonificPotencialBosqueProduccionPermanenteService;
 
-	
+	@Autowired
+	private TemCoberturaBoscosa2014Service temCoberturaBoscosa2014Service;
+
+	@Autowired
+	private TemPerdidaBosque20012014Service temPerdidaBosque20012014Service;
+
 	@Autowired
 	private TemBiodiversidadEspeciesPeligroExtincionService temBiodiversidadEspeciesPeligroExtincionService;
 
@@ -314,9 +324,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 	ConsultaACLFuxionService consultaACLFuxionService;
 	
 	private String strGeometriaRespuesta;
+	private String strGeometriaRespuestaBoundary;
 	private String listSrlIdCapaConsulta;
 	private String listIdDataCapaConsulta;
 	private String listIdDataCapaCriConsulta;
+	
+	private String strIdCapaConsulta;
+	private String strPoligonoConsulta;
 	
 	public ConsultaACLFuxionAction() {
 	}
@@ -328,6 +342,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		Map<String, Object> session		= ActionContext.getContext().getSession();
 		try {
+			strPoligonoConsulta			= CadenaUtil.getStr(strPoligonoConsulta);
+			if(!CadenaUtil.getStr(strIdCapaConsulta).equals("")) {
+				BaseBeanVectorial baseBeanVectorial		= (BaseBeanVectorial)session.get("beanConsultaCapasRightClick");
+				if(baseBeanVectorial != null) {
+					strPoligonoConsulta	= baseBeanVectorial.getStrTheGeom();//Proviene de APA
+				}
+			}
 			
 			String strHashConsulta	= null;
 			if(CadenaUtil.getStrNull(session.get("strHashConsultaACL")) != null) {
@@ -356,26 +377,31 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 			Map<String, String> mapServ	= ServiciosProperties.getServiciosByIdList();
 			final List<String> listReporteOk		= new ArrayList<String>();
 			String strLastServicioConsultado		= "";
-			strGeometriaRespuesta					= "";
+			strGeometriaRespuesta					= strPoligonoConsulta;
 			List<Runnable> listThreadRids			= new ArrayList<Runnable>();
 			final List<String> listThreadRidsRS		= new ArrayList<String>();
 			boolean esRaster				= false;
+			boolean esPorlomenosUnRaster	= false;
 			for(int i = 0;i< listConsulta.size();i++) {
 				esRaster		= false;
 				strSrlIdCapa	= listConsulta.get(i);
 				strIdData		= listIdData.get(i);
-				strIdDataCri	= listIdDataCri.get(i);
+				strIdDataCri	= "";
 				if(mapServ.get(CadenaUtil.getStr(strSrlIdCapa)) != null) {
 					strLastServicioConsultado	= mapServ.get(CadenaUtil.getStr(strSrlIdCapa));
 					switch(strLastServicioConsultado) {
+					
 					case "BasLimProvinciaService":
 					{
 						try {
 							BasLimProvinciaDto basLimProvinciaDto		= new BasLimProvinciaDto();
-							basLimProvinciaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasLimProvincia basLimProvincia		= basLimProvinciaService.buscarGeometryById(basLimProvinciaDto);
-							if(basLimProvincia != null) {
-								listReporte.add(basLimProvincia);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basLimProvinciaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasLimProvincia basLimProvincia		= basLimProvinciaService.buscarGeometryById(basLimProvinciaDto);
+								if(basLimProvincia != null) {
+									listReporte.add(basLimProvincia);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -388,10 +414,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasLimDepartamentoDto basLimDepartamentoDto		= new BasLimDepartamentoDto();
-							basLimDepartamentoDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasLimDepartamento basLimDepartamento		= basLimDepartamentoService.buscarGeometryById(basLimDepartamentoDto);
-							if(basLimDepartamento != null) {
-								listReporte.add(basLimDepartamento);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basLimDepartamentoDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasLimDepartamento basLimDepartamento		= basLimDepartamentoService.buscarGeometryById(basLimDepartamentoDto);
+								if(basLimDepartamento != null) {
+									listReporte.add(basLimDepartamento);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -404,10 +433,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasLimDistritosDto basLimDistritosDto		= new BasLimDistritosDto();
-							basLimDistritosDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasLimDistritos basLimDistritos		= basLimDistritosService.buscarGeometryById(basLimDistritosDto);
-							if(basLimDistritos != null) {
-								listReporte.add(basLimDistritos);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basLimDistritosDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasLimDistritos basLimDistritos		= basLimDistritosService.buscarGeometryById(basLimDistritosDto);
+								if(basLimDistritos != null) {
+									listReporte.add(basLimDistritos);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -420,10 +452,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
-							basLimAmazoniaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasLimAmazonia basLimAmazonia		= basLimAmazoniaService.buscarGeometryById(basLimAmazoniaDto);
-							if(basLimAmazonia != null) {
-								listReporte.add(basLimAmazonia);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basLimAmazoniaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasLimAmazonia basLimAmazonia		= basLimAmazoniaService.buscarGeometryById(basLimAmazoniaDto);
+								if(basLimAmazonia != null) {
+									listReporte.add(basLimAmazonia);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -436,10 +471,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasHidroRiosLagunasDto basHidroRiosLagunasDto		= new BasHidroRiosLagunasDto();
-							basHidroRiosLagunasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasHidroRiosLagunas basHidroRiosLagunas		= basHidroRiosLagunasService.buscarGeometryById(basHidroRiosLagunasDto);
-							if(basHidroRiosLagunas != null) {
-								listReporte.add(basHidroRiosLagunas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basHidroRiosLagunasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasHidroRiosLagunas basHidroRiosLagunas		= basHidroRiosLagunasService.buscarGeometryById(basHidroRiosLagunasDto);
+								if(basHidroRiosLagunas != null) {
+									listReporte.add(basHidroRiosLagunas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -452,10 +490,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasHidroRios100000Dto basHidroRios100000Dto		= new BasHidroRios100000Dto();
-							basHidroRios100000Dto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasHidroRios100000 basHidroRios100000		= basHidroRios100000Service.buscarGeometryById(basHidroRios100000Dto);
-							if(basHidroRios100000 != null) {
-								listReporte.add(basHidroRios100000);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basHidroRios100000Dto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasHidroRios100000 basHidroRios100000		= basHidroRios100000Service.buscarGeometryById(basHidroRios100000Dto);
+								if(basHidroRios100000 != null) {
+									listReporte.add(basHidroRios100000);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -464,30 +505,17 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemCuencasHidrograficasService":
-					{
-						try {
-							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-							temCuencasHidrograficasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCuencasHidrograficas temCuencasHidrograficas		= temCuencasHidrograficasService.buscarGeometryById(temCuencasHidrograficasDto);
-							if(temCuencasHidrograficas != null) {
-								listReporte.add(temCuencasHidrograficas);
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemCuencasHidrograficasService");
-						}
-						break;
-					}
 					case "BasViasRedVialVecinalService":
 					{
 						try {
 							BasViasRedVialVecinalDto basViasRedVialVecinalDto		= new BasViasRedVialVecinalDto();
-							basViasRedVialVecinalDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasViasRedVialVecinal basViasRedVialVecinal		= basViasRedVialVecinalService.buscarGeometryById(basViasRedVialVecinalDto);
-							if(basViasRedVialVecinal != null) {
-								listReporte.add(basViasRedVialVecinal);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basViasRedVialVecinalDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasViasRedVialVecinal basViasRedVialVecinal		= basViasRedVialVecinalService.buscarGeometryById(basViasRedVialVecinalDto);
+								if(basViasRedVialVecinal != null) {
+									listReporte.add(basViasRedVialVecinal);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -500,10 +528,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasViasRedVialNacionalDto basViasRedVialNacionalDto		= new BasViasRedVialNacionalDto();
-							basViasRedVialNacionalDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasViasRedVialNacional basViasRedVialNacional		= basViasRedVialNacionalService.buscarGeometryById(basViasRedVialNacionalDto);
-							if(basViasRedVialNacional != null) {
-								listReporte.add(basViasRedVialNacional);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basViasRedVialNacionalDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasViasRedVialNacional basViasRedVialNacional		= basViasRedVialNacionalService.buscarGeometryById(basViasRedVialNacionalDto);
+								if(basViasRedVialNacional != null) {
+									listReporte.add(basViasRedVialNacional);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -516,10 +547,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							BasViasRedVialDepartamentalDto basViasRedVialDepartamentalDto		= new BasViasRedVialDepartamentalDto();
-							basViasRedVialDepartamentalDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							BasViasRedVialDepartamental basViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscarGeometryById(basViasRedVialDepartamentalDto);
-							if(basViasRedVialDepartamental != null) {
-								listReporte.add(basViasRedVialDepartamental);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								basViasRedVialDepartamentalDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								BasViasRedVialDepartamental basViasRedVialDepartamental		= basViasRedVialDepartamentalService.buscarGeometryById(basViasRedVialDepartamentalDto);
+								if(basViasRedVialDepartamental != null) {
+									listReporte.add(basViasRedVialDepartamental);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -532,10 +566,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemViaFerreaDto temViaFerreaDto		= new TemViaFerreaDto();
-							temViaFerreaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemViaFerrea temViaFerrea		= temViaFerreaService.buscarGeometryById(temViaFerreaDto);
-							if(temViaFerrea != null) {
-								listReporte.add(temViaFerrea);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temViaFerreaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemViaFerrea temViaFerrea		= temViaFerreaService.buscarGeometryById(temViaFerreaDto);
+								if(temViaFerrea != null) {
+									listReporte.add(temViaFerrea);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -548,10 +585,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemViasTrochasDto temViasTrochasDto		= new TemViasTrochasDto();
-							temViasTrochasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemViasTrochas temViasTrochas		= temViasTrochasService.buscarGeometryById(temViasTrochasDto);
-							if(temViasTrochas != null) {
-								listReporte.add(temViasTrochas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temViasTrochasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemViasTrochas temViasTrochas		= temViasTrochasService.buscarGeometryById(temViasTrochasDto);
+								if(temViasTrochas != null) {
+									listReporte.add(temViasTrochas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -560,14 +600,17 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasService":
+					case "TemSoeconComunidadesCampesinasTotalesService":
 					{
 						try {
 							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
-							temSoeconComunidadesCampesinasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemSoeconComunidadesCampesinas temSoeconComunidadesCampesinas		= temSoeconComunidadesCampesinasService.buscarGeometryById(temSoeconComunidadesCampesinasDto);
-							if(temSoeconComunidadesCampesinas != null) {
-								listReporte.add(temSoeconComunidadesCampesinas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temSoeconComunidadesCampesinasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemSoeconComunidadesCampesinas temSoeconComunidadesCampesinas		= temSoeconComunidadesCampesinasService.buscarGeometryById(temSoeconComunidadesCampesinasDto);
+								if(temSoeconComunidadesCampesinas != null) {
+									listReporte.add(temSoeconComunidadesCampesinas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -580,10 +623,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemComunidadesNativasDto temComunidadesNativasDto		= new TemComunidadesNativasDto();
-							temComunidadesNativasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemComunidadesNativas temComunidadesNativas		= temComunidadesNativasService.buscarGeometryById(temComunidadesNativasDto);
-							if(temComunidadesNativas != null) {
-								listReporte.add(temComunidadesNativas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temComunidadesNativasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemComunidadesNativas temComunidadesNativas		= temComunidadesNativasService.buscarGeometryById(temComunidadesNativasDto);
+								if(temComunidadesNativas != null) {
+									listReporte.add(temComunidadesNativas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -596,10 +642,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemReservasTerritorialesIndigenasDto temReservasTerritorialesIndigenasDto		= new TemReservasTerritorialesIndigenasDto();
-							temReservasTerritorialesIndigenasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemReservasTerritorialesIndigenas temReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscarGeometryById(temReservasTerritorialesIndigenasDto);
-							if(temReservasTerritorialesIndigenas != null) {
-								listReporte.add(temReservasTerritorialesIndigenas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temReservasTerritorialesIndigenasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemReservasTerritorialesIndigenas temReservasTerritorialesIndigenas		= temReservasTerritorialesIndigenasService.buscarGeometryById(temReservasTerritorialesIndigenasDto);
+								if(temReservasTerritorialesIndigenas != null) {
+									listReporte.add(temReservasTerritorialesIndigenas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -612,10 +661,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemSoeconSolicitudCreacionReservasTerritorialesDto temSoeconSolicitudCreacionReservasTerritorialesDto		= new TemSoeconSolicitudCreacionReservasTerritorialesDto();
-							temSoeconSolicitudCreacionReservasTerritorialesDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemSoeconSolicitudCreacionReservasTerritoriales temSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscarGeometryById(temSoeconSolicitudCreacionReservasTerritorialesDto);
-							if(temSoeconSolicitudCreacionReservasTerritoriales != null) {
-								listReporte.add(temSoeconSolicitudCreacionReservasTerritoriales);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temSoeconSolicitudCreacionReservasTerritorialesDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemSoeconSolicitudCreacionReservasTerritoriales temSoeconSolicitudCreacionReservasTerritoriales		= temSoeconSolicitudCreacionReservasTerritorialesService.buscarGeometryById(temSoeconSolicitudCreacionReservasTerritorialesDto);
+								if(temSoeconSolicitudCreacionReservasTerritoriales != null) {
+									listReporte.add(temSoeconSolicitudCreacionReservasTerritoriales);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -628,10 +680,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesEcoturismoDto temConcesionesEcoturismoDto		= new TemConcesionesEcoturismoDto();
-							temConcesionesEcoturismoDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesEcoturismo temConcesionesEcoturismo		= temConcesionesEcoturismoService.buscarGeometryById(temConcesionesEcoturismoDto);
-							if(temConcesionesEcoturismo != null) {
-								listReporte.add(temConcesionesEcoturismo);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesEcoturismoDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesEcoturismo temConcesionesEcoturismo		= temConcesionesEcoturismoService.buscarGeometryById(temConcesionesEcoturismoDto);
+								if(temConcesionesEcoturismo != null) {
+									listReporte.add(temConcesionesEcoturismo);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -644,10 +699,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesCastaniaDto temConcesionesForestalesCastaniaDto		= new TemConcesionesForestalesCastaniaDto();
-							temConcesionesForestalesCastaniaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesCastania temConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscarGeometryById(temConcesionesForestalesCastaniaDto);
-							if(temConcesionesForestalesCastania != null) {
-								listReporte.add(temConcesionesForestalesCastania);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesCastaniaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesCastania temConcesionesForestalesCastania		= temConcesionesForestalesCastaniaService.buscarGeometryById(temConcesionesForestalesCastaniaDto);
+								if(temConcesionesForestalesCastania != null) {
+									listReporte.add(temConcesionesForestalesCastania);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -660,10 +718,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesConservacionDto temConcesionesForestalesConservacionDto		= new TemConcesionesForestalesConservacionDto();
-							temConcesionesForestalesConservacionDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesConservacion temConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscarGeometryById(temConcesionesForestalesConservacionDto);
-							if(temConcesionesForestalesConservacion != null) {
-								listReporte.add(temConcesionesForestalesConservacion);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesConservacionDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesConservacion temConcesionesForestalesConservacion		= temConcesionesForestalesConservacionService.buscarGeometryById(temConcesionesForestalesConservacionDto);
+								if(temConcesionesForestalesConservacion != null) {
+									listReporte.add(temConcesionesForestalesConservacion);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -676,10 +737,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesMaderableAdecuadasDto temConcesionesForestalesMaderableAdecuadasDto		= new TemConcesionesForestalesMaderableAdecuadasDto();
-							temConcesionesForestalesMaderableAdecuadasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesMaderableAdecuadas temConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscarGeometryById(temConcesionesForestalesMaderableAdecuadasDto);
-							if(temConcesionesForestalesMaderableAdecuadas != null) {
-								listReporte.add(temConcesionesForestalesMaderableAdecuadas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesMaderableAdecuadasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesMaderableAdecuadas temConcesionesForestalesMaderableAdecuadas		= temConcesionesForestalesMaderableAdecuadasService.buscarGeometryById(temConcesionesForestalesMaderableAdecuadasDto);
+								if(temConcesionesForestalesMaderableAdecuadas != null) {
+									listReporte.add(temConcesionesForestalesMaderableAdecuadas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -692,10 +756,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesMaderableConcursoDto temConcesionesForestalesMaderableConcursoDto		= new TemConcesionesForestalesMaderableConcursoDto();
-							temConcesionesForestalesMaderableConcursoDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesMaderableConcurso temConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscarGeometryById(temConcesionesForestalesMaderableConcursoDto);
-							if(temConcesionesForestalesMaderableConcurso != null) {
-								listReporte.add(temConcesionesForestalesMaderableConcurso);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesMaderableConcursoDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesMaderableConcurso temConcesionesForestalesMaderableConcurso		= temConcesionesForestalesMaderableConcursoService.buscarGeometryById(temConcesionesForestalesMaderableConcursoDto);
+								if(temConcesionesForestalesMaderableConcurso != null) {
+									listReporte.add(temConcesionesForestalesMaderableConcurso);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -708,10 +775,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesManejoFaunaSilvestreDto temConcesionesForestalesManejoFaunaSilvestreDto		= new TemConcesionesForestalesManejoFaunaSilvestreDto();
-							temConcesionesForestalesManejoFaunaSilvestreDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesManejoFaunaSilvestre temConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscarGeometryById(temConcesionesForestalesManejoFaunaSilvestreDto);
-							if(temConcesionesForestalesManejoFaunaSilvestre != null) {
-								listReporte.add(temConcesionesForestalesManejoFaunaSilvestre);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesManejoFaunaSilvestreDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesManejoFaunaSilvestre temConcesionesForestalesManejoFaunaSilvestre		= temConcesionesForestalesManejoFaunaSilvestreService.buscarGeometryById(temConcesionesForestalesManejoFaunaSilvestreDto);
+								if(temConcesionesForestalesManejoFaunaSilvestre != null) {
+									listReporte.add(temConcesionesForestalesManejoFaunaSilvestre);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -724,10 +794,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesForestalesReforestacionDto temConcesionesForestalesReforestacionDto		= new TemConcesionesForestalesReforestacionDto();
-							temConcesionesForestalesReforestacionDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesForestalesReforestacion temConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscarGeometryById(temConcesionesForestalesReforestacionDto);
-							if(temConcesionesForestalesReforestacion != null) {
-								listReporte.add(temConcesionesForestalesReforestacion);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesForestalesReforestacionDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesForestalesReforestacion temConcesionesForestalesReforestacion		= temConcesionesForestalesReforestacionService.buscarGeometryById(temConcesionesForestalesReforestacionDto);
+								if(temConcesionesForestalesReforestacion != null) {
+									listReporte.add(temConcesionesForestalesReforestacion);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -740,10 +813,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemPrediosRuralesDto temPrediosRuralesDto		= new TemPrediosRuralesDto();
-							temPrediosRuralesDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemPrediosRurales temPrediosRurales		= temPrediosRuralesService.buscarGeometryById(temPrediosRuralesDto);
-							if(temPrediosRurales != null) {
-								listReporte.add(temPrediosRurales);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temPrediosRuralesDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemPrediosRurales temPrediosRurales		= temPrediosRuralesService.buscarGeometryById(temPrediosRuralesDto);
+								if(temPrediosRurales != null) {
+									listReporte.add(temPrediosRurales);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -756,10 +832,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemZonificPotencialBosqueProduccionPermanenteDto temZonificPotencialBosqueProduccionPermanenteDto		= new TemZonificPotencialBosqueProduccionPermanenteDto();
-							temZonificPotencialBosqueProduccionPermanenteDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemZonificPotencialBosqueProduccionPermanente temZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscarGeometryById(temZonificPotencialBosqueProduccionPermanenteDto);
-							if(temZonificPotencialBosqueProduccionPermanente != null) {
-								listReporte.add(temZonificPotencialBosqueProduccionPermanente);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temZonificPotencialBosqueProduccionPermanenteDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemZonificPotencialBosqueProduccionPermanente temZonificPotencialBosqueProduccionPermanente		= temZonificPotencialBosqueProduccionPermanenteService.buscarGeometryById(temZonificPotencialBosqueProduccionPermanenteDto);
+								if(temZonificPotencialBosqueProduccionPermanente != null) {
+									listReporte.add(temZonificPotencialBosqueProduccionPermanente);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -772,10 +851,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionHidroelectricasGeneracionDto temConcesionHidroelectricasGeneracionDto		= new TemConcesionHidroelectricasGeneracionDto();
-							temConcesionHidroelectricasGeneracionDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionHidroelectricasGeneracion temConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscarGeometryById(temConcesionHidroelectricasGeneracionDto);
-							if(temConcesionHidroelectricasGeneracion != null) {
-								listReporte.add(temConcesionHidroelectricasGeneracion);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionHidroelectricasGeneracionDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionHidroelectricasGeneracion temConcesionHidroelectricasGeneracion		= temConcesionHidroelectricasGeneracionService.buscarGeometryById(temConcesionHidroelectricasGeneracionDto);
+								if(temConcesionHidroelectricasGeneracion != null) {
+									listReporte.add(temConcesionHidroelectricasGeneracion);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -788,10 +870,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
-							temConcesionHidroelectricasDistribucionDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionHidroelectricasDistribucion temConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscarGeometryById(temConcesionHidroelectricasDistribucionDto);
-							if(temConcesionHidroelectricasDistribucion != null) {
-								listReporte.add(temConcesionHidroelectricasDistribucion);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionHidroelectricasDistribucionDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionHidroelectricasDistribucion temConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscarGeometryById(temConcesionHidroelectricasDistribucionDto);
+								if(temConcesionHidroelectricasDistribucion != null) {
+									listReporte.add(temConcesionHidroelectricasDistribucion);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -804,10 +889,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemConcesionesMinerasDto temConcesionesMinerasDto		= new TemConcesionesMinerasDto();
-							temConcesionesMinerasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemConcesionesMineras temConcesionesMineras		= temConcesionesMinerasService.buscarGeometryById(temConcesionesMinerasDto);
-							if(temConcesionesMineras != null) {
-								listReporte.add(temConcesionesMineras);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temConcesionesMinerasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemConcesionesMineras temConcesionesMineras		= temConcesionesMinerasService.buscarGeometryById(temConcesionesMinerasDto);
+								if(temConcesionesMineras != null) {
+									listReporte.add(temConcesionesMineras);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -820,10 +908,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemAnpNacionalDto temAnpNacionalDto		= new TemAnpNacionalDto();
-							temAnpNacionalDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemAnpNacional temAnpNacional		= temAnpNacionalService.buscarGeometryById(temAnpNacionalDto);
-							if(temAnpNacional != null) {
-								listReporte.add(temAnpNacional);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temAnpNacionalDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemAnpNacional temAnpNacional		= temAnpNacionalService.buscarGeometryById(temAnpNacionalDto);
+								if(temAnpNacional != null) {
+									listReporte.add(temAnpNacional);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -836,10 +927,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemAnpRegionalDto temAnpRegionalDto		= new TemAnpRegionalDto();
-							temAnpRegionalDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemAnpRegional temAnpRegional		= temAnpRegionalService.buscarGeometryById(temAnpRegionalDto);
-							if(temAnpRegional != null) {
-								listReporte.add(temAnpRegional);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temAnpRegionalDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemAnpRegional temAnpRegional		= temAnpRegionalService.buscarGeometryById(temAnpRegionalDto);
+								if(temAnpRegional != null) {
+									listReporte.add(temAnpRegional);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -852,10 +946,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemAnpPrivadaDto temAnpPrivadaDto		= new TemAnpPrivadaDto();
-							temAnpPrivadaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemAnpPrivada temAnpPrivada		= temAnpPrivadaService.buscarGeometryById(temAnpPrivadaDto);
-							if(temAnpPrivada != null) {
-								listReporte.add(temAnpPrivada);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temAnpPrivadaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemAnpPrivada temAnpPrivada		= temAnpPrivadaService.buscarGeometryById(temAnpPrivadaDto);
+								if(temAnpPrivada != null) {
+									listReporte.add(temAnpPrivada);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -868,10 +965,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemSinanpeAmortiguamientoDto temSinanpeAmortiguamientoDto		= new TemSinanpeAmortiguamientoDto();
-							temSinanpeAmortiguamientoDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemSinanpeAmortiguamiento temSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscarGeometryById(temSinanpeAmortiguamientoDto);
-							if(temSinanpeAmortiguamiento != null) {
-								listReporte.add(temSinanpeAmortiguamiento);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temSinanpeAmortiguamientoDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemSinanpeAmortiguamiento temSinanpeAmortiguamiento		= temSinanpeAmortiguamientoService.buscarGeometryById(temSinanpeAmortiguamientoDto);
+								if(temSinanpeAmortiguamiento != null) {
+									listReporte.add(temSinanpeAmortiguamiento);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -884,10 +984,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemClaveBiodiversidadDto temClaveBiodiversidadDto		= new TemClaveBiodiversidadDto();
-							temClaveBiodiversidadDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemClaveBiodiversidad temClaveBiodiversidad		= temClaveBiodiversidadService.buscarGeometryById(temClaveBiodiversidadDto);
-							if(temClaveBiodiversidad != null) {
-								listReporte.add(temClaveBiodiversidad);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temClaveBiodiversidadDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemClaveBiodiversidad temClaveBiodiversidad		= temClaveBiodiversidadService.buscarGeometryById(temClaveBiodiversidadDto);
+								if(temClaveBiodiversidad != null) {
+									listReporte.add(temClaveBiodiversidad);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -900,10 +1003,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemHumedalesRamsarDto temHumedalesRamsarDto		= new TemHumedalesRamsarDto();
-							temHumedalesRamsarDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemHumedalesRamsar temHumedalesRamsar		= temHumedalesRamsarService.buscarGeometryById(temHumedalesRamsarDto);
-							if(temHumedalesRamsar != null) {
-								listReporte.add(temHumedalesRamsar);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temHumedalesRamsarDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemHumedalesRamsar temHumedalesRamsar		= temHumedalesRamsarService.buscarGeometryById(temHumedalesRamsarDto);
+								if(temHumedalesRamsar != null) {
+									listReporte.add(temHumedalesRamsar);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -916,10 +1022,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemCoverturaVegetal2015Dto temCoverturaVegetal2015Dto		= new TemCoverturaVegetal2015Dto();
-							temCoverturaVegetal2015Dto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCoverturaVegetal2015 temCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscarGeometryById(temCoverturaVegetal2015Dto);
-							if(temCoverturaVegetal2015 != null) {
-								listReporte.add(temCoverturaVegetal2015);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temCoverturaVegetal2015Dto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemCoverturaVegetal2015 temCoverturaVegetal2015		= temCoverturaVegetal2015Service.buscarGeometryById(temCoverturaVegetal2015Dto);
+								if(temCoverturaVegetal2015 != null) {
+									listReporte.add(temCoverturaVegetal2015);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -932,10 +1041,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemCarbonoEcozonasDto temCarbonoEcozonasDto		= new TemCarbonoEcozonasDto();
-							temCarbonoEcozonasDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCarbonoEcozonas temCarbonoEcozonas		= temCarbonoEcozonasService.buscarGeometryById(temCarbonoEcozonasDto);
-							if(temCarbonoEcozonas != null) {
-								listReporte.add(temCarbonoEcozonas);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temCarbonoEcozonasDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemCarbonoEcozonas temCarbonoEcozonas		= temCarbonoEcozonasService.buscarGeometryById(temCarbonoEcozonasDto);
+								if(temCarbonoEcozonas != null) {
+									listReporte.add(temCarbonoEcozonas);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -948,10 +1060,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemIndiceImportanciaBiologicaDto temIndiceImportanciaBiologicaDto		= new TemIndiceImportanciaBiologicaDto();
-							temIndiceImportanciaBiologicaDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemIndiceImportanciaBiologica temIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscarGeometryById(temIndiceImportanciaBiologicaDto);
-							if(temIndiceImportanciaBiologica != null) {
-								listReporte.add(temIndiceImportanciaBiologica);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temIndiceImportanciaBiologicaDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemIndiceImportanciaBiologica temIndiceImportanciaBiologica		= temIndiceImportanciaBiologicaService.buscarGeometryById(temIndiceImportanciaBiologicaDto);
+								if(temIndiceImportanciaBiologica != null) {
+									listReporte.add(temIndiceImportanciaBiologica);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -964,10 +1079,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemCentrosPobladosDto temCentrosPobladosDto		= new TemCentrosPobladosDto();
-							temCentrosPobladosDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCentrosPoblados temCentrosPoblados		= temCentrosPobladosService.buscarGeometryById(temCentrosPobladosDto);
-							if(temCentrosPoblados != null) {
-								listReporte.add(temCentrosPoblados);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temCentrosPobladosDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemCentrosPoblados temCentrosPoblados		= temCentrosPobladosService.buscarGeometryById(temCentrosPobladosDto);
+								if(temCentrosPoblados != null) {
+									listReporte.add(temCentrosPoblados);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -980,10 +1098,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemProyeccionDensidadPob2015Dto temProyeccionDensidadPob2015Dto		= new TemProyeccionDensidadPob2015Dto();
-							temProyeccionDensidadPob2015Dto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemProyeccionDensidadPob2015 temProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscarGeometryById(temProyeccionDensidadPob2015Dto);
-							if(temProyeccionDensidadPob2015 != null) {
-								listReporte.add(temProyeccionDensidadPob2015);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temProyeccionDensidadPob2015Dto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemProyeccionDensidadPob2015 temProyeccionDensidadPob2015		= temProyeccionDensidadPob2015Service.buscarGeometryById(temProyeccionDensidadPob2015Dto);
+								if(temProyeccionDensidadPob2015 != null) {
+									listReporte.add(temProyeccionDensidadPob2015);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -996,10 +1117,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemCostoOportunidadDeforestacionDto temCostoOportunidadDeforestacionDto		= new TemCostoOportunidadDeforestacionDto();
-							temCostoOportunidadDeforestacionDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemCostoOportunidadDeforestacion temCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscarGeometryById(temCostoOportunidadDeforestacionDto);
-							if(temCostoOportunidadDeforestacion != null) {
-								listReporte.add(temCostoOportunidadDeforestacion);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temCostoOportunidadDeforestacionDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemCostoOportunidadDeforestacion temCostoOportunidadDeforestacion		= temCostoOportunidadDeforestacionService.buscarGeometryById(temCostoOportunidadDeforestacionDto);
+								if(temCostoOportunidadDeforestacion != null) {
+									listReporte.add(temCostoOportunidadDeforestacion);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -1012,10 +1136,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemProyectosPuntosDto temProyectosPuntosDto		= new TemProyectosPuntosDto();
-							temProyectosPuntosDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemProyectosPuntos temProyectosPuntos		= temProyectosPuntosService.buscarGeometryById(temProyectosPuntosDto);
-							if(temProyectosPuntos != null) {
-								listReporte.add(temProyectosPuntos);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temProyectosPuntosDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemProyectosPuntos temProyectosPuntos		= temProyectosPuntosService.buscarGeometryById(temProyectosPuntosDto);
+								if(temProyectosPuntos != null) {
+									listReporte.add(temProyectosPuntos);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -1028,10 +1155,13 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					{
 						try {
 							TemProyectosPoligonosDto temProyectosPoligonosDto		= new TemProyectosPoligonosDto();
-							temProyectosPoligonosDto.setSrlGid(CadenaUtil.getInte(strIdData));
-							TemProyectosPoligonos temProyectosPoligonos		= temProyectosPoligonosService.buscarGeometryById(temProyectosPoligonosDto);
-							if(temProyectosPoligonos != null) {
-								listReporte.add(temProyectosPoligonos);
+							String[] arrStrIdData			= strIdData.replace('|', '-').split("-");
+							for(String strIdDataCurr:arrStrIdData) {
+								temProyectosPoligonosDto.setSrlGid(CadenaUtil.getInte(strIdDataCurr));
+								TemProyectosPoligonos temProyectosPoligonos		= temProyectosPoligonosService.buscarGeometryById(temProyectosPoligonosDto);
+								if(temProyectosPoligonos != null) {
+									listReporte.add(temProyectosPoligonos);
+								}
 							}
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -1040,6 +1170,7 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 						}
 						break;
 					}
+					
 					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					case "TemBiodiversidadEspeciesPeligroExtincionService":
 					{
@@ -1089,7 +1220,7 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 							int startRids	= 0;
 							int endRids		= 0;
 							for(int m = 0;m < listRids.size();m++) {
-								if(countRids >= 30 || (m+1 == listRids.size())) {
+								if(countRids >= 20 || (m+1 == listRids.size())) {
 									if(m+1 == listRids.size()) {
 										listRidsDiv.add(listRids.get(m));
 									}
@@ -1173,7 +1304,7 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 							int startRids	= 0;
 							int endRids		= 0;
 							for(int m = 0;m < listRids.size();m++) {
-								if(countRids >= 30 || (m+1 == listRids.size())) {
+								if(countRids >= 20 || (m+1 == listRids.size())) {
 									if(m+1 == listRids.size()) {
 										listRidsDiv.add(listRids.get(m));
 									}
@@ -1257,7 +1388,7 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 							int startRids	= 0;
 							int endRids		= 0;
 							for(int m = 0;m < listRids.size();m++) {
-								if(countRids >= 40 || (m+1 == listRids.size())) {
+								if(countRids >= 30 || (m+1 == listRids.size())) {
 									if(m+1 == listRids.size()) {
 										listRidsDiv.add(listRids.get(m));
 									}
@@ -1341,7 +1472,7 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 							int startRids	= 0;
 							int endRids		= 0;
 							for(int m = 0;m < listRids.size();m++) {
-								if(countRids >= 30 || (m+1 == listRids.size())) {
+								if(countRids >= 20 || (m+1 == listRids.size())) {
 									if(m+1 == listRids.size()) {
 										listRidsDiv.add(listRids.get(m));
 									}
@@ -1377,12 +1508,187 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 						}
 						break;
 					}
+					case "TemCoberturaBoscosa2014Service":
+					{
+						esRaster	= true;
+						try {
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
+							strSrlIdCapa	= listConsulta.get(i);
+							strIdData		= listIdData.get(i);
+							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
+							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							} else if(strIdDataCri.equals("mayor")) {//Mayor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
+							} else if(strIdDataCri.equals("menor")) {//Menor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
+							} else if(strIdDataCri.equals("igual")) {//Igual a
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
+							} else if(strIdDataCri.equals("rango")) {//Por rango
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							}
+							if(!strGeometriaRespuesta.equals("")) {
+								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
+							}
+							List<Integer> listRids			= temCoberturaBoscosa2014Service.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 10 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temCoberturaBoscosa2014Service.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemCoberturaBoscosa2014Service ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							System.out.println("ADD TemCoberturaBoscosa2014Service");
+							listReporteOk.add("TemCoberturaBoscosa2014Service");
+						}
+						break;
+					}
+					case "TemPerdidaBosque20012014":
+					{
+						esRaster	= true;
+						try {
+							double dblCapaUmbralMin	= 0d;
+							double dblCapaUmbralMax	= 0d;
+							
+							strSrlIdCapa	= listConsulta.get(i);
+							strIdData		= listIdData.get(i);
+							strIdDataCri	= listIdDataCri.get(i);
+							
+							Map<String, Double> map		= capaUmbralService.selectCapaUmbralMinMax(CadenaUtil.getInte(strSrlIdCapa));
+							if(map.size() > 0) {
+								dblCapaUmbralMin		= (Double)map.get("min");
+								dblCapaUmbralMax		= (Double)map.get("max");
+							}
+							
+							BeanRasterDto beanRasterDto		= new BeanRasterDto();
+							beanRasterDto.setStrHashConsulta(strHashConsulta);
+							if(strIdDataCri.equals("preestablecido")) {//Umbrales preestablecidos
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							} else if(strIdDataCri.equals("mayor")) {//Mayor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+strIdData+" and [rast] <= "+dblCapaUmbralMax+"");
+							} else if(strIdDataCri.equals("menor")) {//Menor a
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+dblCapaUmbralMin+" and [rast] <= "+strIdData+"");
+							} else if(strIdDataCri.equals("igual")) {//Igual a
+								beanRasterDto.setStrRangoConsulta("[rast] = "+strIdData+"");
+							} else if(strIdDataCri.equals("rango")) {//Por rango
+								String[] arrStridData	= strIdData.split("-");
+								beanRasterDto.setStrRangoConsulta("[rast] >= "+arrStridData[0]+" and [rast] <= "+arrStridData[1]+"");
+							}
+							if(!strGeometriaRespuesta.equals("")) {
+								beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strGeometriaRespuesta));
+							} else {
+								BasLimAmazoniaDto basLimAmazoniaDto		= new BasLimAmazoniaDto();
+								List<BasLimAmazonia> listBasLimAmazonia		= basLimAmazoniaService.buscarGeometry(basLimAmazoniaDto);
+								if(listBasLimAmazonia.size() > 0) {
+									beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(listBasLimAmazonia.get(0).getStrTheGeom()));
+									strGeometriaRespuesta		= listBasLimAmazonia.get(0).getStrTheGeom();
+								}
+							}
+							List<Integer> listRids			= temPerdidaBosque20012014Service.selectRidAfectadosByGeometry(beanRasterDto);
+							List<Integer> listRidsDiv		= new ArrayList<Integer>();
+							int countRids	= 0;
+							int startRids	= 0;
+							int endRids		= 0;
+							for(int m = 0;m < listRids.size();m++) {
+								if(countRids >= 10 || (m+1 == listRids.size())) {
+									if(m+1 == listRids.size()) {
+										listRidsDiv.add(listRids.get(m));
+									}
+									endRids	= m;
+									final int startRidsFinal	= startRids;
+									final int endRidsFinal		= endRids;
+									final BeanRasterDto currBeanRasterDto	= beanRasterDto.clone();
+									currBeanRasterDto.setStrInRids(listRidsDiv.toString());
+									listThreadRids.add(new Runnable() {
+										public void run() {
+											try {
+												temPerdidaBosque20012014Service.insertGeometryByRangoAndGeometry(currBeanRasterDto);
+											} catch(Exception ex) {
+												ex.printStackTrace();
+											} finally {
+												listThreadRidsRS.add("TemPerdidaBosque20012014Service ["+startRidsFinal+"-"+endRidsFinal+"]");
+											}
+										}
+									});
+									countRids	= 0;
+									listRidsDiv	= new ArrayList<Integer>();
+									startRids	= m;
+								} else {
+									listRidsDiv.add(listRids.get(m));
+									countRids++;
+								}
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							System.out.println("ADD TemPerdidaBosque20012014Service");
+							listReporteOk.add("TemPerdidaBosque20012014Service");
+						}
+						break;
+					}
 					}
 				}
 				if(!esRaster) {
-					strGeometriaRespuesta	= evaluarGeometrias(listReporte);
+					strGeometriaRespuesta	= evaluarGeometrias(listReporte, strPoligonoConsulta);
 					session.put("geometria_"+strHashConsulta, strGeometriaRespuesta);
+				} else {
+					esPorlomenosUnRaster = true;
 				}
+			}
+			if(esPorlomenosUnRaster) {
+				session.put("usar_consulta_acl", "true");
+			} else {
+				session.put("usar_consulta_acl", "false");
 			}
 			for(int m = 0;m < listThreadRids.size();m++) {
 				new Thread(listThreadRids.get(m)).start();
@@ -1396,7 +1702,9 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 					break;
 				}
 			}
-			
+			if(!CadenaUtil.getStr(strGeometriaRespuesta).equals("")) {
+				strGeometriaRespuestaBoundary	= consultaACLFuxionService.selectBoundary(strGeometriaRespuesta);
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1404,25 +1712,35 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String evaluarGeometrias(List<BaseBeanVectorial> listReporte) {
+	public String evaluarGeometrias(List<BaseBeanVectorial> listReporte, String strPoligonoConsulta) {
 		ConsultaACLFuxion consultaACLFuxion		= new ConsultaACLFuxion();
 		String strGeomRS	= "";
 		String strGeom01	= "";
 		BaseBeanVectorial baseBeanVectorial		= null;
-		if(listReporte.size() > 1) {
-			strGeom01	= listReporte.get(0).getStrTheGeom();
-			for(int i = 1;i < listReporte.size();i++) {
-				baseBeanVectorial	= listReporte.get(i);
+		String strBaseBeanVectorial		= null;
+		List<String> listReporteStr	= new ArrayList<String>();
+		if(CadenaUtil.getStrNull(strPoligonoConsulta) != null) {
+			listReporteStr.add(strPoligonoConsulta);
+		}
+		for(int i = 0;i < listReporte.size();i++) {
+			baseBeanVectorial	= listReporte.get(i);
+			listReporteStr.add(baseBeanVectorial.getStrTheGeom());
+		}
+		if(listReporteStr.size() > 1) {
+			strGeom01	= listReporteStr.get(0);
+			for(int i = 1;i < listReporteStr.size();i++) {
+				strBaseBeanVectorial	= listReporteStr.get(i);
 				consultaACLFuxion.setStrGeom01(strGeom01);
-				consultaACLFuxion.setStrGeom02(baseBeanVectorial.getStrTheGeom());
+				consultaACLFuxion.setStrGeom02(strBaseBeanVectorial);
 				strGeomRS	= consultaACLFuxionService.selectFuxion(consultaACLFuxion);
 				strGeom01	= strGeomRS;
 			}
-		} else if(listReporte.size() == 1) {
-			strGeomRS	= listReporte.get(0).getStrTheGeom();
+		} else if(listReporteStr.size() == 1) {
+			strGeomRS	= listReporteStr.get(0);
 		}
 		return strGeomRS;
 	}
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1459,4 +1777,32 @@ public class ConsultaACLFuxionAction extends ActionSupport {
 		this.listIdDataCapaCriConsulta = listIdDataCapaCriConsulta;
 	}
 
+	
+	public String getStrGeometriaRespuestaBoundary() {
+		return strGeometriaRespuestaBoundary;
+	}
+	
+
+	public void setStrGeometriaRespuestaBoundary(
+			String strGeometriaRespuestaBoundary) {
+		this.strGeometriaRespuestaBoundary = strGeometriaRespuestaBoundary;
+	}
+
+	public String getStrIdCapaConsulta() {
+		return strIdCapaConsulta;
+	}
+
+	public void setStrIdCapaConsulta(String strIdCapaConsulta) {
+		this.strIdCapaConsulta = strIdCapaConsulta;
+	}
+
+	public String getStrPoligonoConsulta() {
+		return strPoligonoConsulta;
+	}
+
+	public void setStrPoligonoConsulta(String strPoligonoConsulta) {
+		this.strPoligonoConsulta = strPoligonoConsulta;
+	}
+
+	
 }

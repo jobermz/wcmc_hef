@@ -2,6 +2,7 @@ package wcmc.hef.dao.capa.domain;
 
 import java.util.Date;
 import java.util.List;
+
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemPrediosRurales extends TemPrediosRuralesKey implements BaseBeanVectorial {
@@ -13,7 +14,13 @@ public class TemPrediosRurales extends TemPrediosRuralesKey implements BaseBeanV
 	private String strCodproy;
 	private Integer intCntCodpro;
 	private Integer intOrigFid;
-
+	private Integer intGeodecid;
+	public Integer getIntGeodecid() {
+		return intGeodecid;
+	}
+	public void setIntGeodecid(Integer intGeodecid) {
+		this.intGeodecid = intGeodecid;
+	}
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
     }

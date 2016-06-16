@@ -2,11 +2,10 @@ package wcmc.hef.dao.capa.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class BasLimDepartamentoParamDef {
-	
+		
     protected String orderByClause;
 
     protected boolean distinct;
@@ -21,7 +20,8 @@ public class BasLimDepartamentoParamDef {
 	
     public void setStrHashConsulta(String strHashConsulta) {
     	if(CadenaUtil.getStrNull(strHashConsulta) != null) {
-        	this.strHashConsulta = " inner join wcmc_hef.tem_query_acl qry on de_hash_consulta = '"+CadenaUtil.getStr(strHashConsulta)+"' and ST_Intersects(ST_Transform(si_the_geom, 32718), cd_rast) ";
+        	this.strHashConsulta = " inner join wcmc_hef.tem_query_acl qry on de_hash_consulta = '"+CadenaUtil.getStr(strHashConsulta)+"' and ST_Intersects(ST_Transform(si_the_geom, 32718), cd_rast, 1) ";
+        	setDistinct(true);
     	}
     }
 	
@@ -184,7 +184,11 @@ public class BasLimDepartamentoParamDef {
         
         
         public Criteria andStrTheGeomIntersectsTo(String value) {
-        	addCriterion("ST_Intersects(si_the_geom, ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326)) ");
+        	if(CadenaUtil.getStr(value).toUpperCase().indexOf("POINT") != -1) {
+            	addCriterion("ST_Intersects(si_the_geom, ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326))  ");
+        	} else {
+            	addCriterion("ST_Intersects(si_the_geom, ST_BUFFER(ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326), -0.00001))  ");
+        	}
             return (Criteria) this;
         }
         
@@ -332,7 +336,7 @@ public class BasLimDepartamentoParamDef {
             return (Criteria) this;
         }
         
-		
+				
     }
     
     public static class Criteria extends GeneratedCriteria {
@@ -427,5 +431,5 @@ public class BasLimDepartamentoParamDef {
             this(condition, value, secondValue, null);
         }
     }
-	
+		
 }

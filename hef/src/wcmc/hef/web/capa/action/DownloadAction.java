@@ -46,6 +46,8 @@ public class DownloadAction extends ActionSupport {
 	protected String archivoNombre;
 	protected String archivoTamanio;
 	private String strId;
+	private String strIdCapaUsuario;
+	private String strImagenReporte;
 
 	public InputStream getArchivo() {
 		Map<String, Object> session		= ActionContext.getContext().getSession();
@@ -74,6 +76,38 @@ public class DownloadAction extends ActionSupport {
 				} else {
 					return returnDataNoExisteAdjunto(strNombreFile);
 				}
+			} else if(CadenaUtil.getStrNull(strIdCapaUsuario) != null) {
+				String strRepositorioTemporal	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.RUTA_BASE_CAPAS_USUARIO);
+				
+				CapaDto capaDto		= new CapaDto();
+				capaDto.setSrlIdCapa(CadenaUtil.getInte(strIdCapaUsuario));
+				Capa capa			= capaService.buscarById(capaDto);
+				String strNombreFile	 = "";
+				if(capa != null && capa.getStrShp() != null) {
+					strNombreFile		= capa.getStrNombre();
+					File fileTemporal	= new File(strRepositorioTemporal+File.separator+capa.getStrShp()+".zip");
+					if(fileTemporal.exists()) {
+						archivoNombre					= strNombreFile;
+						archivoTamanio					= "" + fileTemporal.length();
+						archivo							= new FileInputStream(fileTemporal);
+						return archivo;
+					} else {
+						return returnDataNoExisteAdjunto(strNombreFile);
+					}					
+				} else {
+					return returnDataNoExisteAdjunto(strNombreFile);
+				}
+			} else if(CadenaUtil.getStrNull(strImagenReporte) != null) {
+				String strRepositorioTemporal	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.REPOSITORIO_DOCS_TEMPORAL);
+				File fileTemporal	= new File(strRepositorioTemporal+File.separator+strImagenReporte+".jpg");
+				if(fileTemporal.exists()) {
+					archivoNombre					= strImagenReporte+".jpg";
+					archivoTamanio					= "" + fileTemporal.length();
+					archivo							= new FileInputStream(fileTemporal);
+					return archivo;
+				} else {
+					return returnDataNoExisteAdjunto(strImagenReporte+".png");
+				}	
 			} else if(strId != null && strId.equals("")) {
 				return returnDataNoExisteAdjunto("otro.JPG");
 			}
@@ -121,6 +155,22 @@ public class DownloadAction extends ActionSupport {
 
 	public void setStrId(String strId) {
 		this.strId = strId;
+	}
+
+	public String getStrImagenReporte() {
+		return strImagenReporte;
+	}
+
+	public void setStrImagenReporte(String strImagenReporte) {
+		this.strImagenReporte = strImagenReporte;
+	}
+
+	public String getStrIdCapaUsuario() {
+		return strIdCapaUsuario;
+	}
+
+	public void setStrIdCapaUsuario(String strIdCapaUsuario) {
+		this.strIdCapaUsuario = strIdCapaUsuario;
 	}
 
 	private byte[] arrDataImgBlank		= {-119,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,-82,0,0,0,-5,8,6,0,0,0,-13,79,-81,-86,0,0,0,1,115,82,71,66,0,-82,-50,28,-23,0,0,0,4,103,65,77,65,0,0,-79,

@@ -11,6 +11,11 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
+		<action name="consultaCapasBoundary" class="wcmc.hef.web.capa.action.ConsultaAction" method="consultarBoundary">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
 		<action name="consultaCapasRightClick" class="wcmc.hef.web.capa.action.ConsultaRightClickAction" method="consultar">
 			<result name="success" type="tiles">consulta_capas_right_click_form</result>
 			<interceptor-ref name="basicStack" />  
@@ -36,6 +41,11 @@
 			<interceptor-ref name="basicStack" />  
 		</action>
 		
+		<action name="consultaACLFiltroMapa" class="wcmc.hef.web.capa.action.ConsultaACLFiltroMapaAction" method="consultar">
+			<result name="success" type="json"/>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
 		<action name="reporteCapas" class="wcmc.hef.web.capa.action.ReporteConsultaAction" method="reporteTodos">
 			<result name="success" type="jasper">
 				<param name="location">/reportes/reportAnalitico.jasper</param>
@@ -55,8 +65,31 @@
 			</result>
 		</action>
 		
+		<action name="reporteCapasCSV" class="wcmc.hef.web.capa.action.ReporteConsultaAction" method="reporteTodosCSV">
+		</action>
+		
 		<action name="consultaCombosCapaUmbral" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
 			<result name="success" type="tiles">consulta_combos_capa_umbral_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaCombosCapaUmbralSinDec" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
+			<result name="success" type="tiles">consulta_combos_capa_umbral_sin_dec_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaCombosCapaUmbral2Dec" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
+			<result name="success" type="tiles">consulta_combos_capa_umbral_2_dec_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaCombosCapaFiltrajeNum" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
+			<result name="success" type="tiles">consulta_combos_capa_filtraje_num_form</result>
+			<interceptor-ref name="basicStack" />  
+		</action>
+		
+		<action name="consultaCombosCapaFiltrajeNumSinDec" class="wcmc.hef.web.visor.action.VisorAction" method="obtenerCapaUmbral">
+			<result name="success" type="tiles">consulta_combos_capa_filtraje_num_sin_dec_form</result>
 			<interceptor-ref name="basicStack" />  
 		</action>
 		

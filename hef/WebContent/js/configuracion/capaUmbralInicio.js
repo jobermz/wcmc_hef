@@ -51,11 +51,12 @@ function instanciardt_basico_capa_umbral(ejecutaBuscar) {
 				{"mData" : "strNombre"},
 				{"mData" : "dblValorMinimo"},
 				{"mData" : "dblValorMaximo"},
+				{"mData" : "strNroLayer"},
 				{"mData" : null}
 		],
 		"aoColumnDefs": [
 		                 {
-		                	 "aTargets": [3],
+		                	 "aTargets": [4],
 		                	 "mData": null,
 		                	 "mRender": function (data, type, row) {
 		                		 return '<div style="width:100px;"><button title="Editar" class="btn btn-primary btn_buscar_control_capa_umbral" onclick="editar_capa_umbral(\'' + row.srlIdCapaUmbral + '\');return false;"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;&nbsp;'

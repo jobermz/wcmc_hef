@@ -13,6 +13,7 @@
 		<result column="de_observa" property="strObserva" jdbcType="VARCHAR"/>
 		<result column="ha_shape_area" property="dblShapeArea" jdbcType="DOUBLE"/>
 		<result column="ha_shape_len" property="dblShapeLen" jdbcType="DOUBLE"/>
+		<result column="cd_geodec_id" property="intGeodecid" jdbcType="INTEGER"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemHumedalesRamsarMap" parameterType="wcmc.hef.dao.capa.domain.TemHumedalesRamsarParamDef">
 		select
@@ -230,7 +231,8 @@
 		cd_id__, 
 		de_observa, 
 		ha_shape_area, 
-		ha_shape_len
+		ha_shape_len,
+		cd_geodec_id
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
@@ -243,7 +245,8 @@
 		cd_id__, 
 		de_observa, 
 		ha_shape_area, 
-		ha_shape_len
+		ha_shape_len,
+		cd_geodec_id
 	</sql>
 	<sql id="Base_Column_List_Combo">
 		cd_gid, 
@@ -256,7 +259,8 @@
 		cd_id__, 
 		de_observa, 
 		ha_shape_area, 
-		ha_shape_len
+		ha_shape_len,
+		cd_geodec_id
 	</sql>
 
 </mapper>

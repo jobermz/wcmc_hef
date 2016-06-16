@@ -25,7 +25,7 @@
 		<result column="de_addedby" property="strAddedby" jdbcType="VARCHAR"/>
 		<result column="fc_addeddate" property="dteAddeddate" jdbcType="DATE"/>
 		<result column="de_changeby" property="strChangeby" jdbcType="VARCHAR"/>
-		<result column="fc_changedate" property="dteChangedate" jdbcType="DATE"/>
+<!-- 		<result column="fc_changedate" property="dteChangedate" jdbcType="DATE"/> -->
 		<result column="de_source" property="strSource" jdbcType="VARCHAR"/>
 		<result column="de_deltxt" property="strDeltxt" jdbcType="VARCHAR"/>
 		<result column="de_delgeom" property="strDelgeom" jdbcType="VARCHAR"/>
@@ -443,7 +443,6 @@
 		de_addedby, 
 		fc_addeddate, 
 		de_changeby, 
-		fc_changedate, 
 		de_source, 
 		de_deltxt, 
 		de_delgeom, 
@@ -476,7 +475,6 @@
 		de_addedby, 
 		fc_addeddate, 
 		de_changeby, 
-		fc_changedate, 
 		de_source, 
 		de_deltxt, 
 		de_delgeom, 
@@ -509,7 +507,6 @@
 		de_addedby, 
 		fc_addeddate, 
 		de_changeby, 
-		fc_changedate, 
 		de_source, 
 		de_deltxt, 
 		de_delgeom, 

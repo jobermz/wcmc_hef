@@ -3,23 +3,15 @@ package wcmc.hef.web.capa.action;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import wcmc.hef.business.core.configuracion.dto.CapaUmbralDto;
 import wcmc.hef.business.core.configuracion.service.CapaService;
 import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
-
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
-
 import wcmc.hef.business.core.capa.service.BasHidroRios100000Service;
 import wcmc.hef.business.core.capa.service.BasHidroRiosLagunasService;
 import wcmc.hef.business.core.capa.service.BasLimAmazoniaService;
@@ -32,8 +24,6 @@ import wcmc.hef.business.core.capa.service.BasViasRedVialVecinalService;
 import wcmc.hef.business.core.capa.service.TemAnpNacionalService;
 import wcmc.hef.business.core.capa.service.TemAnpPrivadaService;
 import wcmc.hef.business.core.capa.service.TemAnpRegionalService;
-import wcmc.hef.business.core.capa.service.TemBiodiversidadEspeciesPeligroExtincionService;
-import wcmc.hef.business.core.capa.service.TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService;
 import wcmc.hef.business.core.capa.service.TemCarbonoEcozonasService;
 import wcmc.hef.business.core.capa.service.TemCentrosPobladosService;
 import wcmc.hef.business.core.capa.service.TemClaveBiodiversidadService;
@@ -50,16 +40,12 @@ import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasDistribuci
 import wcmc.hef.business.core.capa.service.TemConcesionHidroelectricasGeneracionService;
 import wcmc.hef.business.core.capa.service.TemCostoOportunidadDeforestacionService;
 import wcmc.hef.business.core.capa.service.TemCoverturaVegetal2015Service;
-import wcmc.hef.business.core.capa.service.TemCuencasHidrograficasService;
-import wcmc.hef.business.core.capa.service.TemDensidadCarbonoAereaService;
 import wcmc.hef.business.core.capa.service.TemHumedalesRamsarService;
-import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.service.TemPrediosRuralesService;
 import wcmc.hef.business.core.capa.service.TemProyeccionDensidadPob2015Service;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
 import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.business.core.capa.service.TemReservasTerritorialesIndigenasService;
-import wcmc.hef.business.core.capa.service.TemRiesgoErosionHidricaService;
 import wcmc.hef.business.core.capa.service.TemSinanpeAmortiguamientoService;
 import wcmc.hef.business.core.capa.service.TemSoeconComunidadesCampesinasService;
 import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTerritorialesService;
@@ -67,11 +53,7 @@ import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
-import wcmc.hef.business.core.capa.dto.BaseBeanVectorialDto;
-import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
-import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
-import wcmc.hef.dao.capa.domain.BeanRaster;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -124,12 +106,11 @@ import wcmc.hef.business.core.capa.dto.TemCostoOportunidadDeforestacionDto;
 import wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacion;
 import wcmc.hef.business.core.capa.dto.TemCoverturaVegetal2015Dto;
 import wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015;
-import wcmc.hef.business.core.capa.dto.TemCuencasHidrograficasDto;
-import wcmc.hef.dao.capa.domain.TemCuencasHidrograficas;
 import wcmc.hef.business.core.capa.dto.TemHumedalesRamsarDto;
 import wcmc.hef.dao.capa.domain.TemHumedalesRamsar;
 import wcmc.hef.business.core.capa.dto.TemIndiceImportanciaBiologicaDto;
 import wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologica;
+import wcmc.hef.business.core.capa.service.TemIndiceImportanciaBiologicaService;
 import wcmc.hef.business.core.capa.dto.TemPrediosRuralesDto;
 import wcmc.hef.dao.capa.domain.TemPrediosRurales;
 import wcmc.hef.business.core.capa.dto.TemProyeccionDensidadPob2015Dto;
@@ -152,9 +133,7 @@ import wcmc.hef.business.core.capa.dto.TemViasTrochasDto;
 import wcmc.hef.dao.capa.domain.TemViasTrochas;
 import wcmc.hef.business.core.capa.dto.TemZonificPotencialBosqueProduccionPermanenteDto;
 import wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente;
-import wcmc.hef.dao.configuracion.domain.CapaUmbral;
 import wcmc.hef.general.util.CadenaUtil;
-import wcmc.hef.general.util.ConfiguracionProperties;
 import wcmc.hef.general.util.ServiciosProperties;
 
 public class ConsultaCombosParaCentrarAction extends ActionSupport {
@@ -245,13 +224,7 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 	private TemCoverturaVegetal2015Service temCoverturaVegetal2015Service;
 
 	@Autowired
-	private TemCuencasHidrograficasService temCuencasHidrograficasService;
-
-	@Autowired
 	private TemHumedalesRamsarService temHumedalesRamsarService;
-
-	@Autowired
-	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
 
 	@Autowired
 	private TemPrediosRuralesService temPrediosRuralesService;
@@ -284,20 +257,10 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 	private TemViasTrochasService temViasTrochasService;
 
 	@Autowired
+	private TemIndiceImportanciaBiologicaService temIndiceImportanciaBiologicaService;
+
+	@Autowired
 	private TemZonificPotencialBosqueProduccionPermanenteService temZonificPotencialBosqueProduccionPermanenteService;
-
-	
-	@Autowired
-	private TemBiodiversidadEspeciesPeligroExtincionService temBiodiversidadEspeciesPeligroExtincionService;
-
-	@Autowired
-	private TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService;
-
-	@Autowired
-	private TemDensidadCarbonoAereaService temDensidadCarbonoAereaService;
-
-	@Autowired
-	private TemRiesgoErosionHidricaService temRiesgoErosionHidricaService;
 
 	@Autowired
 	private CapaService capaService;
@@ -733,21 +696,6 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemCuencasHidrograficasService":
-					{
-						try {
-							TemCuencasHidrograficasDto temCuencasHidrograficasDto		= new TemCuencasHidrograficasDto();
-							List<TemCuencasHidrograficas> listTemCuencasHidrograficas		= temCuencasHidrograficasService.buscarCombo(temCuencasHidrograficasDto);
-							if(listTemCuencasHidrograficas.size() > 0) {
-								mapReporte.put("listTemCuencasHidrograficas", listTemCuencasHidrograficas);
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemCuencasHidrograficasService");
-						}
-						break;
-					}
 					case "TemHumedalesRamsarService":
 					{
 						try {
@@ -868,7 +816,7 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 						}
 						break;
 					}
-					case "TemSoeconComunidadesCampesinasService":
+					case "TemSoeconComunidadesCampesinasTotalesService":
 					{
 						try {
 							TemSoeconComunidadesCampesinasDto temSoeconComunidadesCampesinasDto		= new TemSoeconComunidadesCampesinasDto();
@@ -944,116 +892,6 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 						break;
 					}
 					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					/*
-					case "TemBiodiversidadEspeciesPeligroExtincionService":
-					{
-						try {
-							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							BeanRaster beanRaster		= temBiodiversidadEspeciesPeligroExtincionService.selectByGeometry(beanRasterDto);
-							if(beanRaster != null) {
-								mapReporte.put("listTemBiodiversidadEspeciesPeligroExtincion", beanRaster);
-								
-								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
-								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
-								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
-								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
-								for(CapaUmbral cu:listUmbrales) {
-									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										beanRaster.setStrCategoria(cu.getStrNombre());
-										break;
-									}
-								}
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemBiodiversidadEspeciesPeligroExtincionService");
-						}
-						break;
-					}
-					case "TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService":
-					{
-						try {
-							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							BeanRaster beanRaster		= temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService.selectByGeometry(beanRasterDto);
-							if(beanRaster != null) {
-								mapReporte.put("listTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica", beanRaster);
-								
-								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
-								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
-								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
-								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
-								for(CapaUmbral cu:listUmbrales) {
-									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										beanRaster.setStrCategoria(cu.getStrNombre());
-										break;
-									}
-								}
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaService");
-						}
-						break;
-					}
-					case "TemDensidadCarbonoAereaService":
-					{
-						try {
-							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							BeanRaster beanRaster		= temDensidadCarbonoAereaService.selectByGeometry(beanRasterDto);
-							if(beanRaster != null) {
-								mapReporte.put("listTemDensidadCarbonoAerea", beanRaster);
-								
-								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
-								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
-								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
-								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
-								for(CapaUmbral cu:listUmbrales) {
-									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										beanRaster.setStrCategoria(cu.getStrNombre());
-										break;
-									}
-								}
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemDensidadCarbonoAereaService");
-						}
-						break;
-					}
-					case "TemRiesgoErosionHidricaService":
-					{
-						try {
-							BeanRasterDto beanRasterDto		= new BeanRasterDto();
-							beanRasterDto.setStrPoligonoConsulta(CadenaUtil.getStr(strPoligonoConsulta));
-							BeanRaster beanRaster		= temRiesgoErosionHidricaService.selectByGeometry(beanRasterDto);
-							if(beanRaster != null) {
-								mapReporte.put("listTemRiesgoErosionHidrica", beanRaster);
-								
-								double dblValue		= CadenaUtil.getDoub(beanRaster.getStrValuePromedio());
-								CapaUmbralDto capaUmbralDto = new CapaUmbralDto();
-								capaUmbralDto.setIntIdCapa(CadenaUtil.getInte(strSrlIdCapa));
-								List<CapaUmbral> listUmbrales	= capaUmbralService.buscar(capaUmbralDto);
-								for(CapaUmbral cu:listUmbrales) {
-									if(dblValue >= cu.getDblValorMinimo().doubleValue() && dblValue < cu.getDblValorMaximo().doubleValue()) {
-										beanRaster.setStrCategoria(cu.getStrNombre());
-										break;
-									}
-								}
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						} finally {
-							listReporteOk.add("TemRiesgoErosionHidricaService");
-						}
-						break;
-					}
-					*/
 					}
 				}
 			}

@@ -8,6 +8,7 @@
 		<result column="de_nombre" property="strNombre" jdbcType="VARCHAR"/>
 		<result column="ha_valmin" property="dblValorMinimo" jdbcType="DOUBLE"/>
 		<result column="ha_valmax" property="dblValorMaximo" jdbcType="DOUBLE"/>
+		<result column="de_nro_layer" property="strNroLayer" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="CapaUmbralMap" parameterType="wcmc.hef.dao.configuracion.domain.CapaUmbralParamDef">
 		select
@@ -50,6 +51,9 @@
 			<if test="dblValorMaximo != null">
 				ha_valmax,
 			</if>
+			<if test="strNroLayer != null">
+				de_nro_layer,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="intIdCapa != null">
@@ -63,6 +67,9 @@
 			</if>
 			<if test="dblValorMaximo != null">
 				#{dblValorMaximo, jdbcType=DOUBLE},
+			</if>
+			<if test="strNroLayer != null">
+				#{strNroLayer, jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -80,6 +87,9 @@
 			</if>
 			<if test="dblValorMaximo != null">
 				ha_valmax = #{dblValorMaximo,jdbcType=DOUBLE},
+			</if>
+			<if test="strNroLayer != null">
+				de_nro_layer = #{strNroLayer,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where 1 = 1
@@ -128,7 +138,8 @@
 		(SELECT ts.de_nombre FROM wcmc_hef.t_capa ts WHERE ts.cd_capa = tab.cd_capa) AS cd_capa_string, 
 		de_nombre, 
 		ha_valmin, 
-		ha_valmax
+		ha_valmax,
+		de_nro_layer
 	</sql>
 	
 	<select id="selectCapaUmbralMinMax" resultType="Map" parameterType="Integer">

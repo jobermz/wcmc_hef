@@ -6,7 +6,7 @@ import java.util.Date;
 import wcmc.hef.general.util.CadenaUtil;
 
 public class TemCoverturaVegetal2015ParamDef {
-	
+		
     protected String orderByClause;
 
     protected boolean distinct;
@@ -21,7 +21,8 @@ public class TemCoverturaVegetal2015ParamDef {
 	
     public void setStrHashConsulta(String strHashConsulta) {
     	if(CadenaUtil.getStrNull(strHashConsulta) != null) {
-        	this.strHashConsulta = " inner join wcmc_hef.tem_query_acl qry on de_hash_consulta = '"+CadenaUtil.getStr(strHashConsulta)+"' and ST_Intersects(ST_Transform(si_the_geom, 32718), cd_rast) ";
+        	this.strHashConsulta = " inner join wcmc_hef.tem_query_acl qry on de_hash_consulta = '"+CadenaUtil.getStr(strHashConsulta)+"' and ST_Intersects(ST_Transform(si_the_geom, 32718), cd_rast, 1) ";
+        	setDistinct(true);
     	}
     }
 	
@@ -184,7 +185,11 @@ public class TemCoverturaVegetal2015ParamDef {
         
         
         public Criteria andStrTheGeomIntersectsTo(String value) {
-        	addCriterion("ST_Intersects(si_the_geom, ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326)) ");
+        	if(CadenaUtil.getStr(value).toUpperCase().indexOf("POINT") != -1) {
+            	addCriterion("ST_Intersects(si_the_geom, ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326))  ");
+        	} else {
+            	addCriterion("ST_Intersects(si_the_geom, ST_BUFFER(ST_GeomFromText('"+CadenaUtil.getStr(value)+"',4326), -0.00001))  ");
+        	}
             return (Criteria) this;
         }
         
@@ -600,7 +605,7 @@ public class TemCoverturaVegetal2015ParamDef {
             return (Criteria) this;
         }
         
-		
+				
     }
     
     public static class Criteria extends GeneratedCriteria {
@@ -695,5 +700,5 @@ public class TemCoverturaVegetal2015ParamDef {
             this(condition, value, secondValue, null);
         }
     }
-	
+		
 }

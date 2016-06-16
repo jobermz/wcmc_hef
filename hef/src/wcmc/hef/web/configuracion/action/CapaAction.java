@@ -91,7 +91,7 @@ public class CapaAction extends ActionSupport {
 				capaDto.setIntGrupoCapas(CadenaUtil.getInte(buscar_intGrupoCapas));
 			}
 			
-			listCapa = capaService.buscar(capaDto);
+			listCapa = capaService.buscarConfig(capaDto);
 		} catch(Exception ex) {
 			//ex.printStackTrace();
 			addActionError("Ocurrio un error:" + ex.getMessage());

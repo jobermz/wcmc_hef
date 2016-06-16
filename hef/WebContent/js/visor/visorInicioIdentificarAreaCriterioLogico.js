@@ -1,105 +1,25 @@
 function iniciarIdentificarAreaPorCriteriosLogicos() {
-	$('.identificar-area-criterio-logico').click(identificarAreaCriterioLogico);
+	//$('.identificar-area-criterio-logico').click(identificarAreaCriterioLogico);
 	
 	$('.btnProcesarIdentAreaCriteriosLogicos').click(procesarCriterioLogico);
-	$('.btnSeleccionarTodasCapasACL').click(seleccionarTodosACL);
+	//$('.btnSeleccionarTodasCapasACL').click(seleccionarTodosACL);
 	$(".btnAplicarACLFiltrar").click(aplicarFiltroACL);
-	$("#idCriterioFiltroUmbral").change(actualizarFiltroUmbralACL);
+	
+	//$("#idCriterioFiltroUmbral").change(actualizarFiltroUmbralACLEvent);
 	$(".btnAplicarACLUmbral").click(aplicarFiltroUmbralACL);
 	
-	$("#idMenuLimiparACL").click(limpiarCapasSeleccionadasACL);
+	$("#idCriterioFiltroNumerico").change(actualizarFiltrajeNumericoACLEvent);
+	$(".btnAplicarACLFiltraje").click(aplicarFiltrajeNumericoACL);
+	
+	$(".clsLimpiarACL").click(limpiarCapasSeleccionadasACL);
 	
 }
-/////////////////////////////////////////////////////////////////////////////////////////
-function identificarAreaCriterioLogico() {
-	$('.identificar-area-criterio-logico-modal').off('shown.bs.modal');
-	$('.identificar-area-criterio-logico-modal').off('hidden.bs.modal');
-	$('.identificar-area-criterio-logico-modal').on('shown.bs.modal', function (e) {
-		inicializarSeleccionadasActivasACL();
-	});
-	$('.identificar-area-criterio-logico-modal').on('hidden.bs.modal', function (e) {
-	});
-	$('.identificar-area-criterio-logico-modal').modal('show');
-}
-function inicializarSeleccionadasActivasACL() {
-	if(listado_idCapaIdentACL!=null && listado_idCapaIdentACL.length > 0) {
-		$(".capasBaseACL").each(function(index) {
-			$(this).prop("checked", false);
-		});
-		for(var i = 0;i < listado_idCapaIdentACL.length;i++) {
-			$("#idCapaIdentACL"+listado_idCapaIdentACL[i]).prop("checked", true);
-		}
-	} else {
-		$(".capasBaseACL").each(function(index) {
-			$(this).prop("checked", false);
-		});
-		$(".capasBase").each(function(index) {
-			if($(this).is(':checked')) {
-				var srlIdCapa	= $(this).attr("value");
-				$("#idCapaIdentACL"+srlIdCapa).prop("checked", true);
-			}
-		});
-	}
-	guardarCapasSeleccionadasACL();
-}
-var listado_idCapaIdentACL		= null;
-function guardarCapasSeleccionadasACL() {
-	listado_idCapaIdentACL			= new Array();
-	$(".capasBaseACL").each(function(index) {
-		if($(this).is(':checked')) {
-			var srlIdCapa		= $(this).attr("id-capa");
-			listado_idCapaIdentACL[listado_idCapaIdentACL.length]	= srlIdCapa;
-		}
-	});
-	$('.badgeCustomACL').html(listado_idCapaIdentACL.length);
-	$('.badgeCustomACL').css("display","");
-	
-	$(".clsPanelGrupoCapasACL").each(function(index) {
-		var contador	= 0;
-		$(this).find(".capasBaseACL").each(function(index) {
-			if($(this).is(':checked')) {
-				contador++;
-			}
-		});
-		if(contador > 0) {
-			$(this).find(".badgeCustomPanelGrupoCapaACL").html(contador);
-			$(this).find(".badgeCustomPanelGrupoCapaACL").css("display", "");
-		} else {
-			$(this).find(".badgeCustomPanelGrupoCapaACL").html("");
-			$(this).find(".badgeCustomPanelGrupoCapaACL").css("display", "none");
-		}
-	});
-	$(".clsPanelGrupoCapasMainACL").each(function(index) {
-		var contador	= 0;
-		$(this).find(".capasBaseACL").each(function(index) {
-			if($(this).is(':checked')) {
-				contador++;
-			}
-		});
-		if(contador > 0) {
-			$(this).find(".badgeCustomPanelGrupoCapaMainACL").html(contador);
-			$(this).find(".badgeCustomPanelGrupoCapaMainACL").css("display", "");
-		} else {
-			$(this).find(".badgeCustomPanelGrupoCapaMainACL").html("");
-			$(this).find(".badgeCustomPanelGrupoCapaMainACL").css("display", "none");
-		}
-	});
-
-}
-function limpiarCapasSeleccionadasACL() {
-	listado_idCapaIdentACL	= null;
-	$('.badgeCustomACL').css("display","none");
-	$(".identificar-area-criterio-logico-modal").find(".clsDivDetFiltroACL").each(function(index) {
-		$(this).html("");
-		$(this).attr("valSelect", "");
-		$(this).attr("valSelectDesde", "");
-		$(this).attr("valSelectHasta", "");
-		$(this).attr("valCriterio", "");
-		$(this).attr("srlIdCapa", "");
-	});
-}
-///////////////////////////////////////////////////////////////////////////////////////// FILTRO SHP
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function filtrarACL(srlIdCapa) {
+	srlIdCapa	= ""+srlIdCapa;
+	cerrarTodosPopover();
+	$(".clsDivACL").html("<center><div style='background-color:#FFFFFF;height:28px;vertical-align: middle;'><img src='image/busy.gif'/> Espere por favor</div></center>");
 	$('.identificar-area-criterio-logico-filtrar-modal').off('shown.bs.modal');
 	$('.identificar-area-criterio-logico-filtrar-modal').off('hidden.bs.modal');
 	$('.identificar-area-criterio-logico-filtrar-modal').on('shown.bs.modal', function (e) {
@@ -112,40 +32,85 @@ function filtrarACL(srlIdCapa) {
 			});
 			$(".clsDivACL").html(datos);
 			$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker({
-				liveSearch: true,
-				maxOptions: 1
+				liveSearch: true
+				//maxOptions: 5
 			});
+			var valSelect	= dataComboFiltroACL[srlIdCapa];
+			if(valSelect) {
+				$(".clsDivACL").find("select[name=combo_area_ACL]").val(valSelect);
+				$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker('refresh');
+			}
+
 			$(".clsDivACL").attr("srlIdCapa", srlIdCapa);
 		});
 	});
 	$('.identificar-area-criterio-logico-filtrar-modal').on('hidden.bs.modal', function (e) {
+		//$(".identificar-area-criterio-logico-modal").modal('show');
 	});
-	$(".identificar-area-criterio-logico-modal").modal('hide');
+	//$(".identificar-area-criterio-logico-modal").modal('hide');
 	$('.identificar-area-criterio-logico-filtrar-modal').modal('show');
 }
+var dataComboFiltroACL	= new Array();
 function aplicarFiltroACL() {
 	var valSelect		= $(".clsDivACL").find("select").val();
-	var valSelectTxt	= $(".clsDivACL").find("select option:selected").text();
+	var valSelectTxt	= $(".clsDivACL").find("button[data-id=combo_area_ACL]").attr("title");
 	var srlIdCapa		= $(".clsDivACL").attr("srlIdCapa");
-	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html(valSelectTxt);
-	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect", valSelect);
-	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
+	
+	dataComboFiltroACL[srlIdCapa] = valSelect;
+	valSelect			= valSelect.join('|');
+//	var valSelectTxt	= $(".clsDivACL").find("select option:selected").text();
+//	var valSelectTxt	= $(".clsDivACL").find("select[data-id=combo_area_ACL]").attr("title");
+	var paramDefs		= evaluarConfiguracionFiltroACL(srlIdCapa, valSelect);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", valSelectTxt);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).css("display", "");
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", valSelectTxt);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("valSelect", valSelect);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("paramDefs", paramDefs);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
 	$('.identificar-area-criterio-logico-filtrar-modal').modal('hide');
-	$(".identificar-area-criterio-logico-modal").modal('show');
+	refrescarVisualizarCapa(srlIdCapa);
+	//$(".identificar-area-criterio-logico-modal").modal('show');
 }
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function filtrarUmbralACL(srlIdCapa) {
+	cerrarTodosPopover();
 	$('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa', srlIdCapa);
 	$('.identificar-area-criterio-logico-umbral-modal').off('shown.bs.modal');
 	$('.identificar-area-criterio-logico-umbral-modal').off('hidden.bs.modal');
 	$('.identificar-area-criterio-logico-umbral-modal').on('shown.bs.modal', function (e) {
-		actualizarFiltroUmbralACL();
 		var srlIdCapa	= $('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa');
 		var param	= {
 				srlIdCapa: srlIdCapa
 		};
-		$.post("consultaCombosCapaUmbral.action", param, function(datos) {
+		var urlAction	= "";
+		if(srlIdCapa == "48" || srlIdCapa == "49" || srlIdCapa == "51") {
+			urlAction	= "consultaCombosCapaUmbralSinDec.action";
+		} else if(srlIdCapa == "50") {
+			urlAction	= "consultaCombosCapaUmbral2Dec.action";
+		} else {
+			urlAction	= "consultaCombosCapaUmbral.action";
+		}
+		$.post(urlAction, param, function(datos) {
+			var objDefFiltro	= $(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa);
+			$("#idDivComboUmbrales").find("select[name=filtrar_umbral]").each(function(index) {
+				$(this).unbind("selectpicker");
+			});
 			$("#idDivComboUmbrales").html(datos);
+			$("#idDivComboUmbrales").find("select[name=filtrar_umbral]").selectpicker({
+				//liveSearch: true
+				//maxOptions: 1
+			});
+			$("#idDivComboUmbrales").attr("srlIdCapa", srlIdCapa);
+
+			//actualizarFiltroUmbralACL(srlIdCapa);
+			var valSelect		= objDefFiltro.attr("valSelect");//Ambos
+			if(valSelect && valSelect.indexOf(",") != -1) {
+				valSelect	= eval("[" + valSelect + "]");
+				$("#idValorFiltroUmbralPre").val(valSelect);
+			}
+			
+			$("#idDivComboUmbrales").find("select[name=filtrar_umbral]").selectpicker('refresh');
 		});
 		$.post("consultaUmbralesMinMaxACL.action", param, function(datos) {
 			console.log("consultaUmbralesMinMaxACL: min=" + datos.strCapaUmbralMin + " max=" + datos.strCapaUmbralMax+" nombre="+datos.strCapaUmbralNombreCapa);
@@ -155,69 +120,297 @@ function filtrarUmbralACL(srlIdCapa) {
 		}, "json");
 	});
 	$('.identificar-area-criterio-logico-umbral-modal').on('hidden.bs.modal', function (e) {
-		$(".identificar-area-criterio-logico-modal").modal('show');
+		//$(".identificar-area-criterio-logico-modal").modal('show');
 	});
-	$(".identificar-area-criterio-logico-modal").modal('hide');
+	//$(".identificar-area-criterio-logico-modal").modal('hide');
 	$('.identificar-area-criterio-logico-umbral-modal').modal('show');
 }
-function actualizarFiltroUmbralACL() {
-	$(".clsDivCriterioUmbralInputs").each(function(){
-		$(this).css("display", "none");
-	});
-	$("#idValorFiltroUmbralPre").val("");
-	$("#idValorFiltroUmbral").val("");
-	$("#idValorFiltroUmbralDesde").val("");
-	$("#idValorFiltroUmbralHasta").val("");
-	
-	var filtroUmbral	= $("#idCriterioFiltroUmbral").val();
-	if(filtroUmbral == "preestablecido") {//Umbrales preestablecidos
-		$("#idDivPreestablecidos").css("display", "");
-	} else if(filtroUmbral == "mayor") {//Mayor a
-		$("#idDivValor").css("display", "");
-	} else if(filtroUmbral == "menor") {//Menor a
-		$("#idDivValor").css("display", "");
-	} else if(filtroUmbral == "igual") {//Igual a
-		$("#idDivValor").css("display", "");
-	} else if(filtroUmbral == "rango") {//Por rango
-		$("#idDivRango").css("display", "");
-	}
-}
-function aplicarFiltroUmbralACL() {
-//	var criterioFiltroUmbralTXT	= $("#idCriterioFiltroUmbral option:selected").text();
-	var valorFiltroUmbralPre	= $("#idValorFiltroUmbralPre").val();
-	var valorFiltroUmbralPreTXT	= $("#idValorFiltroUmbralPre option:selected").text();
-	var valorFiltroUmbral		= $("#idValorFiltroUmbral").val();
-	var valorFiltroUmbralDesde	= $("#idValorFiltroUmbralDesde").val();
-	var valorFiltroUmbralHasta	= $("#idValorFiltroUmbralHasta").val();
-	var srlIdCapa				= $('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa');
-	
-	var filtroUmbral	= $("#idCriterioFiltroUmbral").val();
-	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valCriterio",filtroUmbral);
-	$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
-	if(filtroUmbral == "preestablecido") {//Umbrales preestablecidos
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Umbral: "+valorFiltroUmbralPreTXT);
-		var arrUmbralPre	= eval(valorFiltroUmbralPre);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",arrUmbralPre[1]+"-"+arrUmbralPre[2]);
-	} else if(filtroUmbral == "mayor") {//Mayor a
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valor > "+valorFiltroUmbral);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbral);
-	} else if(filtroUmbral == "menor") {//Menor a
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valor < "+valorFiltroUmbral);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbral);
-	} else if(filtroUmbral == "igual") {//Igual a
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html("Valor = "+valorFiltroUmbral);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelect",valorFiltroUmbral);
-	} else if(filtroUmbral == "rango") {//Por rango
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).html(""+valorFiltroUmbralDesde+" < val < "+valorFiltroUmbralHasta);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelectDesde",valorFiltroUmbralDesde);
-		$(".identificar-area-criterio-logico-modal").find("#idDivDetFiltroACL"+srlIdCapa).attr("valSelectHasta",valorFiltroUmbralHasta);
-	}
-	$('.identificar-area-criterio-logico-umbral-modal').modal('hide');
-	$(".identificar-area-criterio-logico-modal").modal('show');
-}
-/////////////////////////////////////////////////////////////////////////////////////////
 
+function aplicarFiltroUmbralACL() {
+	var valorFiltroUmbralPreTXT	= $("#idValorFiltroUmbralPre").parent().find("button").find(".filter-option").html();
+	var valorFiltroUmbralPre	= $("#idValorFiltroUmbralPre").val();
+	var srlIdCapa				= $('.identificar-area-criterio-logico-umbral-modal').attr('srlIdCapa');
+	var objDefFiltro	= $(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa);
+	
+	objDefFiltro.attr("srlIdCapa", srlIdCapa);
+	objDefFiltro.css("display", "");
+	objDefFiltro.attr("title", "Umbral: "+valorFiltroUmbralPreTXT);
+	objDefFiltro.attr("valSelect",valorFiltroUmbralPre);
+	refrescarVisualizarCapa(srlIdCapa);
+	$('.identificar-area-criterio-logico-umbral-modal').modal('hide');
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function filtrajeNumericoACL(srlIdCapa) {
+	cerrarTodosPopover();
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').attr('srlIdCapa', srlIdCapa);
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').off('shown.bs.modal');
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').off('hidden.bs.modal');
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').on('shown.bs.modal', function (e) {
+//		var srlIdCapa	= $('.identificar-area-criterio-logico-filtraje-numerico-modal').attr('srlIdCapa');
+		$("#idDivFiltrajeCriterio").css("display","");
+		$("#idDivFiltrajeEcozonas").css("display","none");
+		$("#idDivFiltrajeRangos").css("display","");
+		
+		$("#idCriterioFiltroNumerico").val("mayor");
+		$("#idValorFiltraje").val("");
+		$("#idValorFiltrajeDesde").val("");
+		$("#idValorFiltrajeHasta").val("");
+		
+		actualizarFiltrajeNumericoACLEvent();
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		var srlIdCapa	= $('.identificar-area-criterio-logico-filtraje-numerico-modal').attr('srlIdCapa');
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		{
+			$("#idDivFiltrajeCriterio").css("display","none");
+			$("#idDivFiltrajeEcozonas").css("display","none");
+			$("#idDivFiltrajeRangos").css("display","none");
+			$("#idDivRowComboFiltrajeNumerico").css("display","");
+			var param	= {
+					srlIdCapa: srlIdCapa
+			};
+			$.post("consultaUmbralesMinMaxACL.action", param, function(datos) {
+				//console.log("consultaUmbralesMinMaxACL: min=" + datos.strCapaUmbralMin + " max=" + datos.strCapaUmbralMax+" nombre="+datos.strCapaUmbralNombreCapa);
+				$("#idDivRangoFiltrajeMinimo").html(datos.strCapaUmbralMin);
+				$("#idDivRangoFiltrajeMaximo").html(datos.strCapaUmbralMax);
+				$("#idDivCapaFiltrajeNombreCapa").html(datos.strCapaUmbralNombreCapa);
+			}, "json");
+			var urlAction	= "";
+			if(srlIdCapa == "43") {//Centros poblados
+				urlAction	= "consultaCombosCapaFiltrajeNumSinDec.action";
+			} else {
+				urlAction	= "consultaCombosCapaFiltrajeNum.action";
+			}
+			$.post(urlAction, param, function(datos) {
+				//var objDefFiltro	= $(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa);
+				//idValorFiltroRangoNum" name="filtrar_rango_numerico
+				$("#idDivComboFiltrajeNumerico").find("select[name=filtrar_rango_numerico]").each(function(index) {
+					$(this).unbind("selectpicker");
+				});
+				$("#idDivComboFiltrajeNumerico").html(datos);
+				$("#idDivComboFiltrajeNumerico").find("select[name=filtrar_rango_numerico]").selectpicker({
+					//liveSearch: true
+					//maxOptions: 1
+				});
+				$("#idDivComboFiltrajeNumerico").attr("srlIdCapa", srlIdCapa);
+				var valSelect	= dataComboFiltrajeNumericoACL[srlIdCapa];
+				if(valSelect) {
+					$("#idDivComboFiltrajeNumerico").find("select[name=filtrar_rango_numerico]").val(valSelect);
+				}
+				
+				/*
+				var valSelect		= objDefFiltro.attr("valSelect");//Ambos
+				if(valSelect.indexOf(",") != -1) {
+					valSelect	= eval("[" + valSelect + "]");
+				}
+				$("#idValorFiltroUmbralPre").val(valSelect);
+				*/
+				$("#idDivComboFiltrajeNumerico").find("select[name=filtrar_rango_numerico]").selectpicker('refresh');
+			});
+		}
+	});
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').on('hidden.bs.modal', function (e) {});
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').modal('show');
+}
+var dataComboFiltrajeNumericoACL	= new Array();
+function aplicarFiltrajeNumericoACL() {
+	//alert("aplicarFiltrajeNumericoACL();");
+	var srlIdCapa	= $('.identificar-area-criterio-logico-filtraje-numerico-modal').attr('srlIdCapa');
+	var paramDefs	= "";
+	{
+		var valSelect	= $("#idDivComboFiltrajeNumerico").find("select").val();
+		dataComboFiltrajeNumericoACL[srlIdCapa] = valSelect;
+		//valSelect			= valSelect.join('|');
+		if(srlIdCapa == "41") {//tem_carbono_ecozonas
+			var mostrar	= "";
+			var criterios	= "";
+			for(var i = 0;i<valSelect.length;i++) {
+				var arrDatos	= eval(valSelect[i]);
+				if(criterios != "") {
+					criterios	+= ",";
+					mostrar		+= ", ";
+				}
+				criterios	+= "'"+arrDatos[3]+"'";
+				mostrar		+= ""+arrDatos[3]+"";
+			}
+			criterios	= "tC_ha in ("+criterios+")";
+			paramDefs	= "{\"0\":\""+criterios+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "Valores en: "+mostrar);
+		} else if(srlIdCapa == "42") {//tem_indice_importancia_biologica
+			var criterios	= "";
+			var mostrar	= "";
+			for(var i = 0;i<valSelect.length;i++) {
+				var arrDatos	= eval(valSelect[i]);
+				if(criterios != "") {
+					criterios	+= " OR ";
+					mostrar		+= ", ";
+				}
+				criterios	+= "(imp_glob > "+arrDatos[1]+" and imp_glob <= "+arrDatos[2]+")";
+				mostrar		+= "["+arrDatos[1]+" < val <= "+arrDatos[2]+"]";
+			}
+			paramDefs	= "{\"0\":\""+criterios+"\"}";
+			//paramDefs	= "{\"0\":\"imp_glob > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "Rangos: "+mostrar);
+		} else if(srlIdCapa == "43") {//tem_centros_poblados
+			var criterios	= "";
+			var mostrar	= "";
+			for(var i = 0;i<valSelect.length;i++) {
+				var arrDatos	= eval(valSelect[i]);
+				if(criterios != "") {
+					criterios	+= " OR ";
+					mostrar		+= ", ";
+				}
+				criterios	+= "(POB07 > "+arrDatos[1]+" and POB07 <= "+arrDatos[2]+")";
+				mostrar		+= "["+arrDatos[1]+" < val <= "+arrDatos[2]+"]";
+			}
+			paramDefs	= "{\"0\":\""+criterios+"\"}";
+			//paramDefs	= "{\"0\":\"POB07 > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "Rangos: "+mostrar);
+		} else if(srlIdCapa == "44") {//tem_proyeccion_densidad_pob_2015
+			var criterios	= "";
+			var mostrar	= "";
+			for(var i = 0;i<valSelect.length;i++) {
+				var arrDatos	= eval(valSelect[i]);
+				if(criterios != "") {
+					criterios	+= " OR ";
+					mostrar		+= ", ";
+				}
+				criterios	+= "(pop_dens > "+arrDatos[1]+" and pop_dens <= "+arrDatos[2]+")";
+				mostrar		+= "["+arrDatos[1]+" < val <= "+arrDatos[2]+"]";
+			}
+			paramDefs	= "{\"1\":\""+criterios+"\"}";
+			//paramDefs	= "{\"1\":\"pop_dens > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "Rangos: "+mostrar);
+		} else if(srlIdCapa == "45") {//tem_costo_oportunidad_deforestacion
+			var criterios	= "";
+			var mostrar	= "";
+			for(var i = 0;i<valSelect.length;i++) {
+				var arrDatos	= eval(valSelect[i]);
+				if(criterios != "") {
+					criterios	+= " OR ";
+					mostrar		+= ", ";
+				}
+				criterios	+= "(COP_tCo2_h > "+arrDatos[1]+" and COP_tCo2_h <= "+arrDatos[2]+")";
+				mostrar		+= "["+arrDatos[1]+" < val <= "+arrDatos[2]+"]";
+			}
+			paramDefs	= "{\"0\":\""+criterios+"\"}";
+			//paramDefs	= "{\"0\":\"COP_tCo2_h > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "Rangos: "+mostrar);
+		}
+	}
+		
+	/*
+	} else if(srlIdCapa == "42") {//tem_indice_importancia_biologica
+		var idCriterioFiltroNumerico	= $("#idCriterioFiltroNumerico").val();
+		if(idCriterioFiltroNumerico == "mayor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"imp_glob > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "> "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "menor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"imp_glob < "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "< "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "rango") {
+			var idValorFiltrajeDesde	= $("#idValorFiltrajeDesde").val();
+			var idValorFiltrajeHasta	= $("#idValorFiltrajeHasta").val();
+			paramDefs	= "{\"0\":\"imp_glob > "+idValorFiltrajeDesde+" and imp_glob < "+idValorFiltrajeHasta+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "["+idValorFiltrajeDesde+"-"+idValorFiltrajeHasta+"]");
+		}
+	} else if(srlIdCapa == "43") {//tem_centros_poblados
+		var idCriterioFiltroNumerico	= $("#idCriterioFiltroNumerico").val();
+		if(idCriterioFiltroNumerico == "mayor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"POB07 > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "> "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "menor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"POB07 < "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "< "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "rango") {
+			var idValorFiltrajeDesde	= $("#idValorFiltrajeDesde").val();
+			var idValorFiltrajeHasta	= $("#idValorFiltrajeHasta").val();
+			paramDefs	= "{\"0\":\"POB07 > "+idValorFiltrajeDesde+" and POB07 < "+idValorFiltrajeHasta+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "["+idValorFiltrajeDesde+"-"+idValorFiltrajeHasta+"]");
+		}
+	} else if(srlIdCapa == "44") {//tem_proyeccion_densidad_pob_2015
+		var idCriterioFiltroNumerico	= $("#idCriterioFiltroNumerico").val();
+		if(idCriterioFiltroNumerico == "mayor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"1\":\"pop_dens > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "> "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "menor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"1\":\"pop_dens < "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "< "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "rango") {
+			var idValorFiltrajeDesde	= $("#idValorFiltrajeDesde").val();
+			var idValorFiltrajeHasta	= $("#idValorFiltrajeHasta").val();
+			paramDefs	= "{\"1\":\"pop_dens > "+idValorFiltrajeDesde+" and pop_dens < "+idValorFiltrajeHasta+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "["+idValorFiltrajeDesde+"-"+idValorFiltrajeHasta+"]");
+		}
+	} else if(srlIdCapa == "45") {//tem_costo_oportunidad_deforestacion
+		var idCriterioFiltroNumerico	= $("#idCriterioFiltroNumerico").val();
+		if(idCriterioFiltroNumerico == "mayor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"COP_tCo2_h > "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "> "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "menor") {
+			var idValorFiltraje	= $("#idValorFiltraje").val();
+			paramDefs	= "{\"0\":\"COP_tCo2_h < "+idValorFiltraje+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "< "+idValorFiltraje);
+		} else if(idCriterioFiltroNumerico == "rango") {
+			var idValorFiltrajeDesde	= $("#idValorFiltrajeDesde").val();
+			var idValorFiltrajeHasta	= $("#idValorFiltrajeHasta").val();
+			paramDefs	= "{\"0\":\"COP_tCo2_h > "+idValorFiltrajeDesde+" and COP_tCo2_h < "+idValorFiltrajeHasta+"\"}";
+			$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", "["+idValorFiltrajeDesde+"-"+idValorFiltrajeHasta+"]");
+		}
+	}
+	*/
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).css("display", "");
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("paramDefs", paramDefs);
+	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
+	
+	refrescarVisualizarCapa(srlIdCapa);
+//	var valSelect		= $(".clsDivACL").find("select").val();
+//	valSelect			= valSelect.join('|');
+//	var valSelectTxt	= $(".clsDivACL").find("button[data-id=combo_area_ACL]").attr("title");
+//	var paramDefs		= evaluarConfiguracionFiltroACL(srlIdCapa, valSelect);
+	
+	$('.identificar-area-criterio-logico-filtraje-numerico-modal').modal('hide');
+}
+function actualizarFiltrajeNumericoACLEvent() {
+	var idCriterioFiltroNumerico	= $("#idCriterioFiltroNumerico").val();
+	if(idCriterioFiltroNumerico == "mayor") {
+		$("#idDivFiltrajeNumericoValor").css("display","");
+		$("#idDivFiltrajeNumericoRango").css("display","none");
+		$("#idValorFiltrajeDesde").val("");
+		$("#idValorFiltrajeHasta").val("");
+		$("#idValorFiltraje").val("");
+	} else if(idCriterioFiltroNumerico == "menor") {
+		$("#idDivFiltrajeNumericoValor").css("display","");
+		$("#idDivFiltrajeNumericoRango").css("display","none");
+		$("#idValorFiltrajeDesde").val("");
+		$("#idValorFiltrajeHasta").val("");
+		$("#idValorFiltraje").val("");
+	} else if(idCriterioFiltroNumerico == "rango") {
+		$("#idDivFiltrajeNumericoValor").css("display","none");
+		$("#idDivFiltrajeNumericoRango").css("display","");
+		$("#idValorFiltrajeDesde").val("");
+		$("#idValorFiltrajeHasta").val("");
+		$("#idValorFiltraje").val("");
+	}
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function procesarCriterioLogico() {
+	procesarCriterioLogicoExecute(false);
+}
+
+function procesarCriterioLogicoExecute(esOrigenProcesarAPA, wkt, idCapa) {
 	blockui();
 	var listSrlIdCapaCons			= "";
 	var listIdDataCapaCons			= "";
@@ -225,7 +418,7 @@ function procesarCriterioLogico() {
 	var listSrlIdCapaConsRASTER		= "";
 	var listIdDataCapaConsRASTER	= "";
 	var listIdDataCapaCriConsRASTER	= "";
-	guardarCapasSeleccionadasACL();
+	//guardarCapasSeleccionadasACL();
 	$(".clsDivDetFiltroACL").each(function(index) {
 		var valSelect		= $(this).attr("valSelect");//Ambos
 		var valSelectDesde	= $(this).attr("valSelectDesde");//Solo Umbrales
@@ -262,8 +455,13 @@ function procesarCriterioLogico() {
 			listIdDataCapaCriCons	+= "";
 		}
 	});
-	if(listSrlIdCapaCons.length <= 0) {
+	if(!esOrigenProcesarAPA && listSrlIdCapaCons.length <= 0) {
 		alert("Debe incluir por lo menos una capa de tipo vectorial");
+		unblockui();
+		return;
+	}
+	if(esOrigenProcesarAPA && listSrlIdCapaCons.length <= 0 && listSrlIdCapaConsRASTER.length <= 0) {
+		//unblockui();
 		return;
 	}
 	if(listSrlIdCapaConsRASTER.length > 0) {
@@ -276,23 +474,64 @@ function procesarCriterioLogico() {
 		listIdDataCapaCons		+= listIdDataCapaConsRASTER;
 		listIdDataCapaCriCons	+= listIdDataCapaCriConsRASTER;
 	}
-	var param	= {
-			listSrlIdCapaConsulta: listSrlIdCapaCons,
-			listIdDataCapaConsulta: listIdDataCapaCons,
-			listIdDataCapaCriConsulta: listIdDataCapaCriCons,
-	};
+	var param	= null;
+	if(wkt) {//Para los casos, dib rect y pol, cargar polig desde zip
+		param	= {
+				listSrlIdCapaConsulta: listSrlIdCapaCons,
+				listIdDataCapaConsulta: listIdDataCapaCons,
+				listIdDataCapaCriConsulta: listIdDataCapaCriCons,
+				strPoligonoConsulta: wkt,
+				zoomLevel: map.getView().getZoom(),
+				esRaster:true
+			};
+	} else if(idCapa) {//Solo para el caso de click derecho
+		param	= {
+				listSrlIdCapaConsulta: listSrlIdCapaCons,
+				listIdDataCapaConsulta: listIdDataCapaCons,
+				listIdDataCapaCriConsulta: listIdDataCapaCriCons,
+				strIdCapaConsulta: idCapa,
+				zoomLevel: map.getView().getZoom(),
+				esRaster:true
+			};
+	} else {
+		param	= {
+				listSrlIdCapaConsulta: listSrlIdCapaCons,
+				listIdDataCapaConsulta: listIdDataCapaCons,
+				listIdDataCapaCriConsulta: listIdDataCapaCriCons,
+				zoomLevel: map.getView().getZoom(),
+				esRaster:true
+		};
+	}
+	$.ajax({
+		data:param,
+		url:'consultaACLFuxion.action',
+		type:'post',
+		async:false,
+		dataType:"json",
+		beforeSend:function(){},
+		success:function(response){
+			if(!esOrigenProcesarAPA) {
+				procesarAnalizarPorArea(null, null);
+			/*} else {
+				unblockui();*/
+			}
+		}
+	});
+	/*
 	$.post("consultaACLFuxion.action", param, function(datos) {
-		unblockui();
-		procesarReporteACL();
-//		procesarReporteACL(datos.strGeometriaRespuesta);
-		$(".identificar-area-criterio-logico-modal").modal('hide');
+		if(!esOrigenProcesarAPA) {
+			procesarAnalizarPorArea(null, null);
+		} else {
+			unblockui();
+		}
 	},"json");
+	*/
+	
 }
-
+/*
 function procesarReporteACL() {
-	blockui();
 	var srlIdCapas="";
-	$("input[name=capaIdentACL]").each(function(index) {
+	$("input[name=capasBase]").each(function(index) {
 		var input	= $(this);
 		console.log("+ input="+input.val()+" isChecked="+input.is(':checked'));
 		if(input.is(':checked')) {
@@ -304,28 +543,85 @@ function procesarReporteACL() {
 	});
 	var param	= null;
 	param	= {
-			listSrlIdCapaConsulta: srlIdCapas
+			listSrlIdCapaConsulta: srlIdCapas,
+			zoomLevel: map.getView().getZoom()
 		};
 	
 	$.post('consultaCapas.action', param, function(datos) {
-		$('.reporte-capas-modal').off('shown.bs.modal');
-		$('.reporte-capas-modal').off('hidden.bs.modal');
-		$('.reporte-capas-modal').on('shown.bs.modal', function (e) {
-		});
-		$('.reporte-capas-modal').on('hidden.bs.modal', function (e) {
-		});
+		$("#idDivReporte").html("");
+		$('.seleccionar-capas-modal').css("display", "none");
+		$('.reporte-capas-modal').css("display", "");
+		
 		$("#idDivReporte").html(datos);
-		$('.reporte-capas-modal').modal('show');
 		unblockui();
 	});
 }
-function seleccionarTodosACL() {
-	var checkedTodos	= true;
-	$("input[name=capaIdentACL]").each(function(index) {
-		checkedTodos	&= $(this).is(':checked');
+*/
+function ocutarReporte() {
+	$('.seleccionar-capas-modal').css("display", "");
+	$('.reporte-capas-modal').css("display", "none");
+	dibujarEnMapaOcultar();
+}
+function mostrarReporte() {
+	$('.seleccionar-capas-modal').css("display", "none");
+	$('.reporte-capas-modal').css("display", "");
+	dibujarEnMapaMostrar();
+}
+function limpiarCapasEspACL(inputCheckBox) {
+	var elementFiltro		= inputCheckBox.parent().parent().find(".clsDivDetFiltroACL");
+	var elementFiltroTitle	= inputCheckBox.parent().parent().find(".clsDivDetFiltroACLTitle");
+
+	var srlIdCapa	= elementFiltroTitle.attr("srlIdCapa");
+	elementFiltro.removeAttr("valSelect");
+	elementFiltro.removeAttr("valSelectDesde");
+	elementFiltro.removeAttr("valSelectHasta");
+	elementFiltro.removeAttr("valCriterio");
+	elementFiltro.removeAttr("srlIdCapa");
+	elementFiltro.removeAttr("title");
+	elementFiltro.removeAttr("rangoUmbralVis");
+	elementFiltroTitle.removeAttr("paramDefs");
+	elementFiltroTitle.removeAttr("valSelect");
+	elementFiltroTitle.removeAttr("valSelectDesde");
+	elementFiltroTitle.removeAttr("valSelectHasta");
+	elementFiltroTitle.removeAttr("valCriterio");
+	elementFiltroTitle.removeAttr("srlIdCapa");
+	elementFiltroTitle.removeAttr("title");
+	elementFiltroTitle.removeAttr("rangoUmbralVis");
+	elementFiltroTitle.css("display", "none");
+	dataComboFiltrajeNumericoACL[srlIdCapa]	= null;
+	dataComboFiltroACL[srlIdCapa]			= null;
+}
+function limpiarCapasSeleccionadasACL() {
+	$(".clsDivDetFiltroACL").each(function(index) {
+		$(this).removeAttr("valSelect");
+		$(this).removeAttr("valSelectDesde");
+		$(this).removeAttr("valSelectHasta");
+		$(this).removeAttr("valCriterio");
+		$(this).removeAttr("srlIdCapa");
+		$(this).removeAttr("title");
+		$(this).removeAttr("rangoUmbralVis");
 	});
-	$("input[name=capaIdentACL]").each(function(index) {
-		$(this).prop('checked', !checkedTodos);
+	$(".clsDivDetFiltroACLTitle").each(function(index) {
+		$(this).removeAttr("paramDefs");
+		$(this).removeAttr("valSelect");
+		$(this).removeAttr("valSelectDesde");
+		$(this).removeAttr("valSelectHasta");
+		$(this).removeAttr("valCriterio");
+		$(this).removeAttr("srlIdCapa");
+		$(this).removeAttr("title");
+		$(this).removeAttr("rangoUmbralVis");
+		$(this).css("display", "none");
 	});
-	guardarCapasSeleccionadasACL();
+//	$(".capasBase").each(function(index) {
+//		if($(this).is(':checked')) {
+//			mostrarCapaById($(this).val());
+//		} else {
+//			ocultarCapaById($(this).val());
+//		}
+//	});
+	ocultarTodasCapas();
+	iniciarCapasSeleccionadasDefault();
+	dataComboFiltrajeNumericoACL	= new Array();
+	dataComboFiltroACL				= new Array();
+
 }

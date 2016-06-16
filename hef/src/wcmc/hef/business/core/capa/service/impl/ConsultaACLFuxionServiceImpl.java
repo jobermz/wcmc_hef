@@ -16,5 +16,19 @@ public class ConsultaACLFuxionServiceImpl implements ConsultaACLFuxionService {
 	public String selectFuxion(ConsultaACLFuxion consultaACLFuxion) {
 		return consultaACLFuxionMapper.selectFuxion(consultaACLFuxion);
 	}
-
+	public String selectBoundary(String value) {
+		return consultaACLFuxionMapper.selectBoundary(value);
+	}
+	public String selectBBOX(String value) {
+		return consultaACLFuxionMapper.selectBBOX(value);
+	}
+	public String selectBBOX4326(String value) {
+		return consultaACLFuxionMapper.selectBBOX4326(value);
+	}
+	public String selectCenter4326(String value) {
+		return consultaACLFuxionMapper.selectCenter4326(value);
+	}
+	public String selectCenter_Y_X_4326(String value) {
+		return consultaACLFuxionMapper.selectCenter_Y_X_4326(value);
+	}
 }

@@ -72,6 +72,7 @@ public class CapaUsuarioAction extends ActionSupport {
 						capaDto.setStrEsCentrarMapa("N");
 						capaDto.setStrEsFiltroAcl("N");
 						capaDto.setStrEsSelecApa("N");
+						capaDto.setStrEsActiva("S");
 						capaDto.setIntIdUsuario(cuentaUsuarioDto.getSrlId());
 						capaService.guardar(capaDto);
 						

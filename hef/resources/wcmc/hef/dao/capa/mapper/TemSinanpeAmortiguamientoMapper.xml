@@ -7,7 +7,7 @@
 		<result column="cd_objectid" property="lngObjectid" jdbcType="INTEGER"/>
 		<result column="de_za_nomb" property="strZaNomb" jdbcType="VARCHAR"/>
 		<result column="de_za_bale" property="strZaBale" jdbcType="VARCHAR"/>
-		<result column="fc_za_fecr" property="dteZaFecr" jdbcType="DATE"/>
+<!-- 		<result column="fc_za_fecr" property="dteZaFecr" jdbcType="DATE"/> -->
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemSinanpeAmortiguamientoMap" parameterType="wcmc.hef.dao.capa.domain.TemSinanpeAmortiguamientoParamDef">
 		select
@@ -174,24 +174,21 @@
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
 		cd_objectid, 
 		de_za_nomb, 
-		de_za_bale, 
-		fc_za_fecr
+		de_za_bale 
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 
 		ST_AsText(si_the_geom) as si_the_geom, 
 		cd_objectid, 
 		de_za_nomb, 
-		de_za_bale, 
-		fc_za_fecr
+		de_za_bale 
 	</sql>
 	<sql id="Base_Column_List_Combo">
 		cd_gid, 
 		'' as si_the_geom, 
 		cd_objectid, 
 		de_za_nomb, 
-		de_za_bale, 
-		fc_za_fecr
+		de_za_bale 
 	</sql>
 
 </mapper>

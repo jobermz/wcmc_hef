@@ -44,7 +44,9 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.geotools.renderer.GTRenderer;
 import org.geotools.renderer.lite.StreamingRenderer;
 import org.geotools.styling.FeatureTypeStyle;
+import org.geotools.styling.Fill;
 import org.geotools.styling.LineSymbolizer;
+import org.geotools.styling.PolygonSymbolizer;
 import org.geotools.styling.Rule;
 import org.geotools.styling.Stroke;
 import org.geotools.styling.Style;
@@ -82,6 +84,7 @@ public class GeotoolsFull {
 			ex.printStackTrace();
 		}
 	}
+	
 	public String convertirShapeToImagen(String strShapeFileDemo, String strFileTempName) throws Exception {
 		List<Map<String, String>> listMapShape	= new ArrayList<Map<String, String>>();
 		Map<String, String> mapOutShape			= null;
@@ -295,15 +298,21 @@ public class GeotoolsFull {
 	private static Style demoStyle(String typeName) throws Exception {
 		StyleFactory sf		= CommonFactoryFinder.getStyleFactory(GeoTools.getDefaultHints());
 		FilterFactory2 ff	= CommonFactoryFinder.getFilterFactory2(GeoTools.getDefaultHints());
-		Stroke stroke		= sf.createStroke(ff.literal(CadenaUtil.generaColorAleatorio(50)), ff.literal(2));
 		
-		LineSymbolizer lineSymbolizer = sf.createLineSymbolizer();
-		lineSymbolizer.setStroke(stroke);
+//		Stroke stroke		= sf.createStroke(ff.literal(CadenaUtil.generaColorAleatorio(50)), ff.literal(2));
+//		LineSymbolizer lineSymbolizer = sf.createLineSymbolizer();
+//		lineSymbolizer.setStroke(stroke);
+		
+		Fill fill = sf.fill(null, ff.literal(CadenaUtil.generaColorAleatorio(50)), ff.literal(1.0));
+//		fill.setOpacity(ff.literal(0.3));
+		PolygonSymbolizer polygonSymbolizer = sf.createPolygonSymbolizer();
+		polygonSymbolizer.setFill(fill);
 		
 		Rule rule			= sf.createRule();
 		rule.setFilter(Filter.INCLUDE);
 		
-		rule.setSymbolizers(new Symbolizer[] { lineSymbolizer });
+//		rule.setSymbolizers(new Symbolizer[] { lineSymbolizer });
+		rule.setSymbolizers(new Symbolizer[] { polygonSymbolizer });
 		
 		FeatureTypeStyle type = sf.createFeatureTypeStyle();
 		type.setFeatureTypeName(typeName);

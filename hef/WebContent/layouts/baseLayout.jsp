@@ -25,6 +25,8 @@ request.setAttribute("CURR_DAY", strTimeDay);
 	<link href="tools/bootstrap-datatables/css/datatables.bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="tools/bootstrap-datatables/css/datatables-responsive.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="tools/bootstrap-select/css/bootstrap-select.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/build.css">
 	
 	<script src="tools/jquery-ui-1.10.4.custom_cupertino/js/jquery-1.10.2.js"></script>
 	<script src="tools/jquery-ui-1.10.4.custom_cupertino/js/jquery-ui-1.10.4.custom.js"></script>
@@ -41,13 +43,17 @@ request.setAttribute("CURR_DAY", strTimeDay);
 	<script	src="tools/bootstrap-datatables/js/datatables.bootstrap.js" type="text/javascript"></script>
 	<script src="tools/bootstrap-datatables/js/datatables-responsive.js" type="text/javascript"></script>
 	<script src="tools/bootstrap-select/js/bootstrap-select.js"></script>
+	<script src="js/bootstrap-select/i18n/defaults-es_CL.js"></script>
+	
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	
 	<link rel="stylesheet" href="css/comun.css?day=${CURR_DAY}">
-	<link href="css/visor/visorInicio.css?day=${CURR_DAY}" rel="stylesheet" type="text/css">
-	<script src="js/visor/visorInicioAnalizarPorArea.js?day=${CURR_DAY}" type="text/javascript"></script>
-	<script src="js/visor/visorInicioIdentificarAreaCriterioLogico.js?day=${CURR_DAY}" type="text/javascript"></script>
-	<script src="js/visor/visorCapasUploadInicio.js?day=${CURR_DAY}" type="text/javascript"></script>
-	
+<%-- 	<link href="css/visor/visorInicio.css?day=${CURR_DAY}" rel="stylesheet" type="text/css"> --%>
+<%-- 	<script src="js/visor/visorInicioAnalizarPorArea.js?day=${CURR_DAY}" type="text/javascript"></script> --%>
+<%-- 	<script src="js/visor/visorInicioIdentificarAreaCriterioLogico.js?day=${CURR_DAY}" type="text/javascript"></script> --%>
+<%-- 	<script src="js/visor/visorCapasUploadInicio.js?day=${CURR_DAY}" type="text/javascript"></script> --%>
+<%-- 	<script src="js/visor/visorConfigurarFiltroRasterACLInicio.js?day=${CURR_DAY}" type="text/javascript"></script> --%>
+	<script src="js/visor/visorConfigurarFiltroACLInicio.js?day=${CURR_DAY}" type="text/javascript"></script>
 	
 	<tiles:useAttribute id="css" name="styles" classname="java.util.List" />
 	<c:forEach var="item" items="${css}">
@@ -59,6 +65,7 @@ request.setAttribute("CURR_DAY", strTimeDay);
 		classname="java.util.List" />
 	<c:forEach var="item" items="${js_list}">
 		<script src="${item}?day=${CURR_DAY}" type="text/javascript"></script>
+<%-- 		<script src="${item}" type="text/javascript"></script> --%>
 	</c:forEach>
 
 	<title>.::Hef::.</title>
@@ -66,6 +73,7 @@ request.setAttribute("CURR_DAY", strTimeDay);
 <body style="background-color: black;">
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="content" />
+	<tiles:insertAttribute name="footer" />
 	<div id="divModalmsg"></div>
 </body>
 </html>
