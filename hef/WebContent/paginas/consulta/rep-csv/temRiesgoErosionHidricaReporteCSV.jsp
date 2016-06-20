@@ -5,5 +5,5 @@
 response.setHeader("Content-Disposition", "filename=TemRiesgoErosionHidrica.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor mínimo;Valor máxinimo
-${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMinSinDecimales};${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMaxSinDecimales}
+%>Valor mínimo,Valor máxinimo
+${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMinSinDecimales},${sessionScope.reporte.beanTemRiesgoErosionHidrica.strValueMaxSinDecimales}

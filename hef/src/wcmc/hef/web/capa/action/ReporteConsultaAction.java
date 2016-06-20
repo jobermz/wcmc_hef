@@ -55,6 +55,7 @@ public class ReporteConsultaAction extends ActionSupport {
 			Map<String, Object> mapReporte			= (Map<String, Object>)session.get("reporte");
 			Map<String, String> mapReporteNombres	= (Map<String, String>)session.get("mapReporteNombres");
 			
+			
 			Iterator<String> iteraKey	= mapReporte.keySet().iterator();
 			List<String> litKey	= new ArrayList<String>();
 			
@@ -72,9 +73,12 @@ public class ReporteConsultaAction extends ActionSupport {
 			map		= new HashMap<String, Object>();
 			Map<String, Object> mapImg		= new HashMap<String, Object>();
 			String strFileTempName			= CadenaUtil.getStr(session.get("NombreImagenReporteTemp"));
+			String strFileGmapTempName		= CadenaUtil.getStr(session.get("NombreImagenGMapReporteTemp"));
+			
 			//File fileTemporal				= new File(strRepositorioTemporal+File.separator+strFileTempName+".png");
 			
-			mapImg.put("strRutaImagen", strRepositorioTemporal + File.separator + strFileTempName + ".jpg");
+			mapImg.put("strRutaMPeru", strRepositorioTemporal + File.separator + strFileGmapTempName + ".jpg");
+			mapImg.put("strRutaDetalle", strRepositorioTemporal + File.separator + strFileTempName + ".jpg");
 			listMapRep.add(mapImg);
 			map.put("dataReporte", new JRMapCollectionDataSource(listMapRep));
 			map.put("strNombreReporte", "imagenReporte.jasper");//listTemZonificPotencialBosqueProduccionPermanente

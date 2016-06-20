@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemCarbonoEcozonas.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre Ecozona;Densidad de Carbono media estimada
-<s:iterator value="#session.reporte.listTemCarbonoEcozonas" var="reporte">${reporte.strEcozona};${reporte.strTcHa}
+%>Nombre Ecozona,Densidad de Carbono media estimada
+<s:iterator value="#session.reporte.listTemCarbonoEcozonas" var="reporte">${reporte.strEcozona},${reporte.strTcHa}
 </s:iterator>

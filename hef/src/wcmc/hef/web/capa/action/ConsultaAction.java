@@ -2,7 +2,6 @@ package wcmc.hef.web.capa.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,24 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import wcmc.hef.business.core.configuracion.dto.CampoMetadataDto;
 import wcmc.hef.business.core.configuracion.dto.CapaDto;
-import wcmc.hef.business.core.configuracion.dto.GeometriaUsuarioDto;
 import wcmc.hef.business.core.configuracion.service.CampoMetadataService;
 import wcmc.hef.business.core.configuracion.service.CapaService;
 import wcmc.hef.business.core.configuracion.service.GeometriaUsuarioService;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
-
 import wcmc.hef.business.core.capa.service.BasHidroRios100000Service;
 import wcmc.hef.business.core.capa.service.BasHidroRiosLagunasService;
 import wcmc.hef.business.core.capa.service.BasLimAmazoniaService;
@@ -75,17 +66,13 @@ import wcmc.hef.business.core.capa.service.TemSoeconSolicitudCreacionReservasTer
 import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
-import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
 import wcmc.hef.business.core.capa.dto.BeanRasterDto;
 import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
-import wcmc.hef.dao.capa.domain.BasHidroRios100000;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorial;
 import wcmc.hef.dao.capa.domain.BaseBeanVectorialImpl;
 import wcmc.hef.dao.capa.domain.BeanRaster;
 import wcmc.hef.dao.capa.domain.ConsultaACLFuxion;
 import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
-import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
-import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
 import wcmc.hef.dao.capa.domain.BasLimAmazonia;
 import wcmc.hef.business.core.capa.dto.BasLimDepartamentoDto;
@@ -136,8 +123,6 @@ import wcmc.hef.business.core.capa.dto.TemCostoOportunidadDeforestacionDto;
 import wcmc.hef.dao.capa.domain.TemCostoOportunidadDeforestacion;
 import wcmc.hef.business.core.capa.dto.TemCoverturaVegetal2015Dto;
 import wcmc.hef.dao.capa.domain.TemCoverturaVegetal2015;
-import wcmc.hef.business.core.capa.dto.TemCuencasHidrograficasDto;
-import wcmc.hef.dao.capa.domain.TemCuencasHidrograficas;
 import wcmc.hef.business.core.capa.dto.TemHumedalesRamsarDto;
 import wcmc.hef.dao.capa.domain.TemHumedalesRamsar;
 import wcmc.hef.business.core.capa.dto.TemIndiceImportanciaBiologicaDto;
@@ -164,13 +149,10 @@ import wcmc.hef.business.core.capa.dto.TemViasTrochasDto;
 import wcmc.hef.dao.capa.domain.TemViasTrochas;
 import wcmc.hef.business.core.capa.dto.TemZonificPotencialBosqueProduccionPermanenteDto;
 import wcmc.hef.dao.capa.domain.TemZonificPotencialBosqueProduccionPermanente;
-import wcmc.hef.dao.configuracion.domain.CampoMetadata;
 import wcmc.hef.dao.configuracion.domain.Capa;
-import wcmc.hef.dao.configuracion.domain.GeometriaUsuario;
 import wcmc.hef.general.util.CadenaUtil;
 import wcmc.hef.general.util.ConfiguracionProperties;
 import wcmc.hef.general.util.Geotools;
-import wcmc.hef.general.util.GeotoolsFullImagen;
 import wcmc.hef.general.util.GeotoolsImagen;
 import wcmc.hef.general.util.ImagenUtil;
 import wcmc.hef.general.util.RedUtil;
@@ -562,6 +544,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "BasLimAmazoniaService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -581,6 +564,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "BasHidroRiosLagunasService":
@@ -635,6 +619,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "BasViasRedVialVecinalService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -654,10 +639,12 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "BasViasRedVialNacionalService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -677,10 +664,12 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "BasViasRedVialDepartamentalService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -700,10 +689,12 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemViaFerreaService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -723,10 +714,12 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemViasTrochasService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -746,6 +739,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemSoeconComunidadesCampesinasTotalesService":
@@ -1256,6 +1250,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "TemCoverturaVegetal2015Service":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -1275,6 +1270,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemCarbonoEcozonasService":
@@ -1348,6 +1344,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "TemProyeccionDensidadPob2015Service":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -1367,6 +1364,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemCostoOportunidadDeforestacionService":
@@ -1508,6 +1506,7 @@ public class ConsultaAction extends ActionSupport {
 					}
 					case "TemRiesgoErosionHidricaService":
 					{
+						/*
 						Thread t= new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -1526,6 +1525,7 @@ public class ConsultaAction extends ActionSupport {
 							}
 						});
 						listThread.add(t);
+						*/
 						break;
 					}
 					case "TemCoberturaBoscosa2014Service":
@@ -1581,6 +1581,7 @@ public class ConsultaAction extends ActionSupport {
 			}
 			
 			prepararCapasReporte(listConsulta, mapServ);
+			prepararCapasReporteGMaps();
 			
 			while(true) {
 				synchronized(this) {
@@ -1601,7 +1602,6 @@ public class ConsultaAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-
 	public String evaluarGeometrias(List<BaseBeanVectorial> listReporte) {
 		ConsultaACLFuxion consultaACLFuxion		= new ConsultaACLFuxion();
 		String strGeomRS	= "";
@@ -1624,6 +1624,7 @@ public class ConsultaAction extends ActionSupport {
 	
 	public void prepararCapasReporte(List<String> listConsulta, Map<String, String> mapServ) throws Exception {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
 		String strBbox					= consultaACLFuxionService.selectBBOX(strPoligonoConsulta);
 		final String strBbox4326		= consultaACLFuxionService.selectBBOX4326(strPoligonoConsulta);
 		zoomLevel			= ""+(CadenaUtil.getInte(zoomLevel)+1);
@@ -1644,8 +1645,8 @@ public class ConsultaAction extends ActionSupport {
 		
 		int altoOri		= (int)Math.abs(ylong);
 		int anchoOri	= (int)Math.abs(xlong);
-		int alto		= altoOri;
-		int ancho		= anchoOri;
+//		int alto		= altoOri;
+//		int ancho		= anchoOri;
 		final int[] newDim	= new int[] {-1,-1};
 		List<byte[]> listArrByteImage					= null;
 		List<byte[]> listArrByteImageGmap				= new ArrayList<byte[]>();
@@ -1657,18 +1658,18 @@ public class ConsultaAction extends ActionSupport {
 		final List<String> listThreadRSLayer			= new Vector<String>();
 
 		String gmaps	= request.getParameter("gmaps");
-		listArrByteImageGmap.add(cargarGoogleMaps(strBbox4326, gmaps, anchoOri, altoOri, anchoOri, altoOri));
+		listArrByteImageGmap.add(cargarGoogleMaps(strBbox4326, gmaps, anchoOri, altoOri, anchoOri, altoOri, CadenaUtil.getInte(zoomLevel)));
 		
 		listArrByteImage					= new ArrayList<byte[]>();
 		listArrByteImage.addAll(listArrByteImageGmap);
 		listArrByteImage.addAll(listArrByteImageLayer);
 		
-		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strPoligonoConsulta, ancho, alto);
+		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strPoligonoConsulta, anchoOri, altoOri);
 		listArrByteImage.add(bytImageSeleccion);
 
-		byte[] bytImageTemp				= ImagenUtil.fuxionarImagenPNG(listArrByteImage, ancho, alto);
+		byte[] bytImageTemp				= ImagenUtil.fuxionarImagenPNG(listArrByteImage, anchoOri, altoOri);
 
-		byte[] bytImage				= ImagenUtil.comprimirImagenJPG(bytImageTemp, ancho, alto);
+		byte[] bytImage				= ImagenUtil.comprimirImagenJPG(bytImageTemp, anchoOri, altoOri);
 		FileOutputStream fos	= null;
 		try {
 			String strFileTempName	= ""+new Date().getTime();
@@ -1677,6 +1678,71 @@ public class ConsultaAction extends ActionSupport {
 			if(ActionContext.getContext() != null) {
 				Map<String, Object> session		= ActionContext.getContext().getSession();
 				session.put("NombreImagenReporteTemp", strFileTempName);
+			}
+			fos	= new FileOutputStream(file);
+			fos.write(bytImage);
+			fos.flush();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {fos.close();}catch (Exception ex){}
+		}
+	}
+	public static void main(String args[]){
+		try{
+			ConsultaAction c	= new ConsultaAction();
+			c.setStrPoligonoConsulta("POLYGON((-77.3876953125 -10.390571576337706,-77.3876953125 -13.165073873513023,-75.03662109375 -13.165073873513023,-75.03662109375 -10.390571576337706,-77.3876953125 -10.390571576337706))");
+			c.prepararCapasReporteGMaps();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void prepararCapasReporteGMaps() throws Exception {
+		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+		String strBoxMapaPeru			= "LINESTRING(-81.9580078125 -18.7503098131406,-81.9580078125 0.461420793530621,-68.115234375 0.461420793530621,-68.115234375 -18.7503098131406,-81.9580078125 -18.7503098131406)";
+		final String strBbox4326		= consultaACLFuxionService.selectBBOX4326(strBoxMapaPeru);
+		int zoom			= CadenaUtil.getInte(5);
+		String[] arrBbox	= strBbox4326.split(",");//<xmin>, <ymin>, <xmax>, <ymax>
+		System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
+		
+		double xmin		= CadenaUtil.getDoub(arrBbox[0]);
+		double ymin		= CadenaUtil.getDoub(arrBbox[1]);
+		double xmax		= CadenaUtil.getDoub(arrBbox[2]);
+		double ymax		= CadenaUtil.getDoub(arrBbox[3]);
+		
+		double[] arrPixMin	= convertirWorlCoordinateEnPixeles(xmin, ymin, zoom);
+		double[] arrPixMax	= convertirWorlCoordinateEnPixeles(xmax, ymax, zoom);
+		
+		double ylong	= arrPixMax[1] - arrPixMin[1];
+		double xlong	= arrPixMax[0] - arrPixMin[0];
+		
+		int altoOri		= (int)Math.abs(ylong);
+		int anchoOri	= (int)Math.abs(xlong);
+		
+		List<byte[]> listArrByteImage					= null;
+		List<byte[]> listArrByteImageGmap				= new ArrayList<byte[]>();
+		
+		String gmaps	= request.getParameter("gmaps");
+//		String gmaps	= "ROADMAP";
+		listArrByteImageGmap.add(cargarGoogleMaps(strBbox4326, gmaps, anchoOri, altoOri, anchoOri, altoOri, zoom));
+		
+		listArrByteImage					= new ArrayList<byte[]>();
+		listArrByteImage.addAll(listArrByteImageGmap);
+		
+		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strBoxMapaPeru, strPoligonoConsulta, anchoOri, altoOri, "#0000FF", 5);
+		listArrByteImage.add(bytImageSeleccion);
+
+		byte[] bytImageTemp				= ImagenUtil.fuxionarImagenPNG(listArrByteImage, anchoOri, altoOri);
+
+		byte[] bytImage				= ImagenUtil.comprimirImagenJPG(bytImageTemp, anchoOri, altoOri);
+		FileOutputStream fos	= null;
+		try {
+			String strFileTempName	= ""+new Date().getTime();
+			String strRutaRepTemp	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.REPOSITORIO_DOCS_TEMPORAL);
+			File file	= new File(strRutaRepTemp+File.separator+strFileTempName+".jpg");
+			if(ActionContext.getContext() != null) {
+				Map<String, Object> session		= ActionContext.getContext().getSession();
+				session.put("NombreImagenGMapReporteTemp", strFileTempName);
 			}
 			fos	= new FileOutputStream(file);
 			fos.write(bytImage);
@@ -1719,7 +1785,7 @@ public class ConsultaAction extends ActionSupport {
 		return bytImageLastRS;
 	}
 	
-	public byte[] cargarGoogleMaps(String strBbox, String gmaps, int anchoOri, int altoOri, int anchoLoad, int altoLoad) throws Exception {
+	public byte[] cargarGoogleMaps(String strBbox, String gmaps, int anchoOri, int altoOri, int anchoLoad, int altoLoad, int currZoomLevel) throws Exception {
 		
 		String[] arrBbox	= strBbox.split(",");//<xmin>, <ymin>, <xmax>, <ymax>
 		double xmin			= CadenaUtil.getDoub(arrBbox[0]);
@@ -1734,8 +1800,8 @@ public class ConsultaAction extends ActionSupport {
 		int alto		= altoOri;
 		int ancho		= anchoOri;
 
-		final int zoom			= CadenaUtil.getInte(zoomLevel);
-		System.out.println("zoom="+zoomLevel);
+		final int zoom			= currZoomLevel;
+		System.out.println("zoom="+currZoomLevel);
 
 		final StringBuffer sbUrl	= new StringBuffer();
 		

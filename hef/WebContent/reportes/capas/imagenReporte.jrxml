@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11d336ad-671a-4450-8863-1d041f1a0af0">
 	<property name="ireport.zoom" value="0.7513148009015779"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="2"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
 	<field name="strRutaMPeru" class="java.lang.String"/>
@@ -22,13 +22,13 @@
 		</band>
 	</title>
 	<detail>
-		<band height="361" splitType="Stretch">
+		<band height="465" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="40" y="0" width="233" height="361" uuid="649cce23-73be-4882-82dc-7aa960794969"/>
+				<reportElement x="0" y="0" width="330" height="462" uuid="649cce23-73be-4882-82dc-7aa960794969"/>
 				<imageExpression><![CDATA[$F{strRutaMPeru}]]></imageExpression>
 			</image>
-			<image>
-				<reportElement x="386" y="0" width="361" height="361" uuid="e1662c58-f26f-43e8-b3fb-69b6249168c3"/>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="364" y="0" width="438" height="462" uuid="e1662c58-f26f-43e8-b3fb-69b6249168c3"/>
 				<imageExpression><![CDATA[$F{strRutaDetalle}]]></imageExpression>
 			</image>
 		</band>

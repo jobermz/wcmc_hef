@@ -11,6 +11,7 @@ public class TemIndiceImportanciaBiologica extends TemIndiceImportanciaBiologica
     private String strHashConsulta;
 	private String strTheGeom;
 	private Double dblImpGlob;
+	private String strDescUmbral;
 
     public void setStrHashConsulta(String strHashConsulta) {
         this.strHashConsulta = strHashConsulta;
@@ -41,6 +42,12 @@ public class TemIndiceImportanciaBiologica extends TemIndiceImportanciaBiologica
 	}
 	public void setDblImpGlob(Double dblImpGlob) {
 		this.dblImpGlob = dblImpGlob;
+	}
+	public String getStrDescUmbral() {
+		return strDescUmbral;
+	}
+	public void setStrDescUmbral(String strDescUmbral) {
+		this.strDescUmbral = strDescUmbral;
 	}
 	
 }

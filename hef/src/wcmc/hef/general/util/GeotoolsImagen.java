@@ -28,6 +28,7 @@ import org.geotools.map.MapContent;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.geotools.renderer.GTRenderer;
 import org.geotools.renderer.lite.StreamingRenderer;
+import org.geotools.resources.BoundingBoxes;
 import org.geotools.styling.FeatureTypeStyle;
 import org.geotools.styling.Fill;
 import org.geotools.styling.LineSymbolizer;
@@ -41,6 +42,7 @@ import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.filter.Filter;
 import org.opengis.filter.FilterFactory2;
+import org.opengis.geometry.BoundingBox;
 
 import com.sun.mail.util.BASE64EncoderStream;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
@@ -69,15 +71,34 @@ public class GeotoolsImagen {
 	}
 	
 	public byte[] convertirShapeToImagen(String strWkt, int intAncho, int intAlto) throws Exception {
-		WKTReader reader	= new WKTReader( new GeometryFactory() );
-//		Geometry point		= (Geometry) reader.read("LINESTRING(1 2, 3 4)");
-		Geometry point		= (Geometry) reader.read(strWkt);
+		WKTReader reader		= new WKTReader( new GeometryFactory() );
+		Geometry point			= (Geometry) reader.read(strWkt);
 		try {
 			List<Geometry> listGeom	= new ArrayList<Geometry>();
 			listGeom.add(point);
 			SimpleFeatureSource feSource	= createSimpleFeatureSource(listGeom);
 			
 			return saveImage(feSource, intAncho, intAlto);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			throw new Exception(ex.getMessage());
+		} finally {
+		}
+	}
+	
+	public byte[] convertirShapeToImagen(String strWktBounds, String strWkt, int intAncho, int intAlto, String strColor, int intGrosor) throws Exception {
+		WKTReader reader		= new WKTReader( new GeometryFactory() );
+		Geometry point			= (Geometry) reader.read(strWkt);
+		Geometry pointBounds	= (Geometry) reader.read(strWktBounds);
+		try {
+			List<Geometry> listGeom	= new ArrayList<Geometry>();
+			listGeom.add(point);
+			SimpleFeatureSource feSource	= createSimpleFeatureSource(listGeom);
+			listGeom	= new ArrayList<Geometry>();
+			listGeom.add(pointBounds);
+			SimpleFeatureSource feSourceBBox	= createSimpleFeatureSource(listGeom);
+			
+			return saveImage(feSource, feSourceBBox, intAncho, intAlto, strColor, intGrosor);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());
@@ -103,15 +124,24 @@ public class GeotoolsImagen {
 	}
 	
 	private byte[] saveImage(SimpleFeatureSource featureSource, int imageWidth, int imageHeight) throws Exception {
+		return saveImage(featureSource, null, imageWidth, imageHeight, "#0000FF", 5);
+	}
+	private byte[] saveImage(SimpleFeatureSource featureSource, SimpleFeatureSource featureSourceBBox, int imageWidth, int imageHeight, String strColor, int intAncho) throws Exception {
 		ByteOutputStream fos	= null;
 		byte[] arrByte			= null;
 //		String strRutaRepTemp	= ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.REPOSITORIO_DOCS_TEMPORAL);
 		MapContent mapContent			= new MapContent();
 		mapContent.setTitle("StyleLab");
 		
-		Style style						= demoStyle(featureSource.getSchema().getTypeName());
+		Style style						= demoStyle(featureSource.getSchema().getTypeName(), strColor, intAncho);
 		Layer layer						= new FeatureLayer(featureSource, style);
 		mapContent.addLayer(layer);
+		
+		if(featureSourceBBox != null) {
+			style						= demoStyle(featureSourceBBox.getSchema().getTypeName(), "#FFFFFF", 1);
+			layer						= new FeatureLayer(featureSourceBBox, style);
+			mapContent.addLayer(layer);
+		}
 		
 		GTRenderer renderer				= new StreamingRenderer();
 		renderer.setMapContent(mapContent);
@@ -121,6 +151,8 @@ public class GeotoolsImagen {
 		String strCadenaExtent	= "";
 		try {
 			mapBounds						= mapContent.getMaxBounds();//[minx, miny, maxx, maxy]
+//			mapBounds.setBounds(b);
+			
 			strCadenaExtent	= "["+mapBounds.getMinX()+","+mapBounds.getMinY()+","+mapBounds.getMaxX()+","+mapBounds.getMaxY()+"]";
 			//System.out.println("Geotools.saveImage() strCadenaExtent="+strCadenaExtent);
 			double heightToWidth			= mapBounds.getSpan(1) / mapBounds.getSpan(0);
@@ -220,6 +252,39 @@ public class GeotoolsImagen {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static Style demoStyle(String typeName, String strColor, int intAncho) throws Exception {
+		StyleFactory sf		= CommonFactoryFinder.getStyleFactory(GeoTools.getDefaultHints());
+		FilterFactory2 ff	= CommonFactoryFinder.getFilterFactory2(GeoTools.getDefaultHints());
+		
+//		Stroke stroke		= sf.createStroke(ff.literal("#0000FF"), ff.literal(5));
+		Stroke stroke		= sf.createStroke(ff.literal(strColor), ff.literal(intAncho));
+		stroke.setOpacity(ff.literal(0.8));
+//		Stroke stroke		= sf.createStroke(ff.literal(CadenaUtil.generaColorAleatorio(50)), ff.literal(2));
+		LineSymbolizer lineSymbolizer = sf.createLineSymbolizer();
+		lineSymbolizer.setStroke(stroke);
+		
+//		Fill fill = sf.fill(null, ff.literal(CadenaUtil.generaColorAleatorio(50)), ff.literal(1.0));
+		Fill fill = sf.fill(null, ff.literal("#FFFFFF"), ff.literal(1.0));
+		fill.setOpacity(ff.literal(0.25));
+		PolygonSymbolizer polygonSymbolizer = sf.createPolygonSymbolizer();
+		polygonSymbolizer.setFill(fill);
+		
+		Rule rule			= sf.createRule();
+		rule.setFilter(Filter.INCLUDE);
+//		rule.setSymbolizers(new Symbolizer[] { polygonSymbolizer });
+		rule.setSymbolizers(new Symbolizer[] { lineSymbolizer });
+//		rule.setSymbolizers(new Symbolizer[] { lineSymbolizer, polygonSymbolizer });
+		
+		FeatureTypeStyle type = sf.createFeatureTypeStyle();
+		type.setFeatureTypeName(typeName);
+		type.addRule(rule);
+		
+		Style style = sf.createStyle();
+		style.addFeatureTypeStyle(type);
+		
+		return style;
 	}
 	
 	private static Style demoStyle(String typeName) throws Exception {

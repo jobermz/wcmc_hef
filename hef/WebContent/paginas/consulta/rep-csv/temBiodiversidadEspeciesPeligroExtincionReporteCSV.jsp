@@ -5,5 +5,5 @@
 response.setHeader("Content-Disposition", "filename=TemBiodiversidadEspeciesPeligroExtincion.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor promedio (Número de Espécies);Valor mínimo (Número de Espécies);Valor máximo (Número de Espécies)
-${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValuePromedioSinDecimales};${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValueMinSinDecimales};${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValueMaxSinDecimales}
+%>Valor promedio (Número de Espécies),Valor mínimo (Número de Espécies),Valor máximo (Número de Espécies)
+${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValuePromedioSinDecimales},${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValueMinSinDecimales},${sessionScope.reporte.beanTemBiodiversidadEspeciesPeligroExtincion.strValueMaxSinDecimales}

@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemProyectosPoligonos.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre iniciativa;Organización responsable
-<s:iterator value="#session.reporte.listTemProyectosPoligonos" var="reporte">${reporte.strInicProg};${reporte.strInstitucio}
+%>Nombre iniciativa,Organización responsable
+<s:iterator value="#session.reporte.listTemProyectosPoligonos" var="reporte">${reporte.strInicProg},${reporte.strInstitucio}
 </s:iterator>

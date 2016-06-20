@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=BasLimProvincia.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Código;Provincia
-<s:iterator value="#session.reporte.listBasLimProvincia" var="reporte">${reporte.strIdprov};${reporte.strNombprov}
+%>Código,Provincia
+<s:iterator value="#session.reporte.listBasLimProvincia" var="reporte">${reporte.strIdprov},${reporte.strNombprov}
 </s:iterator>

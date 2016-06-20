@@ -57,7 +57,7 @@ function confDatosParamDefs_3(idxDefs) {//3	Distritos
 		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("17", idxDefs, "strIddpto")+")\"}";
 	}
 function confDatosParamDefs_18(idxDefs) {//18	Comunidades Campesinas
-	return "{\"12\":\"OBJECTID_1 in("+consultarDatosCapa("18", idxDefs, "intGeodecid", true)+")\"}";
+	return "{\"12\":\"NOMBRE in("+consultarDatosCapa("18", idxDefs, "strNombre")+")\"}";
 }
 function confDatosParamDefs_19(idxDefs) {//19	Comunidades Nativas
 	return "{\"8\":\"gml_id in("+consultarDatosCapa("19", idxDefs, "strGmlId")+")\"}";
@@ -68,9 +68,9 @@ function confDatosParamDefs_20(idxDefs) {//20	Reservas territoriales índigenas
 function confDatosParamDefs_21(idxDefs) {//21	Solicitudes de creación de reservas territoriales indígenas
 	return "{\"11\":\"OBJECTID_1 in("+consultarDatosCapa("21", idxDefs, "intObjectid1", true)+")\"}";
 }
-		function confDatosParamDefs_22(idxDefs) {//22	Concesiones de Ecoturismo //TODO CONFLICTO DE CAMPO ID
-			return "{\"4\":\"Id in("+consultarDatosCapa("22", idxDefs, "intId")+")\"}";
-		}
+function confDatosParamDefs_22(idxDefs) {//22	Concesiones de Ecoturismo
+	return "{\"4\":\"CONTRATO in("+consultarDatosCapa("22", idxDefs, "strContrato")+")\"}";
+}
 function confDatosParamDefs_23(idxDefs) {//23	Concesiones forestales para el aprovechamiento de la castaña y la shiringa //TODO CONFLICTO DE CAMPO ID OK
 	return "{\"6\":\"OBJECTID in("+consultarDatosCapa("23", idxDefs, "intObjectid", true)+")\"}";
 }
@@ -98,8 +98,11 @@ function confDatosParamDefs_30(idxDefs) {//30	Bosques de producción permamente /
 function confDatosParamDefs_31(idxDefs) {//31	Concesiones para la generación de energía eléctrica
 	return "{\"14\":\"ID_GRAFICO in("+consultarDatosCapa("31", idxDefs, "strIdGrafico")+")\"}";
 }
+function confDatosParamDefs_32(idxDefs) {//32	Concesiones para la distribucion de energía eléctrica
+	return "{\"13\":\"ID_GRAFICO in("+consultarDatosCapa("32", idxDefs, "strIdGrafico")+")\"}";
+}
 function confDatosParamDefs_33(idxDefs) {//33	Concesiones Mineras
-	return "{\"9\":\"OBJECTID in("+consultarDatosCapa("33", idxDefs, "intObjectid", true)+")\"}";
+	return "{\"9\":\"CONCESION in("+consultarDatosCapa("33", idxDefs, "strConcesion")+")\"}";
 }
 function confDatosParamDefs_34(idxDefs) {//34	Areas Naturales Protegidas a nivel nacional
 	return "{\"2\":\"OBJECTID  in("+consultarDatosCapa("34", idxDefs, "lngObjectid", true)+")\"}";
@@ -116,9 +119,9 @@ function confDatosParamDefs_37(idxDefs) {//37	Zonas de Amortiguamiento
 function confDatosParamDefs_38(idxDefs) {//38	Áreas clave para la biodiversidad
 	return "{\"0\":\"OBJECTID_1 in("+consultarDatosCapa("38", idxDefs, "intObjectid1", true)+")\"}";
 }
-	function confDatosParamDefs_39(idxDefs) {//39	Zonas RAMSAR
-		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("39", idxDefs, "strIddpto")+")\"}";
-	}
+function confDatosParamDefs_39(idxDefs) {//39	Zonas RAMSAR
+	return "{\"1\":\"GEODEC_ID in("+consultarDatosCapa("39", idxDefs, "intGeodecid", true)+")\"}";
+}
 	function confDatosParamDefs_40(idxDefs) {//40	Cobertura vegetal
 		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("40", idxDefs, "strIddpto")+")\"}";
 	}
@@ -137,12 +140,12 @@ function confDatosParamDefs_38(idxDefs) {//38	Áreas clave para la biodiversidad
 	function confDatosParamDefs_45(idxDefs) {//45	Costos de oportunidad a nivel distrital para la reducción de emisiones por deforestación
 		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("45", idxDefs, "strIddpto")+")\"}";
 	}
-	function confDatosParamDefs_46(idxDefs) {//46	Iniciativas, programas y proyectos de conservación existentes (puntos)
-		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("46", idxDefs, "strIddpto")+")\"}";
-	}
-function confDatosParamDefs_47(idxDefs) {//47	Iniciativas, programas y proyectos de conservación existentes (polígonos)
-	return "{\"0\":\"SH_CODIGO in("+consultarDatosCapa("47", idxDefs, "dblShCodigo",true)+")\"}";
-}
+//	function confDatosParamDefs_46(idxDefs) {//46	Iniciativas, programas y proyectos de conservación existentes (puntos)
+//		return "{\"0\":\"IDDPTO in("+consultarDatosCapa("46", idxDefs, "strIddpto")+")\"}";
+//	}
+//function confDatosParamDefs_47(idxDefs) {//47	Iniciativas, programas y proyectos de conservación existentes (polígonos)
+//	return "{\"0\":\"SH_CODIGO in("+consultarDatosCapa("47", idxDefs, "dblShCodigo",true)+")\"}";
+//}
 
 function consultarDatosCapa(srlIdCapa, listIdDataCapaCons, nombVar, esInt) {
 	var resultado	= "";
@@ -172,4 +175,117 @@ function consultarDatosCapa(srlIdCapa, listIdDataCapaCons, nombVar, esInt) {
 		}
 	});
 	return resultado;
+}
+
+function evaluarConfiguracionFiltroACL_ProyPoli(srlIdCapa) {
+	var valSelectDepa		= $(".clsDivACL").find("select[name=combo_area_ACL_depa]").val();
+	var valSelectAdmi		= $(".clsDivACL").find("select[name=combo_area_ACL_admi]").val();
+	var valSelectCoop		= $(".clsDivACL").find("select[name=combo_area_ACL_coop]").val();
+	var valSelectAnioDes	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val();
+	var valSelectAnioHas	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val();
+	
+	var paramDefs	= "";
+	paramDefs	+= "{\"0\":\"";
+	var paramItemDefs	= "";
+	if(valSelectDepa != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa+"%' "; 
+	}
+	if(valSelectAdmi != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "ADMINISTRA = '"+valSelectAdmi+"' ";
+	}
+	if(valSelectCoop != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "COOPERANTE = '"+valSelectCoop+"' ";
+	}
+	
+	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
+		if(parseInt(valSelectAnioDes) <= parseInt(valSelectAnioHas)) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ANIO_INIC <= "+valSelectAnioDes+" ";
+			
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ANIO_TERM >= '"+valSelectAnioHas+"' ";
+		} else {
+			alert("El año termino seleccionado debe ser posterior al año inicio");
+		}
+	}
+	paramDefs	+= paramItemDefs;
+	paramDefs	+= "\"}";
+	
+	var rs= {
+			paramDefs:paramDefs,
+			title:paramItemDefs
+	};
+	return rs;
+}
+function evaluarConfiguracionFiltroACL_ProyPunt(srlIdCapa) {
+	var valSelectDepa		= $(".clsDivACL").find("select[name=combo_area_ACL_depa]").val();
+	var valSelectAdmi		= $(".clsDivACL").find("select[name=combo_area_ACL_admi]").val();
+	var valSelectCoop		= $(".clsDivACL").find("select[name=combo_area_ACL_coop]").val();
+	var valSelectAnioDes	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val();
+	var valSelectAnioHas	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val();
+	
+	var paramDefs	= "";
+	paramDefs	+= "{\"1\":\"";
+	var paramItemDefs	= "";
+	if(valSelectDepa != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa+"%' ";
+	}
+	if(valSelectAdmi != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "ADMINISTRA = '"+valSelectAdmi+"' ";
+	}
+	if(valSelectCoop != "") {
+		if(paramItemDefs.length != 0) {
+			paramItemDefs	+= "and ";
+		}
+		paramItemDefs	+= "COOPERANTE = '"+valSelectCoop+"' ";
+	}
+	
+	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
+		if(parseInt(valSelectAnioDes) <= parseInt(valSelectAnioHas)) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ANIO_INIC <= "+valSelectAnioDes+" ";
+			
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ANIO_TERM >= '"+valSelectAnioHas+"' ";
+		} else {
+			alert("El año termino seleccionado debe ser posterior al año inicio");
+		}
+	}
+	paramDefs	+= paramItemDefs;
+	paramDefs	+= "\"}";
+	
+	var rs= {
+			paramDefs:paramDefs,
+			title:paramItemDefs
+	};
+	return rs;
+}
+function confDatosParamDefs_46(idxDefs) {//46	Iniciativas, programas y proyectos de conservación existentes (puntos)
+	return "{\"0\":\"IDDPTO in("+consultarDatosCapa("46", idxDefs, "strIddpto")+")\"}";
+}
+function confDatosParamDefs_47(idxDefs) {//47	Iniciativas, programas y proyectos de conservación existentes (polígonos)
+return "{\"0\":\"SH_CODIGO in("+consultarDatosCapa("47", idxDefs, "dblShCodigo",true)+")\"}";
 }

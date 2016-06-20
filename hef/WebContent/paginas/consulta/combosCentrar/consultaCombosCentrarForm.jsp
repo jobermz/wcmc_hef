@@ -174,7 +174,7 @@
 	<tr>
 		<td><strong>Concesiones Mineras</strong></td>
 		<td>
-			<s:select list="#session.comboCentrar.listTemConcesionesMineras" name="combo_centrar_visor" headerKey="" headerValue="-Seleccionar-" listKey="srlGid" listValue="%{strTitConces}" data-live-search="true" onchange="centrar_mapa_desde_combo(this);"></s:select>
+			<s:select list="#session.comboCentrar.listTemConcesionesMineras" name="combo_centrar_visor" headerKey="" headerValue="-Seleccionar-" listKey="srlGid" listValue="%{strConcesion}" data-live-search="true" onchange="centrar_mapa_desde_combo(this);"></s:select>
 		</td>
 	</tr>
 </s:if>

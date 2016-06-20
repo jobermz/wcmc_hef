@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemConcesionHidroelectricasGeneracion.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre;Tipo
-<s:iterator value="#session.reporte.listTemConcesionHidroelectricasGeneracion" var="reporte">${reporte.strConcesion};${reporte.strFuente}
+%>Nombre,Tipo
+<s:iterator value="#session.reporte.listTemConcesionHidroelectricasGeneracion" var="reporte">${reporte.strConcesion},${reporte.strFuente}
 </s:iterator>

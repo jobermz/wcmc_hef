@@ -59,6 +59,7 @@
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>
+		group by de_nombre
 		<if test="orderByClause != null" >
 			order by ${orderByClause}
 		</if>
@@ -285,21 +286,8 @@
 		cd_geodec_id
 	</sql>
 	<sql id="Base_Column_List_Combo">
-		cd_gid, 
-		'' as si_the_geom, 
-		cd_objectid, 
-		de_nombre, 
-		de_estado, 
-		de_resolucion, 
-		ha_area_ha, 
-		de_nomdpto, 
-		de_nomprov, 
-		de_distrito, 
-		de_fecha_reso, 
-		de_n_titulo, 
-		ha_shape_leng, 
-		ha_shape_area,
-		cd_geodec_id
+		max(cd_gid) as cd_gid,  
+		de_nombre
 	</sql>
 
 </mapper>

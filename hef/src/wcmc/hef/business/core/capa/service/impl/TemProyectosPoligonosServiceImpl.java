@@ -2,10 +2,13 @@ package wcmc.hef.business.core.capa.service.impl;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import wcmc.hef.business.core.capa.dto.TemProyectosPoligonosDto;
 import wcmc.hef.business.core.capa.service.TemProyectosPoligonosService;
 import wcmc.hef.dao.capa.domain.TemProyectosPoligonos;
@@ -307,6 +310,26 @@ public class TemProyectosPoligonosServiceImpl implements TemProyectosPoligonosSe
 		BeanUtils.copyProperties(temProyectosPoligonosDto, temProyectosPoligonos);
 		Integer rs	= temProyectosPoligonosMapper.deleteByPrimaryKey(temProyectosPoligonos);
 		return rs;
+	}
+	
+	public List<Map> selectAnioDesde() throws Exception {
+		return temProyectosPoligonosMapper.selectAnioDesde();
+	}
+	
+	public List<Map> selectAnioHasta() throws Exception {
+		return temProyectosPoligonosMapper.selectAnioHasta();
+	}
+	
+	public List<Map> selectGroupByCoperante() throws Exception {
+		return temProyectosPoligonosMapper.selectGroupByCoperante();
+	}
+	
+	public List<Map> selectGroupByAdministra() throws Exception {
+		return temProyectosPoligonosMapper.selectGroupByAdministra();
+	}
+	
+	public List<Map> selectDepartamentos() throws Exception {
+		return temProyectosPoligonosMapper.selectDepartamentos();
 	}
 	
 }

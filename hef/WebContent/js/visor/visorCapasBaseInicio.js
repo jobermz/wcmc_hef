@@ -133,7 +133,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 			//var layersTemp			= evaluarConfiguracionFiltroUmbralACL(srlIdCapa,valSelect);
 			if(valSelect) {
 				var layersTemp	= "show:" + valSelect;
-				//console.log("layersTemp="+layersTemp);
+				console.log("layersTemp="+layersTemp);
 				layers	= layersTemp;
 			}
 			
@@ -141,7 +141,7 @@ function mostrarCapaById(srlIdCapa, min, max) {
 		var paramDefs			= "";
 		var paramDefTemp		= $(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("paramDefs");
 		if(paramDefTemp) {
-			//console.log("paramDefTemp="+paramDefTemp);
+			console.log("paramDefTemp="+paramDefTemp);
 			paramDefs		= paramDefTemp;
 		} else {
 			paramDefs		= "";

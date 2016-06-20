@@ -814,6 +814,34 @@ public class ConsultaCombosACLAction extends ActionSupport {
 							if(listTemProyectosPoligonos.size() > 0) {
 								mapReporte.put("listTemProyectosPoligonos", listTemProyectosPoligonos);
 							}
+							List listMapAnioDesde		= temProyectosPoligonosService.selectAnioDesde();
+							List listMapAnioHasta		= temProyectosPoligonosService.selectAnioHasta();
+							List<Map> listMapDepartamentos	= temProyectosPoligonosService.selectDepartamentos();
+							List<Map> listMapAdministra		= temProyectosPoligonosService.selectGroupByAdministra();
+							List<Map> listMapCoperante		= temProyectosPoligonosService.selectGroupByCoperante();
+							
+							if(listMapAnioDesde.size()>0 && listMapAnioHasta.size()>0) {
+								int intAnioDesde	= CadenaUtil.getInte(((Map)listMapAnioDesde.get(0)).get("anio"));
+								int intAnioHasta	= CadenaUtil.getInte(((Map)listMapAnioHasta.get(0)).get("anio"));
+								listMapAnioDesde	= new ArrayList<Map>();
+								listMapAnioHasta	= new ArrayList<Map>();
+								Map map				= null;
+								for(int i = intAnioDesde;i <= intAnioHasta;i++) {
+									map	= new HashMap();
+									map.put("anio",""+i);
+									listMapAnioDesde.add(map);
+									map	= new HashMap();
+									map.put("anio",""+i);
+									listMapAnioHasta.add(map);
+								}
+							}
+							
+							mapReporte.put("listMapAnioDesde", listMapAnioDesde);
+							mapReporte.put("listMapAnioHasta", listMapAnioHasta);
+							mapReporte.put("listMapDepartamentos", listMapDepartamentos);
+							mapReporte.put("listMapAdministra", listMapAdministra);
+							mapReporte.put("listMapCoperante", listMapCoperante);
+							
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {
@@ -829,6 +857,34 @@ public class ConsultaCombosACLAction extends ActionSupport {
 							if(listTemProyectosPuntos.size() > 0) {
 								mapReporte.put("listTemProyectosPuntos", listTemProyectosPuntos);
 							}
+							List listMapAnioDesde		= temProyectosPuntosService.selectAnioDesde();
+							List listMapAnioHasta		= temProyectosPuntosService.selectAnioHasta();
+							List<Map> listMapDepartamentos	= temProyectosPuntosService.selectDepartamentos();
+							List<Map> listMapAdministra		= temProyectosPuntosService.selectGroupByAdministra();
+							List<Map> listMapCoperante		= temProyectosPuntosService.selectGroupByCoperante();
+
+							if(listMapAnioDesde.size()>0 && listMapAnioHasta.size()>0) {
+								int intAnioDesde	= CadenaUtil.getInte(((Map)listMapAnioDesde.get(0)).get("anio"));
+								int intAnioHasta	= CadenaUtil.getInte(((Map)listMapAnioHasta.get(0)).get("anio"));
+								listMapAnioDesde	= new ArrayList<Map>();
+								listMapAnioHasta	= new ArrayList<Map>();
+								Map map				= null;
+								for(int i = intAnioDesde;i <= intAnioHasta;i++) {
+									map	= new HashMap();
+									map.put("anio",""+i);
+									listMapAnioDesde.add(map);
+									map	= new HashMap();
+									map.put("anio",""+i);
+									listMapAnioHasta.add(map);
+								}
+							}
+							
+							mapReporte.put("listMapAnioDesde", listMapAnioDesde);
+							mapReporte.put("listMapAnioHasta", listMapAnioHasta);
+							mapReporte.put("listMapDepartamentos", listMapDepartamentos);
+							mapReporte.put("listMapAdministra", listMapAdministra);
+							mapReporte.put("listMapCoperante", listMapCoperante);
+
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						} finally {

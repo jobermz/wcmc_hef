@@ -212,7 +212,7 @@ public class TemConcesionesMinerasServiceImpl implements TemConcesionesMinerasSe
 			}
 		}
 		
-		temConcesionesMinerasParamDef.setOrderByClause("de_tit_conces");
+		temConcesionesMinerasParamDef.setOrderByClause("de_concesion");
 		List<TemConcesionesMineras>	 list	= temConcesionesMinerasMapper.selectByDefaultParameterCombo(temConcesionesMinerasParamDef);
 		return list;
 	}

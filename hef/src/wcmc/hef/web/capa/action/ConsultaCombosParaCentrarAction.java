@@ -5,13 +5,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import wcmc.hef.business.core.configuracion.service.CapaService;
 import wcmc.hef.business.core.configuracion.service.CapaUmbralService;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
 import wcmc.hef.business.core.capa.service.BasHidroRios100000Service;
 import wcmc.hef.business.core.capa.service.BasHidroRiosLagunasService;
 import wcmc.hef.business.core.capa.service.BasLimAmazoniaService;
@@ -53,7 +58,9 @@ import wcmc.hef.business.core.capa.service.TemViaFerreaService;
 import wcmc.hef.business.core.capa.service.TemViasTrochasService;
 import wcmc.hef.business.core.capa.service.TemZonificPotencialBosqueProduccionPermanenteService;
 import wcmc.hef.business.core.capa.dto.BasHidroRios100000Dto;
+import wcmc.hef.business.core.capa.dto.TemConcesionHidroelectricasDistribucionDto;
 import wcmc.hef.dao.capa.domain.BasHidroRios100000;
+import wcmc.hef.dao.capa.domain.TemConcesionHidroelectricasDistribucion;
 import wcmc.hef.business.core.capa.dto.BasHidroRiosLagunasDto;
 import wcmc.hef.dao.capa.domain.BasHidroRiosLagunas;
 import wcmc.hef.business.core.capa.dto.BasLimAmazoniaDto;
@@ -663,6 +670,21 @@ public class ConsultaCombosParaCentrarAction extends ActionSupport {
 							ex.printStackTrace();
 						} finally {
 							listReporteOk.add("TemConcesionHidroelectricasGeneracionService");
+						}
+						break;
+					}
+					case "TemConcesionHidroelectricasDistribucionService":
+					{
+						try {
+							TemConcesionHidroelectricasDistribucionDto temConcesionHidroelectricasDistribucionDto		= new TemConcesionHidroelectricasDistribucionDto();
+							List<TemConcesionHidroelectricasDistribucion> listTemConcesionHidroelectricasDistribucion		= temConcesionHidroelectricasDistribucionService.buscarCombo(temConcesionHidroelectricasDistribucionDto);
+							if(listTemConcesionHidroelectricasDistribucion.size() > 0) {
+								mapReporte.put("listTemConcesionHidroelectricasDistribucion", listTemConcesionHidroelectricasDistribucion);
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						} finally {
+							listReporteOk.add("TemConcesionHidroelectricasDistribucionService");
 						}
 						break;
 					}

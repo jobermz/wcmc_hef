@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemCostoOportunidadDeforestacion.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre distrito;Costos de oportunidad
-<s:iterator value="#session.reporte.listTemCostoOportunidadDeforestacion" var="reporte">${reporte.strNombdist};${reporte.dblCopTco2H}
+%>Nombre distrito,Costos de oportunidad
+<s:iterator value="#session.reporte.listTemCostoOportunidadDeforestacion" var="reporte">${reporte.strNombdist},${reporte.dblCopTco2H}
 </s:iterator>

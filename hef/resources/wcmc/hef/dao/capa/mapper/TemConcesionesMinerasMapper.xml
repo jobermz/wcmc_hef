@@ -63,6 +63,7 @@
 		<if test="_parameter != null" >
 			<include refid="Parameter_Default_Where_Clause" />
 		</if>
+		group by de_concesion
 		<if test="orderByClause != null" >
 			order by ${orderByClause}
 		</if>
@@ -342,25 +343,8 @@
 		ha_shape_stle
 	</sql>
 	<sql id="Base_Column_List_Combo">
-		cd_gid, 
-		'' as si_the_geom, 
-		cd_objectid_1, 
-		de_gml_id, 
-		cd_objectid, 
-		de_codigou, 
-		de_zona, 
-		de_concesion, 
-		de_estado, 
-		de_tit_conces, 
-		de_naturaleza, 
-		de_fec_denu, 
-		ha_hectarea, 
-		de_carta, 
-		de_nm_dist, 
-		de_nm_prov, 
-		de_nm_depa, 
-		ha_shape_star, 
-		ha_shape_stle
+		max(cd_gid) as cd_gid,  
+		de_concesion
 	</sql>
 
 </mapper>

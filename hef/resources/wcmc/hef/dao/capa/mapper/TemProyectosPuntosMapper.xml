@@ -389,4 +389,24 @@
 		de_link
 	</sql>
 
+	<select id="selectAnioDesde" resultType="Map">
+		select min(de_anio_inic) as anio from wcmc_hef.tem_proyectos_puntos
+	</select>
+	
+	<select id="selectAnioHasta" resultType="Map">
+		select max(de_anio_term) as anio from wcmc_hef.tem_proyectos_puntos
+	</select>
+	
+	<select id="selectGroupByCoperante" resultType="Map">
+		select distinct de_cooperante from wcmc_hef.tem_proyectos_puntos order by de_cooperante
+	</select>
+	
+	<select id="selectGroupByAdministra" resultType="Map">
+		select distinct de_administra from wcmc_hef.tem_proyectos_puntos order by de_administra
+	</select>
+	
+	<select id="selectDepartamentos" resultType="Map">
+		select de_nombdep from wcmc_hef.bas_lim_departamento order by de_nombdep
+	</select>
+	
 </mapper>

@@ -5,5 +5,5 @@
 response.setHeader("Content-Disposition", "filename=TemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor promedio (Número de Espécies);Valor mínimo (Número de Espécies);Valor máximo (Número de Espécies)
-${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValuePromedioSinDecimales};${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValueMinSinDecimales};${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValueMaxSinDecimales}
+%>Valor promedio (Número de Espécies),Valor mínimo (Número de Espécies),Valor máximo (Número de Espécies)
+${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValuePromedioSinDecimales},${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValueMinSinDecimales},${sessionScope.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica.strValueMaxSinDecimales}

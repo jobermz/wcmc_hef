@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=BasViasRedVialNacional.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Código;Superficie
-<s:iterator value="#session.reporte.listBasViasRedVialNacional" var="reporte">${reporte.strRutaD044};${reporte.strSuperRod}
+%>Código,Superficie
+<s:iterator value="#session.reporte.listBasViasRedVialNacional" var="reporte">${reporte.strRutaD044},${reporte.strSuperRod}
 </s:iterator>

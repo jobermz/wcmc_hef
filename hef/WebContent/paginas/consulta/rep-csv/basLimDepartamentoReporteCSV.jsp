@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=BasLimDepartamento.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Código;Departamento
-<s:iterator value="#session.reporte.listBasLimDepartamento" var="reporte">${reporte.strIddpto};${reporte.strNombdep}
+%>Código,Departamento
+<s:iterator value="#session.reporte.listBasLimDepartamento" var="reporte">${reporte.strIddpto},${reporte.strNombdep}
 </s:iterator>

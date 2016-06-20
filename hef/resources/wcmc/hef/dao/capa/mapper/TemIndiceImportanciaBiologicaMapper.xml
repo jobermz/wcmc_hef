@@ -5,6 +5,7 @@
 		<result column="cd_gid" property="srlGid" jdbcType="INTEGER"/>
 		<result column="si_the_geom" property="strTheGeom" jdbcType="VARCHAR"/>
 		<result column="ha_imp_glob" property="dblImpGlob" jdbcType="DOUBLE"/>
+		<result column="desc_umbral" property="strDescUmbral" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="selectByDefaultParameter" resultMap="TemIndiceImportanciaBiologicaMap" parameterType="wcmc.hef.dao.capa.domain.TemIndiceImportanciaBiologicaParamDef">
 		select
@@ -139,10 +140,24 @@
 			</foreach>
 		</where>
 	</sql>
+	<!--
 	<sql id="Base_Column_List">
 		cd_gid, 
 		ST_AsText(ST_Boundary(Box2D(si_the_geom))) as si_the_geom, 
 		ha_imp_glob
+	</sql>
+	-->
+	<sql id="">
+	
+	</sql>
+	<sql id="Base_Column_List">
+		<![CDATA[
+		avg(ha_imp_glob) as ha_imp_glob,
+		(select de_nombre from wcmc_hef.t_capaumbral 
+			WHERE cd_capa = 42 
+			AND avg(tab.ha_imp_glob) >= ha_valmin
+			AND avg(tab.ha_imp_glob) < ha_valmax) as desc_umbral
+		]]>
 	</sql>
 	<sql id="Base_Column_List_Geometry">
 		cd_gid, 

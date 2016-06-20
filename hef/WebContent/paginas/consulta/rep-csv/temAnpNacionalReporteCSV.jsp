@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemAnpNacional.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Categoria;Nombre
-<s:iterator value="#session.reporte.listTemAnpNacional" var="reporte">${reporte.strAnpCate};${reporte.strAnpNomb}
+%>Categoría,Nombre
+<s:iterator value="#session.reporte.listTemAnpNacional" var="reporte">${reporte.strAnpCate},${reporte.strAnpNomb}
 </s:iterator>

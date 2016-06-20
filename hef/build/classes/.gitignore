@@ -2,6 +2,6 @@
 /configuracion.properties
 /log4j.properties
 /servicios.properties
-/struts
+/struts/
 /struts.xml
-/wcmc
+/wcmc/

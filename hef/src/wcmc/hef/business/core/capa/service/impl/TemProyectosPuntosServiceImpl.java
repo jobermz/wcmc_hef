@@ -2,10 +2,13 @@ package wcmc.hef.business.core.capa.service.impl;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import wcmc.hef.business.core.capa.dto.TemProyectosPuntosDto;
 import wcmc.hef.business.core.capa.service.TemProyectosPuntosService;
 import wcmc.hef.dao.capa.domain.TemProyectosPuntos;
@@ -272,5 +275,26 @@ public class TemProyectosPuntosServiceImpl implements TemProyectosPuntosService 
 		Integer rs	= temProyectosPuntosMapper.deleteByPrimaryKey(temProyectosPuntos);
 		return rs;
 	}
+
+	public List<Map> selectAnioDesde() throws Exception {
+		return temProyectosPuntosMapper.selectAnioDesde();
+	}
+	
+	public List<Map> selectAnioHasta() throws Exception {
+		return temProyectosPuntosMapper.selectAnioHasta();
+	}
+	
+	public List<Map> selectGroupByCoperante() throws Exception {
+		return temProyectosPuntosMapper.selectGroupByCoperante();
+	}
+	
+	public List<Map> selectGroupByAdministra() throws Exception {
+		return temProyectosPuntosMapper.selectGroupByAdministra();
+	}
+	
+	public List<Map> selectDepartamentos() throws Exception {
+		return temProyectosPuntosMapper.selectDepartamentos();
+	}
+	
 	
 }

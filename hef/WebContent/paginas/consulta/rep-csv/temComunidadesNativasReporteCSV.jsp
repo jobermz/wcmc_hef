@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemComunidadesNativas.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre;Federación;Etnia;Población
-<s:iterator value="#session.reporte.listTemComunidadesNativas" var="reporte">${reporte.strNombre};${reporte.strFederacion};${reporte.strEtnia1};${reporte.dblPoblacion}
+%>Nombre,Federación,Etnia,Población
+<s:iterator value="#session.reporte.listTemComunidadesNativas" var="reporte">${reporte.strNombre},${reporte.strFederacion},${reporte.strEtnia1},${reporte.dblPoblacion}
 </s:iterator>

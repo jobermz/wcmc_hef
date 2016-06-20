@@ -27,18 +27,18 @@ function filtrarACL(srlIdCapa) {
 				listSrlIdCapaConsulta:srlIdCapa
 		};
 		$.post("consultaCombosACL.action", param, function(datos) {
-			$(".clsDivACL").find("select[name=combo_area_ACL]").each(function(index) {
+			$(".clsDivACL").find(".combo_area_ACL").each(function(index) {
 				$(this).unbind("selectpicker");
 			});
 			$(".clsDivACL").html(datos);
-			$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker({
+			$(".clsDivACL").find(".combo_area_ACL").selectpicker({
 				liveSearch: true
 				//maxOptions: 5
 			});
 			var valSelect	= dataComboFiltroACL[srlIdCapa];
 			if(valSelect) {
 				$(".clsDivACL").find("select[name=combo_area_ACL]").val(valSelect);
-				$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker('refresh');
+				$(".clsDivACL").find(".combo_area_ACL").selectpicker('refresh');
 			}
 
 			$(".clsDivACL").attr("srlIdCapa", srlIdCapa);
@@ -52,19 +52,34 @@ function filtrarACL(srlIdCapa) {
 }
 var dataComboFiltroACL	= new Array();
 function aplicarFiltroACL() {
-	var valSelect		= $(".clsDivACL").find("select").val();
-	var valSelectTxt	= $(".clsDivACL").find("button[data-id=combo_area_ACL]").attr("title");
-	var srlIdCapa		= $(".clsDivACL").attr("srlIdCapa");
 	
-	dataComboFiltroACL[srlIdCapa] = valSelect;
-	valSelect			= valSelect.join('|');
-//	var valSelectTxt	= $(".clsDivACL").find("select option:selected").text();
-//	var valSelectTxt	= $(".clsDivACL").find("select[data-id=combo_area_ACL]").attr("title");
-	var paramDefs		= evaluarConfiguracionFiltroACL(srlIdCapa, valSelect);
+	var srlIdCapa		= $(".clsDivACL").attr("srlIdCapa");
+	var valSelect		= "";
+	var valSelectTxt	= "";
+	var paramDefs		= "";
+	if(srlIdCapa == "47" ) {
+		var rs			= evaluarConfiguracionFiltroACL_ProyPoli(srlIdCapa);
+		paramDefs		= rs.paramDefs;
+		valSelectTxt	= rs.title;//"Varios criterios para poligonos";
+	} else if(srlIdCapa == "46") {
+		var rs			= evaluarConfiguracionFiltroACL_ProyPunt(srlIdCapa);
+		paramDefs		= rs.paramDefs;
+		valSelectTxt	= rs.title;//"Varios criterios para puntos";
+	} else {
+		valSelect			= $(".clsDivACL").find("select").val();
+		valSelectTxt		= $(".clsDivACL").find("button[data-id=combo_area_ACL]").attr("title");
+		if(valSelect) {
+			dataComboFiltroACL[srlIdCapa] = valSelect;
+			valSelect			= valSelect.join('|');
+		}
+		paramDefs		= evaluarConfiguracionFiltroACL(srlIdCapa, valSelect);
+	}
 	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", valSelectTxt);
 	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).css("display", "");
 	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("title", valSelectTxt);
-	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("valSelect", valSelect);
+	if(valSelect) {
+		$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("valSelect", valSelect);
+	}
 	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("paramDefs", paramDefs);
 	$(".seleccionar-capas-modal").find("#idDivDetFiltroACLTitle"+srlIdCapa).attr("srlIdCapa", srlIdCapa);
 	$('.identificar-area-criterio-logico-filtrar-modal').modal('hide');

@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemIndiceImportanciaBiologica.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor
-<s:iterator value="#session.reporte.listTemIndiceImportanciaBiologica" var="reporte">${reporte.dblImpGlob4Decimales}
+%>Promedio,Umbral
+<s:iterator value="#session.reporte.listTemIndiceImportanciaBiologica" var="reporte">${reporte.dblImpGlob4Decimales},${reporte.strDescUmbral}
 </s:iterator>

@@ -5,6 +5,6 @@
 response.setHeader("Content-Disposition", "filename=TemReservasTerritorialesIndigenas.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Nombre;Etnia
-<s:iterator value="#session.reporte.listTemReservasTerritorialesIndigenas" var="reporte">${reporte.strNombre};${reporte.strEtnia}
+%>Nombre,Etnia
+<s:iterator value="#session.reporte.listTemReservasTerritorialesIndigenas" var="reporte">${reporte.strNombre},${reporte.strEtnia}
 </s:iterator>

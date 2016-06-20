@@ -5,5 +5,5 @@
 response.setHeader("Content-Disposition", "filename=TemDensidadCarbonoAerea.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor total (Toneladas/hectárea);Valor promedio (Toneladas/hect&aacute;rea);Valor mínimo (Toneladas/hectárea);Valor máxinimo (Toneladas/hectárea)
-${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueSumaTotal2Decimales};${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValuePromedio2Decimales};${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueMin2Decimales};${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueMax2Decimales}
+%>Valor total (Toneladas/hectárea),Valor promedio (Toneladas/hect&aacute;rea),Valor mínimo (Toneladas/hectárea),Valor máxinimo (Toneladas/hectárea)
+${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueSumaTotal2Decimales},${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValuePromedio2Decimales},${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueMin2Decimales},${sessionScope.reporte.beanTemDensidadCarbonoAerea.strValueMax2Decimales}
