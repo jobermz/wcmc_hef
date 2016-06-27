@@ -464,11 +464,13 @@ function guardarCapasSeleccionadasCapasBase() {
 function dibujarRectangulo() {
 	cerrarTodosPopover();
 	$('.analizar-por-area-modal').modal('hide');
+	terminarInteraction();
 	addInteraction("Box");
 }
 function dibujarPoligono() {
 	cerrarTodosPopover();
 	$('.analizar-por-area-modal').modal('hide');
+	terminarInteraction();
 	addInteraction("Polygon");
 }
 

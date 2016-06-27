@@ -78,9 +78,10 @@
 	<definition name="consulta_combos_capa_umbral_form" template="/paginas/visor/comboCapaUmbralInicio.jsp"></definition>
 	<definition name="consulta_combos_capa_umbral_sin_dec_form" template="/paginas/visor/comboCapaUmbralSinDecimalesInicio.jsp"></definition>
 	<definition name="consulta_combos_capa_umbral_2_dec_form" template="/paginas/visor/comboCapaUmbral2DecimalesInicio.jsp"></definition>
+	<definition name="consulta_combos_capa_umbral_sin_rangos_form" template="/paginas/visor/comboCapaUmbralSinRangosInicio.jsp"></definition>
+	
 	<definition name="consulta_combos_capa_filtraje_num_form" template="/paginas/visor/comboCapaFiltrajeNumInicio.jsp"></definition>
 	<definition name="consulta_combos_capa_filtraje_num_sin_dec_form" template="/paginas/visor/comboCapaFiltrajeNumSinDecimalesInicio.jsp"></definition>
-	
 	
 	<!-- Cuenta de usuario -->
 	<definition name="cuenta_usuario_inicio" extends="configuracionLayout">

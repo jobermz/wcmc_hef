@@ -100,9 +100,14 @@ function filtrarUmbralACL(srlIdCapa) {
 		};
 		var urlAction	= "";
 		if(srlIdCapa == "48" || srlIdCapa == "49" || srlIdCapa == "51") {
+			//"Riqueza potencial de especies en peligro de extincion"
+			//"Riqueza potencial de especies de fauna endémica"
+			//"Importancia de los bosques en el control de la erosión hídrica"
 			urlAction	= "consultaCombosCapaUmbralSinDec.action";
-		} else if(srlIdCapa == "50") {
+		} else if(srlIdCapa == "50") {//"Densidad de carbono de la biomasa área "
 			urlAction	= "consultaCombosCapaUmbral2Dec.action";
+		} else if(srlIdCapa == "66") {//"Perdida de Bosque desde el 2001 al 2014"
+			urlAction	= "consultaCombosCapaUmbralSinRangos.action";
 		} else {
 			urlAction	= "consultaCombosCapaUmbral.action";
 		}

@@ -355,7 +355,7 @@ function drawEnd(event) {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
     });
-    console.log("WKT="+wkt);
+    //console.log("WKT="+wkt);
     terminarInteraction();
     procesarAnalizarPorArea(wkt);//Dibujar rectangulo y poligono en pantalla
 }

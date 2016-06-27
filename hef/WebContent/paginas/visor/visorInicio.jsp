@@ -3,34 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<input type="hidden" name="CAPAS_BASE_DEPARTAMENTO" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_DEPARTAMENTO)%>"/>
-<input type="hidden" name="CAPAS_BASE_PROVINCIA" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_PROVINCIA)%>"/>
-<input type="hidden" name="CAPAS_BASE_DISTRITO" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_DISTRITO)%>"/>
-
 <input type="hidden" name="TIPO_CAPA_VECTORIAL" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_VECTORIAL)%>"/>
 <input type="hidden" name="TIPO_CAPA_UMBRAL" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_UMBRAL)%>"/>
 <input type="hidden" name="TIPO_CAPA_VECTORIAL_NUMERICA" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_VECTORIAL_NUMERICA)%>"/>
 
 <input type="hidden" name="CAPAS_VISUALIZACION_DEFAULT" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_VISUALIZACION_DEFAULT)%>"/>
 
-<input type="hidden" name="TEMPROYECCIONDENSIDADPOB2015_MIN" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMPROYECCIONDENSIDADPOB2015_MIN)%>"/>
-<input type="hidden" name="TEMPROYECCIONDENSIDADPOB2015_MAX" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMPROYECCIONDENSIDADPOB2015_MAX)%>"/>
-
-<input type="hidden" name="TEMCOSTOOPORTUNIDADDEFORESTACION_MIN" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCOSTOOPORTUNIDADDEFORESTACION_MIN)%>"/>
-<input type="hidden" name="TEMCOSTOOPORTUNIDADDEFORESTACION_MAX" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCOSTOOPORTUNIDADDEFORESTACION_MAX)%>"/>
-
-<input type="hidden" name="TEMINDICEIMPORTANCIABIOLOGICA_MIN" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMINDICEIMPORTANCIABIOLOGICA_MIN)%>"/>
-<input type="hidden" name="TEMINDICEIMPORTANCIABIOLOGICA_MAX" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMINDICEIMPORTANCIABIOLOGICA_MAX)%>"/>
-
-<input type="hidden" name="TEMCENTROSPOBLADOS_MIN" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCENTROSPOBLADOS_MIN)%>"/>
-<input type="hidden" name="TEMCENTROSPOBLADOS_MAX" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCENTROSPOBLADOS_MAX)%>"/>
-
-<input type="hidden" name="TEMCARBONOECOZONAS_01" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_01)%>"/>
-<input type="hidden" name="TEMCARBONOECOZONAS_06" value="<%=ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_06)%>"/>
 <%
-request.setAttribute("CAPAS_BASE_DEPARTAMENTO", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_DEPARTAMENTO));
-request.setAttribute("CAPAS_BASE_PROVINCIA", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_PROVINCIA));
-request.setAttribute("CAPAS_BASE_DISTRITO", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPAS_BASE_DISTRITO));
 
 request.setAttribute("TIPO_CAPA_VECTORIAL", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_VECTORIAL));
 request.setAttribute("TIPO_CAPA_UMBRAL", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TIPO_CAPA_UMBRAL));
@@ -38,43 +17,8 @@ request.setAttribute("TIPO_CAPA_VECTORIAL_NUMERICA", ConfiguracionProperties.get
 
 request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.CAPA_GRUPO_USUARIO));
 
-request.setAttribute("TEMPROYECCIONDENSIDADPOB2015_MIN", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMPROYECCIONDENSIDADPOB2015_MIN));
-request.setAttribute("TEMPROYECCIONDENSIDADPOB2015_MAX", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMPROYECCIONDENSIDADPOB2015_MAX));
-
-request.setAttribute("TEMCOSTOOPORTUNIDADDEFORESTACION_MIN", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCOSTOOPORTUNIDADDEFORESTACION_MIN));
-request.setAttribute("TEMCOSTOOPORTUNIDADDEFORESTACION_MAX", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCOSTOOPORTUNIDADDEFORESTACION_MAX));
-
-request.setAttribute("TEMINDICEIMPORTANCIABIOLOGICA_MIN", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMINDICEIMPORTANCIABIOLOGICA_MIN));
-request.setAttribute("TEMINDICEIMPORTANCIABIOLOGICA_MAX", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMINDICEIMPORTANCIABIOLOGICA_MAX));
-
-request.setAttribute("TEMCENTROSPOBLADOS_MIN", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCENTROSPOBLADOS_MIN));
-request.setAttribute("TEMCENTROSPOBLADOS_MAX", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCENTROSPOBLADOS_MAX));
-
-request.setAttribute("TEMCARBONOECOZONAS_01", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_01));
-request.setAttribute("TEMCARBONOECOZONAS_02", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_02));
-request.setAttribute("TEMCARBONOECOZONAS_03", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_03));
-request.setAttribute("TEMCARBONOECOZONAS_04", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_04));
-request.setAttribute("TEMCARBONOECOZONAS_05", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_05));
-request.setAttribute("TEMCARBONOECOZONAS_06", ConfiguracionProperties.getConstanteStr(ConfiguracionProperties.TEMCARBONOECOZONAS_06));
-
 %>
 <s:set value="#request.TIPO_CAPA_VECTORIAL_NUMERICA" var="TIPO_CAPA_VECTORIAL_NUMERICA"></s:set>
-
-<s:set value="#request.TEMPROYECCIONDENSIDADPOB2015_MIN" var="TEMPROYECCIONDENSIDADPOB2015_MIN"></s:set>
-<s:set value="#request.TEMPROYECCIONDENSIDADPOB2015_MAX" var="TEMPROYECCIONDENSIDADPOB2015_MAX"></s:set>
-
-<s:set value="#request.TEMCOSTOOPORTUNIDADDEFORESTACION_MIN" var="TEMCOSTOOPORTUNIDADDEFORESTACION_MIN"></s:set>
-<s:set value="#request.TEMCOSTOOPORTUNIDADDEFORESTACION_MAX" var="TEMCOSTOOPORTUNIDADDEFORESTACION_MAX"></s:set>
-
-<s:set value="#request.TEMINDICEIMPORTANCIABIOLOGICA_MIN" var="TEMINDICEIMPORTANCIABIOLOGICA_MIN"></s:set>
-<s:set value="#request.TEMINDICEIMPORTANCIABIOLOGICA_MAX" var="TEMINDICEIMPORTANCIABIOLOGICA_MAX"></s:set>
-
-<s:set value="#request.TEMCENTROSPOBLADOS_MIN" var="TEMCENTROSPOBLADOS_MIN"></s:set>
-<s:set value="#request.TEMCENTROSPOBLADOS_MAX" var="TEMCENTROSPOBLADOS_MAX"></s:set>
-
-<s:set value="#request.CAPAS_BASE_DEPARTAMENTO" var="CAPAS_BASE_DEPARTAMENTO"></s:set>
-<s:set value="#request.CAPAS_BASE_PROVINCIA" var="CAPAS_BASE_PROVINCIA"></s:set>
-<s:set value="#request.CAPAS_BASE_DISTRITO" var="CAPAS_BASE_DISTRITO"></s:set>
 
 <s:set value="#request.TIPO_CAPA_VECTORIAL" var="TIPO_CAPA_VECTORIAL"></s:set>
 <s:set value="#request.TIPO_CAPA_UMBRAL" var="TIPO_CAPA_UMBRAL"></s:set>

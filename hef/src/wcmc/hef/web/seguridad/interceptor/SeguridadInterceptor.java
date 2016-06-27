@@ -72,7 +72,8 @@ public class SeguridadInterceptor implements Interceptor {
 			listActionException.add("consultaCombosCapaFiltrajeNumSinDec");
 			listActionException.add("consultaCombosCapaUmbralSinDec");
 			listActionException.add("consultaCombosCapaUmbral2Dec");
-//			listActionException.add("consultaCombosCapaUmbral2Dec");
+			listActionException.add("consultaCombosCapaUmbralSinRangos");
+//			listActionException.add("consultaCombosCapaUmbralSinRangos");
 			
 			if(listActionException.contains(actionName)) {
 				return arg0.invoke();

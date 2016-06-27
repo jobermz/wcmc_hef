@@ -1624,7 +1624,7 @@ public class ConsultaAction extends ActionSupport {
 	
 	public void prepararCapasReporte(List<String> listConsulta, Map<String, String> mapServ) throws Exception {
 		HttpServletRequest request		= (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-		System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
+		//System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
 		String strBbox					= consultaACLFuxionService.selectBBOX(strPoligonoConsulta);
 		final String strBbox4326		= consultaACLFuxionService.selectBBOX4326(strPoligonoConsulta);
 		zoomLevel			= ""+(CadenaUtil.getInte(zoomLevel)+1);
@@ -1703,7 +1703,7 @@ public class ConsultaAction extends ActionSupport {
 		final String strBbox4326		= consultaACLFuxionService.selectBBOX4326(strBoxMapaPeru);
 		int zoom			= CadenaUtil.getInte(5);
 		String[] arrBbox	= strBbox4326.split(",");//<xmin>, <ymin>, <xmax>, <ymax>
-		System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
+		//System.out.println("strPoligonoConsulta="+strPoligonoConsulta);
 		
 		double xmin		= CadenaUtil.getDoub(arrBbox[0]);
 		double ymin		= CadenaUtil.getDoub(arrBbox[1]);
@@ -1776,7 +1776,7 @@ public class ConsultaAction extends ActionSupport {
 		sbUrl.append("size="+((int)(dblAnchoLoad*dblFactorReductor))+"x"+((int)(dblAltoLoad*dblFactorReductor))+"&");
 		sbUrl.append("scale=1&");
 		sbUrl.append("maptype=roadmap");
-		System.out.println("sbUrl=("+sbUrl+")");
+		//System.out.println("sbUrl=("+sbUrl+")");
 		
 		byte[] arrData	= RedUtil.consultarInternet(sbUrl.toString());
 		
@@ -1801,7 +1801,7 @@ public class ConsultaAction extends ActionSupport {
 		int ancho		= anchoOri;
 
 		final int zoom			= currZoomLevel;
-		System.out.println("zoom="+currZoomLevel);
+		//System.out.println("zoom="+currZoomLevel);
 
 		final StringBuffer sbUrl	= new StringBuffer();
 		
