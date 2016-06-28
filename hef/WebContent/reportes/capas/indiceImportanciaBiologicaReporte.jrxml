@@ -6,7 +6,6 @@
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
 	<field name="dblImpGlob4Decimales" class="java.lang.String"/>
-	<field name="strDescUmbral" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -17,43 +16,29 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Índice de Importancia Biológica]]></text>
+				<text><![CDATA[Índice de importancia biológica]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="137" height="15" uuid="419fd8f8-be44-4668-9a91-9358b574c48a"/>
+				<reportElement x="0" y="0" width="802" height="15" uuid="419fd8f8-be44-4668-9a91-9358b574c48a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Promedio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="137" y="0" width="137" height="15" uuid="64b14c4b-4e90-401e-81a0-7eac69cf3fb1"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Umbral]]></text>
+				<text><![CDATA[Valor]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="137" height="32" uuid="57428ee4-969c-464f-a335-e738805f7cd3"/>
+				<reportElement x="0" y="0" width="802" height="32" uuid="57428ee4-969c-464f-a335-e738805f7cd3"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dblImpGlob4Decimales}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="137" y="0" width="137" height="32" uuid="439102fc-e84f-4fa9-b0f9-2790308bbfbb"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{strDescUmbral}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

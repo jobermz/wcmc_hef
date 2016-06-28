@@ -157,7 +157,7 @@
 			<s:if test="%{#session.reporte.listTemAnpNacional.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temAnpNacionalReporte','idDivDetaRepo', this);" class="list-group-item "> Áreas Nacionales Protegidas <span class="badge"><s:property value="%{#session.reporte.listTemAnpNacional.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep8" onclick="mostrarAcordionReporte(8); mostrarDetaRepo('temAnpNacionalReporte','idDivDetaRepo8', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas Nacionales Protegidas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas naturales protegidas de administración nacional <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -174,7 +174,7 @@
 			<s:if test="%{#session.reporte.listTemAnpPrivada.size()>0}">
 <%-- 			<a href="#" onclick="mostrarDetaRepo('temAnpPrivadaReporte','idDivDetaRepo', this);" class="list-group-item "> Áreas Protegidas Privadas  <span class="badge"><s:property value="%{#session.reporte.listTemAnpPrivada.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep9" onclick="mostrarAcordionReporte(9); mostrarDetaRepo('temAnpPrivadaReporte','idDivDetaRepo9', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas Protegidas Privadas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Areas naturales protegidas de administración privada <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -191,7 +191,7 @@
 			<s:if test="%{#session.reporte.listTemAnpRegional.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temAnpRegionalReporte','idDivDetaRepo', this);" class="list-group-item "> Áreas de Conservación Regionales <span class="badge"><s:property value="%{#session.reporte.listTemAnpRegional.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep10" onclick="mostrarAcordionReporte(10); mostrarDetaRepo('temAnpRegionalReporte','idDivDetaRepo10', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas Protegidas Privadas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas naturales protegidas de administración regional <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -208,7 +208,7 @@
 			<s:if test="%{#session.reporte.listTemCarbonoEcozonas.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCarbonoEcozonasReporte','idDivDetaRepo', this);" class="list-group-item "> Densidad de Carbono por Ecozonas <span class="badge"><s:property value="%{#session.reporte.listTemCarbonoEcozonas.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep11" onclick="mostrarAcordionReporte(11); mostrarDetaRepo('temCarbonoEcozonasReporte','idDivDetaRepo11', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Densidad de Carbono por Ecozonas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Valores medios de densidad de carbono por ecozonas (en Tn/Ha) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -225,7 +225,7 @@
 			<s:if test="%{#session.reporte.listTemCentrosPoblados.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCentrosPobladosReporte','idDivDetaRepo', this);" class="list-group-item "> Centros Poblados  <span class="badge"><s:property value="%{#session.reporte.listTemCentrosPoblados.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep12" onclick="mostrarAcordionReporte(12); mostrarDetaRepo('temCentrosPobladosReporte','idDivDetaRepo12', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Centros Poblados <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Centros poblados <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -242,7 +242,7 @@
 			<s:if test="%{#session.reporte.listTemClaveBiodiversidad.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temClaveBiodiversidadReporte','idDivDetaRepo', this);" class="list-group-item "> Áreas Clave para la Biodiversidad  <span class="badge"><s:property value="%{#session.reporte.listTemClaveBiodiversidad.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep13" onclick="mostrarAcordionReporte(13); mostrarDetaRepo('temClaveBiodiversidadReporte','idDivDetaRepo13', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas Clave para la Biodiversidad <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas clave para la biodiversidad <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -276,7 +276,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesEcoturismo.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionesEcoturismoReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones Ecoturismo  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesEcoturismo.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep15" onclick="mostrarAcordionReporte(15); mostrarDetaRepo('temConcesionesEcoturismoReporte','idDivDetaRepo15', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones Ecoturismo <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones de ecoturismo <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -327,7 +327,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesMaderableAdecuadas.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesMaderableAdecuadasReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones Forestales Maderables <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesMaderableAdecuadas.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep18" onclick="mostrarAcordionReporte(18); mostrarDetaRepo('temConcesionesForestalesMaderableAdecuadasReporte','idDivDetaRepo18', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones Forestales Maderables <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones forestales con fines maderables <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -344,7 +344,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesMaderableConcurso.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesMaderableConcursoReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones Forestales Maderable Concurso  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesMaderableConcurso.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep19" onclick="mostrarAcordionReporte(19); mostrarDetaRepo('temConcesionesForestalesMaderableConcursoReporte','idDivDetaRepo19', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones Forestales Maderables Concurso<span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones forestales con fines maderables en concurso<span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -361,7 +361,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesManejoFaunaSilvestre.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesManejoFaunaSilvestreReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones de Manejo Fauna Silvestre  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesManejoFaunaSilvestre.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep20" onclick="mostrarAcordionReporte(20); mostrarDetaRepo('temConcesionesForestalesManejoFaunaSilvestreReporte','idDivDetaRepo20', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones de Manejo Fauna Silvestre <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones de áreas para manejo de fauna silvestre <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -378,7 +378,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesForestalesReforestacion.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionesForestalesReforestacionReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones con fines de Forestación y Reforestación <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesForestalesReforestacion.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep21" onclick="mostrarAcordionReporte(21); mostrarDetaRepo('temConcesionesForestalesReforestacionReporte','idDivDetaRepo21', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones con fines de Forestación y Reforestación  <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones forestales con fines de forestación y reforestación <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -395,7 +395,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionesMineras.size()>0}">
 <%-- 			<a href="#" onclick="mostrarDetaRepo('temConcesionesMinerasReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones Mineras  <span class="badge"><s:property value="%{#session.reporte.listTemConcesionesMineras.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep22" onclick="mostrarAcordionReporte(22); mostrarDetaRepo('temConcesionesMinerasReporte','idDivDetaRepo22', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones Mineras <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones mineras <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -412,7 +412,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionHidroelectricasDistribucion.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionHidroelectricasDistribucionReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones de Distribución de Energía Eléctrica <span class="badge"><s:property value="%{#session.reporte.listTemConcesionHidroelectricasDistribucion.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep23" onclick="mostrarAcordionReporte(23); mostrarDetaRepo('temConcesionHidroelectricasDistribucionReporte','idDivDetaRepo23', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones de Distribución de Energía Eléctrica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones para la distribución de energía eléctrica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -429,7 +429,7 @@
 			<s:if test="%{#session.reporte.listTemConcesionHidroelectricasGeneracion.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temConcesionHidroelectricasGeneracionReporte','idDivDetaRepo', this);" class="list-group-item "> Concesiones de Generación de Energía Eléctrica <span class="badge"><s:property value="%{#session.reporte.listTemConcesionHidroelectricasGeneracion.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep24" onclick="mostrarAcordionReporte(24); mostrarDetaRepo('temConcesionHidroelectricasGeneracionReporte','idDivDetaRepo24', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones de Generación de Energía Eléctrica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Concesiones para la generación de energía eléctrica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -446,7 +446,7 @@
 			<s:if test="%{#session.reporte.listTemCostoOportunidadDeforestacion.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCostoOportunidadDeforestacionReporte','idDivDetaRepo', this);" class="list-group-item "> Costos de Oportunidad para Reducir Emisiones por Deforestación  <span class="badge"><s:property value="%{#session.reporte.listTemCostoOportunidadDeforestacion.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep25" onclick="mostrarAcordionReporte(25); mostrarDetaRepo('temCostoOportunidadDeforestacionReporte','idDivDetaRepo25', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Costos de Oportunidad para Reducir Emisiones por Deforestación <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Costos de oportunidad a nivel distrital para la reducción de emisiones por deforestación (en Soles/tCO2) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -463,7 +463,7 @@
 			<s:if test="%{#session.reporte.listTemCoverturaVegetal2015.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCoverturaVegetal2015Reporte','idDivDetaRepo', this);" class="list-group-item "> Covertura Vegetal <span class="badge"><s:property value="%{#session.reporte.listTemCoverturaVegetal2015.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep26" onclick="mostrarAcordionReporte(26); mostrarDetaRepo('temCoverturaVegetal2015Reporte','idDivDetaRepo26', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Covertura Vegetal <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Covertura vegetal <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -480,7 +480,7 @@
 			<s:if test="%{#session.reporte.listTemCuencasHidrograficas.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCuencasHidrograficasReporte','idDivDetaRepo', this);" class="list-group-item "> Cuencas Hidrograficas  <span class="badge"><s:property value="%{#session.reporte.listTemCuencasHidrograficas.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep27" onclick="mostrarAcordionReporte(27); mostrarDetaRepo('temCuencasHidrograficasReporte','idDivDetaRepo27', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Cuencas Hidrograficas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Informacion de Unidades Hidrograficas a nivel nacional. Escala base de 1:100.000 <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -497,7 +497,7 @@
 			<s:if test="%{#session.reporte.listTemHumedalesRamsar.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temHumedalesRamsarReporte','idDivDetaRepo', this);" class="list-group-item "> Zonas Ramsar  <span class="badge"><s:property value="%{#session.reporte.listTemHumedalesRamsar.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep28" onclick="mostrarAcordionReporte(28); mostrarDetaRepo('temHumedalesRamsarReporte','idDivDetaRepo28', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Zonas Ramsar <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Zonas RAMSAR <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -514,7 +514,7 @@
 			<s:if test="%{#session.reporte.listTemIndiceImportanciaBiologica.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temIndiceImportanciaBiologicaReporte','idDivDetaRepo', this);" class="list-group-item "> Indice de Importancia Biologica  <span class="badge"><s:property value="%{#session.reporte.listTemIndiceImportanciaBiologica.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep29" onclick="mostrarAcordionReporte(29); mostrarDetaRepo('temIndiceImportanciaBiologicaReporte','idDivDetaRepo29', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Indice de Importancia Biologica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Indice de importancia biológica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -531,7 +531,7 @@
 			<s:if test="%{#session.reporte.listTemPrediosRurales.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temPrediosRuralesReporte','idDivDetaRepo', this);" class="list-group-item "> Predios Rurales <span class="badge"><s:property value="%{#session.reporte.listTemPrediosRurales.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep30" onclick="mostrarAcordionReporte(30); mostrarDetaRepo('temPrediosRuralesReporte','idDivDetaRepo30', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Predios Rurales <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Predios rurales <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -548,7 +548,7 @@
 			<s:if test="%{#session.reporte.listTemProyeccionDensidadPob2015.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temProyeccionDensidadPob2015Reporte','idDivDetaRepo', this);" class="list-group-item "> Densidad de Población <span class="badge"><s:property value="%{#session.reporte.listTemProyeccionDensidadPob2015.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep31" onclick="mostrarAcordionReporte(31); mostrarDetaRepo('temProyeccionDensidadPob2015Reporte','idDivDetaRepo31', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Densidad de Población <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Densidad de población (en hab/Km2) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -565,7 +565,7 @@
 			<s:if test="%{#session.reporte.listTemProyectosPoligonos.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temProyectosPoligonosReporte','idDivDetaRepo', this);" class="list-group-item "> Áreas de Proyectos de Conservación <span class="badge"><s:property value="%{#session.reporte.listTemProyectosPoligonos.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep32" onclick="mostrarAcordionReporte(32); mostrarDetaRepo('temProyectosPoligonosReporte','idDivDetaRepo32', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Áreas de Proyectos de Conservación <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Iniciativas, programas y proyectos de conservación existentes (polígonos) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -582,7 +582,7 @@
 			<s:if test="%{#session.reporte.listTemProyectosPuntos.size()>0}">
 <%-- 			<a href="#" onclick="mostrarDetaRepo('temProyectosPuntosReporte','idDivDetaRepo', this);" class="list-group-item "> Proyectos de Conservación (Por puntos) <span class="badge"><s:property value="%{#session.reporte.listTemProyectosPuntos.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep33" onclick="mostrarAcordionReporte(33); mostrarDetaRepo('temProyectosPuntosReporte','idDivDetaRepo33', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Proyectos de Conservación (Por puntos) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Iniciativas, programas y proyectos de conservación existentes (puntos) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -599,7 +599,7 @@
 			<s:if test="%{#session.reporte.listTemReservasTerritorialesIndigenas.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temReservasTerritorialesIndigenasReporte','idDivDetaRepo', this);" class="list-group-item "> Reservas Territoriales Indigenas  <span class="badge"><s:property value="%{#session.reporte.listTemReservasTerritorialesIndigenas.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep34" onclick="mostrarAcordionReporte(34); mostrarDetaRepo('temReservasTerritorialesIndigenasReporte','idDivDetaRepo34', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Reservas Territoriales Indigenas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Reservas territoriales índigenas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -631,7 +631,7 @@
 			<s:if test="%{#session.reporte.listTemSoeconComunidadesCampesinas.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temSoeconComunidadesCampesinasReporte','idDivDetaRepo', this);" class="list-group-item "> Comunidades Campesinas <span class="badge"><s:property value="%{#session.reporte.listTemSoeconComunidadesCampesinasTotales.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep36" onclick="mostrarAcordionReporte(36); mostrarDetaRepo('temSoeconComunidadesCampesinasReporte','idDivDetaRepo36', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Comunidades Campesinas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Comunidades campesinas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -661,7 +661,7 @@
 			<s:if test="%{#session.reporte.listTemViaFerrea.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temViaFerreaReporte','idDivDetaRepo', this);" class="list-group-item "> Vias Ferreas  <span class="badge"><s:property value="%{#session.reporte.listTemViaFerrea.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep38" onclick="mostrarAcordionReporte(38); mostrarDetaRepo('temViaFerreaReporte','idDivDetaRepo38', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Vias Ferreas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Vias férreas <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -691,7 +691,7 @@
 			<s:if test="%{#session.reporte.listTemZonificPotencialBosqueProduccionPermanente.size()>0}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temZonificPotencialBosqueProduccionPermanenteReporte','idDivDetaRepo', this);" class="list-group-item "> Bosques de Producción Permanente  <span class="badge"><s:property value="%{#session.reporte.listTemZonificPotencialBosqueProduccionPermanente.size()}" /></span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep40" onclick="mostrarAcordionReporte(40); mostrarDetaRepo('temZonificPotencialBosqueProduccionPermanenteReporte','idDivDetaRepo40', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Bosques de Producción Permanente <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Bosques de producción permanente <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -708,7 +708,7 @@
 			<s:if test="%{#session.reporte.beanTemBiodiversidadEspeciesPeligroExtincion!=null}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadEspeciesPeligroExtincionReporte','idDivDetaRepo', this);" class="list-group-item "> Riqueza Potencial de Especies en Peligro Extinción  <span class="badge">1</span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep41" onclick="mostrarAcordionReporte(41); mostrarDetaRepo('temBiodiversidadEspeciesPeligroExtincionReporte','idDivDetaRepo41', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Riqueza Potencial de Especies en Peligro Extinción <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Riqueza potencial de especies en peligro de extinción (en número de especies) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -723,7 +723,7 @@
 			<s:if test="%{#session.reporte.beanTemBiodiversidadRiquezaPotencialEspeciesFaunaEndemica!=null}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaReporte','idDivDetaRepo', this);" class="list-group-item "> Riqueza Potencial de Especies de Fauna Endémica  <span class="badge">1</span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep42" onclick="mostrarAcordionReporte(42); mostrarDetaRepo('temBiodiversidadRiquezaPotencialEspeciesFaunaEndemicaReporte','idDivDetaRepo42', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Riqueza Potencial de Especies de Fauna Endémica  <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep">Riqueza potencial de especies de fauna endémica (en número de especies) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -738,7 +738,7 @@
 			<s:if test="%{#session.reporte.beanTemDensidadCarbonoAerea!=null}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temDensidadCarbonoAereaReporte','idDivDetaRepo', this);" class="list-group-item "> Densidad Carbono <span class="badge">1</span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep43" onclick="mostrarAcordionReporte(43); mostrarDetaRepo('temDensidadCarbonoAereaReporte','idDivDetaRepo43', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Densidad Carbono  <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Densidad de carbono de la biomasa aérea (en Tn/Ha) <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -753,7 +753,7 @@
 			<s:if test="%{#session.reporte.beanTemRiesgoErosionHidrica!=null}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temRiesgoErosionHidricaReporte','idDivDetaRepo', this);" class="list-group-item "> Importancia de los Bosques para el control de Erosión Hidrica  <span class="badge">1</span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep44" onclick="mostrarAcordionReporte(44); mostrarDetaRepo('temRiesgoErosionHidricaReporte','idDivDetaRepo44', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Importancia de los Bosques para el control de Erosión Hidrica    <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Importancia de los bosques en el control de la erosión hídrica <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>
@@ -768,7 +768,7 @@
 			<s:if test="%{#session.reporte.beanTemCoberturaBoscosa2014!=null}">
 <%-- 				<a href="#" onclick="mostrarDetaRepo('temCoberturaBoscosa2014Reporte','idDivDetaRepo', this);" class="list-group-item "> Cobertura boscosa 2014  <span class="badge">1</span></a> --%>
 				<div class="panel-heading cursorPointer" role="tab" id="headingOneRep45" onclick="mostrarAcordionReporte(45); mostrarDetaRepo('temCoberturaBoscosa2014Reporte','idDivDetaRepo45', this);">
-					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Cobertura boscosa 2014 <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
+					<h4 class="panel-title clsNombreGrupoCapaSelectorRep clsNombreGrupoCapaRep"> Cobertura boscosa <span class="badge badgeCustomPanelGrupoCapaMainCB"></span>
 						<div class="pull-right clsDivNombreGrupoCapaIconoRep"><i class="glyphicon glyphicon-plus-sign"></i></div>
 					</h4>
 				</div>

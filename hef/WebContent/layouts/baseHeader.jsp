@@ -29,7 +29,7 @@
 	<div class="navbar-top">
 		<div id="container" style="margin-top: 5px;margin-bottom: 5ps;">
 			<div class="row" >
-				<div class="col-sm-6">
+				<div class="col-sm-5">
 					<div class="row">
 						<div class="col-sm-12 text-left">
 							<ul class="media-list">
@@ -62,12 +62,14 @@
 					</div>
 
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-2 clsEtiquetaBeta">Beta</div>
+				<div class="col-sm-5">
 					<div class="pull-right">
 						<img alt="" src="image/Logo_Programa_Bosques.png" style="height: 44px;display: inline-table;"/>
 						<img alt="" src="image/Logo_MINAM.png" style="height: 44px;display: inline-table;margin-left: 0px;"/>
 						&nbsp;&nbsp;
 						<a href="download/Geodecision_Guia_de_Usuario.pdf" title="Geodecision guía de usuario" target="_blank" style="margin-top: 13px;display: inline-table;"><i class="fa fa-lg fa-book"></i> </a>
+						
 						&nbsp;&nbsp;
 						<s:if test="%{#session.USUARIO_ACTUAL != null}">
 							<div class="pull-right" style="display: inline-table;">
@@ -87,11 +89,13 @@
 								</ul>
 							</div>
 						</s:if>
+						<%--
 						<s:else>
 							<div class="pull-right " style="margin-top: 13px;margin-right: 15px;display: inline-table;">
 								<a href="login.action" class="clsLogin"><i class="fa fa-lg fa-sign-in"></i> Login</a>
 							</div>
 						</s:else>
+						--%>
 					</div>
 				</div>
 			</div>

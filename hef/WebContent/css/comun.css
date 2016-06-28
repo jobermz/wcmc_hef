@@ -246,3 +246,14 @@ button.close {
 	color: #666666;
 	line-height: 1.1;
 }
+.clsEtiquetaBeta {
+	font-family: 'Open Sans', sans-serif;
+	font-style: italic;
+	font-size: 11pt;
+	font-weight: bold;
+	color: #FF3333;
+	line-height: 1.1;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 15px;
+}
