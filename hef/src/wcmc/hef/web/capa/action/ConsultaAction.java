@@ -1729,7 +1729,7 @@ public class ConsultaAction extends ActionSupport {
 		listArrByteImage					= new ArrayList<byte[]>();
 		listArrByteImage.addAll(listArrByteImageGmap);
 		
-		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strBoxMapaPeru, strPoligonoConsulta, anchoOri, altoOri, "#0000FF", 5);
+		byte[] bytImageSeleccion	= new GeotoolsImagen().convertirShapeToImagen(strBoxMapaPeru, strPoligonoConsulta, anchoOri, altoOri, "#0000FF", 3);
 		listArrByteImage.add(bytImageSeleccion);
 
 		byte[] bytImageTemp				= ImagenUtil.fuxionarImagenPNG(listArrByteImage, anchoOri, altoOri);
