@@ -29,7 +29,7 @@
 	<div class="navbar-top">
 		<div id="container" style="margin-top: 5px;margin-bottom: 5ps;">
 			<div class="row" >
-				<div class="col-sm-5">
+				<div class="col-sm-7">
 					<div class="row">
 						<div class="col-sm-12 text-left">
 							<ul class="media-list">
@@ -56,14 +56,10 @@
 							  </li>
 							</ul>
 						</div>
-<!-- 						<div class="row"> -->
-<%-- 							<small><div class="col-sm-12 text-center clsTituloCapaActiva">&nbsp;</div></small> --%>
-<!-- 						</div> -->
 					</div>
-
 				</div>
-				<div class="col-sm-2 clsEtiquetaBeta">Beta</div>
-				<div class="col-sm-5">
+				<div class="col-sm-1 clsEtiquetaBeta">Beta</div>
+				<div class="col-sm-4">
 					<div class="pull-right">
 						<img alt="" src="image/Logo_Programa_Bosques.png" style="height: 44px;display: inline-table;"/>
 						<img alt="" src="image/Logo_MINAM.png" style="height: 44px;display: inline-table;margin-left: 0px;"/>

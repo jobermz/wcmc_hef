@@ -38,18 +38,6 @@
 					</div>
 				</div>
 			
-	<%--
-			<s:if test="%{#session.reporte.listBasHidroRios100000.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('basHidroRios100000Reporte','idDivDetaRepo', this);" class="list-group-item "> Rios Principales<span class="badge"><s:property value="%{#session.reporte.listBasHidroRios100000.size()}" /></span></a>
-			</s:if>
-
-			<s:if test="%{#session.reporte.listBasHidroRiosLagunas.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('basHidroRiosLagunasReporte','idDivDetaRepo', this);" class="list-group-item "> Lagos y Lagunas  <span class="badge"><s:property value="%{#session.reporte.listBasHidroRiosLagunas.size()}" /></span></a>
-			</s:if>
-			<s:if test="%{#session.reporte.listBasLimAmazonia.size()>0}">
-				<a href="#" onclick="mostrarDetaRepo('basLimAmazoniaReporte','idDivDetaRepo', this);" class="list-group-item "> Bas lim amazonia  <span class="badge"><s:property value="%{#session.reporte.listBasLimAmazonia.size()}" /></span></a>
-			</s:if>
-			--%>
 			
 			<s:if test="%{#session.reporte.listBasLimDepartamento.size()>0}">
 <%-- 			<a href="#" onclick="mostrarDetaRepo('basLimDepartamentoReporte','idDivDetaRepo2', this);" class="list-group-item "> Departamentos <span class="badge"><s:property value="%{#session.reporte.listBasLimDepartamento.size()}" /></span></a> --%>

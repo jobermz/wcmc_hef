@@ -131,7 +131,7 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 
 
 <div class="modal fade left identificar-area-criterio-logico-filtrar-modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-md ">
+	<div class="modal-dialog modal-lg ">
 		<div class="modal-content" id="idDivIACFiltrar" style="background-color: white;">
 			
 			<s:include value="visorInicioFormIdentificarAreaCriterioLogicosFiltrar.jsp"></s:include>
@@ -141,7 +141,7 @@ request.setAttribute("CAPA_GRUPO_USUARIO", ConfiguracionProperties.getConstanteS
 </div>
 
 <div class="modal fade left identificar-area-criterio-logico-umbral-modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-lg ">
+	<div class="modal-dialog modal-sm ">
 		<div class="modal-content" id="idDivIACUmbral" style="background-color: white;">
 			
 			<s:include value="visorInicioFormIdentificarAreaCriterioLogicosUmbral.jsp"></s:include>

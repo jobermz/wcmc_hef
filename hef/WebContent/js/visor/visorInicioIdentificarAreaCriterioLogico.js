@@ -27,11 +27,11 @@ function filtrarACL(srlIdCapa) {
 				listSrlIdCapaConsulta:srlIdCapa
 		};
 		$.post("consultaCombosACL.action", param, function(datos) {
-			$(".clsDivACL").find(".combo_area_ACL").each(function(index) {
+			$(".clsDivACL").find("select[name=combo_area_ACL]").each(function(index) {
 				$(this).unbind("selectpicker");
 			});
 			$(".clsDivACL").html(datos);
-			$(".clsDivACL").find(".combo_area_ACL").selectpicker({
+			$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker({
 				liveSearch: true
 				//maxOptions: 5
 			});

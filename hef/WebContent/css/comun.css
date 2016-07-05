@@ -159,26 +159,26 @@ body {
     background-color: #5f3815;
 }
 .info-capas-modal .modal-dialog {
-    width: 1000px;
-    margin: 30px auto;
+	width: 1000px;
+	margin: 30px auto;
 }
 .modal-dialog {
-    width: 440px;
-    margin: 30px auto;
+	/*width: 440px;*/
+	margin: 30px auto;
 }
 .modal-body {
-    position: relative;
-    padding: 15px;
-    height: 280px;
+	position: relative;
+	padding: 15px;
+	height: 280px;
 }
 
 .navbar-fixed-top, .navbar-fixed-bottom {
-    border-radius: 0;
-    border-color: #E7DED7;
+	border-radius: 0;
+	border-color: #E7DED7;
 }
 
 .panel-group .panel + .panel {
-    margin-top: -1px;
+	margin-top: -1px;
 }
 
 .fa-user:before {
@@ -253,7 +253,7 @@ button.close {
 	font-weight: bold;
 	color: #666666;
 	line-height: 1.1;
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 	margin-top: 15px;
 }
