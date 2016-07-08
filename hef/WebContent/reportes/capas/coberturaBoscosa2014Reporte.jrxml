@@ -21,7 +21,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Cobertura boscosa 2014]]></text>
+				<text><![CDATA[Cobertura boscosa]]></text>
 			</staticText>
 		</band>
 	</title>

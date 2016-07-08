@@ -31,16 +31,96 @@ function filtrarACL(srlIdCapa) {
 				$(this).unbind("selectpicker");
 			});
 			$(".clsDivACL").html(datos);
-			$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker({
-				liveSearch: true
-				//maxOptions: 5
-			});
-			var valSelect	= dataComboFiltroACL[srlIdCapa];
-			if(valSelect) {
-				$(".clsDivACL").find("select[name=combo_area_ACL]").val(valSelect);
-				$(".clsDivACL").find(".combo_area_ACL").selectpicker('refresh');
+			if(srlIdCapa == "47" ) {//Proy poligonos
+//				var rs			= evaluarConfiguracionFiltroACL_ProyPoli(srlIdCapa);
+//				paramDefs		= rs.paramDefs;
+//				valSelectTxt	= rs.title;//"Varios criterios para poligonos";
+				
+				$(".clsDivACL").find(".combo_area_ACL").each(function(index) {
+					$(this).unbind("selectpicker");
+					$(this).selectpicker({
+						liveSearch: true
+						//maxOptions: 5
+					});
+				});
+				if(dataComboFiltroACL[srlIdCapa]) {
+					var valSelectDepa		= dataComboFiltroACL[srlIdCapa][0];
+					var valSelectAdmi		= dataComboFiltroACL[srlIdCapa][1];
+					var valSelectCoop		= dataComboFiltroACL[srlIdCapa][2];
+					var valSelectAnioDes	= dataComboFiltroACL[srlIdCapa][3];
+					var valSelectAnioHas	= dataComboFiltroACL[srlIdCapa][4];
+					if(valSelectDepa) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_depa]").val(valSelectDepa);
+						$(".clsDivACL").find("select[name=combo_area_ACL_depa]").selectpicker('refresh');
+					}
+					if(valSelectAdmi) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_admi]").val(valSelectAdmi);
+						$(".clsDivACL").find("select[name=combo_area_ACL_admi]").selectpicker('refresh');
+					}
+					if(valSelectCoop) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_coop]").val(valSelectCoop);
+						$(".clsDivACL").find("select[name=combo_area_ACL_coop]").selectpicker('refresh');
+					}
+					if(valSelectAnioDes) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val(valSelectAnioDes);
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").selectpicker('refresh');
+					}
+					if(valSelectAnioHas) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val(valSelectAnioHas);
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").selectpicker('refresh');
+					}
+				}
+			} else if(srlIdCapa == "46") {//Proy puntos
+//				var rs			= evaluarConfiguracionFiltroACL_ProyPunt(srlIdCapa);
+//				paramDefs		= rs.paramDefs;
+//				valSelectTxt	= rs.title;//"Varios criterios para puntos";
+				
+				$(".clsDivACL").find(".combo_area_ACL").each(function(index) {
+					$(this).unbind("selectpicker");
+					$(this).selectpicker({
+						liveSearch: true
+						//maxOptions: 5
+					});
+				});
+				if(dataComboFiltroACL[srlIdCapa]) {
+					var valSelectDepa		= dataComboFiltroACL[srlIdCapa][0];
+					var valSelectAdmi		= dataComboFiltroACL[srlIdCapa][1];
+					var valSelectCoop		= dataComboFiltroACL[srlIdCapa][2];
+					var valSelectAnioDes	= dataComboFiltroACL[srlIdCapa][3];
+					var valSelectAnioHas	= dataComboFiltroACL[srlIdCapa][4];
+					if(valSelectDepa) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_depa]").val(valSelectDepa);
+						$(".clsDivACL").find("select[name=combo_area_ACL_depa]").selectpicker('refresh');
+					}
+					if(valSelectAdmi) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_admi]").val(valSelectAdmi);
+						$(".clsDivACL").find("select[name=combo_area_ACL_admi]").selectpicker('refresh');
+					}
+					if(valSelectCoop) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_coop]").val(valSelectCoop);
+						$(".clsDivACL").find("select[name=combo_area_ACL_coop]").selectpicker('refresh');
+					}
+					if(valSelectAnioDes) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val(valSelectAnioDes);
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").selectpicker('refresh');
+					}
+					if(valSelectAnioHas) {
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val(valSelectAnioHas);
+						$(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").selectpicker('refresh');
+					}
+				}
+			} else {
+				$(".clsDivACL").find("select[name=combo_area_ACL]").selectpicker({
+					liveSearch: true
+					//maxOptions: 5
+				});
+				var valSelect	= dataComboFiltroACL[srlIdCapa];
+				if(valSelect) {
+					$(".clsDivACL").find("select[name=combo_area_ACL]").val(valSelect);
+					$(".clsDivACL").find(".combo_area_ACL").selectpicker('refresh');
+				}
 			}
-
+		
 			$(".clsDivACL").attr("srlIdCapa", srlIdCapa);
 		});
 	});

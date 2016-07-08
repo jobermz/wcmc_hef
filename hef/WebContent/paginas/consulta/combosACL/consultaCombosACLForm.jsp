@@ -326,19 +326,19 @@
 	<tr>
 		<td><strong>Departamento</strong></td>
 		<td>
-			<s:select list="#session.comboACL.listMapDepartamentos" name="combo_area_ACL_depa" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_nombdep" listValue="%{de_nombdep}" data-live-search="true"></s:select>
+			<s:select multiple="true" list="#session.comboACL.listMapDepartamentos" name="combo_area_ACL_depa" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_nombdep" listValue="%{de_nombdep}" data-live-search="true"></s:select>
 		</td>
 	</tr>
 	<tr>
 		<td><strong>Administrador</strong></td>
 		<td>
-			<s:select list="#session.comboACL.listMapAdministra" name="combo_area_ACL_admi" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_administra" listValue="%{de_administra}" data-live-search="true"></s:select>
+			<s:select multiple="true" list="#session.comboACL.listMapAdministra" name="combo_area_ACL_admi" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_administra" listValue="%{de_administra}" data-live-search="true"></s:select>
 		</td>
 	</tr>
 	<tr>
 		<td><strong>Cooperante</strong></td>
 		<td>
-			<s:select list="#session.comboACL.listMapCoperante" name="combo_area_ACL_coop" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_cooperante" listValue="%{de_cooperante}" data-live-search="true"></s:select>
+			<s:select multiple="true" list="#session.comboACL.listMapCoperante" name="combo_area_ACL_coop" cssClass="combo_area_ACL" headerKey="" headerValue="-Seleccionar-" listKey="de_cooperante" listValue="%{de_cooperante}" data-live-search="true"></s:select>
 		</td>
 	</tr>
 	<tr>

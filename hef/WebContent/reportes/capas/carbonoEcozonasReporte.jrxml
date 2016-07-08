@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Densidad de carbono por ecozonas]]></text>
+				<text><![CDATA[Valores medios de densidad de carbono por ecozonas (en Tn/Ha)]]></text>
 			</staticText>
 		</band>
 	</title>

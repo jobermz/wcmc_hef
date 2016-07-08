@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Áreas protegidas privadas]]></text>
+				<text><![CDATA[Areas naturales protegidas de administración privada]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Bosques de producción permanente]]></text>
+				<text><![CDATA[Bosques de producción permanente]]></text>
 			</staticText>
 		</band>
 	</title>

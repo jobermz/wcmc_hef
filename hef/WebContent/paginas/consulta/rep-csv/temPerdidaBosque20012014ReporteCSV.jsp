@@ -5,5 +5,5 @@
 response.setHeader("Content-Disposition", "filename=TemPerdidaBosque20012014.csv");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
-%>Valor mínimo,Valor máxinimo
-${sessionScope.reporte.beanTemPerdidaBosque20012014.strValueMin},${sessionScope.reporte.beanTemPerdidaBosque20012014.strValueMax}
+%>Valor total (hectárea)
+${sessionScope.reporte.beanTemPerdidaBosque20012014.strValueCountPerdidaBosque2Decimales}

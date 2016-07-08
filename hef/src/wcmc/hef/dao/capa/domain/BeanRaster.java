@@ -133,6 +133,20 @@ public class BeanRaster {
 		else 
 			return "0";
 	}
+	public String getStrValueCount2Decimales() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(lngValueCount).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+
+	public String getStrValueCountPerdidaBosque2Decimales() {
+		if(dblValueSumaTotal != null)
+			return new BigDecimal(((double)lngValueCount)*0.09d).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString();
+		else 
+			return "0.00";
+	}
+
 	public Long getLngValueCount() {
 		return lngValueCount;
 	}

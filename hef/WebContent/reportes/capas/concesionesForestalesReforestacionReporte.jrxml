@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAnalitico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="652f32dc-1057-4a39-9e8b-145b686edb0d">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
-	<property name="ireport.x" value="168"/>
+	<property name="ireport.x" value="82"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parametros.strFecha" class="java.lang.String"/>
 	<parameter name="parametros.strHora" class="java.lang.String"/>
@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones con fines de forestación y reforestación]]></text>
+				<text><![CDATA[Concesiones forestales con fines de forestación y reforestación]]></text>
 			</staticText>
 		</band>
 	</title>

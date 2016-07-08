@@ -163,7 +163,7 @@ body {
 	margin: 30px auto;
 }
 .modal-dialog {
-	/*width: 440px;*/
+	width: 440px;
 	margin: 30px auto;
 }
 .modal-body {
@@ -256,4 +256,10 @@ button.close {
 	text-align: left;
 	vertical-align: middle;
 	margin-top: 15px;
+}
+/* li .selected { */
+/* 	background-color: #D6E0EB; */
+/* } */
+.dropdown-menu > .selected > a {
+	background-color: #D6E0EB;
 }

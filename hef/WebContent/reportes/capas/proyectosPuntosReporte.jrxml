@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Proyectos de conservación (por puntos)]]></text>
+				<text><![CDATA[Iniciativas, programas y proyectos de conservación existentes (polígonos)]]></text>
 			</staticText>
 		</band>
 	</title>

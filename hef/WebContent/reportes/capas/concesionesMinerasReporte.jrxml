@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones Mineras]]></text>
+				<text><![CDATA[Concesiones mineras]]></text>
 			</staticText>
 		</band>
 	</title>

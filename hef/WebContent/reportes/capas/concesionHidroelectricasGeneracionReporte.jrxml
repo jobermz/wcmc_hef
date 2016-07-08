@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones de generación de energía eléctrica]]></text>
+				<text><![CDATA[Concesiones de generación de energía eléctrica]]></text>
 			</staticText>
 		</band>
 	</title>

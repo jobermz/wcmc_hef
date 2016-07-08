@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Red víal departamental]]></text>
+				<text><![CDATA[Red vial departamental]]></text>
 			</staticText>
 		</band>
 	</title>

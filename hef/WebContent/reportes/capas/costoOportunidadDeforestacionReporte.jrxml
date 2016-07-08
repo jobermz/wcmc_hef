@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Costos de oportunidad para reducir emisiones por deforestación]]></text>
+				<text><![CDATA[Costos de oportunidad a nivel distrital para la reducción de emisiones por deforestación (en Soles/tCO2)]]></text>
 			</staticText>
 		</band>
 	</title>

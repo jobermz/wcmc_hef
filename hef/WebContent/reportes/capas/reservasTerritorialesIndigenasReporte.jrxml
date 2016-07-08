@@ -17,7 +17,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Reservas Territoriales Índigenas]]></text>
+				<text><![CDATA[Reservas territoriales índigenas]]></text>
 			</staticText>
 		</band>
 	</title>

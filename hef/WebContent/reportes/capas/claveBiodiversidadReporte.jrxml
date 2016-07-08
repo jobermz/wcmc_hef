@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Áreas clave para la biodiversidad]]></text>
+				<text><![CDATA[Áreas clave para la biodiversidad]]></text>
 			</staticText>
 		</band>
 	</title>

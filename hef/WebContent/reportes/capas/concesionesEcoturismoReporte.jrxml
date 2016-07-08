@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones de ecoturismo]]></text>
+				<text><![CDATA[Concesiones de ecoturismo]]></text>
 			</staticText>
 		</band>
 	</title>

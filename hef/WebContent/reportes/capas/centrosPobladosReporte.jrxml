@@ -18,7 +18,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Centros poblados]]></text>
+				<text><![CDATA[Centros poblados]]></text>
 			</staticText>
 		</band>
 	</title>

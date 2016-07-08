@@ -183,27 +183,39 @@ function evaluarConfiguracionFiltroACL_ProyPoli(srlIdCapa) {
 	var valSelectCoop		= $(".clsDivACL").find("select[name=combo_area_ACL_coop]").val();
 	var valSelectAnioDes	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val();
 	var valSelectAnioHas	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val();
+	dataComboFiltroACL[srlIdCapa] = new Array();
+	dataComboFiltroACL[srlIdCapa][0] = valSelectDepa;
+	dataComboFiltroACL[srlIdCapa][1] = valSelectAdmi;
+	dataComboFiltroACL[srlIdCapa][2] = valSelectCoop;
+	dataComboFiltroACL[srlIdCapa][3] = valSelectAnioDes;
+	dataComboFiltroACL[srlIdCapa][4] = valSelectAnioHas;
 	
 	var paramDefs	= "";
 	paramDefs	+= "{\"0\":\"";
 	var paramItemDefs	= "";
-	if(valSelectDepa != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectDepa != null && valSelectDepa.length > 0 && valSelectDepa != "null") {
+		for(var i=0;i<valSelectDepa.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa[i]+"%' "; 
 		}
-		paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa+"%' "; 
 	}
-	if(valSelectAdmi != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
+		for(var i=0;i<valSelectAdmi.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
 		}
-		paramItemDefs	+= "ADMINISTRA = '"+valSelectAdmi+"' ";
 	}
-	if(valSelectCoop != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
+		for(var i=0;i<valSelectCoop.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
 		}
-		paramItemDefs	+= "COOPERANTE = '"+valSelectCoop+"' ";
 	}
 	
 	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
@@ -236,29 +248,41 @@ function evaluarConfiguracionFiltroACL_ProyPunt(srlIdCapa) {
 	var valSelectCoop		= $(".clsDivACL").find("select[name=combo_area_ACL_coop]").val();
 	var valSelectAnioDes	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_desde]").val();
 	var valSelectAnioHas	= $(".clsDivACL").find("select[name=combo_area_ACL_anio_hasta]").val();
-	
+	dataComboFiltroACL[srlIdCapa] = new Array();
+	dataComboFiltroACL[srlIdCapa][0] = valSelectDepa;
+	dataComboFiltroACL[srlIdCapa][1] = valSelectAdmi;
+	dataComboFiltroACL[srlIdCapa][2] = valSelectCoop;
+	dataComboFiltroACL[srlIdCapa][3] = valSelectAnioDes;
+	dataComboFiltroACL[srlIdCapa][4] = valSelectAnioHas;
+
 	var paramDefs	= "";
 	paramDefs	+= "{\"1\":\"";
 	var paramItemDefs	= "";
-	if(valSelectDepa != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectDepa != null && valSelectDepa.length > 0 && valSelectDepa != "null") {
+		for(var i=0;i<valSelectDepa.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa[i]+"%' "; 
 		}
-		paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa+"%' ";
 	}
-	if(valSelectAdmi != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
+		for(var i=0;i<valSelectAdmi.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
 		}
-		paramItemDefs	+= "ADMINISTRA = '"+valSelectAdmi+"' ";
 	}
-	if(valSelectCoop != "") {
-		if(paramItemDefs.length != 0) {
-			paramItemDefs	+= "and ";
+	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
+		for(var i=0;i<valSelectCoop.length;i++) {
+			if(paramItemDefs.length != 0) {
+				paramItemDefs	+= "and ";
+			}
+			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
 		}
-		paramItemDefs	+= "COOPERANTE = '"+valSelectCoop+"' ";
 	}
-	
+
 	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
 		if(parseInt(valSelectAnioDes) <= parseInt(valSelectAnioHas)) {
 			if(paramItemDefs.length != 0) {

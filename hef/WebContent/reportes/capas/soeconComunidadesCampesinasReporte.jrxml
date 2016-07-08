@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Comunidades Campesinas]]></text>
+				<text><![CDATA[Comunidades campesinas]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones de manejo de fauna silvestre]]></text>
+				<text><![CDATA[Concesiones de áreas para manejo de fauna silvestre]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Densidad de población]]></text>
+				<text><![CDATA[Densidad de población (en hab/Km2)]]></text>
 			</staticText>
 		</band>
 	</title>

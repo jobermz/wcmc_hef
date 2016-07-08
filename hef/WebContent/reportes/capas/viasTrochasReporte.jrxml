@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Vías trochas]]></text>
+				<text><![CDATA[Vías trochas]]></text>
 			</staticText>
 		</band>
 	</title>

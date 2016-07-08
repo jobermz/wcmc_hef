@@ -20,7 +20,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Riqueza en especies de fauna endémica]]></text>
+				<text><![CDATA[Riqueza potencial de especies en peligro de extinción (en número de especies)]]></text>
 			</staticText>
 		</band>
 	</title>

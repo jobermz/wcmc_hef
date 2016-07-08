@@ -21,7 +21,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Erosicón Hídrica]]></text>
+				<text><![CDATA[Iniciativas, programas y proyectos de conservación existentes (puntos)]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Solicitud de creación de reservas índigenas]]></text>
+				<text><![CDATA[Solicitudes de creación de reservas territoriales indígenas]]></text>
 			</staticText>
 		</band>
 	</title>

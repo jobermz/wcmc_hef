@@ -16,7 +16,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Concesiones de castaña]]></text>
+				<text><![CDATA[Concesiones forestales para el aprovechamiento de la castaña y la shiringa]]></text>
 			</staticText>
 		</band>
 	</title>

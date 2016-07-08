@@ -21,7 +21,7 @@
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Analítico - Densidad Carbono Aerea]]></text>
+				<text><![CDATA[Densidad de carbono de la biomasa aérea (en Tn/Ha)]]></text>
 			</staticText>
 		</band>
 	</title>
