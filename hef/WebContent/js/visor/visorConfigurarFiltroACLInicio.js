@@ -191,44 +191,46 @@ function evaluarConfiguracionFiltroACL_ProyPoli(srlIdCapa) {
 	dataComboFiltroACL[srlIdCapa][4] = valSelectAnioHas;
 	
 	var paramDefs	= "";
-	paramDefs	+= "{\"0\":\"";
+	paramDefs	+= "{\"1\":\"";
 	var paramItemDefs	= "";
 	if(valSelectDepa != null && valSelectDepa.length > 0 && valSelectDepa != "null") {
 		for(var i=0;i<valSelectDepa.length;i++) {
 			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
+				paramItemDefs	+= "OR ";
+			} else {
+				paramItemDefs	+= "( ";
 			}
 			paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa[i]+"%' "; 
 		}
+		paramItemDefs	+= ") ";
 	}
-	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
-		for(var i=0;i<valSelectAdmi.length;i++) {
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
-		}
-	}
-	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
-		for(var i=0;i<valSelectCoop.length;i++) {
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
-		}
-	}
+//	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
+//		for(var i=0;i<valSelectAdmi.length;i++) {
+//			if(paramItemDefs.length != 0) {
+//				paramItemDefs	+= "and ";
+//			}
+//			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
+//		}
+//	}
+//	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
+//		for(var i=0;i<valSelectCoop.length;i++) {
+//			if(paramItemDefs.length != 0) {
+//				paramItemDefs	+= "and ";
+//			}
+//			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
+//		}
+//	}
 	
 	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
 		if(parseInt(valSelectAnioDes) <= parseInt(valSelectAnioHas)) {
 			if(paramItemDefs.length != 0) {
 				paramItemDefs	+= "and ";
 			}
-			paramItemDefs	+= "ANIO_INIC <= "+valSelectAnioDes+" ";
-			
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "ANIO_TERM >= '"+valSelectAnioHas+"' ";
+			paramItemDefs	+= "( ";
+			paramItemDefs	+= "ANIO_INIC >= "+valSelectAnioDes+" ";
+			paramItemDefs	+= "and ";
+			paramItemDefs	+= "ANIO_TERM <= "+valSelectAnioHas+" ";
+			paramItemDefs	+= ") ";
 		} else {
 			alert("El año termino seleccionado debe ser posterior al año inicio");
 		}
@@ -256,44 +258,46 @@ function evaluarConfiguracionFiltroACL_ProyPunt(srlIdCapa) {
 	dataComboFiltroACL[srlIdCapa][4] = valSelectAnioHas;
 
 	var paramDefs	= "";
-	paramDefs	+= "{\"1\":\"";
+	paramDefs	+= "{\"0\":\"";
 	var paramItemDefs	= "";
 	if(valSelectDepa != null && valSelectDepa.length > 0 && valSelectDepa != "null") {
 		for(var i=0;i<valSelectDepa.length;i++) {
 			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
+				paramItemDefs	+= "OR ";
+			} else {
+				paramItemDefs	+= "( ";
 			}
 			paramItemDefs	+= "DEPARTAMEN like '%"+valSelectDepa[i]+"%' "; 
 		}
+		paramItemDefs	+= ") ";
 	}
-	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
-		for(var i=0;i<valSelectAdmi.length;i++) {
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
-		}
-	}
-	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
-		for(var i=0;i<valSelectCoop.length;i++) {
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
-		}
-	}
+//	if(valSelectAdmi != null && valSelectAdmi.length > 0 && valSelectAdmi != "null") {
+//		for(var i=0;i<valSelectAdmi.length;i++) {
+//			if(paramItemDefs.length != 0) {
+//				paramItemDefs	+= "and ";
+//			}
+//			paramItemDefs	+= "ADMINISTRA like '%"+valSelectAdmi[i]+"%' "; 
+//		}
+//	}
+//	if(valSelectCoop != null && valSelectCoop.length > 0 && valSelectCoop != "null") {
+//		for(var i=0;i<valSelectCoop.length;i++) {
+//			if(paramItemDefs.length != 0) {
+//				paramItemDefs	+= "and ";
+//			}
+//			paramItemDefs	+= "COOPERANTE like '%"+valSelectCoop[i]+"%' "; 
+//		}
+//	}
 
 	if(valSelectAnioDes != "" && valSelectAnioHas != "") {
 		if(parseInt(valSelectAnioDes) <= parseInt(valSelectAnioHas)) {
 			if(paramItemDefs.length != 0) {
 				paramItemDefs	+= "and ";
 			}
-			paramItemDefs	+= "ANIO_INIC <= "+valSelectAnioDes+" ";
-			
-			if(paramItemDefs.length != 0) {
-				paramItemDefs	+= "and ";
-			}
-			paramItemDefs	+= "ANIO_TERM >= '"+valSelectAnioHas+"' ";
+			paramItemDefs	+= "( ";
+			paramItemDefs	+= "ANIO_INIC >= "+valSelectAnioDes+" ";
+			paramItemDefs	+= "and ";
+			paramItemDefs	+= "ANIO_TERM <= "+valSelectAnioHas+" ";
+			paramItemDefs	+= ") ";
 		} else {
 			alert("El año termino seleccionado debe ser posterior al año inicio");
 		}
